@@ -42,7 +42,7 @@ const MessageModal = ({ open, handleClose, handleSubmit, success, message, proce
             >
                 <Box className='warning-message'>
                     <Box className='gif-box'>
-                        <Image src={gif} alt='alert gif' width={100} height={100} />
+                        <Image unoptimized src={gif} alt='alert gif' width={100} height={100} />
                     </Box>
                     <Typography variant='h6' className={success ? 'success' : 'error'}>{success ? 'Success' : 'Warning'}</Typography>
                 </Box>

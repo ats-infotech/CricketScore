@@ -3,7 +3,7 @@ import SvgIcon from "@/assets/icons/SvgIcon"
 import { CommonText } from "@/components/common/commonText"
 import ExtraRunSection from "@/components/common/commonUi/ExtrasSection/ExtraSection"
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import './Scorecard.css'
 import SwitchSelect from "@/components/common/commonUi/SwitchSelect/SwitchSelect"
 import { teamsState } from "@/redux/slices/teamSlice"
@@ -14,18 +14,12 @@ const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonst
     const strikebatter = playerdata?.filter(players => players?.playerName === strikeplayer)[0]
     const nonstrikebatter = playerdata?.filter(players => players?.playerName === nonstrikeplayer)[0]
     const topBatters = BattingOrder && BattingOrder?.length > 0 && BattingOrder?.slice(0, 3);
-    // const visibleOutPlayerStats = !show && status === 4 ? outplayerstats?.filter(player => topBatters?.includes(player.BatterId)) : !show ? outplayerstats?.slice(0, length) : outplayerstats;
     let visibleOutPlayerStats = outplayerstats;
     if (!show && status === 4) {
         visibleOutPlayerStats = outplayerstats?.filter((player) => topBatters?.includes(player.BatterId));
     } else if (!show) {
         visibleOutPlayerStats = outplayerstats?.slice(0, length);
     }
-    // const visibleOutPlayerStats = !show 
-    // ? outplayerstats
-    //     ?.sort((a, b) => BattingOrder?.indexOf(a?.BatterId) - BattingOrder?.indexOf(b?.BatterId)) 
-    //     ?.slice(0, length) 
-    // : outplayerstats;
     const WDs = Extras ? Extras?.filter((items) => items.reason === 'WD') : [];
     const LBs = Extras ? Extras?.filter((items) => items.reason === 'LB') : [];
     const NBs = Extras ? Extras?.filter((items) => items.reason === 'NB') : [];
@@ -91,21 +85,6 @@ const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonst
                                 return (
                                     <React.Fragment key={i}>
                                         <TableRow>
-                                            {/* {dataHeader?.map((field) => {
-                                                return (
-                                                    <TableCell key={field} className="user_scorecard_table-cell data">
-                                                        {field === 'playerName' ? (
-                                                            <Box className='user_post_image_main_section'>
-                                                                <Typography className="player-name">
-                                                                    {`${batter?.playerName}${(batter?.playerName === post?.team1Captain?.playerName || batter?.playerName === post?.team2Captain?.playerName) ? ' (C)' : ''}${(batter?.playerName === post?.team1WicketKeeper?.playerName || batter?.playerName === post?.team2WicketKeeper?.playerName) ? ' (Wk)' : ''}`}
-                                                                </Typography>
-                                                            </Box>
-                                                        ) : (field === 'batter1sr') && batter?.type === 'striker' ? Math.floor(playerstats?.batter1sr || 0)
-                                                            : (field === 'batter2sr') && batter?.type === 'nonstriker' ? Math.floor(playerstats?.batter2sr || 0)
-                                                                : (field === 'sr') ? Math?.floor(batter?.sr || 0) : batter?.type === 'striker' || batter?.type === 'nonstriker' ? playerstats?.[field] || 0 : batter?.[field] || 0}
-                                                    </TableCell>
-                                                )
-                                            })} */}
                                             {dataHeader.map((field) => {
                                                 let cellContent;
 
@@ -137,17 +116,6 @@ const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonst
                                         </TableRow>
                                         {batter?.type === 'out' && batter?.reason !== 'Not Out' && (
                                             <TableRow>
-                                                {/* <TableCell colSpan={dataHeader.length} sx={{ padding: '0px 12px 12px 12px' }} className="user_scorecard_out_table-cell data">
-                                                    {
-                                                        batter?.reason === "LBW" ? `lbw b ${playerdata?.find((p) => p.id === batter.bowler)?.playerName}`
-                                                            : batter?.reason === "Catch" ? `c ${playerdata?.find((p) => p.id === batter.fielder)?.playerName} b ${playerdata.find((p) => p.id === batter.bowler)?.playerName}`
-                                                                : batter?.reason === "Stumped" ? `st ${playerdata?.find((p) => p.id === batter.fielder)?.playerName} b ${playerdata.find((p) => p.id === batter.bowler)?.playerName}`
-                                                                    : batter?.reason === "Run Out" ? `run out ${playerdata?.find((p) => p.id === batter.fielder)?.playerName}`
-                                                                        : batter?.reason === "Bowled" ? `b ${playerdata?.find((p) => p.id === batter.bowler)?.playerName}`
-                                                                            : batter?.reason === "Hit Wicket" ? `hit wicket b ${playerdata?.find((p) => p.id === batter.bowler)?.playerName}`
-                                                                                : batter?.reason === 'Retired Hurt' ? 'Retired Hurt' : ''
-                                                    }
-                                                </TableCell> */}
                                                 <TableCell colSpan={dataHeader.length} sx={{ padding: '0px 6px 5px 6px' }} className="user_scorecard_out_table-cell data">
                                                     {(() => {
 
@@ -283,7 +251,7 @@ const BowlingTable = ({ header, data, currentOver, completedOver, playerdata, cu
                                             {field === 'playerName' ?
                                                 <Box className='user_post_image_main_section'>
                                                     <Typography className="player-name">
-                                                        { `${currentbowler}*${(currentbowler === post.team1Captain?.playerName || currentbowler === post.team2Captain?.playerName) ? ' (C)' : ''}${(currentbowler === post.team1WicketKeeper?.playerName || currentbowler === post.team2WicketKeeper?.playerName) ? ' (Wk)' : ''}`}
+                                                        {`${currentbowler}*${(currentbowler === post.team1Captain?.playerName || currentbowler === post.team2Captain?.playerName) ? ' (C)' : ''}${(currentbowler === post.team1WicketKeeper?.playerName || currentbowler === post.team2WicketKeeper?.playerName) ? ' (Wk)' : ''}`}
                                                     </Typography>
                                                 </Box>
                                                 : field === 'maiden' ? maiden === NaN ? 0 : maiden
@@ -385,10 +353,11 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
         team2Captain: '',
         team2WicketKeeper: ''
     })
+    const teamRef = useRef(null);
     const team_data = useSelector(teamsState)
     const CurrentInnings = matchData?.currentInnings
     let isTestMatch = tournamentData?.match_type === "Test Match" ? true : false
-    let isFollowOn = matchData?.followOn === "Follow On" ? true : false
+    // let isFollowOn = matchData?.followOn === "Follow On" ? true : false
     const firstInnings = matchData?.firstInnings
     const secondInnings = matchData?.secondInnings
     const thirdInnings = matchData?.superOverFirstInnings
@@ -448,6 +417,12 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
         let playersId = [...commonPlayerTeam1.map(player => player.playerName), ...commonPlayerTeam2.map(player => player.playerName)]
         setPlayingPlayers(playersId)
     }, [playerData, team1, team2])
+
+    useEffect(() => {
+        if (teamRef.current) {
+            teamRef.current.scrollTop = 0;
+        }
+    }, [currentTeam]);
 
     const handleShowMoreBatter = () => {
         setShowAllBatter(!showAllBatter);
@@ -537,15 +512,6 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
             }
             teams.push(tossWinner?.battingSide, tossWinner?.bowlingSide)
         }
-        //  else if (innings === 3 || innings === 4) {
-        //     setCurrentTeam(2)
-        //     teams.push(tossWinner?.battingSide, tossWinner?.bowlingSide);
-        //     teams.push(`${matchData?.superOverCount && superOverCountEven ? tossWinner?.battingSide : tossWinner?.bowlingSide} Superover`);
-        //     if (innings === 4) {
-        //         setCurrentTeam(3)
-        //         teams.push(`${matchData?.superOverCount && !superOverCountEven ? tossWinner?.battingSide : tossWinner?.bowlingSide} Superover`);
-        //     }
-        // }
         setInningsTeam(teams)
     }, [innings, tossWinner, matchData]);
 
@@ -630,7 +596,6 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
         currentOver: CurrentOverScore,
         playerdata: playerData,
         post: playersPost,
-        // completedOver: CurrentInnings === 1 || CurrentInnings === 2 ? overlength : CurrentInnings === 4 && matchData?.status === 4 ? fourthInnings?.Currentover : '',
         completedOver: isTestMatch && (CurrentInnings === 3 || CurrentInnings === 4) ? overlength : CurrentInnings === 1 || CurrentInnings === 2 ? overlength : CurrentInnings === 3 ? thirdInnings?.Currentover : CurrentInnings === 4 && matchData?.status === 4 ? fourthInnings?.Currentover : '',
         currentbowler: playerOnField.bowler,
         show: showAllBowler,
@@ -676,19 +641,9 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     return (
         <Box className='user_scorecard_main_section activeAnimation'>
             <Box className='commentary_team_select_section'>
-                {/* <Typography variant="body2" >{CommonText.Score}</Typography> */}
-                {/* <FormControl className="commentary_team_select">
-                    <InputSelect value={currentTeam} onChange={(e) => setCurrentTeam(e.target.value)} >
-                        {inningsTeam.map((items, i) => (
-                            <MenuItem value={i} key={i} sx={{ fontWeight: 'bold', color: 'white' }}>
-                                {items}
-                            </MenuItem>
-                        ))}
-                    </InputSelect>
-                </FormControl> */}
                 <SwitchSelect options={inningsTeam} defaultSelected={currentTeam} onChange={(val) => setCurrentTeam(val)} />
             </Box>
-            <Box className='user_currentteam_score'>
+            <Box ref={teamRef} className='user_currentteam_score'>
                 {
                     currentTeam === 0 &&
                     <>

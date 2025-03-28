@@ -1,5 +1,5 @@
 'use client'
-import Custom404 from "@/app/not-found";
+// import Custom404 from "@/app/not-found";
 import PlayerBoard from "@/pages/PlayerBoard/PlayerBoard";
 import { matchesState, ReplaceMatchSchedule } from "@/redux/slices/matchSlice";
 import { playersState } from "@/redux/slices/playersSlice";
@@ -37,30 +37,37 @@ const PlayerBoards = () => {
         batsManSlect: false,
         scoreSelect: false
     })
-    const [loading, setLoading] = useState(false)
+    const [team1, setTeam1] = useState([])
+    const [team2, setTeam2] = useState([])
+    // const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        setLoading(true)
+        let team1 = team_data?.data?.find((items) => items?.id === selectedMatch?.team1?.id)
+        let team2 = team_data?.data?.find((items) => items?.id === selectedMatch?.team2?.id)
+        setTeam1(team1)
+        setTeam2(team2)
+    },[team_data, selectedMatch])
+
+    useEffect(() => {
+        // setLoading(true)
         let startedMatch = match_data.data?.find((item) => item?.id === params['slug'][0])
         let filterCurrentTournament = tournament_data?.data?.find((items) => items?.id === startedMatch?.tournamentId)
         setTournamentData(filterCurrentTournament)
-        let teams = [startedMatch?.team1, startedMatch?.team2]
+        let teams = [team1, team2]
+        
         setSelectdMatch(startedMatch)
         if (startedMatch) {
             const tossWinnerId = startedMatch?.toss?.tossWinner;
             const selectedSide = startedMatch?.toss?.selectSide;
 
-            const team1 = startedMatch.team1;
-            const team2 = startedMatch.team2;
-
             if (tossWinnerId && selectedSide) {
                 let battingTeam, bowlingTeam;
                 if (selectedSide === 'Bat') {
-                    battingTeam = teams.find((team) => team.id === tossWinnerId) || team1;
-                    bowlingTeam = teams.find((team) => team.id !== tossWinnerId) || team2;
+                    battingTeam = teams?.find((team) => team?.id === tossWinnerId) || team1;
+                    bowlingTeam = teams?.find((team) => team?.id !== tossWinnerId) || team2;
                 } else {
-                    bowlingTeam = teams.find((team) => team.id === tossWinnerId) || team1;
-                    battingTeam = teams.find((team) => team.id !== tossWinnerId) || team2;
+                    bowlingTeam = teams?.find((team) => team?.id === tossWinnerId) || team1;
+                    battingTeam = teams?.find((team) => team?.id !== tossWinnerId) || team2;
                 }
                 setTeamPlay({
                     batting: battingTeam,
@@ -68,8 +75,8 @@ const PlayerBoards = () => {
                 });
             }
         }
-        setLoading(false)
-    }, [params, match_data, team_data]);
+        // setLoading(false)
+    }, [params, match_data, team_data, tournament_data, team1, team2]);
 
 
     useEffect(() => {
@@ -107,8 +114,6 @@ const PlayerBoards = () => {
         dispatch(ReplaceMatchSchedule(createNewObj))
         router.push(`/scoreboard/${selectedMatch?.id}`)
     }
-
-    // if(!loading && (!selectedMatch || !selectedMatch?.post)) return <Custom404 />
     
     return (
         <Box>

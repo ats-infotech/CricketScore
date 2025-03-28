@@ -67,7 +67,7 @@ const Matchstats = ({ currentMatch, mvpPoints }) => {
                                                         <Typography sx={{ fontSize: 'var(--normal)', color: 'var(--text-white)' }}>{items.playerletter}</Typography>
                                                     </Box>
                                                     :
-                                                    <Image src={`/${items.playerthumbnail}`} alt="players" height={500} width={500} />}
+                                                    <Image unoptimized src={`/${items.playerthumbnail}`} alt="players" height={500} width={500} />}
                                             </Box>
                                             <Box className='ms-gradient-line'></Box>
                                             <Typography variant="h5">{items.playerName}</Typography>
@@ -96,7 +96,7 @@ const Matchstats = ({ currentMatch, mvpPoints }) => {
                                         </Box>
                                         :
                                         <Box className='mvp_all_players_stats'>
-                                            <Image src={`/${items.playerthumbnail}`} width={500} height={500} alt='' />
+                                            <Image unoptimized src={`/${items.playerthumbnail}`} width={500} height={500} alt='' />
                                         </Box>
                                     }
                                     <CommonStatsSection team_name={items.team} name={items.playerName} batting={items?.battingPoints} bowling={items?.bowlingPoints} fielding={items?.fieldingPoints} total={items?.totalPoints} />

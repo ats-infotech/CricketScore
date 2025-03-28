@@ -30,7 +30,7 @@ const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlaye
                                         <Box className='strike_player_photo'>
                                             {
                                                 item?.playerImage ?
-                                                    <Image className={type === 'readonly' ? 'active' : isSelect ? 'active' : 'notActive'} src={`/${item?.playerImage}`} alt='profile pic' width={150} height={150} />
+                                                    <Image unoptimized className={type === 'readonly' ? 'active' : isSelect ? 'active' : 'notActive'} src={`/${item?.playerImage}`} alt='profile pic' width={150} height={150} />
                                                     :
                                                     <Box className={type === 'readonly' ? 'active' : isSelect ? 'active' : 'notActive'}
                                                         sx={{

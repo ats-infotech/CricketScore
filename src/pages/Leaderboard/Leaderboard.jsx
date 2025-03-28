@@ -106,7 +106,7 @@ const Leaderboard = ({ playerData, teamData }) => {
                                                 <Box className='leaderboard_image_section'>
                                                     {
                                                         items.playerImage
-                                                            ? <Image src={`/${items.playerImage}`} width={500} height={500} alt='' />
+                                                            ? <Image unoptimized src={`/${items.playerImage}`} width={500} height={500} alt='' />
                                                             : <Box
                                                                 className='imageTextBox'
                                                                 sx={{

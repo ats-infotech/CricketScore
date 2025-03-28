@@ -17,7 +17,7 @@ const CommonSection = ({ data, teamlogo, teamname, matchData, letter, color }) =
         <>
             <Box className='match_teams_section'>
                 <Box className='match_teams_image_section'>
-                    {teamlogo && <Image src={`/${teamlogo}`} alt="teamlogo" height={500} width={500} />}
+                    {teamlogo && <Image unoptimized src={`/${teamlogo}`} alt="teamlogo" height={500} width={500} />}
                     {!teamlogo && <ImageAvatar text={letter} bgColor={color} height={'50px'} smallHeight={'50px'} smallWidth={'50px'} meduimHeight={'50px'} meduimWidth={'50px'} width={'50px'} borderRadius={'10px'} fontSize={'var(--normal)'} />}
                 </Box>
                 <Typography variant="body2">{teamname}</Typography>
@@ -40,7 +40,7 @@ const CommonSection = ({ data, teamlogo, teamname, matchData, letter, color }) =
                                                 </Box>
                                                 :
                                                 <Box sx={{ width: '70%', marginTop: '25px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', overflow: 'hidden' }}>
-                                                    <Image src={`/${item?.playerImage}`} alt='profile pic' width={150} height={150} />
+                                                    <Image unoptimized src={`/${item?.playerImage}`} alt='profile pic' width={150} height={150} />
                                                 </Box>
                                         }
                                     </Box>

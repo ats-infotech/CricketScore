@@ -511,7 +511,6 @@ const TestScoreBoard = () => {
         revise: false,
         over: ""
     })
-    // const [matchEndDate, setMatchEndDate] = useState()
     const CurrentDate = new Date()
     let matchDate = new Date(matchStartDate?.getFullYear(), matchStartDate?.getMonth(), matchStartDate?.getDate());
     let currentDay = new Date(CurrentDate?.getFullYear(), CurrentDate?.getMonth(), CurrentDate?.getDate());
@@ -581,7 +580,6 @@ const TestScoreBoard = () => {
         const endDate = new Date(startDate);
         endDate.setDate(startDate.getDate() + 4);
         setMatchStartDate(startDate)
-        // setMatchEndDate(endDate)
     }, [currentMatch])
 
     useEffect(() => {
@@ -636,12 +634,6 @@ const TestScoreBoard = () => {
             };
             handleBatterOrder(createNewObj)
         }
-        // if (CurrentInnings === 2 || CurrentInnings === 1) {
-        //     setMaxOver(parseInt(currentMatch?.totalovers))
-        // } else if (CurrentInnings === 3 || CurrentInnings === 4) {
-        //     setMaxOver(1)
-        // }
-        // setOverPerBowler(parseInt(currentMatch?.overPerBowler))
         setPlayersPost({
             team1Captain: Team1Captain,
             team1WicketKeeper: Team1WicketKeeper,
@@ -1271,7 +1263,6 @@ const TestScoreBoard = () => {
                     strike: activeStrike === 1 ? 2 : 1
                 });
                 setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, runs: '', followon: 0 })
-                // await dispatch(ReplaceMatchSchedule(createNewObj));
             }
         } else if (ball.ballNo === 0 && legalBallCount === 0) {
             if (initailscore.run === 0 && initailscore.wicket === 0 && ball.ballNo === 0 && legalBallCount === 0) {
@@ -1311,12 +1302,6 @@ const TestScoreBoard = () => {
     const handleOverChangeClicked = () => {
         setBowlerchange(true)
         setOpen(true)
-        // if (maxOver > 1 + ball.overNo) {
-        //     setOverFinished(false)
-        // } else {
-        //     setInningsComplete(true)
-        //     setOverFinished(true)
-        // }
     };
 
     const addRun = (runs) => {
@@ -1995,7 +1980,6 @@ const TestScoreBoard = () => {
             handleInningsComplete();
             hasRunwinningRef.current = true;
         } else if (CurrentInnings === 3 && !hasRunwinningRef.current && target.totalruns > initailscore.run && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
-            // && currentMatch?.superOverFirstInnings?.Wickets?.filter(player => player.reason === "Not Out").length < 1
             && matchThirdInnings?.Currentover[0]?.bowlerId !== matchThirdInnings?.Completedovers?.[matchThirdInnings?.Completedovers.length - 1]?.bowlerId) {
             handleInningsComplete();
             hasRunwinningRef.current = true;
@@ -2004,7 +1988,6 @@ const TestScoreBoard = () => {
             handleInningsComplete();
             hasRunwinningRef.current = true;
         } else if (CurrentInnings === 3 && !hasRunwinningRef.current && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
-            // && currentMatch?.superOverFirstInnings?.Wickets?.filter(player => player.reason === "Not Out").length < 1
             && matchThirdInnings?.Currentover[0]?.bowlerId !== matchThirdInnings?.Completedovers?.[matchThirdInnings?.Completedovers.length - 1]?.bowlerId
             && ((matchFirstInnings?.Currentover?.[0]?.runs + matchThirdInnings?.Currentover?.[0]?.runs) < matchSecondInnings?.Currentover?.[0]?.runs)) {
             handleInningsComplete();
@@ -2013,7 +1996,7 @@ const TestScoreBoard = () => {
             handleInningsComplete();
             hasRunwinningRef.current = true;
         }
-    }, [winningTeam, currentMatch, initailscore.run, initailscore.wicket])
+    }, [winningTeam, currentMatch, initailscore.run, initailscore.wicket, winSituation])
 
     useEffect(() => {
         if (ball.ballNo > 0 || ball.overNo > 0 || legalBallCount > 0) {
@@ -2022,16 +2005,17 @@ const TestScoreBoard = () => {
             const dayNumber = CurrentRunningDay?.split(" ")[1];
             const totalOversLeft = ((5 - parseInt(dayNumber)) * 90) + (90 - (perDayOverBowled[`day${dayNumber}`] + (matchThirdInnings?.Currentover?.[0]?.legalBall === 6 ? 1 : 0)))
             const FinalBallShow = totalOversLeft > 20 ? totalOversLeft - 1 : totalOversLeft * 6 - legalBallCount
+            let winTeam = team1?.id === winningTeam ? team1?.team_name : team2?.team_name
 
-            if (CurrentInnings === 4 && tossWinner.bowlingSide === matchFourthInnings?.bowlingside && !isFollowOn && winningTeam) {
+            if (CurrentInnings === 4 && tossWinner.bowlingSide === winTeam && !isFollowOn && winningTeam) {
                 const runs = 1 + matchFirstInnings?.Currentover?.[0]?.runs + matchThirdInnings?.Currentover?.[0]?.runs - matchSecondInnings?.Currentover?.[0]?.runs - matchFourthInnings?.Currentover?.[0]?.runs
                 reason = `won by ${runs} runs`
-            } else if (CurrentInnings === 4 && tossWinner.bowlingSide === matchFourthInnings?.bowlingside && isFollowOn && winningTeam) {
+            } else if (CurrentInnings === 4 && tossWinner.bowlingSide === winTeam && isFollowOn && winningTeam) {
                 const runs = 1 + matchSecondInnings?.Currentover?.[0]?.runs + matchThirdInnings?.Currentover?.[0]?.runs - matchFirstInnings?.Currentover?.[0]?.runs - matchFourthInnings?.Currentover?.[0]?.runs
                 reason = `won by ${runs} runs`
-            } else if (CurrentInnings === 4 && winningTeam === matchFourthInnings?.battingside && winningTeam) {
+            } else if (CurrentInnings === 4 && tossWinner.battingSide === winTeam && winningTeam) {
                 reason = `won the match ${legalBallCount === 6 ? FinalBallShow + 1 : FinalBallShow}.${6 - legalBallCount} Overs left`
-            } else if (CurrentInnings === 3 && tossWinner.bowlingSide === matchThirdInnings?.bowlingside && winningTeam) {
+            } else if (CurrentInnings === 3 && tossWinner.bowlingSide === winTeam && winningTeam) {
                 reason = `won the match by 1 Innings and ${target.runs}`
             } else if (CurrentInnings === 4 && target.totalruns > initailscore.run && target.overs === 0 && legalBallCount === 6 && winningTeam) {
                 reason = `Match Draw`
@@ -2598,8 +2582,6 @@ const TestScoreBoard = () => {
 
     const updateForWideOrNoBall = (lastScore) => {
         const scoreValue = lastScore === "WD" || lastScore === "NB" ? 1 : parseInt(lastScore.replace(/[^0-9]/g, '')) + 1;
-        // const scoreType = lastScore.includes('WD') ? 'wd' : 'nb';
-
         setBowlerScore((prev) => ({
             ...prev,
             run: prev.run - scoreValue,
@@ -3099,8 +3081,6 @@ const TestScoreBoard = () => {
             setRno(false)
         }
     }, [wicketReason.reason])
-
-    // if (!loading && !currentMatch) return <Custom404 />
 
     return (
         <>

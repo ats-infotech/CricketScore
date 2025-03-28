@@ -398,7 +398,7 @@ const ScoreBoard = () => {
     const params = useParams()
     const dispatch = useDispatch()
     const hasRunRef = useRef(false);
-    const hasRunwinningRef = useRef(false)
+    // const hasRunwinningRef = useRef(false)
     const hasbatterpassed = useRef(false)
     const router = useRouter()
     const [oversFinished, setOverFinished] = useState(false)
@@ -931,31 +931,6 @@ const ScoreBoard = () => {
             partnership: initailscore.run,
             newBatter: wicketReason.newBatter
         }
-
-        // const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
-        // const updatedBatterOrder = [...filterBatterOrder];
-        // const isOldBatterOut = currentMatch?.[innings]?.Wickets?.some(wicket => wicket.BatterId === filterBatterOrder.at(-1));
-        // if (!isOldBatterOut) {
-        //     updatedBatterOrder.pop();
-        // }
-        // if (!updatedBatterOrder.includes(wicketReason.newBatter)) {
-        //     updatedBatterOrder.push(wicketReason.newBatter);
-        // }
-        // const isBatterOut = currentMatch?.[innings]?.Wickets?.some(wicket => wicket.BatterId === wicketReason.newBatter);
-        // if (!isBatterOut) {
-        //     setBattingOrder(updatedBatterOrder);
-        //     const createNewBatterObj = {
-        //         id: currentMatch?.id,
-        //         [innings]: {
-        //             BattingOrder: updatedBatterOrder
-        //         }
-        //     };
-        //     const action = CurrentInnings === 3 ? ReplaceSuperOverBattingOrder :
-        //         CurrentInnings === 2 ? ReplaceSecondInningsBattingOrder :
-        //             CurrentInnings === 1 ? ReplaceBattingOrder :
-        //                 ReplaceSuperOverSecondInningsBattingOrder;
-        //     dispatch(action(createNewBatterObj));
-        // }
 
         const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
         const updatedBatterOrder = [...filterBatterOrder];
@@ -1832,12 +1807,12 @@ const ScoreBoard = () => {
             if (completedOver && !hasRunRef.current) {
                 setBall((prev) => ({
                     ...prev,
-                    overNo: Object.keys(completedOver).length ?? 0,
+                    overNo: currentInnings === 2 && currentMatch?.matchWinner ? completedOver.length - 1 : completedOver.length ?? 0,
                 }));
             }
 
             if (!hasRunRef.current && winner !== undefined) {
-                setWinningTeam(winner)
+                // setWinningTeam(winner)
             }
 
             if (!hasRunRef.current && BattingOrder) {
@@ -1931,45 +1906,42 @@ const ScoreBoard = () => {
     }, [winningTeam, winningSituation])
 
     useEffect(() => {
-        if (!hasRunwinningRef.current && currentMatch?.superOverSecondInnings?.Currentover?.[0]?.runs === initailscore.run && target.totalruns <= initailscore.run
-            && winningTeam && inning === 4 && currentMatch?.superOverSecondInnings?.Wickets?.filter(player => player.reason === "Not Out").length < 2) {
+        if (currentMatch?.superOverSecondInnings?.Currentover?.[0]?.runs === initailscore.run && target.totalruns <= initailscore.run
+            && winningTeam && CurrentInnings === 4 && currentMatch?.superOverSecondInnings?.Wickets?.filter(player => player.reason === "Not Out").length < 2) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
-        } else if (!hasRunwinningRef.current && target.totalruns > initailscore.run && maxOver >= 1 + ball.overNo && inning === 4 &&
-            currentMatch?.superOverSecondInnings?.Currentover?.[0]?.runs === initailscore.run && winningTeam && currentMatch?.superOverSecondInnings?.Currentover[0]?.legalBall === legalBallCount &&
+        } else if (target.totalruns > initailscore.run && maxOver >= 1 + ball.overNo && CurrentInnings === 4 &&
+            currentMatch?.superOverSecondInnings?.Currentover?.[0]?.runs === initailscore.run && winningTeam && 
+            currentMatch?.superOverSecondInnings?.Currentover[0]?.legalBall === legalBallCount &&
             currentMatch?.superOverSecondInnings?.Wickets?.filter(player => player.reason === "Not Out").length < 2) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
-        } else if (!hasRunwinningRef.current && currentMatch?.secondInnings?.Currentover?.[0]?.runs === initailscore.run && target.totalruns <= initailscore.run
-            && winningTeam && currentMatch?.secondInnings?.Currentover[0]?.bowlerId !== currentMatch?.secondInnings?.Completedovers?.[currentMatch?.secondInnings?.Completedovers.length - 1]?.bowlerId
-            && inning === 2) {
+        } else if (currentMatch?.secondInnings?.Currentover?.[0]?.runs === initailscore.run && target.totalruns <= initailscore.run && CurrentInnings === 2 && winningTeam 
+            && currentMatch?.secondInnings?.Currentover[0]?.bowlerId !== currentMatch?.secondInnings?.Completedovers?.[currentMatch?.secondInnings?.Completedovers.length - 1]?.bowlerId) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
-        } else if (!hasRunwinningRef.current && target.totalruns > initailscore.run && maxOver >= 1 + ball.overNo && inning === 2 &&
-            currentMatch?.secondInnings?.Currentover?.[0]?.runs === initailscore.run && winningTeam && currentMatch?.secondInnings?.Currentover[0]?.legalBall === legalBallCount &&
+        } else if (target.totalruns > initailscore.run && maxOver >= 1 + ball.overNo && CurrentInnings === 2 && currentMatch?.secondInnings?.Currentover?.[0]?.runs === initailscore.run 
+            && winningTeam && currentMatch?.secondInnings?.Currentover[0]?.legalBall === legalBallCount &&
             currentMatch?.secondInnings?.Currentover[0]?.bowlerId !== currentMatch?.secondInnings?.Completedovers?.[currentMatch?.secondInnings?.Completedovers.length - 1]?.bowlerId) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
         }
-    }, [winningTeam, currentMatch, initailscore.run, initailscore.wicket, winningSituation])
+    }, [winningTeam, currentMatch, initailscore.run, initailscore.wicket])
 
     useEffect(() => {
         let reason = ""
-        if (tossWinner.battingSide === matchFourthInnings?.battingside && CurrentInnings === 4 && winningTeam) {
+        let winTeam = team1?.id === winningTeam ? team1?.team_name : team2?.team_name
+        if (tossWinner.battingSide === winTeam && CurrentInnings === 4 && winningTeam) {
             const balls = matchFourthInnings?.Currentover?.[0].legalBall
             const winningballs = 6 - balls
             reason = (`won superover (${winningballs} balls left)`)
-        } else if (tossWinner.bowlingSide === matchFourthInnings?.bowlingside && CurrentInnings === 4 && winningTeam) {
+        } else if (tossWinner.bowlingSide === winTeam && CurrentInnings === 4 && winningTeam) {
             const winningruns = matchThirdInnings?.Currentover?.[0]?.runs - matchFourthInnings?.Currentover?.[0]?.runs
             reason = (`won superover by ${winningruns} runs`)
-        } else if (tossWinner.battingSide === currentMatch?.secondInnings?.battingside && CurrentInnings === 2 && winningTeam) {
+        } else if (tossWinner.battingSide === winTeam && CurrentInnings === 2 && winningTeam) {
             const balls = currentMatch?.secondInnings?.Currentover?.[0].legalBall === 6 ? 0 : currentMatch?.secondInnings?.Currentover?.[0].legalBall
             const overs = currentMatch?.secondInnings?.Currentover?.[0].legalBall === 6 ? currentMatch?.secondInnings?.Completedovers?.length : currentMatch?.secondInnings?.Completedovers?.length - 1
             const totalovers = parseInt(currentMatch?.target?.overs) - overs
             const winningballs = (totalovers * 6) - balls
             const totalWickets = parseInt(currentMatch?.perteamplayers) - initailscore.wicket - 1
             reason = (`won by ${totalWickets} wickets (${winningballs} balls left) ${currentMatch?.target?.dls === true ? '(DLS Method)' : ''}`)
-        } else if (tossWinner.bowlingSide === currentMatch?.secondInnings?.bowlingside && CurrentInnings === 2 && winningTeam) {
+        } else if (tossWinner.bowlingSide === winTeam && CurrentInnings === 2 && winningTeam) {
             const winningruns = currentMatch?.firstInnings?.Currentover?.[0]?.runs - currentMatch?.secondInnings?.Currentover?.[0]?.runs
             reason = (`won by ${winningruns} runs ${currentMatch?.target?.dls === true ? '(DLS Method)' : ''}`)
         }
@@ -2569,7 +2541,6 @@ const ScoreBoard = () => {
                 setUndo(true)
                 const lastScore = newBallScores[i];
                 if (winningTeam) {
-                    hasRunwinningRef.current = false;
                     setWinningTeam()
                     const createNewObj = {
                         ...currentMatch,
@@ -3019,46 +2990,36 @@ const ScoreBoard = () => {
         }
     }
 
-    const handleReviseTarget = () => {
+    const handleReviseTarget = (type) => {
         setOpen(true)
         setReviseTarget({
             revise: true,
             over: "",
-            type: "DLS"
+            type: type
         })
     }
 
     const ConfirmReviseTarget = () => {
-        const Team1Run = matchFirstInnings?.Currentover?.[0]?.runs
-        const Team1Over = parseInt(currentMatch?.totalovers)
-        const target = calculateDLSTarget(Team1Run, Team1Over, reviseTarget.over, initailscore.wicket)
-        const newObj = {
-            id: currentMatch?.id,
-            target: {
-                runs: target,
-                overs: reviseTarget.over.toString(),
-                dls: true
+        if (reviseTarget.type === "DLS") {
+            const Team1Run = matchFirstInnings?.Currentover?.[0]?.runs
+            const Team1Over = parseInt(currentMatch?.totalovers)
+            const target = calculateDLSTarget(Team1Run, Team1Over, reviseTarget.over, initailscore.wicket)
+            const newObj = {
+                id: currentMatch?.id,
+                target: {
+                    runs: target,
+                    overs: reviseTarget.over.toString(),
+                    dls: true
+                }
             }
+            dispatch(ChangeMatchTarget(newObj))
+        } else if (reviseTarget.type === "Overs") {
+            const newObj = {
+                id: currentMatch?.id,
+                totalovers: (parseInt(currentMatch?.totalovers) - reviseTarget.over).toString()
+            }
+            dispatch(DescreaseMatchOvers(newObj))
         }
-        dispatch(ChangeMatchTarget(newObj))
-        handleClose()
-    }
-
-    const handleReviseOvers = () => {
-        setOpen(true)
-        setReviseTarget({
-            revise: true,
-            over: "",
-            type: "Overs"
-        })
-    }
-
-    const ConfirmReviseOvers = () => {
-        const newObj = {
-            id: currentMatch?.id,
-            totalovers: (parseInt(currentMatch?.totalovers) - reviseTarget.over).toString()
-        }
-        dispatch(DescreaseMatchOvers(newObj))
         handleClose()
     }
 
@@ -3101,7 +3062,7 @@ const ScoreBoard = () => {
         },
         {
             condition: reviseTarget.revise,
-            onClick: reviseTarget.type === "DLS" ? ConfirmReviseTarget : ConfirmReviseOvers,
+            onClick: ConfirmReviseTarget,
             title: reviseTarget.type === "DLS" ? "Revise Target" : "Revise Overs",
             disabled: isReviseDisable
         },
@@ -3155,7 +3116,6 @@ const ScoreBoard = () => {
                 handleBreakOpen={handleBreakOpen}
                 terminateMatch={handleMatchTerminate}
                 reviseTarget={handleReviseTarget}
-                reviseOvers={handleReviseOvers}
                 winSituation={winningSituation}
                 team1Data={Team1Data}
                 team2Data={Team2Data}

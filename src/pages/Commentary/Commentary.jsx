@@ -2,7 +2,7 @@
 import { CommonText } from "@/components/common/commonText";
 import SwitchSelect from "@/components/common/commonUi/SwitchSelect/SwitchSelect";
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './Commentary.css';
 import { useSelector } from "react-redux";
 import { teamsState } from "@/redux/slices/teamSlice";
@@ -21,6 +21,7 @@ const CommentaryPage = ({ matchData, teamData, playerData, type, tournamentData 
     const [innings, setInnings] = useState()
     const [commentarys, setCommentarys] = useState(0)
     const [Commentary, setCommentary] = useState([])
+    const commentaryRef = useRef(null);
     const team_data = useSelector(teamsState)
     let isTestMatch = tournamentData?.match_type === "Test Match" ? true : false
     let isFollowOn = matchData?.followOn === "Follow On" ? true : false
@@ -35,6 +36,23 @@ const CommentaryPage = ({ matchData, teamData, playerData, type, tournamentData 
         : isTestMatch && isFollowOn ? 3
             : !matchData?.superOverCount && CurrentInnings === 3 ? 3
                 : matchData?.superOverCount && superOverCountEven && CurrentInnings === 3 ? 4 : 3
+
+    let isFirstBattingTeamPlayingSuperover = isTestMatch && matchData?.followOn !== "Follow On" && CurrentInnings === 3 ? true
+        : isTestMatch && matchData?.followOn === "Follow On" && CurrentInnings === 3 ? false
+            : isTestMatch && matchData?.followOn !== "Follow On" && CurrentInnings === 4 ? false
+                : isTestMatch && matchData?.followOn === "Follow On" && CurrentInnings === 4 ? true
+                    : (CurrentInnings === 2 || CurrentInnings === 1) ? false
+                        : !matchData?.superOverCount && CurrentInnings === 4 ? true
+                            : matchData?.superOverCount && superOverCountEven && CurrentInnings === 3 ? false
+                                : true
+
+    let isSecondBattingTeamPlayingSuperover = isTestMatch && matchData?.followOn !== "Follow On" && CurrentInnings === 3 ? false
+        : isTestMatch && matchData?.followOn === "Follow On" && CurrentInnings === 3 ? true
+            : isTestMatch && matchData?.followOn !== "Follow On" && CurrentInnings === 4 ? true
+                : isTestMatch && matchData?.followOn === "Follow On" && CurrentInnings === 4 ? false
+                    : (CurrentInnings === 2 || CurrentInnings === 1) ? false
+                        : !matchData?.superOverCount && CurrentInnings === 3 ? true
+                            : matchData?.superOverCount && superOverCountEven && CurrentInnings === 3 ? true : false
 
     const SuperOverTeam = commentarys === 0 ? FirstBattingTeamInnings : commentarys === 1 ? SecondBattingTeamInnings : ''
 
@@ -56,8 +74,14 @@ const CommentaryPage = ({ matchData, teamData, playerData, type, tournamentData 
                 : commentarys === 1 && matchData?.secondInnings && matchData?.secondInnings?.Currentover?.[0] ? completedlegalballs || 0
                     : 0
 
-    let SecondInningsTitleCondition = innings <= 2 ? false : innings === 4 ? true : FirstBattingTeamInnings === 3 && innings === 3 && commentarys === 0 ? true : SecondBattingTeamInnings === 3 && innings === 3 && commentarys === 1 ? true : false
+    let SecondInningsTitleCondition = innings <= 2 ? false : innings === 4 ? true : isSecondBattingTeamPlayingSuperover === 3 && innings === 3 && commentarys === 0 ? true : isSecondBattingTeamPlayingSuperover === 3 && innings === 3 && commentarys === 1 ? true : false
 
+    useEffect(() => {
+        if (commentaryRef.current) {
+            commentaryRef.current.scrollTop = 0;
+        }
+    }, [commentarys]);
+    
     useEffect(() => {
         let team1 = team_data?.data?.find((items) => items?.id === matchData?.team1?.id)
         let team2 = team_data?.data?.find((items) => items?.id === matchData?.team2?.id)
@@ -112,22 +136,15 @@ const CommentaryPage = ({ matchData, teamData, playerData, type, tournamentData 
             setCommentarys(0)
             commentary.push(tossWinner?.battingSide);
         } else if (innings === 2 || innings === 3 || innings === 4) {
-            commentary.push(tossWinner?.battingSide, tossWinner?.bowlingSide);
-            if ((FirstBattingTeamInnings === 3 && innings === 3) || (FirstBattingTeamInnings === 4 && innings === 4)) {
+            if (innings === 2) {
+                setCommentarys(1)
+            } else if (isFirstBattingTeamPlayingSuperover) {
                 setCommentarys(0)
-            } else if ((SecondBattingTeamInnings === 3 && innings === 3) || (SecondBattingTeamInnings === 4 && innings === 4)) {
+            } else if (isSecondBattingTeamPlayingSuperover) {
                 setCommentarys(1)
             }
+            commentary.push(tossWinner?.battingSide, tossWinner?.bowlingSide);
         }
-        // else if (innings === 3 || innings === 4) {
-        //     setCommentarys(2)
-        //     commentary.push(tossWinner?.battingSide, tossWinner?.bowlingSide);
-        //     commentary.push(`${matchData?.superOverCount && superOverCountEven ? tossWinner?.battingSide : tossWinner?.bowlingSide} Superover`);
-        //     if (innings === 4) {
-        //         setCommentarys(3)
-        //         commentary.push(`${matchData?.superOverCount && !superOverCountEven ? tossWinner?.battingSide : tossWinner?.bowlingSide} Superover`);
-        //     }
-        // }
         setInningsCommentary(commentary);
     }, [innings, tossWinner]);
 
@@ -135,24 +152,9 @@ const CommentaryPage = ({ matchData, teamData, playerData, type, tournamentData 
         <Box>
             <Box className={`commentary_main_section  ${type === 'live' ? 'islive' : ''}`}>
                 <Box className='commentary_title_section'>
-                    {/* <Typography variant="body2" >{CommonText.Commentary}</Typography> */}
-                    {/* <FormControl className="commentary_team_select" >
-                        <InputSelect
-                            value={commentarys}
-                            onChange={(e) => setCommentarys(e.target.value)}
-                        >
-                            {
-                                inningsCommentary.map((items, i) => {
-                                    return (
-                                        <MenuItem value={i} key={i}>{items}</MenuItem>
-                                    )
-                                })
-                            }
-                        </InputSelect>
-                    </FormControl> */}
                     <SwitchSelect options={inningsCommentary} defaultSelected={commentarys} onChange={(val) => setCommentarys(val)} />
                 </Box>
-                <Box className={`${type === 'live' ? '' : Commentary.length > 0 ? 'commentryMaxHeight' : ''}`}>
+                <Box ref={commentaryRef} className={`${type === 'live' ? '' : Commentary?.length > 0 ? 'commentryMaxHeight' : ''}`}>
                     {
                         Array.isArray(Commentary) && Commentary.length > 0 ? (
                             [...Commentary]

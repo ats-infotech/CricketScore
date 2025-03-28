@@ -15,6 +15,8 @@ import nonstrikerpic from '../../assets/img/cricket/nonstriker.png';
 import strikerpic from '../../assets/img/cricket/striker.png';
 import PlayerSelection from "../PlayerSelection/StrikePlayerSection";
 import './PlayerBoard.css';
+import { useSelector } from "react-redux";
+import { teamsState } from "@/redux/slices/teamSlice";
 
 const ImageHeading = ({ src, title }) => {
     return (
@@ -33,12 +35,14 @@ const PlayerBoard = ({ teamplay, players, handleOnPlayerChange, selectePlayer, s
     const [bowlingPlayers, setBowlingPlayers] = useState([]);
     const [onActive, setOnActive] = useState('');
     const [activeData, setActiveData] = useState([])
+    const team_data = useSelector(teamsState)
     const router = useRouter()
 
     const sm = useMediaQuery('(max-width: 350px)')
     const md = useMediaQuery('(max-width: 380px)')
     const lg = useMediaQuery('(max-width: 410px)')
-
+    let team1 = team_data?.data?.find((items) => items?.id === currentmatch?.team1?.id)
+    let team2 = team_data?.data?.find((items) => items?.id === currentmatch?.team2?.id)
     let selectedPlyrs = currentmatch?.selectedPlayer
     let selectedTeam1 = selectedPlyrs?.team1
     let selectedTeam2 = selectedPlyrs?.team2
@@ -47,36 +51,34 @@ const PlayerBoard = ({ teamplay, players, handleOnPlayerChange, selectePlayer, s
     let ismatchTest = tournamentData?.match_type === "Test Match" ? true : false
     let isFollowOn = currentmatch?.followOn === "Follow On" ? true : false
 
-    // let Team1Name = teamplay?.batting?.team_name || `${CommonText.BattingTeam}`
-    // let Team2Name = teamplay?.bowling?.team_name || `${CommonText.BowlingTeam}`
-    // let Team1Logo = teamplay?.batting?.team_logo || `${CommonText.BattingTeam}`
-    // let Team2Logo = teamplay?.bowling?.team_logo || `${CommonText.BowlingTeam}`
-
-    let Team1Name = currentmatch?.team1?.team_name
-    let Team1Letter = currentmatch?.team1?.letter
-    let Team1Color = currentmatch?.team1?.team_color
-    let Team1Logo = currentmatch?.team1?.team_logo
-    let Team2Name = currentmatch?.team2?.team_name
-    let Team2Letter = currentmatch?.team2?.letter
-    let Team2Color = currentmatch?.team2?.team_color
-    let Team2Logo = currentmatch?.team2?.team_logo
+    let Team1Name = team1?.team_name
+    let Team1Letter = team1?.letter
+    let Team1Color = team1?.team_color
+    let Team1Logo = team1?.team_logo
+    let Team2Name = team2?.team_name
+    let Team2Letter = team2?.letter
+    let Team2Color = team2?.team_color
+    let Team2Logo = team2?.team_logo
     let superOverCountEven = currentmatch?.superOverCount % 2 === 0
-    let BattingTeamName = ismatchTest && !isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name 
-    : ismatchTest && isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name 
-    : ismatchTest && isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.batting?.team_name 
-    : ismatchTest && !isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.bowling?.team_name
-    : superOverCountEven && currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name 
-    : superOverCountEven && currentmatch?.currentInnings !== 3 ? teamplay?.bowling?.team_name 
-    : currentmatch?.currentInnings === 2 || currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name 
-    : teamplay?.batting?.team_name
-    let BowlingTeamName = ismatchTest && !isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name 
-    : ismatchTest && isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name 
-    : ismatchTest && isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.bowling?.team_name 
-    : ismatchTest && !isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.batting?.team_name 
-    : superOverCountEven && currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name
-    : superOverCountEven && currentmatch?.currentInnings !== 3 ? teamplay?.batting?.team_name 
-    : currentmatch?.currentInnings === 2 || currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name 
-    : teamplay?.bowling?.team_name
+
+    let BattingTeamName = ismatchTest && !isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name
+        : ismatchTest && isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name
+            : ismatchTest && isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.batting?.team_name
+                : ismatchTest && !isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.bowling?.team_name
+                    : superOverCountEven && currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name
+                        : superOverCountEven && currentmatch?.currentInnings !== 3 ? teamplay?.bowling?.team_name
+                            : currentmatch?.currentInnings === 2 || currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name
+                                : teamplay?.batting?.team_name
+
+    let BowlingTeamName = ismatchTest && !isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name
+        : ismatchTest && isFollowOn && currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name
+            : ismatchTest && isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.bowling?.team_name
+                : ismatchTest && !isFollowOn && currentmatch?.currentInnings === 4 ? teamplay?.batting?.team_name
+                    : superOverCountEven && currentmatch?.currentInnings === 3 ? teamplay?.bowling?.team_name
+                        : superOverCountEven && currentmatch?.currentInnings !== 3 ? teamplay?.batting?.team_name
+                            : currentmatch?.currentInnings === 2 || currentmatch?.currentInnings === 3 ? teamplay?.batting?.team_name
+                                : teamplay?.bowling?.team_name
+
     let strikerName = battingPlayers.find(item => item?.id === striker)?.playerName || 'Striker'
     let nonStrikerName = battingPlayers.find(item => item?.id === nonStriker)?.playerName || 'Non-Striker'
     let bowlerName = bowlingPlayers.find(item => item?.id === bowler)?.playerName || 'Bowler'
@@ -92,16 +94,16 @@ const PlayerBoard = ({ teamplay, players, handleOnPlayerChange, selectePlayer, s
         const filteredBowlingPlayers = players.filter((player) => (player?.teamId === bowlingTeamId));
         const PickedBowlingPlayer = filteredBowlingPlayers.filter((items) => Allplayer?.includes(items.id))
 
-        if (ismatchTest && currentmatch?.currentInnings === 4 ? !isFollowOn 
+        if (ismatchTest && currentmatch?.currentInnings === 4 ? !isFollowOn
             : ismatchTest && currentmatch?.currentInnings === 3 ? isFollowOn
-            : currentmatch?.superOverCount && currentmatch?.currentInnings === 3  ? !superOverCountEven 
-            : currentmatch?.superOverCount && currentmatch?.currentInnings !== 3  ? superOverCountEven
-            : (currentmatch?.currentInnings === 2 || currentmatch?.currentInnings === 3)) {
+                : currentmatch?.superOverCount && currentmatch?.currentInnings === 3 ? !superOverCountEven
+                    : currentmatch?.superOverCount && currentmatch?.currentInnings !== 3 ? superOverCountEven
+                        : (currentmatch?.currentInnings === 2 || currentmatch?.currentInnings === 3)) {
             setBowlingPlayers(PickedFilterBattingPlayer);
             setBattingPlayers(PickedBowlingPlayer);
         } else if (currentmatch?.superOverCount && currentmatch?.currentInnings === 3 ? superOverCountEven
-            : currentmatch?.superOverCount && currentmatch?.currentInnings !== 3 ? !superOverCountEven 
-            : (teamplay || currentmatch?.currentInnings === 4)) {
+            : currentmatch?.superOverCount && currentmatch?.currentInnings !== 3 ? !superOverCountEven
+                : (teamplay || currentmatch?.currentInnings === 4)) {
             setBowlingPlayers(PickedBowlingPlayer);
             setBattingPlayers(PickedFilterBattingPlayer);
         }
@@ -136,10 +138,10 @@ const PlayerBoard = ({ teamplay, players, handleOnPlayerChange, selectePlayer, s
         <>
             {
                 !onActive ?
-                    <Box sx={{position: 'relative'}}>
+                    <Box sx={{ position: 'relative' }}>
                         <Banner
                             status={currentmatch?.status ? currentmatch?.status : ''}
-                            tossWinner={currentmatch?.toss && (currentmatch?.currentInnings !== 3 || currentmatch?.currentInnings !== 4) ? `${currentmatch?.toss?.tossWinner === currentmatch?.team1?.id ? currentmatch?.team1?.team_name : currentmatch?.team2?.team_name} won the toss and decided to ${currentmatch?.toss?.selectSide}` : 'Superover'}
+                            tossWinner={currentmatch?.toss && (currentmatch?.currentInnings !== 3 || currentmatch?.currentInnings !== 4) ? `${currentmatch?.toss?.tossWinner === currentmatch?.team1?.id ? team1?.team_name : team2?.team_name} won the toss and decided to ${currentmatch?.toss?.selectSide}` : 'Superover'}
                             image1={Team1Logo ? `/${Team1Logo}` : null}
                             team1letter={Team1Letter}
                             team1color={Team1Color}

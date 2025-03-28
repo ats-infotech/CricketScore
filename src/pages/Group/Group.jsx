@@ -428,7 +428,7 @@ const GroupPage = () => {
                                     return (
                                         <Box className={`group_common_main_section ${isSelect ? 'active' : ''}`} key={item?.id} onClick={(e) => handleCheckboxChange(e, item)}>
                                             <Box className='group_common_section'>
-                                                {item?.team_logo && <Image src={`/${item?.team_logo}`} alt='profile pic' width={150} height={150} />}
+                                                {item?.team_logo && <Image unoptimized src={`/${item?.team_logo}`} alt='profile pic' width={150} height={150} />}
                                                 {!item?.team_logo && <ImageAvatar text={item?.letter} bgColor={item?.team_color} borderRadius={'10px'} smallHeight={'100px'} smallWidth={'100px'} />}
                                             </Box>
                                             <Typography variant="body2">{teamName}</Typography>

@@ -65,7 +65,7 @@ const CommonSection = ({ title, batterheader, batterdata, highestPointsPlayer, t
                     <Box className='summary_common_card_info'>
                         <Typography variant="body2">{highestPointsPlayer?.playerName}</Typography>
                         <Box className='summary_common_card_sub_info'>
-                            {highestPointsPlayer?.teamthumbnail && <Image src={`/${highestPointsPlayer?.teamthumbnail}`} width={500} height={500} alt="" />}
+                            {highestPointsPlayer?.teamthumbnail && <Image unoptimized src={`/${highestPointsPlayer?.teamthumbnail}`} width={500} height={500} alt="" />}
                             {!highestPointsPlayer?.teamthumbnail && <ImageAvatar text={highestPointsPlayer?.teamletter} bgColor={highestPointsPlayer?.teamcolor} width={'70px'}
                                 height={'70px'} smallHeight={'70px'} smallWidth={'70px'} meduimHeight={'70px'} meduimWidth={'70px'} borderRadius={'10px'} />}
                             <Typography variant="body2" >{highestPointsPlayer?.team}</Typography>

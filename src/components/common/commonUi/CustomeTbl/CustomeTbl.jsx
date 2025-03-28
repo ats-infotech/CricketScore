@@ -33,7 +33,7 @@ const CustomeTbl = ({ headRow, data }) => {
                                                         row?.keyname === 'team_name' ? (
                                                             <Box className='image_col'>
                                                                 <Box className='image_box'>
-                                                                    {item['team_logo'] && <Image src={`/${item['team_logo']}`} alt={row?.keyname} width={100} height={100} />}
+                                                                    {item['team_logo'] && <Image unoptimized src={`/${item['team_logo']}`} alt={row?.keyname} width={100} height={100} />}
                                                                     {!item['team_logo'] && <ImageAvatar fontSize={'var(--small)'} height={'40px'} width={'40px'} 
                                                                     text={item['letter']} bgColor={item['team_color']} smallHeight={'40px'} smallWidth={'40px'} meduimHeight={'40px'} meduimWidth={'40px'} />}
                                                                 </Box>

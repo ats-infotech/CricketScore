@@ -179,22 +179,22 @@ const TestScorePage = ({
     let Innings3Declare = match?.superOverFirstInnings?.declare === "yes" ? true : false
 
     useEffect(() => {
-        const striker = players.filter(player => player.id === playerselection.striker)
-        const nonStriker = players.filter(player => player.id === playerselection.nonStriker)
-        const bowler = players.filter(player => player.id === playerselection.bowler)
+        const striker = players?.filter(player => player?.id === playerselection?.striker)
+        const nonStriker = players?.filter(player => player?.id === playerselection?.nonStriker)
+        const bowler = players?.filter(player => player?.id === playerselection?.bowler)
         setPlayerOnField({
-            striker: striker[0]?.playerName,
-            strikerimage: striker[0]?.playerImage,
-            strikerletter: striker[0]?.letter,
-            strikercolor: striker[0]?.playerColor,
-            nonStriker: nonStriker[0]?.playerName,
-            nonStrikerimage: nonStriker[0]?.playerImage,
-            nonStrikerletter: nonStriker[0]?.letter,
-            nonStrikercolor: nonStriker[0]?.playerColor,
-            bowler: bowler[0]?.playerName,
-            bowlerimage: bowler[0]?.playerImage,
-            bowlerletter: bowler[0]?.letter,
-            bowlercolor: bowler[0]?.playerColor
+            striker: striker[0]?.playerName || "",
+            strikerimage: striker[0]?.playerImage || "",
+            strikerletter: striker[0]?.letter || "TA",
+            strikercolor: striker[0]?.playerColor || "",
+            nonStriker: nonStriker[0]?.playerName || "",
+            nonStrikerimage: nonStriker[0]?.playerImage || "",
+            nonStrikerletter: nonStriker[0]?.letter || "TA",
+            nonStrikercolor: nonStriker[0]?.playerColor || "",
+            bowler: bowler[0]?.playerName || "",
+            bowlerimage: bowler[0]?.playerImage || "",
+            bowlerletter: bowler[0]?.letter || "TA",
+            bowlercolor: bowler[0]?.playerColor || ""
         })
 
     }, [playerselection])
@@ -380,7 +380,7 @@ const TestScorePage = ({
                             gif.gif &&
                             <Box className='score_gif_main_section'>
                                 <Box className='score_gif_section'>
-                                    <Image alt="gif" src={gif.type === '4' ? fourgif : gif.type === '6' ? sixgif : wicketgif} height={500} width={500} />
+                                    <Image unoptimized alt="gif" src={gif.type === '4' ? fourgif : gif.type === '6' ? sixgif : wicketgif} height={500} width={500} />
                                 </Box>
                             </Box>
                         }

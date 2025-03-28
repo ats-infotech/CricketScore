@@ -9,7 +9,7 @@ import './Banner.css'
 const LogoImage = React.memo(({ src, props, style, type }) => {
     return (
         <Box className={`logo_image ${type === "score" ? 'score' : ""}`}>
-            <Image src={src} alt="logo" width={100} height={100} style={style} {...props} />
+            <Image unoptimized src={src} alt="logo" width={100} height={100} style={style} {...props} />
         </Box>
     )
 })
@@ -45,7 +45,7 @@ const Banner = ({ image1, image2, type, team1score, team2score, winnerName = '',
     team2Declare = false, team1SuperOverDeclare = false, team2SuperOverDeclare = false }) => {
     return (
         <Box className={`banner_main activeAnimation ${type === 'score' || type === 'scoring' && 'active'}`}>
-            <Image src={banner} alt="banner" width={500} height={500} />
+            <Image unoptimized src={banner} alt="banner" width={500} height={500} />
             {
                 (status === 2 || status === 1) &&
                 <Box className='TossWinner'>

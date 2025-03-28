@@ -80,7 +80,7 @@ const MatchCard = (props) => {
     const getWinnerMessage = (item) => {
         let winner;
         const winningTeam = team_data?.data?.find((items) => items?.id === item?.matchWinner)?.team_name
-        const terminatedTeam = team_data?.data?.find((items) => items?.id === item?.terminate?.teamdisqualify)
+        const terminatedTeam = team_data?.data?.find((items) => items?.id === item?.terminate?.teamdisqualify)?.team_name
         if (item?.terminate) {
             if (item?.terminate?.mainreason === "rain") {
                 winner = (`Match abandoned due to ${item?.terminate?.mainreason}`)
@@ -118,7 +118,7 @@ const MatchCard = (props) => {
                     .map((item, i) => {
                         const formattedDate = formatDate(item?.datetime || item?.match_start_time);
                         const winner = getWinnerMessage(item);
-                        let team1 = team_data?.data?.find((items) => items?.id === item?.team1?.id) 
+                        let team1 = team_data?.data?.find((items) => items?.id === item?.team1?.id)
                         let team2 = team_data?.data?.find((items) => items?.id === item?.team2?.id)
                         let team1_logo = team1.team_logo;
                         let team1_name = team1.team_name;
@@ -132,8 +132,8 @@ const MatchCard = (props) => {
                         let firstInnings = item?.firstInnings?.Currentover[0];
                         let secondInnings = item?.status !== 4 ? item?.secondInnings?.Currentover[0] : item?.secondInnings?.Completedovers?.slice(-1)[0];
                         let superover = item?.currentInnings === 3 || item?.currentInnings === 4;
-                        let thirdInnings = !isTestMatch ? item?.superOverFirstInnings?.Completedovers?.slice(-1)[0] : item?.superOverFirstInnings?.Currentover[0];
-                        let fourthInnings = !isTestMatch ? item?.superOverSecondInnings?.Completedovers?.slice(-1)[0] : item?.superOverSecondInnings?.Currentover[0];
+                        let thirdInnings = isTestMatch ? item?.superOverFirstInnings?.Completedovers?.slice(-1)[0] : item?.superOverFirstInnings?.Currentover[0];
+                        let fourthInnings = isTestMatch ? item?.superOverSecondInnings?.Completedovers?.slice(-1)[0] : item?.superOverSecondInnings?.Currentover[0];
                         let firstInningsCompletedOver = item?.firstInnings?.Completedovers?.length;
                         let secondInningsCompletedOver = item?.secondInnings?.Completedovers?.length;
                         let thirdInningsCompletedOver = item?.superOverFirstInnings?.Completedovers?.length;
@@ -162,7 +162,7 @@ const MatchCard = (props) => {
                                             : (completedOvers > 0 || !completedOvers) && innings?.legalBall === 6 && currentPlayingInnings ? completedOvers + 1 || 1
                                                 : completedOvers > 0 && innings?.legalBall !== 6 && currentPlayingInnings ? completedOvers : completedOvers ? completedOvers
                                                     : 0;
-                            let over = isSuperOver && innings?.legalBall && !isTestMatch === 6 ? `1.0` : `${overno}.${ball}`;
+                            let over = isSuperOver && innings?.legalBall === 6 && !isTestMatch ? `1.0` : `${overno}.${ball}`;
 
                             return { runs, wicket, ball, over };
                         };
@@ -290,7 +290,8 @@ const MatchCard = (props) => {
                                                         title={getMatchButtonTitle()}
                                                         width={'180px'}
                                                         height={'44px'}
-                                                        onClick={() => handleStartMatch(item?.id)} /> : ''
+                                                        onClick={() => handleStartMatch(item?.id)}
+                                                    /> : ''
                                         }
                                     </Box>
                                 </Box>}

@@ -90,7 +90,6 @@ const ScorePage = ({
     post,
     terminateMatch,
     reviseTarget,
-    reviseOvers,
     handleBreakOpen,
     winSituation,
     team1Data,
@@ -317,7 +316,7 @@ const ScorePage = ({
                                         hover={'none'} />
                                 </Box>
                                 <Box className='test_score_render_button'>
-                                    <CustomeButton height={'50px'} title={currentinnings === 1 || !currentinnings ? "Revise Overs" : currentinnings === 2 ? "DLS Target" : "Break"} width={'100%'} onClick={currentinnings === 1 || !currentinnings ? reviseOvers : currentinnings === 2 ? reviseTarget : handleBreakOpen} hover={'none'} disabled={winner} />
+                                    <CustomeButton height={'50px'} title={currentinnings === 1 || !currentinnings ? "Revise Overs" : currentinnings === 2 ? "DLS Target" : "Break"} width={'100%'} onClick={currentinnings === 1 || !currentinnings ? () => reviseTarget("Overs") : currentinnings === 2 ? () => reviseTarget("DLS") : handleBreakOpen} hover={'none'} disabled={winner} />
                                     <CustomeButton height={'50px'} title={"Match Terminate"} width={'100%'} onClick={terminateMatch} hover={'none'} disabled={winner} />
                                 </Box>
                                 {(currentinnings === 2 || currentinnings === 1 || !currentinnings) && <Box className='test_score_render_button' >
@@ -329,7 +328,7 @@ const ScorePage = ({
                             gif.gif &&
                             <Box className='score_gif_main_section'>
                                 <Box className='score_gif_section'>
-                                    <Image alt="gif" src={gif.type === '4' ? fourgif : gif.type === '6' ? sixgif : wicketgif} height={500} width={500} />
+                                    <Image unoptimized alt="gif" src={gif.type === '4' ? fourgif : gif.type === '6' ? sixgif : wicketgif} height={500} width={500} />
                                 </Box>
                             </Box>
                         }

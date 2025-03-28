@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CaptainImage from '../../assets/img/playing11/captain.png';
 import WicketKeeperImage from '../../assets/img/playing11/wk.png';
 import './player11.css';
+import { teamsState } from "@/redux/slices/teamSlice";
 
 const CommonButton = ({ title, onClick, isActive, activeTab }) => {
     return (
@@ -156,6 +157,7 @@ const Player11 = () => {
     const [deletedId, setDeleteId] = useState('')
     const match_data = useSelector(matchesState)
     const player_data = useSelector(playersState)
+    const team_data = useSelector(teamsState)
     const router = useRouter()
     const dispatch = useDispatch()
     const [activeSelectedPlayers, setActiveSelectedPlayers] = useState({
@@ -275,13 +277,15 @@ const Player11 = () => {
     }, [activeTab]);
 
     useEffect(() => {
-        const team1 = matchObj?.team1
-        const team2 = matchObj?.team2
+        // const team1 = matchObj?.team1
+        // const team2 = matchObj?.team2
+        let team1 = team_data?.data?.find((items) => items?.id === matchObj?.team1?.id)
+        let team2 = team_data?.data?.find((items) => items?.id === matchObj?.team2?.id)
         const playersallowed = parseInt(matchObj?.perteamplayers)
         setPerTeamPlayers(playersallowed)
         setTeam1(team1)
         setTeam2(team2)
-    }, [matchObj])
+    }, [matchObj, team_data])
 
     useEffect(() => {
         if (selectedTeamPlayers.length >= perTeamPlayers) {

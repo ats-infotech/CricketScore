@@ -7,139 +7,6 @@ import { useSelector } from "react-redux"
 import './MatchSummary.css'
 import { teamsState } from "@/redux/slices/teamSlice"
 
-// const calculateMVPPoints = (player, wickets, economy, team1, team2) => {
-//     let battingPoints = 0;
-//     let bowlingPoints = 0;
-//     let fieldingPoints = 0;
-//     let battingrun = 0;
-//     let bowlingrun = 0;
-//     let battingball = 0;
-//     let bowlingball = 0;
-//     let four = 0;
-//     let six = 0;
-//     let sr = 0;
-//     let eco = 0;
-//     let maiden = 0;
-//     let over = 0;
-//     let bowlerwickets = 0;
-//     let team = team1?.id === player.teamId ? team1?.team_name : team2?.team_name;
-//     let teamletter = team1?.id === player.teamId ? team1?.letter : team2?.letter;
-//     let teamcolor = team1?.id === player.teamId ? team1?.team_color : team2?.team_color;
-//     let team1Logo = team1?.team_logo ? team1?.team_logo : null
-//     let team2Logo = team2?.team_logo ? team2?.team_logo : null
-//     let teamthumbnail = team1?.id === player.teamId ? team1Logo : team2Logo;
-//     let playerthumbnail = player?.playerImage
-
-//     // Batting Points Calculation
-//     const playerscores = wickets?.filter(wicket => wicket.BatterId === player.id);
-
-//     playerscores.forEach(wicket => {
-
-//         // 1 point for every 2 runs
-//         battingPoints += Math.floor(wicket.run / 2);
-//         battingrun += parseInt(wicket.run)
-//         four += parseInt(wicket.four)
-//         six += parseInt(wicket.six)
-//         battingball += parseInt(wicket.balls)
-//         sr = parseInt((wicket.run / wicket.balls) * 100)
-
-//         // Half-century and century points
-//         if (wicket.run >= 50 && wicket.run < 100) battingPoints += 5;
-//         if (wicket.run >= 100) battingPoints += 10;
-
-//         // Strike rate points
-//         if ((wicket.run / wicket.balls) * 100 >= 80 && (wicket.run / wicket.balls) * 100 < 100) battingPoints += 2;
-//         if ((wicket.run / wicket.balls) * 100 > 100) battingPoints += 4;
-
-//         // Boundary points
-//         battingPoints += wicket.four;
-//         battingPoints += 2 * wicket.six;
-//     });
-
-
-//     const bowlerTotalScore = economy.filter(data => data.bowlerId === player.id);
-//     const bowlerOverLength = economy
-//         .filter(data => data.bowlerId === player.id)
-//         .reduce((totalOvers, data) => {
-//             if (data.legalBall === 6) {
-//                 return totalOvers + 1;
-//             } else {
-//                 return totalOvers + (data.legalBall / 10);
-//             }
-//         }, 0);
-//     const roundedBowlerOverLength = Math.round(bowlerOverLength * 10) / 10;
-//     const targetBowlerId = player.id;
-//     over += roundedBowlerOverLength
-
-//     bowlerTotalScore.forEach(bowler => {
-//         if (bowler.bowlerId === targetBowlerId) {
-//             bowlingrun = bowler.bowlerrun
-//             bowlerwickets = bowler.bowlerwicket
-//             bowlingball += bowler.legalBall;
-//         }
-//     });
-
-//     bowlingPoints += bowlerwickets * 10
-//     if (bowlerwickets >= 3 && bowlerwickets < 5) bowlingPoints += 5
-//     if (bowlerwickets >= 5) bowlingPoints += 10
-//     const economyRate = bowlingrun / roundedBowlerOverLength;
-//     eco = economyRate.toString().slice(0, 5)
-//     if (economyRate < 2) bowlingPoints += 10;
-//     if (economyRate > 2 && economyRate <= 5) bowlingPoints += 8;
-//     if (economyRate > 5 && economyRate <= 7) bowlingPoints += 6;
-//     if (economyRate > 7 && economyRate <= 10) bowlingPoints += 4;
-//     if (economyRate > 10) bowlingPoints += 2;
-
-//     const bowlerScores = economy.filter(data => data.bowlerId === player.id);
-
-//     if (bowlerScores) {
-//         bowlerScores.forEach(bowlerScore => {
-//             const intKeysValues = Object.keys(bowlerScore)
-//                 .filter(key => !isNaN(key))
-//                 .map(key => bowlerScore[key]);
-
-//             if (intKeysValues.every(value => (value === "0" || value === "W" || value === "LB" || value === "1LB" || value === "2LB" || value === "3LB" || value === "4LB" || value === "5LB" || value === "6LB"))) {
-//                 maiden += 1;
-//             }
-//         });
-//     }
-
-//     bowlingPoints += maiden * 2
-
-//     // Fielding Points Calculation
-//     const fieldingScore = wickets?.filter(wicket => wicket.fielder === player.id);
-//     fieldingScore.forEach(() => {
-//         fieldingPoints += 10;
-//     });
-
-
-//     return {
-//         playerName: player.playerName,
-//         playerthumbnail,
-//         playerletter: player.letter,
-//         playercolor: player.playerColor,
-//         team,
-//         teamthumbnail,
-//         teamletter,
-//         teamcolor,
-//         battingrun,
-//         battingball,
-//         four,
-//         six,
-//         sr,
-//         bowlingrun,
-//         bowlingball,
-//         bowlerwickets,
-//         eco,
-//         maiden,
-//         over,
-//         bowlingPoints,
-//         battingPoints,
-//         fieldingPoints,
-//         totalPoints: battingPoints + bowlingPoints + fieldingPoints,
-//     };
-// };
-
 const MatchSummary = ({ matchData, playerData, teamData, tournamentData }) => {
 
     const [tournament, setTournament] = useState([])
@@ -311,9 +178,9 @@ const MatchSummary = ({ matchData, playerData, teamData, tournamentData }) => {
                     <CardContent>
                         <Typography variant="h6" className="innings_title">Match Summary</Typography>
                         <Box className="matchsummary-gradient-line"></Box>
-                        <Typography variant="body1" className="info">{`${matchData?.team1?.team_name} vs ${matchData?.team2?.team_name}, ${tournament?.tournament_name}`}</Typography>
+                        <Typography variant="body1" className="info">{`${team1?.team_name} vs ${team2?.team_name}, ${tournament?.tournament_name}`}</Typography>
                         <Typography variant="body2" className="info">{`${formatDate(matchData?.match_start_time)}, ${tournament?.city}, ${tournament?.ground}`}</Typography>
-                        <Typography variant="body2" className="info">{`${matchData?.toss?.tossWinner === matchData?.team1?.id ? matchData?.team1?.team_name : matchData?.team2?.team_name} won the toss and decided to ${matchData?.toss?.selectSide}`}</Typography>
+                        <Typography variant="body2" className="info">{`${matchData?.toss?.tossWinner === matchData?.team1?.id ? team1?.team_name : team2?.team_name} won the toss and decided to ${matchData?.toss?.selectSide}`}</Typography>
                         <Typography variant="body2" className="info">{winnermsg}</Typography>
                         {!matchData?.terminate && <Typography variant="body2" className="info">{`MVP: ${highestPointsPlayer?.playerName} ${highestPointsPlayer?.battingrun}(${highestPointsPlayer?.battingball}) and ${highestPointsPlayer?.bowlingrun}/${highestPointsPlayer?.bowlerwickets} in ${(highestPointsPlayer?.bowlingball / 6).toFixed(1)}`}</Typography>}
                     </CardContent>
@@ -331,12 +198,12 @@ const MatchSummary = ({ matchData, playerData, teamData, tournamentData }) => {
                             <Box className="matchsummary-gradient-line"></Box>
                             <Typography variant="body2" className="info">{`Total Score: ${innings?.Currentover?.[0]?.runs}/${innings?.Currentover?.[0]?.wicket} in ${innings?.Currentover?.[0]?.legalBall === 6 ? innings?.Completedovers?.length : innings?.Completedovers?.length - 1}.${innings?.Currentover?.[0]?.legalBall === 6 ? 0 : innings?.Currentover?.[0]?.legalBall || 0}`}</Typography>
                             <Typography variant="body2" className="info">{`Best Batter: ${index === 0 ? highestBattingTeam1Point?.playerName : highestBattingTeam2Point?.playerName} ${index === 0 ? highestBattingTeam1Point?.battingrun : highestBattingTeam2Point?.battingrun}(${index === 0 ? highestBattingTeam1Point?.battingball : highestBattingTeam2Point?.battingball})`}</Typography>
-                            <Typography variant="body2" className="info">{`Best Bowler: ${index === 0 ? highestBowlingTeam2Point?.playerName : highestBowlingTeam1Point?.playerName} ${index === 0 ? highestBowlingTeam2Point?.bowlingrun : highestBowlingTeam1Point?.bowlingrun}/${index === 0 ? highestBowlingTeam2Point?.bowlerwickets : highestBowlingTeam1Point?.bowlerwickets}`}</Typography>
+                            <Typography variant="body2" className="info">{`Best Bowler: ${index === 0 ? highestBowlingTeam2Point?.playerName : highestBowlingTeam1Point?.playerName} ${index === 0 ? highestBowlingTeam2Point?.bowlingrun : highestBowlingTeam1Point?.bowlingrun}/${index === 0 ? highestBowlingTeam2Point?.bowlerwickets : highestBowlingTeam1Point?.bowlerwickets} in ${(highestBowlingTeam1Point?.bowlingball / 6).toFixed(1)}`}</Typography>
                         </CardContent>
                     </Card>
                 ))}
 
-                {isTestMatch && matchData?.currentInnings === 3 &&
+                {isTestMatch && (matchData?.currentInnings === 3 || matchData?.currentInnings === 4) &&
                     <Card className="match_card_sum">
                         <CardContent>
                             <Typography variant="h6" className="innings_title">{`Third Innings (${matchData?.toss?.tossWinner === team1?.id && matchData?.toss?.selectSide === "Bat" && !isFollowOn ? team1?.team_name
@@ -350,19 +217,19 @@ const MatchSummary = ({ matchData, playerData, teamData, tournamentData }) => {
                     </Card>
                 }
 
-                {isTestMatch && matchData?.currentInnings === 4 && [thirdinnings, fourthinnings].map((innings, index) => (
-                    <Card key={index} className="match_card_sum">
+                {isTestMatch && matchData?.currentInnings === 4 && 
+                    <Card className="match_card_sum">
                         <CardContent>
-                            <Typography variant="h6" className="innings_title">{`${index === 0 ? "Third" : "Fourth"} Innings (${matchData?.toss?.tossWinner === team1?.id && matchData?.toss?.selectSide === "Bat" && isFollowOn ? team1?.team_name
+                            <Typography variant="h6" className="innings_title">{`${"Fourth"} Innings (${matchData?.toss?.tossWinner === team1?.id && matchData?.toss?.selectSide === "Bat" && isFollowOn ? team1?.team_name
                                 : matchData?.toss?.tossWinner !== team1?.id && matchData?.toss?.selectSide !== "Bat" && isFollowOn ? team1?.team_name
                                     : team2?.team_name})`}</Typography>
                             <Box className="matchsummary-gradient-line"></Box>
-                            <Typography variant="body2" className="info">{`Total Score: ${innings?.Currentover?.[0]?.runs}/${innings?.Currentover?.[0]?.wicket} in ${innings?.Currentover?.[0]?.legalBall === 6 ? innings?.Completedovers?.length : innings?.Completedovers?.length - 1}.${innings?.Currentover?.[0]?.legalBall === 6 ? 0 : innings?.Currentover?.[0]?.legalBall || 0}`}</Typography>
-                            <Typography variant="body2" className="info">{`Best Batter: ${index === 0 ? highestSecondInningsBattingTeam1Point?.playerName : highestSecondInningsBattingTeam2Point?.playerName} ${index === 0 ? highestSecondInningsBattingTeam1Point?.battingrun : highestSecondInningsBattingTeam2Point?.battingrun}(${index === 0 ? highestSecondInningsBattingTeam1Point?.battingball : highestSecondInningsBattingTeam2Point?.battingball})`}</Typography>
-                            <Typography variant="body2" className="info">{`Best Bowler: ${index === 0 ? highestSecondInningsBowlingTeam2Point?.playerName : highestSecondInningsBowlingTeam1Point?.playerName} ${index === 0 ? highestSecondInningsBowlingTeam2Point?.bowlingrun : highestSecondInningsBowlingTeam1Point?.bowlingrun}/${index === 0 ? highestSecondInningsBowlingTeam2Point?.bowlerwickets : highestSecondInningsBowlingTeam1Point?.bowlerwickets}`}</Typography>
+                            <Typography variant="body2" className="info">{`Total Score: ${fourthinnings?.Currentover?.[0]?.runs}/${fourthinnings?.Currentover?.[0]?.wicket} in ${fourthinnings?.Currentover?.[0]?.legalBall === 6 ? fourthinnings?.Completedovers?.length : fourthinnings?.Completedovers?.length - 1}.${fourthinnings?.Currentover?.[0]?.legalBall === 6 ? 0 : fourthinnings?.Currentover?.[0]?.legalBall || 0}`}</Typography>
+                            <Typography variant="body2" className="info">{`Best Batter: ${highestSecondInningsBattingTeam2Point?.playerName} ${highestSecondInningsBattingTeam2Point?.battingrun}(${highestSecondInningsBattingTeam2Point?.battingball})`}</Typography>
+                            <Typography variant="body2" className="info">{`Best Bowler: ${highestSecondInningsBowlingTeam1Point?.playerName} ${highestSecondInningsBowlingTeam1Point?.bowlingrun}/${highestSecondInningsBowlingTeam1Point?.bowlerwickets}`}</Typography>
                         </CardContent>
                     </Card>
-                ))}
+                }
             </Box>
         </Box>
     );

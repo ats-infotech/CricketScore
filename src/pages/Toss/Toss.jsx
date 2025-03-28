@@ -22,6 +22,7 @@ import fireworkgif from '../../assets/img/toss/rightfirework.gif'
 import tailgif from '../../assets/img/toss/Tail.gif'
 import tailcoin from '../../assets/img/toss/Tail.png'
 import './Toss.css'
+import { teamsState } from "@/redux/slices/teamSlice"
 
 const Toss = () => {
     const params = useParams()
@@ -46,7 +47,7 @@ const Toss = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const hasRunRef = useRef(false);
-
+    const team_data = useSelector(teamsState)
     const match_data = useSelector(matchesState)
     const dispatch = useDispatch()
     const router = useRouter()
@@ -70,8 +71,10 @@ const Toss = () => {
         if (!match_data?.data) return;
         // setLoading(true);
         const matchById = match_data.data.find(item => item.id === params.matchId);
+        let team1 = team_data?.data?.find((items) => items?.id === matchById?.team1?.id)
+        let team2 = team_data?.data?.find((items) => items?.id === matchById?.team2?.id)
         if (matchById) {
-            setTeams([matchById.team1, matchById.team2]);
+            setTeams([team1, team2]);
             setMatch(matchById);
         }
         // setLoading(false);
