@@ -1,0 +1,16 @@
+.extra_run_section{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.extra_run_section p {
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    font-size: var(--ex-small) !important;
+}
+
+.extra_run_section.scores p {
+    color: var(--text-white) !important;
+}

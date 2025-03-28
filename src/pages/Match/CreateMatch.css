@@ -1,0 +1,216 @@
+.matchFrom {
+    padding: 0 40px 40px;
+    height: calc(100vh - 300px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin: 40px 0 0;
+}
+
+.scheduleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+/* Team selection banner */
+.create_team_banner {
+    width: 100%;
+    height: 250px !important;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.create_team_banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--linear-gradient);
+}
+
+.create_team_banner .box_child {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+/* ---------- team_selection_Box ------------- */
+
+.team_selection_Box {
+    width: 100%;
+    position: relative;
+}
+
+.team_selection_Box .selecte_team_logo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    box-shadow: var(--shadow-light);
+    background-size: cover;
+    background-position: top center;
+    margin: 0 auto 20px auto;
+}
+
+.team_selection_Box .selecte_team_logo svg {
+    width: 30px;
+    height: 30px;
+    color: var(--text-white);
+}
+
+.team_selection_Box p.describe {
+    font-family: var(--primary-font);
+    font-size: var(--ex-small);
+    font-weight: 600;
+    color: var(--text-white);
+    z-index: 1;
+    text-align: center;
+}
+
+/* ------------- Swiper Up modal css ------------ */
+.team_show_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.show_all_Team {
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+    gap: 15px;
+    /* padding: 0 6%; */
+}
+
+.show_all_Team.wrap {
+    flex-wrap: wrap;
+}
+
+.show_all_Team.scroll {
+    flex-wrap: wrap;
+    /* overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    height: calc(100vh - 520px); */
+    /* padding: 20px 0; */
+}
+
+.show_all_Team .Team_box {
+    width: 50%;
+    margin: 0 20px;
+    max-height: 120px;
+    cursor: pointer;
+    /* margin: 0 auto; */
+}
+.show_all_Team .Team_box.showBox {
+    width: 30%;
+    margin: 0;
+}
+
+.show_all_Team .Team_box p {
+    font-family: var(--primary-font);
+    font-size: var(--ex-small);
+    font-weight: 600;
+    color: var(--text-white);
+    z-index: 1;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.show_all_Team .Team_box .team_logo_box {
+    box-shadow: var(--shadow-dark);
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+.show_all_Team .team_logo_box .checkIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.show_all_Team .Team_box .team_logo_box .checkIcon::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.5;
+    content: "";
+}
+
+.show_all_Team .Team_box .team_logo_box .checkIcon svg {
+    width: 50px;
+    height: 50px;
+    color: var(--text-white);
+    z-index: 1;
+}
+
+/* team length less than 2 */
+
+.show_all_add_button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.show_all_add_button p {
+    font-size: var(--small) !important;
+    color: var(--wicket) !important;
+    text-align: center;
+    font-weight: 500 !important;
+}
+
+@media screen and (max-width:425px) {
+    .show_all_Team {
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .matchFrom {
+        padding: 30px 20px;
+    }
+
+    .team_selection_Box .selecte_team_logo {
+        width: 70px;
+        height: 70px;
+    }
+}

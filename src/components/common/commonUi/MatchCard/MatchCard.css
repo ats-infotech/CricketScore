@@ -1,0 +1,209 @@
+/* -------- match_card ------ */
+.all_matched {
+    /* height: calc(100vh - 460px) !important;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none; */
+    /* margin: 0 auto; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.all_matched.isPastTournament {
+    /* height: auto !important; */
+    height: calc(100vh - 346px) !important;
+}
+
+.row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.match_card {
+    width: 100%;
+    height: auto;
+    background-color: var(--box-blue) !important;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    /* overflow: hidden; */
+    /* margin-bottom: 30px; */
+}
+
+.match_card .match_location.break,
+.match_card .match_location.stumps {
+    background-color: #c40023;
+    padding: 5px 6px 4px 10px;
+    position: absolute;
+    top: 0;
+    /* right: 0; */
+    left: 0px;
+    margin: 0;
+    border-radius: 15px 0 5px 0;
+}
+
+.match_card .match_location.stumps {
+    right: 0 !important;
+    left: 0;
+    border-radius: 0;
+}
+
+.match_card .match_location,
+.match_card .match_type {
+    font-size: var(--ex-small);
+    font-weight: 600;
+    color: var(--text-white);
+    text-align: center;
+    margin-bottom: 10px;
+    /* text-transform: capitalize; */
+    letter-spacing: 0.06em;
+}
+
+.match_card .match_type.winner , .match_card .match_type.terminate {
+    background-color: #348f04;
+    padding: 5px 6px 4px 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 15px 15px 0 0;
+}
+
+.match_card .match_type.terminate{
+    background-color: #c40023 !important;
+}
+
+.match_card .match_type {
+    margin-bottom: 20px;
+}
+
+.match_card .teamVsLogo {
+    width: 30px;
+    height: 40px;
+    margin-top: 26px;
+}
+
+/* .match_card .linear-gradiant {
+    width: 100%;
+    height: 0px;
+    margin: 30px auto;
+    background: linear-gradient(90deg, #0c1830 2.39%, #fff 47.83%, #0c1830 98.27%);
+} */
+
+.start_match_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.start_match_box button {
+    font-size: var(--small);
+}
+
+/* ----------------- TeamScoreBox ----------------- */
+
+.TeamScoreBox .teamLogo {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.TeamScoreBox .team_details {
+    padding: 8px 0;
+}
+
+.TeamScoreBox .team_details .team_name {
+    font-size: var(--ex-small);
+    font-weight: 700;
+    color: var(--text-white);
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.TeamScoreBox .team_details .team_score {
+    font-size: var(--small);
+    font-weight: 700;
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    justify-content: center;
+}
+
+.TeamScoreBox .team_details .team_score .runs {
+    font-size: var(--normal);
+}
+
+.TeamScoreBox .team_details .team_score .overs {
+    font-size: var(--ex-small);
+    font-weight: 500;
+    color: var(--text-grey);
+}
+
+
+@media screen and (max-width:380px) {
+    .TeamScoreBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .TeamScoreBox .teamLogo {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .match_card .match_location,
+    .match_card .match_type {
+        letter-spacing: 0.04em;
+    }
+}
+
+@media only screen and (orientation: portrait) and (max-width: 410px) {
+    .TeamScoreBox .teamLogo {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .match_card {
+        padding: 30px 15px 15px;
+    }
+
+    .match_card .match_location,
+    .match_card .match_type {
+        font-size: var(--ex-ex-small);
+        letter-spacing: 0.06em;
+    }
+
+    .TeamScoreBox .team_details .team_score .runs {
+        font-size: var(--ex-small);
+    }
+}
+
+@media screen and (max-width:350px) {
+    .TeamScoreBox .teamLogo {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .match_card .match_location,
+    .match_card .match_type {
+        font-size: var(--ex-ex-small);
+        letter-spacing: 0.06em;
+    }
+
+    .TeamScoreBox .team_details .team_score .runs {
+        font-size: var(--ex-small);
+    }
+}

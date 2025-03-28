@@ -1,0 +1,32 @@
+.MuiStack-root {
+    padding-top: 0 !important;
+}
+
+.MuiStack-root .MuiFormControl-root {
+    width: 100%;
+    height: 46px;
+}
+
+.MuiInputBase-root {
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    outline: none !important;
+    border: 0 !important;
+    background-color: var(--primary-color);
+}
+
+.MuiInputBase-root input {
+    color: var(--text-lightgrey);
+    width: 100%;
+}
+
+.MuiIconButton-root svg {
+    color: var(--text-lightgrey);
+    width: 20px;
+    height: 20;
+}
+
+.MuiInputBase-root.Mui-disabled {
+    background-color: #9797975d;
+    color: rgb(135, 135, 135);
+}

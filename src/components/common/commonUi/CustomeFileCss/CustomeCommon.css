@@ -1,0 +1,56 @@
+/* ------ TitleBox ------- */
+
+.title_box {
+    width: 100%;
+    max-width: 350px;
+}
+
+.title_box .child_box {
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.title_box .child_box .title {
+    font-size: var(--normal);
+    font-weight: 600;
+}
+
+.title_box .gradiant_box {
+    background: linear-gradient(90deg, #0C1830 9.39%, #FFFFFF 53.83%, #0C1830 98.27%);
+    height: 1px;
+    width: 100%;
+}
+
+/* ------------------ */
+
+/* --------------- BlueInput ----------- */
+.blue_input,
+.blue_select_input {
+    background-color: var(--blue-background);
+    border: none;
+    outline: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    width: 100%;
+    color: var(--text-white);
+    font-weight: 500;
+}
+
+.blue_select_input {
+    width: auto;
+    padding: 14px 5px;
+    background-position: right 10px center; 
+}
+
+.blue_input .errorMessageText,
+.blue_select_input .errorMessageText {
+    font-size: var(--ex-small)!important;
+    text-align: left!important;
+    margin: 6px 0 0 5px!important;
+}
+
+/* ------------------------------------------ */

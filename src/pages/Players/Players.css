@@ -1,0 +1,202 @@
+.players_page_main {
+    padding: 30px 15px;
+}
+
+.players_page_main .player_box_main {
+    padding: 30px 0;
+}
+
+.players_page_main .button_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px 0;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.share_button_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+.smallText {
+    font-family: var(--primary-font);
+    font-size: var(--small);
+    font-weight: 500;
+    color: var(--text-lightgrey);
+    text-align: center;
+}
+
+.ex-smallText {
+    font-family: var(--primary-font);
+    font-size: var(--ex-small)!important;
+    font-weight: 500;
+    color: var(--text-lightgrey);
+    text-align: center;
+}
+
+.buttonBoxNormal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+/* ------ manual_add_player_main  ---- */
+
+.manual_add_player_main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.manual_add_player_main .form_box {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+.manual_add_player_main .form_box .upload_player_image {
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
+    background-color: var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-position: center;
+    background-size: cover;
+    position: relative;  
+    cursor: pointer; 
+}
+
+.manual_add_player_main .form_box .upload_player_image .iconBig {
+    width: 30px;
+    height: 30px;
+    color: var(--text-grey);
+}
+.manual_add_player_main .form_box .upload_player_image .errorText {
+    font-family: var(--primary-font);
+    font-size: var(--ex-small);
+    margin: 0 auto;
+    text-align: center;
+}   
+
+.manual_add_player_main  .deleteUpdateBtn {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   margin-bottom: 20px;
+}
+
+.manual_add_player_main  .deleteUpdateBtn.actionBottomfixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    background-color: var(--primary-color);
+    padding: 10px;
+    max-width: var(--screen-max-width);
+    transition: all 0.3s ease;
+}
+
+.player_add_when_No_data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+
+/* icon back */
+
+.top-arrows {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -20px 0 15px 0;
+}
+
+.top-arrows svg.back {
+  transform: rotate(90deg);
+}
+
+.top-arrows svg,
+.close_player {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: var(--text-white);
+}
+
+.close_player {
+    position: absolute;
+    top: 28px;
+    right: 20px;
+}
+
+
+/* count of add player */
+.countOfPlayer{
+    position: fixed;
+    left: 0;
+    top: 50px;
+    z-index: 10;
+    background-color: var(--text-white);
+    width: 50px;
+    height: 50px;
+    border-radius: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.countOfPlayer p {
+    font-family: var(--primary-font);
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: var(--normal);
+}
+
+.section-box.activeLastSpaceBottom:nth-last-child(3n-1) {
+    margin-bottom: 50px;
+}
+
+
+@media screen and (max-width:430px) {
+    .players_page_main .player_box_main {
+        padding: 15px 0;
+    }
+    .strike_player_selection_box {
+        height: calc(100vh - 160px)!important;
+    }
+}
+@media screen and (max-width:414px) {
+    .players_page_main .player_box_main {
+        padding: 10px 0;
+    }
+    .strike_player_selection_box {
+        height: calc(100vh - 160px)!important;
+    }
+}
+@media screen and (max-width:375px) {
+    .strike_player_selection_box {
+        height: calc(100vh - 150px)!important;
+    }
+    .players_page_main .player_box_main {
+        padding: 0;
+    }
+}

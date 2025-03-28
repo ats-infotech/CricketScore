@@ -1,0 +1,275 @@
+/* ----------- about_us_main ----------- */
+.m-0 {
+    margin: 0 !important;
+}
+
+.maxheight {
+    /* height: calc(100vh - 315px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none; */
+}
+
+.about_us_main {
+    margin: 20px 15px 0;
+}
+
+.teamlink_main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 0 0;
+    gap: 15px;
+}
+
+.teamlink_main button {
+  background-color: var(--primary-color);
+}
+
+.teams_data_box {
+    padding: 20px 0px 0;
+}
+
+.activeTeam {
+    margin: 20px 25px;
+    /* height: calc(100vh - 343px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none; */
+}
+
+/* ------------ */
+.teamBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.teamBox .teamChildBox {
+    display: flex;
+    align-content: center;
+    gap: 20px;
+}
+
+.teamBox .teamDetails h6 {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: var(--small);
+    color: var(--text-white);
+    margin-bottom: 5px;
+}
+
+.teamBox .teamDetails p {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: var(--ex-small);
+    color: var(--text-lightgrey);
+    display: flex;
+    /* align-items: center; */
+    gap: 6px;
+}
+
+.teamBox .teamDetails p svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-lightgrey);
+}
+
+.userteamBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.userteamBox .teamChildBox {
+    display: flex;
+    align-content: center;
+    gap: 20px;
+}
+
+.userteamBox .teamChildBox img {
+    position: relative;
+    z-index: 100;
+}
+
+.userteamBox .teamDetails {
+    position: relative;
+    z-index: 10;
+}
+
+.userteamBox .teamDetails h6 {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: var(--ex-small);
+    color: var(--text-white);
+    margin-bottom: 5px;
+}
+
+.userteamBox .teamDetails p {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: var(--ex-small);
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.userteamBox .teamDetails p svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-white);
+}
+
+.userteamBox .AddPlayerTag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.userteamBox .AddPlayerTag svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-white);
+}
+
+.userteamBox .AddPlayerTag p {
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: var(--ex-ex-small);
+    color: var(--text-white);
+}
+
+.team_background_effect {
+    position: absolute;
+    z-index: 0;
+    background-color: var(--text-white);
+    filter: blur(87.5px);
+    height: 50px;
+    width: 70px;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    left: -50px;
+}
+
+.team_logo_section{
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.team_letter_section{
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team_letter_section p{
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+}
+
+
+/* menus */
+.menu-icon-box {
+    padding: 0!important;
+}
+.menu-icon-box svg {
+    color: var(--text-white);
+    width: 26px;
+    height: 26px;
+}
+
+.AddPlayerTag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.AddPlayerTag svg {
+    width: 18px;
+    height: 18px;
+    color: var(--primary-color);
+}
+
+.AddPlayerTag.delete svg,
+.AddPlayerTag.delete p {
+    color: var(--text-red) !important;
+}
+
+.AddPlayerTag p {
+    display: inline-block;
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: var(--ex-small);
+    color: var(--primary-color);
+}
+
+.list-menu .MuiPaper-root {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.list-menu ul {
+    background-color: var(--text-white);
+    border: 1px solid var(--text-grey);
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.list-menu ul li {
+    padding: 10px 15px;
+    height: auto;
+    min-height: auto;
+}
+
+.list-menu ul li.focus,
+.list-menu ul li.hover {
+    background-color: var(--text-lightgrey);
+}
+
+@media screen and (max-width:375px) {
+    .teamBox .teamDetails h6 {
+        font-size: var(--ex-small);
+    }
+    
+    .activeTeam {
+        margin: 0px 20px;
+    }
+}
+
+@media screen and (max-width:345px) {
+    .teamBox .teamDetails h6 {
+        font-size: var(--ex-ex-small);
+    } 
+}
+

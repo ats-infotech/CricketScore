@@ -1,0 +1,206 @@
+.tournamentPageMain {
+    padding: 20px 30px;
+
+}
+
+/* .tournamentTabs {
+    padding: 30px 0 0px;
+} */
+
+.search_box_main {
+    padding: 20px 0 22px;
+}
+
+.create_tournament_button {
+    width: 100%;
+    display: block;
+    margin-top: 25px;
+}
+
+/* ---- tab ----- */
+.tournament_tab_main .MuiTabs-indicator {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    bottom: auto;
+}
+.tournament_tab_main {
+    display: flex;
+    width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    justify-content: space-around;
+}
+.tournament_tab_main::-webkit-scrollbar {
+    width: 0px !important;
+}
+.MuiTabs-scroller{
+    overflow: hidden;
+}
+.tournament_tab_main .MuiButtonBase-root {  
+    font-family: var(--primary-font);
+    color: var(--text-grey);
+    font-size: var(--ex-small);
+    font-weight: 500;
+    padding: 8px 15px;
+    text-transform: capitalize;
+    min-width: auto;
+    min-height: auto;
+}
+
+.tournament_tab_main .MuiButtonBase-root.Mui-selected {
+    border-bottom-color: var(--primary-color);   
+    color: var(--primary-color); 
+}
+
+/* --------- tournament_page_menu -------  */
+.tournament_page_menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tournament_page_menu svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.tournament_page_menu .notificationBox {
+    /* background-color: var(--text-white); */
+    border-radius: 10px;
+    box-shadow: var(--shadow-dark);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.tournament_page_menu .notificationBox svg {
+    width: 22px;
+    height: 22px;
+    color: var(--primary-color);
+}
+
+/* -------- tournament-card ----------- */
+
+.all_tournaments {
+    margin: 10px 0px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100vh - 270px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+
+.all_tournaments.adminHeight {
+    height: calc(100vh - 253px);
+}
+
+.tournament-card {
+    width: 100%;
+    min-height: 200px;
+    border-radius: 20px;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    cursor: pointer;
+}
+
+.tournament-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(12, 24, 48, 0) 5.25%, #0C1830 94%);
+}
+
+.tournament-details {
+    padding: 20px;
+    z-index: 1;
+}
+
+.tournament-details p,
+.tournament-details h6 {
+    font-family: var(--primary-font);
+    color: var(--text-white);
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.tournament-details h6 {
+    font-size: var(--normal);
+}
+
+.tournament-details p {
+    font-weight: 400;
+    font-size: var(--ex-small);
+    margin-bottom: 4px;
+}
+
+.tournament-details p.tournament-location {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.more-deatils-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    border-radius: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    border: 10px solid var(--primary-light-color);
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+}
+
+.more-deatils-icon svg {
+    width: 30px;
+    height: 30px;
+    color: var(--text-white);
+}
+
+@media screen and (max-width:380px) {
+    .tournamentPageMain {
+        padding: 20px 20px;
+    }
+    .tournament-card  {
+        min-height: 180px;
+    }
+    .more-deatils-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+    .more-deatils-icon {
+        width: 50px;
+        height: 50px;
+        border: 8px solid var(--primary-light-color);
+        right: -1px;
+        bottom: -3px;
+    }
+}
+
+@media screen and (max-width:350px) {
+    .tournament-card  {
+        min-height: 150px;
+    }
+}

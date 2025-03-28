@@ -1,0 +1,42 @@
+.qrHeight {
+    margin-top: 30px;
+    padding: 0 20px 20px;
+    /* height: calc(100vh - 350px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none; */
+}
+
+.qr_main_section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.qr_title p{
+    font-size: var(--semi-normal) !important;
+    font-weight: 500 !important;
+    color: var(--primary-color);
+}
+
+.qr_section{
+    height: 190px;
+    width: 190px;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.qr_sub_title p{
+    font-size: var(--ex-small) !important;
+    font-weight: 500 !important;
+    color: var(--text-grey);
+    max-width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}

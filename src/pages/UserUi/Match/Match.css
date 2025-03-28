@@ -1,0 +1,228 @@
+.matchOption {
+    height: 50px;
+    border-radius: 40px;
+    padding: 8px;
+    margin: 30px 25px 30px;
+    /* max-width: 370px; */
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Details {
+    padding: 9px 35px;
+    border-radius: 40px;
+    display: flex;
+    color: var(--text-white);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.matchText {
+    font-family: var(--primary-font);
+    font-size: var(--ex-small);
+}
+
+.Details.active {
+    background-color: var(--text-white);
+    color: var(--primary-color);
+}
+
+.match_list_main_section {
+    padding-inline: 25px;
+    /* height: calc(100vh - 440px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth; */
+}
+
+/* .match_list_sub_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+} */
+
+.user_match_card {
+    width: 100%;
+    /* max-width: 350px !important;
+    min-height: 265px !important; */
+    background-color: var(--box-blue) !important;
+    border-radius: 15px;
+    padding: 30px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0px !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.match_info_section {
+    margin-bottom: 20px;
+}
+
+.match_info_section h6 {
+    font-size: var(--small) !important;
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+.match_info_section p {
+    font-size: var(--ex-small) !important;
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+.match_info_section p.break {
+    background-color: #c40023;
+    padding: 5px 6px 4px 10px;
+    position: absolute;
+    top: 0;
+    /* right: 0; */
+    left: 0px;
+    margin: 0;
+    border-radius: 0 0 5px 0;
+}
+
+.match_info_section p.winner {
+    background-color: #348f04;
+    padding: 5px 6px 4px 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+.match_team_info_section {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.TeamScoreBox .teamLogo {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.TeamScoreBox .team_details {
+    padding: 8px 0;
+}
+
+.TeamScoreBox .team_details .team_name {
+    font-size: var(--ex-small);
+    font-weight: 700;
+    color: var(--text-white);
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.TeamScoreBox .team_details .team_score {
+    font-size: var(--small);
+    font-weight: 700;
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    justify-content: center;
+}
+
+.TeamScoreBox .team_details .team_score .runs {
+    font-size: var(--normal);
+}
+
+.TeamScoreBox .team_details .team_score .overs {
+    font-size: var(--ex-small);
+    font-weight: 500;
+    color: var(--text-grey);
+}
+
+.teamVsLogo {
+    width: 30px;
+    height: 40px;
+    margin-top: 26px;
+}
+
+.match_button {
+    margin: 0 auto;
+}
+
+.match_button p {
+    font-size: var(--ex-small) !important;
+    text-transform: capitalize !important;
+    font-weight: 600 !important;
+    color: var(--text-lightblue);
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 400px) {
+    .matchOption {
+        margin: 30px 20px;
+    }
+
+    .match_info_section h6 {
+        font-size: var(--ex-small) !important;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+    .Details {
+        padding: 9px 30px;
+    }
+
+    .TeamScoreBox .teamLogo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .match_list_main_section {
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .TeamScoreBox .teamLogo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .Details {
+        padding: 9px 20px !important;
+    }
+
+    .TeamScoreBox .team_details .team_score .runs {
+        font-size: var(--ex-small);
+    }
+
+    .match_info_section p {
+        font-size: var(--ex-ex-small) !important;
+    }
+}
+
+
+/* ----- */
+
+.userSubTab {
+    margin: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    z-index: 99;
+    box-shadow: var(--shadow-grey-light);
+    max-width: var(--screen-max-width);
+    margin: 0 auto;
+    transition: border-radius 0.3s ease-in-out,
+        position 0.4s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+}

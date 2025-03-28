@@ -1,0 +1,19 @@
+.custome_error_box{
+    background-color: var(--box-blue);
+    min-height: 104px !important;
+    margin: 30px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 15px;
+    color: var(--text-white);
+}
+.custome_error_box h6 {
+    font-size: var( --small);
+    font-weight: 400;
+    text-align: center;
+    color: var(--text-white);
+    letter-spacing: .1px;
+    line-height: 18px;
+}

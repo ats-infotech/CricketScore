@@ -1,0 +1,92 @@
+.matches_main {
+    padding: 30px 25px 0;
+    /* height: calc(100vh - 320px);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: auto;
+    scrollbar-color: transparent transparent; */
+}
+
+/* --------------------------- */
+
+.message_box_section.activeHeight {
+    /* height: calc(100vh - 394px);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: auto;
+    scrollbar-color: transparent transparent; */
+    border-radius: 15px;
+}
+
+.message_box_main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+}
+
+.schedule_button {
+    margin: 0 auto 20px auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* -------- modal ---------- */
+
+.showButtonBox {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ------------ SelectionButton  ------------- */
+
+.RoundSelectionBox {
+    padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.SelectionButton {
+    font-size: var(--small) !important;
+    font-weight: 500 !important;
+    background-color: var(--blue-background) !important;
+    border-radius: 10px !important;
+    color: var(--text-white) !important;
+    text-transform: capitalize !important;
+    border: 1.4px solid transparent !important;
+    padding: 15px !important;
+    min-width: 130px !important;
+    transition: all 0.5s;
+}
+
+.SelectionButton.active {
+    border: 1.4px solid var(--text-white) !important;
+}
+
+.match-menu-icon-box svg {
+    color: var(--text-white) !important;
+    width: 26px;
+    height: 26px;
+}
+
+/* -----------  */
+.schedulwButtonFixed {
+    position: fixed;
+    padding: 10px 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    max-width: var(--screen-max-width);
+    background: var(--primary-light-color);
+    margin: 0 auto;
+    transition: all .3s linear;
+}

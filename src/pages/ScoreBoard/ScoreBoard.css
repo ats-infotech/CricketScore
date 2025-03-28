@@ -1,0 +1,159 @@
+/* .scoreboard_form{
+    width: 100%;
+} */
+
+.scoreboard_common_section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 0 20px;
+}
+
+.scoreboard_common_section.isCatch {
+    margin: 0;
+    padding: 0;
+    justify-content: normal;
+}
+
+.scoreboard_common_section p{
+    font-size: var(--small) !important;
+    font-weight: 500 !important;
+    color: var(--text-white) !important;
+}
+
+.scoreboard_common_section.active{
+    width: auto;
+    padding: 0px;
+    margin: 10px 0;
+}
+
+.scoreboard_dialog_section .MuiPaper-root{
+    width: 100% !important;
+    border-radius: 15px !important;
+    margin: 0px 20px;
+    max-width: 430px;
+    padding: 40px;
+    background: var(--primary-color);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.16);
+    position: relative;
+}
+
+.scoreboard_dialog_wicket_section{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.scoreboard_dialog_wicket_section.reason{
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.scoreboard_dialog_penalty_section{
+    display: flex;
+    flex-direction: column;
+}
+
+.scoreboard_dialog_penalty_textarea{
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 40px;
+    width: 70%;
+    padding: 10px;
+    min-height: 120px;
+}
+
+.scoreboard_dialog_button_section{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.custom_run_section{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom_team_section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block: 20px;
+}
+
+.runs_input_field{
+    padding: 7px;
+    width: 60px;
+    font-weight: 600 !important;
+    text-align: center;
+}
+
+.reason_input_field{
+    padding: 10px;
+    width: 100%;
+    font-weight: 600 !important;
+    border-radius: 5px;
+}
+
+.runs_input_field:focus, .reason_input_field:focus{
+    outline: none;
+}
+
+.custom_run_section p, .custom_team_section p {
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+    font-size: var(--small) !important;
+}
+
+.declare_warning{
+    color: var(--text-red) !important;
+    font-weight: 600 !important;
+    text-align: center;
+    font-size: var(--small) !important;
+}
+
+.reviseOver{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.reviseOver p{
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+}
+
+@media screen and (max-width: 440px) {
+    .scoreboard_dialog_wicket_section.reason {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .scoreboard_dialog_wicket_section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .scoreboard_dialog_section .MuiPaper-root{
+        padding: 30px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .scoreboard_dialog_section .MuiPaper-root{
+        padding: 20px;
+    }
+}

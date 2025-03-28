@@ -1,0 +1,49 @@
+.section-box {
+    width:100%;
+    min-height: 110px;
+    background-color: var(--box-blue);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.section-box p.describeText {
+    color: var(--text-grey);
+    font-family: var(--primary-font);
+    font-size: var(--ex-ex-small);
+    font-weight: 600;
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+
+.section-box .iconText {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+.section-box .iconText svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-white);
+}
+.section-box .iconText p {
+    color: var(--text-white);
+    font-family: var(--primary-font);
+    font-size: var(--small);
+    font-weight: 600;
+    padding: 0 0 10px 0;
+}
+
+/* .bottomLine {
+    margin: 0 auto;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #0C1830 9.39%, #FFFFFF 53.83%, #0C1830 92.27%);
+} */
+
+
+@media screen and (max-width:375px) {
+    .section-box {
+       padding: 20px;
+    }
+}

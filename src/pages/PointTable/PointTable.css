@@ -1,0 +1,26 @@
+.point_table_section {
+    /* height: calc(100vh - 328px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none; */
+    padding: 0px 20px;
+    margin-top: 10px;
+}
+
+.point_table p {
+    color: var(--primary-color) !important;
+    font-size: var(--small) !important;
+    font-weight: 500 !important;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.pt-gradient-line {
+    width: 100%;
+    max-width: 280px;
+    height: 2px;
+    background: linear-gradient(to right, #fefefe00 20%, #0c1830 50%, #fff4ee00 86%);
+    background-size: 100% 100%;
+    margin: 8px auto 20px auto;
+}

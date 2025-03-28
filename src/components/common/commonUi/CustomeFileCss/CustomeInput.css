@@ -1,0 +1,72 @@
+/* autofill css */
+input:-webkit-autofill, 
+textarea:-webkit-autofill {
+    background-color: var(--primary-color) !important;
+    color: var(--text-lightgrey) !important; 
+    -webkit-text-fill-color: var(--text-lightgrey) !important; 
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+}
+
+input:-moz-autofill, 
+textarea:-moz-autofill {
+    background-color: var(--primary-color) !important; 
+    color: var(--text-lightgrey) !important;
+}
+
+input:focus:-webkit-autofill, 
+textarea:focus:-webkit-autofill {
+    background-color: var(--primary-color) !important;
+    -webkit-text-fill-color: var(--text-lightgrey) !important;
+    color: var(--text-lightgrey) !important; 
+}
+
+/* date picker dash removal css */
+/* .MuiPickersToolbar-root{
+    display: none !important;
+} */
+
+.custome_input {
+    padding: 0 0 15px 0;
+}
+
+.custome_input label {
+    display: block;
+    color: var(--text-grey);
+    margin-bottom: 6px;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: var(--ex-small);
+}
+
+.custome_input input {
+    font-family: var(--primary-font);
+    outline: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: 500;
+    font-size: var(--ex-small);
+    border: 0px;
+    appearance: none;
+    width: 100%;
+    height: 46px;
+}
+
+.custome_input input.notOpen {
+    color: var(--text-lightgrey);
+    background-color: var(--primary-color);
+}
+
+input[type='date'],
+input[type='datetime-local'],
+input[type='time'] {
+    color-scheme: dark;
+    background-color: #9797975d;
+    color: rgb(135, 135, 135);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input[type='date']::placeholder {
+    text-transform: uppercase;
+}

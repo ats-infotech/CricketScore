@@ -1,0 +1,203 @@
+.live_main_section {
+    height: calc(100vh - 350px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    margin: 30px 20px 0px 20px;
+}
+
+.live_common_player_main_section{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: row;
+}
+
+.live_common_player_main_section.nonstriker{
+    flex-direction: row-reverse;
+}
+
+.live_player_section{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.live_player_section p {
+    font-size: var(--ex-small) !important;
+    color: var(--text-white) !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+}
+
+.live_player_icon_section{
+    height: 30px;
+    width: 30px;
+    background-color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.live_player_icon_section.active{
+    background-color: var(--boundary) !important;
+}
+
+.live_player_icon_section svg{
+    height: 14px;
+    width: 14px;
+}
+
+.live_player_live_section{
+    display: flex;
+    gap: 5px;
+    height: 30px;
+    padding: 10px;
+    background-color: #FFFFFF33;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 8px;
+    width: fit-content;
+}
+
+.live_player_live_section p{
+    font-size: var(--ex-small) !important;
+    color: var(--text-white) !important;
+    font-weight: 600 !important;
+}
+
+.live_batter_player_card{
+    max-width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    box-shadow: 0px -5px 20px rgba(255, 255, 255, 0.08), 0px 5px 35px rgba(12, 24, 48, 0.3);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 35px 30px;
+}
+
+.silver-gradient-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #0c1830 2.39%, #fff 47.83%, #0c1830 98.27%);
+}
+
+.live_bowler_player_card{
+    height: 118px;
+    max-width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    box-shadow: 0px -5px 20px rgba(255, 255, 255, 0.08), 0px 5px 35px rgba(12, 24, 48, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.live_balls_section{
+    padding-top: 25px;
+}
+
+.live-gradient-line {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) 10%, rgba(12, 24, 48, 1) 50%, rgba(0, 0, 0, 0.2) 90%);
+}
+
+.live_balls{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 11px 0px;
+}
+
+.live_table_section{
+    width: 100%;
+    background-color: var(--primary-color);
+    margin: 25px 0 0 0;
+    border-radius: 15px;
+    display: flex;
+}
+
+.live_table_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.live_table{
+    max-width: 90%;
+}
+
+.table-cell svg{
+    height: 14px;
+    width: 14px;
+    color: var(--text-white);
+    margin-right: 10px;
+}
+
+.table-cell{
+    color: var(--text-white) !important;
+    font-size: var(--small) !important;
+    padding: 10px !important;
+}
+
+.player-name{
+    color: var(--text-white) !important;
+    font-size: var(--small) !important;
+}
+
+.table-cell.data{
+    border-bottom: 0px !important;
+}
+
+.live_player_table_icon_section{
+    height: 28px;
+    width: 28px;
+    background-color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.live_player_table_icon_section.active{
+    background-color: var(--boundary) !important;
+}
+
+.live_player_table_icon_section svg{
+    height: 14px;
+    width: 14px;
+    margin: 0px !important;
+}
+
+.Live_Extra_Runs{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.Live_Extra_Runs p {
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    font-size: var(--ex-small) !important;
+}
+
+@media screen and (max-width: 380px) {
+    .live_batter_player_card{
+        padding: 20px;
+    }
+}

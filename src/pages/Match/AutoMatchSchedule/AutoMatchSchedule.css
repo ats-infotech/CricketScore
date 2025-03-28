@@ -1,0 +1,14 @@
+.auto_match_schedule {
+    padding: 30px 15px;
+}
+
+.auto_match_form {
+    padding: 40px 0;
+}
+
+.button_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 0;
+}

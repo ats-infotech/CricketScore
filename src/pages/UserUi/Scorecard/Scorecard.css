@@ -1,0 +1,146 @@
+.user_scorecard_main_section{
+    padding: 30px 25px 0;
+}
+
+.user_currentteam_score{
+    height: calc(100vh - 410px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    margin: 0 auto;
+    -ms-overflow-style: none; 
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.player-name{
+    font-family: var(--primary-font) !important;
+    font-size: var(--ex-small) !important;
+    font-weight: 500 !important;
+}
+
+.user_post_image_main_section{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user_post_image_section{
+    height: 22px;
+    width: 22px;
+    background-color: var(--text-white);
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.user_scorecard_table_section{
+    width: 100%;
+    background-color: var(--primary-color);
+    margin: 15px 0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user_scorecard_table_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.user_scorecard_table{
+    max-width: 90%;
+}
+
+.user_scorecard_table-cell svg, .user_scorecard_out_table-cell svg{
+    height: 14px;
+    width: 14px;
+    color: var(--text-white);
+    margin-right: 10px;
+}
+
+
+.user_scorecard_table-cell{
+    color: var(--text-white) !important;
+    font-size: var(--small) !important;
+    padding: 12px 5px !important;
+}
+
+.user_scorecard_out_table-cell{
+    color: var(--text-grey) !important;
+    font-size: var(--ex-small) !important;
+    font-weight: 500 !important;
+}
+
+.user_scorecard_table-cell.data, .user_scorecard_out_table-cell{
+    border-bottom: 0px !important;
+}
+
+.user_scorecard_button{
+    font-size: var(--ex-small) !important;
+    color: var(--text-lightgrey) !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+}
+
+.user_scorecard_button svg{
+    margin-left: 5px;
+}
+
+.Scorecard_Extra_Runs{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.Scorecard_Extra_Runs p {
+    color: var(--text-white) !important;
+    font-weight: 600 !important;
+    font-size: var(--ex-small) !important;
+}
+
+.scorecard_superover_section span{
+    font-weight: 600 !important;
+    color: var(--primary-color) !important;
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: var(--semi-normal);
+    margin-top: 25px;
+}
+
+.scorecard_first_section span{
+    font-weight: 600 !important;
+    color: var(--primary-color) !important;
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: var(--semi-normal);
+    margin-top: 10px;
+}
+
+.scorecard_superover_lineargradient{
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 9.39%, #0c1830 50.73%, transparent 98.27%);
+    margin: 10px 0 30px 0;
+}
+
+@media screen and (max-width: 400px) {
+    .user_scorecard_table-cell{
+        font-size: var(--ex-small) !important;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .user_scorecard_main_section{
+        padding: 30px 20px 0;
+    }
+}
+@media screen and (max-width: 350px) {
+    .user_scorecard_table-cell{
+        font-size: var(--ex-small) !important;
+        padding: 8px !important;
+    }
+}

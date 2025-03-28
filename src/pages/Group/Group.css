@@ -1,0 +1,409 @@
+.group_main_section {
+    padding: 20px;
+}
+
+.group_team_section {
+    display: flex;
+    gap: 15px;
+}
+
+.group_team_section img {
+    height: 100px;
+    width: 100px;
+}
+
+.all_groups {
+    margin-bottom: 15px;
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    height: calc(100vh - 180px);
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .all_groups.activeHeight {
+    height: calc(100vh - 220px);
+} */
+
+.group_post_main_section {
+    overflow-y: auto;
+    height: calc(100vh - 265px);
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-inline: 7%;
+    padding-bottom: 10px !important;
+}
+
+.group_post_main_section.activeHeight {
+    height: calc(100vh - 322px);
+}
+
+.group_row_section {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.group_post_main_section.errors {
+    height: calc(100vh - 315px);
+}
+
+.group_post_main_section.error {
+    height: calc(100vh - 430px);
+}
+
+.group_common_main_section {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+}
+
+/* .group_common_main_section.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 0;
+} */
+
+.group_common_section {
+    height: 100px;
+    width: 100px;
+    background-color: transparent;
+    border-radius: 15px;
+    box-shadow: var(--shadow-grey-light);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.group_Text_circle_section {
+    height: 150px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    box-shadow: var(--shadow-grey-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.group_Text_circle {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.group_common_main_section p {
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    font-size: var(--ex-small) !important;
+    margin-block: 10px !important;
+    text-align: center !important;
+}
+
+.group_Text_circle p {
+    font-size: var(--large) !important;
+}
+
+.group_common_sub_section {
+    display: flex;
+    justify-content: center;
+}
+
+.group_checkbox_section {
+    height: 28px;
+    width: 28px;
+    border: 1px solid var(--text-white);
+    border-radius: 50%;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.group_checkbox_section.active {
+    /* height: 28px;
+    width: 28px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; */
+    background-color: var(--primary-color);
+}
+
+.group_team_title {
+    color: var(--text-grey);
+    margin-left: 10px !important;
+    font-weight: 400;
+    font-size: var(--small);
+}
+
+.group_final_button {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 75px;
+    left: 7%;
+    right: 7%;
+    z-index: 2;
+    gap: 10px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+/* -------- new css ----- */
+.Selected_teams_main_section {
+    margin: 40px 0 0 0;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    position: relative;
+    box-shadow: var(--group-box-shadow);
+}
+
+.group_action_section {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -38px;
+    right: 0;
+}
+
+.group_actions {
+    width: 32px;
+    height: 32px;
+    background-color: var(--text-white);
+    box-shadow: var(--shadow-grey);
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.group_actions:nth-child(1) {
+    background-color: transparent;
+    border: 1px solid var(--black);
+}
+
+.group_actions svg {
+    font-size: var(--semi-normal) !important;
+    cursor: pointer;
+}
+
+.group_actions svg:nth-child(1) {
+    color: var(--black);
+}
+
+.Selected_teams_main_section .Group_name_field p {
+    color: var(--text-white) !important;
+    font-size: var(--normal) !important;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+.gp-gradient-line {
+    width: 100%;
+    max-width: 280px;
+    height: 2px;
+    background: linear-gradient(90deg, #0C1830 9.39%, #FFFFFF 53.83%, #0C1830 98.27%);
+    background-size: 100% 100%;
+    margin: 10px auto;
+}
+
+.Selected_team_section {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    padding: 0 20px 5px;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-color: var(--text-white) transparent;
+    scrollbar-width: thin;
+}
+
+.Selected_team_section.active3three {
+    justify-content: center;
+    padding: 0px;
+}
+
+.Selected_team_section.activeSize {
+    justify-content: center;
+}
+
+.Selected_team_section .team_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+
+.Selected_team_section .team_box .Selected_teams.activeSize {
+    height: 100px;
+    width: 100px;
+}
+
+.Selected_team_section .team_box .Selected_teams {
+    border-radius: 10px;
+    height: 70px;
+    width: 70px;
+    margin: 20px 0 10px 0;
+    overflow: hidden;
+    box-shadow: 0px 0px 24px 0px #FFFFFF1F;
+}
+
+.Selected_team_section .team_box p {
+    color: var(--text-white) !important;
+    font-size: var(--small) !important;
+    font-weight: 500 !important;
+    text-align: center;
+    margin: 0;
+}
+
+.add_team_in_group {
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+.add_team_in_group .team_group_box {
+    height: 100px;
+    width: 100px;
+    background-color: var(--text-white);
+    border-radius: 15px;
+    box-shadow: var(--shadow-grey-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.add_team_in_group .team_group_box .svgBox {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--black);
+    border-radius: 100px;
+}
+
+.add_team_in_group .team_group_box .svgBox svg {
+    width: 20px;
+    height: 20px;
+    color: var(--black);
+}
+
+.add_team_in_group p {
+    color: var(--text-grey) !important;
+    font-weight: 600 !important;
+    font-size: var(--ex-small) !important;
+    margin: 20px 0 10px 0 !important;
+    text-align: center !important;
+}
+
+
+@media screen and (max-width:576px) {
+    .Selected_team_section {
+        scrollbar-color: transparent transparent;
+    }
+}
+
+@media screen and (max-width:435px) {
+    .group_post_main_section {
+        padding-right: 5%;
+        padding-left: 6%;
+    }
+}
+
+@media screen and (max-width:421px) {
+    .group_post_main_section {
+        padding-right: 4%;
+        padding-left: 5%;
+    }
+}
+
+@media screen and (max-width:413px) {
+    .group_row_section {
+        column-gap: 15px;
+        row-gap: 24px;
+        padding-inline: 5%;
+    }
+
+    .group_post_main_section {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width:410px) {
+    .group_row_section {
+        padding-inline: 4%;
+    }
+}
+
+@media screen and (max-width:399px) {
+    .group_row_section {
+        padding-inline: 3%;
+    }
+}
+
+@media screen and (max-width:390px) {
+    .group_row_section {
+        padding-inline: 2%;
+    }
+}
+
+@media screen and (max-width:383px) {
+    .group_row_section {
+        padding-inline: 1%;
+    }
+}
+
+@media screen and (max-width:376px) {
+    .group_row_section {
+        padding-inline: 0;
+    }
+}
+
+@media screen and (max-width:370px) {
+    .group_row_section {
+        padding-inline: 12%;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width:340px) {
+    .group_row_section {
+        padding-inline: 8%;
+    }
+}

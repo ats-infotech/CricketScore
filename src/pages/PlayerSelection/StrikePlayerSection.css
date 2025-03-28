@@ -1,0 +1,144 @@
+.strike_player_selection_box {
+    height: calc(100vh - 185px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    margin: 0px auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.strike_player_selection_box.user {
+    height: calc(100vh - 170px);
+}
+
+.strike_player_selection_box .strike_player_row_box {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding-inline: 8%;
+}
+
+.strike_player_selection_box .strike_player_row_box .strike_player_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 0 15px 0;
+    width: 140px;
+    position: relative;
+    cursor: pointer;
+}
+
+.strike_player_selection_box .strike_player_row_box .strike_player_box .box_column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.strike_player_selection_box .strike_player_row_box .strike_player_box .container {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 300px;
+    z-index: 10;
+}
+
+.strike_player_selection_box .strike_player_row_box .strike_player_box .container .checkmark {
+    border: 1px solid var(--text-white);
+    box-shadow: var(--shadow-grey-light);
+}
+
+.strike_player_selection_box .strike_player_row_box .strike_player_box .box_column .strike_player_image {
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.strike_player_selection_box .strike_player_row_box .strike_player_box .box_column .strike_player_image.active {
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+
+.strike_player_image .strike_player_photo {
+    width: 94px;
+    height: 120px;
+}
+
+.strike_player_image .strike_player_photo img {
+    position: relative;
+    z-index: 10;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+}
+
+.strike_player_photo img.active {
+    filter: grayscale(0);
+}
+
+.strike_player_photo img.notActive {
+    filter: grayscale(1);
+}
+
+.strike_player_image .strike_player_photo .box_design {
+    position: relative;
+    z-index: 0;
+    background-color: var(--text-white);
+    filter: blur(87.5px);
+    width: 100px;
+    height: 100px;
+}
+
+.player_name {
+    font-size: var(--small) !important;
+    font-weight: 600 !important;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+@media screen and (max-width: 380px) {
+    .strike_player_selection_box .strike_player_row_box .strike_player_box .box_column .strike_player_image {
+        height: 140px;
+        max-width: 130px;
+    }
+
+    .strike_player_selection_box .strike_player_row_box {
+        padding: 6%;
+    }
+
+    .strike_player_image .strike_player_photo {
+        width: 90px;
+        height: 120px;
+    }
+
+    .strike_player_selection_box .strike_player_row_box .strike_player_box {
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .strike_player_selection_box .strike_player_row_box .strike_player_box .box_column .strike_player_image {
+        max-width: 120px;
+    }
+
+    .strike_player_image .strike_player_photo {
+        width: 80px;
+        height: 110px;
+    }
+
+    .strike_player_selection_box .strike_player_row_box .strike_player_box {
+        width: 120px;
+    }
+}

@@ -1,0 +1,41 @@
+.tornament_form {
+    padding: 65px 40px 0px;
+    position: relative;
+}
+
+.second_tournament_form {
+    padding: 20px 40px 0px;
+    position: relative;
+}
+
+.createTournamentForm {
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.createTournamentForm::-webkit-scrollbar {
+    width: 0px !important;
+}
+
+@media only screen and (orientation: portrait) {
+    .tornament_form {
+        padding: 65px 20px 0 !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .tornament_form {
+        padding: 65px 20px 0px !important;
+    }
+    .second_tournament_form {
+        padding: 20px 20px 0px !important;
+    }
+
+    .tornament_form {
+        padding: 50px 20px 0 !important;
+        -webkit-padding-start: 20px;
+        -webkit-padding-end: 20px;
+    }
+}

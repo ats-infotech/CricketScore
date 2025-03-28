@@ -1,0 +1,97 @@
+.tabs_main .MuiTabs-indicator {
+    display: none;
+}
+
+.tabs_main .MuiTabs-scroller{
+    display: flex !important;
+}
+
+.tabs_main .MuiTabs-flexContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 15px 15px;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-lightgrey) transparent;
+    scroll-snap-type: x mandatory;
+    max-width: var(--screen-max-width);
+    -webkit-overflow-scrolling: touch;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar {
+    width: thin;
+}
+
+.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.tabs_main .childTab {
+    color: var(--text-white);
+    min-height: 35px;
+    min-width: auto;
+    border: 1px solid var(--text-white);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px;
+    flex-direction: row;
+    transition: all 0.5s ease;
+    padding: 0px 10px; 
+}
+
+.tabs_main .childTab p{
+    font-family: var(--primary-font);
+    font-size: var(--small);
+    font-weight: 600;
+    text-transform: capitalize;
+    margin: 0;
+    line-height: 26px;
+}
+
+.tabs_main .childTab .MuiSvgIcon-root {
+    display: inline-block;
+    margin: 0; 
+}
+
+.tabs_main .childTab.Mui-selected {
+    color: var(--primary-color);
+    background-color: var(--text-white);
+}
+
+@media screen and  (max-width:576px) {
+    .tabs_main .MuiTabs-flexContainer {
+        scrollbar-color: transparent transparent;
+    }
+}
+
+
+
+/* for javscript use */
+
+.sticky-tab-list {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    background-color: var(--primary-color);
+    padding: 10px 0 0;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3 linear;
+}
+
+@media screen and (max-width:430px) {
+    .sticky-tab-list {
+        left: 0;
+        right: 0;
+    }
+}

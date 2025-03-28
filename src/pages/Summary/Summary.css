@@ -1,0 +1,210 @@
+.table-cell {
+    color: var(--text-white) !important;
+    font-size: var(--small) !important;
+    padding: 15px 10px !important;
+}
+
+.table-cell.data {
+    border-bottom: 0px !important;
+}
+
+.summary_table_section {
+    height: 110px;
+    width: 100%;
+    background-color: var(--blue-background);
+    margin: 15px 0;
+    border-radius: 15px;
+    display: flex;
+}
+
+.summary_table_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary_table {
+    max-width: 90%;
+}
+
+.table-cell svg {
+    height: 14px;
+    width: 14px;
+    color: var(--text-white);
+    margin-right: 10px;
+}
+
+.summary_common_section {
+    padding: 0 20px 20px 20px;
+}
+
+.summary_max_height {
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior:smooth;
+    height: calc(100vh - 325px);
+}
+
+.summary_max_height.user{
+    height: calc(100vh - 340px);
+}
+
+.summary_common_section_title {
+    margin-bottom: 20px;
+}
+
+.summary_common_section_title p {
+    font-weight: 500 !important;
+    font-size: var(--semi-normal) !important;
+}
+
+.summary_common_card_section {
+    height: 320px;
+    width: 100%;
+    border-radius: 30px;
+    background-color: var(--primary-color);
+    box-shadow: 0px 0px 30px rgba(12, 24, 48, 0.5);
+}
+
+.summary_common_card_section.mvp {
+    height: 450px;
+}
+
+.summary_common_card_sub_section {
+    height: 160px;
+    width: 100%;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 45px;
+    justify-content: center;
+    border-bottom-left-radius: 30px;
+    overflow: hidden;
+}
+
+.summary_common_card {
+    position: relative;
+}
+
+.summary_letter_main_section{
+    position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background-color: var(--primary-color) !important;
+}
+
+.summary_letter_section{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary_letter_section p {
+    font-size: var(--semi-normal) !important;
+    font-weight: 500 !important;
+    color: var(--text-white) !important;
+}
+
+.summary_common_card img {
+    max-width: 100px;
+    height: 150px;
+    position: relative;
+    z-index: 10;
+    margin-top: 33px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.summary_common_card_background_effect {
+    position: absolute;
+    z-index: 0;
+    background-color: var(--text-white);
+    filter: blur(87.5px);
+    height: 100px;
+    width: 100px;
+    top: 0;
+    bottom: 0;
+}
+
+.summary_common_card_info {
+    min-width: 120px;
+}
+
+.summary_common_card_info p {
+    color: var(--text-white) !important;
+    font-size: var(--normal) !important;
+    font-weight: 700 !important;
+    margin-bottom: 10px !important;
+    text-align: center!important;
+}
+
+.summary_common_card_sub_info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.summary_common_card_sub_info img {
+    width: 70px ;
+    max-height: 70px ;
+}
+
+.summary_common_card_sub_info p {
+    color: var(--text-white) !important;
+    font-size: var(--ex-small) !important;
+    font-weight: 700 !important;
+}
+
+.summary_stats_section {
+    padding: 0 10px;
+}
+
+.no_result p{
+    font-size: var(--normal);
+    font-weight: 500 !important;
+    padding: 20px;
+    text-align: center;
+}
+
+@media screen and (max-width: 410px) {
+    .table-cell {
+        padding: 15px 8px !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .table-cell {
+        font-size: var(--ex-small) !important;
+        padding: 12px 7px !important;
+    }
+
+    .summary_table_section {
+        height: 90px;
+    }
+
+    .summary_common_card_section {
+        height: 300px;
+    }
+
+    .summary_common_card_section.mvp {
+        height: 410px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .table-cell {
+        font-size: var(--ex-small) !important;
+        padding: 10px 5px !important;
+    }
+}

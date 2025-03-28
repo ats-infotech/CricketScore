@@ -1,0 +1,196 @@
+.matchstats_main_section{
+    margin: 15px 0 0 0 !important;
+    height: calc(100vh - 335px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none; 
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.matchstats_top3_section{
+    height: 345px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.matchstats_top3{
+    height: 247px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.matchstats_top1{
+    height: 277px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.matchstats_top3_image{
+    height: 120px;
+    width: 80px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.matchstats_top1_image{
+    height: 160px;
+    width: 120px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.ms-gradient-line {
+    width: 100%;
+    max-width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #0c1830 2.39%, #fff 47.83%, #0c1830 98.27%);
+    margin-top: 5px;
+}
+
+.matchstats_top3 h5{
+    font-size: var(--ex-small) !important;
+    color: var(--text-lightgrey) !important;
+    font-weight: 500 !important;
+    text-align: center;
+    margin: 10px 0 0px 0;
+}
+
+.matchstats_top3 h6{
+    font-size: var(--small) !important;
+    color: var(--text-lightgrey) !important;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+.matchstats_top3 p{
+    font-size: var(--semi-normal) !important;
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+.matchstats_top1 h5, .matchstats_top1 h6{
+    font-size: var(--normal) !important;
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+    text-align: center;
+    margin: 10px 0 0px 0;
+}
+
+.matchstats_top1 h6{
+    margin: 0px !important;
+}
+
+.matchstats_top1 p{
+    font-size: var(--ex-large) !important;
+    color: var(--text-white) !important;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+.mvp_title p{
+    font-size: var(--semi-normal) !important;
+    font-weight: 500 !important;
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+.mvp_all_players_stats_section{
+    display: flex;
+    gap: 20px;
+    margin-block: 25px;
+}
+
+.mvp_stats{
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
+.mvp_stats_section{
+    width: 80%;
+}
+
+.mvp_stats_section p{
+    font-size: var(--normal) !important;
+    font-weight: 500 !important;
+    color: var(--primary-color);
+}
+
+.mvp_stats_section span{
+    font-size: var(--ex-small) !important;
+    font-weight: 500 !important;
+    color: var(--text-grey) !important;
+    margin-bottom: 5px;
+}
+
+.mvp_stats p{
+    font-size: var(--ex-ex-small) !important;
+    font-weight: 600 !important;
+    color: var(--text-grey) !important;
+}
+
+.mvp_divider{
+    border: 1px solid var(--primary-color) !important;
+    max-height: 15px;
+}
+
+.mvp_all_players_stats{
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 410px) {
+    .mvp_stats p{
+        font-size: var(--ex-ex-small) !important;
+    }
+    .mvp_all_players_stats_section{
+        padding: 0 0px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .matchstats_top3_image{
+        height: 100px;
+        width: 70px;
+    }
+    .matchstats_top1_image{
+        height: 120px;
+        width: 90px;
+    }
+    .mvp_all_players_stats_section{
+        gap: 15px;
+        padding: 0 0px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .matchstats_top3_image{
+        height: 80px;
+        width: 60px;
+    }
+    .matchstats_top1_image{
+        height: 100px;
+        width: 80px;
+    }
+    .mvp_stats p{
+        font-size: var(--ex-ex-ex-small) !important;
+    }
+}
