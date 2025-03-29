@@ -27,6 +27,7 @@ const matchButtonGroups = [
     { title: 'Summary', icon: 'scorecard', value: 'summary' },
     { title: 'Scorecard', icon: 'scorecard', value: 'scorecard' },
     { title: 'Commentary', icon: 'commentary', value: 'commentary' },
+    { title: 'Analysis', icon: 'analysis', value: 'analysis' },
     { title: 'Cricket Box', icon: 'mvp', value: 'cricketbox' },
     { title: 'MVP', icon: 'mvp', value: 'mvp' },
     { title: 'Teams', icon: 'teams2', value: 'teams' },

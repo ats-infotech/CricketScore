@@ -1,6 +1,7 @@
 'use client'
 import Loader from "@/components/common/commonUi/Loader";
 import CommentaryPage from "@/pages/Commentary/Commentary";
+import ScoreAnalysis from "@/pages/UserUi/Analysis/Analysis";
 import LiveMatch from "@/pages/UserUi/Live/Live";
 import MatchSummary from "@/pages/UserUi/MatchSummary/MatchSummary";
 import Mvp from "@/pages/UserUi/MVP/Mvp";
@@ -47,6 +48,8 @@ const MatchCategory = () => {
         return <Scorecard matchData={matchData} teamData={teamData} playerData={playerData} tournamentData={tournamentData} />
       case 'commentary':
         return <CommentaryPage matchData={matchData} teamData={teamData} playerData={playerData} tournamentData={tournamentData}/>;
+      case 'analysis':
+        return <ScoreAnalysis matchData={matchData} tournamentData={tournamentData} teamData={teamData} />
       case 'cricketbox':
         return <Mvp matchData={matchData} playerData={playerData} teamData={teamData} tournamentData={tournamentData} />;
       case 'mvp':
