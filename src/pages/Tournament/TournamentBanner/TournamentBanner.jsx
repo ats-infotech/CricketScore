@@ -121,7 +121,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
     const team2Letter = team2?.letter
     const team2Color = team2?.team_color
     const isPastTournament = CheckTournamentIsRunning(tData?.tournament_start_date, tData?.tournament_end_date) === 'completed'
-    let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary') : matchButtonGroups
+    let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary' && items?.value !== 'analysis') : matchButtonGroups
     // let pastMatchGroups = isPastTournament ? buttonGroups.filter((items) => items.value !== 'about') : buttonGroups
     let pastMatchGroups = buttonGroups
     let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false

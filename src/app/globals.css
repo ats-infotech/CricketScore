@@ -22,6 +22,17 @@
   --blue-background: #274072;
   --box-blue: #3F4C66;
 
+  /* Analysis Charts Color */
+
+  --orange-red: #eb6d56;
+  --chart-blue: #3da5f4;
+  --purple: #8884d8;
+  --light-green: #82ca9d;
+  --yellow: #f1c40f;
+  --coral: #ff7f50;
+  --pink: #ffb4e6;
+  --green: #28a745;
+
   --background-forever: linear-gradient(338.66deg, #FF7600 -146.54%, #FFFFFF 51.51%, #FF7600 242.75%);
   --linear-gradient: linear-gradient(180deg, rgba(12, 24, 48, 0) -85.67%, #0C1830 88.33%);
 
