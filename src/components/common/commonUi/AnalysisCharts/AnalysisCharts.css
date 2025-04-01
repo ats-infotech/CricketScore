@@ -1,0 +1,261 @@
+.chart_title {
+    padding: 0px 20px 20px 20px;
+}
+
+.chart_title p {
+    font-size: var(--semi-normal) !important;
+    text-align: center;
+    color: var(--primary-color) !important;
+    font-weight: 500;
+}
+
+.analysis-gradient-line {
+    width: 100%;
+    max-width: 280px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 10%, rgba(12, 24, 48, 1) 50%, rgba(0, 0, 0, 0.2) 90%);
+    margin: 8px auto 0px;
+}
+
+.barchart_container,
+.pie_chart_container,
+.runrate_chart_container {
+    margin: 20px auto 30px;
+    padding: 10px 0px;
+    border-radius: 15px;
+    background-color: var(--text-white);
+    box-shadow: var(--group-box-shadow);
+}
+
+.filter_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.filter_section p {
+    font-size: var(--small) !important;
+    color: var(--primary-color) !important;
+    font-weight: 500;
+}
+
+.filter_section .MuiInputBase-root {
+    background-color: transparent !important;
+    border: 2px solid var(--primary-color) !important;
+    min-width: 100px;
+    width: fit-content;
+    border-radius: 10px !important;
+    outline: none !important;
+}
+
+.filter_section .MuiOutlinedInput-notchedOutline {
+    border: none !important;
+}
+
+
+/* Style for Y-Axis labels (Overs) */
+.recharts-yAxis .recharts-cartesian-axis-tick {
+    font-size: 12px;
+    fill: #333;
+    font-weight: 600 !important;
+    padding-left: 5px;
+}
+
+/* Style for X-Axis labels (Runs) */
+.recharts-xAxis .recharts-cartesian-axis-tick {
+    font-size: var(--ex-small) !important;
+    fill: #333;
+    font-weight: 600 !important;
+    padding-top: 5px;
+}
+
+/* Tooltip styles */
+.recharts-tooltip-wrapper {
+    background-color: var(--text-white) !important;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: var(--ex-small) !important;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for Legends */
+.recharts-legend-item {
+    font-size: var(--ex-small) !important;
+    margin-right: 12px;
+    font-weight: 600 !important;
+    cursor: pointer;
+}
+
+/* Bar Label Text */
+text {
+    font-size: var(--small) !important;
+    font-weight: 600 !important;
+    fill: #444 !important;
+    font-family: var(--primary-font) !important;
+}
+
+.Wicket_Text {
+    font-size: var(--ex-ex-small) !important;
+    fill: var(--text-white) !important;
+}
+
+/* Wicket Label Styling */
+.wicket-label {
+    fill: var(--text-red) !important;
+    font-size: var(--ex-ex-small) !important;
+    font-weight: bold;
+    text-anchor: start;
+}
+
+/* Optional padding for better spacing */
+.bar-chart-container {
+    padding: 20px;
+    background-color: var(--text-white);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Hide overflow to prevent unwanted scrollbars */
+.recharts-wrapper {
+    overflow: hidden;
+}
+
+/* Axis line styling */
+.recharts-cartesian-axis-line {
+    stroke: #ccc;
+}
+
+/* Highlight active bar on click */
+.recharts-bar-rectangle:active {
+    fill: #4a90e2;
+}
+
+.custom-tooltip {
+    background-color: #fff;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    font-weight: 600 !important;
+    color: #333;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Pir charts */
+.pie_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pie_title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Partnership */
+.partnership_section {
+    background-color: white;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.partnership_card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.batter_info {
+    width: fit-content;
+    text-align: center;
+}
+
+.batter_name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: var(--ex-small);
+    color: var(--primary-color) !important;
+    max-width: 100px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+
+.batter_score {
+    font-size: 14px;
+    font-weight: 500;
+    font-size: var(--ex-small);
+    color: var(--primary-color) !important;
+}
+
+.partnership_runs_main_section {
+    position: relative;
+}
+
+.partnership_runs_section {
+    position: relative;
+    z-index: 10;
+    background-color: var(--text-white);
+    width: fit-content;
+    padding: 3px 2px 3px;
+}
+
+.partnership_run_color_partition {
+    position: absolute;
+    display: flex;
+    height: 32.5px;
+    min-width: 100px;
+    left: -35px;
+    right: 0;
+    top: -5.5px;
+    overflow: hidden;
+}
+
+.partnership_run_left_section {
+    width: 50px;
+    height: 40px;
+    overflow: hidden;
+    transform: rotate(180deg);
+}
+
+.partnership_run_right_section {
+    width: 50px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.partnership_runs {
+    font-weight: bold;
+    font-size: 12px;
+    color: var(--primary-color) !important;
+}
+
+
+@media screen and (max-width: 350px) {
+    .recharts-legend-item {
+        font-size: var(--ex-ex-small) !important;
+    }
+    .batter_name {
+        font-size: var(--ex-ex-small);
+        max-width: 70px;
+    }
+}

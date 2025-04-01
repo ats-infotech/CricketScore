@@ -1,144 +1,11 @@
 'use client';
-import { Box, Typography, Select, MenuItem } from '@mui/material';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, } from 'recharts';
+import { Box } from '@mui/material';
 import './Analysis.css';
 import { useEffect, useState } from 'react';
 import { teamsState } from '@/redux/slices/teamSlice';
 import { useSelector } from 'react-redux';
-
-const TopSection = ({ value, onChange, title, team1, team2, type }) => {
-    return (
-        <>
-            <Box className="chart_title">
-                <Typography variant="body2">{title}</Typography>
-                <Box className="analysis-gradient-line"></Box>
-            </Box>
-
-            <FilterSelect value={value} onChange={onChange} team1={team1} team2={team2} type={type} />
-        </>
-    )
-}
-
-const CustomWicketLabel = ({ x, y, value, height }) => {
-    if (value > 0) {
-        return (
-            <g>
-                {Array.from({ length: value }).map((_, i) => (
-                    <g key={i}>
-                        <circle
-                            cx={x + 7}
-                            cy={y - 10 - i * (12 + 5)}
-                            r={8}
-                            fill="#ff4d4d"
-                        />
-                        <text
-                            x={x + 7}
-                            y={y - 10 - i * (12 + 5) + 3}
-                            fill="#fff"
-                            fontSize={8}
-                            fontWeight="bold"
-                            textAnchor="middle"
-                            className="Wicket_Text"
-                        >
-                            W
-                        </text>
-                    </g>
-                ))}
-            </g>
-        );
-    }
-    return null;
-};
-
-const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length > 0) {
-        const inningsOneData = payload.find(item => item.dataKey === "inningsOneRuns");
-        const inningsTwoData = payload.find(item => item.dataKey === "inningsTwoRuns");
-
-        return (
-            <div
-                className="custom-tooltip"
-                style={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #ccc",
-                    padding: "5px",
-                    borderRadius: "5px",
-                }}
-            >
-                <p className="label">{`Over: ${payload[0].payload.over}`}</p>
-
-                {inningsOneData && inningsOneData.value > 0 && (
-                    <>
-                        <p style={{ color: inningsOneData.fill }}>
-                            {`${inningsOneData.name}: ${inningsOneData.value} runs`}
-                        </p>
-                        {inningsOneData.payload.inningsOneWickets > 0 && (
-                            <p style={{ color: "#ff4d4d" }}>
-                                {`${inningsOneData.payload.inningsOneWickets} Wickets`}
-                            </p>
-                        )}
-                    </>
-                )}
-
-                {inningsTwoData && inningsTwoData.value > 0 && (
-                    <>
-                        <p style={{ color: inningsTwoData.fill }}>
-                            {`${inningsTwoData.name}: ${inningsTwoData.value} runs`}
-                        </p>
-                        {inningsTwoData.payload.inningsTwoWickets > 0 && (
-                            <p style={{ color: "#ff4d4d" }}>
-                                {`${inningsTwoData.payload.inningsTwoWickets} Wickets`}
-                            </p>
-                        )}
-                    </>
-                )}
-            </div>
-        );
-    }
-    return null;
-};
-
-const FilterSelect = ({ value, onChange, team1, team2, type }) => {
-    return (
-        <Box className="filter_section">
-            <Typography variant="body2">
-                Filter by Team:
-            </Typography>
-            <Select
-                value={value}
-                onChange={onChange}
-                size="small"
-                variant="outlined"
-            >
-                {type !== "partnerships" && <MenuItem value="Both">Both Teams</MenuItem>}
-                <MenuItem value="Team1">{team1?.team_name || 'Team 1'}</MenuItem>
-                <MenuItem value="Team2">{team2?.team_name || 'Team 2'}</MenuItem>
-            </Select>
-        </Box>
-    )
-}
-
-const CommonLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team1dataKey, team2dataKey, filter, TeamOne, TeamTwo, onChange, title, value }) => {
-    return (
-        <>
-            <TopSection team1={TeamOne} team2={TeamTwo} value={value} onChange={onChange} title={title} />
-            <ResponsiveContainer className="runrate_chart_container" width="90%" height={500} style={{ paddingBlock: 15 }}>
-                <LineChart data={data}>
-                    <XAxis dataKey="over" label={{ value: "OVERS", position: "insideBottom", offset: -5 }} padding={{ left: 10, right: 10 }} allowDuplicatedCategory={false} />
-                    <YAxis domain={[0, 'auto']} label={{ value: "RUNS", angle: -90, position: "insideLeft", offset: 15 }} />
-                    <Tooltip />
-                    <Legend verticalAlign="top" align="center" wrapperStyle={{ top: 0 }} />
-                    {(filter === "Both" || filter === "Team1") &&
-                        <Line fill="var(--light-green)" type="monotone" dataKey={team1dataKey} strokeWidth={2} name={inningsOneLabel} stroke="var(--light-green)" connectNulls />
-                    }
-                    {(filter === "Both" || filter === "Team2") &&
-                        <Line fill="var(--yellow)" type="monotone" dataKey={team2dataKey} strokeWidth={2} name={inningsTwoLabel} stroke="var(--yellow)" connectNulls />
-                    }
-                </LineChart>
-            </ResponsiveContainer>
-        </>
-    )
-}
+import { playersState } from '@/redux/slices/playersSlice';
+import { AnalysisBarChart, AnalysisLineChart, AnalysisPartnership, AnalysisPieChart } from '@/components/common/commonUi/AnalysisCharts/AnalysisCharts';
 
 const ScoreAnalysis = ({ matchData }) => {
     const [team1, setTeam1] = useState({});
@@ -148,14 +15,11 @@ const ScoreAnalysis = ({ matchData }) => {
         runrate: 'Both',
         worm: 'Both',
         wickets: 'Both',
+        typesofruns: 'Both',
         partnerships: 'Team1'
     });
-    const [filterRunsType, setFilterRunsType] = useState({
-        innings: 'Both',
-        batter: 'All',
-        bowler: 'All'
-    })
     const team_data = useSelector(teamsState);
+    const player_data = useSelector(playersState)
 
     // Innings Data
     const inningsOneOversData = matchData?.firstInnings?.Completedovers || [];
@@ -164,7 +28,8 @@ const ScoreAnalysis = ({ matchData }) => {
     const inningsTwoWicketData = matchData?.secondInnings?.Wickets || [];
     const inningsOneBattingOrder = matchData?.firstInnings?.BattingOrder?.[0] || [];
     const inningsTwoBattingOrder = matchData?.secondInnings?.BattingOrder?.[0] || [];
-    const isTeam1BattingFirst = (matchData?.toss?.tossWinner === matchData?.team1?.id && matchData?.toss?.selectSide === 'Bat') || (matchData?.toss?.tossWinner !== matchData?.team1?.id && matchData?.toss?.selectSide !== 'Bat');
+    const isTeam1BattingFirst = (matchData?.toss?.tossWinner === matchData?.team1?.id && matchData?.toss?.selectSide === 'Bat')
+        || (matchData?.toss?.tossWinner !== matchData?.team1?.id && matchData?.toss?.selectSide !== 'Bat');
     const TeamOne = isTeam1BattingFirst ? team1 : team2
     const TeamTwo = isTeam1BattingFirst ? team2 : team1
 
@@ -177,10 +42,6 @@ const ScoreAnalysis = ({ matchData }) => {
 
     const handleChange = (field) => event => {
         setFilter(prev => ({ ...prev, [field]: event.target.value }));
-    };
-
-    const handleRunTypeChange = (field) => event => {
-        setFilterRunsType(prev => ({ ...prev, [field]: event.target.value }));
     };
 
     // Function to calculate runs and wickets per over
@@ -300,7 +161,7 @@ const ScoreAnalysis = ({ matchData }) => {
             default:
                 return item;
         }
-    });
+    }).reverse();
 
     // Run Rate Line Chart
     const calculateRunRate = (data) => {
@@ -387,6 +248,18 @@ const ScoreAnalysis = ({ matchData }) => {
     }));
 
     // Wicket Pie Chart
+    const mergeAndSumWicketData = (data1, data2) => {
+        const mergedData = [...data1];
+        data2.forEach(item => {
+            const existingItem = mergedData.find(existing => existing.name === item.name);
+            if (existingItem) {
+                existingItem.value += item.value;
+            } else {
+                mergedData.push(item);
+            }
+        });
+        return mergedData;
+    };
     const preparePieData = (wicketData, innings) => {
         const data = [
             { name: 'LBW', value: wicketData?.lbw || 0, color: 'var(--light-green)' },
@@ -394,8 +267,8 @@ const ScoreAnalysis = ({ matchData }) => {
             { name: 'Stumping', value: wicketData?.Stumping || 0, color: 'var(--purple)' },
             { name: 'Run Out', value: wicketData?.RunOut || 0, color: 'var(--orange-red)' },
             { name: 'Bowled', value: wicketData?.Bowled || 0, color: 'var(--yellow)' },
-            { name: 'Hit Wicket', value: wicketData?.Hitwicket || 0, color: 'var(--coral)' },
-            { name: 'Retired Hurt', value: wicketData?.RetiredHurt || 0, color: 'var(--pink)' },
+            { name: 'Hit Wicket', value: wicketData?.Hitwicket || 0, color: 'var(--pink)' },
+            { name: 'Retired Hurt', value: wicketData?.RetiredHurt || 0, color: 'var(--coral)' },
         ];
         const totalValue = data.reduce((sum, item) => sum + item.value, 0);
         if (totalValue === 0 && filter.wickets !== "Both") {
@@ -403,11 +276,17 @@ const ScoreAnalysis = ({ matchData }) => {
         }
         return data.filter((item) => item.value > 0);
     };
-
-    const inningsOneWicket = calculateWicketType(inningsOneWicketData)
-    const inningsTwoWicket = calculateWicketType(inningsTwoWicketData)
+    const inningsOneWicket = calculateWicketType(inningsOneWicketData);
+    const inningsTwoWicket = calculateWicketType(inningsTwoWicketData);
     const inningsOnePieData = preparePieData(inningsOneWicket, 'Innings 1');
     const inningsTwoPieData = preparePieData(inningsTwoWicket, 'Innings 2');
+    const pieData = filter.wickets === 'Both'
+        ? mergeAndSumWicketData(inningsOnePieData, inningsTwoPieData)
+        : filter.wickets === 'Team1'
+            ? inningsOnePieData
+            : filter.wickets === 'Team2'
+                ? inningsTwoPieData
+                : [];
 
     // Types of Runs Bar Chart
     const countShots = (data) => {
@@ -471,229 +350,90 @@ const ScoreAnalysis = ({ matchData }) => {
     const CalculatePartnerships = ({ over, wickets, pairs }) => {
         let partnerships = [];
         let previousPartnership = 0;
-        let processedPairs = new Set();
-    
+        let previousBatter1Id = null;
+        let previousBatter2Id = null;
+
         for (let i = 0; i < wickets.length; i++) {
             let wicket = wickets[i];
             let pair = pairs.find(p => p.includes(wicket.BatterId));
             let partnershipRun = wicket.partnership - previousPartnership;
-    
+
             if (pair) {
                 let batter1Run = 0;
                 let batter2Run = 0;
+                let batter1Ball = 0;
+                let batter2Ball = 0;
                 if (pair[0] === wicket.BatterId) {
-                    batter1Run = wicket.run;
-                    batter2Run = partnershipRun - wicket.run;
+                    batter1Run = wicket.batter1Contribution;
+                    batter1Ball = wicket.batter1balls;
+                    batter2Run = wicket.batter2Contribution
+                    batter2Ball = wicket.batter2balls
+                    previousBatter1Id = wicket.BatterId
                 } else if (pair[1] === wicket.BatterId) {
-                    batter2Run = wicket.run;
-                    batter1Run = partnershipRun - wicket.run;
+                    batter2Run = wicket.batter2Contribution
+                    batter2Ball = wicket.batter2balls
+                    batter1Run = wicket.batter1Contribution
+                    batter1Ball = wicket.batter1balls
+                    previousBatter2Id = wicket.BatterId
                 }
-                let pairId = pair.sort().join("-"); 
-                if (!processedPairs.has(pairId)) {
-                    partnerships.push({
-                        wicketId: pairId,
-                        batter1run: batter1Run,
-                        batter2run: batter2Run,
-                        partnershipRun: partnershipRun,
-                    });
-                    processedPairs.add(pairId);
+                let pairId = pair.sort().join("-");
+                let batter1Id = wicket.batter1Id
+                let batter2Id = wicket.batter2Id
+                if (batter1Id === "" || batter2Id === "") {
+                    continue;
                 }
-    
+                if ((previousBatter1Id?.toString() === batter1Id && previousBatter2Id?.toString() === batter2Id)) {
+                    continue;
+                }
+                partnerships.push({
+                    wicketId: pairId,
+                    batter1run: batter1Run,
+                    batter1ball: batter1Ball,
+                    batter1Id,
+                    batter2Id,
+                    batter2run: batter2Run,
+                    batter2ball: batter2Ball,
+                    partnershipRun: partnershipRun,
+                });
                 previousPartnership = wicket.partnership;
             }
         }
-    
         return partnerships;
     };
-    
+
     const inningsOneBattingPair = WicketPairs({ wickets: inningsOneWicketData, BattingOrder: inningsOneBattingOrder }) || []
-    const inningsOnePartnerships = CalculatePartnerships({over: inningsOneOversData, wickets: inningsOneWicketData, pairs: inningsOneBattingPair})
+    const inningsOnePartnerships = CalculatePartnerships({ over: inningsOneOversData, wickets: inningsOneWicketData, pairs: inningsOneBattingPair })
     const inningsTwoBattingPair = WicketPairs({ wickets: inningsTwoWicketData, BattingOrder: inningsTwoBattingOrder }) || []
-    const inningsTwoPartnerships = CalculatePartnerships({over: inningsTwoOversData, wickets: inningsTwoWicketData, pairs: inningsTwoBattingPair})
+    const inningsTwoPartnerships = CalculatePartnerships({ over: inningsTwoOversData, wickets: inningsTwoWicketData, pairs: inningsTwoBattingPair })
+    const PartnershipData = filter.partnerships === "Team1" ? inningsOnePartnerships : inningsTwoPartnerships
 
     return (
         <Box className="main_analysis_section">
-            <TopSection team1={TeamOne} team2={TeamTwo} value={filter.manhattan} onChange={handleChange('manhattan')} title={"Manhattan"} />
-            <ResponsiveContainer className="barchart_container" width="90%" height={500} style={{ paddingBottom: 15 }}>
-                <BarChart
-                    data={filteredData}
-                    layout="horizontal"
-                    margin={{ top: 20, right: 0, left: 0, bottom: 5 }}
-                >
-                    <Legend verticalAlign="top" align="center" height={36} />
-                    <XAxis
-                        dataKey="over"
-                        type="category"
-                        tickFormatter={(value) => `${value}`}
-                        label={{
-                            value: 'Overs',
-                            position: 'insideBottom',
-                            offset: -5,
-                        }}
-                    />
-                    <YAxis
-                        type="number"
-                        label={{
-                            value: 'Runs',
-                            angle: -90,
-                            position: 'insideLeft',
-                        }}
-                    />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-                    {(filter.manhattan === 'Both' || filter.manhattan === 'Team1') && (
-                        <Bar
-                            dataKey="inningsOneRuns"
-                            fill="var(--light-green)"
-                            name={inningsOneLabel}
-                            barSize={15}
-                        >
-                            <LabelList
-                                dataKey="inningsOneWickets"
-                                position="top"
-                                content={(props) => <CustomWicketLabel {...props} />}
-                            />
-                        </Bar>
-                    )}
-                    {(filter.manhattan === 'Both' || filter.manhattan === 'Team2') && (
-                        <Bar
-                            dataKey="inningsTwoRuns"
-                            fill="var(--yellow)"
-                            name={inningsTwoLabel}
-                            barSize={15}
-                        >
-                            <LabelList
-                                dataKey="inningsTwoWickets"
-                                position="top"
-                                content={(props) => <CustomWicketLabel {...props} />}
-                            />
-                        </Bar>
-                    )}
-                </BarChart>
-            </ResponsiveContainer>
+            {/* Manhattan Bar Chart */}
+            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.manhattan} handleChange={handleChange('manhattan')} filteredData={filteredData}
+                inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Manhattan"} yaxisdatakey={"over"} yaxislabel={"Overs"}
+                xaxislabel={"Runs"} bar1datakey={"inningsOneRuns"} bar2datakey={"inningsTwoRuns"} bar1wicketslabel={"inningsOneWickets"} bar2wicketslabel={"inningsTwoWickets"} />
 
             {/* Run Rate Line Chart*/}
-            <CommonLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('runrate')} value={filter.runrate} title={"Run Rate"} data={formattedRunRateData}
+            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('runrate')} value={filter.runrate} title={"Run Rate"} data={formattedRunRateData}
                 filter={filter.runrate} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1RunRate'} team2dataKey={'team2RunRate'} />
 
-
             {/* Worm Line Chart */}
-            <CommonLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('worm')} value={filter.worm} title={"Worm"} data={formattedRunsData}
+            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('worm')} value={filter.worm} title={"Worm"} data={formattedRunsData}
                 filter={filter.worm} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1Runs'} team2dataKey={'team2Runs'} />
 
-
             {/* Wickets Pie Chart */}
-            <TopSection team1={TeamOne} team2={TeamTwo} value={filter.wickets} onChange={handleChange('wickets')} title={"Wickets Pie"} />
-            <ResponsiveContainer className="pie_chart_container" width="90%" height={250}>
-                <PieChart>
-                    <Legend
-                        layout="horizontal"
-                        verticalAlign="top"
-                        align="center"
-                        wrapperStyle={{ marginBottom: 10 }}
-                    />
-                    <Pie
-                        data={
-                            filter.wickets === 'Team2'
-                                ? inningsOnePieData
-                                : filter.wickets === 'Team1'
-                                    ? inningsTwoPieData
-                                    : inningsOnePieData.concat(inningsTwoPieData)
-                        }
-                        dataKey="value"
-                        nameKey="name"
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={100}
-                        fill="#8884d8"
-                        labelLine={false}
-                        label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
-                            const RADIAN = Math.PI / 180;
-                            const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-                            const x = cx + radius * Math.cos(-midAngle * RADIAN);
-                            const y = cy + radius * Math.sin(-midAngle * RADIAN);
-                            const fillColor =
-                                filter.wickets === 'Team2'
-                                    ? inningsOnePieData[index]?.color
-                                    : filter.wickets === 'Team1'
-                                        ? inningsTwoPieData[index]?.color
-                                        : inningsOnePieData.concat(inningsTwoPieData)[index]?.color;
-
-                            return (
-                                <>
-                                    <circle cx={x} cy={y} r={14} fill="white" stroke={fillColor} strokeWidth={2} />
-                                    <text
-                                        x={x}
-                                        y={y}
-                                        fill={fillColor}
-                                        textAnchor="middle"
-                                        dominantBaseline="central"
-                                        fontSize={12}
-                                        fontWeight="bold"
-                                    >
-                                        {value}
-                                    </text>
-                                </>
-                            );
-                        }}
-                    >
-                        {(
-                            filter.wickets === 'Team2'
-                                ? inningsOnePieData
-                                : filter.wickets === 'Team1'
-                                    ? inningsTwoPieData
-                                    : inningsOnePieData.concat(inningsTwoPieData)
-                        ).map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                    </Pie>
-                </PieChart>
-            </ResponsiveContainer>
+            <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} topsectionvalue={filter.wickets} onChange={handleChange('wickets')}
+                title={"Wickets Pie"} data={pieData} inningsOnePieData={inningsOnePieData} inningsTwoPieData={inningsTwoPieData} />
 
             {/* Types of Runs Bar Chart */}
-            <TopSection team1={TeamOne} team2={TeamTwo} value={filterRunsType.innings} onChange={handleRunTypeChange('innings')} title={"Types of Runs"} />
-            <ResponsiveContainer className="barchart_container" width="90%" height={500} style={{ paddingBottom: 15 }}>
-                <BarChart
-                    data={shots}
-                    layout="vertical"
-                    margin={{ top: 20, right: 0, left: 0, bottom: 5 }}
-                >
-                    <Legend verticalAlign="top" align="center" height={36} />
-                    <YAxis
-                        dataKey="shotType"
-                        type="category"
-                        tickFormatter={(value) => `${value}s`}
-                        label={{
-                            value: 'Shots',
-                            angle: -90,
-                            position: 'insideLeft',
-                        }}
-                    />
-                    <XAxis
-                        type="number"
-                        label={{
-                            value: 'No of shots',
-                            position: 'insideBottom',
-                            offset: -5,
-                        }}
-                    />
-                    <Tooltip cursor={{ fill: 'transparent' }} />
-                    {(filterRunsType.innings === "Both" || filterRunsType.innings === "Team1") && <Bar
-                        dataKey="inningsOne"
-                        fill="var(--light-green)"
-                        name={inningsOneLabel}
-                        barSize={15}
-                    />}
-                    {(filterRunsType.innings === "Both" || filterRunsType.innings === "Team2") && <Bar
-                        dataKey="inningsTwo"
-                        fill="var(--yellow)"
-                        name={inningsTwoLabel}
-                        barSize={15}
-                    />}
-                </BarChart>
-            </ResponsiveContainer>
+            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.typesofruns} handleChange={handleChange('typesofruns')} filteredData={shots}
+                inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Types of Runs"} yaxisdatakey={"shotType"} yaxislabel={'Shots'} xaxislabel={'No of shots'}
+                bar1datakey={"inningsOne"} bar2datakey={"inningsTwo"} />
 
             {/* Partnerships */}
-            {/* <TopSection value={filter.partnerships} onChange={handleChange('partnerships')} team1={TeamOne} team2={TeamTwo} title={"Partnerships"} type={"partnerships"} /> */}
+            <AnalysisPartnership team1={TeamOne} team2={TeamTwo} onChange={handleChange('partnerships')} title={"Partnerships"} topsectionvalue={filter.partnerships}
+                playerdata={player_data} data={PartnershipData} />
 
         </Box>
     );
