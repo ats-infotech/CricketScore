@@ -159,10 +159,12 @@ const PartnershipCard = ({ data, playerdata }) => {
 // BarChart
 export const AnalysisBarChart = ({ team1, team2, filter, handleChange, filteredData, inningsOneLabel, inningsTwoLabel, title, yaxisdatakey,
     yaxislabel, xaxislabel, bar1datakey, bar2datakey, bar1wicketslabel, bar2wicketslabel }) => {
+
+    const dynamicHeight = Math.max(300, filteredData.length * 30);
     return (
         <>
             <TopSection team1={team1} team2={team2} value={filter} onChange={handleChange} title={title} />
-            <ResponsiveContainer className="barchart_container" width="90%" style={{ paddingBottom: 15 }}>
+            <ResponsiveContainer className="barchart_container" height={dynamicHeight} width="90%" style={{ paddingBottom: 15 }}>
                 <BarChart
                     data={filteredData}
                     layout="vertical"

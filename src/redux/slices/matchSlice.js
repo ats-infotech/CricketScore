@@ -56,6 +56,14 @@ const matchSlice = createSlice({
                     status
                 } : item)
         },
+        UpdatePartnership: (state, action) => {
+            const { id, partnership } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    partnership
+                } : item)
+        },
         MatchTerminate: (state, action) => {
             const { id, terminate } = action.payload;
             state.data = state.data.map((item) =>
@@ -605,7 +613,7 @@ const matchSlice = createSlice({
 })
 
 export const { createMatchSchedule, editMatchSchedule, deleteMatchSchedule, deleteAllMatchesForTournament, autoMatchSchedule, ReplaceMatchSchedule, AddInnings, AddOver, ChangeMatchOver, ChangeMatchTarget,
-    AddWicket, RemoveExtra, AddExtra, RemoveWicket, ChangePlayer, ChangeInnings, AddSecondInnings, AddSecondInningsOver, AddSecondInningsWicket, AddSecondInningsExtra, MatchTerminate,
+    AddWicket, RemoveExtra, AddExtra, RemoveWicket, ChangePlayer, ChangeInnings, AddSecondInnings, AddSecondInningsOver, AddSecondInningsWicket, AddSecondInningsExtra, MatchTerminate, UpdatePartnership,
     RemoveSecondInningsExtra, RemoveSecondInningsWicket, AddSuperOverInnings, AddSuperOverSecondInnings, RemoveSuperOverWicket, ChangeStatus, AddSuperOverWicket, AddSuperOverExtra, DescreaseMatchOvers,
     RemoveSuperOverExtra, AddSuperOverSecondInningsWicket, AddSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, AddCommentary, RemoveOver,
     ReplaceBattingOrder, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, AddSuperOverCompletedOver, AddSuperOverSecondInningsCompletedOver,

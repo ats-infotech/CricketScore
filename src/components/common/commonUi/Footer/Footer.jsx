@@ -8,8 +8,8 @@ import './Footer.css';
 const FooterContent = [
     { id: 1, icon: 'home', name: 'Home', navigate: '/' },
     { id: 2, icon: 'group', name: 'My Cricket', navigate: '/mytournaments' },
-    { id: 3, icon: 'news', name: 'News', navigate: '' },
-    { id: 4, icon: 'profile', name: 'Profile', navigate: '' },
+    { id: 3, icon: 'news', name: 'News', navigate: '/news' },
+    { id: 4, icon: 'profile', name: 'Profile', navigate: '/profile' },
 ];
 
 export const Footer = () => {

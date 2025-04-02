@@ -10,7 +10,7 @@ import {
     AddSuperOverInnings, AddSuperOverSecondInnings, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsWicket, AddSuperOverWicket, AddWicket, ChangeInnings,
     ChangeMatchTarget, ChangePlayer, ChangeStatus, DescreaseMatchOvers, MatchBreakSchedule, matchesState, MatchTerminate, RemoveExtra, RemoveOver, RemoveSecondInningsExtra,
     RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder,
-    ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder
+    ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership
 } from "@/redux/slices/matchSlice";
 import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
@@ -1012,9 +1012,6 @@ const ScoreBoard = () => {
         setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
     }
 
-    console.log(currentMatch);
-    
-
     const handlePlayerWicket = (batter, data, score, wide) => {
         const innings = CurrentInnings === 4 ? 'superOverSecondInnings' : CurrentInnings === 3 ? 'superOverFirstInnings' : CurrentInnings === 2 ? 'secondInnings' : 'firstInnings';
         const reason =
@@ -1052,6 +1049,22 @@ const ScoreBoard = () => {
             }
         };
 
+        const getBatterOneRuns = () => {
+            if (!batter) return activeStrike === 1 ? partnership.batter1run : partnership.batter1run;
+
+            if (playerselection.striker === batter) {
+                return activeStrike === 1 ? partnership.batter1run + parseInt(data) : partnership.batter1run;
+            }
+        }
+
+        const getBatterTwoRuns = () => {
+            if (!batter) return activeStrike === 2 ? partnership.batter2run : partnership.batter2run;
+
+            if (playerselection.nonStriker === batter) {
+                return activeStrike === 1 ? partnership.batter2run + parseInt(data) : partnership.batter2run;
+            }
+        }
+
         const getBalls = () => {
             if (wide === "wide") {
                 return batter && playerselection.striker === batter ? batterScores.batter1balls :
@@ -1063,6 +1076,26 @@ const ScoreBoard = () => {
                 batter && playerselection.striker !== batter ? batterScores.batter2balls + 1 :
                     activeStrike === 1 ? batterScores.batter1balls + 1 : batterScores.batter2balls + 1;
         };
+
+        const getBatterOneBalls = () => {
+            if (wide === "wide") {
+                return batter && playerselection.striker === batter ? partnership.batter1balls :
+                    activeStrike === 1 ? partnership.batter1balls + 1 : partnership.batter1balls
+            }
+
+            return batter && playerselection.striker === batter ? partnership.batter1balls + 1 :
+                activeStrike === 1 ? partnership.batter1balls + 1 : partnership.batter1balls
+        }
+
+        const getBatterTwoBalls = () => {
+            if (wide === "wide") {
+                return batter && playerselection.nonStriker === batter ? partnership.batter2balls :
+                    activeStrike === 1 ? partnership.batter2balls + 1 : partnership.batter2balls
+            }
+
+            return batter && playerselection.nonStriker === batter ? partnership.batter2balls + 1 :
+                activeStrike === 2 ? partnership.batter2balls + 1 : partnership.batter2balls
+        }
 
         const getDot = () => {
             if (wide === 'wide') {
@@ -1123,11 +1156,11 @@ const ScoreBoard = () => {
             partnership: initailscore.run,
             newBatter: wicketReason.newBatter,
             newBatter: wicketReason.newBatter,
-            batter1Contribution: partnership.batter1run,
-            batter1balls: partnership.batter1balls,
+            batter1Contribution: getBatterOneRuns(),
+            batter1balls: getBatterOneBalls(),
             batter1Id: playerselection.striker,
-            batter2Contribution: partnership.batter2run,
-            batter2balls: partnership.batter2balls,
+            batter2Contribution: getBatterTwoRuns(),
+            batter2balls: getBatterTwoBalls(),
             batter2Id: playerselection.nonStriker
         };
 
@@ -1845,9 +1878,10 @@ const ScoreBoard = () => {
         const currentInnings = CurrentInnings
         const currentOver = currentInnings === 4 ? matchFourthInnings?.Currentover?.[0] : currentInnings === 3 ? matchThirdInnings?.Currentover?.[0] : currentInnings === 2 ? matchSecondInnings?.Currentover?.[0] : matchFirstInnings?.Currentover?.[0];
         const completedOver = currentInnings === 2 ? matchSecondInnings?.Completedovers : currentInnings === 1 ? matchFirstInnings?.Completedovers : 0;
-        const target = currentInnings === 4 ? matchThirdInnings?.Currentover?.[0]?.runs : matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers.length - 1]?.runs;
+        // const target = currentInnings === 4 ? matchThirdInnings?.Currentover?.[0]?.runs : matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers.length - 1]?.runs;
         const winner = currentMatch?.matchWinner
         const BattingOrder = currentInnings === 4 ? matchFourthInnings?.BattingOrder?.[0] : currentInnings === 3 ? matchThirdInnings?.BattingOrder?.[0] : currentInnings === 2 ? matchSecondInnings?.BattingOrder?.[0] : currentInnings === 1 ? matchFirstInnings?.BattingOrder?.[0] : ''
+        const PartnerShip = currentMatch?.partnership
 
         if (currentInnings !== undefined) {
             StoreTeamScore()
@@ -1867,14 +1901,23 @@ const ScoreBoard = () => {
                 setBattingOrder(BattingOrder)
             }
 
-            if (target && !hasRunRef.current && (currentInnings !== 1 || currentInnings !== 4)) {
-                // setTarget({
-                //     runs: target + 1,
-                //     overs: parseInt(currentMatch?.totalovers) * 6,
-                //     totalruns: target + 1,
-                //     totalballs: parseInt(currentMatch?.totalovers) * 6
-                // })
+            if (!hasRunRef.current && partnership) {
+                setPartnerShip({
+                    batter1run: PartnerShip?.batter1run ?? 0,
+                    batter1balls: PartnerShip?.batter1balls ?? 0,
+                    batter2run: PartnerShip?.batter2run ?? 0,
+                    batter2balls: PartnerShip?.batter2balls ?? 0,
+                })
             }
+
+            // if (target && !hasRunRef.current && (currentInnings !== 1 || currentInnings !== 4)) {
+            //     // setTarget({
+            //     //     runs: target + 1,
+            //     //     overs: parseInt(currentMatch?.totalovers) * 6,
+            //     //     totalruns: target + 1,
+            //     //     totalballs: parseInt(currentMatch?.totalovers) * 6
+            //     // })
+            // }
 
             if (currentOver && !hasRunRef.current) {
                 const ballLength =
@@ -1934,12 +1977,6 @@ const ScoreBoard = () => {
                     batter2four: currentOver?.batter2four ?? 0,
                     batter2six: currentOver?.batter2six ?? 0,
                     batter2sr: currentOver?.batter2sr ?? ""
-                });
-                setPartnerShip({
-                    batter1run: currentOver?.batter1run ?? 0,
-                    batter1balls: currentOver?.batter1balls ?? 0,
-                    batter2run: currentOver?.batter2run ?? 0,
-                    batter2balls: currentOver?.batter2balls ?? 0,
                 });
 
                 hasRunRef.current = true;
@@ -2129,6 +2166,16 @@ const ScoreBoard = () => {
             /NB\+W/,
             /\d+NB\+W/
         ];
+        const PartnershipObj = {
+            id: currentMatch?.id,
+            partnership: {
+                batter1run: partnership.batter1run,
+                batter1balls: partnership.batter1balls,
+                batter2run: partnership.batter2run,
+                batter2balls: partnership.batter2balls
+            }
+        }
+        dispatch(UpdatePartnership(PartnershipObj))
         if (!invalidScores.some((pattern) =>
             typeof pattern === 'string'
                 ? pattern === Commentary.score
@@ -2330,11 +2377,6 @@ const ScoreBoard = () => {
                 batter1six: wicketBatterScores?.six ? wicketBatterScores?.six : 0,
                 batter1sr: wicketBatterScores?.sr ? wicketBatterScores?.sr : ""
             }))
-            setPartnerShip((prev) => ({
-                ...prev,
-                batter1run: wicketBatterScores?.run ? wicketBatterScores?.run : 0,
-                batter1balls: wicketBatterScores?.balls ? wicketBatterScores?.balls : 0,
-            }))
         } else if (strike === 2) {
             setBatterScores((prev) => ({
                 ...prev,
@@ -2345,12 +2387,13 @@ const ScoreBoard = () => {
                 batter2six: wicketBatterScores?.six ? wicketBatterScores?.six : 0,
                 batter2sr: wicketBatterScores?.sr ? wicketBatterScores?.sr : ""
             }))
-            setPartnerShip((prev) => ({
-                ...prev,
-                batter2run: wicketBatterScores?.run ? wicketBatterScores?.run : 0,
-                batter2balls: wicketBatterScores?.balls ? wicketBatterScores?.balls : 0,
-            }))
         }
+        // setPartnerShip({
+        //     batter1run: wicketBatterScores?.batter1Contribution ?? 0,
+        //     batter1balls: wicketBatterScores?.batter1balls ?? 0,
+        //     batter2run: wicketBatterScores?.batter2Contribution ?? 0,
+        //     batter2balls: wicketBatterScores?.batter2balls ?? 0,
+        // })
     }
 
     const handleBowlerPrevStats = (id) => {
@@ -2488,6 +2531,17 @@ const ScoreBoard = () => {
             batter2balls: partnership.batter2balls,
             batter2Id: playerselection.nonStriker
         });
+
+        const PartnershipObj = {
+            id: currentMatch?.id,
+            partnership: {
+                batter1run: 0,
+                batter1balls: 0,
+                batter2run: 0,
+                batter2balls: 0,
+            }
+        }
+
         const dispatchWicket = async (batterId, batterStats) => {
             const notOutObject = createNotOutObject(batterId, batterStats);
             const createNewObj = {
@@ -2520,6 +2574,7 @@ const ScoreBoard = () => {
                 partnership: initailscore.run
             });
         }
+        dispatch(UpdatePartnership(PartnershipObj))
     }
 
     const handleInningsChange = async () => {
@@ -2668,11 +2723,12 @@ const ScoreBoard = () => {
                                 batter1four: wickets?.four,
                                 batter1six: wickets?.six
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter1run: wickets?.run,
-                                batter1balls: wickets?.balls - 1,
-                            }))
+                            setPartnerShip({
+                                batter1run: wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls - 1,
+                                batter2run: wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls,
+                            })
                         } else if (activeStrike === 2) {
                             handlePlayerChange(playerselection.striker, wickets?.BatterId, playerselection.bowler)
                             setBatterScores((prev) => ({
@@ -2683,11 +2739,12 @@ const ScoreBoard = () => {
                                 batter2four: wickets?.four,
                                 batter2six: wickets?.six
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter2run: wickets?.run,
-                                batter2balls: wickets?.balls - 1,
-                            }))
+                            setPartnerShip({
+                                batter1run: wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls,
+                                batter2run: wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls - 1,
+                            })
                         }
                         const createNewObj = {
                             id: currentMatch?.id,
@@ -2711,13 +2768,12 @@ const ScoreBoard = () => {
                                 batter2run: lastScore === 'W' ? prev.batter2run : activeStrike === 2 && !oddRunoutValues ? prev.batter2run - runs : activeStrike === 1 && oddRunoutValues ? prev.batter2run - runs : prev.batter2run,
                                 batter2balls: lastScore === 'W' ? prev.batter2balls : activeStrike === 2 && !oddRunoutValues ? prev.batter2balls - 1 : activeStrike === 1 && oddRunoutValues ? prev.batter2balls - 1 : prev.batter2balls,
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter1run: lastScore === 'W' ? wickets?.run - runs : activeStrike === 1 && !oddRunoutValues ? wickets?.run - runs : activeStrike === 2 && oddRunoutValues ? wickets?.run - runs : wickets?.run,
-                                batter1balls: lastScore === 'W' ? wickets?.balls - 1 : activeStrike === 1 && !oddRunoutValues ? wickets?.balls - 1 : activeStrike === 2 && oddRunoutValues ? wickets?.balls - 1 : wickets?.balls,
-                                batter2run: lastScore === 'W' ? prev.batter2run : activeStrike === 2 && !oddRunoutValues ? prev.batter2run - runs : activeStrike === 1 && oddRunoutValues ? prev.batter2run - runs : prev.batter2run,
-                                batter2balls: lastScore === 'W' ? prev.batter2balls : activeStrike === 2 && !oddRunoutValues ? prev.batter2balls - 1 : activeStrike === 1 && oddRunoutValues ? prev.batter2balls - 1 : prev.batter2balls,
-                            }))
+                            setPartnerShip({
+                                batter1run: lastScore === 'W' ? wickets?.batter1Contribution - runs : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - runs : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - runs : wickets?.batter1Contribution,
+                                batter1balls: lastScore === 'W' ? wickets?.batter1balls - 1 : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1balls - 1 : activeStrike === 2 && oddRunoutValues ? wickets?.batter1balls - 1 : wickets?.batter1balls,
+                                batter2run: lastScore === 'W' ? wickets?.batter2Contribution : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - runs : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - runs : wickets?.batter2Contribution,
+                                batter2balls: lastScore === 'W' ? wickets?.batter2balls : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2balls - 1 : activeStrike === 1 && oddRunoutValues ? wickets?.batter2balls - 1 : wickets?.batter2balls,
+                            })
                         } else if (wickets?.newBatter.toString() === playerselection.nonStriker.toString()) {
                             handlePlayerChange(playerselection.striker, wickets?.BatterId, playerselection.bowler)
                             setBatterScores((prev) => ({
@@ -2730,13 +2786,12 @@ const ScoreBoard = () => {
                                 batter2four: wickets?.four,
                                 batter2six: wickets?.six
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter1run: lastScore === 'W' ? prev.batter1run : activeStrike === 1 && !oddRunoutValues ? prev.batter1run - runs : activeStrike === 2 && oddRunoutValues ? prev.batter1run - runs : prev.batter1run,
-                                batter1balls: lastScore === 'W' ? prev.batter1balls : activeStrike === 1 && !oddRunoutValues ? prev.batter1balls - 1 : activeStrike === 2 && oddRunoutValues ? prev.batter1balls - 1 : prev.batter1balls,
-                                batter2run: lastScore === 'W' ? wickets?.run - runs : activeStrike === 2 && !oddRunoutValues ? wickets?.run - runs : activeStrike === 1 && oddRunoutValues ? wickets?.run - runs : wickets?.run,
-                                batter2balls: lastScore === 'W' ? wickets?.balls - 1 : activeStrike === 2 && !oddRunoutValues ? wickets?.balls - 1 : activeStrike === 1 && oddRunoutValues ? wickets?.balls - 1 : wickets?.balls,
-                            }))
+                            setPartnerShip({
+                                batter1run: lastScore === 'W' ? wickets?.batter1Contribution : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - runs : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - runs : wickets?.batter1Contribution,
+                                batter1balls: lastScore === 'W' ? wickets?.batter1balls : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1balls - 1 : activeStrike === 2 && oddRunoutValues ? wickets?.batter1balls - 1 : wickets?.batter1balls,
+                                batter2run: lastScore === 'W' ? wickets?.batter2Contribution - runs : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - runs : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - runs : wickets?.batter2Contribution,
+                                batter2balls: lastScore === 'W' ? wickets?.batter2balls - 1 : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2balls - 1 : activeStrike === 1 && oddRunoutValues ? wickets?.batter2balls - 1 : wickets?.batter2balls,
+                            })
                         }
                         const createNewObj = {
                             id: currentMatch?.id,
@@ -2759,11 +2814,6 @@ const ScoreBoard = () => {
                                 batter1four: wickets?.four,
                                 batter1six: wickets?.six,
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter1run: wickets?.run,
-                                batter1balls: wickets?.balls
-                            }))
                         } else if (wickets?.newBatter.toString() === playerselection.nonStriker.toString()) {
                             handlePlayerChange(playerselection.striker, wickets?.BatterId, playerselection.bowler)
                             setBatterScores((prev) => ({
@@ -2774,12 +2824,13 @@ const ScoreBoard = () => {
                                 batter2four: wickets?.four,
                                 batter2six: wickets?.six
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter2run: wickets?.run,
-                                batter2balls: wickets?.balls,
-                            }))
                         }
+                        setPartnerShip({
+                            batter1run: wickets?.batter1Contribution,
+                            batter1balls: wickets?.batter1balls,
+                            batter2run: wickets?.batter2Contribution,
+                            batter2balls: wickets?.batter2balls,
+                        })
                         const createNewObj = {
                             id: currentMatch?.id,
                             BatterId: wickets?.BatterId
@@ -2804,12 +2855,12 @@ const ScoreBoard = () => {
                                 batter1six: wickets?.six,
                                 batter2run: activeStrike === 2 && !oddRunoutValues ? prev.batter2run - batterruns : activeStrike === 1 && oddRunoutValues ? prev.batter2run - batterruns : prev.batter2run,
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter1run: activeStrike === 1 && !oddRunoutValues ? wickets?.run - batterruns : activeStrike === 2 && oddRunoutValues ? wickets?.run - batterruns : wickets?.run,
-                                batter1balls: wickets?.balls,
-                                batter2run: activeStrike === 2 && !oddRunoutValues ? prev.batter2run - batterruns : activeStrike === 1 && oddRunoutValues ? prev.batter2run - batterruns : prev.batter2run,
-                            }))
+                            setPartnerShip({
+                                batter1run: activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - batterruns : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - batterruns : wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls,
+                                batter2run: activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - batterruns : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - batterruns : wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls,
+                            })
                         } else if (wickets?.newBatter.toString() === playerselection.nonStriker.toString()) {
                             handlePlayerChange(playerselection.striker, wickets?.BatterId, playerselection.bowler)
                             setBatterScores((prev) => ({
@@ -2821,12 +2872,12 @@ const ScoreBoard = () => {
                                 batter2four: wickets?.four,
                                 batter2six: wickets?.six
                             }))
-                            setPartnerShip((prev) => ({
-                                ...prev,
-                                batter1run: activeStrike === 1 && !oddRunoutValues ? prev.batter1run - batterruns : activeStrike === 2 && oddRunoutValues ? prev.batter1run - batterruns : prev.batter1run,
-                                batter2run: activeStrike === 2 && !oddRunoutValues ? wickets?.run - batterruns : activeStrike === 1 && oddRunoutValues ? wickets?.run - batterruns : wickets?.run,
-                                batter2balls: wickets?.balls,
-                            }))
+                            setPartnerShip({
+                                batter1run: activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - batterruns : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - batterruns : wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls,
+                                batter2run: activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - batterruns : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - batterruns : wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls,
+                            })
                         }
                         const createNewObj = {
                             id: currentMatch?.id,
@@ -2872,7 +2923,12 @@ const ScoreBoard = () => {
                         setBowlerScore(prev => ({ ...prev, ballNo: prev.ballNo - 1, dot: prev.dot - 1 }));
                         const batterKey = activeStrike === 1 && isOdd ? 'batter2' : activeStrike === 1 && !isOdd ? 'batter1' : activeStrike === 2 && isOdd ? 'batter1' : 'batter2';
                         setBatterScores(prev => ({ ...prev, [`${batterKey}balls`]: prev[`${batterKey}balls`] - 1 }));
-                        setPartnerShip(prev => ({ ...prev, [`${batterKey}balls`]: prev[`${batterKey}balls`] - 1 }));
+                        setPartnerShip({
+                            batter1run: wickets?.batter1Contribution,
+                            batter1balls: (activeStrike === 1 && !isOdd) || (activeStrike === 2 && isOdd) ? wickets?.batter1balls - 1 : wickets?.batter1balls,
+                            batter2run: wickets?.batter2Contribution,
+                            batter2balls: (activeStrike === 1 && isOdd) || (activeStrike === 2 && !isOdd) ? wickets?.batter2balls - 1 : wickets?.batter2balls,
+                        })
                     }
 
                     // Change Strike for odd runs

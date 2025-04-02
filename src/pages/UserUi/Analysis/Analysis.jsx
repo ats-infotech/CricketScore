@@ -135,31 +135,43 @@ const ScoreAnalysis = ({ matchData }) => {
         : `Innings 2 - ${team1?.team_name || 'Team 1'}`;
 
     // Filter data based on selected filter and remove empty overs
+    // const filteredData = mergedData.filter((item) => {
+    //     switch (filter.manhattan) {
+    //         case 'Team1':
+    //             return item.inningsOneRuns;
+    //         case 'Team2':
+    //             return item.inningsTwoRuns;
+    //         default:
+    //             return item.inningsOneRuns || item.inningsTwoRuns;
+    //     }
+    // }).map((item) => {
+        
+    //     switch (filter.manhattan) {
+    //         case 'Team1':
+    //             return {
+    //                 ...item,
+    //                 inningsTwoRuns: 0,
+    //                 inningsTwoWickets: 0,
+    //             };
+    //         case 'Team2':
+    //             return {
+    //                 ...item,
+    //                 inningsOneRuns: 0,
+    //                 inningsOneWickets: 0,
+    //             };
+    //         default:
+    //             return item;
+    //     }
+    // }).reverse();
     const filteredData = mergedData.filter((item) => {
         switch (filter.manhattan) {
             case 'Team1':
-                return item.inningsOneRuns > 0;
+                return item.inningsOneRuns !== undefined && item.inningsOneRuns !== null;
             case 'Team2':
-                return item.inningsTwoRuns > 0;
+                return item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null;
             default:
-                return item.inningsOneRuns > 0 || item.inningsTwoRuns > 0;
-        }
-    }).map((item) => {
-        switch (filter.manhattan) {
-            case 'Team1':
-                return {
-                    ...item,
-                    inningsTwoRuns: 0,
-                    inningsTwoWickets: 0,
-                };
-            case 'Team2':
-                return {
-                    ...item,
-                    inningsOneRuns: 0,
-                    inningsOneWickets: 0,
-                };
-            default:
-                return item;
+                return (item.inningsOneRuns !== undefined && item.inningsOneRuns !== null) || 
+                       (item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null);
         }
     }).reverse();
 

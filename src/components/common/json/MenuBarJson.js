@@ -8,7 +8,7 @@ export const MenuBarJson = [
     {
         icon: 'game-flag',
         title: 'Start A Match',
-        redirect: '',
+        redirect: 'mytournaments',
         submenu: []
     },
     {

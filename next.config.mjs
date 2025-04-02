@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
-// import withTM from 'next-transpile-modules';
-
-// const withTranspile = withTM(['@mui/x-date-pickers', '@mui/material']);
 
 const nextConfig = {
-// const nextConfig = withTranspile ({
     reactStrictMode: false,
     onDemandEntries: {
         maxInactiveAge: 60 * 1000, // Keep entries longer
@@ -21,6 +17,16 @@ const nextConfig = {
     experimental: {
         optimizeCss: true,  // Reduce CSS size
         scrollRestoration: true, // Maintain scroll position on navigation
+    },
+    webpack: (config) => {
+        config.module.rules.push({
+            test: /\.(mp4|webm|ogg|ogv)$/,
+            type: 'asset/resource',
+            generator: {
+                filename: 'static/videos/[name].[hash][ext]',
+            },
+        });
+        return config;
     },
 };
 

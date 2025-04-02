@@ -1,0 +1,9 @@
+.profile_main_section{
+    padding: 20px 30px;
+}
+
+.profile_image_section{
+    height: 110px;
+    width: 110px;
+    margin: 60px auto 40px;
+}

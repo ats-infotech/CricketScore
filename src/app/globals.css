@@ -16,6 +16,9 @@
   --black: #000000;
   --stats-grey: #D0D0D0;
   --text-lightblue: #9DB2CE;
+  --desc-grey: #494949;
+  --desc-black: #1C1C1C;
+  --play-icon-grey: #888888;
 
   --primary-color: #0C1830;
   --secondary-color: #233250;
@@ -32,6 +35,12 @@
   --coral: #ff7f50;
   --pink: #ffb4e6;
   --green: #28a745;
+
+  /* News Feed Colors */
+  --festival-title: linear-gradient(90deg, #276EB6 0%, #443995 100%);
+  --festival-button: linear-gradient(90deg, #2A6DB5 0%, #443995 100%);
+  --imagetotext-title: #153D88;
+  --imagetotext-button: linear-gradient(90deg, #AC1E7E 3.13%, #2B1957 100%);
 
   --background-forever: linear-gradient(338.66deg, #FF7600 -146.54%, #FFFFFF 51.51%, #FF7600 242.75%);
   --linear-gradient: linear-gradient(180deg, rgba(12, 24, 48, 0) -85.67%, #0C1830 88.33%);
