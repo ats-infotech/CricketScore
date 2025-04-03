@@ -992,9 +992,10 @@ const TestScoreBoard = () => {
 
         const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
         const updatedBatterOrder = [...filterBatterOrder];
-        const wasBatterOut = currentMatch?.[innings]?.Wickets?.some(wicket => wicket.BatterId === wicketReason.batter);
-        if (!wasBatterOut) {
-            const batterIndex = updatedBatterOrder.indexOf(wicketReason.batter);
+        const wasBatterOut = currentMatch?.[innings]?.Wickets?.some(wicket => wicket.BatterId === wicketReason.newBatter && wicket.reason === "Retired Hurt");
+
+        if (wasBatterOut) {
+            const batterIndex = updatedBatterOrder.indexOf(wicketReason.newBatter);
             if (batterIndex !== -1) {
                 updatedBatterOrder.splice(batterIndex, 1);
             }
@@ -1120,7 +1121,7 @@ const TestScoreBoard = () => {
         const wasBatterOut = currentMatch?.[innings]?.Wickets?.some(wicket => wicket.BatterId === wicketReason.newBatter && wicket.reason === "Retired Hurt");
 
         if (wasBatterOut) {
-            const batterIndex = updatedBatterOrder.indexOf(wicketReason.batter);
+            const batterIndex = updatedBatterOrder.indexOf(wicketReason.newBatter);
             if (batterIndex !== -1) {
                 updatedBatterOrder.splice(batterIndex, 1);
             }
@@ -2604,7 +2605,7 @@ const TestScoreBoard = () => {
             (wicket) => wicket.BatterId === wickets?.BatterId && wickets?.reason !== 'Retired Hurt'
         );
         if (wasBatterOut) {
-            const batterIndex = updatedBatterOrder.indexOf(wickets?.BatterId);
+            const batterIndex = updatedBatterOrder.indexOf(wickets?.newBatter);
             if (batterIndex !== -1) {
                 updatedBatterOrder.splice(batterIndex, 1);
             }

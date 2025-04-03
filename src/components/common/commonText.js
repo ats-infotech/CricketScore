@@ -87,5 +87,11 @@ export const CommonText = {
     LeaderBoardDataNotAvailable: 'Leaderboard Data Is Not Available',
     TeamsDataNotAvailable: 'Teams Data Is Not Available',
     nextoveralert: 'Please Select Next Over',
-    tournamentDetails: 'Tournament Details'
+    tournamentDetails: 'Tournament Details',
+    verfication: "Verification Code",
+    msgsent: "We have sent the verification code to your SMS.",
+    genderPreferencetitle: "Your Gender Preference",
+    genderPreferencedescription: "Select your gender preference to proceed.",
+    welcome: "Welcome back!",
+    welcomedescription: "Dive back into the action—live scores, match updates, and everything cricket awaits you!"
 }
