@@ -28,6 +28,9 @@ const ScoreAnalysis = ({ matchData }) => {
     const inningsTwoWicketData = matchData?.secondInnings?.Wickets || [];
     const inningsOneBattingOrder = matchData?.firstInnings?.BattingOrder?.[0] || [];
     const inningsTwoBattingOrder = matchData?.secondInnings?.BattingOrder?.[0] || [];
+    const inningsOnePartnership = matchData?.firstInnings?.Partnerships || []
+    const inningsTwoPartnership = matchData?.secondInnings?.Partnerships || []
+
     const isTeam1BattingFirst = (matchData?.toss?.tossWinner === matchData?.team1?.id && matchData?.toss?.selectSide === 'Bat')
         || (matchData?.toss?.tossWinner !== matchData?.team1?.id && matchData?.toss?.selectSide !== 'Bat');
     const TeamOne = isTeam1BattingFirst ? team1 : team2
@@ -135,34 +138,6 @@ const ScoreAnalysis = ({ matchData }) => {
         : `Innings 2 - ${team1?.team_name || 'Team 1'}`;
 
     // Filter data based on selected filter and remove empty overs
-    // const filteredData = mergedData.filter((item) => {
-    //     switch (filter.manhattan) {
-    //         case 'Team1':
-    //             return item.inningsOneRuns;
-    //         case 'Team2':
-    //             return item.inningsTwoRuns;
-    //         default:
-    //             return item.inningsOneRuns || item.inningsTwoRuns;
-    //     }
-    // }).map((item) => {
-        
-    //     switch (filter.manhattan) {
-    //         case 'Team1':
-    //             return {
-    //                 ...item,
-    //                 inningsTwoRuns: 0,
-    //                 inningsTwoWickets: 0,
-    //             };
-    //         case 'Team2':
-    //             return {
-    //                 ...item,
-    //                 inningsOneRuns: 0,
-    //                 inningsOneWickets: 0,
-    //             };
-    //         default:
-    //             return item;
-    //     }
-    // }).reverse();
     const filteredData = mergedData.filter((item) => {
         switch (filter.manhattan) {
             case 'Team1':
@@ -170,10 +145,10 @@ const ScoreAnalysis = ({ matchData }) => {
             case 'Team2':
                 return item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null;
             default:
-                return (item.inningsOneRuns !== undefined && item.inningsOneRuns !== null) || 
-                       (item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null);
+                return (item.inningsOneRuns !== undefined && item.inningsOneRuns !== null) ||
+                    (item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null);
         }
-    }).reverse();
+    });
 
     // Run Rate Line Chart
     const calculateRunRate = (data) => {
@@ -422,7 +397,7 @@ const ScoreAnalysis = ({ matchData }) => {
     return (
         <Box className="main_analysis_section">
             {/* Manhattan Bar Chart */}
-            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.manhattan} handleChange={handleChange('manhattan')} filteredData={filteredData}
+            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.manhattan} handleChange={handleChange('manhattan')} data={filteredData}
                 inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Manhattan"} yaxisdatakey={"over"} yaxislabel={"Overs"}
                 xaxislabel={"Runs"} bar1datakey={"inningsOneRuns"} bar2datakey={"inningsTwoRuns"} bar1wicketslabel={"inningsOneWickets"} bar2wicketslabel={"inningsTwoWickets"} />
 
@@ -435,11 +410,10 @@ const ScoreAnalysis = ({ matchData }) => {
                 filter={filter.worm} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1Runs'} team2dataKey={'team2Runs'} />
 
             {/* Wickets Pie Chart */}
-            <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} topsectionvalue={filter.wickets} onChange={handleChange('wickets')}
-                title={"Wickets Pie"} data={pieData} inningsOnePieData={inningsOnePieData} inningsTwoPieData={inningsTwoPieData} />
+            <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} onChange={handleChange('wickets')} title={"Wickets Pie"} data={pieData} />
 
             {/* Types of Runs Bar Chart */}
-            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.typesofruns} handleChange={handleChange('typesofruns')} filteredData={shots}
+            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.typesofruns} handleChange={handleChange('typesofruns')} data={shots}
                 inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Types of Runs"} yaxisdatakey={"shotType"} yaxislabel={'Shots'} xaxislabel={'No of shots'}
                 bar1datakey={"inningsOne"} bar2datakey={"inningsTwo"} />
 

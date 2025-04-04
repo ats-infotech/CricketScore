@@ -22,7 +22,7 @@ export const SwipeUpDrawer = React.memo(({ open, children, onClose, backgroundCo
     return (
         <>
             {open && (
-                <Box sx={{ width:'100%',position: 'fixed', bottom: `${drawerHeight + 12}px` || '94%', zIndex: 1000, maxWidth:'440px'}}>
+                <Box sx={{ width: '100%', position: 'fixed', bottom: `${drawerHeight + 12}px` || '94%', zIndex: 1000, maxWidth: '440px', left: 0, right: 0, margin: '0 auto' }}>
                     <CloseIcon
                         sx={{
                             margin:'0 auto',
@@ -113,7 +113,7 @@ export const BlueInput = React.memo(({ placeholder, type, value, onChange, error
 
     return (
         <Box sx={{ display: 'block', width: '100%' }}>
-            <input placeholder={placeholder} type={type === 'number' ? 'tel' : type} value={value} onChange={onChangeHandler} className='blue_input' disabled={disabled}  onKeyDown={(e) => handleOnlyNumbers(e)}/>
+            <input placeholder={placeholder} type={type === 'number' ? 'tel' : type} value={value} onChange={onChangeHandler} className='blue_input' disabled={disabled} onKeyDown={(e) => handleOnlyNumbers(e)} />
             {error && <Typography variant='body2' color='error' className='errorMessageText'>{error}</Typography>}
         </Box>
     )

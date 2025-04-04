@@ -16,11 +16,11 @@ const LoginPage = () => {
         mobile: "",
         gender: ""
     })
-    const [sliderImagePercentage, setSliderImagePercentage] = useState({
-        img1: 0,
-        img2: 0,
-        img3: 0
-    })
+    const imageCount = loginJson.length;
+    const initialState = Object.fromEntries(
+        Array.from({ length: imageCount }, (_, i) => [`img${i + 1}`, 0])
+    )
+    const [sliderImagePercentage, setSliderImagePercentage] = useState(initialState)
     const [otp, setOtp] = useState(Array(4).fill(""))
     const [errorState, setErrorState] = useState("")
     const [loginStep, setLoginStep] = useState(1)
@@ -36,31 +36,22 @@ const LoginPage = () => {
         const interval = setInterval(() => {
             setSliderImagePercentage((prev) => {
                 const updated = { ...prev };
+                const imageKeys = Object.keys(updated);
+                const currentIndex = imageKeys.indexOf(`img${sliderImage}`);
 
-                if (sliderImage === 1) {
-                    if (updated.img1 < 100) {
-                        updated.img1 += 10;
-                    } else {
-                        setSliderImage(2);
-                    }
-                } else if (sliderImage === 2) {
-                    if (updated.img2 < 100) {
-                        updated.img2 += 10;
-                    } else {
-                        setSliderImage(3);
-                    }
-                } else if (sliderImage === 3) {
-                    if (updated.img3 < 100) {
-                        updated.img3 += 10;
-                    } else {
-                        setSliderImage(1);
-                        return { img1: 0, img2: 0, img3: 0 };
+                if (updated[`img${sliderImage}`] < 100) {
+                    updated[`img${sliderImage}`] += 10;
+                } else {
+                    const nextIndex = (currentIndex + 1) % imageKeys.length;
+                    setSliderImage(parseInt(imageKeys[nextIndex].replace('img', ''), 10));
+
+                    if (nextIndex === 0) {
+                        return Object.fromEntries(imageKeys.map((key) => [key, 0]));
                     }
                 }
                 return updated;
             });
         }, 500);
-
         return () => clearInterval(interval);
     }, [sliderImage]);
 
@@ -141,23 +132,23 @@ const LoginPage = () => {
                             loginJson.length > 0 && loginJson.map((items, i) => {
                                 return (
                                     <Box key={i}>
-                                        {items.id === sliderImage &&
-                                            <Box className="login_slider_images">
-                                                    <Image unoptimized src={items.image} alt="Image" height={500} width={500} />
-                                            </Box>
-                                        }
-                                        <Box className="slider_shadow_effect"></Box>
+                                        <Box className={`login_slider_images ${items.id === sliderImage ? 'active' : ''}`}>
+                                            <Image unoptimized src={items.image} alt="Image" height={500} width={500} />
+                                        </Box>
+                                        <Box className="slider_shadow_effect" />
                                     </Box>
                                 )
                             })
                         }
                         {
-                            loginStep !== 1 && <Box className="login_back_step_section" onClick={() => {
-                                setLoginStep(loginStep - 1)
-                                setErrorState("")
-                            }}>
-                                <SvgIcon id={"down-arrow"} />
-                            </Box>
+                            loginStep !== 1 && (
+                                <Box className="login_back_step_section" onClick={() => {
+                                    setLoginStep(loginStep - 1);
+                                    setErrorState("");
+                                }}>
+                                    <SvgIcon id={"down-arrow"} />
+                                </Box>
+                            )
                         }
                     </Box>
 

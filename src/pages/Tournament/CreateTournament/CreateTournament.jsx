@@ -5,13 +5,13 @@ import Avatar from "@/components/common/commonUi/Avtar/Avtar";
 import CustomeInput from "@/components/common/commonUi/CustomeInput";
 import CustomeTags from "@/components/common/commonUi/CustomeTags";
 import { TornamentExtraForm, TornamentForm } from "@/components/common/json/TornamentForm";
-import { createTornament, editTournament } from "@/redux/slices/tournamentSlice";
+import { createTornament, editTournament, tournamentState } from "@/redux/slices/tournamentSlice";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { Box, Button, Checkbox, FormControlLabel, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uploadTournamentFile } from "../../../components/common/uploadFileApis";
 import './CreateTournament.css';
 
@@ -103,6 +103,7 @@ const CreateTournament = ({ tournamentData }) => {
     const dispatch = useDispatch();
     const router = useRouter()
     const sm = useMediaQuery('(max-width: 380px)')
+    const tournament_data = useSelector(tournamentState)
 
     useEffect(() => {
         if (tournamentData !== undefined) {
@@ -389,7 +390,7 @@ const CreateTournament = ({ tournamentData }) => {
                     setErrorMessage("Failed to register the tournament. Please try again.");
                 }
             } else {
-                let Id = generateNumberId();
+                let Id = generateNumberId(tournament_data?.data);
                 const res = await uploadTournamentFile({
                     tournament_banner: createTornaments?.tournament_banner || null,
                     tournament_image: createTornaments?.tournament_image || null,

@@ -188,7 +188,7 @@ const Team = ({ tournamentData = null, type, teamData = null }) => {
                 return;
             }
             setLoading(true)
-            let Id = generateNumberId();
+            let Id = generateNumberId(team_data?.data);
             let tournamentId = tournamentData?.id
             const res = await uploadFile({
                 thumbnail: addTeam.team_logo,

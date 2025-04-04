@@ -6,9 +6,10 @@ import InputSelect from "@/components/common/commonUi/InputSelect";
 import { breakType } from "@/components/common/json/commonJson";
 import ScorePage from "@/pages/Score/Score";
 import {
-    AddCommentary, AddExtra, AddInnings, AddOver, AddSecondInnings, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsWicket, AddSuperOverExtra,
+    AddCommentary, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsWicket, AddSuperOverExtra,
     AddSuperOverInnings, AddSuperOverSecondInnings, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsWicket, AddSuperOverWicket, AddWicket, ChangeInnings,
-    ChangeMatchTarget, ChangePlayer, ChangeStatus, DescreaseMatchOvers, MatchBreakSchedule, matchesState, MatchTerminate, RemoveExtra, RemoveOver, RemoveSecondInningsExtra,
+    ChangeMatchTarget, ChangePlayer, ChangeStatus, DescreaseMatchOvers, MatchBreakSchedule, matchesState, MatchTerminate, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra,
+    RemoveSecondInningsPartnership,
     RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder,
     ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership
 } from "@/redux/slices/matchSlice";
@@ -603,8 +604,10 @@ const ScoreBoard = () => {
         } else if (battinglength + filterBatterWithHurt === initailscore.wicket) {
             setInningsComplete(true)
         } else {
-            setInningsComplete(false)
-            setAllOut(false)
+            if (!oversFinished) {
+                setInningsComplete(false)
+                setAllOut(false)
+            }
         }
     }, [currentMatch])
 
@@ -950,6 +953,28 @@ const ScoreBoard = () => {
             batter2Id: playerselection.nonStriker
         }
 
+        const PartnerShip = {
+            batter1Contribution: partnership.batter1run,
+            batter1balls: partnership.batter1balls,
+            batter1Id: playerselection.striker,
+            batter2Contribution: partnership.batter2run,
+            batter2balls: partnership.batter2balls,
+            batter2Id: playerselection.nonStriker,
+            partnership: initailscore.run,
+        }
+
+        const PartnerShipObject = {
+            id: currentMatch?.id,
+            [innings]: {
+                Partnerships: PartnerShip
+            }
+        }
+
+        if (CurrentInnings === 1 || CurrentInnings === 2) {
+            const actions = CurrentInnings === 1 ? AddPartnership : AddSecondInningsPartnership
+            dispatch(actions(PartnerShipObject))
+        }
+
         const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
         const updatedBatterOrder = [...filterBatterOrder];
         const wasBatterOut = currentMatch?.[innings]?.Wickets?.some(wicket => wicket.BatterId === wicketReason.newBatter && wicket.reason === "Retired Hurt");
@@ -1122,7 +1147,7 @@ const ScoreBoard = () => {
         const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
         const updatedBatterOrder = [...filterBatterOrder];
         const wasBatterOut = currentMatch?.[innings]?.Wickets?.some(wicket => wicket.BatterId === wicketReason.newBatter && wicket.reason === "Retired Hurt");
-        
+
         if (wasBatterOut) {
             const batterIndex = updatedBatterOrder.indexOf(wicketReason.newBatter);
             if (batterIndex !== -1) {
@@ -1165,6 +1190,28 @@ const ScoreBoard = () => {
             batter2balls: getBatterTwoBalls(),
             batter2Id: playerselection.nonStriker
         };
+
+        const PartnerShip = {
+            batter1Contribution: getBatterOneRuns(),
+            batter1balls: getBatterOneBalls(),
+            batter1Id: playerselection.striker,
+            batter2Contribution: getBatterTwoRuns(),
+            batter2balls: getBatterTwoBalls(),
+            batter2Id: playerselection.nonStriker,
+            partnership: initailscore.run
+        }
+
+        const PartnerShipObject = {
+            id: currentMatch?.id,
+            [innings]: {
+                Partnerships: PartnerShip
+            }
+        }
+
+        if (CurrentInnings === 1 || CurrentInnings === 2) {
+            const actions = CurrentInnings === 1 ? AddPartnership : AddSecondInningsPartnership
+            dispatch(actions(PartnerShipObject))
+        }
 
         if (reason === 'Catch' || reason === "Stumped" || reason === "Run Out") {
             WicketObject.fielder = wicketReason.fielder;
@@ -1316,6 +1363,13 @@ const ScoreBoard = () => {
             setOverFinished(true)
         }
     };
+
+    useEffect(() => {
+        if ((maxOver === ball.overNo + 1) && legalBallCount === 6 && active.active !== true) {
+            setInningsComplete(true)
+            setOverFinished(true)
+        }
+    }, [maxOver, ball, legalBallCount, active])
 
     const addRun = (runs) => {
         if (initailscore.run === 0) {
@@ -2319,7 +2373,8 @@ const ScoreBoard = () => {
                 Completedovers: CurrentInnings === 1 || CurrentInnings === 2 ? [] : undefined,
                 Wickets: [],
                 Extras: [],
-                BattingOrder: []
+                BattingOrder: [],
+                Partnerships: CurrentInnings === 1 || CurrentInnings === 2 ? [] : undefined
             },
             ...currentInning.additionalData
         };
@@ -2648,6 +2703,7 @@ const ScoreBoard = () => {
         const currentInnings = CurrentInnings
         const inningsMap = [matchFirstInnings, matchSecondInnings, matchThirdInnings, matchFourthInnings];
         const wickets = inningsMap[currentInnings - 1]?.Wickets?.slice(-1)[0]
+        const lastpartnership = inningsMap[currentInnings - 1]?.Partnerships?.slice(-1)[0]
         const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
         const updatedBatterOrder = [...filterBatterOrder];
         const wasBatterOut = currentMatch?.[innings]?.Wickets?.some(
@@ -2658,7 +2714,6 @@ const ScoreBoard = () => {
             if (batterIndex !== -1) {
                 updatedBatterOrder.splice(batterIndex, 1);
             }
-            
         }
         setBattingOrder(updatedBatterOrder);
         const createNewBatterObj = {
@@ -2668,7 +2723,12 @@ const ScoreBoard = () => {
             }
         };
         const Batteraction = CurrentInnings === 3 ? ReplaceSuperOverBattingOrder : CurrentInnings === 2 ? ReplaceSecondInningsBattingOrder : CurrentInnings === 1 ? ReplaceBattingOrder : ReplaceSuperOverSecondInningsBattingOrder;
-
+        const partnershipAction = CurrentInnings === 1 ? RemovePartnership : RemoveSecondInningsPartnership
+        const partnerShipObj = {
+            id: currentMatch?.id,
+            batter1Id: lastpartnership?.batter1Id || "",
+            batter2Id: lastpartnership?.batter2Id || ""
+        }
         const action = CurrentInnings === 3 ? RemoveSuperOverWicket : CurrentInnings === 2 ? RemoveSecondInningsWicket : CurrentInnings === 1 ? RemoveWicket : RemoveSuperOverSecondInningsWicket;
         const ExtraRemoveAction = CurrentInnings === 3 ? RemoveSuperOverExtra : CurrentInnings === 2 ? RemoveSecondInningsExtra : CurrentInnings === 1 ? RemoveExtra : RemoveSuperOverSecondInningsExtra;
         for (let i = newBallScores.length - 1; i >= 0; i--) {
@@ -2755,6 +2815,9 @@ const ScoreBoard = () => {
                         };
                         await dispatch(Batteraction(createNewBatterObj));
                         await dispatch(action(createNewObj));
+                        if (CurrentInnings === 1 || CurrentInnings === 2) {
+                            await dispatch(partnershipAction(partnerShipObj))
+                        }
                     } else if ((lastScore.includes('W+') || lastScore.includes('W')) && wickets?.reason === 'Run Out' && !lastScore.includes('WD+W') && !lastScore.includes('NB+W')) {
                         const runs = runoutValues;
                         setInitialscore(prev => ({ ...prev, wicket: prev.wicket - 1, run: prev.run - runs }));
@@ -2802,6 +2865,9 @@ const ScoreBoard = () => {
                         };
                         await dispatch(Batteraction(createNewBatterObj));
                         await dispatch(action(createNewObj));
+                        if (CurrentInnings === 1 || CurrentInnings === 2) {
+                            await dispatch(partnershipAction(partnerShipObj))
+                        }
                     } else if (lastScore.includes('WD+W') && (wickets?.reason === 'Run Out' || wickets?.reason === "Stumped")) {
                         const runs = wideRunoutValues + 1;
                         setLength(prevLength => prevLength - 1);
@@ -2841,6 +2907,9 @@ const ScoreBoard = () => {
                         await dispatch(Batteraction(createNewBatterObj));
                         await dispatch(action(createNewObj));
                         await dispatch(ExtraRemoveAction({ id: currentMatch?.id }))
+                        if (CurrentInnings === 1 || CurrentInnings === 2) {
+                            await dispatch(partnershipAction(partnerShipObj))
+                        }
                     } else if (lastScore.includes('NB+W') && wickets?.reason === 'Run Out') {
                         const runs = noballRunoutValues;
                         const batterruns = noballBatterRuns
@@ -2889,6 +2958,9 @@ const ScoreBoard = () => {
                         await dispatch(Batteraction(createNewBatterObj));
                         await dispatch(action(createNewObj));
                         await dispatch(ExtraRemoveAction({ id: currentMatch?.id }))
+                        if (CurrentInnings === 1 || CurrentInnings === 2) {
+                            await dispatch(partnershipAction(partnerShipObj))
+                        }
                     }
                     setBall(prev => ({ ...prev, ballNo: prev.ballNo - 1 }));
 

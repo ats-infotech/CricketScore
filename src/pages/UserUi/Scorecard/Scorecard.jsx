@@ -131,7 +131,7 @@ const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonst
                                                             case "LBW":
                                                                 return `lbw b ${bowler}`;
                                                             case "Catch":
-                                                                return `c ${fielderName} b ${bowler}`;
+                                                                return `${fielderName === bowler ? `c & b ${bowler}` : `c ${fielderName} b ${bowler}`}`;
                                                             case "Stumped":
                                                                 return `st ${fielderName} b ${bowler}`;
                                                             case "Run Out":
@@ -421,6 +421,8 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     useEffect(() => {
         if (teamRef.current) {
             teamRef.current.scrollTop = 0;
+            setShowAllBatter(false)
+            setShowAllBowler(false)
         }
     }, [currentTeam]);
 

@@ -4,9 +4,15 @@ export const generateUniqueId = () => {
     return Math.random().toString(36).substr(2, 9);
 };
 
-export const generateNumberId = () => {
-    const randomNumber = Math.floor(Math.random() * 10000);
-    return randomNumber.toString().padStart(4, '0');
+export const generateNumberId = (existingData = []) => {
+    const existingIds = new Set(existingData?.map(data => data.id)); 
+    let newId;
+
+    do {
+        newId = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    } while (existingIds.has(newId));
+
+    return newId;
 };
 
 export const CheckTournamentIsRunning = (startDate, endDate) => {

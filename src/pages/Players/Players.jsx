@@ -10,12 +10,12 @@ import Loader from "@/components/common/commonUi/Loader";
 import MessageModal from "@/components/common/commonUi/Modal/MessageModal";
 import SectionBox from "@/components/common/commonUi/SectionBox/SectionBox";
 import { uploadPlayerFile } from "@/components/common/uploadFileApis";
-import { createPlayerData, deletePlayerData, updatePlayerData } from "@/redux/slices/playersSlice";
+import { createPlayerData, deletePlayerData, playersState, updatePlayerData } from "@/redux/slices/playersSlice";
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Typography } from "@mui/material";
 import { useQRCode } from "next-qrcode";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PlayerSelection from "../PlayerSelection/StrikePlayerSection";
 import './Players.css';
 
@@ -53,6 +53,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
     const [processing, setProcessing] = useState(false);
     const fileInputRef = useRef([]);
     const dispatch = useDispatch();
+    const player_data = useSelector(playersState)
     const { Canvas } = useQRCode();
 
     const handleModalClose = () => {
@@ -325,7 +326,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
             return {
                 tournamentId: teamdata.tournamentId,
                 teamId: teamdata.id,
-                id: updatePlayer ? isUpdatePlayerData?.id : generateNumberId(),
+                id: updatePlayer ? isUpdatePlayerData?.id : generateNumberId(player_data?.data),
                 playerName,
                 playerContact,
                 playerColor,

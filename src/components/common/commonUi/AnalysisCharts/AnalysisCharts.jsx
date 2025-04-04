@@ -1,6 +1,7 @@
 import { Box, Typography, Select, MenuItem } from '@mui/material';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, } from 'recharts';
 import './AnalysisCharts.css'
+import { useMemo } from "react";
 
 // Top Section contains title and Select for all Graphs
 const TopSection = ({ value, onChange, title, team1, team2, type }) => {
@@ -38,21 +39,21 @@ const FilterSelect = ({ value, onChange, team1, team2, type }) => {
 }
 
 // This Wicket Label is for Manhattan graph
-const CustomWicketLabel = ({ x, y, value, width }) => {
+const CustomWicketLabel = ({ x, y, value, height }) => {
     if (value > 0) {
         return (
             <g>
                 {Array.from({ length: value }).map((_, i) => (
                     <g key={i}>
                         <circle
-                            cx={x + width + 10 + i * (12 + 5)}
-                            cy={y + 7}
+                            cx={x + 7}
+                            cy={y - 10 - i * (12 + 5)}
                             r={8}
                             fill="#ff4d4d"
                         />
                         <text
-                            x={x + width + 10 + i * (12 + 5)}
-                            y={y + 10}
+                            x={x + 7}
+                            y={y - 10 - i * (12 + 5) + 3}
                             fill="#fff"
                             fontSize={8}
                             fontWeight="bold"
@@ -156,105 +157,111 @@ const PartnershipCard = ({ data, playerdata }) => {
     );
 };
 
-// BarChart
-export const AnalysisBarChart = ({ team1, team2, filter, handleChange, filteredData, inningsOneLabel, inningsTwoLabel, title, yaxisdatakey,
+// bar chart
+export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inningsOneLabel, inningsTwoLabel, title, yaxisdatakey,
     yaxislabel, xaxislabel, bar1datakey, bar2datakey, bar1wicketslabel, bar2wicketslabel }) => {
+    const isTypeOfRunsGraph = title === "Types of Runs" ? true : false
+    const chartWidth = useMemo(() => {
+        const minWidthPerData = isTypeOfRunsGraph ? 2 : 40;
+        return Math.max(data.length * minWidthPerData, 350);
+    }, [data]);
 
-    const dynamicHeight = Math.max(300, filteredData.length * 30);
     return (
         <>
             <TopSection team1={team1} team2={team2} value={filter} onChange={handleChange} title={title} />
-            <ResponsiveContainer className="barchart_container" height={dynamicHeight} width="90%" style={{ paddingBottom: 15 }}>
-                <BarChart
-                    data={filteredData}
-                    layout="vertical"
-                    margin={{ top: 20, right: 30, left: 30, bottom: 5 }}
-                >
-                    <Legend verticalAlign="top" align="center" height={36} />
-                    <YAxis
-                        dataKey={yaxisdatakey}
-                        type="category"
-                        tickFormatter={title === "Types of Runs" ? (value) => `${value}s` : (value) => `${value}`}
-                        width={40}
-                        label={{
-                            value: yaxislabel,
-                            angle: -90,
-                            position: 'insideLeft',
-                        }}
-                    />
-                    <XAxis
-                        type="number"
-                        label={{
-                            value: xaxislabel,
-                            position: 'insideBottom',
-                            offset: -5,
-                        }}
-                    />
-                    {title !== "Types of Runs" ? <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} /> : <Tooltip cursor={{ fill: 'transparent' }} />}
+            <Box className="bar_chart_container">
+                <Box sx={{ width: chartWidth }}>
+                    <ResponsiveContainer width="100%" height={400}>
+                        {/* for manhattan horizontal layout is used and for types of runs vertical layout is used */}
+                        <BarChart data={data} layout={!isTypeOfRunsGraph ? "horizontal" : 'vertical'} margin={{ top: 20, right: 10, left: 0, bottom: 5 }}>
+                            <Legend verticalAlign="top" align="center" height={36} />
+                            {/* all are not given in one condition as it will not show up if we close in a div or fragment */}
 
-                    {(filter === 'Both' || filter === 'Team1') && (
-                        <Bar
-                            dataKey={bar1datakey}
-                            fill="var(--light-green)"
-                            name={inningsOneLabel}
-                            barSize={15}
-                        >
-                            {title !== "Types of Runs" && <LabelList
-                                dataKey={bar1wicketslabel}
-                                position="right"
-                                content={(props) => <CustomWicketLabel {...props} />}
-                            />}
-                        </Bar>
-                    )}
+                            {/* x-axis data for manhattan chart */}
+                            {!isTypeOfRunsGraph && <XAxis dataKey={yaxisdatakey} type="category" tickFormatter={(value) => `${value}`}
+                                label={{ value: yaxislabel, position: "insideBottom", offset: -5 }} />}
+                            {/* y-axis data for manhattan chart */}
+                            {!isTypeOfRunsGraph && <YAxis type="number" label={{ value: xaxislabel, angle: -90, position: "insideLeft" }} />}
 
-                    {(filter === 'Both' || filter === 'Team2') && (
-                        <Bar
-                            dataKey={bar2datakey}
-                            fill="var(--yellow)"
-                            name={inningsTwoLabel}
-                            barSize={15}
-                        >
-                            {title !== "Types of Runs" && <LabelList
-                                dataKey={bar2wicketslabel}
-                                position="right"
-                                content={(props) => <CustomWicketLabel {...props} />}
-                            />}
-                        </Bar>
-                    )}
-                </BarChart>
-            </ResponsiveContainer>
+                            {/* x-axis data for types of runs chart */}
+                            {isTypeOfRunsGraph && <XAxis type="number" label={{ value: xaxislabel, position: 'insideBottom', offset: -5 }} />}
+                            {/* y-axis data for types of runs chart */}
+                            {isTypeOfRunsGraph && <YAxis dataKey={yaxisdatakey} type="category" tickFormatter={(value) => `${value}s`} width={40}
+                                label={{ value: yaxislabel, angle: -90, position: 'insideLeft' }} />}
+
+                            {!isTypeOfRunsGraph ? <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} /> : <Tooltip cursor={{ fill: 'transparent' }} />}
+
+                            {(filter === "Both" || filter === "Team1") && (
+                                <Bar dataKey={bar1datakey} fill="var(--light-green)" name={inningsOneLabel} barSize={15}>
+                                    {!isTypeOfRunsGraph && <LabelList dataKey={bar1wicketslabel} position="right" content={(props) => <CustomWicketLabel {...props} />} />}
+                                </Bar>
+                            )}
+                            {(filter === "Both" || filter === "Team2") && (
+                                <Bar dataKey={bar2datakey} fill="var(--yellow)" name={inningsTwoLabel} barSize={15}>
+                                    {!isTypeOfRunsGraph && <LabelList dataKey={bar2wicketslabel} position="right" content={(props) => <CustomWicketLabel {...props} />} />}
+                                </Bar>
+                            )}
+                        </BarChart>
+                    </ResponsiveContainer>
+                </Box>
+            </Box>
         </>
     );
 };
 
 // Line Chart
 export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team1dataKey, team2dataKey, filter, TeamOne, TeamTwo, onChange, title, value }) => {
+    const chartWidth = useMemo(() => {
+        const minWidthPerData = 30;
+        return Math.max(data.length * minWidthPerData, 350);
+    }, [data]);
+
     return (
         <>
             <TopSection team1={TeamOne} team2={TeamTwo} value={value} onChange={onChange} title={title} />
-            <ResponsiveContainer className="runrate_chart_container" width="90%" style={{ paddingBlock: 20 }}>
-                <LineChart data={data}>
-                    <XAxis dataKey="over" label={{ value: "OVERS", position: "insideBottom", offset: -5 }} padding={{ left: 10, right: 10 }} allowDuplicatedCategory={false} />
-                    <YAxis domain={[0, 'auto']} label={{ value: "RUNS", angle: -90, position: "insideLeft", offset: 15 }} />
-                    <Tooltip />
-                    <Legend verticalAlign="top" align="center" wrapperStyle={{ top: 0 }} />
-                    {(filter === "Both" || filter === "Team1") &&
-                        <Line fill="var(--light-green)" type="monotone" dataKey={team1dataKey} strokeWidth={2} name={inningsOneLabel} stroke="var(--light-green)" connectNulls />
-                    }
-                    {(filter === "Both" || filter === "Team2") &&
-                        <Line fill="var(--yellow)" type="monotone" dataKey={team2dataKey} strokeWidth={2} name={inningsTwoLabel} stroke="var(--yellow)" connectNulls />
-                    }
-                </LineChart>
-            </ResponsiveContainer>
+            <Box className="line_chart_container">
+                <Box sx={{ width: chartWidth }}>
+                    <ResponsiveContainer width="100%" height={400}>
+                        <LineChart data={data} width={chartWidth} margin={{ left: -10, bottom: 15 }} >
+
+                            <XAxis dataKey="over" label={{ value: "OVERS", position: "insideBottom", offset: -10 }} padding={{ left: 10, right: 10 }} allowDuplicatedCategory={false} />
+
+                            <YAxis domain={[0, "auto"]} label={{ value: "RUNS", angle: -90, position: "insideLeft", offset: 15 }} />
+
+                            <Tooltip />
+
+                            <Legend verticalAlign="top" align="center" wrapperStyle={{ top: 0 }} />
+
+                            {(filter === "Both" || filter === "Team1") && (
+                                <Line fill="var(--light-green)" type="monotone" dataKey={team1dataKey} strokeWidth={2} name={inningsOneLabel} stroke="var(--light-green)" connectNulls />
+                            )}
+                            {(filter === "Both" || filter === "Team2") && (
+                                <Line fill="var(--yellow)" type="monotone" dataKey={team2dataKey} strokeWidth={2} name={inningsTwoLabel} stroke="var(--yellow)" connectNulls />
+                            )}
+
+                        </LineChart>
+                    </ResponsiveContainer>
+                </Box>
+            </Box>
         </>
-    )
-}
+    );
+};
 
 // Pie Chart
-export const AnalysisPieChart = ({ team1, team2, filter, topsectionvalue, onChange, title, data, inningsOnePieData, inningsTwoPieData }) => {
+export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data }) => {
+    const colorMap = {
+        'LBW': 'var(--light-green)',
+        'Stumping': 'var(--purple)',
+        'Catches': 'var(--chart-blue)',
+        'Run Out': 'var(--orange-red)',
+        'Bowled': 'var(--yellow)',
+        'Hit Wicket': 'var(--pink)',
+        'Retired Hurt': 'var(--coral)',
+    };
+
     return (
         <>
-            <TopSection team1={team1} team2={team2} value={topsectionvalue} onChange={onChange} title={title} />
+            <TopSection team1={team1} team2={team2} value={filter} onChange={onChange} title={title} />
             <ResponsiveContainer className="pie_chart_container" width="90%" height={300}>
                 <PieChart>
                     <Legend
@@ -272,20 +279,15 @@ export const AnalysisPieChart = ({ team1, team2, filter, topsectionvalue, onChan
                         cy="50%"
                         innerRadius={60}
                         outerRadius={100}
-                        fill="#8884d8"
                         labelLine={false}
                         label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
                             const RADIAN = Math.PI / 180;
                             const labelRadius = innerRadius + (outerRadius - innerRadius) * 0.5;
                             const x = cx + labelRadius * Math.cos(-midAngle * RADIAN);
                             const y = cy + labelRadius * Math.sin(-midAngle * RADIAN);
-
-                            const fillColor =
-                                filter === 'Team1'
-                                    ? inningsOnePieData[index]?.color
-                                    : filter === 'Team2'
-                                        ? inningsTwoPieData[index]?.color
-                                        : inningsOnePieData.concat(inningsTwoPieData)[index]?.color;
+                            const item = data[index];
+                            const name = item?.name;
+                            const fillColor = colorMap[name] || 'grey';
 
                             return (
                                 <>
@@ -305,15 +307,10 @@ export const AnalysisPieChart = ({ team1, team2, filter, topsectionvalue, onChan
                             );
                         }}
                     >
-                        {(
-                            filter === 'Team1'
-                                ? inningsOnePieData
-                                : filter === 'Team2'
-                                    ? inningsTwoPieData
-                                    : inningsOnePieData.concat(inningsTwoPieData)
-                        ).map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
+                        {data.map((entry, index) => {
+                            const fillColor = colorMap[entry.name] || 'gray';
+                            return <Cell key={`cell-${index}`} fill={fillColor} />;
+                        })}
                     </Pie>
                 </PieChart>
             </ResponsiveContainer>

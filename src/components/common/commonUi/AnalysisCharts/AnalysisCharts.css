@@ -17,9 +17,29 @@
     margin: 8px auto 0px;
 }
 
-.barchart_container,
-.pie_chart_container,
-.runrate_chart_container {
+.bar_chart_container, .line_chart_container{
+    width: 90%;
+    overflow-x: auto;
+    scrollbar-color: var(--primary-color) var(--text-white);
+    scrollbar-width: thin;
+    margin: 20px auto 30px;
+    background-color: var(--text-white);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.bar_chart_container::-webkit-scrollbar-thumb,
+.line_chart_container::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+
+.bar_chart_container::-webkit-scrollbar-track,
+.line_chart_container::-webkit-scrollbar-track {
+  background: var(--text-white);
+}
+
+.pie_chart_container {
     margin: 20px auto 30px;
     padding: 10px 0px;
     border-radius: 15px;

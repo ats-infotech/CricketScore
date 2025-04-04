@@ -200,6 +200,33 @@ const matchSlice = createSlice({
                 } : item
             );
         },
+        AddPartnership: (state, action) => {
+            const { id, firstInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    firstInnings: {
+                        ...item.firstInnings,
+                        Partnerships: [
+                            ...(item.firstInnings.Partnerships || []),
+                            firstInnings.Partnerships,
+                        ]
+                    }
+                } : item
+            );
+        },
+        RemovePartnership: (state, action) => {
+            const { id, batter1Id, batter2Id } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    firstInnings: {
+                        ...item.firstInnings,
+                        Partnerships: item.firstInnings.Partnerships.filter(partnership => !(partnership.batter1Id === batter1Id && partnership.batter2Id === batter2Id))
+                    }
+                } : item
+            );
+        },
         RemoveWicket: (state, action) => {
             const { id, BatterId } = action.payload;
             state.data = state.data.map((item) =>
@@ -304,6 +331,33 @@ const matchSlice = createSlice({
                     secondInnings: {
                         ...item.secondInnings,
                         Completedovers: item.secondInnings.Completedovers.filter((_, index, arr) => index < arr.length - 1)
+                    }
+                } : item
+            );
+        },
+        AddSecondInningsPartnership: (state, action) => {
+            const { id, secondInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    secondInnings: {
+                        ...item.secondInnings,
+                        Partnerships: [
+                            ...(item.secondInnings.Partnerships || []),
+                            secondInnings.Partnerships,
+                        ]
+                    }
+                } : item
+            );
+        },
+        RemoveSecondInningsPartnership: (state, action) => {
+            const { id, batter1Id, batter2Id } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    secondInnings: {
+                        ...item.secondInnings,
+                        Partnerships: item.secondInnings.Partnerships.filter(partnership => !(partnership.batter1Id === batter1Id && partnership.batter2Id === batter2Id))
                     }
                 } : item
             );
@@ -617,6 +671,7 @@ export const { createMatchSchedule, editMatchSchedule, deleteMatchSchedule, dele
     RemoveSecondInningsExtra, RemoveSecondInningsWicket, AddSuperOverInnings, AddSuperOverSecondInnings, RemoveSuperOverWicket, ChangeStatus, AddSuperOverWicket, AddSuperOverExtra, DescreaseMatchOvers,
     RemoveSuperOverExtra, AddSuperOverSecondInningsWicket, AddSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, AddCommentary, RemoveOver,
     ReplaceBattingOrder, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, AddSuperOverCompletedOver, AddSuperOverSecondInningsCompletedOver,
-    RemoveSuperOverCompletedOver, RemoveSuperOverSecondInningsCompletedOver, MatchBreakSchedule, ChangeOverPerDay, AddDeclareStatus, AddSecondInningsDeclareStatus, AddSuperOverDeclareStatus } = matchSlice.actions
+    RemoveSuperOverCompletedOver, RemoveSuperOverSecondInningsCompletedOver, MatchBreakSchedule, ChangeOverPerDay, AddDeclareStatus, AddSecondInningsDeclareStatus, AddSuperOverDeclareStatus,
+    AddPartnership, AddSecondInningsPartnership, RemovePartnership, RemoveSecondInningsPartnership } = matchSlice.actions
 export const matchesState = (state) => state.matches
 export default matchSlice.reducer

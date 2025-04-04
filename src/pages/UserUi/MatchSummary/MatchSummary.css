@@ -85,3 +85,9 @@
     font-family: var(--primary-font) !important;
     margin: 5px 0 !important;
 }
+
+@media screen and (max-width: 350px) {
+    .info {
+        font-size: var(--ex-small) !important;
+    }
+}

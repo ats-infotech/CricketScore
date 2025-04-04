@@ -4,7 +4,7 @@
 
 .overflow_inputs {
     /* height: 100%; */
-    height: calc(100vh - 312px);
+    height: calc(100vh - 280px);
     overflow-y: auto;
     scrollbar-color: transparent transparent;
     margin: 0px auto;
@@ -94,7 +94,7 @@
 
 @media screen and (max-width:380px) {
     .team_form {
-        padding: 30px 20px;
+        padding: 20px 20px;
     }
 }
 @media screen and (max-width:360px) {
