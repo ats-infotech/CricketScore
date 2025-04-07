@@ -94,7 +94,9 @@ const Leaderboard = ({ playerData, teamData }) => {
                                     let bowlingwickets = items.bowlingwickets
                                     let bowlingruns = items.bowlingruns
                                     let bowlingball = items.bowlingballs
-                                    let bowlingovers = bowlingball / 6
+                                    let overs = Math.floor(bowlingball / 6);
+                                    let bowls = bowlingball % 6;
+                                    let bowlingovers = `${overs}.${bowls}`;
                                     let bowlingaverage = bowlingruns > 0 && bowlingwickets === 0 ? bowlingruns : bowlingruns > 0 && bowlingwickets > 0 ? Math.floor(bowlingruns / bowlingwickets) : 0
                                     let ecostring = bowlingruns > 0 && bowlingball > 0 ? bowlingruns / bowlingovers : 0
                                     let eco = ecostring.toFixed(1)

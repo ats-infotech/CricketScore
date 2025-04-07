@@ -124,21 +124,31 @@
 
 .TeamScoreBox .team_details .team_name {
     font-size: var(--ex-small);
-    font-weight: 700;
+    font-weight: 500 !important;
     color: var(--text-white);
     text-align: center;
     text-transform: capitalize;
 }
 
+.TeamScoreBox .team_details .team_name.winningTeam {
+    color: var(--yellow) !important;
+    font-weight: 700 !important;
+}
+
 .TeamScoreBox .team_details .team_score {
     font-size: var(--small);
-    font-weight: 700;
+    font-weight: 500 !important;
     color: var(--text-white);
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 8px;
     justify-content: center;
+}
+
+.TeamScoreBox .team_details .team_score.winningTeam {
+    font-weight: 600 !important;
+    color: var(--yellow);
 }
 
 .TeamScoreBox .team_details .team_score .runs {

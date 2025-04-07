@@ -3,8 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList, ResponsiveCont
 import './AnalysisCharts.css'
 import { useMemo } from "react";
 
-// Top Section contains title and Select for all Graphs
-const TopSection = ({ value, onChange, title, team1, team2, type }) => {
+// Top Section contains title and Select for Graphs
+const TopSection = ({ value, onChange, title, team1, team2, type, isTestMatch }) => {
     return (
         <>
             <Box className="chart_title">
@@ -12,27 +12,38 @@ const TopSection = ({ value, onChange, title, team1, team2, type }) => {
                 <Box className="analysis-gradient-line"></Box>
             </Box>
 
-            <FilterSelect value={value} onChange={onChange} team1={team1} team2={team2} type={type} />
+            {
+                isTestMatch ? <TestFilterSelect value={value} onChange={onChange} team1={team1} team2={team2} type={type} />
+                    : <FilterSelect value={value} onChange={onChange} team1={team1} team2={team2} type={type} />
+            }
         </>
     )
 }
 
-// common select for all graphs
+// limited over Match select
 const FilterSelect = ({ value, onChange, team1, team2, type }) => {
     return (
         <Box className="filter_section">
-            <Typography variant="body2">
-                Filter by Team:
-            </Typography>
-            <Select
-                value={value}
-                onChange={onChange}
-                size="small"
-                variant="outlined"
-            >
+            <Select value={value} onChange={onChange} size="small" variant="outlined">
                 {type !== "partnerships" && <MenuItem value="Both">Both Teams</MenuItem>}
                 <MenuItem value="Team1">{team1?.team_name || 'Team 1'}</MenuItem>
                 <MenuItem value="Team2">{team2?.team_name || 'Team 2'}</MenuItem>
+            </Select>
+        </Box>
+    )
+}
+
+// Test Match select
+const TestFilterSelect = ({ value, onChange, team1, team2, type }) => {
+    return (
+        <Box className="filter_section">
+            <Select value={value} onChange={onChange} size="small" variant="outlined" >
+                {type !== "partnerships" && <MenuItem value="Both 1">Both Teams 1st innnings</MenuItem>}
+                {type !== "partnerships" && <MenuItem value="Both 2">Both Teams 2nd innnings</MenuItem>}
+                <MenuItem value="Team1firstinning">{team1?.team_name || 'Team 1'} 1st inning</MenuItem>
+                <MenuItem value="Team1secondinning">{team1?.team_name || 'Team 1'} 2nd inning</MenuItem>
+                <MenuItem value="Team2firstinning">{team2?.team_name || 'Team 2'} 1st inning</MenuItem>
+                <MenuItem value="Team2secondinning">{team2?.team_name || 'Team 2'} 2nd inning</MenuItem>
             </Select>
         </Box>
     )
@@ -159,7 +170,7 @@ const PartnershipCard = ({ data, playerdata }) => {
 
 // bar chart
 export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inningsOneLabel, inningsTwoLabel, title, yaxisdatakey,
-    yaxislabel, xaxislabel, bar1datakey, bar2datakey, bar1wicketslabel, bar2wicketslabel }) => {
+    yaxislabel, xaxislabel, bar1datakey, bar2datakey, bar1wicketslabel, bar2wicketslabel, isTestMatch }) => {
     const isTypeOfRunsGraph = title === "Types of Runs" ? true : false
     const chartWidth = useMemo(() => {
         const minWidthPerData = isTypeOfRunsGraph ? 2 : 40;
@@ -168,7 +179,7 @@ export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inn
 
     return (
         <>
-            <TopSection team1={team1} team2={team2} value={filter} onChange={handleChange} title={title} />
+            <TopSection team1={team1} team2={team2} value={filter} onChange={handleChange} title={title} isTestMatch={isTestMatch} />
             <Box className="bar_chart_container">
                 <Box sx={{ width: chartWidth }}>
                     <ResponsiveContainer width="100%" height={400}>
@@ -191,12 +202,12 @@ export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inn
 
                             {!isTypeOfRunsGraph ? <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} /> : <Tooltip cursor={{ fill: 'transparent' }} />}
 
-                            {(filter === "Both" || filter === "Team1") && (
+                            {(filter === "Both" || filter === "Team1" || filter === "Both 1" || filter === "Both 2" || filter === "Team1firstinning" || filter === "Team1secondinning") && (
                                 <Bar dataKey={bar1datakey} fill="var(--light-green)" name={inningsOneLabel} barSize={15}>
                                     {!isTypeOfRunsGraph && <LabelList dataKey={bar1wicketslabel} position="right" content={(props) => <CustomWicketLabel {...props} />} />}
                                 </Bar>
                             )}
-                            {(filter === "Both" || filter === "Team2") && (
+                            {(filter === "Both" || filter === "Team2" || filter === "Both 1" || filter === "Both 2" || filter === "Team2firstinning" || filter === "Team2secondinning") && (
                                 <Bar dataKey={bar2datakey} fill="var(--yellow)" name={inningsTwoLabel} barSize={15}>
                                     {!isTypeOfRunsGraph && <LabelList dataKey={bar2wicketslabel} position="right" content={(props) => <CustomWicketLabel {...props} />} />}
                                 </Bar>
@@ -210,7 +221,7 @@ export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inn
 };
 
 // Line Chart
-export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team1dataKey, team2dataKey, filter, TeamOne, TeamTwo, onChange, title, value }) => {
+export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team1dataKey, team2dataKey, filter, TeamOne, TeamTwo, onChange, title, value, isTestMatch }) => {
     const chartWidth = useMemo(() => {
         const minWidthPerData = 30;
         return Math.max(data.length * minWidthPerData, 350);
@@ -218,7 +229,7 @@ export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team
 
     return (
         <>
-            <TopSection team1={TeamOne} team2={TeamTwo} value={value} onChange={onChange} title={title} />
+            <TopSection team1={TeamOne} team2={TeamTwo} value={value} onChange={onChange} title={title} isTestMatch={isTestMatch} />
             <Box className="line_chart_container">
                 <Box sx={{ width: chartWidth }}>
                     <ResponsiveContainer width="100%" height={400}>
@@ -232,10 +243,11 @@ export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team
 
                             <Legend verticalAlign="top" align="center" wrapperStyle={{ top: 0 }} />
 
-                            {(filter === "Both" || filter === "Team1") && (
+                            {(filter === "Both" || filter === "Team1" || filter === "Both 1" || filter === "Both 2" || filter === "Team1firstinning" || filter === "Team1secondinning") && (
                                 <Line fill="var(--light-green)" type="monotone" dataKey={team1dataKey} strokeWidth={2} name={inningsOneLabel} stroke="var(--light-green)" connectNulls />
                             )}
-                            {(filter === "Both" || filter === "Team2") && (
+
+                            {(filter === "Both" || filter === "Team2" || filter === "Both 1" || filter === "Both 2" || filter === "Team2firstinning" || filter === "Team2secondinning") && (
                                 <Line fill="var(--yellow)" type="monotone" dataKey={team2dataKey} strokeWidth={2} name={inningsTwoLabel} stroke="var(--yellow)" connectNulls />
                             )}
 
@@ -248,7 +260,7 @@ export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team
 };
 
 // Pie Chart
-export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data }) => {
+export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data, isTestMatch }) => {
     const colorMap = {
         'LBW': 'var(--light-green)',
         'Stumping': 'var(--purple)',
@@ -261,7 +273,7 @@ export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data }
 
     return (
         <>
-            <TopSection team1={team1} team2={team2} value={filter} onChange={onChange} title={title} />
+            <TopSection team1={team1} team2={team2} value={filter} onChange={onChange} title={title} isTestMatch={isTestMatch} />
             <ResponsiveContainer className="pie_chart_container" width="90%" height={300}>
                 <PieChart>
                     <Legend
@@ -279,6 +291,7 @@ export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data }
                         cy="50%"
                         innerRadius={60}
                         outerRadius={100}
+                        style={{outline: 'none'}}
                         labelLine={false}
                         label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
                             const RADIAN = Math.PI / 180;
@@ -319,10 +332,10 @@ export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data }
 }
 
 // Partnership Section
-export const AnalysisPartnership = ({ data, playerdata, team1, team2, title, onChange, topsectionvalue }) => {
+export const AnalysisPartnership = ({ data, playerdata, team1, team2, title, onChange, topsectionvalue, isTestMatch }) => {
     return (
         <>
-            <TopSection value={topsectionvalue} onChange={onChange} team1={team1} team2={team2} title={title} type={"partnerships"} />
+            <TopSection value={topsectionvalue} onChange={onChange} team1={team1} team2={team2} title={title} type={"partnerships"} isTestMatch={isTestMatch} />
             <Box sx={{ marginTop: '15px' }} className="partnership_section">
                 {data.map((item, i) => (
                     <PartnershipCard key={i} data={item} playerdata={playerdata} />

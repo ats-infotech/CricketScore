@@ -32,6 +32,8 @@ const Stats = ({ tournamentData }) => {
                 <CommonBox data={getStat('dotballs')} title={'Dot Balls'}/>
                 <CommonBox data={getStat('catches')} title={'Catches'}/>
                 <CommonBox data={getStat('stumpings')} title={'Stumpings'}/>
+                <CommonBox data={((getStat('dotballs')*100)/getStat('balls')).toFixed(2)} title={'DB%'}/>
+                <CommonBox data={((((getStat('fours') * 4)+(getStat('sixes') * 6)) * 100)/getStat('runs')).toFixed(2)} title={'BDRY%'}/>
         </Box>
     )
 }

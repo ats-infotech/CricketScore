@@ -44,8 +44,15 @@ const teamSlice = createSlice({
                         win: (state.data[index].win ?? 0) + (stats.win ?? 0),
                         lose: (state.data[index].lose ?? 0) + (stats.lose ?? 0),
                         tie: (state.data[index].tie ?? 0) + (stats.tie ?? 0),
-                        nrr: (state.data[index].nrr ?? 0) + (stats.nrr ?? 0),
-                        noreason: (state.data[index].noreason ?? 0) + (stats.noreason ?? 0)
+                        // nrr: (state.data[index].nrr ?? 0) + (stats.nrr ?? 0),
+                        wicket: (state.data[index].wicket ?? 0) + (stats.wicket ?? 0),
+                        runs: (state.data[index].runs ?? 0) + (stats.runs ?? 0),
+                        overs: (state.data[index].overs ?? 0) + (stats.overs ?? 0),
+                        balls: (state.data[index].balls ?? 0) + (stats.balls ?? 0),
+                        noresult: (state.data[index].noresult ?? 0) + (stats.noresult ?? 0),
+                        againtsruns: (state.data[index].againtsruns ?? 0) + (stats.againtsruns ?? 0),
+                        againtsballs: (state.data[index].againtsballs ?? 0) + (stats.againtsballs ?? 0),
+                        againtsovers: (state.data[index].againtsovers ?? 0) + (stats.againtsovers ?? 0),
                     };
                 }
             });

@@ -122,7 +122,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
     const team2Color = team2?.team_color
     const isPastTournament = CheckTournamentIsRunning(tData?.tournament_start_date, tData?.tournament_end_date) === 'completed'
     let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false
-    let matchGroups = tData?.status === 4 && isTestMatch ? matchButtonGroups.filter((items) => items?.value !== 'live' && items?.value !== 'analysis') : tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary' && items?.value !== 'analysis') : matchButtonGroups
+    let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary' && items?.value !== 'analysis') : matchButtonGroups
     // let pastMatchGroups = isPastTournament ? buttonGroups.filter((items) => items.value !== 'about') : buttonGroups
     let pastMatchGroups = buttonGroups
     let matchFirstInnings = tData?.firstInnings
@@ -575,7 +575,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
                     <Box>
                         <Box className='tournament_target_section'>
                             {
-                                isTestMatch &&
+                                isTestMatch && tData.status !== 4 &&
                                 <Typography>{isBreakStart ? '' : isStumps ? 'Stumps' : `${team1?.team_name} vs ${team2?.team_name} Test Match ${CurrentRunningDay}`}</Typography>
                             }
                             {

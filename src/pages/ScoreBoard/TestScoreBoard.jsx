@@ -2,7 +2,7 @@
 import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import InputSelect from "@/components/common/commonUi/InputSelect";
-import { AddCommentary, AddDeclareStatus, AddExtra, AddInnings, AddOver, AddSecondInnings, AddSecondInningsDeclareStatus, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsWicket, AddSuperOverCompletedOver, AddSuperOverDeclareStatus, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverSecondInnings, AddSuperOverSecondInningsCompletedOver, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsWicket, AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchOver, ChangeOverPerDay, ChangePlayer, ChangeStatus, MatchBreakSchedule, matchesState, RemoveExtra, RemoveOver, RemoveSecondInningsExtra, RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder } from "@/redux/slices/matchSlice";
+import { AddCommentary, AddDeclareStatus, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsDeclareStatus, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsWicket, AddSuperOverCompletedOver, AddSuperOverDeclareStatus, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverPartnership, AddSuperOverSecondInnings, AddSuperOverSecondInningsCompletedOver, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsPartnership, AddSuperOverSecondInningsWicket, AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchOver, ChangeOverPerDay, ChangePlayer, ChangeStatus, MatchBreakSchedule, matchesState, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverPartnership, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsPartnership, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership } from "@/redux/slices/matchSlice";
 import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
 import { updateTournamentStats } from "@/redux/slices/tournamentSlice";
@@ -535,6 +535,12 @@ const TestScoreBoard = () => {
     const dayNumber = CurrentRunningDay?.split(" ")[1];
     const [Team1Data, setTeam1Data] = useState([])
     const [Team2Data, setTeam2Data] = useState([])
+    const [partnership, setPartnerShip] = useState({
+        batter1run: 0,
+        batter1balls: 0,
+        batter2run: 0,
+        batter2balls: 0,
+    })
 
     // Redux Data
     const match_data = useSelector(matchesState)
@@ -987,8 +993,35 @@ const TestScoreBoard = () => {
             six: batter && playerselection.striker === batter ? batterScores.batter1six : batter && playerselection.striker !== batter ? batterScores.batter2six : 0,
             sr: batter && playerselection.striker === batter ? batterScores.batter1sr : batter && playerselection.striker !== batter ? batterScores.batter2sr : 0,
             partnership: initailscore.run,
-            newBatter: wicketReason.newBatter
+            newBatter: wicketReason.newBatter,
+            batter1Contribution: partnership.batter1run,
+            batter1balls: partnership.batter1balls,
+            batter1Id: playerselection.striker,
+            batter2Contribution: partnership.batter2run,
+            batter2balls: partnership.batter2balls,
+            batter2Id: playerselection.nonStriker
         }
+
+        const PartnerShip = {
+            batter1Contribution: partnership.batter1run,
+            batter1balls: partnership.batter1balls,
+            batter1Id: playerselection.striker,
+            batter2Contribution: partnership.batter2run,
+            batter2balls: partnership.batter2balls,
+            batter2Id: playerselection.nonStriker,
+            partnership: initailscore.run,
+        }
+
+        const PartnerShipObject = {
+            id: currentMatch?.id,
+            [innings]: {
+                Partnerships: PartnerShip
+            }
+        }
+
+        const partnershipActions = CurrentInnings === 1 ? AddPartnership : CurrentInnings === 2 ? AddSecondInningsPartnership : CurrentInnings === 3 ? AddSuperOverPartnership
+            : CurrentInnings === 4 ? AddSuperOverSecondInningsPartnership : ''
+        dispatch(partnershipActions(PartnerShipObject))
 
         const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
         const updatedBatterOrder = [...filterBatterOrder];
@@ -1023,6 +1056,13 @@ const TestScoreBoard = () => {
                 Wickets: WicketObject
             }
         };
+
+        setPartnerShip({
+            batter1run: 0,
+            batter1balls: 0,
+            batter2run: 0,
+            batter2balls: 0,
+        })
 
         const action = CurrentInnings === 4 ? AddSuperOverSecondInningsWicket : CurrentInnings === 3 ? AddSuperOverWicket : CurrentInnings === 2 ? AddSecondInningsWicket : AddWicket;
         const actions = CurrentInnings === 3 ? RemoveSuperOverWicket : CurrentInnings === 2 ? RemoveSecondInningsWicket : CurrentInnings === 1 ? RemoveWicket : RemoveSuperOverSecondInningsWicket;
@@ -1083,6 +1123,16 @@ const TestScoreBoard = () => {
             }
         };
 
+        const getBatterOneRuns = () => {
+            if (!batter) return activeStrike === 1 ? partnership.batter1run : partnership.batter1run;
+            return activeStrike === 1 ? partnership.batter1run + parseInt(data) : partnership.batter1run;
+        }
+
+        const getBatterTwoRuns = () => {
+            if (!batter) return activeStrike === 2 ? partnership.batter2run : partnership.batter2run;
+            return activeStrike === 2 ? partnership.batter2run + parseInt(data) : partnership.batter2run;
+        }
+
         const getBalls = () => {
             if (wide === "wide") {
                 return batter && playerselection.striker === batter ? batterScores.batter1balls :
@@ -1094,6 +1144,26 @@ const TestScoreBoard = () => {
                 batter && playerselection.striker !== batter ? batterScores.batter2balls + 1 :
                     activeStrike === 1 ? batterScores.batter1balls + 1 : batterScores.batter2balls + 1;
         };
+
+        const getBatterOneBalls = () => {
+            if (wide === "wide") {
+                return batter && playerselection.striker === batter ? partnership.batter1balls :
+                    activeStrike === 1 ? partnership.batter1balls + 1 : partnership.batter1balls
+            }
+
+            return batter && playerselection.striker === batter ? partnership.batter1balls + 1 :
+                activeStrike === 1 ? partnership.batter1balls + 1 : partnership.batter1balls
+        }
+
+        const getBatterTwoBalls = () => {
+            if (wide === "wide") {
+                return batter && playerselection.nonStriker === batter ? partnership.batter2balls :
+                    activeStrike === 1 ? partnership.batter2balls + 1 : partnership.batter2balls
+            }
+
+            return batter && playerselection.nonStriker === batter ? partnership.batter2balls + 1 :
+                activeStrike === 2 ? partnership.batter2balls + 1 : partnership.batter2balls
+        }
 
         const getDot = () => {
             if (wide === 'wide') {
@@ -1153,8 +1223,35 @@ const TestScoreBoard = () => {
             six: getScore('six'),
             sr: getScore('sr'),
             partnership: initailscore.run,
-            newBatter: wicketReason.newBatter
+            newBatter: wicketReason.newBatter,
+            batter1Contribution: getBatterOneRuns(),
+            batter1balls: getBatterOneBalls(),
+            batter1Id: playerselection.striker,
+            batter2Contribution: getBatterTwoRuns(),
+            batter2balls: getBatterTwoBalls(),
+            batter2Id: playerselection.nonStriker
         };
+
+        const PartnerShip = {
+            batter1Contribution: getBatterOneRuns(),
+            batter1balls: getBatterOneBalls(),
+            batter1Id: playerselection.striker,
+            batter2Contribution: getBatterTwoRuns(),
+            batter2balls: getBatterTwoBalls(),
+            batter2Id: playerselection.nonStriker,
+            partnership: initailscore.run
+        }
+
+        const PartnerShipObject = {
+            id: currentMatch?.id,
+            [innings]: {
+                Partnerships: PartnerShip
+            }
+        }
+
+        const partnershipActions = CurrentInnings === 1 ? AddPartnership : CurrentInnings === 2 ? AddSecondInningsPartnership : CurrentInnings === 3 ? AddSuperOverPartnership
+            : CurrentInnings === 4 ? AddSuperOverSecondInningsPartnership : ''
+        dispatch(partnershipActions(PartnerShipObject))
 
         if (reason === 'Catch' || reason === "Stumped" || reason === "Run Out") {
             WicketObject.fielder = wicketReason.fielder;
@@ -1198,6 +1295,13 @@ const TestScoreBoard = () => {
             BatterId: wicketReason.newBatter
         };
         dispatch(actions(createNewObj));
+
+        setPartnerShip({
+            batter1run: 0,
+            batter1balls: 0,
+            batter2run: 0,
+            batter2balls: 0,
+        })
     }
 
     const handleAllOut = async () => {
@@ -1392,6 +1496,7 @@ const TestScoreBoard = () => {
 
         const id = currentMatch?.tournamentId
         await dispatch(updateTournamentStats({ id, matches }))
+        const isFollow = currentMatch?.followOn === "Follow On" ? true : false
         const Winningpayload = {
             teamId: team1?.id,
             match: 1,
@@ -1399,8 +1504,14 @@ const TestScoreBoard = () => {
             win: 0,
             lose: 0,
             tie: 1,
-            nrr: 0,
-            noreason: 0
+            // nrr: 0,
+            noresult: 0,
+            runs: matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0) || 0,
+            balls: matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0) || 0,
+            overs: matchFirstInnings?.Completedovers?.length + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0) || 0,
+            againtsruns: matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0) || 0,
+            againtsballs: matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0) || 0,
+            againtsovers: matchSecondInnings?.Completedovers?.length + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0) || 0,
         }
         const Lossingpayload = {
             teamId: team2?.id,
@@ -1409,8 +1520,14 @@ const TestScoreBoard = () => {
             win: 0,
             lose: 0,
             tie: 1,
-            nrr: 0,
-            noreason: 0
+            // nrr: 0,
+            noresult: 0,
+            runs: matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0) || 0,
+            balls: matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0) || 0,
+            overs: matchSecondInnings?.Completedovers?.length + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0) || 0,
+            againtsruns: matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0) || 0,
+            againtsballs: matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0) || 0,
+            againtsovers: matchFirstInnings?.Completedovers?.length + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0) || 0,
         }
         const teams = [Winningpayload, Lossingpayload]
         dispatch(updateTeamStats({ teams }));
@@ -1464,6 +1581,11 @@ const TestScoreBoard = () => {
             [`${batter}four`]: prev[`${batter}four`] + fours,
             [`${batter}six`]: prev[`${batter}six`] + sixes,
             [`${batter}sr`]: prev[`${batter}sr`],
+        }));
+        setPartnerShip(prev => ({
+            ...prev,
+            [`${batter}run`]: prev[`${batter}run`] + runs,
+            [`${batter}balls`]: prev[`${batter}balls`] + balls,
         }));
     };
 
@@ -1880,6 +2002,8 @@ const TestScoreBoard = () => {
         const currentOver = currentInnings === 4 ? matchFourthInnings?.Currentover?.[0] : currentInnings === 3 ? matchThirdInnings?.Currentover?.[0] : currentInnings === 2 ? matchSecondInnings?.Currentover?.[0] : currentInnings === 1 ? matchFirstInnings?.Currentover?.[0] : [];
         const completedOver = currentInnings === 3 ? matchThirdInnings?.Completedovers : currentInnings === 2 ? matchSecondInnings?.Completedovers : currentInnings === 1 ? matchFirstInnings?.Completedovers : currentInnings === 4 ? matchFourthInnings?.Completedovers : [];
         const OverPerDayData = currentMatch?.perDayOver
+        const PartnerShip = currentMatch?.partnership || partnership
+
         if (currentInnings !== undefined) {
             if (completedOver && !hasRunRef.current) {
                 setBall((prev) => ({
@@ -1895,6 +2019,15 @@ const TestScoreBoard = () => {
                     day3: OverPerDayData?.day3,
                     day4: OverPerDayData?.day4,
                     day5: OverPerDayData?.day5,
+                })
+            }
+
+            if (!hasRunRef.current && PartnerShip) {
+                setPartnerShip({
+                    batter1run: PartnerShip?.batter1run ?? 0,
+                    batter1balls: PartnerShip?.batter1balls ?? 0,
+                    batter2run: PartnerShip?.batter2run ?? 0,
+                    batter2balls: PartnerShip?.batter2balls ?? 0,
                 })
             }
 
@@ -2017,7 +2150,7 @@ const TestScoreBoard = () => {
             } else if (CurrentInnings === 4 && tossWinner.battingSide === winTeam && winningTeam) {
                 reason = `won the match ${legalBallCount === 6 ? FinalBallShow + 1 : FinalBallShow}.${6 - legalBallCount} Overs left`
             } else if (CurrentInnings === 3 && tossWinner.bowlingSide === winTeam && winningTeam) {
-                reason = `won the match by 1 Innings and ${target.runs}`
+                reason = `won the match by an innings and ${target.runs} runs`
             } else if (CurrentInnings === 4 && target.totalruns > initailscore.run && target.overs === 0 && legalBallCount === 6 && winningTeam) {
                 reason = `Match Draw`
             }
@@ -2156,6 +2289,16 @@ const TestScoreBoard = () => {
             /NB\+W/,
             /\d+NB\+W/
         ];
+        const PartnershipObj = {
+            id: currentMatch?.id,
+            partnership: {
+                batter1run: partnership.batter1run,
+                batter1balls: partnership.batter1balls,
+                batter2run: partnership.batter2run,
+                batter2balls: partnership.batter2balls
+            }
+        }
+        dispatch(UpdatePartnership(PartnershipObj))
         if (!invalidScores.some((pattern) =>
             typeof pattern === 'string'
                 ? pattern === Commentary.score
@@ -2370,15 +2513,6 @@ const TestScoreBoard = () => {
     }
 
     const matchFinished = async () => {
-        const FirstInningslegalBall = matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers?.length - 1]?.legalBall
-        const FirstInningsOver = FirstInningslegalBall === 6 ? matchFirstInnings?.Completedovers?.length : matchFirstInnings?.Completedovers?.length - 1 + (FirstInningslegalBall / 10)
-        const FirstInningsRuns = matchFirstInnings?.Completedovers[matchFirstInnings?.Completedovers.length - 1]?.runs
-        const SecondInningslegalBall = matchSecondInnings?.Completedovers?.[matchSecondInnings?.Completedovers?.length - 1]?.legalBall
-        const SecondInningsOver = SecondInningslegalBall === 6 ? matchSecondInnings?.Completedovers?.length : matchSecondInnings?.Completedovers?.length - 1 + (SecondInningslegalBall / 10)
-        const SecondInningsRuns = matchSecondInnings?.Completedovers[matchSecondInnings?.Completedovers.length - 1]?.runs
-        const battingside = (SecondInningsRuns / SecondInningsOver) - (FirstInningsRuns / FirstInningsOver)
-        const bowlingside = (FirstInningsRuns / FirstInningsOver) - (SecondInningsRuns / SecondInningsOver)
-
         const createStatusNewObj = {
             id: currentMatch?.id,
             status: 4
@@ -2442,8 +2576,10 @@ const TestScoreBoard = () => {
         const id = currentMatch?.tournamentId
         await dispatch(updateTournamentStats({ id, matches }))
 
-        const filterWinningTeam = team1?.team_name === winningTeam
-        const sideWin = winningTeam === tossWinner.battingSide
+        // const filterWinningTeam = team1?.team_name === winningTeam
+        const filterWinningTeam = team1?.id === winningTeam ? true : false
+        const isFollow = currentMatch?.followOn === "Follow On" ? true : false
+        // const sideWin = winningTeam === tossWinner.battingSide
         const Winningpayload = {
             teamId: filterWinningTeam ? team1?.id : team2?.id,
             match: 1,
@@ -2451,8 +2587,20 @@ const TestScoreBoard = () => {
             win: 1,
             lose: 0,
             tie: 0,
-            nrr: sideWin ? battingside : bowlingside,
-            noreason: 0
+            // nrr: sideWin ? battingside : bowlingside,
+            noresult: 0,
+            runs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+                : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
+            balls: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+                : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
+            overs: filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+                : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
+            againtsruns: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+                : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
+            againtsballs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+                : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
+            againtsovers: !filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+                : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
         }
         const Lossingpayload = {
             teamId: !filterWinningTeam ? team1?.id : team2?.id,
@@ -2461,8 +2609,20 @@ const TestScoreBoard = () => {
             win: 0,
             lose: 1,
             tie: 0,
-            nrr: sideWin ? bowlingside : battingside,
-            noreason: 0
+            // nrr: sideWin ? bowlingside : battingside,
+            noresult: 0,
+            runs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+                : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
+            balls: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+                : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
+            overs: !filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+                : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
+            againtsruns: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+                : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
+            againtsballs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+                : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
+            againtsovers: filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+                : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
         }
         const teams = [Winningpayload, Lossingpayload]
         dispatch(updateTeamStats({ teams }));
@@ -2483,8 +2643,26 @@ const TestScoreBoard = () => {
             four: batterStats.four,
             six: batterStats.six,
             sr: batterStats.sr,
-            partnership: batterStats.partnership
+            partnership: batterStats.partnership,
+            newBatter: wicketReason.newBatter,
+            batter1Contribution: partnership.batter1run,
+            batter1balls: partnership.batter1balls,
+            batter1Id: playerselection.striker,
+            batter2Contribution: partnership.batter2run,
+            batter2balls: partnership.batter2balls,
+            batter2Id: playerselection.nonStriker
         });
+
+        const PartnershipObj = {
+            id: currentMatch?.id,
+            partnership: {
+                batter1run: 0,
+                batter1balls: 0,
+                batter2run: 0,
+                batter2balls: 0,
+            }
+        }
+
         const dispatchWicket = async (batterId, batterStats) => {
             const notOutObject = createNotOutObject(batterId, batterStats);
             const createNewObj = {
@@ -2517,6 +2695,7 @@ const TestScoreBoard = () => {
                 partnership: initailscore.run
             });
         }
+        dispatch(UpdatePartnership(PartnershipObj))
     }
 
     const handleInningsChange = async () => {
@@ -2578,6 +2757,11 @@ const TestScoreBoard = () => {
                     ? prev[`${batterKey}${isBoundary ? (lastScore === '4' ? 'four' : 'six') : 'dot'}`] - 1
                     : prev[`${batterKey}${isDotBall ? 'dot' : ''}`] - 1
         }));
+        setPartnerShip(prev => ({
+            ...prev,
+            [`${batterKey}run`]: noball ? prev[`${batterKey}run`] - noballRuns : prev[`${batterKey}run`] - runValue,
+            [`${batterKey}balls`]: noball ? prev[`${batterKey}balls`] : prev[`${batterKey}balls`] - 1,
+        }));
     };
 
 
@@ -2599,6 +2783,7 @@ const TestScoreBoard = () => {
         const currentInnings = CurrentInnings
         const inningsMap = [matchFirstInnings, matchSecondInnings, matchThirdInnings, matchFourthInnings];
         const wickets = inningsMap[currentInnings - 1]?.Wickets?.slice(-1)[0]
+        const lastpartnership = inningsMap[currentInnings - 1]?.Partnerships?.slice(-1)[0]
         const filterBatterOrder = currentMatch?.[innings]?.BattingOrder?.[0] || [];
         const updatedBatterOrder = [...filterBatterOrder];
         const wasBatterOut = currentMatch?.[innings]?.Wickets?.some(
@@ -2618,7 +2803,13 @@ const TestScoreBoard = () => {
             }
         };
         const Batteraction = CurrentInnings === 3 ? ReplaceSuperOverBattingOrder : CurrentInnings === 2 ? ReplaceSecondInningsBattingOrder : CurrentInnings === 1 ? ReplaceBattingOrder : ReplaceSuperOverSecondInningsBattingOrder;
-
+        const partnershipAction = CurrentInnings === 1 ? RemovePartnership : CurrentInnings === 2 ? RemoveSecondInningsPartnership : CurrentInnings === 3 ? RemoveSuperOverPartnership
+            : CurrentInnings === 4 ? RemoveSuperOverSecondInningsPartnership : ''
+        const partnerShipObj = {
+            id: currentMatch?.id,
+            batter1Id: lastpartnership?.batter1Id || "",
+            batter2Id: lastpartnership?.batter2Id || ""
+        }
         const action = CurrentInnings === 3 ? RemoveSuperOverWicket : CurrentInnings === 2 ? RemoveSecondInningsWicket : CurrentInnings === 1 ? RemoveWicket : RemoveSuperOverSecondInningsWicket;
         const ExtraRemoveAction = CurrentInnings === 3 ? RemoveSuperOverExtra : CurrentInnings === 2 ? RemoveSecondInningsExtra : CurrentInnings === 1 ? RemoveExtra : RemoveSuperOverSecondInningsExtra;
         for (let i = newBallScores.length - 1; i >= 0; i--) {
@@ -2675,6 +2866,12 @@ const TestScoreBoard = () => {
                                 batter1four: wickets?.four,
                                 batter1six: wickets?.six
                             }))
+                            setPartnerShip({
+                                batter1run: wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls - 1,
+                                batter2run: wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls,
+                            })
                         } else if (activeStrike === 2) {
                             handlePlayerChange(playerselection.striker, wickets?.BatterId, playerselection.bowler)
                             setBatterScores((prev) => ({
@@ -2685,6 +2882,12 @@ const TestScoreBoard = () => {
                                 batter2four: wickets?.four,
                                 batter2six: wickets?.six
                             }))
+                            setPartnerShip({
+                                batter1run: wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls,
+                                batter2run: wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls - 1,
+                            })
                         }
                         const createNewObj = {
                             id: currentMatch?.id,
@@ -2692,6 +2895,7 @@ const TestScoreBoard = () => {
                         };
                         dispatch(Batteraction(createNewBatterObj));
                         dispatch(action(createNewObj));
+                        dispatch(partnershipAction(partnerShipObj))
                     } else if ((lastScore.includes('W+') || lastScore.includes('W')) && wickets?.reason === 'Run Out' && !lastScore.includes('WD+W') && !lastScore.includes('NB+W')) {
                         const runs = runoutValues;
                         setInitialscore(prev => ({ ...prev, wicket: prev.wicket - 1, run: prev.run - runs }));
@@ -2708,6 +2912,12 @@ const TestScoreBoard = () => {
                                 batter2run: lastScore === 'W' ? prev.batter2run : activeStrike === 2 && !oddRunoutValues ? prev.batter2run - runs : activeStrike === 1 && oddRunoutValues ? prev.batter2run - runs : prev.batter2run,
                                 batter2balls: lastScore === 'W' ? prev.batter2balls : activeStrike === 2 && !oddRunoutValues ? prev.batter2balls - 1 : activeStrike === 1 && oddRunoutValues ? prev.batter2balls - 1 : prev.batter2balls,
                             }))
+                            setPartnerShip({
+                                batter1run: lastScore === 'W' ? wickets?.batter1Contribution - runs : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - runs : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - runs : wickets?.batter1Contribution,
+                                batter1balls: lastScore === 'W' ? wickets?.batter1balls - 1 : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1balls - 1 : activeStrike === 2 && oddRunoutValues ? wickets?.batter1balls - 1 : wickets?.batter1balls,
+                                batter2run: lastScore === 'W' ? wickets?.batter2Contribution : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - runs : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - runs : wickets?.batter2Contribution,
+                                batter2balls: lastScore === 'W' ? wickets?.batter2balls : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2balls - 1 : activeStrike === 1 && oddRunoutValues ? wickets?.batter2balls - 1 : wickets?.batter2balls,
+                            })
                         } else if (wickets?.newBatter.toString() === playerselection.nonStriker.toString()) {
                             handlePlayerChange(playerselection.striker, wickets?.BatterId, playerselection.bowler)
                             setBatterScores((prev) => ({
@@ -2720,6 +2930,12 @@ const TestScoreBoard = () => {
                                 batter2four: wickets?.four,
                                 batter2six: wickets?.six
                             }))
+                            setPartnerShip({
+                                batter1run: lastScore === 'W' ? wickets?.batter1Contribution : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - runs : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - runs : wickets?.batter1Contribution,
+                                batter1balls: lastScore === 'W' ? wickets?.batter1balls : activeStrike === 1 && !oddRunoutValues ? wickets?.batter1balls - 1 : activeStrike === 2 && oddRunoutValues ? wickets?.batter1balls - 1 : wickets?.batter1balls,
+                                batter2run: lastScore === 'W' ? wickets?.batter2Contribution - runs : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - runs : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - runs : wickets?.batter2Contribution,
+                                batter2balls: lastScore === 'W' ? wickets?.batter2balls - 1 : activeStrike === 2 && !oddRunoutValues ? wickets?.batter2balls - 1 : activeStrike === 1 && oddRunoutValues ? wickets?.batter2balls - 1 : wickets?.batter2balls,
+                            })
                         }
                         const createNewObj = {
                             id: currentMatch?.id,
@@ -2727,6 +2943,7 @@ const TestScoreBoard = () => {
                         };
                         dispatch(Batteraction(createNewBatterObj));
                         dispatch(action(createNewObj));
+                        dispatch(partnershipAction(partnerShipObj))
                     } else if (lastScore.includes('WD+W') && (wickets?.reason === 'Run Out' || wickets?.reason === "Stumped")) {
                         const runs = wideRunoutValues + 1;
                         setLength(prevLength => prevLength - 1);
@@ -2753,6 +2970,12 @@ const TestScoreBoard = () => {
                                 batter2six: wickets?.six
                             }))
                         }
+                        setPartnerShip({
+                            batter1run: wickets?.batter1Contribution,
+                            batter1balls: wickets?.batter1balls,
+                            batter2run: wickets?.batter2Contribution,
+                            batter2balls: wickets?.batter2balls,
+                        })
                         const createNewObj = {
                             id: currentMatch?.id,
                             BatterId: wickets?.BatterId
@@ -2760,6 +2983,7 @@ const TestScoreBoard = () => {
                         dispatch(Batteraction(createNewBatterObj));
                         dispatch(action(createNewObj));
                         dispatch(ExtraRemoveAction({ id: currentMatch?.id }))
+                        dispatch(partnershipAction(partnerShipObj))
                     } else if (lastScore.includes('NB+W') && wickets?.reason === 'Run Out') {
                         const runs = noballRunoutValues;
                         const batterruns = noballBatterRuns
@@ -2777,6 +3001,12 @@ const TestScoreBoard = () => {
                                 batter1six: wickets?.six,
                                 batter2run: activeStrike === 2 && !oddRunoutValues ? prev.batter2run - batterruns : activeStrike === 1 && oddRunoutValues ? prev.batter2run - batterruns : prev.batter2run,
                             }))
+                            setPartnerShip({
+                                batter1run: activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - batterruns : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - batterruns : wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls,
+                                batter2run: activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - batterruns : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - batterruns : wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls,
+                            })
                         } else if (wickets?.newBatter.toString() === playerselection.nonStriker.toString()) {
                             handlePlayerChange(playerselection.striker, wickets?.BatterId, playerselection.bowler)
                             setBatterScores((prev) => ({
@@ -2788,6 +3018,12 @@ const TestScoreBoard = () => {
                                 batter2four: wickets?.four,
                                 batter2six: wickets?.six
                             }))
+                            setPartnerShip({
+                                batter1run: activeStrike === 1 && !oddRunoutValues ? wickets?.batter1Contribution - batterruns : activeStrike === 2 && oddRunoutValues ? wickets?.batter1Contribution - batterruns : wickets?.batter1Contribution,
+                                batter1balls: wickets?.batter1balls,
+                                batter2run: activeStrike === 2 && !oddRunoutValues ? wickets?.batter2Contribution - batterruns : activeStrike === 1 && oddRunoutValues ? wickets?.batter2Contribution - batterruns : wickets?.batter2Contribution,
+                                batter2balls: wickets?.batter2balls,
+                            })
                         }
                         const createNewObj = {
                             id: currentMatch?.id,
@@ -2796,6 +3032,7 @@ const TestScoreBoard = () => {
                         dispatch(Batteraction(createNewBatterObj));
                         dispatch(action(createNewObj));
                         dispatch(ExtraRemoveAction({ id: currentMatch?.id }))
+                        dispatch(partnershipAction(partnerShipObj))
                     }
                     setBall(prev => ({ ...prev, ballNo: prev.ballNo - 1 }));
 
@@ -2834,6 +3071,12 @@ const TestScoreBoard = () => {
                         setBowlerScore(prev => ({ ...prev, ballNo: prev.ballNo - 1, dot: prev.dot - 1 }));
                         const batterKey = activeStrike === 1 && isOdd ? 'batter2' : activeStrike === 1 && !isOdd ? 'batter1' : activeStrike === 2 && isOdd ? 'batter1' : 'batter2';
                         setBatterScores(prev => ({ ...prev, [`${batterKey}balls`]: prev[`${batterKey}balls`] - 1 }));
+                        setPartnerShip({
+                            batter1run: wickets?.batter1Contribution,
+                            batter1balls: (activeStrike === 1 && !isOdd) || (activeStrike === 2 && isOdd) ? wickets?.batter1balls - 1 : wickets?.batter1balls,
+                            batter2run: wickets?.batter2Contribution,
+                            batter2balls: (activeStrike === 1 && isOdd) || (activeStrike === 2 && !isOdd) ? wickets?.batter2balls - 1 : wickets?.batter2balls,
+                        })
                     }
 
                     // Change Strike for odd runs

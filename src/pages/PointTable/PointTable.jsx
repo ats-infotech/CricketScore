@@ -28,7 +28,15 @@ const headerData = [
     },
     {
         title: 'NR',
-        keyname: 'noreason'
+        keyname: 'noresult'
+    },
+    {
+        title: 'For',
+        keyname: 'for'
+    },
+    {
+        title: 'Against',
+        keyname: 'againts'
     },
     {
         title: 'Pt.',

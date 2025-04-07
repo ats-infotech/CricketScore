@@ -23,6 +23,10 @@ const CustomeTbl = ({ headRow, data }) => {
                 <TableBody>
                     {
                         data && data.length > 0 && data.map((item, i) => {
+                            const overs = !item.balls ? 0 : item.balls === 6 ? item.overs : item.overs - 1 + (item.balls / 10)
+                            const againtsovers = !item.againtsballs ? 0 : item.againtsballs === 6 ? item.againtsovers : item.againtsovers - 1 + (item.againtsballs / 10)
+                            const nrr = item.runs && item.againtsruns ? (item.runs / overs) - (item.againtsruns / againtsovers) : 0.000
+                            
                             return (
                                 <TableRow key={`$_${i}`} sx={{ border: 0 }}>
                                     {
@@ -40,7 +44,11 @@ const CustomeTbl = ({ headRow, data }) => {
                                                                 <Typography variant='body2' className="para">{item[row?.keyname]?.toLowerCase()}</Typography>
                                                             </Box>
                                                         ) : row?.keyname === 'nrr' ? (
-                                                            item[row?.keyname]?.toFixed(3)
+                                                            nrr?.toFixed(3)
+                                                        ) : row?.keyname === 'for' ? (
+                                                            `${item.runs}/${overs}`
+                                                        ) : row?.keyname === 'againts' ? (
+                                                            `${item.againtsruns}/${againtsovers}`
                                                         ) : (
                                                             item[row?.keyname]
                                                         )

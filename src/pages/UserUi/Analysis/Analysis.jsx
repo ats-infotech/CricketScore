@@ -7,16 +7,18 @@ import { useSelector } from 'react-redux';
 import { playersState } from '@/redux/slices/playersSlice';
 import { AnalysisBarChart, AnalysisLineChart, AnalysisPartnership, AnalysisPieChart } from '@/components/common/commonUi/AnalysisCharts/AnalysisCharts';
 
-const ScoreAnalysis = ({ matchData }) => {
+const ScoreAnalysis = ({ matchData, tournamentData }) => {
     const [team1, setTeam1] = useState({});
     const [team2, setTeam2] = useState({});
+    let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false
+    let isFollowOn = matchData?.followOn === "Follow On" ? true : false
     const [filter, setFilter] = useState({
-        manhattan: 'Both',
-        runrate: 'Both',
-        worm: 'Both',
-        wickets: 'Both',
-        typesofruns: 'Both',
-        partnerships: 'Team1'
+        manhattan: isTestMatch ? 'Both 1' : 'Both',
+        runrate: isTestMatch ? 'Both 1' : 'Both',
+        worm: isTestMatch ? 'Both 1' : 'Both',
+        wickets: isTestMatch ? 'Both 1' : 'Both',
+        typesofruns: isTestMatch ? 'Both 1' : 'Both',
+        partnerships: isTestMatch ? 'Team1firstinning' : 'Team1'
     });
     const team_data = useSelector(teamsState);
     const player_data = useSelector(playersState)
@@ -24,12 +26,20 @@ const ScoreAnalysis = ({ matchData }) => {
     // Innings Data
     const inningsOneOversData = matchData?.firstInnings?.Completedovers || [];
     const inningsTwoOversData = matchData?.secondInnings?.Completedovers || [];
+    const inningsThreeOversData = matchData?.superOverFirstInnings?.Completedovers || [];
+    const inningsFourOversData = matchData?.superOverSecondInnings?.Completedovers || [];
     const inningsOneWicketData = matchData?.firstInnings?.Wickets || [];
     const inningsTwoWicketData = matchData?.secondInnings?.Wickets || [];
+    const inningsThreeWicketData = matchData?.superOverFirstInnings?.Wickets || [];
+    const inningsFourWicketData = matchData?.superOverSecondInnings?.Wickets || [];
     const inningsOneBattingOrder = matchData?.firstInnings?.BattingOrder?.[0] || [];
     const inningsTwoBattingOrder = matchData?.secondInnings?.BattingOrder?.[0] || [];
-    const inningsOnePartnership = matchData?.firstInnings?.Partnerships || []
-    const inningsTwoPartnership = matchData?.secondInnings?.Partnerships || []
+    const inningsThreeBattingOrder = matchData?.superOverFirstInnings?.BattingOrder?.[0] || [];
+    const inningsFourBattingOrder = matchData?.superOverSecondInnings?.BattingOrder?.[0] || [];
+    // const inningsOnePartnership = matchData?.firstInnings?.Partnerships || []
+    // const inningsTwoPartnership = matchData?.secondInnings?.Partnerships || []
+    // const inningsThreePartnership = matchData?.superOverFirstInnings?.Partnerships || []
+    // const inningsFourPartnership = matchData?.superOverSecondInnings?.Partnerships || []
 
     const isTeam1BattingFirst = (matchData?.toss?.tossWinner === matchData?.team1?.id && matchData?.toss?.selectSide === 'Bat')
         || (matchData?.toss?.tossWinner !== matchData?.team1?.id && matchData?.toss?.selectSide !== 'Bat');
@@ -115,8 +125,10 @@ const ScoreAnalysis = ({ matchData }) => {
     // Calculate stats for both innings
     const inningsOneStats = calculateStats(inningsOneOversData);
     const inningsTwoStats = calculateStats(inningsTwoOversData);
+    const inningsThreeStats = calculateStats(inningsThreeOversData);
+    const inningsFourStats = calculateStats(inningsFourOversData);
 
-    // Merge data for both innings
+    // Merge data for first innings
     const mergedData = inningsOneStats.map((item, index) => {
         const inningsTwo = inningsTwoStats[index] || {};
         return {
@@ -125,6 +137,18 @@ const ScoreAnalysis = ({ matchData }) => {
             inningsOneWickets: item.wickets,
             inningsTwoRuns: inningsTwo.inningsRuns || 0,
             inningsTwoWickets: inningsTwo.wickets || 0,
+        };
+    });
+
+    // merge data for second innings
+    const mergedSecondInningsData = inningsThreeStats.map((item, index) => {
+        const inningsFour = inningsFourStats[index] || {};
+        return {
+            over: item.over,
+            inningsOneRuns: item.inningsRuns,
+            inningsOneWickets: item.wickets,
+            inningsTwoRuns: inningsFour.inningsRuns || 0,
+            inningsTwoWickets: inningsFour.wickets || 0,
         };
     });
 
@@ -150,6 +174,30 @@ const ScoreAnalysis = ({ matchData }) => {
         }
     });
 
+    const filteredInningsOneData = mergedData.filter((item) => {
+        switch (filter.manhattan) {
+            case 'Team1firstinning':
+                return item.inningsOneRuns !== undefined && item.inningsOneRuns !== null;
+            case 'Team2firstinning':
+                return item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null;
+            default:
+                return (item.inningsOneRuns !== undefined && item.inningsOneRuns !== null) ||
+                    (item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null);
+        }
+    })
+
+    const filteredInningsTwoData = mergedSecondInningsData.filter((item) => {
+        switch (filter.manhattan) {
+            case 'Team1secondinning':
+                return isFollowOn ? item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null : item.inningsOneRuns !== undefined && item.inningsOneRuns !== null;
+            case 'Team2secondinning':
+                return isFollowOn ? item.inningsOneRuns !== undefined && item.inningsOneRuns !== null : item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null;
+            default:
+                return (item.inningsOneRuns !== undefined && item.inningsOneRuns !== null) ||
+                    (item.inningsTwoRuns !== undefined && item.inningsTwoRuns !== null);
+        }
+    })
+
     // Run Rate Line Chart
     const calculateRunRate = (data) => {
         return data.map((over, index) => {
@@ -162,8 +210,12 @@ const ScoreAnalysis = ({ matchData }) => {
     };
     const inningsOneRunRate = calculateRunRate(inningsOneOversData)
     const inningsTwoRunRate = calculateRunRate(inningsTwoOversData)
+    const inningsThreeRunRate = calculateRunRate(inningsThreeOversData)
+    const inningsFourRunRate = calculateRunRate(inningsFourOversData)
     const maxOvers = Math.max(inningsOneRunRate.length, inningsTwoRunRate.length);
+    const inningsTwoMaxOvers = Math.max(inningsThreeRunRate.length, inningsFourRunRate.length)
     const combinedRunRateData = [];
+    const combinedInningsTwoRunRateData = []
     for (let i = 0; i < maxOvers; i++) {
         const over1 = inningsOneRunRate[i];
         const over2 = inningsTwoRunRate[i];
@@ -187,7 +239,35 @@ const ScoreAnalysis = ({ matchData }) => {
             });
         }
     }
+    for (let i = 0; i < inningsTwoMaxOvers; i++) {
+        const over1 = isFollowOn ? inningsFourRunRate[i] : inningsThreeRunRate[i];
+        const over2 = isFollowOn ? inningsThreeRunRate[i] : inningsFourRunRate[i];
+        if (over1 && over2) {
+            combinedInningsTwoRunRateData.push({
+                over: over1.over,
+                team1RunRate: over1?.runRate,
+                team2RunRate: over2?.runRate,
+            });
+        } else if (over1) {
+            combinedInningsTwoRunRateData.push({
+                over: over1.over,
+                team1RunRate: over1?.runRate,
+                team2RunRate: null,
+            });
+        } else if (over2) {
+            combinedInningsTwoRunRateData.push({
+                over: over2.over,
+                team1RunRate: null,
+                team2RunRate: over2?.runRate,
+            });
+        }
+    }
     const formattedRunRateData = combinedRunRateData.map((item) => ({
+        ...item,
+        team1RunRate: item.team1RunRate ? parseFloat(item.team1RunRate) : null,
+        team2RunRate: item.team2RunRate ? parseFloat(item.team2RunRate) : null,
+    }));
+    const formattedInningsTwoRunRateData = combinedInningsTwoRunRateData.map((item) => ({
         ...item,
         team1RunRate: item.team1RunRate ? parseFloat(item.team1RunRate) : null,
         team2RunRate: item.team2RunRate ? parseFloat(item.team2RunRate) : null,
@@ -204,7 +284,11 @@ const ScoreAnalysis = ({ matchData }) => {
     }
     const inningsOneRuns = calculatePerOverRuns(inningsOneOversData)
     const inningsTwoRuns = calculatePerOverRuns(inningsTwoOversData)
+    const inningsThreeRuns = calculatePerOverRuns(inningsThreeOversData)
+    const inningsFourRuns = calculatePerOverRuns(inningsFourOversData)
+
     const combinedRunsData = [];
+    const combinedInningsTwoRunsData = [];
     for (let i = 0; i < maxOvers; i++) {
         const over1 = inningsOneRuns[i];
         const over2 = inningsTwoRuns[i];
@@ -228,10 +312,38 @@ const ScoreAnalysis = ({ matchData }) => {
             });
         }
     }
+    for (let i = 0; i < inningsTwoMaxOvers; i++) {
+        const over1 = isFollowOn ? inningsFourRuns[i] : inningsThreeRuns[i];
+        const over2 = isFollowOn ? inningsThreeRuns[i] : inningsFourRuns[i];
+        if (over1 && over2) {
+            combinedInningsTwoRunsData.push({
+                over: over1.over,
+                team1Runs: over1?.run,
+                team2Runs: over2?.run,
+            });
+        } else if (over1) {
+            combinedInningsTwoRunsData.push({
+                over: over1.over,
+                team1Runs: over1?.run,
+                team2Runs: null,
+            });
+        } else if (over2) {
+            combinedInningsTwoRunsData.push({
+                over: over2.over,
+                team1Runs: null,
+                team2Runs: over2?.run,
+            });
+        }
+    }
     const formattedRunsData = combinedRunsData.map((item) => ({
         ...item,
         team1Runs: item.team1Runs ? parseFloat(item.team1Runs) : null,
         team2Runs: item.team2Runs ? parseFloat(item.team2Runs) : null,
+    }));
+    const formattedInningsTwoRunsData = combinedInningsTwoRunsData.map((item) => ({
+        ...item,
+        team1RunRate: item.team1RunRate ? parseFloat(item.team1RunRate) : null,
+        team2RunRate: item.team2RunRate ? parseFloat(item.team2RunRate) : null,
     }));
 
     // Wicket Pie Chart
@@ -247,7 +359,7 @@ const ScoreAnalysis = ({ matchData }) => {
         });
         return mergedData;
     };
-    const preparePieData = (wicketData, innings) => {
+    const preparePieData = (wicketData) => {
         const data = [
             { name: 'LBW', value: wicketData?.lbw || 0, color: 'var(--light-green)' },
             { name: 'Catches', value: wicketData?.Catches || 0, color: 'var(--chart-blue)' },
@@ -265,15 +377,19 @@ const ScoreAnalysis = ({ matchData }) => {
     };
     const inningsOneWicket = calculateWicketType(inningsOneWicketData);
     const inningsTwoWicket = calculateWicketType(inningsTwoWicketData);
-    const inningsOnePieData = preparePieData(inningsOneWicket, 'Innings 1');
-    const inningsTwoPieData = preparePieData(inningsTwoWicket, 'Innings 2');
-    const pieData = filter.wickets === 'Both'
-        ? mergeAndSumWicketData(inningsOnePieData, inningsTwoPieData)
-        : filter.wickets === 'Team1'
-            ? inningsOnePieData
-            : filter.wickets === 'Team2'
-                ? inningsTwoPieData
-                : [];
+    const inningsThreeWicket = calculateWicketType(inningsThreeWicketData);
+    const inningsFourWicket = calculateWicketType(inningsFourWicketData);
+    const inningsOnePieData = preparePieData(inningsOneWicket);
+    const inningsTwoPieData = preparePieData(inningsTwoWicket);
+    const inningsThreePieData = preparePieData(inningsThreeWicket)
+    const inningsFourPieData = preparePieData(inningsFourWicket)
+    const pieData = filter.wickets === 'Both' || filter.wickets === "Both 1" ? mergeAndSumWicketData(inningsOnePieData, inningsTwoPieData)
+        : filter.wickets === 'Both 2' ? mergeAndSumWicketData(inningsThreePieData, inningsFourPieData)
+            : filter.wickets === 'Team1' || filter.wickets === 'Team1firstinning' ? inningsOnePieData
+                : filter.wickets === 'Team2' || filter.wickets === 'Team2firstinning' ? inningsTwoPieData
+                    : (filter.wickets === "Team1secondinning" && !isFollowOn) || (filter.wickets === "Team2secondinning" && isFollowOn) ? inningsThreePieData
+                        : (filter.wickets === "Team2secondinning" && !isFollowOn) || (filter.wickets === "Team1secondinning" && isFollowOn) ? inningsFourPieData
+                            : [];
 
     // Types of Runs Bar Chart
     const countShots = (data) => {
@@ -293,6 +409,9 @@ const ScoreAnalysis = ({ matchData }) => {
     };
     const inningsOneShotsCount = countShots(inningsOneOversData)
     const inningsTwoShotsCount = countShots(inningsTwoOversData)
+    const inningsThreeShotsCount = countShots(inningsThreeOversData)
+    const inningsFourShotsCount = countShots(inningsFourOversData)
+
     const prepareChartData = (inningsOneShotsCount, inningsTwoShotsCount) => {
         const uniqueKeys = Array.from(
             new Set([
@@ -306,11 +425,12 @@ const ScoreAnalysis = ({ matchData }) => {
 
         return sortedKeys.map((key) => ({
             shotType: `${key}`,
-            inningsOne: inningsOneShotsCount[key] || 0,
-            inningsTwo: inningsTwoShotsCount[key] || 0,
+            inningsOne: isFollowOn ? inningsTwoShotsCount[key] || 0 : inningsOneShotsCount[key] || 0,
+            inningsTwo: isFollowOn ? inningsOneShotsCount[key] || 0 : inningsTwoShotsCount[key] || 0,
         })).reverse();
     };
     const shots = prepareChartData(inningsOneShotsCount, inningsTwoShotsCount)
+    const inningsTwoShots = prepareChartData(inningsThreeShotsCount, inningsFourShotsCount)
 
     // Partnerships
     const WicketPairs = ({ wickets, BattingOrder }) => {
@@ -334,42 +454,30 @@ const ScoreAnalysis = ({ matchData }) => {
         return pairs;
     };
 
-    const CalculatePartnerships = ({ over, wickets, pairs }) => {
+     const CalculatePartnerships = ({ over, wickets, pairs }) => {
         let partnerships = [];
         let previousPartnership = 0;
-        let previousBatter1Id = null;
-        let previousBatter2Id = null;
-
+        let previousPairId = null;
+    
         for (let i = 0; i < wickets.length; i++) {
             let wicket = wickets[i];
             let pair = pairs.find(p => p.includes(wicket.BatterId));
             let partnershipRun = wicket.partnership - previousPartnership;
-
+    
             if (pair) {
-                let batter1Run = 0;
-                let batter2Run = 0;
-                let batter1Ball = 0;
-                let batter2Ball = 0;
-                if (pair[0] === wicket.BatterId) {
-                    batter1Run = wicket.batter1Contribution;
-                    batter1Ball = wicket.batter1balls;
-                    batter2Run = wicket.batter2Contribution
-                    batter2Ball = wicket.batter2balls
-                    previousBatter1Id = wicket.BatterId
-                } else if (pair[1] === wicket.BatterId) {
-                    batter2Run = wicket.batter2Contribution
-                    batter2Ball = wicket.batter2balls
-                    batter1Run = wicket.batter1Contribution
-                    batter1Ball = wicket.batter1balls
-                    previousBatter2Id = wicket.BatterId
-                }
-                let pairId = pair.sort().join("-");
-                let batter1Id = wicket.batter1Id
-                let batter2Id = wicket.batter2Id
+                let batter1Run = wicket.batter1Contribution ? wicket.batter1Contribution : partnershipRun - wicket.batter2Contribution;
+                let batter2Run = wicket.batter2Contribution ? wicket.batter2Contribution : partnershipRun - wicket.batter1Contribution;
+                let batter1Ball = wicket.batter1balls;
+                let batter2Ball = wicket.batter2balls;
+                let batter1Id = wicket.batter1Id;
+                let batter2Id = wicket.batter2Id;
+    
                 if (batter1Id === "" || batter2Id === "") {
                     continue;
                 }
-                if ((previousBatter1Id?.toString() === batter1Id && previousBatter2Id?.toString() === batter2Id)) {
+    
+                let pairId = [batter1Id, batter2Id].sort().join("-");
+                if (previousPairId === pairId) {
                     continue;
                 }
                 partnerships.push({
@@ -383,6 +491,7 @@ const ScoreAnalysis = ({ matchData }) => {
                     partnershipRun: partnershipRun,
                 });
                 previousPartnership = wicket.partnership;
+                previousPairId = pairId;
             }
         }
         return partnerships;
@@ -392,34 +501,47 @@ const ScoreAnalysis = ({ matchData }) => {
     const inningsOnePartnerships = CalculatePartnerships({ over: inningsOneOversData, wickets: inningsOneWicketData, pairs: inningsOneBattingPair })
     const inningsTwoBattingPair = WicketPairs({ wickets: inningsTwoWicketData, BattingOrder: inningsTwoBattingOrder }) || []
     const inningsTwoPartnerships = CalculatePartnerships({ over: inningsTwoOversData, wickets: inningsTwoWicketData, pairs: inningsTwoBattingPair })
-    const PartnershipData = filter.partnerships === "Team1" ? inningsOnePartnerships : inningsTwoPartnerships
+    const inningsThreeBattingPair = WicketPairs({ wickets: inningsThreeWicketData, BattingOrder: inningsThreeBattingOrder }) || []
+    const inningsThreePartnerships = CalculatePartnerships({ over: inningsThreeOversData, wickets: inningsThreeWicketData, pairs: inningsThreeBattingPair })
+    const inningsFourBattingPair = WicketPairs({ wickets: inningsFourWicketData, BattingOrder: inningsFourBattingOrder }) || []
+    const inningsFourPartnerships = CalculatePartnerships({ over: inningsFourOversData, wickets: inningsFourWicketData, pairs: inningsFourBattingPair })
+    const PartnershipData = filter.partnerships === "Team1" || filter.partnerships === "Team1firstinning" ? inningsOnePartnerships
+        : filter.partnerships === "Team2" || filter.partnerships === "Team2firstinning" ? inningsTwoPartnerships : (filter.partnerships === "Team1secondinning" && !isFollowOn)
+            || (filter.partnerships === "Team2secondinning" && isFollowOn) ? inningsThreePartnerships
+            : inningsFourPartnerships
 
     return (
         <Box className="main_analysis_section">
             {/* Manhattan Bar Chart */}
-            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.manhattan} handleChange={handleChange('manhattan')} data={filteredData}
-                inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Manhattan"} yaxisdatakey={"over"} yaxislabel={"Overs"}
-                xaxislabel={"Runs"} bar1datakey={"inningsOneRuns"} bar2datakey={"inningsTwoRuns"} bar1wicketslabel={"inningsOneWickets"} bar2wicketslabel={"inningsTwoWickets"} />
+            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.manhattan} handleChange={handleChange('manhattan')}
+                data={isTestMatch && (filter.manhattan === "Both 1" || filter.manhattan === "Team1firstinning" || filter.manhattan === "Team2firstinning") ? filteredInningsOneData
+                    : isTestMatch && (filter.manhattan === "Both 2" || filter.manhattan === "Team1secondinning" || filter.manhattan === "Team2secondinning") ? filteredInningsTwoData
+                        : filteredData} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Manhattan"} yaxisdatakey={"over"} yaxislabel={"Overs"}
+                isTestMatch={isTestMatch} xaxislabel={"Runs"} bar1datakey={"inningsOneRuns"} bar2datakey={"inningsTwoRuns"} bar1wicketslabel={"inningsOneWickets"} bar2wicketslabel={"inningsTwoWickets"} />
 
             {/* Run Rate Line Chart*/}
-            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('runrate')} value={filter.runrate} title={"Run Rate"} data={formattedRunRateData}
-                filter={filter.runrate} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1RunRate'} team2dataKey={'team2RunRate'} />
+            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('runrate')} value={filter.runrate} title={"Run Rate"} isTestMatch={isTestMatch}
+                data={isTestMatch && (filter.runrate === "Both 2" || filter.runrate === "Team1secondinning" || filter.runrate === "Team2secondinning") ? formattedInningsTwoRunRateData
+                    : formattedRunRateData} filter={filter.runrate} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel}
+                team1dataKey={'team1RunRate'} team2dataKey={'team2RunRate'} />
 
             {/* Worm Line Chart */}
-            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('worm')} value={filter.worm} title={"Worm"} data={formattedRunsData}
-                filter={filter.worm} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1Runs'} team2dataKey={'team2Runs'} />
+            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('worm')} value={filter.worm} title={"Worm"} isTestMatch={isTestMatch}
+                data={isTestMatch && (filter.worm === "Both 2" || filter.worm === "Team1secondinning" || filter.worm === "Team2secondinning") ? formattedInningsTwoRunsData
+                    : formattedRunsData} filter={filter.worm} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1Runs'} team2dataKey={'team2Runs'} />
 
             {/* Wickets Pie Chart */}
-            <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} onChange={handleChange('wickets')} title={"Wickets Pie"} data={pieData} />
+            <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} onChange={handleChange('wickets')} title={"Wickets Pie"} data={pieData} isTestMatch={isTestMatch} />
 
             {/* Types of Runs Bar Chart */}
-            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.typesofruns} handleChange={handleChange('typesofruns')} data={shots}
-                inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Types of Runs"} yaxisdatakey={"shotType"} yaxislabel={'Shots'} xaxislabel={'No of shots'}
-                bar1datakey={"inningsOne"} bar2datakey={"inningsTwo"} />
+            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.typesofruns} handleChange={handleChange('typesofruns')}
+                data={isTestMatch && (filter.typesofruns === "Both 2" || filter.typesofruns === "Team1secondinning" || filter.typesofruns === "Team2secondinning") ? inningsTwoShots
+                    : shots} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Types of Runs"} yaxisdatakey={"shotType"} yaxislabel={'Shots'}
+                xaxislabel={'No of shots'} bar1datakey={"inningsOne"} bar2datakey={"inningsTwo"} isTestMatch={isTestMatch} />
 
             {/* Partnerships */}
             <AnalysisPartnership team1={TeamOne} team2={TeamTwo} onChange={handleChange('partnerships')} title={"Partnerships"} topsectionvalue={filter.partnerships}
-                playerdata={player_data} data={PartnershipData} />
+                playerdata={player_data} data={PartnershipData} isTestMatch={isTestMatch} />
 
         </Box>
     );

@@ -34,8 +34,8 @@ const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlaye
                                                     :
                                                     <Box className={type === 'readonly' ? 'active' : isSelect ? 'active' : 'notActive'}
                                                         sx={{
-                                                            width: sm ? '80px' : md ? '90px' : '100px',
-                                                            height: sm ? '80px' : md ? '90px' : '100px',
+                                                            width: sm ? '80px' : md ? '90px' : '95px',
+                                                            height: sm ? '80px' : md ? '90px' : '95px',
                                                             borderRadius: '100px',
                                                             border: 'none',
                                                             color: 'var(--text-white)',
@@ -44,7 +44,8 @@ const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlaye
                                                             justifyContent: 'center',
                                                             fontSize: '24px',
                                                             fontWeight: 'bold',
-                                                            backgroundColor: item?.playerColor
+                                                            backgroundColor: item?.playerColor,
+                                                            marginTop: sm ? '1px' : md ? '7px' : '3px'
                                                         }}
                                                     >
                                                         {item?.letter}

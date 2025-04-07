@@ -49,7 +49,7 @@ const MatchCategory = () => {
       case 'commentary':
         return <CommentaryPage matchData={matchData} teamData={teamData} playerData={playerData} tournamentData={tournamentData}/>;
       case 'analysis':
-        return <ScoreAnalysis matchData={matchData} tournamentData={tournamentData} teamData={teamData} />
+        return <ScoreAnalysis matchData={matchData} tournamentData={tournamentData} />
       case 'cricketbox':
         return <Mvp matchData={matchData} playerData={playerData} teamData={teamData} tournamentData={tournamentData} />;
       case 'mvp':

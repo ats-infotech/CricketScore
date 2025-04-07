@@ -1077,18 +1077,12 @@ const ScoreBoard = () => {
 
         const getBatterOneRuns = () => {
             if (!batter) return activeStrike === 1 ? partnership.batter1run : partnership.batter1run;
-
-            if (playerselection.striker === batter) {
-                return activeStrike === 1 ? partnership.batter1run + parseInt(data) : partnership.batter1run;
-            }
+            return activeStrike === 1 ? partnership.batter1run + parseInt(data) : partnership.batter1run;
         }
 
         const getBatterTwoRuns = () => {
             if (!batter) return activeStrike === 2 ? partnership.batter2run : partnership.batter2run;
-
-            if (playerselection.nonStriker === batter) {
-                return activeStrike === 1 ? partnership.batter2run + parseInt(data) : partnership.batter2run;
-            }
+            return activeStrike === 2 ? partnership.batter2run + parseInt(data) : partnership.batter2run;
         }
 
         const getBalls = () => {
@@ -1181,7 +1175,6 @@ const ScoreBoard = () => {
             six: getScore('six'),
             sr: getScore('sr'),
             partnership: initailscore.run,
-            newBatter: wicketReason.newBatter,
             newBatter: wicketReason.newBatter,
             batter1Contribution: getBatterOneRuns(),
             batter1balls: getBatterOneBalls(),
@@ -1392,7 +1385,7 @@ const ScoreBoard = () => {
         }));
     };
 
-    const handleTied = async () => {
+    const handleTied = async (type) => {
         const createStatusNewObj = {
             id: currentMatch?.id,
             status: 4
@@ -1446,8 +1439,13 @@ const ScoreBoard = () => {
             win: 0,
             lose: 0,
             tie: matchTerminate.mainreason === 2 ? 0 : 1,
-            nrr: 0,
-            noreason: matchTerminate.mainreason === 2 ? 1 : 0
+            noresult: matchTerminate.mainreason === 2 ? 1 : 0,
+            runs: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.runs,
+            balls: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.legalBall,
+            overs: type === 'rain' ? 0 : matchFirstInnings?.Completedovers?.length,
+            againtsruns: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.runs,
+            againtsballs: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            againtsovers: type === 'rain' ? 0 : matchSecondInnings?.Completedovers?.length,
         }
         const team2payload = {
             teamId: team2?.id,
@@ -1456,8 +1454,13 @@ const ScoreBoard = () => {
             win: 0,
             lose: 0,
             tie: matchTerminate.mainreason === 2 ? 0 : 1,
-            nrr: 0,
-            noreason: matchTerminate.mainreason === 2 ? 1 : 0
+            noresult: matchTerminate.mainreason === 2 ? 1 : 0,
+            runs: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.runs,
+            balls: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            overs: type === 'rain' ? 0 : matchSecondInnings?.Completedovers?.length || 0,
+            againtsruns: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.runs,
+            againtsballs: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.legalBall,
+            againtsovers: type === 'rain' ? 0 : matchFirstInnings?.Completedovers?.length,
         }
         const teams = [team1payload, team2payload]
         dispatch(updateTeamStats({ teams }));
@@ -1937,7 +1940,7 @@ const ScoreBoard = () => {
         // const target = currentInnings === 4 ? matchThirdInnings?.Currentover?.[0]?.runs : matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers.length - 1]?.runs;
         const winner = currentMatch?.matchWinner
         const BattingOrder = currentInnings === 4 ? matchFourthInnings?.BattingOrder?.[0] : currentInnings === 3 ? matchThirdInnings?.BattingOrder?.[0] : currentInnings === 2 ? matchSecondInnings?.BattingOrder?.[0] : currentInnings === 1 ? matchFirstInnings?.BattingOrder?.[0] : ''
-        const PartnerShip = currentMatch?.partnership
+        const PartnerShip = currentMatch?.partnership || partnership
 
         if (currentInnings !== undefined) {
             StoreTeamScore()
@@ -1957,7 +1960,7 @@ const ScoreBoard = () => {
                 setBattingOrder(BattingOrder)
             }
 
-            if (!hasRunRef.current && partnership) {
+            if (!hasRunRef.current && PartnerShip) {
                 setPartnerShip({
                     batter1run: PartnerShip?.batter1run ?? 0,
                     batter1balls: PartnerShip?.batter1balls ?? 0,
@@ -2477,15 +2480,6 @@ const ScoreBoard = () => {
     }
 
     const matchFinished = async () => {
-        const FirstInningslegalBall = matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers?.length - 1]?.legalBall
-        const FirstInningsOver = FirstInningslegalBall === 6 ? matchFirstInnings?.Completedovers?.length : matchFirstInnings?.Completedovers?.length - 1 + (FirstInningslegalBall / 10)
-        const FirstInningsRuns = matchFirstInnings?.Completedovers[matchFirstInnings?.Completedovers.length - 1]?.runs
-        const SecondInningslegalBall = matchSecondInnings?.Completedovers?.[matchSecondInnings?.Completedovers?.length - 1]?.legalBall
-        const SecondInningsOver = SecondInningslegalBall === 6 ? matchSecondInnings?.Completedovers?.length : matchSecondInnings?.Completedovers?.length - 1 + (SecondInningslegalBall / 10)
-        const SecondInningsRuns = matchSecondInnings?.Completedovers[matchSecondInnings?.Completedovers.length - 1]?.runs
-        const battingside = (SecondInningsRuns / SecondInningsOver) - (FirstInningsRuns / FirstInningsOver)
-        const bowlingside = (FirstInningsRuns / FirstInningsOver) - (SecondInningsRuns / SecondInningsOver)
-
         const createStatusNewObj = {
             id: currentMatch?.id,
             status: 4
@@ -2536,27 +2530,36 @@ const ScoreBoard = () => {
         const id = currentMatch?.tournamentId
         await dispatch(updateTournamentStats({ id, matches }))
 
-        const filterWinningTeam = team1?.id === winningTeam ? team1?.team_name : team2?.team_name
-        const sideWin = filterWinningTeam === tossWinner.battingSide
+        const filterWinningTeam = team1?.id === winningTeam ? true : false
         const WinningTeam = {
-            teamId: team1?.id === winningTeam ? team1?.id : team2?.id,
+            teamId: filterWinningTeam ? team1?.id : team2?.id,
             match: 1,
             point: 2,
             win: 1,
             lose: 0,
             tie: 0,
-            nrr: sideWin ? battingside : bowlingside,
-            noreason: 0
+            noresult: 0,
+            runs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            balls: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            overs: filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
+            againtsruns: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            againtsballs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            againtsovers: !filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
         }
         const LossingTeam = {
-            teamId: !team1?.id === winningTeam ? team1?.id : team2?.id,
+            teamId: !filterWinningTeam ? team1?.id : team2?.id,
             match: 1,
             point: 0,
             win: 0,
             lose: 1,
             tie: 0,
-            nrr: sideWin ? bowlingside : battingside,
-            noreason: 0
+            noresult: 0,
+            runs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            balls: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            overs: !filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
+            againtsruns: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            againtsballs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            againtsovers: filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
         }
         const teams = [WinningTeam, LossingTeam]
         dispatch(updateTeamStats({ teams }));
@@ -2723,7 +2726,7 @@ const ScoreBoard = () => {
             }
         };
         const Batteraction = CurrentInnings === 3 ? ReplaceSuperOverBattingOrder : CurrentInnings === 2 ? ReplaceSecondInningsBattingOrder : CurrentInnings === 1 ? ReplaceBattingOrder : ReplaceSuperOverSecondInningsBattingOrder;
-        const partnershipAction = CurrentInnings === 1 ? RemovePartnership : RemoveSecondInningsPartnership
+        const partnershipAction = CurrentInnings === 1 ? RemovePartnership : CurrentInnings === 2 ? RemoveSecondInningsPartnership : ''
         const partnerShipObj = {
             id: currentMatch?.id,
             batter1Id: lastpartnership?.batter1Id || "",
@@ -3151,7 +3154,7 @@ const ScoreBoard = () => {
 
     const ConfirmTerminateMatch = async () => {
         if (matchTerminate.mainreason === 2) {
-            handleTied()
+            handleTied('rain')
         } else if (matchTerminate.mainreason === 1) {
             const createStatusNewObj = {
                 id: currentMatch?.id,
@@ -3219,18 +3222,30 @@ const ScoreBoard = () => {
                 win: 1,
                 lose: 0,
                 tie: 0,
-                nrr: 0,
-                noreason: 0
+                // nrr: 0,
+                noresult: 0,
+                runs: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.runs || 0 : matchSecondInnings?.Currentover?.[0]?.runs || 0,
+                balls: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.legalBall || 0 : matchSecondInnings?.Currentover?.[0]?.legalBall || 0,
+                overs: matchTerminate.disqualified === 2 ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
+                againtsovers: 0,
+                againtsruns: 0,
+                againtsballs: 0
             }
             const LossingTeam = {
-                teamId: !matchTerminate.disqualified === 2 ? team1?.id : team2?.id,
+                teamId: matchTerminate.disqualified !== 2 ? team1?.id : team2?.id,
                 match: 1,
                 point: 0,
                 win: 0,
                 lose: 1,
                 tie: 0,
-                nrr: 0,
-                noreason: 0
+                // nrr: 0,
+                noresult: 0,
+                runs: 0,
+                balls: 0,
+                overs: 0,
+                againtsovers: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.runs || 0 : matchSecondInnings?.Currentover?.[0]?.runs || 0,
+                againtsruns: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.legalBall || 0 : matchSecondInnings?.Currentover?.[0]?.legalBall || 0,
+                againtsballs: matchTerminate.disqualified === 2 ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0
             }
             const teams = [WinningTeam, LossingTeam]
             dispatch(updateTeamStats({ teams }));

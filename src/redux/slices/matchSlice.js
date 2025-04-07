@@ -499,6 +499,33 @@ const matchSlice = createSlice({
                 } : item
             );
         },
+        AddSuperOverPartnership: (state, action) => {
+            const { id, superOverFirstInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    superOverFirstInnings: {
+                        ...item.superOverFirstInnings,
+                        Partnerships: [
+                            ...(item.superOverFirstInnings.Partnerships || []),
+                            superOverFirstInnings.Partnerships,
+                        ]
+                    }
+                } : item
+            );
+        },
+        RemoveSuperOverPartnership: (state, action) => {
+            const { id, batter1Id, batter2Id } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    superOverFirstInnings: {
+                        ...item.superOverFirstInnings,
+                        Partnerships: item.superOverFirstInnings.Partnerships.filter(partnership => !(partnership.batter1Id === batter1Id && partnership.batter2Id === batter2Id))
+                    }
+                } : item
+            );
+        },
         AddSuperOverExtra: (state, action) => {
             const { id, superOverFirstInnings } = action.payload;
             state.data = state.data.map((item) =>
@@ -594,6 +621,33 @@ const matchSlice = createSlice({
                 } : item
             );
         },
+        AddSuperOverSecondInningsPartnership: (state, action) => {
+            const { id, superOverSecondInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    superOverSecondInnings: {
+                        ...item.superOverSecondInnings,
+                        Partnerships: [
+                            ...(item.superOverSecondInnings.Partnerships || []),
+                            superOverSecondInnings.Partnerships,
+                        ]
+                    }
+                } : item
+            );
+        },
+        RemoveSuperOverSecondInningsPartnership: (state, action) => {
+            const { id, batter1Id, batter2Id } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    superOverSecondInnings: {
+                        ...item.superOverSecondInnings,
+                        Partnerships: item.superOverSecondInnings.Partnerships.filter(partnership => !(partnership.batter1Id === batter1Id && partnership.batter2Id === batter2Id))
+                    }
+                } : item
+            );
+        },
         AddSuperOverSecondInningsWicket: (state, action) => {
             const { id, superOverSecondInnings } = action.payload;
             state.data = state.data.map((item) =>
@@ -672,6 +726,6 @@ export const { createMatchSchedule, editMatchSchedule, deleteMatchSchedule, dele
     RemoveSuperOverExtra, AddSuperOverSecondInningsWicket, AddSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, AddCommentary, RemoveOver,
     ReplaceBattingOrder, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, AddSuperOverCompletedOver, AddSuperOverSecondInningsCompletedOver,
     RemoveSuperOverCompletedOver, RemoveSuperOverSecondInningsCompletedOver, MatchBreakSchedule, ChangeOverPerDay, AddDeclareStatus, AddSecondInningsDeclareStatus, AddSuperOverDeclareStatus,
-    AddPartnership, AddSecondInningsPartnership, RemovePartnership, RemoveSecondInningsPartnership } = matchSlice.actions
+    AddPartnership, AddSecondInningsPartnership, RemovePartnership, RemoveSecondInningsPartnership, AddSuperOverPartnership, RemoveSuperOverPartnership, AddSuperOverSecondInningsPartnership, RemoveSuperOverSecondInningsPartnership } = matchSlice.actions
 export const matchesState = (state) => state.matches
 export default matchSlice.reducer

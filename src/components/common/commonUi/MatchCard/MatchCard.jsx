@@ -13,7 +13,7 @@ import './MatchCard.css';
 import { useSelector } from 'react-redux';
 import { teamsState } from '@/redux/slices/teamSlice';
 
-const TeamScoreBox = React.memo(({ teamLogo, teamName, runs, wicket, overs, superover, soruns, sowicket, soovers, letter, color, scorehidden, Innings1Declare, Innings2Declare }) => {
+const TeamScoreBox = React.memo(({ teamLogo, teamName, runs, wicket, overs, superover, soruns, sowicket, soovers, letter, color, scorehidden, Innings1Declare, Innings2Declare, teamWon }) => {
     return (
         <Box className='TeamScoreBox'>
             <Box className='teamLogo'>
@@ -21,13 +21,13 @@ const TeamScoreBox = React.memo(({ teamLogo, teamName, runs, wicket, overs, supe
                 {!teamLogo && <ImageAvatar text={letter} bgColor={color} borderRadius={'10px'} height={'100%'} width={'100%'} />}
             </Box>
             <Box className='team_details'>
-                <Typography variant='body2' className='team_name'>{teamName}</Typography>
-                <Typography variant='body2' className='team_score'>
+                <Typography variant='body2' className={`team_name ${teamWon && 'winningTeam'}`}>{teamName}</Typography>
+                <Typography variant='body2' className={`team_score ${teamWon && 'winningTeam'}`}>
                     <span className='runs'>{runs} / {wicket} {Innings1Declare && '- d'}</span>
                     <span className='overs'>({overs} Ov)</span>
                 </Typography>
                 {superover && !scorehidden &&
-                    <Typography variant='body2' className='team_score'>
+                    <Typography variant='body2' className={`team_score ${teamWon && 'winningTeam'}`}>
                         <span className='runs'>{soruns} / {sowicket} {Innings2Declare && '- d'}</span>
                         <span className='overs'>({soovers} Ov)</span>
                     </Typography>
@@ -79,8 +79,8 @@ const MatchCard = (props) => {
 
     const getWinnerMessage = (item) => {
         let winner;
-        const winningTeam = team_data?.data?.find((items) => items?.id === item?.matchWinner)?.team_name
-        const terminatedTeam = team_data?.data?.find((items) => items?.id === item?.terminate?.teamdisqualify)?.team_name
+        const winningTeam = team_data?.data?.find((items) => items?.id === item?.matchWinner)?.team_name || item?.matchWinner === item?.team1?.id ? item?.team1?.team_name : item?.team2?.team_name
+        const terminatedTeam = team_data?.data?.find((items) => items?.id === item?.terminate?.teamdisqualify)?.team_name || item?.terminate?.teamdisqualify === item?.team1?.id ? item?.team1?.team_name : item?.team2?.team_name
         if (item?.terminate) {
             if (item?.terminate?.mainreason === "rain") {
                 winner = (`Match abandoned due to ${item?.terminate?.mainreason}`)
@@ -118,16 +118,18 @@ const MatchCard = (props) => {
                     .map((item, i) => {
                         const formattedDate = formatDate(item?.datetime || item?.match_start_time);
                         const winner = getWinnerMessage(item);
-                        let team1 = team_data?.data?.find((items) => items?.id === item?.team1?.id)
-                        let team2 = team_data?.data?.find((items) => items?.id === item?.team2?.id)
-                        let team1_logo = team1.team_logo;
-                        let team1_name = team1.team_name;
-                        let team1_letter = team1.letter;
-                        let team1_color = team1.team_color;
-                        let team2_logo = team2.team_logo;
-                        let team2_name = team2.team_name;
-                        let team2_letter = team2.letter;
-                        let team2_color = team2.team_color;
+                        let team1Winner = !item?.matchWinner ? false : item?.matchWinner === item?.team1?.id ? true : false
+                        let team2Winner = !item?.matchWinner ? false : item?.matchWinner !== item?.team1?.id ? true : false
+                        let team1 = team_data?.data?.find((items) => items?.id === item?.team1?.id) || []
+                        let team2 = team_data?.data?.find((items) => items?.id === item?.team2?.id) || []
+                        let team1_logo = team1.team_logo ? team1.team_logo : item?.team1?.team_logo;
+                        let team1_name = team1.team_name ? team1.team_name : item?.team1?.team_name;
+                        let team1_letter = team1.letter ? team1.letter : item?.team1?.letter;
+                        let team1_color = team1.team_color ? team1.team_color : item?.team1.team_color;
+                        let team2_logo = team2.team_logo ? team2.team_logo : item?.team2.team_logo;
+                        let team2_name = team2.team_name ? team2.team_name : item?.team2.team_name;
+                        let team2_letter = team2.letter ? team2.letter : item?.team2.letter;
+                        let team2_color = team2.team_color ? team2.team_color : item?.team2.team_color;
                         let tossWinner = item?.toss?.tossWinner === team1.id ? team1_name : item?.toss?.tossWinner === team2.id ? team2_name : ''
                         let firstInnings = item?.firstInnings?.Currentover[0];
                         let secondInnings = item?.status !== 4 ? item?.secondInnings?.Currentover[0] : item?.secondInnings?.Completedovers?.slice(-1)[0];
@@ -238,6 +240,7 @@ const MatchCard = (props) => {
                                     {isBreakStart && <Typography variant='body2' className='match_location break'>{isBreakStart}</Typography>}
                                     <Box className='row'>
                                         <TeamScoreBox
+                                            teamWon={team1Winner}
                                             teamLogo={team1_logo}
                                             teamName={team1_name}
                                             runs={team1Stats.runs ?? 0}
@@ -257,6 +260,7 @@ const MatchCard = (props) => {
                                             <Image src={vsLogo} alt='logo' width={90} height={90} unoptimized />
                                         </Box>
                                         <TeamScoreBox
+                                            teamWon={team2Winner}
                                             teamLogo={team2_logo}
                                             teamName={team2_name}
                                             runs={team2Stats.runs ?? 0}

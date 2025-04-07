@@ -208,11 +208,14 @@ const Team = ({ tournamentData = null, type, teamData = null }) => {
                     balls: 0,
                     match: 0,
                     point: 0,
-                    noreason: 0,
+                    noresult: 0,
                     tie: 0,
                     win: 0,
                     lose: 0,
                     nrr: 0,
+                    againtsruns: 0,
+                    againtsballs: 0,
+                    againtsovers: 0
                 };
                 let response = await dispatch(createTeams(payload));
                 if (response) {
@@ -257,11 +260,14 @@ const Team = ({ tournamentData = null, type, teamData = null }) => {
                 balls: teamData.balls,
                 match: teamData.match,
                 point: teamData.point,
-                noreason: teamData.noreason,
+                noresult: teamData.noresult,
                 tie: teamData.tie,
                 win: teamData.win,
                 lose: teamData.lose,
                 nrr: teamData.nrr,
+                againtsruns: teamData.againtsruns,
+                againtsballs: teamData.againtsballs,
+                againtsovers: teamData.againtsovers
             };
 
             if (addTeam.team_logo && addTeam.team_logo !== teamData?.team_logo) {
