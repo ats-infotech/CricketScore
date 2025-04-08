@@ -397,7 +397,7 @@ const ScoreBoard = () => {
         ball: 0,
         over: 0
     })
-    const [winningTeam, setWinningTeam] = useState()
+    const [winningTeam, setWinningTeam] = useState('')
     const [winningSituation, setWinningSituation] = useState("")
     const [dot, setDot] = useState()
     const [allOut, setAllOut] = useState(false)
@@ -2094,7 +2094,7 @@ const ScoreBoard = () => {
             const totalovers = parseInt(currentMatch?.target?.overs) - overs
             const winningballs = (totalovers * 6) - balls
             const totalWickets = parseInt(currentMatch?.perteamplayers) - initailscore.wicket - 1
-            reason = (`won by ${totalWickets} wickets (${winningballs} balls left) ${currentMatch?.target?.dls === true ? '(DLS Method)' : ''}`)
+            reason = (`won by ${totalWickets} wickets ${winningballs && winningballs > 0 ? `(${winningballs} balls left)` : ''} ${currentMatch?.target?.dls === true ? '(DLS Method)' : ''}`)
         } else if (tossWinner.bowlingSide === winTeam && CurrentInnings === 2 && winningTeam) {
             const winningruns = currentMatch?.firstInnings?.Currentover?.[0]?.runs - currentMatch?.secondInnings?.Currentover?.[0]?.runs
             reason = (`won by ${winningruns} runs ${currentMatch?.target?.dls === true ? '(DLS Method)' : ''}`)
@@ -2740,14 +2740,17 @@ const ScoreBoard = () => {
                 setOverFinished(false)
                 setUndo(true)
                 const lastScore = newBallScores[i];
+                console.log(winningTeam);
+                
                 if (winningTeam) {
                     hasRunwinningRef.current = false;
-                    setWinningTeam()
+                    setWinningTeam('')
                     const createNewObj = {
                         ...currentMatch,
                         matchWinner: '',
                         winSituation: ''
                     }
+                    // setInningsComplete(false)
                     await dispatch(ReplaceMatchSchedule(createNewObj))
                     if (currentInnings === 2) {
                         await dispatch(RemoveOver({ id: currentMatch?.id }))
@@ -3399,7 +3402,7 @@ const ScoreBoard = () => {
                 <Box>
                     {/* Revise Match Overs & DLS */}
                     {
-                        reviseTarget.revise &&
+                        reviseTarget?.revise &&
                         <>
                             <Typography className="declare_warning" sx={{ marginBottom: '15px' }}>
                                 {reviseTarget.type === "Overs" ? 'Are you sure you want to reduce match overs. Once process is done it can not be undo'
@@ -3414,6 +3417,7 @@ const ScoreBoard = () => {
                                     className="runs_input_field"
                                     type="number"
                                     value={reviseTarget.over}
+                                    autoFocus={ reviseTarget?.revise}
                                     max={reviseTarget.type === "DLS" ? target.overs / 6 : parseInt(currentMatch?.totalovers)}
                                     onChange={(e) => setReviseTarget((prev) => ({ ...prev, over: e.target.value }))}
                                 />
@@ -3446,6 +3450,7 @@ const ScoreBoard = () => {
                                             className="reason_input_field"
                                             type="text"
                                             value={matchTerminate.reason}
+                                            autoFocus={matchTerminate?.mainreason === 1}
                                             onChange={(e) => setMatchTerminate((prev) => ({ ...prev, reason: e.target.value }))}
                                         />
                                     </Box>
@@ -3468,6 +3473,7 @@ const ScoreBoard = () => {
                                 className="runs_input_field"
                                 type="number"
                                 value={wicketReason?.runs}
+                                autoFocus={customRun}
                                 onChange={(e) => setWicketReason((prev) => ({ ...prev, runs: e.target.value }))}
                             />
                             <Typography variant="body2">runs</Typography>
@@ -3596,6 +3602,7 @@ const ScoreBoard = () => {
                                 <textarea
                                     className="scoreboard_dialog_penalty_textarea"
                                     type="text"
+                                    autoFocus={penalty}
                                     onChange={(e) => setWicketReason((prev) => ({ ...prev, penalty: e.target.value }))}
                                 />
                             </Box>

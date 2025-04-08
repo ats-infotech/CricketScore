@@ -3384,7 +3384,7 @@ const TestScoreBoard = () => {
                 <Box>
                     {/* Revise Target Over */}
                     {
-                        reviseOver.revise &&
+                        reviseOver?.revise &&
                         <>
                             <Typography className="declare_warning">This is only to deduct overs. Once process is done it can not be undo</Typography>
                             <Box className="reviseOver">
@@ -3393,6 +3393,7 @@ const TestScoreBoard = () => {
                                     className="runs_input_field"
                                     type="number"
                                     value={reviseOver.over}
+                                    autoFocus={reviseOver?.revise}
                                     onChange={(e) => setReviseOver((prev) => ({ ...prev, over: e.target.value }))}
                                 />
                                 <Typography variant="body2" >= {currentMatch?.targetedOver - (matchFourthInnings?.Completedovers ? matchFourthInnings?.Completedovers?.length : 0) > 20 ? (target.overs + 1) - parseInt(reviseOver.over ? reviseOver.over : 0)
@@ -3422,6 +3423,7 @@ const TestScoreBoard = () => {
                                 className="runs_input_field"
                                 type="number"
                                 value={wicketReason?.runs}
+                                autoFocus={customRun}
                                 onChange={(e) => setWicketReason((prev) => ({ ...prev, runs: e.target.value }))}
                             />
                             <Typography variant="body2">runs</Typography>
@@ -3550,6 +3552,7 @@ const TestScoreBoard = () => {
                                 <textarea
                                     className="scoreboard_dialog_penalty_textarea"
                                     type="text"
+                                    autoFocus={penalty}
                                     onChange={(e) => setWicketReason((prev) => ({ ...prev, penalty: e.target.value }))}
                                 />
                             </Box>
