@@ -353,6 +353,11 @@
     color: var(--text-grey);
 }
 
+.player11_selected_players_section{ 
+    width: 100%;
+    max-width: min-content;
+}
+
 .add_player_in_playing11 p,
 .player11_selected_players_section p {
     color: var(--text-grey) !important;

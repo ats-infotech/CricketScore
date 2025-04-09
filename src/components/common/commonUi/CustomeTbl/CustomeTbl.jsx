@@ -25,8 +25,8 @@ const CustomeTbl = ({ headRow, data }) => {
                         data && data.length > 0 && data.map((item, i) => {
                             const overs = !item.balls ? 0 : item.balls === 6 ? item.overs : item.overs - 1 + (item.balls / 10)
                             const againtsovers = !item.againtsballs ? 0 : item.againtsballs === 6 ? item.againtsovers : item.againtsovers - 1 + (item.againtsballs / 10)
-                            const nrr = item.runs && item.againtsruns ? (item.runs / overs) - (item.againtsruns / againtsovers) : 0.000
-                            
+                            const nrr = item.runs && item.againtsruns ? (item.runs / item.overs) - (item.againtsruns / item.againtsovers) : 0.000
+
                             return (
                                 <TableRow key={`$_${i}`} sx={{ border: 0 }}>
                                     {
@@ -38,17 +38,17 @@ const CustomeTbl = ({ headRow, data }) => {
                                                             <Box className='image_col'>
                                                                 <Box className='image_box'>
                                                                     {item['team_logo'] && <Image unoptimized src={`/${item['team_logo']}`} alt={row?.keyname} width={100} height={100} />}
-                                                                    {!item['team_logo'] && <ImageAvatar fontSize={'var(--small)'} height={'40px'} width={'40px'} 
-                                                                    text={item['letter']} bgColor={item['team_color']} smallHeight={'40px'} smallWidth={'40px'} meduimHeight={'40px'} meduimWidth={'40px'} />}
+                                                                    {!item['team_logo'] && <ImageAvatar fontSize={'var(--small)'} height={'40px'} width={'40px'}
+                                                                        text={item['letter']} bgColor={item['team_color']} smallHeight={'40px'} smallWidth={'40px'} meduimHeight={'40px'} meduimWidth={'40px'} />}
                                                                 </Box>
                                                                 <Typography variant='body2' className="para">{item[row?.keyname]?.toLowerCase()}</Typography>
                                                             </Box>
                                                         ) : row?.keyname === 'nrr' ? (
                                                             nrr?.toFixed(3)
                                                         ) : row?.keyname === 'for' ? (
-                                                            `${item.runs}/${overs}`
+                                                            `${item.runs}/${item.overs.toFixed(1)}`
                                                         ) : row?.keyname === 'againts' ? (
-                                                            `${item.againtsruns}/${againtsovers}`
+                                                            `${item.againtsruns}/${item.againtsovers.toFixed(1)}`
                                                         ) : (
                                                             item[row?.keyname]
                                                         )

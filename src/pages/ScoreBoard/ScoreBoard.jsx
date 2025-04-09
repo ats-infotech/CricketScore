@@ -613,34 +613,48 @@ const ScoreBoard = () => {
 
     const handleClose = () => {
         setOpen(false)
-        setTimeout(() => {
-            setRno(false)
-            setPenalty(false)
-            setBowlerchange(false)
-            setWicket(false)
-            setChangeBatter(false)
-            setRetiredHurt(false)
-            setCustomRun(false)
-            setBreakStart(false)
-            setMatchTerminate({
-                terminate: false,
-                mainreason: 0,
-                pointsdistribution: 0,
-                reason: "",
-                disqualified: 0
-            })
-            setReviseTarget({
-                revise: false,
-                over: "",
-                type: ""
-            })
-            if (active.data !== 'PR' && active.data !== 'NR') {
-                if ((wicketReason.batter === "" || wicketReason.fielder === "") || ((wicketReason.batter !== '' || wicketReason.fielder !== '') && !allOut && wicketReason.newBatter === '')) {
-                    setActive({
-                        active: false,
-                        data: "",
-                        secondactive: ""
-                    })
+        setRno(false)
+        setPenalty(false)
+        setBowlerchange(false)
+        setWicket(false)
+        setChangeBatter(false)
+        setRetiredHurt(false)
+        setCustomRun(false)
+        setBreakStart(false)
+        setMatchTerminate({
+            terminate: false,
+            mainreason: 0,
+            pointsdistribution: 0,
+            reason: "",
+            disqualified: 0
+        })
+        setReviseTarget({
+            revise: false,
+            over: "",
+            type: ""
+        })
+        if (active.data !== 'PR' && active.data !== 'NR') {
+            if ((wicketReason.batter === "" || wicketReason.fielder === "") || ((wicketReason.batter !== "" || wicketReason.fielder !== "") && !allOut && wicketReason.newBatter === "")) {
+                setActive({
+                    active: false,
+                    data: "",
+                    secondactive: ""
+                })
+                if (active.data === "WD" || active.data === "NB") {
+                    setLength(length - 1)
+                    setBowlerScore((prev) => ({
+                        ...prev,
+                        run: prev.run - 1
+                    }))
+                }
+                setInningsComplete(false)
+                setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
+                setAllOut(false)
+            } else if (allOut && (active.data === "RNO" || active.secondactive === "RNO")) {
+                setAllOut(false)
+                setInningsComplete(false)
+            } else {
+                if (wicketReason.newBatter !== "" || wicketReason.batter !== "" || wicketReason.fielder !== "") {
                     if (active.data === "WD" || active.data === "NB") {
                         setLength(length - 1)
                         setBowlerScore((prev) => ({
@@ -648,50 +662,34 @@ const ScoreBoard = () => {
                             run: prev.run - 1
                         }))
                     }
-                    setInningsComplete(false)
-                    setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
-                    setAllOut(false)
-                } else if (allOut && (active.data === "RNO" || active.secondactive === "RNO")) {
-                    setAllOut(false)
-                    setInningsComplete(false)
-                } else {
-                    if (wicketReason.newBatter !== "" || wicketReason.batter !== "" || wicketReason.fielder !== "") {
-                        if (active.data === "WD" || active.data === "NB") {
-                            setLength(length - 1)
-                            setBowlerScore((prev) => ({
-                                ...prev,
-                                run: prev.run - 1
-                            }))
-                        }
-                        setActive({
-                            active: false,
-                            data: "",
-                            secondactive: ""
-                        })
-                        setRno(false)
-                    }
-                    setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
+                    setActive({
+                        active: false,
+                        data: "",
+                        secondactive: ""
+                    })
+                    setRno(false)
                 }
-            }
-            if (active.data === 'PR' || active.data === 'NR') {
-                setActive({
-                    active: false,
-                    data: "",
-                    secondactive: ""
-                })
                 setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
             }
-            if (battinglength + filterBatterWithHurt === initailscore.wicket + 1) {
-                setInningsComplete(false)
-                setAllOut(false)
-            } else if (battinglength + filterBatterWithHurt === initailscore.wicket) {
-                setInningsComplete(true)
-                setAllOut(true)
-            }
-            if (active.active === false) {
-                setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
-            }
-        }, 100);
+        }
+        if (active.data === 'PR' || active.data === 'NR') {
+            setActive({
+                active: false,
+                data: "",
+                secondactive: ""
+            })
+            setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
+        }
+        if (battinglength + filterBatterWithHurt === initailscore.wicket + 1) {
+            setInningsComplete(false)
+            setAllOut(false)
+        } else if (battinglength + filterBatterWithHurt === initailscore.wicket) {
+            setInningsComplete(true)
+            setAllOut(true)
+        }
+        if (active.active === false) {
+            setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, superover: 0, runs: '' })
+        }
     };
 
     const handlePenalty = () => {
@@ -1432,6 +1430,8 @@ const ScoreBoard = () => {
 
         const id = currentMatch?.tournamentId
         await dispatch(updateTournamentStats({ id, matches }))
+        const winningsOvers = matchFirstInnings?.Currentover?.[0]?.legalBall === 6 ? matchFirstInnings?.Completedovers?.length : (matchFirstInnings?.Completedovers?.length - 1) + (matchFirstInnings?.Currentover?.[0]?.legalBall / 10)
+        const lossingOvers = matchSecondInnings?.Currentover?.[0]?.legalBall === 6 ? matchSecondInnings?.Completedovers?.length : (matchSecondInnings?.Completedovers?.length - 1) + (matchSecondInnings?.Currentover?.[0]?.legalBall / 10)
         const team1payload = {
             teamId: team1?.id,
             match: 1,
@@ -1442,10 +1442,10 @@ const ScoreBoard = () => {
             noresult: matchTerminate.mainreason === 2 ? 1 : 0,
             runs: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.runs,
             balls: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.legalBall,
-            overs: type === 'rain' ? 0 : matchFirstInnings?.Completedovers?.length,
+            overs: type === 'rain' ? 0 : winningsOvers,
             againtsruns: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.runs,
             againtsballs: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            againtsovers: type === 'rain' ? 0 : matchSecondInnings?.Completedovers?.length,
+            againtsovers: type === 'rain' ? 0 : lossingOvers,
         }
         const team2payload = {
             teamId: team2?.id,
@@ -1457,10 +1457,10 @@ const ScoreBoard = () => {
             noresult: matchTerminate.mainreason === 2 ? 1 : 0,
             runs: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.runs,
             balls: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            overs: type === 'rain' ? 0 : matchSecondInnings?.Completedovers?.length || 0,
+            overs: type === 'rain' ? 0 : lossingOvers || 0,
             againtsruns: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.runs,
             againtsballs: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.legalBall,
-            againtsovers: type === 'rain' ? 0 : matchFirstInnings?.Completedovers?.length,
+            againtsovers: type === 'rain' ? 0 : winningsOvers,
         }
         const teams = [team1payload, team2payload]
         dispatch(updateTeamStats({ teams }));
@@ -2530,7 +2530,11 @@ const ScoreBoard = () => {
         const id = currentMatch?.tournamentId
         await dispatch(updateTournamentStats({ id, matches }))
 
-        const filterWinningTeam = team1?.id === winningTeam ? true : false
+        const filterWinningTeam = team1?.id === winningTeam
+        const Team1PlayingFirstInnings = currentMatch?.firstInnings?.battingside === team1?.team_name
+        
+        const winningsOvers = matchFirstInnings?.Currentover?.[0]?.legalBall === 6 ? matchFirstInnings?.Completedovers?.length : (matchFirstInnings?.Completedovers?.length - 1) + (matchFirstInnings?.Currentover?.[0]?.legalBall / 10)
+        const lossingOvers = matchSecondInnings?.Currentover?.[0]?.legalBall === 6 ? matchSecondInnings?.Completedovers?.length : (matchSecondInnings?.Completedovers?.length - 1) + (matchSecondInnings?.Currentover?.[0]?.legalBall / 10)
         const WinningTeam = {
             teamId: filterWinningTeam ? team1?.id : team2?.id,
             match: 1,
@@ -2539,13 +2543,14 @@ const ScoreBoard = () => {
             lose: 0,
             tie: 0,
             noresult: 0,
-            runs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            balls: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            overs: filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
-            againtsruns: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            againtsballs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            againtsovers: !filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
+            runs: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            balls: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            overs: Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
+            againtsruns: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            againtsballs: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            againtsovers: !Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
         }
+
         const LossingTeam = {
             teamId: !filterWinningTeam ? team1?.id : team2?.id,
             match: 1,
@@ -2554,16 +2559,17 @@ const ScoreBoard = () => {
             lose: 1,
             tie: 0,
             noresult: 0,
-            runs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            balls: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            overs: !filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
-            againtsruns: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            againtsballs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            againtsovers: filterWinningTeam ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
+            runs: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            balls: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            overs: !Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
+            againtsruns: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
+            againtsballs: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            againtsovers: Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
         }
         const teams = [WinningTeam, LossingTeam]
+        console.log(team1?.id === winningTeam, team1.id, team2.id, WinningTeam, matchFirstInnings?.Currentover?.[0]?.runs);
+        
         dispatch(updateTeamStats({ teams }));
-
         router.push(`/summary/${currentMatch?.id}`);
     }
 
@@ -2740,9 +2746,8 @@ const ScoreBoard = () => {
                 setOverFinished(false)
                 setUndo(true)
                 const lastScore = newBallScores[i];
-                console.log(winningTeam);
-                
-                if (winningTeam) {
+
+                if (InningsComplete) {
                     hasRunwinningRef.current = false;
                     setWinningTeam('')
                     const createNewObj = {
@@ -2751,7 +2756,9 @@ const ScoreBoard = () => {
                         winSituation: ''
                     }
                     // setInningsComplete(false)
-                    await dispatch(ReplaceMatchSchedule(createNewObj))
+                    if (winningTeam) {
+                        await dispatch(ReplaceMatchSchedule(createNewObj))
+                    }
                     if (currentInnings === 2) {
                         await dispatch(RemoveOver({ id: currentMatch?.id }))
                     }
@@ -3313,7 +3320,7 @@ const ScoreBoard = () => {
             disabled: isDisabledForChangeBatter,
         },
         {
-            condition: InningsComplete && allOut,
+            condition: InningsComplete && allOut && !breakStart,
             onClick: handleAllOut,
             title: 'All Out',
             disabled: isDisabledForAllOut,
@@ -3417,7 +3424,7 @@ const ScoreBoard = () => {
                                     className="runs_input_field"
                                     type="number"
                                     value={reviseTarget.over}
-                                    autoFocus={ reviseTarget?.revise}
+                                    autoFocus={reviseTarget?.revise}
                                     max={reviseTarget.type === "DLS" ? target.overs / 6 : parseInt(currentMatch?.totalovers)}
                                     onChange={(e) => setReviseTarget((prev) => ({ ...prev, over: e.target.value }))}
                                 />

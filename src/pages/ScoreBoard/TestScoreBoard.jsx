@@ -2579,6 +2579,7 @@ const TestScoreBoard = () => {
         // const filterWinningTeam = team1?.team_name === winningTeam
         const filterWinningTeam = team1?.id === winningTeam ? true : false
         const isFollow = currentMatch?.followOn === "Follow On" ? true : false
+        const Team1PlayingFirstInnings = currentMatch?.firstInnings?.battingside === team1?.team_name
         // const sideWin = winningTeam === tossWinner.battingSide
         const Winningpayload = {
             teamId: filterWinningTeam ? team1?.id : team2?.id,
@@ -2589,17 +2590,17 @@ const TestScoreBoard = () => {
             tie: 0,
             // nrr: sideWin ? battingside : bowlingside,
             noresult: 0,
-            runs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+            runs: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
                 : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
-            balls: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+            balls: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
                 : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
-            overs: filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+            overs: Team1PlayingFirstInnings ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
                 : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
-            againtsruns: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+            againtsruns: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
                 : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
-            againtsballs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+            againtsballs: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
                 : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
-            againtsovers: !filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+            againtsovers: !Team1PlayingFirstInnings ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
                 : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
         }
         const Lossingpayload = {
@@ -2611,17 +2612,17 @@ const TestScoreBoard = () => {
             tie: 0,
             // nrr: sideWin ? bowlingside : battingside,
             noresult: 0,
-            runs: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+            runs: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
                 : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
-            balls: !filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+            balls: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
                 : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
-            overs: !filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+            overs: !Team1PlayingFirstInnings ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
                 : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
-            againtsruns: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
+            againtsruns: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs + (isFollow ? matchFourthInnings?.Currentover?.[0]?.runs || 0 : matchThirdInnings?.Currentover?.[0]?.runs || 0)
                 : matchSecondInnings?.Currentover?.[0]?.runs + (isFollow ? matchThirdInnings?.Currentover?.[0]?.runs || 0 : matchFourthInnings?.Currentover?.[0]?.runs || 0),
-            againtsballs: filterWinningTeam ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
+            againtsballs: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchFourthInnings?.Currentover?.[0]?.legalBall || 0 : matchThirdInnings?.Currentover?.[0]?.legalBall || 0)
                 : matchSecondInnings?.Currentover?.[0]?.legalBall + (isFollow ? matchThirdInnings?.Currentover?.[0]?.legalBall || 0 : matchFourthInnings?.Currentover?.[0]?.legalBall || 0),
-            againtsovers: filterWinningTeam ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
+            againtsovers: Team1PlayingFirstInnings ? (matchFirstInnings?.Completedovers?.length || 0) + (isFollow ? matchFourthInnings?.Completedovers?.length || 0 : matchThirdInnings?.Completedovers?.length || 0)
                 : matchSecondInnings?.Completedovers?.length || 0 + (isFollow ? matchThirdInnings?.Completedovers?.length || 0 : matchFourthInnings?.Completedovers?.length || 0),
         }
         const teams = [Winningpayload, Lossingpayload]
