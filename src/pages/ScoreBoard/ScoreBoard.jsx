@@ -1430,6 +1430,17 @@ const ScoreBoard = () => {
 
         const id = currentMatch?.tournamentId
         await dispatch(updateTournamentStats({ id, matches }))
+        const getFirstInngsTeam = currentMatch?.firstInnings?.battingside === team1?.team_name
+        const InningsRun = getFirstInngsTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs
+        const againtsInningsRun = !getFirstInngsTeam ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs
+        const firstInningsBalls = matchFirstInnings?.Currentover?.[0]?.legalBall || 0;
+        const secondInningsBalls = matchSecondInnings?.Currentover?.[0]?.legalBall || 0;
+        const firstInningsTotalBalls = firstInningsBalls === 6 ? matchFirstInnings?.Completedovers?.length * 6
+            : ((matchFirstInnings?.Completedovers?.length - 1) * 6) + matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers?.length - 1]?.legalBall
+        const secondInningsTotalBalls = secondInningsBalls === 6 ? matchSecondInnings?.Completedovers?.length * 6
+            : ((matchSecondInnings?.Completedovers?.length - 1) * 6) + matchSecondInnings?.Completedovers?.[matchSecondInnings?.Completedovers?.length - 1]?.legalBall
+        const InningsBalls = getFirstInngsTeam ? firstInningsTotalBalls : secondInningsTotalBalls
+        const AgaintsInningsBalls = !getFirstInngsTeam ? firstInningsTotalBalls : secondInningsTotalBalls
         const winningsOvers = matchFirstInnings?.Currentover?.[0]?.legalBall === 6 ? matchFirstInnings?.Completedovers?.length : (matchFirstInnings?.Completedovers?.length - 1) + (matchFirstInnings?.Currentover?.[0]?.legalBall / 10)
         const lossingOvers = matchSecondInnings?.Currentover?.[0]?.legalBall === 6 ? matchSecondInnings?.Completedovers?.length : (matchSecondInnings?.Completedovers?.length - 1) + (matchSecondInnings?.Currentover?.[0]?.legalBall / 10)
         const team1payload = {
@@ -1440,11 +1451,11 @@ const ScoreBoard = () => {
             lose: 0,
             tie: matchTerminate.mainreason === 2 ? 0 : 1,
             noresult: matchTerminate.mainreason === 2 ? 1 : 0,
-            runs: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.runs,
-            balls: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.legalBall,
+            runs: type === 'rain' ? 0 : InningsRun,
+            balls: type === 'rain' ? 0 : InningsBalls,
             overs: type === 'rain' ? 0 : winningsOvers,
-            againtsruns: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.runs,
-            againtsballs: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.legalBall,
+            againtsruns: type === 'rain' ? 0 : againtsInningsRun,
+            againtsballs: type === 'rain' ? 0 : AgaintsInningsBalls,
             againtsovers: type === 'rain' ? 0 : lossingOvers,
         }
         const team2payload = {
@@ -1455,12 +1466,12 @@ const ScoreBoard = () => {
             lose: 0,
             tie: matchTerminate.mainreason === 2 ? 0 : 1,
             noresult: matchTerminate.mainreason === 2 ? 1 : 0,
-            runs: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.runs,
-            balls: type === 'rain' ? 0 : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            overs: type === 'rain' ? 0 : lossingOvers || 0,
-            againtsruns: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.runs,
-            againtsballs: type === 'rain' ? 0 : matchFirstInnings?.Currentover?.[0]?.legalBall,
-            againtsovers: type === 'rain' ? 0 : winningsOvers,
+            runs: type === 'rain' ? 0 : againtsInningsRun,
+            balls: type === 'rain' ? 0 : AgaintsInningsBalls,
+            overs: type === 'rain' ? 0 : winningsOvers || 0,
+            againtsruns: type === 'rain' ? 0 : InningsRun,
+            againtsballs: type === 'rain' ? 0 : InningsBalls,
+            againtsovers: type === 'rain' ? 0 : lossingOvers,
         }
         const teams = [team1payload, team2payload]
         dispatch(updateTeamStats({ teams }));
@@ -2530,45 +2541,44 @@ const ScoreBoard = () => {
         const id = currentMatch?.tournamentId
         await dispatch(updateTournamentStats({ id, matches }))
 
-        const filterWinningTeam = team1?.id === winningTeam
-        const Team1PlayingFirstInnings = currentMatch?.firstInnings?.battingside === team1?.team_name
-        
-        const winningsOvers = matchFirstInnings?.Currentover?.[0]?.legalBall === 6 ? matchFirstInnings?.Completedovers?.length : (matchFirstInnings?.Completedovers?.length - 1) + (matchFirstInnings?.Currentover?.[0]?.legalBall / 10)
-        const lossingOvers = matchSecondInnings?.Currentover?.[0]?.legalBall === 6 ? matchSecondInnings?.Completedovers?.length : (matchSecondInnings?.Completedovers?.length - 1) + (matchSecondInnings?.Currentover?.[0]?.legalBall / 10)
-        const WinningTeam = {
-            teamId: filterWinningTeam ? team1?.id : team2?.id,
-            match: 1,
-            point: 2,
-            win: 1,
-            lose: 0,
-            tie: 0,
-            noresult: 0,
-            runs: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            balls: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            overs: Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
-            againtsruns: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            againtsballs: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            againtsovers: !Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
-        }
+        const winnerTeam = team_data?.data?.find((items) => items?.id === winningTeam)
+        const getWinnerTeam = winnerTeam?.team_name === team1?.team_name ? team1 : team2;
+        const getLosserTeam = winnerTeam?.team_name === team1?.team_name ? team2 : team1;
+        const getWinnnerInngs = currentMatch?.firstInnings?.battingside === getWinnerTeam?.team_name
 
-        const LossingTeam = {
-            teamId: !filterWinningTeam ? team1?.id : team2?.id,
+        const isWinnerFirstInnings = getWinnnerInngs;
+        const firstInningsRuns = matchFirstInnings?.Currentover?.[0]?.runs || 0;
+        const secondInningsRuns = matchSecondInnings?.Currentover?.[0]?.runs || 0;
+        const firstInningsBalls = matchFirstInnings?.Currentover?.[0]?.legalBall || 0;
+        const secondInningsBalls = matchSecondInnings?.Currentover?.[0]?.legalBall || 0;
+        const firstInningsTotalBalls = firstInningsBalls === 6 ? matchFirstInnings?.Completedovers?.length * 6
+            : ((matchFirstInnings?.Completedovers?.length - 1) * 6) + matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers?.length - 1]?.legalBall
+        const secondInningsTotalBalls = secondInningsBalls === 6 ? matchSecondInnings?.Completedovers?.length * 6
+            : ((matchSecondInnings?.Completedovers?.length - 1) * 6) + matchSecondInnings?.Completedovers?.[matchSecondInnings?.Completedovers?.length - 1]?.legalBall
+        const winningsOvers = firstInningsBalls === 6 ? matchFirstInnings?.Completedovers?.length : (matchFirstInnings?.Completedovers?.length - 1) + (firstInningsBalls / 10)
+        const lossingOvers = secondInningsBalls === 6 ? matchSecondInnings?.Completedovers?.length : (matchSecondInnings?.Completedovers?.length - 1) + (secondInningsBalls / 10)
+
+        const createTeamStats = (isWinner, team) => ({
+            teamId: team?.id,
             match: 1,
-            point: 0,
-            win: 0,
-            lose: 1,
+            point: isWinner ? 2 : 0,
+            win: isWinner ? 1 : 0,
+            lose: isWinner ? 0 : 1,
             tie: 0,
             noresult: 0,
-            runs: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            balls: !Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            overs: !Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
-            againtsruns: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.runs : matchSecondInnings?.Currentover?.[0]?.runs,
-            againtsballs: Team1PlayingFirstInnings ? matchFirstInnings?.Currentover?.[0]?.legalBall : matchSecondInnings?.Currentover?.[0]?.legalBall,
-            againtsovers: Team1PlayingFirstInnings ? winningsOvers || 0 : lossingOvers || 0,
-        }
+            runs: isWinnerFirstInnings === isWinner ? firstInningsRuns : secondInningsRuns,
+            balls: isWinnerFirstInnings === isWinner ? firstInningsTotalBalls : secondInningsTotalBalls,
+            overs: isWinnerFirstInnings === isWinner ? winningsOvers || 0 : lossingOvers || 0,
+            againtsruns: isWinnerFirstInnings === isWinner ? secondInningsRuns : firstInningsRuns,
+            againtsballs: isWinnerFirstInnings === isWinner ? secondInningsTotalBalls : firstInningsTotalBalls,
+            againtsovers: isWinnerFirstInnings === isWinner ? lossingOvers || 0 : winningsOvers || 0,
+        });
+        const WinningTeam = createTeamStats(true, getWinnerTeam)
+        const LossingTeam = createTeamStats(false, getLosserTeam)
         const teams = [WinningTeam, LossingTeam]
-        console.log(team1?.id === winningTeam, team1.id, team2.id, WinningTeam, matchFirstInnings?.Currentover?.[0]?.runs);
-        
+
+        console.log(teams, 'teams', getWinnerTeam);
+
         dispatch(updateTeamStats({ teams }));
         router.push(`/summary/${currentMatch?.id}`);
     }
@@ -3225,6 +3235,22 @@ const ScoreBoard = () => {
             await dispatch(updatePlayersStats({ players }));
             const id = currentMatch?.tournamentId
             await dispatch(updateTournamentStats({ id, matches }))
+            const getInngs = matchFirstInnings?.battingside === team1?.team_name
+            const firstInningsRuns = matchFirstInnings?.Currentover?.[0]?.runs || 0;
+            const secondInningsRuns = matchSecondInnings?.Currentover?.[0]?.runs || 0;
+            const firstInningsBalls = matchFirstInnings?.Currentover?.[0]?.legalBall || 0;
+            const secondInningsBalls = matchSecondInnings?.Currentover?.[0]?.legalBall || 0;
+            const firstInningsTotalBalls = firstInningsBalls === 6 ? matchFirstInnings?.Completedovers?.length * 6
+                : ((matchFirstInnings?.Completedovers?.length - 1) * 6) + matchFirstInnings?.Completedovers?.[matchFirstInnings?.Completedovers?.length - 1]?.legalBall
+            const secondInningsTotalBalls = secondInningsBalls === 6 ? matchSecondInnings?.Completedovers?.length * 6
+                : ((matchSecondInnings?.Completedovers?.length - 1) * 6) + matchSecondInnings?.Completedovers?.[matchSecondInnings?.Completedovers?.length - 1]?.legalBall
+            const winningsOvers = firstInningsBalls === 6 ? matchFirstInnings?.Completedovers?.length : (matchFirstInnings?.Completedovers?.length - 1) + (firstInningsBalls / 10)
+            const lossingOvers = secondInningsBalls === 6 ? matchSecondInnings?.Completedovers?.length : (matchSecondInnings?.Completedovers?.length - 1) + (secondInningsBalls / 10)
+            const InningsRuns = getInngs ? firstInningsRuns : secondInningsRuns
+            const AgaintsInningsRuns = !getInngs ? firstInningsRuns : secondInningsRuns
+            const InningsBalls = getInngs ? firstInningsTotalBalls : secondInningsTotalBalls
+            const AgaintsInningsBalls = !getInngs ? firstInningsTotalBalls : secondInningsTotalBalls
+
             const WinningTeam = {
                 teamId: matchTerminate.disqualified === 2 ? team1?.id : team2?.id,
                 match: 1,
@@ -3234,8 +3260,8 @@ const ScoreBoard = () => {
                 tie: 0,
                 // nrr: 0,
                 noresult: 0,
-                runs: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.runs || 0 : matchSecondInnings?.Currentover?.[0]?.runs || 0,
-                balls: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.legalBall || 0 : matchSecondInnings?.Currentover?.[0]?.legalBall || 0,
+                runs: matchTerminate.disqualified === 2 ? InningsRuns || 0 : AgaintsInningsRuns || 0,
+                balls: matchTerminate.disqualified === 2 ? InningsBalls || 0 : AgaintsInningsBalls || 0,
                 overs: matchTerminate.disqualified === 2 ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0,
                 againtsovers: 0,
                 againtsruns: 0,
@@ -3253,8 +3279,8 @@ const ScoreBoard = () => {
                 runs: 0,
                 balls: 0,
                 overs: 0,
-                againtsovers: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.runs || 0 : matchSecondInnings?.Currentover?.[0]?.runs || 0,
-                againtsruns: matchTerminate.disqualified === 2 ? matchFirstInnings?.Currentover?.[0]?.legalBall || 0 : matchSecondInnings?.Currentover?.[0]?.legalBall || 0,
+                againtsovers: matchTerminate.disqualified === 2 ? AgaintsInningsRuns || 0 : InningsRuns || 0,
+                againtsruns: matchTerminate.disqualified === 2 ? AgaintsInningsBalls || 0 : InningsBalls || 0,
                 againtsballs: matchTerminate.disqualified === 2 ? matchFirstInnings?.Completedovers?.length || 0 : matchSecondInnings?.Completedovers?.length || 0
             }
             const teams = [WinningTeam, LossingTeam]

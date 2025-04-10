@@ -23,9 +23,17 @@ const CustomeTbl = ({ headRow, data }) => {
                 <TableBody>
                     {
                         data && data.length > 0 && data.map((item, i) => {
-                            const overs = !item.balls ? 0 : item.balls === 6 ? item.overs : item.overs - 1 + (item.balls / 10)
-                            const againtsovers = !item.againtsballs ? 0 : item.againtsballs === 6 ? item.againtsovers : item.againtsovers - 1 + (item.againtsballs / 10)
-                            const nrr = item.runs && item.againtsruns ? (item.runs / item.overs) - (item.againtsruns / item.againtsovers) : 0.000
+                            // const overs = !item.balls ? 0 : item.balls === 6 ? item.overs : item.overs - 1 + (item.balls / 10)
+                            // const againtsovers = !item.againtsballs ? 0 : item.againtsballs === 6 ? item.againtsovers : item.againtsovers - 1 + (item.againtsballs / 10)
+                            let bowlingball = item?.balls
+                            let againtsbowlingball = item?.againtsballs
+                            let overs = Math.floor(bowlingball / 6);
+                            let againtsOvers = Math.floor(againtsbowlingball / 6)
+                            let bowls = bowlingball % 6;
+                            let againtsbowl = againtsbowlingball % 6
+                            let bowlingovers = `${overs}.${bowls}`;
+                            let againtsovers = `${againtsOvers}.${againtsbowl}`
+                            const nrr = item.runs && item.againtsruns ? (item.runs / parseFloat(`${overs}.${bowls}`)) - (item.againtsruns / parseFloat(`${againtsOvers}.${againtsbowl}`)) : 0.000
 
                             return (
                                 <TableRow key={`$_${i}`} sx={{ border: 0 }}>
@@ -46,9 +54,9 @@ const CustomeTbl = ({ headRow, data }) => {
                                                         ) : row?.keyname === 'nrr' ? (
                                                             nrr?.toFixed(3)
                                                         ) : row?.keyname === 'for' ? (
-                                                            `${item.runs}/${item.overs.toFixed(1)}`
+                                                            `${item.runs}/${bowlingovers}`
                                                         ) : row?.keyname === 'againts' ? (
-                                                            `${item.againtsruns}/${item.againtsovers.toFixed(1)}`
+                                                            `${item.againtsruns}/${againtsovers}`
                                                         ) : (
                                                             item[row?.keyname]
                                                         )
