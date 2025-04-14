@@ -1,0 +1,42 @@
+.photo_uploader {
+    width: 110px;
+    height: 110px;
+    background-color: var(--primary-color);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.photo_uploader.isFile {
+
+}
+
+.photo_profile_icon {
+    width: 26px;
+    height: 26px;
+    color: var(--text-white);
+}
+
+.profile_sub_icon {
+    background-color: var(--text-white);
+    border-radius: 300px;
+    width: 32px;
+    height: 32px;
+    padding: 9px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.profile_sub_icon svg {
+    width: 14px;
+    height: 14px;
+    color: var(--primary-color);
+}

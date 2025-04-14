@@ -1,11 +1,11 @@
 export const AuctionForm = [
-    // {
-    //     label: 'Auction Name',
-    //     placeholder: 'Enter Auction Name',
-    //     type: 'text',
-    //     key_name: 'auction_name',
-    //     show_type: 'input'
-    // },
+    {
+        label: 'Auction Name',
+        placeholder: 'Enter Auction Name',
+        type: 'text',
+        key_name: 'auction_name',
+        show_type: 'input'
+    },
     {
         label: 'Auction Date',
         placeholder: 'Select Auction Date',

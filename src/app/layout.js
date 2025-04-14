@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
 
   const UpdatePath = () => {
     const path = window.location.pathname;
-    const pathsToHideFooter = ['/toss', '/player11', '/scoreboard', '/playerboard', '/players', '/creatematch', '/automatchschedule', '/registeredTornaments', '/edit-match', '/edit-tournament', '/teams/', '/login'];
+    const pathsToHideFooter = ['/toss', '/player11', '/scoreboard', '/playerboard', '/players', '/creatematch', '/automatchschedule', '/registeredTornaments', '/edit-match', '/edit-tournament', '/teams/', '/login', '/create-auction-player'];
     const pathsForHide = ['/mytournament', '/tournament'];
     const shouldHide = pathsToHideFooter.some((p) => path.includes(p));
     const shouldHidePad = pathsForHide.some((p) => path.includes(p));

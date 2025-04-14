@@ -1,7 +1,7 @@
 import { FormControl, MenuItem } from "@mui/material";
 import InputSelect from "./InputSelect";
 
-const CustomSelectInput = ({ value, label, onChange, options, disabled = false, disabledOptions = [] }) => {
+const CustomSelectInput = ({ value, label, onChange, options, disabled = false, disabledOptions = [], minWidth, borderRadius }) => {
      
     return (
         <FormControl >
@@ -27,6 +27,8 @@ const CustomSelectInput = ({ value, label, onChange, options, disabled = false, 
                 label={label}
                 onChange={onChange}
                 disabled={disabled}
+                minWidth={minWidth}
+                borderRadius={borderRadius}
             // sx={{
             //     backgroundColor: 'var(--blue-background)',
             //     color: 'var(--text-white)',
@@ -47,9 +49,9 @@ const CustomSelectInput = ({ value, label, onChange, options, disabled = false, 
                 {options && options.length > 0 ? (
                     [
                         <MenuItem sx={{ fontWeight: 'bold', color: 'white' }} key={label} value={''}>{label}</MenuItem>,
-                        ...options.map((item) => (
+                        ...options.map((item,i) => (
                             <MenuItem
-                                key={item.key}
+                                key={i}
                                 value={item.key}
                                 disabled={disabledOptions.includes(item.key)}
                                 sx={{ fontWeight: 'bold', color: 'white' }}

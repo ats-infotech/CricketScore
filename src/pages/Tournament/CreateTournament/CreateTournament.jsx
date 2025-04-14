@@ -327,7 +327,7 @@ const CreateTournament = ({ tournamentData }) => {
         const formFields = openTab === 1 ? TornamentForm : TornamentExtraForms;
         formFields.forEach(field => {
             const value = createTornaments[field.key_name];
-            if (!value || (typeof value === 'string' && value.trim() === '')) {
+            if ((!value || (typeof value === 'string' && value.trim() === '')) && field.key_name !== 'auction') {
                 newErrors[field.key_name] = `${field.label} is required`;
                 isValid = false;
             }

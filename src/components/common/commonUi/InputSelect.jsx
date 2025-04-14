@@ -1,6 +1,6 @@
 import { Select } from "@mui/material"
 
-const InputSelect = ({ children, value, onChange, props, minWidth}) => {
+const InputSelect = ({ children, value, onChange, props, minWidth, borderRadius}) => {
     return (
         <Select
             value={value}
@@ -10,7 +10,7 @@ const InputSelect = ({ children, value, onChange, props, minWidth}) => {
             sx={{
                 background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
                 color: 'white',
-                borderRadius: '25px!important',
+                borderRadius: borderRadius ? borderRadius : '25px!important',
                 padding: '10px',
                 fontWeight: 'bold',
                 minWidth: minWidth ? minWidth : '120px',

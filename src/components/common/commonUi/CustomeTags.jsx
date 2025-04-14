@@ -13,12 +13,12 @@ const CustomeTags = ({ label, data, keyName, onClick, value, error, disabled }) 
     return (
         <Box className='custome_tags'>
             <label>{label}</label>
-            <Box className={`tags_box ${keyName === 'ball_type' ? 'nowrap' : 'wrap'}`}>
+            <Box className={`tags_box ${keyName === 'ball_type' || keyName === 'skills' ? 'nowrap' : 'wrap'}`}>
                 {
                     data.length > 0 && data.map((tag, i) => {
                         let selected = keyName === 'break' ? (value === tag?.key_name) : (value === tag?.title)
                         let isDisabled = (tag?.key_name === "test-match" && disabled)
-                        if (keyName === 'ball_type') {
+                        if (keyName === 'ball_type' || keyName === 'skills') {
                             return (
                                 <Box key={i} onClick={() => handleChange(tag?.title, keyName)}>
                                     <Box className={`tag_Image ${selected ? 'selected' : 'notSelected'}`}>
