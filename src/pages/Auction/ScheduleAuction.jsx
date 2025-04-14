@@ -13,8 +13,8 @@ import './ScheduleAuction.css';
 const ScheduleAuction = ({ type }) => {
     const { tournamentId } = useParams()
     const [auctionState, setAuctionState] = useState({
-        auction_date: '',
-        auction_time: '',
+        auction_date: new Date(),
+        auction_time: new Date(new Date().getTime() + 5 * 60 * 1000).toISOString(),
         auction_team_balance_point: '',
         minimum_bid: '',
         bid_increase_by: '',
@@ -26,15 +26,15 @@ const ScheduleAuction = ({ type }) => {
 
     const router = useRouter()
     const dispatch = useDispatch()
-    const auctionData = useSelector(state => state?.auction)
+    const auctionstate = useSelector(state => state?.auction)
+    const auctionData = auctionstate.data.length > 0 && auctionstate?.data?.find((item) => item?.tournamentId === tournamentId) || null;
 
     useEffect(() => {
         setIsUpdate(false)
-        if (type === 'update' && auctionData?.data) {
-            console.log(auctionData?.data, 'auctionData?.data');
+        if (type === 'update' && auctionData) {
             setAuctionState({
-                ...auctionData?.data,
-                auction_time: auctionData?.data?.auction_time
+                ...auctionData,
+                auction_time: auctionData?.auction_time
             })
             setIsUpdate(true)
         }

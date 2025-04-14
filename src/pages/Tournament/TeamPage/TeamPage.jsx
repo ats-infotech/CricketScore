@@ -2,6 +2,7 @@ import SvgIcon from '@/assets/icons/SvgIcon'
 import { CheckTournamentIsRunning } from '@/components/common/commomFunction'
 import CustomeButton from '@/components/common/commonUi/CustomeButton'
 import CustomeErrorBox from '@/components/common/commonUi/CustomeErrorBox'
+import CustomeMessageBox from '@/components/common/commonUi/CustomeMessageBox'
 import ImageAvatar from '@/components/common/commonUi/ImageAvatar/ImageAvatar'
 import MessageModal from '@/components/common/commonUi/Modal/MessageModal'
 import SectionBox from '@/components/common/commonUi/SectionBox/SectionBox'
@@ -19,7 +20,7 @@ import { uploadFile, uploadPlayerFile } from '../../../components/common/uploadF
 import './TeamPage.css'
 
 
-const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = false }) => {
+const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = false, isAuction = false }) => {
     const [anchorEl, setAnchorEl] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -41,7 +42,7 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
     };
 
     return (
-        <Box sx={{ padding: '15px 0 0' }}>
+        <Box sx={{ padding: '0 0 0' }}>
             {
                 teamData.length > 0 && teamData.map((item, i) => {
                     let lastData = teamData.length === (i + 1)
@@ -83,12 +84,12 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
                                     {
                                         title !== 'View Players' ?
                                             <div>
-                                                <MenuItem onClick={() => handleMenuItemClick('add_player')}>
+                                                {!isAuction && <MenuItem onClick={() => handleMenuItemClick('add_player')}>
                                                     <Box className='AddPlayerTag' >
                                                         <SvgIcon id={'add-player'} />
                                                         <Typography variant='body2'>{title}</Typography>
                                                     </Box>
-                                                </MenuItem>
+                                                </MenuItem>}
                                                 <MenuItem onClick={() => handleMenuItemClick('edit')}>
                                                     <Box className='AddPlayerTag' >
                                                         <EditIcon />
@@ -149,6 +150,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
         tournamentData?.tournament_start_date,
         tournamentData?.tournament_end_date
     ) === "completed", [tournamentData]);
+    const isAuction = tournamentData?.auction || false
 
     const handleModalClose = () => {
         setAlertModal({ open: false, success: false, message: "" });
@@ -223,7 +225,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
 
     return (
         <Box className={type === "about" ? "about_us_main maxheight" : "activeTeam"}>
-            {!isTeams && !isUserTeams && (
+            {!isAuction ? !isTeams && !isUserTeams && (
                 <SectionBox icon="teams" title="TeamLink">
                     <Box className="teamlink_main">
                         {!isPastTournament && (
@@ -239,20 +241,49 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                         <CustomeButton icon="share-line" title="Share" />
                     </Box>
                 </SectionBox>
-            )}
+            )
+                :
+                teamData?.length === 0 ?
+                    <Box className='auction_error'>
+                        <CustomeMessageBox icon='teams2' title='Add Teams Guide'
+                            describe='Quickly Add Teams with ease. Get personalized suggestions based on your preferences'
+                        >
+                        </CustomeMessageBox>
+                        <Box sx={{ marginTop: '40px' }}>
+                            <CustomeButton width={'80%'} height={'45px'} bgColor={'var(--primary-color) !important'} hover='none' title='Add Team' onClick={() => router.push(`/teams/${tournamentId}`)} />
+                        </Box>
+                    </Box>
+                    :
+                    <CustomeButton
+                        icon="addTeams"
+                        title="Add Team"
+                        onClick={() => router.push(`/teams/${tournamentId}`)}
+                    />
+            }
 
             {teamData?.length > 0 ? (
                 <Box>
                     {!isUserTeams && (
                         <Box className="teams_data_box">
-                            <SectionBox icon="teams2" title="My Teams">
+                            {!isAuction ?
+                                <SectionBox icon="teams2" title="My Teams">
+                                    <CommonTeamSection
+                                        teamData={teamData}
+                                        onClick={handleEvent}
+                                        isAuction={isAuction}
+                                        title={!isPastTournament ? "Add Player" : "View Players"}
+                                        boolean={isPastTournament}
+                                    />
+                                </SectionBox>
+                                :
                                 <CommonTeamSection
                                     teamData={teamData}
                                     onClick={handleEvent}
+                                    isAuction={isAuction}
                                     title={!isPastTournament ? "Add Player" : "View Players"}
                                     boolean={isPastTournament}
                                 />
-                            </SectionBox>
+                            }
                         </Box>
                     )}
 
@@ -261,6 +292,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                             {teamData.length > 0 ? (
                                 <CommonTeamSection
                                     teamData={teamData}
+                                    isAuction={isAuction}
                                     onClick={handleEvent}
                                     title="View Players"
                                 />
@@ -275,7 +307,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                     )}
                 </Box>
             ) : (
-                <Box sx={{ marginX: "15px" }}>
+               !isAuction && <Box sx={{ marginX: "15px" }}>
                     <CustomeErrorBox icon="noFile" title="Teams data not available" />
                 </Box>
             )}

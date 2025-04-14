@@ -19,7 +19,7 @@ const CustomeBack = React.memo(({ title, onclick, type, align }) => {
     return (
         <Box className='back_button_box' sx={{ marginBottom: type !== 'commonback' ? '10px' : '0px' }}>
             <SvgIcon id='down-arrow' className='backButtonIcon' onClick={handleBack} />
-            {type !== 'commonback' && <Typography variant="p" className="backButtonNearText" sx={{ textAlign: align || 'left', width: '75%' }}>{title}</Typography>}
+            {type !== 'commonback' && title && <Typography variant="p" className="backButtonNearText" sx={{ textAlign: align || 'left', width: '75%' }}>{title}</Typography>}
         </Box>
     )
 })

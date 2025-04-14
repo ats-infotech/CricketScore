@@ -106,8 +106,6 @@ const CreateTournament = ({ tournamentData }) => {
     const sm = useMediaQuery('(max-width: 380px)')
     const tournament_data = useSelector(tournamentState)
 
-    console.log(createTornaments, 'createTornaments');
-
     useEffect(() => {
         if (tournamentData !== undefined) {
             setCreateTornaments({

@@ -83,3 +83,25 @@
     color: var(--text-white);
     cursor: pointer;
 }
+
+@media screen and (max-width:410px) { 
+    .auction_page_main {
+        padding:30px 20px;
+    }
+}
+@media screen and (max-width:380px) { 
+    .auction_card {
+        margin-bottom: 30px;
+    }
+    
+    .auction_image {
+        width: 80px;
+        height: 65px;
+    }
+
+    .icon-text-row {
+        gap: 10px;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}

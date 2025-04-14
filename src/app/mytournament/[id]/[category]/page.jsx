@@ -1,6 +1,5 @@
 'use client'
 import { debounce, leaderBoardShorting } from "@/components/common/commomFunction";
-import Loader from "@/components/common/commonUi/Loader";
 import { getMainContainerDimensions, getWindowDimensions } from "@/components/common/maxHeightFunction";
 import AuctionPage from "@/pages/Auction/Auctionpage/AuctionPage";
 import AuctionPlayerPage from "@/pages/Auction/Auctionplayer/AuctionPlayerPage";

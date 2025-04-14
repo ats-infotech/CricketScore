@@ -32,7 +32,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: ['persist/PERSIST'],
-                ignoredActionPaths: ['payload.auction_time'],
+                ignoredActionPaths: ['payload.auction_time', 'payload.auction_date'],
             },
         }),
 });

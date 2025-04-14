@@ -1,0 +1,164 @@
+.live-auction {
+    padding: 35px;
+    position: relative;
+}
+
+.live-auction .live-auction-header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.live-auction .live-auction-header-main .back_button_box {
+    margin: 0;
+}
+
+.menu_auction_icon {
+    width: 28px;
+    height: 28px;
+    color: var(--text-black);
+}
+
+/* ------------ .au-player-details ---------- */
+.au-player-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    margin-top: 30px;
+}
+
+.au-player-details .au-pl-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+}
+
+.au-pl-details {
+    width: 60%;
+}
+
+.au-pl-details .auction-player {
+    font-size: var(--semi-normal);
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 10px;
+}
+
+.au-pl-details .auction-team-name {
+    font-size: var(--small);
+    font-weight: 500;
+    text-align: center;
+    color: var(--text-green);
+    margin-top: 5px;
+}
+
+.auction-bidding {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--blue-background);
+    border-radius: 10px;
+    padding: 8px 20px;
+}
+
+.auction-bidding .bidding-count {
+    font-size: var(--large);
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.auction-bidding svg.gold-coin {
+    width: 20px;
+    height: 20px;
+}
+
+.auction-bidding svg.edit-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--text-grey);
+}
+
+
+.auction-team {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 0;
+}
+
+/* ======= team card ========= */
+
+.team_card {
+    background-color: var(--primary-color);
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 178px;
+}
+
+.team_card .team-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.team_card .team_details h6 {
+    font-size: var(--ex-small);
+    font-weight: 600;
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-start;
+}
+
+.team_card .team_details h6 svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ========= button-group ======== */
+
+.button-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+}
+
+.action-btn {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    background-color: var(--text-white) !important;
+    color: var(--text-black) !important;
+    padding: 12px !important;
+    font-size: var(--small) !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+    width: 100% !important;
+    max-width: 120px !important;
+    text-transform: capitalize !important;
+}
+
+.action-btn svg {
+    width: 19px;
+    height: 18px;
+    background-color: var(--text-white);
+}

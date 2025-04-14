@@ -2,6 +2,7 @@
 import { debounce, leaderBoardShorting } from "@/components/common/commomFunction";
 import Loader from "@/components/common/commonUi/Loader";
 import { getWindowDimensions } from "@/components/common/maxHeightFunction";
+import AuctionPage from "@/pages/Auction/Auctionpage/AuctionPage";
 import Leaderboard from "@/pages/Leaderboard/Leaderboard";
 import PointTable from "@/pages/PointTable/PointTable";
 import Stats from "@/pages/Stats/Stats";
@@ -76,16 +77,18 @@ const TournamentCategory = () => {
         return <MatchPage teamData={teamData} tournamentData={tournamentData} matchData={matchData} tournamenId={id} />;
       case 'leaderboard':
         return <Leaderboard playerData={playerData} teamData={teamData} />;
+      case 'auction':
+        return <AuctionPage tournamentData={tournamentData} isUser={true} />;
       default:
         return null;
     }
   }, [category, id, tournamentData, teamData, matchData, playerData]);
-  
+
   let contentHeight = windowDimensions?.height - bannerHeight;
-  
+
   return (
     // <Box sx={{ minHeight: `${contentHeight - 80}px`, overflowY: "auto"}}>
-    <Box> 
+    <Box>
       {RenderContent}
     </Box>
   )

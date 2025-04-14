@@ -1,0 +1,67 @@
+.auction-players-page {
+    padding: 30px 30px;
+}
+
+.auction-header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.auction-header-main .header-title {
+    font-size: var(--semi-normal);
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.auction-header-main .back_button_box {
+    margin: 0;
+}
+
+.auction-header-main .auction_icon {
+    width: 18px;
+    height: 18px;
+    color: var(--primary-color);
+}
+
+.auction_search_box_main {
+    padding: 0px 0 30px;
+}
+
+/* ======= auction player card ====== */
+.auction_player_card {
+    background-color: var(--primary-color);
+    width: 100%;
+    border-radius: 15px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.plyer_img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+
+.auction_player_details .player_name,
+.auction_player_details .team_name  {
+    font-size: var(--normal);
+    font-weight: 500;
+    color: var(--text-white);
+}
+.auction_player_details .coins  {
+    font-size: var(--small);
+    font-weight: 500;
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.auction_player_details .coins svg {
+    width: 16px;
+    height: 16px;
+}

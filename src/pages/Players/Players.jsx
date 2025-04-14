@@ -1,3 +1,4 @@
+'use client'
 import SvgIcon from "@/assets/icons/SvgIcon";
 import { generateNumberId } from "@/components/common/commomFunction";
 import { CommonText } from "@/components/common/commonText";

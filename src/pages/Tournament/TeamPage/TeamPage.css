@@ -41,6 +41,10 @@
     scrollbar-width: none; */
 }
 
+.auction_error {
+    padding: 20px 15px 0;
+}
+
 /* ------------ */
 .teamBox {
     width: 100%;

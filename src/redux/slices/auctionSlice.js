@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
-    data: null,
+    data: [],
     auction: false
 }
 
@@ -11,10 +11,21 @@ const auctionSlice = createSlice({
     initialState,
     reducers: {
         scheduleAuction: (state, action) => {
-            state.data = action.payload
+            state.data.push({
+                ...action.payload,
+                auction_time: new Date(action.payload.auction_time).toISOString()
+            })
         },
         updateAuction: (state, action) => {
-            state.data = { ...state.data, ...action.payload }
+            let findIndex = state.data.findIndex(item => item?.id === action.payload.id)
+            if (findIndex !== -1) {
+                let updateData = {
+                    ...state.data[findIndex],
+                    ...action.payload,
+                    auction_time: new Date(action.payload.auction_time).toISOString()
+                }
+                state.data[findIndex] = updateData
+            }
         }
     }
 })
