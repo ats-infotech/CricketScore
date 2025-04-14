@@ -80,7 +80,7 @@ const TournamentCategory = () => {
       case 'auction':
         return <AuctionPage tournamentData={tournamentData} />;
       case 'players':
-        return <AuctionPlayerPage tournamentData={tournamentData} />
+        return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} />
       default:
         return null;
     }

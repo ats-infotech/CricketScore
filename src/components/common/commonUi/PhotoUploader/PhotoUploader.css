@@ -12,6 +12,8 @@
     background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
+    margin: 0 auto;
+    margin-block: 25px;
 }
 
 .photo_uploader.isFile {

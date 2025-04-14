@@ -32,19 +32,12 @@ export const AuctionPlayerForm = [
         show_type: 'input'
     },
     {
-        label: 'Number',
+        label: 'Mobile Number',
         placeholder: 'Enter player number',
         type: 'number',
         key_name: 'playerContact',
         show_type: 'input'
     },
-    // {
-    //     label: 'skills',
-    //     placeholder: 'Enter player skills',
-    //     type: 'text',
-    //     key_name: 'player_skills',
-    //     show_type: 'tags'
-    // },
     {
         label: 'Select Skills',
         placeholder: 'Select Skills',
@@ -136,6 +129,23 @@ export const AuctionPlayerForm = [
         placeholder: 'Enter extra details',
         type: 'text',
         key_name: 'extradetails',
+        show_type: 'input'
+    },
+]
+
+export const BulkPlayerForm = [
+    {
+        label: 'Name',
+        placeholder: 'Enter player name',
+        type: 'text',
+        key_name: 'playerName',
+        show_type: 'input'
+    },
+    {
+        label: 'Mobile Number',
+        placeholder: 'Enter player number',
+        type: 'number',
+        key_name: 'playerContact',
         show_type: 'input'
     },
 ]
