@@ -13,7 +13,7 @@ export const AuctionPlayerForm = [
         label: 'Name',
         placeholder: 'Enter player name',
         type: 'text',
-        key_name: 'player_name',
+        key_name: 'playerName',
         show_type: 'input'
     },
     {
@@ -35,7 +35,7 @@ export const AuctionPlayerForm = [
         label: 'Number',
         placeholder: 'Enter player number',
         type: 'number',
-        key_name: 'phone_number',
+        key_name: 'playerContact',
         show_type: 'input'
     },
     // {

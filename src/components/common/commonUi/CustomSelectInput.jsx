@@ -1,7 +1,7 @@
 import { FormControl, MenuItem } from "@mui/material";
 import InputSelect from "./InputSelect";
 
-const CustomSelectInput = ({ value, label, onChange, options, disabled = false, disabledOptions = [], minWidth, borderRadius }) => {
+const CustomSelectInput = ({ value, label, onChange, options, disabled = false, disabledOptions = [], minWidth, borderRadius, bgColor, labelfont, color, fontWeight }) => {
      
     return (
         <FormControl >
@@ -29,6 +29,10 @@ const CustomSelectInput = ({ value, label, onChange, options, disabled = false, 
                 disabled={disabled}
                 minWidth={minWidth}
                 borderRadius={borderRadius}
+                bgColor={bgColor}
+                labelfont={labelfont}
+                color={color}
+                fontWeight={fontWeight}
             // sx={{
             //     backgroundColor: 'var(--blue-background)',
             //     color: 'var(--text-white)',

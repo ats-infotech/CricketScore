@@ -14,7 +14,7 @@ const AuctionPlayerPage = ({ tournamentData }) => {
                 <CustomeButton
                     icon="addTeams"
                     title="Add Player"
-                    onClick={() => router.push(`/create-auction-player`)}
+                    onClick={() => router.push(`/create-auction-player/${tournamentData?.id}`)}
                 />
             </Box>
         </Box>

@@ -8,3 +8,11 @@
     justify-content: center;
     margin-bottom: 30px;
 }
+
+.select_title_section p {
+    color: var(--text-grey);
+    margin-bottom: 6px;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: var(--ex-small);
+}

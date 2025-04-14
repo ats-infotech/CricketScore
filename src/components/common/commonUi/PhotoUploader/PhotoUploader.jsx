@@ -2,8 +2,9 @@ import SvgIcon from "@/assets/icons/SvgIcon";
 import { Box } from "@mui/material";
 import { useRef } from "react";
 import './PhotoUploader.css'
+import Avtar from "../Avtar/Avtar";
 
-const PhotoUploader = ({ file, onChange }) => {
+const PhotoUploader = ({ file, onChange, name, onNameChange, bgColor, type }) => {
     const fileInputRef = useRef(null);
 
     const openFileManager = () => {
@@ -24,7 +25,18 @@ const PhotoUploader = ({ file, onChange }) => {
                 style={{ display: 'none' }}
                 onChange={onChange}
             />
-            {!file && <SvgIcon id='profile' className='photo_profile_icon' />}
+            {
+                name ?
+                    <>
+                    {(!file) && 
+                        <Avtar name={name} onChange={onNameChange} bgColor={bgColor} type={type}  />
+                    }
+                    </>
+                    :
+                    <>
+                        {!file && <SvgIcon id='profile' className='photo_profile_icon' />}
+                    </>
+            }
             <Box className='profile_sub_icon'>
                 <SvgIcon id='addImage2' className='photo_profile_icon' />
             </Box>

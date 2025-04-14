@@ -1,6 +1,6 @@
 import { Select } from "@mui/material"
 
-const InputSelect = ({ children, value, onChange, props, minWidth, borderRadius}) => {
+const InputSelect = ({ children, value, onChange, props, minWidth, borderRadius, bgColor, labelfont, color, fontWeight }) => {
     return (
         <Select
             value={value}
@@ -8,11 +8,11 @@ const InputSelect = ({ children, value, onChange, props, minWidth, borderRadius}
             displayEmpty
             {...props}
             sx={{
-                background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
-                color: 'white',
+                background: bgColor ? bgColor : 'linear-gradient(135deg, #1e3c72, #2a5298)',
+                color: color ? color : 'white',
                 borderRadius: borderRadius ? borderRadius : '25px!important',
                 padding: '10px',
-                fontWeight: 'bold',
+                fontWeight: fontWeight ? fontWeight : 'bold',
                 minWidth: minWidth ? minWidth : '120px',
                 maxWidth: minWidth ? minWidth : '120px',
                 height:"40px",
@@ -24,7 +24,7 @@ const InputSelect = ({ children, value, onChange, props, minWidth, borderRadius}
                 '& .MuiInputBase-input': {
                     border: 'none',
                     padding:'0 10px !important',
-                    fontSize: 'var(--small)',
+                    fontSize: labelfont ? labelfont : 'var(--small)',
                     position:'absolute',
                     top:'0',
                     right:'0',
@@ -47,7 +47,7 @@ const InputSelect = ({ children, value, onChange, props, minWidth, borderRadius}
                     color: 'var(--text-white)',
                 },
                 '&:hover': {
-                    transform: 'scale(1.02)',
+                    // transform: 'scale(1.02)',
                     // background: 'linear-gradient(135deg, #1e3c72, #344a72)',
                 },
                 '&.Mui-focused': {
