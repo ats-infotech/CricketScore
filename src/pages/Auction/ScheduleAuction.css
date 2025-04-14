@@ -1,0 +1,10 @@
+.schedule_auction_form {
+    padding: 24px 40px 0;
+}
+
+.file_uploader_main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}

@@ -1,15 +1,16 @@
+"use client"
 import { Box, Typography } from "@mui/material";
 import { useRef } from "react";
 import './CustomeFileCss/CustomeInput.css';
 import DateTimePickers from "./DateTimePickers";
 
-const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '', onChange, error, startDate, disabled, onClick, readOnly = false }) => {
+const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '', onChange, error, startDate, disabled, onClick, readOnly = false, ampm }) => {
     const openTornamentEndDate = (type === 'date' && keyName === 'tournament_end_date' && !startDate)
     const openAutoMatchEndDate = (type === 'datetime-local' && keyName === 'match_end_date' && !startDate)
     const isDateType = type === 'date' || type === 'datetime-local' || type === 'time';
     const isDate = type === 'date' || type === 'datetime-local'
     const inputRef = useRef(null);
-
+    
     const handleOnChange = (val, keyName) => {
         let value = val
         if (value?.length === 1 && value?.[0] === ' ') {
@@ -127,7 +128,7 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
         <Box className='custome_input'>
             <label>{label}</label>
             {
-                type === 'datetime-local' || type === 'date' || type === 'time' ?
+                (type === 'datetime-local' || type === 'date' || type === 'time') ?
                     <DateTimePickers
                         type={type}
                         disabled={openEndDate}
@@ -136,6 +137,7 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
                         max={getMaxValue()}
                         keyName={keyName}
                         onChange={handleOnChange}
+                        ampm={ampm}
                     />
                     :
                     <input

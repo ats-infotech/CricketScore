@@ -41,7 +41,7 @@ export const TornamentForm = [
         key_name: 'tournament_start_date',
         show_type: 'input',
     },
-    
+
     {
         label: 'Tournaments End Date',
         placeholder: 'DD/MM/YYYY',
@@ -64,6 +64,17 @@ export const TornamentForm = [
             { title: 'Series', key_name: "series" },
             { title: 'College', key_name: "college" },
             { title: 'Other', key_name: "other" },
+        ]
+    },
+    {
+        label: 'Auction',
+        placeholder: 'want to auction?',
+        type: 'text',
+        key_name: 'auction',
+        show_type: 'tags',
+        data: [
+            { title: 'Yes', key_name: "yes" },
+            { title: 'No', key_name: "no" },
         ]
     },
     {

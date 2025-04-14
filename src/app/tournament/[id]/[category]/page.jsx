@@ -77,7 +77,7 @@ const TournamentCategory = () => {
       case 'leaderboard':
         return <Leaderboard playerData={playerData} teamData={teamData} />;
       default:
-        return <Loader/>;
+        return null;
     }
   }, [category, id, tournamentData, teamData, matchData, playerData]);
   

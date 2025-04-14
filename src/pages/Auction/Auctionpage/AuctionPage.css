@@ -1,0 +1,85 @@
+/* ======== auction page ====== */
+.auction_page_main {
+    height: 100%;
+    width: 100%;
+    padding: 40px 35px;
+}
+
+.auction_btn_row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* ===== auction card ========= */
+.auction_card {
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.auction_image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: var(--text-lightgrey);
+    overflow: hidden;
+}
+
+.auction_image.isText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auction_image.isText h5 {
+    font-size: var(--large);
+    font-weight: 500;
+    color: var(--text-white);
+}
+
+.auction-details h5 {
+    font-size: var(--normal);
+    font-weight: 500;
+    color: var(--text-white);
+    margin-bottom: 12px;
+}
+
+.icon-text-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    width: 140%;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-text span {
+    font-size: var(--ex-small);
+    font-weight: 500;
+    color: var(--text-lightgrey);
+}
+
+.icon-text svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-lightgrey);
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--text-white);
+    cursor: pointer;
+}

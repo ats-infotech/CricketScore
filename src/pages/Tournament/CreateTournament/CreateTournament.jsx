@@ -73,6 +73,7 @@ const CreateTournament = ({ tournamentData }) => {
         need_official: false,
         tournament_banner: null,
         tournament_image: null,
+        auction: false,
         matches: 0,
         innings: 0,
         runs: 0,
@@ -104,6 +105,8 @@ const CreateTournament = ({ tournamentData }) => {
     const router = useRouter()
     const sm = useMediaQuery('(max-width: 380px)')
     const tournament_data = useSelector(tournamentState)
+
+    console.log(createTornaments, 'createTornaments');
 
     useEffect(() => {
         if (tournamentData !== undefined) {
@@ -254,13 +257,21 @@ const CreateTournament = ({ tournamentData }) => {
             //     }));
             // }
         }
-        
+
         if (key === 'tournament_name' && !value) {
             setCreateTornaments(prev => ({
                 ...prev,
                 ['tournament_logo_color']: '',
                 ['letter']: ''
             }));
+        }
+
+        if (key === 'auction') {
+            setCreateTornaments(prev => ({
+                ...prev,
+                [key]: value === 'Yes'
+            }));
+            return
         }
 
         setCreateTornaments(prev => ({
@@ -421,7 +432,7 @@ const CreateTournament = ({ tournamentData }) => {
             setErrorMessage("Something went wrong. Please try again.");
         }
     };
-    
+
     return (
         <Box className="createTournamentForm">
             {
@@ -575,7 +586,7 @@ const CreateTournament = ({ tournamentData }) => {
                             }
                             {
                                 formData?.length > 0 && formData.map((field, index) => {
-                                    let value = createTornaments[field?.key_name];
+                                    let value = field?.key_name === 'auction' ? createTornaments[field?.key_name] === true ? 'Yes' : 'No' : createTornaments[field?.key_name];
                                     const error = errors[field.key_name];
                                     let startDate = createTornaments['tournament_start_date']
                                     if (field?.show_type === 'input') {

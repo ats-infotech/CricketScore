@@ -4,14 +4,22 @@ import ImageAvatar from "@/components/common/commonUi/ImageAvatar/ImageAvatar"
 import Loader from "@/components/common/commonUi/Loader"
 import ScrollableTabs from "@/components/common/commonUi/ScrollableTabs/ScrollableTabs"
 import CommonBack from "@/components/common/commonUi/commonBack"
+import { breakType, TestBreakType } from "@/components/common/json/commonJson"
+import { teamsState } from "@/redux/slices/teamSlice"
 import { Box, Typography } from "@mui/material"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
-import './TournamentBanner.css'
-import { breakType, TestBreakType } from "@/components/common/json/commonJson"
 import { useSelector } from "react-redux"
-import { teamsState } from "@/redux/slices/teamSlice"
+import './TournamentBanner.css'
+
+const auctionbuttonGroups = [
+    { title: 'Auction', icon: 'auction-thor', value: 'auction' },
+    { title: 'Teams', icon: 'teams2', value: 'teams' },
+    { title: 'players', icon: 'add-player', value: 'players' },
+    { title: 'MVP', icon: 'mvp', value: 'mvp' },
+    { title: 'About', icon: 'about', value: 'about' },
+];
 
 const buttonGroups = [
     { title: 'Match', icon: 'striker', value: 'match' },
@@ -477,21 +485,21 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
         const winningTeam = team_data?.data?.find((items) => items?.id === tData?.matchWinner)?.team_name
         const terminatedTeam = team_data?.data?.find((items) => items?.id === tData?.terminate?.teamdisqualify)?.team_name
 
-       if (tData?.status === 4) {
-        if (tData?.terminate) {
-            if (tData?.terminate?.mainreason === "rain") {
-                setWinner(`Match abandoned due to ${tData?.terminate?.mainreason}`)
-            } else {
-                setWinner(`Match abandoned as ${terminatedTeam} was disqualified`)
+        if (tData?.status === 4) {
+            if (tData?.terminate) {
+                if (tData?.terminate?.mainreason === "rain") {
+                    setWinner(`Match abandoned due to ${tData?.terminate?.mainreason}`)
+                } else {
+                    setWinner(`Match abandoned as ${terminatedTeam} was disqualified`)
+                }
+            } else if (tData?.matchWinner === undefined && isTestMatch) {
+                setWinner("Match Draw")
+            } else if (!tData?.matchWinner && !isTestMatch) {
+                setWinner('Match Tied')
+            } else if (tData?.winSituation) {
+                setWinner(`${winningTeam} ${tData?.winSituation}`)
             }
-        } else if (tData?.matchWinner === undefined && isTestMatch) {
-            setWinner("Match Draw")
-        } else if (!tData?.matchWinner && !isTestMatch) {
-            setWinner('Match Tied')
-        } else if (tData?.winSituation) {
-            setWinner(`${winningTeam} ${tData?.winSituation}`)
         }
-       }
     }, [tData, tData?.matchWinner, matchThirdInnings, matchFourthInnings, team1, team2])
 
     useEffect(() => {
@@ -620,7 +628,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
             </Box>
             <Box sx={{ position: 'absolute', bottom: '0', zIndex: '99', left: '0', right: '0' }}>
                 <ScrollableTabs
-                    buttonGroups={type === 'match' ? matchGroups : pastMatchGroups}
+                    buttonGroups={type === 'match' ? matchGroups : data?.auction ? auctionbuttonGroups : pastMatchGroups}
                     tabActive={tabValue}
                     handleChange={handleTabChange}
                 />

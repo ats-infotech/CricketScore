@@ -4,8 +4,8 @@ export const uploadFile = async (payload, method) => {
     const formData = new FormData();
     formData.append('thumbnail', payload.thumbnail);
     formData.append('data', JSON.stringify({
-        folderId: payload.folderId,
-        subFolder: payload.subFolder,
+        folderId: payload.folderId || '',
+        subFolder: payload.subFolder || '',
         oldFileName: payload.oldFileName || '',
         fileName: payload.fileName || ''
     }));
@@ -47,6 +47,24 @@ export const uploadTournamentFile = async (payload, method) => {
         oldImageFileName: payload.oldImageFileName || '',
     }));
     const res = await fetch("/api/uploadtournamentfile", {
+        method: method || "POST",
+        body: formData,
+    })
+
+    const data = await res.json();
+    return data;
+}
+
+export const uploadAuctionFile = async (payload, method) => {
+    const formData = new FormData();
+    formData.append('thumbnail', payload.thumbnail);
+    formData.append('data', JSON.stringify({
+        folderId: payload?.folderId || '',
+        oldFileName: payload?.oldFileName || '',
+        fileName: payload?.fileName || ''
+    }));
+
+    const res = await fetch("/api/uploadauctionfile", {
         method: method || "POST",
         body: formData,
     })

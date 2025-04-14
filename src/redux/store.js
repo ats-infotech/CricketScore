@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
+import auctionSlice from './slices/auctionSlice';
 import matchSlice from './slices/matchSlice';
 import playerScoreBoardSlice from './slices/playerScoreBoardSlice';
 import playersSlice from './slices/playersSlice';
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     teams: teamSlice,
     players: playersSlice,
     matches: matchSlice,
-    playerscoreboard: playerScoreBoardSlice
+    playerscoreboard: playerScoreBoardSlice,
+    auction: auctionSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -30,6 +32,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: ['persist/PERSIST'],
+                ignoredActionPaths: ['payload.auction_time'],
             },
         }),
 });
