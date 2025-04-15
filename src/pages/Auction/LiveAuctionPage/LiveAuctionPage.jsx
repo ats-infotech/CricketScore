@@ -26,13 +26,11 @@ const btnGroup = [
 ]
 
 const LiveAuctionPage = () => {
-    const [displayPlayerIndex, setDisplayPlayerIndex] = useState(0)
     const [currentTeamBidding, setCurrentTeamBidding] = useState(null)
     const [currentBid, setCurrentBid] = useState(0)
     const [updateInputBid, setUpdateInputBid] = useState('')
     const [error, setError] = useState({})
     const [isWhatOpen, setWhatOpen] = useState('')
-    const [selectManualPlayer, setSelectManualPlayer] = useState(displayPlayerIndex)
     const { auctionId } = useParams()
 
     const auctionState = useSelector(state => state.auction)
@@ -42,12 +40,13 @@ const LiveAuctionPage = () => {
     const auctiondata = auctionState.data.find((item) => item?.id === auctionId)
     const teamsData = teamState.data.filter((item) => item?.tournamentId === auctiondata?.tournamentId)
     const playerData = playerState.data.filter((item) => item?.tournamentId === auctiondata?.tournamentId)
-    const player = playerData[displayPlayerIndex]
 
     const [open, setOpen] = useState(false)
-    const [searchValue, setSearchValue] = useState("")
     const [searchResults, setSearchResults] = useState('')
     const [showPlayerData, setShowPlayerData] = useState(playerData || [])
+    const [currentPlayer, setCurrentPlayer] = useState(playerData[0] || null);
+    const [selectManualPlayer, setSelectManualPlayer] = useState(currentPlayer)
+    const player = currentPlayer
 
     const handleClose = () => {
         setOpen(false)
@@ -61,27 +60,34 @@ const LiveAuctionPage = () => {
 
     const handleOnSearch = (event) => {
         const value = event.target.value
-        setSearchValue(value)
         debouncedSearch(value)
     }
 
     const clearSearchValue = () => {
-        setSearchValue('')
         setSearchResults('')
     }
 
-    const searchFunction = (dataArr = [], query) => {
-        if (!query) return dataArr
-        const searchQuery = query.toLowerCase()
-        return dataArr.filter((item) => item?.playerName?.toLowerCase()?.includes(searchQuery))
-    }
+    // Optimize the search functionality to prevent unnecessary re-renders
+    const searchFunction = useCallback((dataArr = [], query) => {
+        if (!query) return dataArr;
+        const searchQuery = query.toLowerCase();
+        return dataArr.filter((item) => item?.playerName?.toLowerCase()?.includes(searchQuery));
+    }, []);
 
     useEffect(() => {
-        if (searchValue) {
-            const data = searchFunction(playerData, searchValue)
+        if (searchResults.trim !== '') {
+            const data = searchFunction(playerData, searchResults)
             setShowPlayerData(data)
         }
-    }, [searchValue, playerData])
+    }, [searchResults, searchFunction])
+
+    // Initialize currentPlayer when playerData loads
+    useEffect(() => {
+        if (playerData.length > 0 && !currentPlayer) {
+            setCurrentPlayer(playerData[0])
+        }
+    }, [playerData])
+
 
     // Initialize current bid when player changes or auction data loads
     useEffect(() => {
@@ -89,7 +95,7 @@ const LiveAuctionPage = () => {
             setCurrentBid(auctiondata.minimum_bid || 0)
             setUpdateInputBid(auctiondata.minimum_bid || '')
         }
-    }, [auctiondata, displayPlayerIndex])
+    }, [auctiondata, currentPlayer])
 
     // Handle team bidding
     const handleTeamBid = (team) => {
@@ -119,15 +125,22 @@ const LiveAuctionPage = () => {
         setCurrentBid(current)
     }
 
-    // auction player Change
+    // Then the random function becomes:
     const handleRandomPlayerChange = () => {
-        if (displayPlayerIndex < playerData.length - 1) {
-            setDisplayPlayerIndex(prev => prev + 1)
-        } else {
-            setDisplayPlayerIndex(0)
-        }
-        setCurrentTeamBidding(null)
-    }
+        if (playerData.length === 0) return;
+
+        // Filter out the current player to avoid immediate repeats
+        const otherPlayers = playerData.filter(player =>
+            currentPlayer ? player.id !== currentPlayer.id : true
+        );
+
+        // Select random from remaining players (or all if no current player)
+        const randomPlayer = otherPlayers.length > 0
+            ? otherPlayers[Math.floor(Math.random() * otherPlayers.length)]
+            : playerData[Math.floor(Math.random() * playerData.length)];
+        setCurrentPlayer(randomPlayer);
+        setCurrentTeamBidding(null);
+    };
 
     const bidHandling = (key) => {
         switch (key) {
@@ -170,12 +183,14 @@ const LiveAuctionPage = () => {
     // handle Modal content show
     const handleWhatOpen = (type) => {
         setWhatOpen(type)
-        setSelectManualPlayer(displayPlayerIndex)
+        setSelectManualPlayer(currentPlayer)
         setOpen(true)
     }
 
     const handleManualPlayerSelection = () => {
-        setDisplayPlayerIndex(selectManualPlayer)
+        if (selectManualPlayer) {
+            setCurrentPlayer(selectManualPlayer)
+        }
         handleClose()
     }
 
@@ -294,12 +309,12 @@ const LiveAuctionPage = () => {
                                 />
                             </Box>
                             {showPlayerData.map((item, i) => {
-                                const isSelect = selectManualPlayer === i
+                                const isSelect = selectManualPlayer?.id === item.id
                                 return (
                                     <Box
                                         className='manual-player-selection'
                                         key={i}
-                                        onClick={() => setSelectManualPlayer(i)}
+                                        onClick={() => setSelectManualPlayer(item)}
                                     >
                                         <Box className='player_row'>
                                             <Box

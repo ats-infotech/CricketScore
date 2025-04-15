@@ -12,6 +12,12 @@
     margin-bottom: 30px;
 }
 
+.describe-msg {
+    font-size: var(--ex-small) !important;
+    font-weight: 500 !important;
+    color: var(--text-black) !important;
+}
+
 /* ===== auction card ========= */
 .auction_card {
     background-color: var(--primary-color);

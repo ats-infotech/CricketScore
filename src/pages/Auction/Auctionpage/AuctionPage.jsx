@@ -2,6 +2,8 @@ import SvgIcon from "@/assets/icons/SvgIcon";
 import { DateFormat } from "@/components/common/commomFunction";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeMessageBox from "@/components/common/commonUi/CustomeMessageBox";
+import { playersState } from "@/redux/slices/playersSlice";
+import { teamsState } from "@/redux/slices/teamSlice";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,7 +13,11 @@ import './AuctionPage.css';
 const AuctionPage = ({ tournamentData, isUser = false }) => {
     const router = useRouter()
     const auctionState = useSelector(state => state?.auction)
+    const teamState = useSelector(teamsState)
+    const playerState = useSelector(playersState)
     const auctionData = auctionState?.data.length > 0 && auctionState?.data.find((item) => item?.tournamentId === tournamentData?.id) || null
+    const teamData = teamState?.data.length > 0 && teamState?.data.filter((item) => item?.tournamentId === tournamentData?.id) || []
+    const playerData = playerState?.data.length > 0 && playerState?.data.filter((item) => item?.tournamentId === tournamentData?.id) || []
     const auctionTime = new Date(auctionData?.auction_time)
     const formattedTime = auctionTime.toLocaleTimeString('en-US', {
         hour: '2-digit',
@@ -20,6 +26,7 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
     });
 
     const isAuctionCompleted = auctionData && Object.keys(auctionData).length > 0
+    const isStartAuction = teamData.length >= 2 && playerData.length >= 4
 
     const handleScheduleAuction = () => {
         router.push(`/create-auction/${tournamentData?.id}`)
@@ -64,7 +71,7 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                                 <span>{`${formattedTime}`}</span>
                             </Typography>
                         </Box>
-                        <Typography className="icon-text" sx={{marginBottom: '10px'}}>
+                        <Typography className="icon-text" sx={{ marginBottom: '10px' }}>
                             <SvgIcon id='add-player' />
                             <span>{`${auctionData?.player_per_team} PI/Team`}</span>
                         </Typography>
@@ -77,10 +84,18 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                 </Box>
             }
             {isAuctionCompleted ?
-                <Box className='auction_btn_row'>
-                    {!isUser && <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} />}
-                    <CustomeButton title={"View Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('view')} />
-                </Box>
+                <>
+                    <Box className='auction_btn_row'>
+                        {!isUser && <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} disabled={!isStartAuction} />}
+                        <CustomeButton title={"View Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('view')} />
+                    </Box>
+                    {!isStartAuction &&
+                        <>
+                            <Typography variant="h6" className="describe-msg"> 🚀 Auction Start Instructions: </Typography>
+                            <Typography variant="h6" className="describe-msg">📌 please add at least 2 teams and a minimum of 4 players to start the auction.</Typography>
+                        </>
+                    }
+                </>
                 :
                 <>
                     <CustomeMessageBox icon='teams2' title='Auction Guide'

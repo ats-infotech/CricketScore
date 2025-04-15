@@ -40,7 +40,7 @@
     justify-content: center;
 }
 
-.au-player-details .au-pl-img h6 { 
+.au-player-details .au-pl-img h6 {
     font-size: var(--semi-normal);
     color: var(--text-white);
     font-weight: 600;
@@ -116,8 +116,8 @@
 }
 
 .team_card.active-bidder {
-  background-color: var(--green);
-  opacity: 0.8;
+    background-color: var(--green);
+    opacity: 0.8;
 }
 
 .team_card .team-logo {
@@ -130,7 +130,7 @@
     justify-content: center;
 }
 
-.team_card .team-logo h6 { 
+.team_card .team-logo h6 {
     font-size: var(--small);
     color: var(--text-white);
     font-weight: 600;
@@ -163,6 +163,9 @@
     left: 0;
     right: 0;
     bottom: 20px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
 }
 
 .action-btn {
@@ -206,6 +209,7 @@
     font-weight: 500;
     color: var(--text-black);
 }
+
 .auction-modal-header svg {
     width: 18px;
     height: 18px;
@@ -236,13 +240,13 @@
 }
 
 .auction_player {
-   font-size: var(--small)!important;
-   font-weight: 600 !important;
-   color: var(--text-white);
+    font-size: var(--small) !important;
+    font-weight: 600 !important;
+    color: var(--text-white);
 }
 
 .auction-player-section {
-  padding: 20px 0;
+    padding: 20px 0;
 }
 
 .manual-player-selection .player-img {
@@ -266,6 +270,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .auction-checkbox.isSelect {
     background-color: var(--text-white);
 }
