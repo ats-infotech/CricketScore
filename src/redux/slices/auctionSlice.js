@@ -17,6 +17,45 @@ const auctionSlice = createSlice({
             }
             state.data.push({ ...action.payload });
         },
+        AddCurrentPlayer: (state, action) => {
+            const { id, CurrentPlayer } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id
+                    ? {
+                        ...item,
+                        CurrentPlayer: [...CurrentPlayer],
+                    }
+                    : item
+            );
+        },
+        AddSoldPlayer: (state, action) => {
+            const { id, SoldPlayers } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id
+                    ? {
+                        ...item,
+                        SoldPlayers: [
+                            ...(item.SoldPlayers || []),
+                            ...SoldPlayers,
+                        ]
+                    }
+                    : item
+            );
+        },
+        AddUnsoldPlayer: (state, action) => {
+            const { id, UnsoldPlayer } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id
+                    ? {
+                        ...item,
+                        UnsoldPlayer: [
+                            ...(item.UnsoldPlayer || []),
+                            ...UnsoldPlayer,
+                        ]
+                    }
+                    : item
+            );
+        },
         updateAuction: (state, action) => {
             let findIndex = state.data.findIndex(item => item?.id === action.payload.id)
             if (findIndex !== -1) {
@@ -31,5 +70,5 @@ const auctionSlice = createSlice({
     }
 })
 
-export const { scheduleAuction, updateAuction } = auctionSlice.actions
+export const { scheduleAuction, updateAuction, AddCurrentPlayer, AddSoldPlayer, AddUnsoldPlayer } = auctionSlice.actions
 export default auctionSlice.reducer

@@ -91,10 +91,28 @@ const teamSlice = createSlice({
                     console.warn(`Team with ID ${teamId} not found in state`);
                 }
             });
+        },
+        updateAuctionTeamStats: (state, action) => {
+            const { teams } = action.payload;
+            teams.forEach(stat => {
+                const { teamId, ...stats } = stat;
+                const index = state.data.findIndex(team => team.id === teamId);
+                if (index !== -1) {
+                    const currentTeam = state.data[index];
+                    const updatedStats = {
+                        ...currentTeam,
+                        wallet: (stats.wallet ?? 0),
+                        players: (stats.players ?? 0),
+                    };
+                    state.data[index] = updatedStats;
+                } else {
+                    console.warn(`Team with ID ${teamId} not found in state`);
+                }
+            });
         }
     }
 })
 
-export const { createTeams, updateTeamStats, deleteTeam, deleteMultipleTeams, updateTeam } = teamSlice.actions
+export const { createTeams, updateTeamStats, deleteTeam, deleteMultipleTeams, updateTeam, updateAuctionTeamStats } = teamSlice.actions
 export const teamsState = (state) => state.teams
 export default teamSlice.reducer

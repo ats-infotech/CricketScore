@@ -73,7 +73,7 @@
     content: '';
     position: absolute;
     background-color: var(--text-white);
-    filter: blur(65.5px);
+    filter: blur(135.5px);
     height: 50px;
     width: 70px;
     top: 0;

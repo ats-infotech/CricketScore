@@ -147,7 +147,7 @@ const CreateAuctionPlayer = ({ edit }) => {
                     valid = false;
                 }
                 if (field.key_name === 'playerContact' && value) {
-                    const phoneRegex = /^[6-9]\d{9}$/;
+                    const phoneRegex = /^[2-9]\d{9}$/;
                     if (!phoneRegex.test(value)) {
                         err[field.key_name] = `Please enter a valid mobile number`;
                         valid = false;
@@ -165,7 +165,7 @@ const CreateAuctionPlayer = ({ edit }) => {
             let oldFileName = (typeof player?.playerImage === 'string') ? (player?.playerImage).split('/').pop() : '';
             let method = edit && player?.playerImage ? 'PUT' : 'POST';
             console.log(playersData[index].playerImage);
-            
+
             const res = await uploadPlayerFile({
                 thumbnail: playersData[index].playerImage,
                 folderId: edit && player ? player?.tournamentId : params?.tournamentId,
@@ -263,14 +263,16 @@ const CreateAuctionPlayer = ({ edit }) => {
             <CustomeBack onclick={() => router.back()} type={'commonback'} />
             {playersData.map((player, index) => (
                 <Box key={index} sx={{ marginBlock: 3, borderRadius: '10px', position: 'relative', border: '1px solid var(--primary-color)', padding: '0 10px' }}>
-                    {playersData.length > 1 && (
-                        <IconButton
-                            onClick={() => handleRemovePlayer(index)}
-                            sx={{ position: 'absolute', top: 5, right: 5 }}
-                        >
-                            <Delete sx={{ color: 'var(--primary-color) !important' }} />
-                        </IconButton>
-                    )}
+                    <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+                        {playersData.length > 1 && (
+                            <IconButton
+                                onClick={() => handleRemovePlayer(index)}
+                                sx={{ position: 'absolute', top: 5, right: 5 }}
+                            >
+                                <Delete sx={{ color: 'var(--primary-color) !important' }} />
+                            </IconButton>
+                        )}
+                    </Box>
                     <PhotoUploader
                         name={player?.playerName}
                         onNameChange={(value) => {

@@ -113,11 +113,16 @@
     width: 100%;
     max-width: 178px;
     transition: all 0.5s ease;
+    cursor: pointer;
 }
 
 .team_card.active-bidder {
     background-color: var(--green);
     opacity: 0.8;
+}
+
+.team_card.disable-bidder {
+    background-color: var(--gray);
 }
 
 .team_card .team-logo {
@@ -138,7 +143,7 @@
 
 .team_card .team_details h6 {
     font-size: var(--ex-small);
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-white);
     display: flex;
     align-items: center;

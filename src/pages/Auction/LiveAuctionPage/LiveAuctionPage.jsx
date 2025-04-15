@@ -7,13 +7,13 @@ import CustomeInput from "@/components/common/commonUi/CustomeInput"
 import CustomeModal from "@/components/common/commonUi/CustomeModal"
 import SearchInput from "@/components/common/commonUi/SearchInput/SearchInput"
 import { playersState } from "@/redux/slices/playersSlice"
-import { teamsState } from "@/redux/slices/teamSlice"
+import { teamsState, updateAuctionTeamStats } from "@/redux/slices/teamSlice"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { Box, Button, Typography } from "@mui/material"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import './LiveAuctionPage.css'
 
 const btnGroup = [
@@ -32,6 +32,7 @@ const LiveAuctionPage = () => {
     const [error, setError] = useState({})
     const [isWhatOpen, setWhatOpen] = useState('')
     const { auctionId } = useParams()
+    const dispatch = useDispatch()
 
     const auctionState = useSelector(state => state.auction)
     const teamState = useSelector(teamsState)
@@ -47,6 +48,16 @@ const LiveAuctionPage = () => {
     const [currentPlayer, setCurrentPlayer] = useState(playerData[0] || null);
     const [selectManualPlayer, setSelectManualPlayer] = useState(currentPlayer)
     const player = currentPlayer
+
+    useEffect(() => {
+        const teams = teamState.data.filter(item => item?.tournamentId === auctiondata?.tournamentId && !item?.wallet).map(item => ({
+            ...item,
+            teamId: item.id,
+            wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
+            players: 0
+        }));
+        dispatch(updateAuctionTeamStats({ teams }))
+    }, [teamsData])
 
     const handleClose = () => {
         setOpen(false)
@@ -93,9 +104,13 @@ const LiveAuctionPage = () => {
     useEffect(() => {
         if (auctiondata) {
             setCurrentBid(auctiondata.minimum_bid || 0)
-            setUpdateInputBid(auctiondata.minimum_bid || '')
+            // setUpdateInputBid(auctiondata.minimum_bid || '')
         }
     }, [auctiondata, currentPlayer])
+
+    useEffect(() => {
+        setUpdateInputBid(currentBid)
+    },[currentBid])
 
     // Handle team bidding
     const handleTeamBid = (team) => {
@@ -239,11 +254,14 @@ const LiveAuctionPage = () => {
             <Box className='auction-team'>
                 {teamsData.length > 0 && teamsData.map((item, i) => {
                     const totalCoins = formatNumberShort(auctiondata?.auction_team_balance_point)
+                    const TeamWallet = formatNumberShort(item?.wallet)
+                    const maxBid = formatNumberShort(item?.wallet - (parseInt(auctiondata?.minimum_bid) * (parseInt(auctiondata?.player_per_team) - item?.players)))
+                    const maxBidReached = currentBid >= (item?.wallet - (parseInt(auctiondata?.minimum_bid) * (parseInt(auctiondata?.player_per_team) - item?.players)))
                     return (
                         <Box
-                            className={`team_card ${currentTeamBidding?.id === item.id ? 'active-bidder' : ''}`}
+                            className={`team_card ${currentTeamBidding?.id === item.id ? 'active-bidder' : ''} ${currentTeamBidding?.id === item.id ? '' : maxBidReached ? 'disable-bidder' : ''}`}
                             key={i}
-                            onClick={() => handleTeamBid(item)}
+                            onClick={maxBidReached ? undefined : () => handleTeamBid(item)}
                         >
                             <Box
                                 className='team-logo'
@@ -267,9 +285,9 @@ const LiveAuctionPage = () => {
                                 <Typography variant="h6">{item?.team_name}</Typography>
                                 <Typography variant="h6">
                                     <SvgIcon id={'gold-coin'} />
-                                    <span>{`100K/${totalCoins}`}</span>
+                                    <span>{`${TeamWallet}/${totalCoins}`}</span>
                                 </Typography>
-                                <Typography variant="h6">Max Bid : 80K</Typography>
+                                <Typography variant="h6">{`Max Bid : ${maxBid}`}</Typography>
                             </Box>
                         </Box>
                     )
