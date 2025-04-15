@@ -5,7 +5,7 @@ export const generateUniqueId = () => {
 };
 
 export const generateNumberId = (existingData = []) => {
-    const existingIds = new Set(existingData?.map(data => data.id)); 
+    const existingIds = new Set(existingData?.map(data => data.id));
     let newId;
 
     do {
@@ -338,8 +338,38 @@ export function calculateDLSTarget(team1Score, team1Overs, team2Overs, team2Wick
     // Calculate available resources for both teams
     const resTeam1 = calculateResource(team1Overs, team1Overs, 0);
     const resTeam2 = calculateResource(team2Overs, team1Overs, team2Wickets);
-    
+
     // Calculate Revised Target
     const revisedTarget = Math.floor(team1Score * (resTeam2 / resTeam1)) + 1;
     return revisedTarget;
+}
+
+export function formatNumberShort(num, decimalPlaces = 1) {
+    if (isNaN(num)) return '0'; // Handle non-numbers
+
+    const absNum = Math.abs(num);
+    const sign = num < 0 ? '-' : '';
+
+    if (absNum < 1000) return num.toString(); // Return as-is for numbers under 1,000
+
+    const units = [
+        { value: 1e12, suffix: 'T' },
+        { value: 1e9, suffix: 'B' },
+        { value: 1e6, suffix: 'M' },
+        { value: 1e3, suffix: 'K' }
+    ];
+
+    for (let unit of units) {
+        if (absNum >= unit.value) {
+            const formattedNum = (absNum / unit.value).toFixed(decimalPlaces);
+            
+            // Remove trailing .0 if decimalPlaces is 1
+            const cleanNum = decimalPlaces > 0 ?
+            formattedNum.replace(/\.0+$|(\..+?)0+$/, '$1') :
+            formattedNum;
+            return sign + cleanNum + unit.suffix;
+        }
+    }
+
+    return num.toString();
 }

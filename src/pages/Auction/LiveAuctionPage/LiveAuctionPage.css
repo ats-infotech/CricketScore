@@ -35,6 +35,15 @@
     width: 90px;
     height: 90px;
     border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.au-player-details .au-pl-img h6 { 
+    font-size: var(--semi-normal);
+    color: var(--text-white);
+    font-weight: 600;
 }
 
 .au-pl-details {
@@ -103,6 +112,12 @@
     gap: 15px;
     width: 100%;
     max-width: 178px;
+    transition: all 0.5s ease;
+}
+
+.team_card.active-bidder {
+  background-color: var(--green);
+  opacity: 0.8;
 }
 
 .team_card .team-logo {
@@ -110,6 +125,15 @@
     height: 56px;
     border-radius: 5px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team_card .team-logo h6 { 
+    font-size: var(--small);
+    color: var(--text-white);
+    font-weight: 600;
 }
 
 .team_card .team_details h6 {
@@ -161,4 +185,93 @@
     width: 19px;
     height: 18px;
     background-color: var(--text-white);
+}
+
+
+
+
+/* ======== modal ======= */
+.auction_modal {
+    padding: 20px 24px;
+}
+
+.auction-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.auction-modal-header h6 {
+    font-size: var(--normal);
+    font-weight: 500;
+    color: var(--text-black);
+}
+.auction-modal-header svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-black);
+}
+
+.update-bid-main {
+    padding: 20px 0 0;
+}
+
+
+/* player selction manually */
+.manual-player-selection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 0;
+    background-color: var(--primary-color);
+    padding: 10px 8px;
+    border-radius: 10px;
+}
+
+.player_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auction_player {
+   font-size: var(--small)!important;
+   font-weight: 600 !important;
+   color: var(--text-white);
+}
+
+.auction-player-section {
+  padding: 20px 0;
+}
+
+.manual-player-selection .player-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-white);
+    box-shadow: var(--shadow-light);
+}
+
+.auction-checkbox {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--text-grey);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auction-checkbox.isSelect {
+    background-color: var(--text-white);
+}
+
+.auction-checkbox svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-color);
 }

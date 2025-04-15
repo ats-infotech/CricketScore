@@ -1,6 +1,6 @@
 import { Dialog } from "@mui/material"
 
-const CustomeModal = ({ open, onClose, children }) => {
+const CustomeModal = ({ open, onClose, children, bgColor }) => {
     return (
         <Dialog
             open={open}
@@ -9,7 +9,7 @@ const CustomeModal = ({ open, onClose, children }) => {
                 maxWidth: 'var(--screen-max-width)',
                 margin: '0 auto',
                 '.MuiPaper-root': {
-                    backgroundColor: "var(--primary-color)",
+                    backgroundColor: bgColor || "var(--primary-color)",
                     borderRadius: '20px',
                     width: '100%'
                 }

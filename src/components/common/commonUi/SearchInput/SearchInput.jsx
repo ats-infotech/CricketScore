@@ -3,12 +3,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Box } from '@mui/material';
 import './SearchInput.css';
 
-const SearchInput = ({ value, onChange, onClear }) => {
+const SearchInput = ({ value, onChange, onClear, placeholder='' }) => {
     
     return (
         <Box className='search_input'>
             <SvgIcon id='search' />
-            <input placeholder="Search Tournaments" value={value} onChange={onChange} />
+            <input placeholder={placeholder || "Search Tournaments"} value={value} onChange={onChange} />
             {value && <CloseIcon className='searchClose' onClick={onClear}/>}
         </Box>
     )
