@@ -2,7 +2,9 @@
 import { debounce, leaderBoardShorting } from "@/components/common/commomFunction";
 import Loader from "@/components/common/commonUi/Loader";
 import { getWindowDimensions } from "@/components/common/maxHeightFunction";
+import AuctionMVP from "@/pages/Auction/Auctionmvp/AuctionMVP";
 import AuctionPage from "@/pages/Auction/Auctionpage/AuctionPage";
+import AuctionPlayerPage from "@/pages/Auction/Auctionplayer/AuctionPlayerPage";
 import Leaderboard from "@/pages/Leaderboard/Leaderboard";
 import PointTable from "@/pages/PointTable/PointTable";
 import Stats from "@/pages/Stats/Stats";
@@ -79,6 +81,10 @@ const TournamentCategory = () => {
         return <Leaderboard playerData={playerData} teamData={teamData} />;
       case 'auction':
         return <AuctionPage tournamentData={tournamentData} isUser={true} />;
+      case 'players':
+        return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} isUser={true} />
+      case 'mvp':
+        return <AuctionMVP tournamentData={tournamentData} playerAuctioned={[]} isUser={true} />
       default:
         return null;
     }

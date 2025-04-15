@@ -2,7 +2,7 @@ import CreateAuctionPlayer from "@/pages/Auction/Auctionplayer/CreateAuctionPlay
 
 const EditAuctionPlayer = () => {
     return(
-        <CreateAuctionPlayer />
+        <CreateAuctionPlayer edit={true} />
     )
 }
 

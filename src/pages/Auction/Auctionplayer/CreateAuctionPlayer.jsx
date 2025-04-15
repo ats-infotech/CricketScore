@@ -12,33 +12,33 @@ import CustomSelectInput from '@/components/common/commonUi/CustomSelectInput'
 import CustomeTags from '@/components/common/commonUi/CustomeTags'
 import { generateNumberId } from '@/components/common/commomFunction'
 import { useDispatch, useSelector } from 'react-redux'
-import { createPlayerData, playersState } from '@/redux/slices/playersSlice'
+import { createPlayerData, playersState, updatePlayerData } from '@/redux/slices/playersSlice'
 import { Add, Delete } from '@mui/icons-material'
 import { uploadPlayerFile } from '@/components/common/uploadFileApis'
 
-const defaultPlayer = {
-    playerImage: null,
-    playerName: '',
-    player_category: '',
-    player_age: '',
-    playerContact: '',
-    player_skills: '',
-    specification1: '',
-    specification2: '',
-    specification3: '',
-    jerseysize: '',
-    trousersize: '',
-    jerseyname: '',
-    jerseynumber: '',
-    matchplayed: '',
-    runsscored: '',
-    wicketstaken: '',
-    extradetails: '',
-    playerColor: '',
-    letter: '',
-};
-
-const CreateAuctionPlayer = () => {
+const CreateAuctionPlayer = ({ edit }) => {
+    const [player, setPlayer] = useState([])
+    const defaultPlayer = {
+        playerImage: null,
+        playerName: edit && player ? player?.playerName : '',
+        player_category: '',
+        player_age: '',
+        playerContact: '',
+        player_skills: '',
+        specification1: '',
+        specification2: '',
+        specification3: '',
+        jerseysize: '',
+        trousersize: '',
+        jerseyname: '',
+        jerseynumber: '',
+        matchplayed: '',
+        runsscored: '',
+        wicketstaken: '',
+        extradetails: '',
+        playerColor: '',
+        letter: '',
+    };
     const [playersData, setPlayersData] = useState([{ ...defaultPlayer }])
     const [blobPaths, setBlobPaths] = useState([{ playerImage: null }])
     const [errors, setErrors] = useState([{}])
@@ -47,6 +47,19 @@ const CreateAuctionPlayer = () => {
     const router = useRouter()
     const dispatch = useDispatch()
     const [FormData, setFormData] = useState([...AuctionPlayerForm]);
+
+    useEffect(() => {
+        if (edit) {
+            const updatePlayer = player_data?.data?.find((items) => items?.id === params?.playerId)
+            setPlayer(updatePlayer)
+        }
+    }, [player_data])
+
+    useEffect(() => {
+        if (edit && player) {
+            setPlayersData([{ ...defaultPlayer, ...player }]);
+        }
+    }, [player])
 
     useEffect(() => {
         if (playersData.length === 1) {
@@ -113,9 +126,13 @@ const CreateAuctionPlayer = () => {
 
     const validateForm = () => {
         let valid = true;
+        const keyArray = ["playerName", "playerContact"];
+        const requiredFormData = FormData.filter((items) => keyArray.includes(items?.key_name));
+
         const newErrors = playersData.map((player) => {
             const err = {};
-            FormData.forEach((field) => {
+
+            requiredFormData.forEach((field) => {
                 const value = player[field.key_name];
                 if (field.show_type === 'input' && (!value || value === '')) {
                     err[field.key_name] = `${field.label} is required`;
@@ -129,6 +146,13 @@ const CreateAuctionPlayer = () => {
                     err[field.key_name] = `${field.label} is required`;
                     valid = false;
                 }
+                if (field.key_name === 'playerContact' && value) {
+                    const phoneRegex = /^[6-9]\d{9}$/;
+                    if (!phoneRegex.test(value)) {
+                        err[field.key_name] = `Please enter a valid mobile number`;
+                        valid = false;
+                    }
+                }
             });
             return err;
         });
@@ -138,13 +162,15 @@ const CreateAuctionPlayer = () => {
 
     const handleImageUpload = async (index) => {
         try {
-            // let oldFileName = (typeof isUpdatePlayerData?.playerImage === 'string') ? (isUpdatePlayerData?.playerImage).split('/').pop() : '';
-            let method = 'POST';
+            let oldFileName = (typeof player?.playerImage === 'string') ? (player?.playerImage).split('/').pop() : '';
+            let method = edit && player?.playerImage ? 'PUT' : 'POST';
+            console.log(playersData[index].playerImage);
+            
             const res = await uploadPlayerFile({
                 thumbnail: playersData[index].playerImage,
-                folderId: params?.tournamentId,
+                folderId: edit && player ? player?.tournamentId : params?.tournamentId,
                 subFolder: 'auction',
-                // oldFileName: oldFileName,
+                oldFileName: oldFileName,
             }, method);
 
             if (res?.url) {
@@ -163,10 +189,11 @@ const CreateAuctionPlayer = () => {
             const { playerName, playerContact, playerColor, playerImage, letter, player_category, player_age, player_skills,
                 specification1, specification2, specification3, jerseysize, trousersize, jerseyname, jerseynumber, matchplayed,
                 runsscored, wicketstaken, extradetails } = player;
+            const getStat = (statName) => edit ? (player?.[statName] || 0) : 0;
             return {
-                tournamentId: params?.tournamentId,
+                tournamentId: edit && player ? player?.tournamentId : params?.tournamentId,
                 teamId: '',
-                id: generateNumberId(player_data?.data),
+                id: edit && player ? player?.id : generateNumberId(player_data?.data),
                 playerName,
                 playerContact,
                 playerColor,
@@ -185,7 +212,22 @@ const CreateAuctionPlayer = () => {
                 matchplayed,
                 runsscored,
                 wicketstaken,
-                extradetails
+                extradetails,
+                battingruns: getStat('battingruns'),
+                battingballs: getStat('battingballs'),
+                battingfour: getStat('battingfour'),
+                battingsix: getStat('battingsix'),
+                battingdot: getStat('battingdot'),
+                battingout: getStat('battingout'),
+                bowlingovers: getStat('bowlingovers'),
+                bowlingwickets: getStat('bowlingwickets'),
+                bowlingballs: getStat('bowlingballs'),
+                bowlingdots: getStat('bowlingdots'),
+                bowlingruns: getStat('bowlingruns'),
+                runouts: getStat('runouts'),
+                catches: getStat('catches'),
+                mvppoints: getStat('mvppoints'),
+                innings: getStat('innings'),
             };
         });
     };
@@ -200,9 +242,16 @@ const CreateAuctionPlayer = () => {
             }
 
             const payload = createPlayerPayload();
-            let response = await dispatch(createPlayerData(payload));
+
+            let response;
+            if (edit) {
+                response = await dispatch(updatePlayerData(payload));
+            } else {
+                response = await dispatch(createPlayerData(payload));
+            }
+
             if (response) {
-                router.push(`/mytournament/${params?.tournamentId}/players`)
+                router.push(`/mytournament/${edit && player ? player?.tournamentId : params?.tournamentId}/players`)
             }
         } else {
             console.log("❌ Validation failed");
@@ -229,6 +278,7 @@ const CreateAuctionPlayer = () => {
                             updated[index] = { ...updated[index], ...value };
                             setPlayersData(updated);
                         }}
+                        previewOldImage={edit && !blobPaths?.[index]?.playerImage}
                         bgColor={player?.playerColor}
                         file={blobPaths?.[index]?.playerImage || player?.playerImage}
                         type={"players"}
@@ -290,14 +340,14 @@ const CreateAuctionPlayer = () => {
                     })}
                 </Box>
             ))}
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+            {!edit && <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
                 <CustomeButton
                     onClick={handleAddPlayer}
                     title="Add Another Player"
                     startIcon={<Add />}
                 />
-            </Box>
-            <CustomeButton onClick={handleSubmit} title={"Add Players"} width={'100%'} />
+            </Box>}
+            <CustomeButton onClick={handleSubmit} title={edit ? "Update Player" : "Add Players"} width={'100%'} />
         </Box>
     );
 }

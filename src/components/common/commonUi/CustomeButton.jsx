@@ -38,7 +38,7 @@ const CustomeButton = ({ icon, title, width, height, bgColor, borderRadius, boxS
                 '&:hover': {
                     // backgroundColor: hover === 'none' ? bgColor : hoverbg ? hoverbg : !disabled ? 'var(--secondary-color)' : '',
                     // color: hover === 'none' ? color : hovertext ? hovertext : !disabled ? 'var(--text-white)' : '',
-                    // boxShadow: boxShadow ? boxShadow : 'none',
+                    boxShadow: 'none',
                 },
                 '&:disabled': {
                     backgroundColor: 'var(--light-grey) !important',

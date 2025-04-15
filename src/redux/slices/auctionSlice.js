@@ -11,10 +11,11 @@ const auctionSlice = createSlice({
     initialState,
     reducers: {
         scheduleAuction: (state, action) => {
-            state.data.push({
-                ...action.payload,
-                auction_time: new Date(action.payload.auction_time).toISOString()
-            })
+            if (!Array.isArray(state.data)) {
+                console.warn("state.data was null or not an array, resetting it.");
+                state.data = [];
+            }
+            state.data.push({ ...action.payload });
         },
         updateAuction: (state, action) => {
             let findIndex = state.data.findIndex(item => item?.id === action.payload.id)

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import './PhotoUploader.css'
 import Avtar from "../Avtar/Avtar";
 
-const PhotoUploader = ({ file, onChange, name, onNameChange, bgColor, type }) => {
+const PhotoUploader = ({ file, onChange, name, onNameChange, bgColor, type, previewOldImage }) => {
     const fileInputRef = useRef(null);
 
     const openFileManager = () => {
@@ -14,7 +14,7 @@ const PhotoUploader = ({ file, onChange, name, onNameChange, bgColor, type }) =>
     return (
         <Box
             sx={{
-                backgroundImage: `url(${file})`,
+                backgroundImage: `${previewOldImage ? `url(/${file})` : `url(${file})`}`,
             }}
             className={`photo_uploader ${file ? 'isFile' : ''}`}
             onClick={openFileManager}>

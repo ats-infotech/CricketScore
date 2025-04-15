@@ -1,56 +1,69 @@
 'use client'
 import CustomeButton from '@/components/common/commonUi/CustomeButton'
-import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material'
-import './AuctionPlayerPage.css'
-import { useRouter } from 'next/navigation'
 import CustomeMessageBox from '@/components/common/commonUi/CustomeMessageBox'
-import Image from 'next/image'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { useState } from 'react'
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
 import MessageModal from '@/components/common/commonUi/Modal/MessageModal'
+import PlayerCard from '@/components/common/commonUi/PlayerCard/PlayerCard'
+import { uploadPlayerFile } from '@/components/common/uploadFileApis'
+import { deletePlayerData } from '@/redux/slices/playersSlice'
+import { Box } from '@mui/material'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import './AuctionPlayerPage.css'
 
-const AuctionPlayerPage = ({ tournamentData, playerData }) => {
-    const [anchorEl, setAnchorEl] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
+const AuctionPlayerPage = ({ tournamentData, playerData, isUser = false }) => {
     const [alertModal, setAlertModal] = useState({ open: false, success: false, message: "" });
-    const [playerId, setPlayerId] = useState(null);
+    const [player, setPlayer] = useState(null);
     const [processing, setProcessing] = useState(false);
-
-    const handleClick = (event, item) => {
-        setAnchorEl(event.currentTarget);
-        setSelectedItem(item)
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-        setSelectedItem(null)
-    };
-
-    const handleMenuItemClick = (action) => {
-        if (selectedItem) {
-            handleEvent(selectedItem, action)
-        }
-        handleClose();
-    };
+    const dispatch = useDispatch()
 
     const handleModalClose = () => {
         setAlertModal({ open: false, success: false, message: "" });
-        setPlayerId(null);
+        setPlayer(null);
     };
 
     const handleEvent = (player, action) => {
         const routes = {
             edit: `/edit-auction-player/${player?.id}`,
             delete: () => handleDeletePlayerInfo(player),
-            // view_player: `/teamplayers/${team?.id}`,
         };
         typeof routes[action] === "function" ? routes[action]() : router.push(routes[action]);
     };
 
     const handleDeletePlayerInfo = (player) => {
-        setPlayerId(player?.id)
+        setPlayer(player)
+        setAlertModal({
+            success: false,
+            open: true,
+            message: `Are you sure want to Delete ${player?.playerName || ''} ?`
+        });
+    }
+
+    const handleDeletePlayer = async () => {
+        let playerId = player?.id
+        setProcessing(true);
+        if (playerId) {
+            let fileName = (typeof player?.playerImage === 'string') ? (player?.playerImage).split('/').pop() : '';
+            let method = 'DELETE';
+            if (fileName) {
+                const res = await uploadPlayerFile({
+                    folderId: player.tournamentId,
+                    subFolder: 'auction',
+                    fileName: fileName,
+                }, method);
+            }
+            let resp = await dispatch(deletePlayerData({ playerId }));
+            if (resp) {
+                setTimeout(() => {
+                    setProcessing(false);
+                    setAlertModal({
+                        success: true,
+                        open: true,
+                        message: 'Player Deleted Successfully'
+                    });
+                }, 2000);
+            }
+        }
     }
 
     const router = useRouter()
@@ -66,63 +79,21 @@ const AuctionPlayerPage = ({ tournamentData, playerData }) => {
                     />
                 </Box>
             }
-            <Box className="auction_add_player">
+            {!isUser && <Box className="auction_add_player">
                 <CustomeButton
                     width={"70%"}
                     title="Add Player"
                     bgColor={"var(--primary-color)"}
                     onClick={() => router.push(`/create-auction-player/${tournamentData?.id}`)}
                 />
-            </Box>
+            </Box>}
             {
                 playerData.length > 0 && <Box className="auction_player_section">
                     {
                         playerData.map((items, i) => {
                             return (
-                                <Box key={i} className="auction_players_sub_section">
-                                    <Box className="auction_player_details">
-                                        <Box className="auction_player_img">
-                                            {
-                                                items?.playerImage ?
-                                                    <Image src={`/${items?.playerImage}`} alt='image' height={80} width={80} />
-                                                    :
-                                                    <Box className="auction_player_avatar" sx={{ backgroundColor: items?.playerColor }}>
-                                                        <Typography variant='body2'>{items?.letter}</Typography>
-                                                    </Box>
-                                            }
-                                        </Box>
-                                        <Box className="auction_player_name">
-                                            <Typography variant='body2'>{items?.playerName}</Typography>
-                                        </Box>
-                                    </Box>
-                                    <Box>
-                                        <IconButton onClick={(e) => handleClick(e, items)} aria-controls="simple-menu" aria-haspopup="true" className='menu-icon-box'>
-                                            <MoreVertIcon />
-                                        </IconButton>
-                                        <Menu
-                                            anchorEl={anchorEl}
-                                            open={Boolean(anchorEl)}
-                                            onClose={handleClose}
-                                            className='list-menu'
-                                        >
-                                            {
-                                                <div>
-                                                    <MenuItem onClick={() => handleMenuItemClick('edit')}>
-                                                        <Box className='AddPlayerTag' >
-                                                            <EditIcon />
-                                                            <Typography variant='body2'>Edit</Typography>
-                                                        </Box>
-                                                    </MenuItem>
-                                                    <MenuItem onClick={() => handleMenuItemClick('delete')}>
-                                                        <Box className='AddPlayerTag delete' >
-                                                            <DeleteIcon color='error' />
-                                                            <Typography variant='body2'>Delete</Typography>
-                                                        </Box>
-                                                    </MenuItem>
-                                                </div>
-                                            }
-                                        </Menu>
-                                    </Box>
+                                <Box key={i}>
+                                    <PlayerCard data={items} onClick={handleEvent} isAuction={true} title={"Add Player"} isUser={isUser} />
                                 </Box>
                             )
                         })
@@ -134,7 +105,7 @@ const AuctionPlayerPage = ({ tournamentData, playerData }) => {
                 handleClose={handleModalClose}
                 success={alertModal.success}
                 message={alertModal.message}
-                // handleSubmit={handleDeleteTeam}
+                handleSubmit={handleDeletePlayer}
                 processing={processing}
             />
         </Box>

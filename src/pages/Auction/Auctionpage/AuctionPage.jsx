@@ -12,6 +12,13 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
     const router = useRouter()
     const auctionState = useSelector(state => state?.auction)
     const auctionData = auctionState?.data.length > 0 && auctionState?.data.find((item) => item?.tournamentId === tournamentData?.id) || null
+    const auctionTime = new Date(auctionData?.auction_time)
+    const formattedTime = auctionTime.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    });
+
     const isAuctionCompleted = auctionData && Object.keys(auctionData).length > 0
 
     const handleScheduleAuction = () => {
@@ -53,39 +60,45 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                                 <span>{DateFormat(auctionData?.auction_date)}</span>
                             </Typography>
                             <Typography className="icon-text">
-                                <SvgIcon id='add-player' />
-                                <span>{`${auctionData?.player_per_team} PI/Team`}</span>
+                                <SvgIcon id='clock' />
+                                <span>{`${formattedTime}`}</span>
                             </Typography>
                         </Box>
+                        <Typography className="icon-text" sx={{marginBottom: '10px'}}>
+                            <SvgIcon id='add-player' />
+                            <span>{`${auctionData?.player_per_team} PI/Team`}</span>
+                        </Typography>
                         <Typography className="icon-text">
                             <SvgIcon id='auction-thor' />
                             <span>{`${auctionData?.auction_team_balance_point} Pts/Team`}</span>
                         </Typography>
                     </Box>
-                    {!isUser && !auctionState?.auction && <SvgIcon id='edit' className='menu-icon' onClick={handleUpdateAuction} />}
+                    {!isUser ? !auctionState?.auction && <SvgIcon id='edit' className='menu-icon' onClick={handleUpdateAuction} /> : <Box></Box>}
                 </Box>
             }
             {isAuctionCompleted ?
                 <Box className='auction_btn_row'>
-                    {!isUser && <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} bgColor={'var(--primary-color)'} onClick={() => handleAuctionRedirect('live')} />}
-                    <CustomeButton title={"View Auction"} width={'50%'} height={'50px'} hover={'none'} bgColor={'var(--primary-color)'} onClick={() => handleAuctionRedirect('view')} />
+                    {!isUser && <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} />}
+                    <CustomeButton title={"View Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('view')} />
                 </Box>
                 :
                 <>
                     <CustomeMessageBox icon='teams2' title='Auction Guide'
-                        describe='Quickly Add Auction with ease. Get personalized suggestions based on your preferences'
+                        describe={!isUser ? 'Quickly Add Auction with ease. Get personalized suggestions based on your preferences' : 'Currently, there are no auctions scheduled. Please check back later for updates. Once an auction is scheduled, you will be able to view the details here.'}
                     >
                     </CustomeMessageBox>
-                    <Box sx={{ marginTop: '40px' }}>
+                    {!isUser && <Box sx={{ marginTop: '40px' }}>
                         <CustomeButton
                             title={"Schedule Auction"}
                             width={'80%'}
                             height={'50px'}
                             hover={'none'}
-                            bgColor={'var(--primary-color)'}
+                            bgColor={'transparent'}
+                            color={'var(--primary-color)'}
+                            border={'2px solid var(--primary-color)'}
                             onClick={handleScheduleAuction}
                         />
-                    </Box>
+                    </Box>}
                 </>
             }
         </Box>

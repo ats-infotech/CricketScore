@@ -65,6 +65,23 @@
     gap: 20px;
 }
 
+.teamDetails{
+    position: relative;
+}
+
+.teamDetails::before{
+    content: '';
+    position: absolute;
+    background-color: var(--text-white);
+    filter: blur(65.5px);
+    height: 50px;
+    width: 70px;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    left: -50px;
+}
+
 .teamBox .teamDetails h6 {
     font-family: var(--primary-font);
     font-weight: 500;

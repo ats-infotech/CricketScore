@@ -1,6 +1,7 @@
 'use client'
 import { debounce, leaderBoardShorting } from "@/components/common/commomFunction";
 import { getMainContainerDimensions, getWindowDimensions } from "@/components/common/maxHeightFunction";
+import AuctionMVP from "@/pages/Auction/Auctionmvp/AuctionMVP";
 import AuctionPage from "@/pages/Auction/Auctionpage/AuctionPage";
 import AuctionPlayerPage from "@/pages/Auction/Auctionplayer/AuctionPlayerPage";
 import Leaderboard from "@/pages/Leaderboard/Leaderboard";
@@ -81,6 +82,8 @@ const TournamentCategory = () => {
         return <AuctionPage tournamentData={tournamentData} />;
       case 'players':
         return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} />
+      case 'mvp':
+        return <AuctionMVP tournamentData={tournamentData} playerAuctioned={[]} />
       default:
         return null;
     }
