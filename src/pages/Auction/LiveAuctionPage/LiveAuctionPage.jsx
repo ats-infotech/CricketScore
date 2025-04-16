@@ -6,6 +6,7 @@ import CustomeButton from "@/components/common/commonUi/CustomeButton"
 import CustomeInput from "@/components/common/commonUi/CustomeInput"
 import CustomeModal from "@/components/common/commonUi/CustomeModal"
 import SearchInput from "@/components/common/commonUi/SearchInput/SearchInput"
+import { addCurrentPlayer, addSoldPlayer, addUnsoldPlayer } from "@/redux/slices/auctionSlice"
 import { playersState } from "@/redux/slices/playersSlice"
 import { teamsState, updateAuctionTeamStats } from "@/redux/slices/teamSlice"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
@@ -26,11 +27,6 @@ const btnGroup = [
 ]
 
 const LiveAuctionPage = () => {
-    const [currentTeamBidding, setCurrentTeamBidding] = useState(null)
-    const [currentBid, setCurrentBid] = useState(0)
-    const [updateInputBid, setUpdateInputBid] = useState('')
-    const [error, setError] = useState({})
-    const [isWhatOpen, setWhatOpen] = useState('')
     const { auctionId } = useParams()
     const dispatch = useDispatch()
 
@@ -40,15 +36,41 @@ const LiveAuctionPage = () => {
 
     const auctiondata = auctionState.data.find((item) => item?.id === auctionId)
     const teamsData = teamState.data.filter((item) => item?.tournamentId === auctiondata?.tournamentId)
-    const playerData = playerState.data.filter((item) => item?.tournamentId === auctiondata?.tournamentId)
+    const playerData = playerState.data.filter((item) =>
+        item?.tournamentId === auctiondata?.tournamentId
+        && !auctiondata?.soldPlayers?.some(sold => sold?.soldPlayer === item?.id)
+        && !auctiondata?.unsoldPlayers?.some(unsold => unsold?.unsoldPlayer === item?.id)
+    )
 
+    const currentAuctionStatus = auctiondata?.currentPlayer || {}
+
+    console.log(currentAuctionStatus, '');
+    const teambidding = currentAuctionStatus ? teamsData.find((team) => team?.id === currentAuctionStatus?.teamId) : null
+    const auctinablePlayer = currentAuctionStatus ? playerData.find((player) => player.id === currentAuctionStatus?.currentPlayer) : playerData[0]
+    const [currentTeamBidding, setCurrentTeamBidding] = useState(teambidding)
+    const [currentBid, setCurrentBid] = useState(0)
+    const [updateInputBid, setUpdateInputBid] = useState('')
+    const [error, setError] = useState({})
+    const [isWhatOpen, setWhatOpen] = useState('')
     const [open, setOpen] = useState(false)
     const [searchResults, setSearchResults] = useState('')
     const [showPlayerData, setShowPlayerData] = useState(playerData || [])
-    const [currentPlayer, setCurrentPlayer] = useState(playerData[0] || null);
-    const [selectManualPlayer, setSelectManualPlayer] = useState(currentPlayer)
+    const [currentPlayer, setCurrentPlayer] = useState(auctinablePlayer || null);
+    const [selectManualPlayer, setSelectManualPlayer] = useState(currentPlayer);
+    const [maxBidHeighestAmount, setMaxBidHeighestAmount] = useState('')
     const player = currentPlayer
+    const [isUpdated, setIsUpdated] = useState(false)
 
+    // Initialize currentPlayer when playerData loads
+    // useEffect(() => {
+    //     if (playerData.length > 0 && !currentPlayer) {
+    //         let currentPlyer = currentAuctionStatus ?
+    //             playerData.find((player) => player.id === currentAuctionStatus?.currentPlayer) : playerData[0]
+    //         setCurrentPlayer(currentPlyer)
+    //     }
+    // }, [playerData])
+
+    // if there is no wallet then...
     useEffect(() => {
         const teams = teamState.data.filter(item => item?.tournamentId === auctiondata?.tournamentId && !item?.wallet).map(item => ({
             ...item,
@@ -58,6 +80,26 @@ const LiveAuctionPage = () => {
         }));
         dispatch(updateAuctionTeamStats({ teams }))
     }, [teamsData])
+
+    // get max bid heighest amount
+    useEffect(() => {
+        if (!auctiondata || !teamsData?.length) return;
+
+        const playersPerTeam = parseInt(auctiondata.player_per_team) || 0;
+        const minBid = parseInt(auctiondata.minimum_bid) || 0;
+
+        // Calculate which team can bid the highest amount
+        const teamWithHighestMaxBid = teamsData.reduce((maxTeam, currentTeam) => {
+            const maxTeamRemaining = maxTeam.wallet - (minBid * (playersPerTeam - (maxTeam.players || 0)));
+            const currentTeamRemaining = currentTeam.wallet - (minBid * (playersPerTeam - (currentTeam.players || 0)));
+
+            return currentTeamRemaining > maxTeamRemaining ? currentTeam : maxTeam;
+        }, teamsData[0]);
+
+        const highestMaxBidAmount = teamWithHighestMaxBid.wallet - (minBid * (playersPerTeam - (teamWithHighestMaxBid.players || 0)));
+        setMaxBidHeighestAmount(highestMaxBidAmount)
+
+    }, [auctiondata, teamsData]);
 
     const handleClose = () => {
         setOpen(false)
@@ -92,25 +134,39 @@ const LiveAuctionPage = () => {
         }
     }, [searchResults, searchFunction])
 
-    // Initialize currentPlayer when playerData loads
-    useEffect(() => {
-        if (playerData.length > 0 && !currentPlayer) {
-            setCurrentPlayer(playerData[0])
-        }
-    }, [playerData])
-
-
     // Initialize current bid when player changes or auction data loads
     useEffect(() => {
-        if (auctiondata) {
-            setCurrentBid(auctiondata.minimum_bid || 0)
+        if (!isUpdated && auctiondata) {
+            let currentBidStatus = currentAuctionStatus ? currentAuctionStatus?.bidPrice : Number(auctiondata.minimum_bid)
+            setCurrentBid(currentBidStatus || 0)
+            const newObj = {
+                teamId: currentTeamBidding?.id || null,
+                currentPlayer: currentPlayer?.id || null,
+                bidPrice: currentBid || 0
+            }
+            const payload = {
+                id: auctionId,
+                currentPlayer: newObj
+            }
+            dispatch(addCurrentPlayer(payload))
+            setIsUpdated(true)
             // setUpdateInputBid(auctiondata.minimum_bid || '')
         }
-    }, [auctiondata, currentPlayer])
+    }, [currentPlayer])
 
     useEffect(() => {
         setUpdateInputBid(currentBid)
-    },[currentBid])
+        const newObj = {
+            teamId: currentTeamBidding?.id || null,
+            currentPlayer: currentPlayer?.id || null,
+            bidPrice: currentBid || 0
+        }
+        const payload = {
+            id: auctionId,
+            currentPlayer: newObj
+        }
+        dispatch(addCurrentPlayer(payload))
+    }, [currentBid, currentTeamBidding])
 
     // Handle team bidding
     const handleTeamBid = (team) => {
@@ -118,7 +174,7 @@ const LiveAuctionPage = () => {
             setCurrentTeamBidding(team)
             if (currentTeamBidding !== null) {
                 const sum = Number(currentBid) + Number(auctiondata?.bid_increase_by)
-                setCurrentBid(sum)
+                setCurrentBid(Number(sum))
             }
         }
     }
@@ -131,7 +187,9 @@ const LiveAuctionPage = () => {
         const minBid = Number(auctiondata.minimum_bid)
 
         if (action === 'up') {
-            current = current + increment
+            if ((current + increment) <= maxBidHeighestAmount) {
+                current = current + increment
+            }
         } else {
             if (current > auctiondata.minimum_bid) {
                 current = Math.max(minBid, current - increment)
@@ -153,9 +211,45 @@ const LiveAuctionPage = () => {
         const randomPlayer = otherPlayers.length > 0
             ? otherPlayers[Math.floor(Math.random() * otherPlayers.length)]
             : playerData[Math.floor(Math.random() * playerData.length)];
+
         setCurrentPlayer(randomPlayer);
         setCurrentTeamBidding(null);
+        setCurrentBid(Number(auctiondata.minimum_bid))
     };
+
+    const handlePlayerSold = () => {
+        const newObj = {
+            teamId: currentTeamBidding?.id,
+            soldPlayer: currentPlayer?.id,
+            bidPrice: currentBid
+        }
+        const payload = {
+            id: auctionId,
+            soldPlayers: newObj
+        }
+        if (currentTeamBidding) {
+            dispatch(addSoldPlayer(payload))
+            handleRandomPlayerChange()
+            const teams = teamState.data.filter(item => item?.tournamentId === auctiondata?.tournamentId).map(item => ({
+                ...item,
+                teamId: item.id,
+                wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
+                players: auctiondata?.soldPlayers?.filter((sold) => sold?.teamId === item?.id)?.length || 0
+            }));
+            dispatch(updateAuctionTeamStats({ teams }))
+        }
+    }
+
+    const handlePlayerUnsold = () => {
+        const payload = {
+            id: auctionId,
+            unsoldPlayers: {
+                unsoldPlayer: currentPlayer?.id
+            }
+        }
+        dispatch(addUnsoldPlayer(payload))
+        handleRandomPlayerChange()
+    }
 
     const bidHandling = (key) => {
         switch (key) {
@@ -170,6 +264,12 @@ const LiveAuctionPage = () => {
                 break
             case 'manual':
                 handleWhatOpen('player')
+                break
+            case 'sold':
+                handlePlayerSold()
+                break
+            case 'unsold':
+                handlePlayerUnsold()
                 break
             default:
                 return
@@ -188,6 +288,11 @@ const LiveAuctionPage = () => {
         if (updateInputBid < minBid) {
             setError({
                 'bid_amount': 'Bid value must be greater than minimum value'
+            })
+            return
+        } else if (updateInputBid > maxBidHeighestAmount) {
+            setError({
+                'bid_amount': 'Bid value must be less than maximum value of teams.'
             })
             return
         }
@@ -209,6 +314,13 @@ const LiveAuctionPage = () => {
         handleClose()
     }
 
+    const InfoOfAuction = [
+        { title: 'Sold', count: auctiondata?.soldPlayers ? auctiondata?.soldPlayers?.length : 0 },
+        { title: 'unsold', count: auctiondata?.unsoldPlayers ? auctiondata?.unsoldPlayers?.length : 0 },
+        { title: 'Available', count: playerData.length },
+        { title: 'Team', count: teamsData.length }
+    ]
+
     return (
         <Box className='live-auction'>
             <Box className='live-auction-header-main'>
@@ -227,7 +339,7 @@ const LiveAuctionPage = () => {
                     >
                         {player?.playerImage ? (
                             <Image
-                                src={player?.playerImage}
+                                src={`/${player?.playerImage}`}
                                 alt="player"
                                 width={100}
                                 height={100}
@@ -254,7 +366,8 @@ const LiveAuctionPage = () => {
             <Box className='auction-team'>
                 {teamsData.length > 0 && teamsData.map((item, i) => {
                     const totalCoins = formatNumberShort(auctiondata?.auction_team_balance_point)
-                    const TeamWallet = formatNumberShort(item?.wallet)
+                    let areadyBidCalledTeams = auctiondata?.soldPlayers && auctiondata?.soldPlayers.find(sold => sold?.teamId === item?.id)
+                    const TeamWallet = formatNumberShort(item?.wallet - (areadyBidCalledTeams?.bidPrice || 0))
                     const maxBid = formatNumberShort(item?.wallet - (parseInt(auctiondata?.minimum_bid) * (parseInt(auctiondata?.player_per_team) - item?.players)))
                     const maxBidReached = currentBid >= (item?.wallet - (parseInt(auctiondata?.minimum_bid) * (parseInt(auctiondata?.player_per_team) - item?.players)))
                     return (
@@ -271,7 +384,7 @@ const LiveAuctionPage = () => {
                             >
                                 {item?.team_logo ? (
                                     <Image
-                                        src={item?.team_logo}
+                                        src={`/${item?.team_logo}`}
                                         alt="team logo"
                                         width={100}
                                         height={100}
@@ -282,7 +395,7 @@ const LiveAuctionPage = () => {
                                 )}
                             </Box>
                             <Box className='team_details'>
-                                <Typography variant="h6">{item?.team_name}</Typography>
+                                <Typography variant="h6">{item?.team_name.slice(0, 12)}</Typography>
                                 <Typography variant="h6">
                                     <SvgIcon id={'gold-coin'} />
                                     <span>{`${TeamWallet}/${totalCoins}`}</span>
@@ -293,19 +406,30 @@ const LiveAuctionPage = () => {
                     )
                 })}
             </Box>
-
-            <Box className='button-group'>
-                {btnGroup.map((item, i) => (
-                    <Button
-                        variant='contained'
-                        className='action-btn'
-                        key={i}
-                        onClick={() => bidHandling(item?.keyname)}
-                    >
-                        <SvgIcon id={item?.icon} />
-                        <span>{item?.name}</span>
-                    </Button>
-                ))}
+            
+            <Box className=''>
+                <Box className='button-group'>
+                    {btnGroup.map((item, i) => (
+                        <Button
+                            variant='contained'
+                            className='action-btn'
+                            key={i}
+                            onClick={() => bidHandling(item?.keyname)}
+                        >
+                            <SvgIcon id={item?.icon} />
+                            <span>{item?.name}</span>
+                        </Button>
+                    ))}
+                </Box>
+                <Box className='info-btn-group'>
+                <SvgIcon id='three-line-menu'/>
+                    {InfoOfAuction.map((item, i) => (
+                        <Box className='info-btn' key={i}>
+                            <span>{item?.title}</span>
+                            <span>{item?.count}</span>
+                        </Box>
+                    ))}
+                </Box>
             </Box>
 
             <CustomeModal open={open} bgColor={'var(--text-white)'}>
@@ -343,10 +467,11 @@ const LiveAuctionPage = () => {
                                             >
                                                 {item?.playerImage ? (
                                                     <Image
-                                                        src={item.playerImage}
+                                                        src={`/${item.playerImage}`}
                                                         alt="player"
                                                         width={50}
                                                         height={50}
+                                                        unoptimized
                                                     />
                                                 ) : (
                                                     <Typography variant="h6">{item?.letter}</Typography>

@@ -8,7 +8,6 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import './Summary.css'
-import { useSelector } from "react-redux"
 
 const CommonTable = ({ header, data, highestPointsPlayer }) => {
     return (

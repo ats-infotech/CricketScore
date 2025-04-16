@@ -17,40 +17,41 @@ const auctionSlice = createSlice({
             }
             state.data.push({ ...action.payload });
         },
-        AddCurrentPlayer: (state, action) => {
-            const { id, CurrentPlayer } = action.payload;
+        addCurrentPlayer: (state, action) => {
+            const { id, currentPlayer } = action.payload;
             state.data = state.data.map((item) =>
                 item.id === id
                     ? {
                         ...item,
-                        CurrentPlayer: [...CurrentPlayer],
+                        currentPlayer: currentPlayer,
                     }
                     : item
             );
         },
-        AddSoldPlayer: (state, action) => {
-            const { id, SoldPlayers } = action.payload;
+        addSoldPlayer: (state, action) => {
+            const { id, soldPlayers } = action.payload;
+            
             state.data = state.data.map((item) =>
                 item.id === id
                     ? {
                         ...item,
-                        SoldPlayers: [
-                            ...(item.SoldPlayers || []),
-                            ...SoldPlayers,
+                        soldPlayers: [
+                            ...(item.soldPlayers || []),
+                            soldPlayers,
                         ]
                     }
                     : item
             );
         },
-        AddUnsoldPlayer: (state, action) => {
-            const { id, UnsoldPlayer } = action.payload;
+        addUnsoldPlayer: (state, action) => {
+            const { id, unsoldPlayers } = action.payload;
             state.data = state.data.map((item) =>
                 item.id === id
                     ? {
                         ...item,
-                        UnsoldPlayer: [
-                            ...(item.UnsoldPlayer || []),
-                            ...UnsoldPlayer,
+                        unsoldPlayers: [
+                            ...(item.unsoldPlayers || []),
+                            unsoldPlayers,
                         ]
                     }
                     : item
@@ -70,5 +71,5 @@ const auctionSlice = createSlice({
     }
 })
 
-export const { scheduleAuction, updateAuction, AddCurrentPlayer, AddSoldPlayer, AddUnsoldPlayer } = auctionSlice.actions
+export const { scheduleAuction, updateAuction, addCurrentPlayer, addSoldPlayer, addUnsoldPlayer } = auctionSlice.actions
 export default auctionSlice.reducer

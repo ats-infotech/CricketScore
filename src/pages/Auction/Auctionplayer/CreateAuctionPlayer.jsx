@@ -1,20 +1,20 @@
 'use client'
-import { Box, Typography, IconButton } from '@mui/material'
-import './CreateAuctionPlayer.css'
-import React, { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { generateNumberId } from '@/components/common/commomFunction'
 import CustomeBack from '@/components/common/commonUi/CustomeBack'
+import CustomeButton from '@/components/common/commonUi/CustomeButton'
+import CustomeInput from '@/components/common/commonUi/CustomeInput'
+import CustomeTags from '@/components/common/commonUi/CustomeTags'
+import CustomSelectInput from '@/components/common/commonUi/CustomSelectInput'
 import PhotoUploader from '@/components/common/commonUi/PhotoUploader/PhotoUploader'
 import { AuctionPlayerForm, BulkPlayerForm } from '@/components/common/json/AuctionPlayerFormJson'
-import CustomeInput from '@/components/common/commonUi/CustomeInput'
-import CustomeButton from '@/components/common/commonUi/CustomeButton'
-import CustomSelectInput from '@/components/common/commonUi/CustomSelectInput'
-import CustomeTags from '@/components/common/commonUi/CustomeTags'
-import { generateNumberId } from '@/components/common/commomFunction'
-import { useDispatch, useSelector } from 'react-redux'
+import { uploadPlayerFile } from '@/components/common/uploadFileApis'
 import { createPlayerData, playersState, updatePlayerData } from '@/redux/slices/playersSlice'
 import { Add, Delete } from '@mui/icons-material'
-import { uploadPlayerFile } from '@/components/common/uploadFileApis'
+import { Box, IconButton, Typography } from '@mui/material'
+import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import './CreateAuctionPlayer.css'
 
 const CreateAuctionPlayer = ({ edit }) => {
     const [player, setPlayer] = useState([])
@@ -260,10 +260,18 @@ const CreateAuctionPlayer = ({ edit }) => {
 
     return (
         <Box className="create_auction_players">
-            <CustomeBack onclick={() => router.back()} type={'commonback'} />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <CustomeBack onclick={() => router.back()} type={'commonback'} />
+               {playersData.length === 1 && <CustomeButton
+                    margin={'0'}
+                    onClick={handleAddPlayer}
+                    title="Add Bulk Player"
+                    startIcon={<Add />}
+                />}
+            </Box>
             {playersData.map((player, index) => (
                 <Box key={index} sx={{ marginBlock: 3, borderRadius: '10px', position: 'relative', border: '1px solid var(--primary-color)', padding: '0 10px' }}>
-                    <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                         {playersData.length > 1 && (
                             <IconButton
                                 onClick={() => handleRemovePlayer(index)}
@@ -342,7 +350,7 @@ const CreateAuctionPlayer = ({ edit }) => {
                     })}
                 </Box>
             ))}
-            {!edit && <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+            {!edit && playersData.length > 1 && <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
                 <CustomeButton
                     onClick={handleAddPlayer}
                     title="Add Another Player"

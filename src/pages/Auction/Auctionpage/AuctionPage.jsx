@@ -54,7 +54,7 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                             backgroundColor: !tournamentData?.tournament_image ? tournamentData?.tournament_logo_color : ''
                         }}
                     >
-                        {tournamentData?.tournament_image ? <Image src={`/${tournamentData?.tournament_image}`} alt="auction" unoptimized width={80} height={80} />
+                        {tournamentData?.tournament_image ? <Image src={`${tournamentData?.tournament_image}`} alt="auction" unoptimized width={80} height={80} />
                             :
                             <Typography variant="h5">{tournamentData?.letter}</Typography>
                         }

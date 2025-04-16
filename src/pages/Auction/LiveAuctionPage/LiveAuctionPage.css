@@ -38,6 +38,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .au-player-details .au-pl-img h6 {
@@ -109,7 +110,7 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     width: 100%;
     max-width: 178px;
     transition: all 0.5s ease;
@@ -133,6 +134,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--shadow-light);
 }
 
 .team_card .team-logo h6 {
@@ -142,18 +144,18 @@
 }
 
 .team_card .team_details h6 {
-    font-size: var(--ex-small);
+    font-size: var(--ex-ex-small);
     font-weight: 500;
     color: var(--text-white);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     justify-content: flex-start;
 }
 
 .team_card .team_details h6 svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
 }
 
 /* ========= button-group ======== */
@@ -196,6 +198,44 @@
 }
 
 
+.info-btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+.info-btn-group svg {
+    width:26px;
+    height: 26px;
+    color: var(--text-white);
+}
+
+.info-btn-group .info-btn {
+    padding: 6px;
+    border-radius: 5px;
+    background-color: var(--text-grey);
+    color: var(--text-white);
+    font-size: var(--ex-small);
+    font-weight: 500;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.info-btn-group .info-btn:nth-child(2) {
+    background-color: var(--green);
+}
+.info-btn-group .info-btn:nth-child(3){
+    background-color: var(--text-red);
+}
+.info-btn-group .info-btn:nth-child(5){
+    background-color: var(--text-green);
+}
 
 
 /* ======== modal ======= */
