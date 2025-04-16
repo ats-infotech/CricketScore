@@ -10,6 +10,7 @@ import Stats from "@/pages/Stats/Stats";
 import AboutPage from "@/pages/Tournament/AboutPage/AboutPage";
 import Matches from "@/pages/Tournament/Matches/Matches";
 import TeamPage from "@/pages/Tournament/TeamPage/TeamPage";
+import { auctionState } from "@/redux/slices/auctionSlice";
 import { matchesState } from "@/redux/slices/matchSlice";
 import { playersState } from "@/redux/slices/playersSlice";
 import { teamsState } from "@/redux/slices/teamSlice";
@@ -25,24 +26,26 @@ const TournamentCategory = () => {
   const match_data = useSelector(matchesState);
   const teams = useSelector(teamsState);
   const player_data = useSelector(playersState);
-
+  const auction_data = useSelector(auctionState)
   const [teamData, setTeamData] = useState([]);
   const [matchData, setMatchData] = useState([])
   const [tournamentData, setTournamentData] = useState({})
+  const [auctionData, setAuctionData] = useState({})
   const [playerData, setPlayerData] = useState([])
   const [windowDimensions, setWindowDimensions] = useState(getMainContainerDimensions());
   const [bannerHeight, setBannerHeight] = useState(0)
 
   useEffect(() => {
     if (!id || !tournament_data?.data?.length) return;
-
-    setTournamentData(tournament_data.data.find((item) => item?.id === id));
+    let tournament = tournament_data.data.find((item) => item?.id === id)
+    setTournamentData(tournament);
     setTeamData(teams.data.filter((item) => item?.tournamentId === id));
     setMatchData(match_data.data.filter((item) => item?.tournamentId === id));
+    setAuctionData(auction_data?.data.find((item) => item?.tournamentId === tournament?.id))
 
     const filteredPlayers = player_data.data.filter((item) => item?.tournamentId === id);
     setPlayerData(leaderBoardShorting(filteredPlayers));
-  }, [id, tournament_data?.data, teams?.data, match_data?.data, player_data?.data]);
+  }, [id, tournament_data?.data, teams?.data, match_data?.data, player_data?.data, auction_data?.data]);
 
 
   useEffect(() => {
@@ -83,7 +86,7 @@ const TournamentCategory = () => {
       case 'players':
         return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} />
       case 'mvp':
-        return <AuctionMVP tournamentData={tournamentData} playerAuctioned={[]} />
+        return <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} />
       default:
         return null;
     }

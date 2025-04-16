@@ -9,9 +9,13 @@
     align-items: center;
 }
 
+.player_card_section.mvp{
+    height: 100px;
+}
+
 .player_card_details{
     display: flex;
-    gap: 15px;
+    gap: 25px;
     align-items: center;
 }
 
@@ -45,6 +49,11 @@
     position: relative;
 }
 
+.player_card_name svg{
+    height: 16px;
+    width: 16px;
+}
+
 .player_card_name::before {
     content: '';
     position: absolute;
@@ -58,8 +67,18 @@
     left: -50px;
 }
 
-.player_card_name p {
+.player_card_name h5, .player_card_name span {
     color: var(--text-white);
     font-weight: 500;
     font-size: var(--small);
+}
+
+.player_card_name p{
+    display: flex;
+    align-items: center;
+    color: var(--text-white);
+    gap: 10px;
+    margin-block: 5px;
+    font-size: var(--small);
+    font-weight: 500;
 }

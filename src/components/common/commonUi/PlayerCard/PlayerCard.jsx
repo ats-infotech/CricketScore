@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { useState } from "react"
 import './PlayerCard.css'
+import SvgIcon from "@/assets/icons/SvgIcon"
 
 const PlayerCard = ({ data, isUser, onClick, isMVP }) => {
     const [anchorEl, setAnchorEl] = useState(false);
@@ -28,7 +29,7 @@ const PlayerCard = ({ data, isUser, onClick, isMVP }) => {
     };
 
     return (
-        <Box className="player_card_section">
+        <Box className={`player_card_section ${isMVP ? 'mvp' : ''}`}>
             <Box className="player_card_details">
                 <Box className="player_card_img">
                     {
@@ -41,7 +42,12 @@ const PlayerCard = ({ data, isUser, onClick, isMVP }) => {
                     }
                 </Box>
                 <Box className="player_card_name">
-                    <Typography variant='body2'>{data?.playerName}</Typography>
+                    <Typography variant='h5'>{data?.playerName}</Typography>
+                    {isMVP && <Typography variant='body2'>
+                        <SvgIcon id={'gold-coin'} />
+                        {data?.playerAmount}
+                        </Typography>}
+                    {isMVP && <Typography variant='p'>{data?.teamName}</Typography>}
                 </Box>
             </Box>
             {!isUser && !isMVP && <Box>

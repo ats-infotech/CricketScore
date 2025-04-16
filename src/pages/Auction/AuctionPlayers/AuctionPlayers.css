@@ -65,3 +65,12 @@
     width: 16px;
     height: 16px;
 }
+
+.player_avatar{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

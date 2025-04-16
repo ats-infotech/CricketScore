@@ -5,3 +5,15 @@
 .auction_mvp_message{
     padding: 10px;
 }
+
+.mvp_players_list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mvp_players_list h4{
+    font-size: var(--normal);
+    text-align: center;
+    font-weight: 500;
+}
