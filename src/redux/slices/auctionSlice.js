@@ -30,7 +30,7 @@ const auctionSlice = createSlice({
         },
         addSoldPlayer: (state, action) => {
             const { id, soldPlayers } = action.payload;
-            
+
             state.data = state.data.map((item) =>
                 item.id === id
                     ? {
@@ -67,9 +67,33 @@ const auctionSlice = createSlice({
                 }
                 state.data[findIndex] = updateData
             }
-        }
+        },
+        handleReauctionUnsold: (state, action) => {
+            const { id } = action.payload
+            state.data = state.data.map((item) =>
+                item.id === id
+                    ? {
+                        ...item,
+                        unsoldPlayers: []
+                    }
+                    : item
+            );
+        },
+        handleResetAuction: (state, action) => {
+            const { id } = action.payload
+            state.data = state.data.map((item) =>
+                item.id === id
+                    ? {
+                        ...item,
+                        soldPlayers: [],
+                        unsoldPlayers: []
+                    }
+                    : item
+            );
+        },
+
     }
 })
 
-export const { scheduleAuction, updateAuction, addCurrentPlayer, addSoldPlayer, addUnsoldPlayer } = auctionSlice.actions
+export const { scheduleAuction, updateAuction, addCurrentPlayer, addSoldPlayer, addUnsoldPlayer, handleReauctionUnsold, handleResetAuction } = auctionSlice.actions
 export default auctionSlice.reducer

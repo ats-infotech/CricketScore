@@ -127,8 +127,8 @@
 }
 
 .team_card .team-logo {
-    width: 56px;
-    height: 56px;
+    width: 45px;
+    height: 45px;
     border-radius: 5px;
     overflow: hidden;
     display: flex;
@@ -159,6 +159,16 @@
 }
 
 /* ========= button-group ======== */
+.info-bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
 
 .button-group {
     display: flex;
@@ -166,13 +176,7 @@
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 20px;
-    width: 100%;
-    max-width: 440px;
-    margin: 0 auto;
+    margin-bottom: 10px;
 }
 
 .action-btn {
@@ -181,7 +185,7 @@
     gap: 12px !important;
     background-color: var(--text-white) !important;
     color: var(--text-black) !important;
-    padding: 12px !important;
+    padding: 8px 12px !important;
     font-size: var(--small) !important;
     font-weight: 600 !important;
     box-shadow: none !important;
@@ -209,9 +213,10 @@
 }
 
 .info-btn-group svg {
-    width:26px;
+    width: 26px;
     height: 26px;
     color: var(--text-white);
+    cursor: pointer;
 }
 
 .info-btn-group .info-btn {
@@ -228,12 +233,14 @@
 }
 
 .info-btn-group .info-btn:nth-child(2) {
-    background-color: var(--green);
+    background-color: var(--boundary);
 }
-.info-btn-group .info-btn:nth-child(3){
+
+.info-btn-group .info-btn:nth-child(3) {
     background-color: var(--text-red);
 }
-.info-btn-group .info-btn:nth-child(5){
+
+.info-btn-group .info-btn:nth-child(5) {
     background-color: var(--text-green);
 }
 
@@ -324,4 +331,60 @@
     width: 20px;
     height: 20px;
     color: var(--primary-color);
+}
+
+/* ------------ message Info --------------- */
+
+.message-info {
+    background-color: var(--text-white);
+    padding: 10px 15px;
+}
+
+.info-details {
+    display: flex;
+    align-items: center;
+    gap: 29px;
+    justify-content: space-between;
+    padding: 20px 15px;
+}
+
+.info-details .info h6 {
+    font-size: var(--normal);
+    font-weight: 500;
+    color: var(--text-black);
+    margin-bottom: 6px;
+}
+
+.info-details .info p {
+    font-size: var(--small);
+    font-weight: 500;
+    color: var(--text-grey);
+}
+
+.info-details .icon-info {
+    background-color: var(--primary-color);
+    border-radius: 100%;
+    padding: 18px;
+    width: 58px;
+    height: 58px;
+}
+
+.info-details .icon-info svg {
+    width: 22px;
+    height: 22px;
+    color: var(--text-white);
+}
+
+.info-divider {
+    height: 1px;
+    background: linear-gradient(90deg, #FFFFFF 0%, #0C1830 50%, #FFFFFF 100%);
+}
+
+.info-close {
+    font-size: var(--large);
+    font-weight: 600;
+    color: var(--text-red);
+    text-align: center;
+    padding: 10px 0 20px 0;
+    cursor: pointer;
 }
