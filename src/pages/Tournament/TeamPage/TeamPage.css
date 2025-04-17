@@ -68,7 +68,7 @@
 .teamDetails{
     position: relative;
 }
-
+/* 
 .teamDetails::before{
     content: '';
     position: absolute;
@@ -80,7 +80,7 @@
     bottom: 0;
     z-index: 0;
     left: -50px;
-}
+} */
 
 .teamBox .teamDetails h6 {
     font-family: var(--primary-font);
@@ -185,12 +185,12 @@
     position: absolute;
     z-index: 0;
     background-color: var(--text-white);
-    filter: blur(87.5px);
+    filter: blur(135.5px);
     height: 50px;
     width: 70px;
     top: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: 0;
     left: -50px;
 }
 

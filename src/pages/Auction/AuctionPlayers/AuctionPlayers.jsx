@@ -1,12 +1,11 @@
 'use client'
 import SvgIcon from "@/assets/icons/SvgIcon"
-import { debounce } from "@/components/common/commomFunction"
+import { debounce, formatNumberShort } from "@/components/common/commomFunction"
 import CustomeBack from "@/components/common/commonUi/CustomeBack"
 import CustomeTabs from "@/components/common/commonUi/CustomeTabs"
 import SearchInput from "@/components/common/commonUi/SearchInput/SearchInput"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { Box, Typography } from "@mui/material"
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import './AuctionPlayers.css'
@@ -14,37 +13,14 @@ import { useSelector } from "react-redux"
 import { teamsState } from "@/redux/slices/teamSlice"
 import { playersState } from "@/redux/slices/playersSlice"
 import { auctionState } from "@/redux/slices/auctionSlice"
-import { tournamentState } from "@/redux/slices/tournamentSlice"
-import Avtar from "@/components/common/commonUi/Avtar/Avtar"
+import PlayerCard from "@/components/common/commonUi/PlayerCard/PlayerCard"
+import CustomeMessageBox from "@/components/common/commonUi/CustomeMessageBox"
 
 const tournamentTabs = [
     { label: 'Sold', value: 0 },
     { label: 'Unsold', value: 1 },
     { label: 'Available', value: 2 }
 ]
-
-const AuctionplayerCard = ({ name, price, team, letter, bgColor, image }) => {
-    return (
-        <Box className='auction_player_card'>
-            <Box className='plyer_img'>
-                {image ? <Image src={require('../../../assets/img/profiledummy.png')} alt='auction' unoptimized />
-                    :
-                    <Box className='player_avatar' sx={{backgroundColor: bgColor}}>
-                        <Typography variant="body2">{letter}</Typography>
-                    </Box>
-                }
-            </Box>
-            <Box className='auction_player_details'>
-                <Typography variant="h6" className="player_name">{name}</Typography>
-                <Typography variant="h6" className="coins">
-                    <SvgIcon id='gold-coin' />
-                    <span>{price}</span>
-                </Typography>
-                <Typography variant="h6" className="team_name">{team}</Typography>
-            </Box>
-        </Box>
-    )
-}
 
 const AuctionPlayersPage = () => {
     const { auctionId } = useParams()
@@ -55,23 +31,20 @@ const AuctionPlayersPage = () => {
     const [teamData, setTeamData] = useState([])
     const [playerData, setPlayerData] = useState([])
     const [auctionData, setAuctionData] = useState({})
-    const [tournamentData, setTournamentData] = useState({})
     const [currentTabPlayers, setCurrentTabPlayers] = useState([])
+
     const team_data = useSelector(teamsState)
     const player_data = useSelector(playersState)
     const auction_data = useSelector(auctionState)
-    const tournament_data = useSelector(tournamentState)
 
     useEffect(() => {
         let currentAuction = auction_data?.data?.find((items) => items?.id === auctionId)
-        let currentTournament = tournament_data?.data?.find((items) => items?.id === currentAuction?.tournamentId)
         let currentTournamentTeam = team_data?.data?.filter((items) => items?.tournamentId === currentAuction?.tournamentId)
         let currentTournamentPlayer = player_data?.data?.filter((items) => items?.tournamentId === currentAuction?.tournamentId)
         setAuctionData(currentAuction)
-        setTournamentData(currentTournament)
         setTeamData(currentTournamentTeam)
         setPlayerData(currentTournamentPlayer)
-    }, [auction_data, tournament_data, player_data, team_data])
+    }, [auction_data, player_data, team_data])
 
     useEffect(() => {
         switch (activeTab) {
@@ -125,7 +98,8 @@ const AuctionPlayersPage = () => {
     const fetchSearchResults = (query) => {
         setSearchResults(query)
     }
-    const debouncedSearch = useCallback(debounce(fetchSearchResults, 500), []);
+
+    const debouncedSearch = useCallback(debounce(fetchSearchResults, 500), [])
 
     const handleOnSearch = (event) => {
         let value = event.target.value
@@ -138,6 +112,16 @@ const AuctionPlayersPage = () => {
         setSearchResults('')
     }
 
+    // Filter players by search text
+    const filteredPlayers = currentTabPlayers.filter((items) => {
+        const player = playerData.find((item) =>
+            item?.id === items?.soldPlayer || item?.id === items?.unsoldPlayer || item?.id === items?.id
+        );
+        if (!player) return false;
+        const playerName = player?.playerName?.toLowerCase() || '';
+        return playerName.includes(searchResults.toLowerCase());
+    });
+
     return (
         <Box className='auction-players-page'>
             <Box className='auction-header-main'>
@@ -149,23 +133,59 @@ const AuctionPlayersPage = () => {
                     <SvgIcon id={showSearchBar ? 'close' : 'search'} className='auction_icon' onClick={handleSearchBarShow} />
                 }
             </Box>
-            {showSearchBar && <Box className='auction_search_box_main' >
-                <SearchInput value={searchValue} onChange={(e) => handleOnSearch(e)} onClear={clearSearchValue} />
-            </Box>}
-            <CustomeTabs data={tournamentTabs || []} onClick={handleTabClick} activeTab={activeTab} />
-            {
-                currentTabPlayers.length > 0 && currentTabPlayers.map((items, i) => {
-                    const player = playerData.find((item) => item?.id === items?.soldPlayer|| item?.id === items?.unsoldPlayer || item?.id === items?.id)
-                    const team = teamData.find((item) => item?.id === items?.teamId)
 
-                    return (
-                        <Box key={i}>
-                            <AuctionplayerCard letter={player?.letter || ''} bgColor={player?.playerColor || ''} image={player?.playerImage || ''} name={player?.playerName} price={items?.bidPrice} team={team?.team_name} />
-                        </Box>
-                    )
-                })
-            }
-            {/* <AuctionplayerCard /> */}
+            {showSearchBar && (
+                <Box className='auction_search_box_main'>
+                    <SearchInput value={searchValue} placeholder="Search Player" onChange={(e) => handleOnSearch(e)} onClear={clearSearchValue} />
+                </Box>
+            )}
+
+            <CustomeTabs data={tournamentTabs || []} onClick={handleTabClick} activeTab={activeTab} />
+
+            <Box className="auctioned_players_data">
+                {
+                    filteredPlayers.length > 0 ?
+                        filteredPlayers.map((items, i) => {
+                            const player = playerData.find((item) =>
+                                item?.id === items?.soldPlayer || item?.id === items?.unsoldPlayer || item?.id === items?.id
+                            )
+                            const team = teamData.find((item) => item?.id === items?.teamId)
+                            const playerAmount = formatNumberShort(items?.bidPrice)
+
+                            const data = {
+                                playerName: player?.playerName,
+                                playerImage: player?.playerImage,
+                                playerColor: player?.playerColor || '',
+                                letter: player?.letter || '',
+                                teamName: team?.team_name,
+                                playerAmount: playerAmount
+                            }
+
+                            return (
+                                <Box key={i}>
+                                    <PlayerCard data={data} isUser={true} isMVP={activeTab === 0} />
+                                </Box>
+                            )
+                        })
+                        :
+                        <CustomeMessageBox
+                            title={
+                                searchResults
+                                    ? 'No Results Found'
+                                    : activeTab === 0
+                                        ? 'Sold player guide'
+                                        : activeTab === 1
+                                            ? 'Unsold players guide'
+                                            : 'Available player guide'
+                            }
+                            describe={
+                                searchResults
+                                    ? '⚠️ No players match your search.'
+                                    : `⚠️ No players were ${activeTab === 0 ? 'Sold' : activeTab === 1 ? 'Unsold' : 'Available'}`
+                            }
+                        />
+                }
+            </Box>
         </Box>
     )
 }
