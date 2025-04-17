@@ -5,6 +5,7 @@ import Loader from "@/components/common/commonUi/Loader"
 import ScrollableTabs from "@/components/common/commonUi/ScrollableTabs/ScrollableTabs"
 import CommonBack from "@/components/common/commonUi/commonBack"
 import { breakType, TestBreakType } from "@/components/common/json/commonJson"
+import { auctionState } from "@/redux/slices/auctionSlice"
 import { teamsState } from "@/redux/slices/teamSlice"
 import { Box, Typography } from "@mui/material"
 import Image from "next/image"
@@ -22,6 +23,7 @@ const auctionbuttonGroups = [
 ];
 
 const buttonGroups = [
+    { title: 'Auction', icon: 'auction-thor', value: 'auction' },
     { title: 'Match', icon: 'striker', value: 'match' },
     { title: 'Leaderboard', icon: 'leaderboard', value: 'leaderboard' },
     { title: 'Points Table', icon: 'pointable', value: 'pointable' },
@@ -93,6 +95,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
     })
     const [Over, setOver] = useState(true)
     const team_data = useSelector(teamsState)
+    const auctionData = useSelector(auctionState)?.data?.find(item => item?.tournamentId === data?.id) || null
     const router = useRouter()
     const tData = data || {};
     const bannerImage = tData?.tournament_banner;
@@ -132,7 +135,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
     let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false
     let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary' && items?.value !== 'analysis') : matchButtonGroups
     // let pastMatchGroups = isPastTournament ? buttonGroups.filter((items) => items.value !== 'about') : buttonGroups
-    let pastMatchGroups = buttonGroups
+    const pastMatchGroups = (!data?.auction || !auctionData) ? buttonGroups.filter(item => item?.value !== 'auction') : auctionData?.auctionStatus !== 3 ? auctionbuttonGroups : buttonGroups;
     let matchFirstInnings = tData?.firstInnings
     let matchSecondInnings = tData?.secondInnings
     let matchThirdInnings = tData?.superOverFirstInnings
@@ -628,7 +631,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
             </Box>
             <Box sx={{ position: 'absolute', bottom: '0', zIndex: '99', left: '0', right: '0' }}>
                 <ScrollableTabs
-                    buttonGroups={type === 'match' ? matchGroups : data?.auction ? auctionbuttonGroups : pastMatchGroups}
+                    buttonGroups={type === 'match' ? matchGroups : pastMatchGroups}
                     tabActive={tabValue}
                     handleChange={handleTabChange}
                 />

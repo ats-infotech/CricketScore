@@ -59,9 +59,22 @@ const playerSlice = createSlice({
                 }
             });
         },
+        updateAuctionedPlayersTeam: (state, action) => {
+            const  players  = action.payload;
+            players.length > 0 && players.forEach(stat => {
+                const { playerId, ...stats } = stat;
+                const index = state.data.findIndex(player => player.id === playerId);
+                if (index !== -1) {
+                    state.data[index] = {
+                        ...state.data[index],
+                        teamId: stats.teamId || 0,
+                    };
+                }
+            });
+        },
     }
 })
 
-export const { createPlayerData, updatePlayerData, deleteMultiplePlayerData, deletePlayerData, deletePlayers, updatePlayersStats } = playerSlice.actions
+export const { createPlayerData, updatePlayerData, deleteMultiplePlayerData, deletePlayerData, deletePlayers, updatePlayersStats, updateAuctionedPlayersTeam } = playerSlice.actions
 export const playersState = (state) => state.players
 export default playerSlice.reducer

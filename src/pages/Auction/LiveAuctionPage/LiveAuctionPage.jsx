@@ -5,20 +5,21 @@ import {
     addSoldPlayer,
     addUnsoldPlayer,
     handleReauctionUnsold,
-    handleResetAuction
+    handleResetAuction,
+    statusUpdateAuction
 } from "@/redux/slices/auctionSlice"
-import { playersState } from "@/redux/slices/playersSlice"
+import { deleteMultiplePlayerData, playersState, updateAuctionedPlayersTeam } from "@/redux/slices/playersSlice"
 import { teamsState, updateAuctionTeamStats } from "@/redux/slices/teamSlice"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button, Menu, MenuItem, Typography } from "@mui/material"
 import dynamic from "next/dynamic"
 import Image from "next/image"
-import { useParams } from "next/navigation"
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import { useParams, useRouter } from "next/navigation"
+import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import './LiveAuctionPage.css'
 
-// Dynamic imports for better code splitting
+// Dynamic imports
 const SvgIcon = dynamic(() => import("@/assets/icons/SvgIcon"))
 const CustomeBack = dynamic(() => import("@/components/common/commonUi/CustomeBack"))
 const CustomeButton = dynamic(() => import("@/components/common/commonUi/CustomeButton"))
@@ -67,81 +68,108 @@ const AUCTION_ACTIONS = [
 const LiveAuctionPage = () => {
     const { auctionId } = useParams()
     const dispatch = useDispatch()
+    const router = useRouter()
+    const playerDataRef = useRef([])
+    const currentBidRef = useRef(0)
 
-    // Combined selector to reduce re-renders
-    const rawAuctionState = useSelector(state => state.auction);
-    const rawTeamState = useSelector(state => teamsState(state));
-    const rawPlayerState = useSelector(state => playersState(state));
-    const { auctionState, teamState, playerState } = useMemo(() => ({
-        auctionState: rawAuctionState,
-        teamState: rawTeamState,
-        playerState: rawPlayerState
-    }), [rawAuctionState, rawTeamState, rawPlayerState]);
+    // Redux state
+    const auctionState = useSelector(state => state.auction)
+    const teamState = useSelector(state => teamsState(state))
+    const playerState = useSelector(state => playersState(state))
 
-    // Memoized data calculations
-    const auctiondata = useMemo(() =>
-        auctionState.data.find((item) => item?.id === auctionId),
-        [auctionState.data, auctionId]
+    // Derived data
+    const auctiondata = auctionState.data.find(item => item?.id === auctionId)
+    const teamsData = teamState.data.filter(item => item?.tournamentId === auctiondata?.tournamentId)
+
+    const availablePlayers = playerState.data.filter(item =>
+        item?.tournamentId === auctiondata?.tournamentId &&
+        !auctiondata?.soldPlayers?.some(sold => sold?.soldPlayer === item?.id) &&
+        !auctiondata?.unsoldPlayers?.some(unsold => unsold?.unsoldPlayer === item?.id)
     )
 
-    const teamsData = useMemo(() =>
-        teamState.data.filter((item) => item?.tournamentId === auctiondata?.tournamentId),
-        [teamState.data, auctiondata]
-    )
-
-    const playerData = useMemo(() =>
-        playerState.data.filter((item) =>
-            item?.tournamentId === auctiondata?.tournamentId
-            && !auctiondata?.soldPlayers?.some(sold => sold?.soldPlayer === item?.id)
-            && !auctiondata?.unsoldPlayers?.some(unsold => unsold?.unsoldPlayer === item?.id)
-        ),
-        [playerState.data, auctiondata]
-    )
+    playerDataRef.current = availablePlayers
 
     const currentAuctionStatus = auctiondata?.currentPlayer || {}
-    const teambidding = useMemo(() =>
-        currentAuctionStatus ? teamsData.find((team) => team?.id === currentAuctionStatus?.teamId) : null,
-        [currentAuctionStatus, teamsData]
-    )
-    const auctinablePlayer = useMemo(() =>
-        currentAuctionStatus ? playerData.find((player) => player.id === currentAuctionStatus?.currentPlayer) || null : playerData[0],
-        [currentAuctionStatus, playerData]
-    )
+    const teambidding = currentAuctionStatus ? teamsData.find(team => team?.id === currentAuctionStatus?.teamId) : null
+    const auctinablePlayer = currentAuctionStatus ?
+        availablePlayers.find(player => player.id === currentAuctionStatus?.currentPlayer) || null :
+        availablePlayers[0]
+    const isAuctionCompleted = availablePlayers.length === 0
 
-    // State management
+    // Local state
     const [currentTeamBidding, setCurrentTeamBidding] = useState(teambidding)
     const [currentBid, setCurrentBid] = useState(0)
     const [updateInputBid, setUpdateInputBid] = useState('')
     const [error, setError] = useState({})
     const [isWhatOpen, setWhatOpen] = useState('')
     const [searchResults, setSearchResults] = useState('')
-    const [currentPlayer, setCurrentPlayer] = useState(auctinablePlayer || playerData[0])
-    const [selectManualPlayer, setSelectManualPlayer] = useState(currentPlayer)
+    const [currentPlayer, setCurrentPlayer] = useState(auctinablePlayer)
+    const [selectManualPlayer, setSelectManualPlayer] = useState(auctinablePlayer)
     const [maxBidHeighestAmount, setMaxBidHeighestAmount] = useState(0)
     const [isUpdated, setIsUpdated] = useState(false)
     const [alertModal, setAlertModal] = useState({ open: false, success: false, message: "" })
     const [isSold, setIsSold] = useState(false)
     const [isUnsold, setIsUnsold] = useState(false)
-    const [open, setOpen] = useState(playerData?.length === 0 || false)
+    const [open, setOpen] = useState(false)
     const [openSettingModal, setOpenSettingModal] = useState(false)
+    const auctionCompleted = openSettingModal || isAuctionCompleted
+    const [reauctionUnsold, setReauctionUnsold] = useState(false)
 
-    const auctionCompleted = openSettingModal || playerData?.length === 0
+    // meulist state
+    const [anchorEl, setAnchorEl] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
 
-    // Memoized derived values
-    const InfoOfAuction = useMemo(() => [
+    // Derived UI data
+    const InfoOfAuction = [
         { title: 'Sold', count: auctiondata?.soldPlayers?.length || 0 },
         { title: 'unsold', count: auctiondata?.unsoldPlayers?.length || 0 },
-        { title: 'Available', count: playerData.length },
+        { title: 'Available', count: availablePlayers.length },
         { title: 'Team', count: teamsData.length }
-    ], [auctiondata, playerData, teamsData])
+    ]
 
-    const showPlayerData = useMemo(() => {
-        if (!searchResults.trim()) return playerData
-        const searchQuery = searchResults.toLowerCase()
-        return playerData.filter((item) => item?.playerName?.toLowerCase()?.includes(searchQuery))
-    }, [searchResults, playerData])
+    const showPlayerData = searchResults.trim()
+        ? availablePlayers.filter(item => item?.playerName?.toLowerCase()?.includes(searchResults.toLowerCase()))
+        : availablePlayers
+
+    // menulist handle
+    const handleMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        setSelectedItem(null)
+    };
+
+    const handleMenuItemClick = () => {
+        router.push(`/auction-players/${auctiondata?.id}`)
+        handleMenuClose()
+    }
+
+
+    useEffect(() => {
+        if (availablePlayers && !currentPlayer) {
+            setCurrentPlayer(availablePlayers[0])
+        }
+    }, [availablePlayers])
 
     // Effects
+    useEffect(() => {
+        if (isAuctionCompleted) {
+            const newObj = {
+                id: auctionId,
+                currentPlayer: {
+                    teamId: null,
+                    currentPlayer: null,
+                    bidPrice: Number(auctiondata.minimum_bid) || 0
+                }
+            }
+            dispatch(addCurrentPlayer(newObj))
+            setOpenSettingModal(true)
+            setOpen(true)
+        }
+    }, [isAuctionCompleted])
+
     useEffect(() => {
         const teams = teamState.data
             .filter(item => item?.tournamentId === auctiondata?.tournamentId && !item?.wallet)
@@ -154,7 +182,7 @@ const LiveAuctionPage = () => {
         if (teams.length) {
             dispatch(updateAuctionTeamStats({ teams }))
         }
-    }, [teamsData, auctiondata, dispatch])
+    }, [teamsData, auctiondata])
 
     useEffect(() => {
         if (!auctiondata || !teamsData?.length) return
@@ -173,11 +201,11 @@ const LiveAuctionPage = () => {
         setMaxBidHeighestAmount(highestMaxBidAmount)
     }, [auctiondata, teamsData])
 
-    // Initialize current bid when player changes or auction data loads
     useEffect(() => {
         if (!isUpdated && auctiondata) {
             const currentBidStatus = currentAuctionStatus ? (currentAuctionStatus?.bidPrice || Number(auctiondata.minimum_bid)) : Number(auctiondata.minimum_bid)
             setCurrentBid(currentBidStatus || 0)
+            currentBidRef.current = currentBidStatus || 0
             updateCurrentPlayerState()
             setIsUpdated(true)
         }
@@ -185,52 +213,57 @@ const LiveAuctionPage = () => {
 
     useEffect(() => {
         setUpdateInputBid(currentBid.toString())
+        currentBidRef.current = currentBid
         updateCurrentPlayerState()
     }, [currentBid, currentTeamBidding])
 
-    const updateCurrentPlayerState = useCallback(() => {
+    // Helper functions
+    function updateCurrentPlayerState() {
+        console.log(currentPlayer, 'availablePlayersooooo');
+
         const newObj = {
             teamId: currentTeamBidding?.id || null,
             currentPlayer: currentPlayer?.id || null,
-            bidPrice: currentBid || 0
+            bidPrice: currentBidRef.current || 0
         }
         const payload = {
             id: auctionId,
             currentPlayer: newObj
         }
         dispatch(addCurrentPlayer(payload))
-    }, [currentTeamBidding, currentPlayer, currentBid, auctionId, dispatch])
+        if (reauctionUnsold) {
+            setReauctionUnsold(false)
+        }
+    }
 
-    // Handlers
-    const handleModalClose = () => {
+    function handleModalClose() {
         setAlertModal({ open: false, success: false, message: "" })
         setIsSold(false)
         setIsUnsold(false)
     }
 
-    const handleClose = () => {
+    function handleClose() {
         setOpen(false)
+        // setReauctionUnsold(false)
         setTimeout(() => {
             setOpenSettingModal(false)
-        }, 500);
+        }, 500)
     }
 
-    const fetchSearchResults = useCallback((query) => {
+    const debouncedSearch = debounce((query) => {
         setSearchResults(query)
-    }, [])
+    }, 500)
 
-    const debouncedSearch = useCallback(debounce(fetchSearchResults, 500), [])
-
-    const handleOnSearch = (event) => {
+    function handleOnSearch(event) {
         const value = event.target.value
         debouncedSearch(value)
     }
 
-    const clearSearchValue = () => {
+    function clearSearchValue() {
         setSearchResults('')
     }
 
-    const handleTeamBid = useCallback((team) => {
+    function handleTeamBid(team) {
         if (currentTeamBidding?.id !== team?.id) {
             setCurrentTeamBidding(team)
             if (currentTeamBidding !== null) {
@@ -238,9 +271,9 @@ const LiveAuctionPage = () => {
                 setCurrentBid(Number(sum))
             }
         }
-    }, [currentTeamBidding, currentBid, auctiondata])
+    }
 
-    const handleBidUpDown = useCallback((action) => {
+    function handleBidUpDown(action) {
         if (!auctiondata && !action) return
         let current = Number(currentBid)
         const increment = Number(auctiondata?.bid_increase_by) || 100
@@ -256,25 +289,28 @@ const LiveAuctionPage = () => {
             }
         }
         setCurrentBid(current)
-    }, [auctiondata, currentBid, maxBidHeighestAmount])
+    }
 
-    const handleRandomPlayerChange = useCallback(() => {
-        if (playerData.length === 0) return
+    function handleRandomPlayerChange() {
+        if (availablePlayers.length === 0) {
+            setCurrentPlayer(null)
+            return
+        }
 
-        const otherPlayers = playerData.filter(player =>
-            currentPlayer ? player.id !== currentPlayer.id : true
-        )
+        const otherPlayers = currentPlayer
+            ? availablePlayers.filter(player => player.id !== currentPlayer.id)
+            : availablePlayers
 
         const randomPlayer = otherPlayers.length > 0
             ? otherPlayers[Math.floor(Math.random() * otherPlayers.length)]
-            : playerData[Math.floor(Math.random() * playerData.length)]
+            : availablePlayers[Math.floor(Math.random() * availablePlayers.length)]
 
         setCurrentPlayer(randomPlayer)
         setCurrentTeamBidding(null)
         setCurrentBid(Number(auctiondata?.minimum_bid || 0))
-    }, [playerData, currentPlayer, auctiondata])
+    }
 
-    const handlePlayerSold = useCallback(async () => {
+    async function handlePlayerSold() {
         const newObj = {
             teamId: currentTeamBidding?.id,
             soldPlayer: currentPlayer?.id,
@@ -295,14 +331,14 @@ const LiveAuctionPage = () => {
                     ...item,
                     teamId: item.id,
                     wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
-                    players: auctiondata?.soldPlayers?.filter((sold) => sold?.teamId === item?.id)?.length || 0
+                    players: auctiondata?.soldPlayers?.filter(sold => sold?.teamId === item?.id)?.length || 0
                 }))
 
             dispatch(updateAuctionTeamStats({ teams }))
         }
-    }, [currentTeamBidding, currentPlayer, currentBid, auctionId, dispatch, handleRandomPlayerChange, teamState.data, auctiondata])
+    }
 
-    const handlePlayerUnsold = useCallback(async () => {
+    async function handlePlayerUnsold() {
         const payload = {
             id: auctionId,
             unsoldPlayers: {
@@ -311,9 +347,9 @@ const LiveAuctionPage = () => {
         }
         await dispatch(addUnsoldPlayer(payload))
         handleRandomPlayerChange()
-    }, [currentPlayer, auctionId, dispatch, handleRandomPlayerChange])
+    }
 
-    const bidHandling = useCallback((key) => {
+    function bidHandling(key) {
         switch (key) {
             case 'bid-up':
                 handleBidUpDown('up')
@@ -347,23 +383,23 @@ const LiveAuctionPage = () => {
             default:
                 return
         }
-    }, [handleBidUpDown, handleRandomPlayerChange, currentTeamBidding, currentPlayer])
+    }
 
-    const handleModalSubmitClick = useCallback(() => {
+    function handleModalSubmitClick() {
         if (isSold) {
             handlePlayerSold()
         } else if (isUnsold) {
             handlePlayerUnsold()
         }
         handleModalClose()
-    }, [isSold, isUnsold, handlePlayerSold, handlePlayerUnsold])
+    }
 
-    const handleOnChange = useCallback((val, key) => {
+    function handleOnChange(val, key) {
         setUpdateInputBid(val)
         setError({})
-    }, [])
+    }
 
-    const submitBidAmount = useCallback(() => {
+    function submitBidAmount() {
         const minBid = Number(auctiondata?.minimum_bid)
         const bidValue = Number(updateInputBid)
 
@@ -380,64 +416,98 @@ const LiveAuctionPage = () => {
         }
         setCurrentBid(bidValue)
         handleClose()
-    }, [updateInputBid, auctiondata, maxBidHeighestAmount])
+    }
 
-    const handleWhatOpen = useCallback((type) => {
+    function handleWhatOpen(type) {
         setWhatOpen(type)
         setSelectManualPlayer(currentPlayer)
+        clearSearchValue()
         setOpen(true)
-    }, [currentPlayer])
+    }
 
-    const handleManualPlayerSelection = useCallback(() => {
+    function handleManualPlayerSelection() {
         if (selectManualPlayer) {
             setCurrentPlayer(selectManualPlayer)
         }
         handleClose()
-    }, [selectManualPlayer])
+    }
 
-    const handleAuctionAction = useCallback(async (id) => {
-        const payload = { id: auctionId }
-        const newObj = {
-            id: auctionId,
-            currentPlayer: {
-                teamId: null,
-                currentPlayer: null,
-                bidPrice: currentBid || 0
+    const handleAuctionAction = async (id) => {
+        const resetState = {
+            teamId: null,
+            currentPlayer: availablePlayers[0],
+            bidPrice: auctiondata?.minimum_bid || 0
+        }
+        if (id === 'complete-auction') {
+            if (auctiondata?.soldPlayers?.length > 0) {
+                const playerIds = auctiondata?.unsoldPlayers?.length > 0 && auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer);
+                if (playerIds.length > 0) {
+                    await dispatch(deleteMultiplePlayerData({ playerId: playerIds }));
+                }
+
+                let playersPayload = auctiondata?.soldPlayers.map((item) => {
+                    return {
+                        playerId: item?.soldPlayer,
+                        teamId: item?.teamId
+                    }
+                })
+                const res = await dispatch(updateAuctionedPlayersTeam(playersPayload))
+                if (res) {
+                    const payload = {
+                        ...auctiondata,
+                        auctionStatus: 3
+                    }
+                    const resp = await dispatch(statusUpdateAuction(payload))
+                    if (resp) {
+                        router.replace(`/mytournament/${auctiondata?.tournamentId}/auction`)
+                    }
+                }
             }
         }
-
-        if (id === 'complete-auction') {
-            // Handle auction completion
-        } else if (id === 'reauction-unsold') {
-            await dispatch(handleReauctionUnsold(payload))
-            await dispatch(addCurrentPlayer(newObj))
-        } else if (id === 'reset-auction') {
-            const teams = teamState.data
-                .filter(item => item?.tournamentId === auctiondata?.tournamentId)
-                .map(item => ({
-                    ...item,
-                    teamId: item.id,
-                    wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
-                    players: 0
-                }))
-
-            await dispatch(handleResetAuction(payload))
-            await dispatch(updateAuctionTeamStats({ teams }))
-            await dispatch(addCurrentPlayer(newObj))
+        else if (id === 'reauction-unsold') {
+            await dispatch(handleReauctionUnsold({ id: auctionId }))
         }
-        handleClose()
-    }, [auctionId, currentBid, dispatch, teamState.data, auctiondata])
+        else if (id === 'reset-auction') {
+            await dispatch(handleResetAuction({ id: auctionId }))
+        }
 
+        await dispatch(addCurrentPlayer({
+            id: auctionId,
+            currentPlayer: resetState
+        }))
+        setCurrentPlayer(availablePlayers[0] || null)
+        setCurrentBid(auctiondata?.minimum_bid || 0)
+        setCurrentTeamBidding(null)
+        handleClose()
+    }
+
+    // Render
     return (
         <Box className='live-auction'>
-            {/* ----- backButton header ---------- */}
+            {/* Header */}
             <Box className='live-auction-header-main'>
                 <CustomeBack />
                 <Typography variant='h6' className="header-title">Auction</Typography>
-                <SvgIcon id={'three-dot-menu'} className='menu_auction_icon' />
+                <Box>
+                    <SvgIcon id={'three-dot-menu'} className='menu_auction_icon' onClick={(e) => handleMenuClick(e)} />
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl)}
+                        onClose={handleMenuClose}
+                        className='list-menu'
+                    >
+                        <MenuItem onClick={() => handleMenuItemClick()}>
+                            <Box className='auction-player-menu' >
+                                <SvgIcon id='auction-thor' />
+                                <Typography variant='body2'>Players</Typography>
+                            </Box>
+                        </MenuItem>
+                    </Menu>
+                </Box>
             </Box>
-            {/* -------- show auction player data ------------ */}
-            {playerData.length > 0 && (
+
+            {/* Player Details */}
+            {availablePlayers.length > 0 && (
                 <Box className='au-player-details'>
                     <Box
                         className='au-pl-img'
@@ -471,17 +541,19 @@ const LiveAuctionPage = () => {
                     </Box>
                 </Box>
             )}
-            {/* -------------- participate auction team data --------- */}
+
+            {/* Team Bidding Area */}
             <Box className='auction-team'>
                 {teamsData.map((item, i) => {
                     const totalCoins = formatNumberShort(Number(auctiondata?.auction_team_balance_point))
+                    const alreadyPurchasedPlayer = auctiondata?.soldPlayers?.filter(sold => sold?.teamId === item?.id).length
                     const areadyBidCalledTeams = auctiondata?.soldPlayers
                         ?.filter(sold => sold?.teamId === item?.id)
-                        ?.reduce((sum, sold) => sum + (sold?.bidPrice || 0), 0) || 0;
+                        ?.reduce((sum, sold) => sum + (sold?.bidPrice || 0), 0) || 0
                     const TeamWallet = formatNumberShort(Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0))
                     const availableWallet = Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0)
-                    const maxBid = formatNumberShort(Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (item?.players || 0))))
-                    const maxBidReached = currentBid >= (Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (item?.players || 0))))
+                    const maxBid = formatNumberShort(Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
+                    const maxBidReached = currentBid >= (Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
 
                     return (
                         <Box
@@ -520,7 +592,8 @@ const LiveAuctionPage = () => {
                     )
                 })}
             </Box>
-            {/* ----------- auction action and info bottom bar -------------- */}
+
+            {/* Bottom Action Bar */}
             <Box className='info-bottom'>
                 <Box className='button-group'>
                     {BTN_GROUP.map((item, i) => (
@@ -548,7 +621,8 @@ const LiveAuctionPage = () => {
                     ))}
                 </Box>
             </Box>
-            {/* --------------- modal --------------- */}
+
+            {/* Modals */}
             <CustomeModal open={open} bgColor={'var(--text-white)'}>
                 {!auctionCompleted ? (
                     <Box className='auction_modal'>
@@ -629,27 +703,36 @@ const LiveAuctionPage = () => {
                     </Box>
                 ) : (
                     <Box className='message-info'>
-                        {AUCTION_ACTIONS.map((action, index) => (
-                            <React.Fragment key={action.id}>
-                                <Box
-                                    className='info-details'
-                                    onClick={() => handleAuctionAction(action.id)}
-                                    sx={{ cursor: 'pointer', '&:hover': { backgroundColor: 'action.hover' } }}
-                                >
-                                    <Box className='info'>
-                                        <Typography variant="h6">{action.title}</Typography>
-                                        <Typography variant="body2">{action.description}</Typography>
+                        {AUCTION_ACTIONS.map((action, index) => {
+                            if (action.id === "reauction-unsold" && (!auctiondata?.unsoldPlayers || auctiondata.unsoldPlayers.length === 0)) {
+                                return null;
+                            }
+                            if (action.id === "complete-auction" && (!auctiondata?.soldPlayers || auctiondata.soldPlayers.length === 0)) {
+                                return null;
+                            }
+
+                            return (
+                                <React.Fragment key={action.id}>
+                                    <Box
+                                        className='info-details'
+                                        onClick={() => handleAuctionAction(action.id)}
+                                        sx={{ cursor: 'pointer', '&:hover': { backgroundColor: 'action.hover' } }}
+                                    >
+                                        <Box className='info'>
+                                            <Typography variant="h6">{action.title}</Typography>
+                                            <Typography variant="body2">{action.description}</Typography>
+                                        </Box>
+                                        <Box className='icon-info'>
+                                            <SvgIcon id={action.icon} />
+                                        </Box>
                                     </Box>
-                                    <Box className='icon-info'>
-                                        <SvgIcon id={action.icon} />
-                                    </Box>
-                                </Box>
-                                {index !== AUCTION_ACTIONS.length - 1 && (
-                                    <Box className='info-divider'></Box>
-                                )}
-                            </React.Fragment>
-                        ))}
-                        <Typography variant="h6" className="info-close" onClick={handleClose}>Close</Typography>
+                                    {index !== AUCTION_ACTIONS.length - 1 && (
+                                        <Box className='info-divider'></Box>
+                                    )}
+                                </React.Fragment>
+                            )
+                        })}
+                        {!isAuctionCompleted && <Typography variant="h6" className="info-close" onClick={handleClose}>Close</Typography>}
                     </Box>
                 )}
             </CustomeModal>

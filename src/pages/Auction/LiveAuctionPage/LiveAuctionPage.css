@@ -388,3 +388,24 @@
     padding: 10px 0 20px 0;
     cursor: pointer;
 }
+
+
+/* - ----------- auction-player-menu --------- */
+
+.auction-player-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.auction-player-menu svg {
+    width: 16px;
+    height: 16px;
+    color: var(--primary-color);
+}
+
+.auction-player-menu p {
+    font-size: var(--small);
+    color: var(--text-primary);
+    font-weight: 600;
+}

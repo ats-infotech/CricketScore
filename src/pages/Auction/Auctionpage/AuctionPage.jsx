@@ -2,16 +2,18 @@ import SvgIcon from "@/assets/icons/SvgIcon";
 import { DateFormat } from "@/components/common/commomFunction";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeMessageBox from "@/components/common/commonUi/CustomeMessageBox";
+import { statusUpdateAuction } from "@/redux/slices/auctionSlice";
 import { playersState } from "@/redux/slices/playersSlice";
 import { teamsState } from "@/redux/slices/teamSlice";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import './AuctionPage.css';
 
 const AuctionPage = ({ tournamentData, isUser = false }) => {
     const router = useRouter()
+    const dispatch = useDispatch()
     const auctionState = useSelector(state => state?.auction)
     const teamState = useSelector(teamsState)
     const playerState = useSelector(playersState)
@@ -25,8 +27,9 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
         hour12: true
     });
 
-    const isAuctionCompleted = auctionData && Object.keys(auctionData).length > 0
+    const isAuctionCreated = auctionData && Object.keys(auctionData).length > 0
     const isStartAuction = teamData.length >= 2 && playerData.length >= 4
+    const isAuctionCompleted = auctionData?.auctionStatus === 3
 
     const handleScheduleAuction = () => {
         router.push(`/create-auction/${tournamentData?.id}`)
@@ -36,18 +39,24 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
         router.push(`/update-auction/${tournamentData?.id}`)
     }
 
-    const handleAuctionRedirect = (type) => {
+    const handleAuctionRedirect = async (type) => {
         if (type === 'live') {
-            router.push(`/live-auction/${auctionData?.id}`)
+            const payload = {
+                ...auctionData,
+                auctionStatus: 2
+            }
+           const res = await dispatch(statusUpdateAuction(payload))
+           if (res) {
+               router.push(`/live-auction/${auctionData?.id}`)
+           }
         } else {
             router.push(`/auction-players/${auctionData?.id}`)
         }
     }
 
-
     return (
         <Box className='auction_page_main'>
-            {isAuctionCompleted &&
+            {isAuctionCreated &&
                 <Box className='auction_card'>
                     <Box className={`auction_image ${!tournamentData?.tournament_image ? 'isText' : ''}`}
                         sx={{
@@ -80,13 +89,13 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                             <span>{`${auctionData?.auction_team_balance_point} Pts/Team`}</span>
                         </Typography>
                     </Box>
-                    {!isUser ? !auctionState?.auction && <SvgIcon id='edit' className='menu-icon' onClick={handleUpdateAuction} /> : <Box></Box>}
+                    {!isUser && !auctionState?.auction && !isAuctionCompleted ? <SvgIcon id='edit' className='menu-icon' onClick={handleUpdateAuction} /> : <Box></Box>}
                 </Box>
             }
-            {isAuctionCompleted ?
+            {isAuctionCreated ?
                 <>
                     <Box className='auction_btn_row'>
-                        {!isUser && <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} disabled={!isStartAuction} />}
+                        {!isUser && !isAuctionCompleted && <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} disabled={!isStartAuction} />}
                         <CustomeButton title={"View Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('view')} />
                     </Box>
                     {!isStartAuction &&

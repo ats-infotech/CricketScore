@@ -99,7 +99,8 @@ const ScheduleAuction = ({ type }) => {
                 id: generateUniqueId(),
                 ...auctionState,
                 tournamentId,
-                auction_time: new Date(auctionState.auction_time).toISOString()
+                auction_time: new Date(auctionState.auction_time).toISOString(),
+                auctionStatus: 1
             }
             let response = await dispatch(scheduleAuction(payload))
             if (response) {

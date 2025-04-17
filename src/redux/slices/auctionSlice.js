@@ -1,10 +1,13 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
-    data: [],
-    auction: false
+    data: []
 }
 
+// auction status
+// 1 - scheduled
+// 2 - started
+// 3 - completed
 
 const auctionSlice = createSlice({
     name: 'auction',
@@ -16,6 +19,12 @@ const auctionSlice = createSlice({
                 state.data = [];
             }
             state.data.push({ ...action.payload });
+        },
+        statusUpdateAuction: (state, action) => {
+            const { id } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? { ...item, ...action.payload} : item
+            );
         },
         addCurrentPlayer: (state, action) => {
             const { id, currentPlayer } = action.payload;
@@ -95,5 +104,6 @@ const auctionSlice = createSlice({
     }
 })
 
-export const { scheduleAuction, updateAuction, addCurrentPlayer, addSoldPlayer, addUnsoldPlayer, handleReauctionUnsold, handleResetAuction } = auctionSlice.actions
+export const { scheduleAuction, statusUpdateAuction, updateAuction, addCurrentPlayer, addSoldPlayer, addUnsoldPlayer, handleReauctionUnsold, handleResetAuction } = auctionSlice.actions
+export const auctionState = (state) => state.auction
 export default auctionSlice.reducer

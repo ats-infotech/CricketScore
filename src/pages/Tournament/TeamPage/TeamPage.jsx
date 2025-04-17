@@ -84,12 +84,12 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
                                     {
                                         title !== 'View Players' ?
                                             <div>
-                                                {!isAuction && <MenuItem onClick={() => handleMenuItemClick('add_player')}>
+                                                <MenuItem onClick={() => handleMenuItemClick('add_player')}>
                                                     <Box className='AddPlayerTag' >
                                                         <SvgIcon id={'add-player'} />
                                                         <Typography variant='body2'>{title}</Typography>
                                                     </Box>
-                                                </MenuItem>}
+                                                </MenuItem>
                                                 <MenuItem onClick={() => handleMenuItemClick('edit')}>
                                                     <Box className='AddPlayerTag' >
                                                         <EditIcon />
