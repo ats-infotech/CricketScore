@@ -164,7 +164,6 @@ const CreateAuctionPlayer = ({ edit }) => {
         try {
             let oldFileName = (typeof player?.playerImage === 'string') ? (player?.playerImage).split('/').pop() : '';
             let method = edit && player?.playerImage ? 'PUT' : 'POST';
-            console.log(playersData[index].playerImage);
 
             const res = await uploadPlayerFile({
                 thumbnail: playersData[index].playerImage,

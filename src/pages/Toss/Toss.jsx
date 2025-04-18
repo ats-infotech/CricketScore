@@ -238,7 +238,7 @@ const Toss = () => {
     // };
 
     const handleStepOne = () => {
-        const coinFlip = Math.floor(Math.random() * 100000);
+        const coinFlip = Math.floor(Math.random() * 100);
         const winningSide = coinFlip % 2 === 0 ? "Head" : "Tail";
         const winner = tossTeams.team1 === winningSide ? teams[0] : tossTeams.team2 === winningSide ? teams[1] : '';
         setSide(winningSide);

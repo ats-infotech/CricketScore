@@ -1,4 +1,5 @@
 'use client'
+import { calculateDLSTarget } from "@/components/common/commomFunction";
 import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeTags from "@/components/common/commonUi/CustomeTags";
@@ -22,7 +23,6 @@ import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './ScoreBoard.css';
-import { calculateDLSTarget } from "@/components/common/commomFunction";
 
 const calculatePlayerStats = (player, wickets, economy) => {
     let battingrun = 0;
@@ -2087,7 +2087,7 @@ const ScoreBoard = () => {
             handleInningsComplete();
             hasRunwinningRef.current = true;
         }
-    }, [winningTeam, currentMatch, initailscore.run, initailscore.wicket])
+    }, [winningTeam, currentMatch, initailscore.run, initailscore.wicket, target, winningSituation])
 
     useEffect(() => {
         let reason = ""
@@ -2576,9 +2576,6 @@ const ScoreBoard = () => {
         const WinningTeam = createTeamStats(true, getWinnerTeam)
         const LossingTeam = createTeamStats(false, getLosserTeam)
         const teams = [WinningTeam, LossingTeam]
-
-        console.log(teams, 'teams', getWinnerTeam);
-
         dispatch(updateTeamStats({ teams }));
         router.push(`/summary/${currentMatch?.id}`);
     }

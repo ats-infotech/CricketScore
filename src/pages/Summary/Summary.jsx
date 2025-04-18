@@ -143,7 +143,6 @@ const SummaryPage = ({
         { label: "W" },
         { label: 'Eco' }
     ]
-    console.log(currentMatch);
     
     const batterdata = ['playerName', 'battingrun', 'battingball', 'four', 'six', 'sr']
     const bowlerdata = ['playerName', 'over', 'bowlingrun', 'maiden', 'bowlerwickets', 'eco']

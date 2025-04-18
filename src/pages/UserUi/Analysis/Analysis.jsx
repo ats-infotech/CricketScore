@@ -509,7 +509,8 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
         : filter.partnerships === "Team2" || filter.partnerships === "Team2firstinning" ? inningsTwoPartnerships : (filter.partnerships === "Team1secondinning" && !isFollowOn)
             || (filter.partnerships === "Team2secondinning" && isFollowOn) ? inningsThreePartnerships
             : inningsFourPartnerships
-
+    const showPieData = filter.wickets === 'Both' && pieData.length === 0 ? false : true
+    
     return (
         <Box className="main_analysis_section">
             {/* Manhattan Bar Chart */}
@@ -531,7 +532,7 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
                     : formattedRunsData} filter={filter.worm} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1Runs'} team2dataKey={'team2Runs'} />
 
             {/* Wickets Pie Chart */}
-            <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} onChange={handleChange('wickets')} title={"Wickets Pie"} data={pieData} isTestMatch={isTestMatch} />
+            {showPieData && <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} onChange={handleChange('wickets')} title={"Wickets Pie"} data={pieData} isTestMatch={isTestMatch} />}
 
             {/* Types of Runs Bar Chart */}
             <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.typesofruns} handleChange={handleChange('typesofruns')}
