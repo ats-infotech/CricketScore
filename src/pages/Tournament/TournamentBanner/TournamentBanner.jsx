@@ -135,7 +135,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
     let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false
     let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary' && items?.value !== 'analysis') : matchButtonGroups
     // let pastMatchGroups = isPastTournament ? buttonGroups.filter((items) => items.value !== 'about') : buttonGroups
-    const pastMatchGroups = (!data?.auction || !auctionData) ? buttonGroups.filter(item => item?.value !== 'auction') : auctionData?.auctionStatus !== 3 ? auctionbuttonGroups : buttonGroups;
+    const pastMatchGroups = (!data?.auction && auctionData?.auctionStatus !== 3) ? buttonGroups.filter(item => item?.value !== 'auction') : auctionData?.auctionStatus !== 3 ? auctionbuttonGroups : buttonGroups;
     let matchFirstInnings = tData?.firstInnings
     let matchSecondInnings = tData?.secondInnings
     let matchThirdInnings = tData?.superOverFirstInnings

@@ -45,12 +45,14 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                 ...auctionData,
                 auctionStatus: 2
             }
-           const res = await dispatch(statusUpdateAuction(payload))
-           if (res) {
-               router.push(`/live-auction/${auctionData?.id}`)
-           }
-        } else {
+            const res = await dispatch(statusUpdateAuction(payload))
+            if (res) {
+                router.push(`/live-auction/${auctionData?.id}`)
+            }
+        } else if (type === 'view') {
             router.push(`/auction-players/${auctionData?.id}`)
+        } else {
+            router.push(`/auction-mvp/${auctionData?.id}`)
         }
     }
 
@@ -95,7 +97,9 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
             {isAuctionCreated ?
                 <>
                     <Box className='auction_btn_row'>
-                        {!isUser && !isAuctionCompleted && <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} disabled={!isStartAuction} />}
+                        {!isUser && !isAuctionCompleted ?
+                            <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} disabled={!isStartAuction} /> :
+                            <CustomeButton title={"Auction Mvp"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('mvp')} />}
                         <CustomeButton title={"View Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('view')} />
                     </Box>
                     {!isStartAuction &&

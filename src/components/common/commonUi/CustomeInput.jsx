@@ -117,9 +117,9 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
         return ''
     }
 
-    const handleWheel = (e) => {
-        e.preventDefault();
-    };
+    // const handleWheel = (e) => {
+    //     e.preventDefault();
+    // };
 
     let openEndDate = (keyName === 'match_end_date' ? openAutoMatchEndDate : openTornamentEndDate)
     let dateType = type === 'datetime-local' ? 'datetime' : type === 'date' ? 'date' : type === 'time' ? 'time' : ''
@@ -148,7 +148,7 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
                         ref={inputRef}
                         onClick={onClick ? onClick : handleFocus}
                         value={value}
-                        onWheel={handleWheel}
+                        // onWheel={handleWheel}
                         onKeyDown={(e) => handleOnlyNumbers(e, keyName)}
                         className={`${openEndDate ? '' : 'notOpen'}`}
                         onChange={(e) => handleOnChange(e.target.value, keyName)}

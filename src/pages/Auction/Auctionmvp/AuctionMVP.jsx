@@ -1,10 +1,12 @@
-import { Box, Typography } from '@mui/material'
-import './AuctionMVP.css'
+import { formatNumberShort } from '@/components/common/commomFunction'
 import CustomeMessageBox from '@/components/common/commonUi/CustomeMessageBox'
 import PlayerCard from '@/components/common/commonUi/PlayerCard/PlayerCard'
-import { formatNumberShort } from '@/components/common/commomFunction'
+import { Box, Typography } from '@mui/material'
+import './AuctionMVP.css'
+import CommonBack from '@/components/common/commonUi/commonBack'
+import CustomeBack from '@/components/common/commonUi/CustomeBack'
 
-const AuctionMVP = ({ auctionData, teamData, playerData }) => {
+const AuctionMVP = ({ auctionData, teamData, playerData, type = null }) => {
     const topPlayersPerTeam = () => {
         const topPlayersMap = {}
         auctionData?.soldPlayers?.forEach((player) => {
@@ -28,7 +30,10 @@ const AuctionMVP = ({ auctionData, teamData, playerData }) => {
                 </Box>
             ) : (
                 <Box className="mvp_players_list">
-                    <Typography variant='h4'>MVPs of Each Team – Highest Paid Players</Typography>
+                    {type === 'page' ? <CustomeBack title='Auction MVPs of Each Team' />
+                        :
+                        <Typography variant='h4'>MVPs of Each Team – Highest Paid Players</Typography>
+                    }
                     {filteredPlayers.map((items, i) => {
                         const team = teamData?.find((item) => item?.id === items?.teamId)
                         const player = playerData?.find((item) => String(item?.id) === String(items?.soldPlayer))

@@ -30,10 +30,11 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: ['persist/PERSIST'],
-                ignoredActionPaths: ['payload.auction_time', 'payload.auction_date'],
-            },
+            serializableCheck: false,
+            // serializableCheck: {
+            //     ignoredActions: ['persist/PERSIST'],
+            //     ignoredActionPaths: ['payload.auction_time', 'payload.auction_date', 'auction.data.*.auction_date'],
+            // },
         }),
 });
 export const persistor = persistStore(store);

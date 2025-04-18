@@ -117,7 +117,6 @@ const LiveAuctionPage = () => {
 
     // meulist state
     const [anchorEl, setAnchorEl] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
 
     // Derived UI data
     const InfoOfAuction = [
@@ -138,7 +137,6 @@ const LiveAuctionPage = () => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
-        setSelectedItem(null)
     };
 
     const handleMenuItemClick = () => {
@@ -219,8 +217,6 @@ const LiveAuctionPage = () => {
 
     // Helper functions
     function updateCurrentPlayerState() {
-        console.log(currentPlayer, 'availablePlayersooooo');
-
         const newObj = {
             teamId: currentTeamBidding?.id || null,
             currentPlayer: currentPlayer?.id || null,
@@ -539,6 +535,9 @@ const LiveAuctionPage = () => {
                             {currentTeamBidding ? currentTeamBidding.team_name : "No bidder"}
                         </Typography>
                     </Box>
+                    {/* <Box className='stamp-gif'>
+                        <Image src={require('../../../assets/img/sold.png')} alt="stamp" />
+                    </Box> */}
                 </Box>
             )}
 
@@ -553,7 +552,8 @@ const LiveAuctionPage = () => {
                     const TeamWallet = formatNumberShort(Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0))
                     const availableWallet = Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0)
                     const maxBid = formatNumberShort(Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
-                    const maxBidReached = currentBid >= (Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
+                    const reachBid = (Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
+                    const maxBidReached = !currentTeamBidding ? currentBid > reachBid : currentBid >= reachBid
 
                     return (
                         <Box
@@ -624,6 +624,7 @@ const LiveAuctionPage = () => {
 
             {/* Modals */}
             <CustomeModal open={open} bgColor={'var(--text-white)'}>
+
                 {!auctionCompleted ? (
                     <Box className='auction_modal'>
                         <Box className='auction-modal-header'>
@@ -632,7 +633,6 @@ const LiveAuctionPage = () => {
                             </Typography>
                             <CloseRoundedIcon onClick={handleClose} />
                         </Box>
-
                         {isWhatOpen === MODAL_TYPES.PLAYER && (
                             <Box className='auction-player-section'>
                                 <Box sx={{ marginBottom: '20px' }}>
@@ -642,46 +642,47 @@ const LiveAuctionPage = () => {
                                         onClear={clearSearchValue}
                                     />
                                 </Box>
-                                {showPlayerData.map((item, i) => {
-                                    const isSelect = selectManualPlayer?.id === item.id
-                                    return (
-                                        <Box
-                                            className='manual-player-selection'
-                                            key={i}
-                                            onClick={() => setSelectManualPlayer(item)}
-                                        >
-                                            <Box className='player_row'>
-                                                <Box
-                                                    className='player-img'
-                                                    sx={{
-                                                        backgroundColor: !item?.playerImage ? item?.playerColor : ''
-                                                    }}
-                                                >
-                                                    {item?.playerImage ? (
-                                                        <Image
-                                                            src={`/${item.playerImage}`}
-                                                            alt="player"
-                                                            width={50}
-                                                            height={50}
-                                                            quality={85}
-                                                        />
-                                                    ) : (
-                                                        <Typography variant="h6">{item?.letter}</Typography>
-                                                    )}
+                                <Box className={showPlayerData.length > 5 ? 'overflow-player' : ''}>
+                                    {showPlayerData.map((item, i) => {
+                                        const isSelect = selectManualPlayer?.id === item.id
+                                        return (
+                                            <Box
+                                                className='manual-player-selection'
+                                                key={i}
+                                                onClick={() => setSelectManualPlayer(item)}
+                                            >
+                                                <Box className='player_row'>
+                                                    <Box
+                                                        className='player-img'
+                                                        sx={{
+                                                            backgroundColor: !item?.playerImage ? item?.playerColor : ''
+                                                        }}
+                                                    >
+                                                        {item?.playerImage ? (
+                                                            <Image
+                                                                src={`/${item.playerImage}`}
+                                                                alt="player"
+                                                                width={50}
+                                                                height={50}
+                                                                quality={85}
+                                                            />
+                                                        ) : (
+                                                            <Typography variant="body2">{item?.letter}</Typography>
+                                                        )}
+                                                    </Box>
+                                                    <Typography variant="h5" className="auction_player">
+                                                        {item?.playerName}
+                                                    </Typography>
                                                 </Box>
-                                                <Typography variant="h5" className="auction_player">
-                                                    {item?.playerName}
-                                                </Typography>
+                                                <Box className={`auction-checkbox ${isSelect ? 'isSelect' : ''}`}>
+                                                    {isSelect && <SvgIcon id={'trueIcon'} />}
+                                                </Box>
                                             </Box>
-                                            <Box className={`auction-checkbox ${isSelect ? 'isSelect' : ''}`}>
-                                                {isSelect && <SvgIcon id={'trueIcon'} />}
-                                            </Box>
-                                        </Box>
-                                    )
-                                })}
+                                        )
+                                    })}
+                                </Box>
                             </Box>
                         )}
-
                         {isWhatOpen === MODAL_TYPES.BID && (
                             <Box className='update-bid-main'>
                                 <CustomeInput

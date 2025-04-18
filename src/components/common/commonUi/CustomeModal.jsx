@@ -11,7 +11,8 @@ const CustomeModal = ({ open, onClose, children, bgColor }) => {
                 '.MuiPaper-root': {
                     backgroundColor: bgColor || "var(--primary-color)",
                     borderRadius: '20px',
-                    width: '100%'
+                    width: '100%',
+                    margin:'18px'
                 }
             }}
         >{children}</Dialog>

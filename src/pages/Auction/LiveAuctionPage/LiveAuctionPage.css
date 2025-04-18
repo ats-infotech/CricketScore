@@ -16,7 +16,7 @@
 .menu_auction_icon {
     width: 28px;
     height: 28px;
-    color: var(--text-black);
+    color: var(--black);
 }
 
 /* ------------ .au-player-details ---------- */
@@ -29,6 +29,7 @@
     border-radius: 15px;
     background-color: var(--primary-color);
     margin-top: 30px;
+    position: relative;
 }
 
 .au-player-details .au-pl-img {
@@ -100,6 +101,14 @@
     justify-content: center;
     gap: 12px;
     padding: 15px 0;
+}
+
+
+/* ------ stamp gif ---------- */
+
+.stamp-gif {
+    width: 80px;
+    height: 80px;
 }
 
 /* ======= team card ========= */
@@ -184,7 +193,7 @@
     align-items: center !important;
     gap: 12px !important;
     background-color: var(--text-white) !important;
-    color: var(--text-black) !important;
+    color: var(--black) !important;
     padding: 8px 12px !important;
     font-size: var(--small) !important;
     font-weight: 600 !important;
@@ -248,6 +257,16 @@
 /* ======== modal ======= */
 .auction_modal {
     padding: 20px 24px;
+    overflow: hidden;
+}
+
+.overflow-player {
+    height: calc(100vh - 300px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 
 .auction-modal-header {
@@ -259,13 +278,13 @@
 .auction-modal-header h6 {
     font-size: var(--normal);
     font-weight: 500;
-    color: var(--text-black);
+    color: var(--black);
 }
 
 .auction-modal-header svg {
     width: 18px;
     height: 18px;
-    color: var(--text-black);
+    color: var(--black);
 }
 
 .update-bid-main {
@@ -313,6 +332,10 @@
     box-shadow: var(--shadow-light);
 }
 
+.manual-player-selection .player-img p {
+    font-weight: 600;
+}
+
 .auction-checkbox {
     width: 24px;
     height: 24px;
@@ -351,7 +374,7 @@
 .info-details .info h6 {
     font-size: var(--normal);
     font-weight: 500;
-    color: var(--text-black);
+    color: var(--black);
     margin-bottom: 6px;
 }
 
@@ -408,4 +431,66 @@
     font-size: var(--small);
     color: var(--text-primary);
     font-weight: 600;
+}
+
+
+@media screen and (max-width:438px) {
+    .live-auction {
+        padding: 18px;
+        position: relative;
+    }
+
+    .button-group {
+        gap: 8px;
+    }
+
+    .auction-team {
+        gap: 8px;
+    }
+
+    .team_card {
+        padding: 10px 10px;
+        max-width: 152px;
+    }
+   
+    .action-btn {
+        gap: 8px !important;
+        color: var(--black) !important;
+        padding: 7px 8px !important;
+        max-width: 107px !important;
+    }
+
+    .info-bottom {
+        padding: 0 6px;
+    }
+}
+
+@media screen and (max-width:370px) { 
+    .info-details .icon-info {
+        padding: 10px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info-details {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: space-between;
+        padding: 10px 4px;
+    }
+}
+
+@media screen and (max-width:348px) {
+    .team_card {
+        padding: 10px 10px;
+        max-width: 100%;
+    }
+    .info-btn-group {
+        gap: 6px;
+        padding: 8px 10px;
+    }
 }
