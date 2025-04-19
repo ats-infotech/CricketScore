@@ -13,6 +13,8 @@ const CommonBox = ({data, title}) => {
 
 const Stats = ({ tournamentData }) => {
     const getStat = (statName) => tournamentData?.[statName] || 0;
+    const boundaryPercentage = getStat('fours') > 0 || getStat('sixes') > 0 ? ((((getStat('fours') * 4)+(getStat('sixes') * 6)) * 100)/getStat('runs')).toFixed(2) : 0
+    const dotBallPercentage = getStat('dotballs') > 0 ? ((getStat('dotballs')*100)/getStat('balls')).toFixed(2) : 0
 
     return (
             <Box className='stats_card_section activeAnimation'>
@@ -32,8 +34,8 @@ const Stats = ({ tournamentData }) => {
                 <CommonBox data={getStat('dotballs')} title={'Dot Balls'}/>
                 <CommonBox data={getStat('catches')} title={'Catches'}/>
                 <CommonBox data={getStat('stumpings')} title={'Stumpings'}/>
-                <CommonBox data={((getStat('dotballs')*100)/getStat('balls')).toFixed(2)} title={'DB%'}/>
-                <CommonBox data={((((getStat('fours') * 4)+(getStat('sixes') * 6)) * 100)/getStat('runs')).toFixed(2)} title={'BDRY%'}/>
+                <CommonBox data={dotBallPercentage} title={'DB%'}/> 
+                <CommonBox data={boundaryPercentage} title={'BDRY%'}/>
         </Box>
     )
 }

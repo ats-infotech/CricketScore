@@ -169,18 +169,18 @@ const LiveAuctionPage = () => {
     }, [isAuctionCompleted])
 
     useEffect(() => {
-        const teams = teamState.data
-            .filter(item => item?.tournamentId === auctiondata?.tournamentId && !item?.wallet)
-            .map(item => ({
-                ...item,
-                teamId: item.id,
-                wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
-                players: 0
-            }))
-        if (teams.length) {
-            dispatch(updateAuctionTeamStats({ teams }))
+        const newTeams = teamState.data.filter(item => item?.tournamentId === auctiondata?.tournamentId &&
+            (!item?.wallet || item?.wallet !== parseInt(auctiondata?.auction_team_balance_point))).map(items => ({
+            ...items,
+            teamId: items.id,
+            wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
+            players: items?.players && items?.wallet !== parseInt(auctiondata?.auction_team_balance_point) ? items?.players : 0
+        }));
+
+        if (newTeams.length) {
+            dispatch(updateAuctionTeamStats({ teams: newTeams }));
         }
-    }, [teamsData, auctiondata])
+    }, [auctiondata?.auction_team_balance_point, auctiondata?.tournamentId, teamState.data]);
 
     useEffect(() => {
         if (!auctiondata || !teamsData?.length) return

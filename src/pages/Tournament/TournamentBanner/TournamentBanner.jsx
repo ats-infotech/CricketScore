@@ -135,7 +135,15 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
     let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false
     let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary' && items?.value !== 'analysis') : matchButtonGroups
     // let pastMatchGroups = isPastTournament ? buttonGroups.filter((items) => items.value !== 'about') : buttonGroups
-    const pastMatchGroups = (!data?.auction && auctionData?.auctionStatus !== 3) ? buttonGroups.filter(item => item?.value !== 'auction') : auctionData?.auctionStatus !== 3 ? auctionbuttonGroups : buttonGroups;
+    // const pastMatchGroups = (!data?.auction && auctionData?.auctionStatus !== 3) ? buttonGroups.filter(item => item?.value !== 'auction') : auctionData?.auctionStatus !== 3 ? auctionbuttonGroups : buttonGroups;
+    let pastMatchGroups;
+    if (data?.auction && auctionData?.auctionStatus !== 3) {
+        pastMatchGroups = auctionbuttonGroups;
+    } else if (!data?.auction && auctionData?.auctionStatus !== 3) {
+        pastMatchGroups = buttonGroups.filter(item => item?.value !== 'auction');
+    } else {
+        pastMatchGroups = buttonGroups;
+    }
     let matchFirstInnings = tData?.firstInnings
     let matchSecondInnings = tData?.secondInnings
     let matchThirdInnings = tData?.superOverFirstInnings
@@ -634,6 +642,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
                     buttonGroups={type === 'match' ? matchGroups : pastMatchGroups}
                     tabActive={tabValue}
                     handleChange={handleTabChange}
+                    data={data}
                 />
             </Box>
         </Box>

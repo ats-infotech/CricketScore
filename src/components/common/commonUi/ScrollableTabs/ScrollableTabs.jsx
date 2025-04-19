@@ -4,11 +4,11 @@ import React, { useEffect, useRef } from 'react';
 import './ScrollableTabs.css';
 import { Addchart } from '@mui/icons-material';
 
-function ScrollableTabs({ buttonGroups, tabActive, handleChange }) {
+function ScrollableTabs({ buttonGroups, tabActive, handleChange, data }) {
     const tabRefs = useRef([]);
 
     useEffect(() => {
-        if (buttonGroups.length > 0 && !buttonGroups.some(item => item.value === tabActive)) {
+        if (buttonGroups.length > 0 && !buttonGroups.some(item => item.value === tabActive) && data) {
             handleChange(buttonGroups[0]?.value || '');
         }
     }, [tabActive, buttonGroups, handleChange]);
