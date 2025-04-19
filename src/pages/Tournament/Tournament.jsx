@@ -2,9 +2,11 @@ import SvgIcon from "@/assets/icons/SvgIcon";
 import { CheckTournamentIsRunning, DateFormat, debounce } from "@/components/common/commomFunction";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeMessageBox from "@/components/common/commonUi/CustomeMessageBox";
+import { auctionState } from "@/redux/slices/auctionSlice";
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import CustomeTabs from "../../components/common/commonUi/CustomeTabs";
 import Menubar from "../../components/common/commonUi/Menubar/Menubar";
 import SearchInput from "../../components/common/commonUi/SearchInput/SearchInput";
@@ -32,6 +34,8 @@ const Tournament = ({ tournamentData, matchData, type }) => {
     const [animation, setAnimation] = useState(false)
     const [searchValue, setSearchValue] = useState("");
     const [searchResults, setSearchResults] = useState('');
+
+    const auctionstate = useSelector(auctionState)
 
     const handleOpen = () => setOpenDrawer(true)
     const handleClose = () => setOpenDrawer(false)
@@ -151,6 +155,16 @@ const Tournament = ({ tournamentData, matchData, type }) => {
         }
     }
 
+
+    const handleTournamentRedirect = (item) => {
+        const auctionData = auctionstate?.data.find((items) => items?.tournamentId === item?.id)
+        const isAuction = auctionData && auctionData?.auctionStatus !== 3
+        const subPath = isAuction ? 'auction' : 'match'
+        type !== 'admin' ?
+            router.push(`tournament/${item?.id}/${subPath}`) :
+            router.push(`mytournament/${item?.id}/${subPath}`)
+    }
+
     return (
         <Box className='tournamentPageMain'>
             <Box className='tournament_page_menu'>
@@ -163,18 +177,18 @@ const Tournament = ({ tournamentData, matchData, type }) => {
                 <SearchInput value={searchValue} onChange={(e) => handleOnSearch(e)} onClear={clearSearchValue} />
             </Box>
             {
-            type !== 'admin' &&
-             <Box className='tournament_tab_main'>
-                <Tabs variant="scrollable" value={activeUserTab} onChange={(event, newValue) => handleUserTab(newValue)}>
-                    {
-                        pageTabs.length > 0 && pageTabs.map((item, i) => {
-                            return (
-                                <Tab label={item?.title} value={item?.value} key={item?.title} />
-                            )
-                        })
-                    }
-                </Tabs>
-            </Box>}
+                type !== 'admin' &&
+                <Box className='tournament_tab_main'>
+                    <Tabs variant="scrollable" value={activeUserTab} onChange={(event, newValue) => handleUserTab(newValue)}>
+                        {
+                            pageTabs.length > 0 && pageTabs.map((item, i) => {
+                                return (
+                                    <Tab label={item?.title} value={item?.value} key={item?.title} />
+                                )
+                            })
+                        }
+                    </Tabs>
+                </Box>}
             {type === 'admin' && tournamentData?.length > 0 &&
                 <Box className='tournamentTabs'>
                     <CustomeTabs data={tournamentTabs || []} onClick={handleTabClick} activeTab={activeTournamentTab} />
@@ -184,7 +198,7 @@ const Tournament = ({ tournamentData, matchData, type }) => {
                 {
                     t_data.length > 0 && t_data.map((item, i) => {
                         return (
-                            <Box key={i} sx={{ backgroundImage: `url('${item?.tournament_banner}')`, backgroundColor: `${!item?.tournament_banner ? item?.tournament_logo_color : ""}` }} className='tournament-card' onClick={type !== 'admin' ? () => router.push(`tournament/${item?.id}/match`) : () => router.push(`mytournament/${item?.id}/match`)}>
+                            <Box key={i} sx={{ backgroundImage: `url('${item?.tournament_banner}')`, backgroundColor: `${!item?.tournament_banner ? item?.tournament_logo_color : ""}` }} className='tournament-card' onClick={() => handleTournamentRedirect(item)}>
                                 <Box className='tournament-details'>
                                     <Typography variant="h6">{item?.tournament_name}</Typography>
                                     <Typography variant="body2">{DateFormat(item?.tournament_start_date)}{' To '} {DateFormat(item?.tournament_end_date)} </Typography>
@@ -209,10 +223,10 @@ const Tournament = ({ tournamentData, matchData, type }) => {
                     >
                         {
                             // type === 'admin' ?
-                                <Box className='create_tournament_button'>
-                                    <CustomeButton width={'100%'} height={'50px'} bgColor={'var(--primary-color) !important'} hover='none' title='Create Your Tournaments' onClick={() => router.push('/registeredTornaments')} />
-                                </Box>
-                                // : ''
+                            <Box className='create_tournament_button'>
+                                <CustomeButton width={'100%'} height={'50px'} bgColor={'var(--primary-color) !important'} hover='none' title='Create Your Tournaments' onClick={() => router.push('/registeredTornaments')} />
+                            </Box>
+                            // : ''
                         }
                     </CustomeMessageBox>
                 }

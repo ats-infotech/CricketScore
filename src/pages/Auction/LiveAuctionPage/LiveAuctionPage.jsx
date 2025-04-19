@@ -189,13 +189,12 @@ const LiveAuctionPage = () => {
         const minBid = parseInt(auctiondata.minimum_bid) || 0
 
         const teamWithHighestMaxBid = teamsData.reduce((maxTeam, currentTeam) => {
-            const maxTeamRemaining = maxTeam.wallet - (minBid * (playersPerTeam - (maxTeam.players || 0)))
-            const currentTeamRemaining = currentTeam.wallet - (minBid * (playersPerTeam - (currentTeam.players || 0)))
+            return maxTeam
+        }, currentTeamBidding)
 
-            return currentTeamRemaining > maxTeamRemaining ? currentTeam : maxTeam
-        }, teamsData[0])
-
-        const highestMaxBidAmount = teamWithHighestMaxBid.wallet - (minBid * (playersPerTeam - (teamWithHighestMaxBid.players || 0)))
+        const alreadyPurchasedPlayer = auctiondata?.soldPlayers?.filter(sold => sold?.teamId === teamWithHighestMaxBid?.id).length || 0
+        const areadyBidCalledTeams = auctiondata?.soldPlayers?.filter(sold => sold?.teamId === teamWithHighestMaxBid?.id)?.reduce((sum, sold) => sum + (sold?.bidPrice || 0), 0) || 0
+        const highestMaxBidAmount = (teamWithHighestMaxBid?.wallet - areadyBidCalledTeams) - (minBid * (playersPerTeam - (alreadyPurchasedPlayer || 0)))
         setMaxBidHeighestAmount(highestMaxBidAmount)
     }, [auctiondata, teamsData])
 
@@ -436,9 +435,13 @@ const LiveAuctionPage = () => {
         }
         if (id === 'complete-auction') {
             if (auctiondata?.soldPlayers?.length > 0) {
-                const playerIds = auctiondata?.unsoldPlayers?.length > 0 && auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer);
+
+                const unSoldplayerIds = auctiondata?.unsoldPlayers?.length > 0 && auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer);
+                const playerIds = availablePlayers?.length > 0 && availablePlayers.map(player => player?.id);
+                let allIds = [...unSoldplayerIds, ...playerIds]
+
                 if (playerIds.length > 0) {
-                    await dispatch(deleteMultiplePlayerData({ playerId: playerIds }));
+                    await dispatch(deleteMultiplePlayerData({ playerId: allIds }));
                 }
 
                 let playersPayload = auctiondata?.soldPlayers.map((item) => {

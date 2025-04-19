@@ -99,10 +99,10 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                     <Box className='auction_btn_row'>
                         {!isUser && !isAuctionCompleted ?
                             <CustomeButton title={"Start Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('live')} disabled={!isStartAuction} /> :
-                            <CustomeButton title={"Auction Mvp"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('mvp')} />}
+                             isAuctionCompleted && <CustomeButton title={"Auction Mvp"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('mvp')} />}
                         <CustomeButton title={"View Auction"} width={'50%'} height={'50px'} hover={'none'} onClick={() => handleAuctionRedirect('view')} />
                     </Box>
-                    {!isStartAuction &&
+                    {!isUser && !isStartAuction &&
                         <>
                             <Typography variant="h6" className="describe-msg"> 🚀 Auction Start Instructions: </Typography>
                             <Typography variant="h6" className="describe-msg">📌 please add at least 2 teams and a minimum of 4 players to start the auction.</Typography>
