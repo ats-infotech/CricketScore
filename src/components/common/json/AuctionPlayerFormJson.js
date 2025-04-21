@@ -42,7 +42,7 @@ export const AuctionPlayerForm = [
         label: 'Select Skills',
         placeholder: 'Select Skills',
         type: 'text',
-        key_name: 'skills',
+        key_name: 'player_skills',
         show_type: 'tags',
         data: [
             { title: 'batsmen', image: require('../../../assets/img/balls/tennis.png'), key_name: "batsment" },

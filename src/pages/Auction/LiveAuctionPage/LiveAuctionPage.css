@@ -32,6 +32,13 @@
     position: relative;
 }
 
+.au-player-details .au-pl-age p {
+    color: var(--text-white);
+    font-weight: 600;
+    text-align: center;
+    margin-top: 5px;
+}
+
 .au-player-details .au-pl-img {
     width: 90px;
     height: 90px;
@@ -67,13 +74,25 @@
     margin-top: 5px;
 }
 
-.auction-bidding {
+.auction-bidding,
+.au-pl-details .auction-player-skills {
     display: flex;
     align-items: center;
     justify-content: space-around;
     background-color: var(--blue-background);
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 8px 20px;
+}
+
+.au-pl-details .auction-player-skills {
+    margin-bottom: 10px;
+}
+
+.au-pl-details .auction-player-skills p {
+    color: var(--text-white);
+    font-size: var(--small);
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
 .auction-bidding .bidding-count {
@@ -93,14 +112,28 @@
     color: var(--text-grey);
 }
 
+.auction-team-section {
+    height: calc(100vh - 415px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    margin: 15px 0 0;
+}
+
+.auction-team-section.skills{
+    height: calc(100vh - 465px);
+}
 
 .auction-team {
-    display: flex;
+    /* display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-    padding: 15px 0;
 }
 
 
@@ -125,7 +158,7 @@
     align-items: center;
     gap: 10px;
     width: 100%;
-    max-width: 178px;
+    /* max-width: 178px; */
     transition: all 0.5s ease;
     cursor: pointer;
 }
@@ -184,11 +217,13 @@
 }
 
 .button-group {
-    display: flex;
+    /* display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    flex-wrap: wrap;
     margin-bottom: 10px;
 }
 
@@ -204,7 +239,7 @@
     box-shadow: none !important;
     border-radius: 10px !important;
     width: 100% !important;
-    max-width: 120px !important;
+    /* max-width: 120px !important; */
     text-transform: capitalize !important;
 }
 
@@ -226,8 +261,10 @@
 }
 
 .info-btn-group svg {
-    width: 26px;
-    height: 26px;
+    min-width: 26px;
+    max-width: 26px;
+    min-height: 26px;
+    max-height: 26px;
     color: var(--text-white);
     cursor: pointer;
 }
@@ -444,9 +481,9 @@
         position: relative;
     }
 
-    .button-group {
+    /* .button-group {
         gap: 8px;
-    }
+    } */
 
     .auction-team {
         gap: 8px;
@@ -454,22 +491,26 @@
 
     .team_card {
         padding: 10px 10px;
-        max-width: 152px;
+        /* max-width: 152px; */
     }
-   
+
     .action-btn {
         gap: 8px !important;
         color: var(--black) !important;
         padding: 7px 8px !important;
-        max-width: 107px !important;
+        /* max-width: 107px !important; */
     }
 
     .info-bottom {
         padding: 0 6px;
     }
+
+    .info-btn-group {
+        overflow: scroll;
+    }
 }
 
-@media screen and (max-width:370px) { 
+@media screen and (max-width:370px) {
     .info-details .icon-info {
         padding: 10px;
         width: 44px;
@@ -493,8 +534,40 @@
         padding: 10px 10px;
         max-width: 100%;
     }
+
     .info-btn-group {
         gap: 6px;
         padding: 8px 10px;
+        overflow: scroll;
+    }
+
+    .action-btn {
+        /* max-width: 99px !important; */
+        font-size: var(--ex-small) !important;
+    }
+
+    .button-group {
+        gap: 5px;
+    }
+
+    .info-btn-group svg {
+        min-width: 18px;
+        max-width: 18px;
+        min-height: 18px;
+        max-height: 18px;
+    }
+
+    .auction-team {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-height: 665px) {
+    .auction-team-section {
+        height: calc(100vh - 435px);
+    }
+
+    .auction-team-section.skills{
+        height: calc(100vh - 480px);
     }
 }

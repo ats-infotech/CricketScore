@@ -261,7 +261,7 @@ const CreateAuctionPlayer = ({ edit }) => {
         <Box className="create_auction_players">
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <CustomeBack onclick={() => router.back()} type={'commonback'} />
-               {playersData.length === 1 && <CustomeButton
+               {playersData.length === 1 && !edit && <CustomeButton
                     margin={'0'}
                     onClick={handleAddPlayer}
                     title="Add Bulk Player"

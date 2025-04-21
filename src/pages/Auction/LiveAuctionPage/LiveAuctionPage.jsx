@@ -171,11 +171,11 @@ const LiveAuctionPage = () => {
     useEffect(() => {
         const newTeams = teamState.data.filter(item => item?.tournamentId === auctiondata?.tournamentId &&
             (!item?.wallet || item?.wallet !== parseInt(auctiondata?.auction_team_balance_point))).map(items => ({
-            ...items,
-            teamId: items.id,
-            wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
-            players: items?.players && items?.wallet !== parseInt(auctiondata?.auction_team_balance_point) ? items?.players : 0
-        }));
+                ...items,
+                teamId: items.id,
+                wallet: parseInt(auctiondata?.auction_team_balance_point) || 0,
+                players: items?.players && items?.wallet !== parseInt(auctiondata?.auction_team_balance_point) ? items?.players : 0
+            }));
 
         if (newTeams.length) {
             dispatch(updateAuctionTeamStats({ teams: newTeams }));
@@ -239,7 +239,8 @@ const LiveAuctionPage = () => {
 
     function handleClose() {
         setOpen(false)
-        // setReauctionUnsold(false)
+        setError({})
+        setUpdateInputBid(currentBid.toString())
         setTimeout(() => {
             setOpenSettingModal(false)
         }, 500)
@@ -508,27 +509,34 @@ const LiveAuctionPage = () => {
             {/* Player Details */}
             {availablePlayers.length > 0 && (
                 <Box className='au-player-details'>
-                    <Box
-                        className='au-pl-img'
-                        sx={{
-                            backgroundColor: !currentPlayer?.playerImage ? currentPlayer?.playerColor : ''
-                        }}
-                    >
-                        {currentPlayer?.playerImage ? (
-                            <Image
-                                src={`/${currentPlayer?.playerImage}`}
-                                alt="player"
-                                width={100}
-                                height={100}
-                                priority
-                                quality={85}
-                            />
-                        ) : (
-                            <Typography variant='h6'>{currentPlayer?.letter}</Typography>
-                        )}
+                    <Box className="au-pl-age">
+                        <Box
+                            className='au-pl-img'
+                            sx={{
+                                backgroundColor: !currentPlayer?.playerImage ? currentPlayer?.playerColor : ''
+                            }}
+                        >
+                            {currentPlayer?.playerImage ? (
+                                <Image
+                                    src={`/${currentPlayer?.playerImage}`}
+                                    alt="player"
+                                    width={100}
+                                    height={100}
+                                    priority
+                                    // quality={85}
+                                    unoptimized
+                                />
+                            ) : (
+                                <Typography variant='h6'>{currentPlayer?.letter}</Typography>
+                            )}
+                        </Box>
+                        {currentPlayer?.player_age && <Typography variant="body2">{currentPlayer?.player_age} Years</Typography>}
                     </Box>
                     <Box className='au-pl-details'>
                         <Typography variant='h6' className="auction-player">{currentPlayer?.playerName}</Typography>
+                        {currentPlayer?.player_skills && <Box className="auction-player-skills">
+                            <Typography variant="body2">{currentPlayer?.player_skills}</Typography>
+                        </Box>}
                         <Box className='auction-bidding'>
                             <SvgIcon id='gold-coin' className='gold-coin' />
                             <Typography variant='h6' className="bidding-count">{currentBid}</Typography>
@@ -545,55 +553,58 @@ const LiveAuctionPage = () => {
             )}
 
             {/* Team Bidding Area */}
-            <Box className='auction-team'>
-                {teamsData.map((item, i) => {
-                    const totalCoins = formatNumberShort(Number(auctiondata?.auction_team_balance_point))
-                    const alreadyPurchasedPlayer = auctiondata?.soldPlayers?.filter(sold => sold?.teamId === item?.id).length
-                    const areadyBidCalledTeams = auctiondata?.soldPlayers
-                        ?.filter(sold => sold?.teamId === item?.id)
-                        ?.reduce((sum, sold) => sum + (sold?.bidPrice || 0), 0) || 0
-                    const TeamWallet = formatNumberShort(Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0))
-                    const availableWallet = Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0)
-                    const maxBid = formatNumberShort(Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
-                    const reachBid = (Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
-                    const maxBidReached = !currentTeamBidding ? currentBid > reachBid : currentBid >= reachBid
+            <Box className={`auction-team-section ${currentPlayer?.player_skills ? 'skills' : ''}`}>
+                <Box className='auction-team'>
+                    {teamsData.map((item, i) => {
+                        const totalCoins = formatNumberShort(Number(auctiondata?.auction_team_balance_point))
+                        const alreadyPurchasedPlayer = auctiondata?.soldPlayers?.filter(sold => sold?.teamId === item?.id).length
+                        const areadyBidCalledTeams = auctiondata?.soldPlayers
+                            ?.filter(sold => sold?.teamId === item?.id)
+                            ?.reduce((sum, sold) => sum + (sold?.bidPrice || 0), 0) || 0
+                        const TeamWallet = formatNumberShort(Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0))
+                        const availableWallet = Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0)
+                        const maxBid = formatNumberShort(Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
+                        const reachBid = (Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
+                        const maxBidReached = !currentTeamBidding ? currentBid > reachBid : currentBid >= reachBid
 
-                    return (
-                        <Box
-                            className={`team_card ${currentTeamBidding?.id === item.id ? 'active-bidder' : ''} ${maxBidReached ? 'disable-bidder' : ''}`}
-                            key={i}
-                            onClick={maxBidReached ? undefined : () => handleTeamBid(item)}
-                        >
+                        return (
                             <Box
-                                className='team-logo'
-                                sx={{
-                                    backgroundColor: !item?.team_logo ? item?.team_color : ''
-                                }}
+                                className={`team_card ${currentTeamBidding?.id === item.id ? 'active-bidder' : ''} ${maxBidReached ? 'disable-bidder' : ''}`}
+                                key={i}
+                                onClick={maxBidReached ? undefined : () => handleTeamBid(item)}
                             >
-                                {item?.team_logo ? (
-                                    <Image
-                                        src={`/${item?.team_logo}`}
-                                        alt="team logo"
-                                        width={100}
-                                        height={100}
-                                        priority={i < 4}
-                                        quality={85}
-                                    />
-                                ) : (
-                                    <Typography variant="h6">{item?.letter}</Typography>
-                                )}
+                                <Box
+                                    className='team-logo'
+                                    sx={{
+                                        backgroundColor: !item?.team_logo ? item?.team_color : ''
+                                    }}
+                                >
+                                    {item?.team_logo ? (
+                                        <Image
+                                            src={`/${item?.team_logo}`}
+                                            alt="team logo"
+                                            width={100}
+                                            height={100}
+                                            priority={i < 4}
+                                            // quality={85}
+                                            unoptimized
+                                        />
+                                    ) : (
+                                        <Typography variant="h6">{item?.letter}</Typography>
+                                    )}
+                                </Box>
+                                <Box className='team_details'>
+                                    <Typography variant="h6">{item?.team_name.slice(0, 12)}</Typography>
+                                    <Typography variant="h6">
+                                        <SvgIcon id={'gold-coin'} />
+                                        <span>{`${TeamWallet}/${totalCoins}`}</span>
+                                    </Typography>
+                                    <Typography variant="h6">{`Max Bid : ${maxBid}`}</Typography>
+                                </Box>
                             </Box>
-                            <Box className='team_details'>
-                                <Typography variant="h6">{item?.team_name.slice(0, 12)}</Typography>
-                                <Typography variant="h6">
-                                    <SvgIcon id={'gold-coin'} />
-                                    <span>{`${TeamWallet}/${totalCoins}`}</span>
-                                </Typography>
-                                <Typography variant="h6">{`Max Bid : ${maxBid}`}</Typography>
-                            </Box>
-                        </Box>
-                    )
-                })}
+                        )
+                    })}
+                </Box>
             </Box>
 
             {/* Bottom Action Bar */}
@@ -667,7 +678,8 @@ const LiveAuctionPage = () => {
                                                                 alt="player"
                                                                 width={50}
                                                                 height={50}
-                                                                quality={85}
+                                                                // quality={85}
+                                                                unoptimized
                                                             />
                                                         ) : (
                                                             <Typography variant="body2">{item?.letter}</Typography>

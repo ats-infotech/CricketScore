@@ -2,25 +2,31 @@
 import SvgIcon from "@/assets/icons/SvgIcon"
 import { debounce, formatNumberShort } from "@/components/common/commomFunction"
 import CustomeBack from "@/components/common/commonUi/CustomeBack"
+import CustomeMessageBox from "@/components/common/commonUi/CustomeMessageBox"
 import CustomeTabs from "@/components/common/commonUi/CustomeTabs"
+import PlayerCard from "@/components/common/commonUi/PlayerCard/PlayerCard"
 import SearchInput from "@/components/common/commonUi/SearchInput/SearchInput"
+import { auctionState } from "@/redux/slices/auctionSlice"
+import { playersState } from "@/redux/slices/playersSlice"
+import { teamsState } from "@/redux/slices/teamSlice"
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { Box, Typography } from "@mui/material"
 import { useParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
-import './AuctionPlayers.css'
 import { useSelector } from "react-redux"
-import { teamsState } from "@/redux/slices/teamSlice"
-import { playersState } from "@/redux/slices/playersSlice"
-import { auctionState } from "@/redux/slices/auctionSlice"
-import PlayerCard from "@/components/common/commonUi/PlayerCard/PlayerCard"
-import CustomeMessageBox from "@/components/common/commonUi/CustomeMessageBox"
+import './AuctionPlayers.css'
 
 const tournamentTabs = [
     { label: 'Sold', value: 0 },
     { label: 'Unsold', value: 1 },
     { label: 'Available', value: 2 }
 ]
+
+const ErrorObj = {
+    0: { title: 'Sold player', desc: 'No players went sold yet' },
+    1: { title: 'Unsold players', desc: 'No players went unsold yet' },
+    2: { title: 'Available player', desc: 'No players available' },
+}
 
 const AuctionPlayersPage = () => {
     const { auctionId } = useParams()
@@ -142,7 +148,7 @@ const AuctionPlayersPage = () => {
 
             <CustomeTabs data={tournamentTabs || []} onClick={handleTabClick} activeTab={activeTab} />
 
-            <Box className="auctioned_players_data">
+            <Box className={`auctioned_players_data ${showSearchBar ? 'active' : ''}`}>
                 {
                     filteredPlayers.length > 0 ?
                         filteredPlayers.map((items, i) => {
@@ -169,20 +175,8 @@ const AuctionPlayersPage = () => {
                         })
                         :
                         <CustomeMessageBox
-                            title={
-                                searchResults
-                                    ? 'No Results Found'
-                                    : activeTab === 0
-                                        ? 'Sold player guide'
-                                        : activeTab === 1
-                                            ? 'Unsold players guide'
-                                            : 'Available player guide'
-                            }
-                            describe={
-                                searchResults
-                                    ? '⚠️ No players match your search.'
-                                    : `⚠️ No players were ${activeTab === 0 ? 'Sold' : activeTab === 1 ? 'Unsold' : 'Available'}`
-                            }
+                            title={searchResults ? 'No Results Found' : `${ErrorObj?.[activeTab]?.title}`}
+                            describe={searchResults ? '⚠️ No players match your search.' : `⚠️ ${ErrorObj?.[activeTab]?.desc}`}
                         />
                 }
             </Box>

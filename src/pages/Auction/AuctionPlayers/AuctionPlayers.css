@@ -38,5 +38,9 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     scroll-behavior: smooth;
-    height: calc(100vh - 210px);
+    height: calc(100vh - 225px);
+}
+
+.auctioned_players_data.active {
+    height: calc(100vh - 300px) !important;
 }
