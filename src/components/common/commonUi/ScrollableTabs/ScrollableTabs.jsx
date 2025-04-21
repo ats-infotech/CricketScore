@@ -1,8 +1,8 @@
 import SvgIcon from '@/assets/icons/SvgIcon';
+import { Addchart } from '@mui/icons-material';
 import { Tab, Tabs, Typography } from '@mui/material';
 import React, { useEffect, useRef } from 'react';
 import './ScrollableTabs.css';
-import { Addchart } from '@mui/icons-material';
 
 function ScrollableTabs({ buttonGroups, tabActive, handleChange, data }) {
     const tabRefs = useRef([]);

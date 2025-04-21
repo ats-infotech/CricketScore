@@ -539,7 +539,7 @@ const LiveAuctionPage = () => {
                         </Typography>
                     </Box>
                     {/* <Box className='stamp-gif'>
-                        <Image src={require('../../../assets/img/sold.png')} alt="stamp" />
+                        <Image src={require('../../../assets/img/sold.png')} alt="stamp" unoptimized/>
                     </Box> */}
                 </Box>
             )}

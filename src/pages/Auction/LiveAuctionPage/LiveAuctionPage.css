@@ -106,10 +106,14 @@
 
 /* ------ stamp gif ---------- */
 
-.stamp-gif {
-    width: 80px;
-    height: 80px;
-}
+/* .stamp-gif {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    top: 65px;
+    transform: rotate(30deg);
+} */
 
 /* ======= team card ========= */
 
