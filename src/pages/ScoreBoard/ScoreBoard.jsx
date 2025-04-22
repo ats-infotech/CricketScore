@@ -5,6 +5,7 @@ import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeTags from "@/components/common/commonUi/CustomeTags";
 import InputSelect from "@/components/common/commonUi/InputSelect";
 import { breakType } from "@/components/common/json/commonJson";
+import { generateSummary } from "@/components/common/openaiApis";
 import ScorePage from "@/pages/Score/Score";
 import {
     AddCommentary, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsWicket, AddSuperOverExtra,
@@ -494,6 +495,28 @@ const ScoreBoard = () => {
             NR: totalNRRuns
         })
     }, [currentMatch?.[innings]?.Extras])
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const payload = {
+    //             name: 'Virat Kohli',
+    //             runs: 85,
+    //             balls: 60,
+    //             wickets: 0,
+    //             sixes: 3,
+    //             fours: 7
+    //         };
+
+    //         try {
+    //             let res = await generateSummary(payload);
+    //             console.log(res, 'ooooooppppppeeennnnaaii');
+    //         } catch (error) {
+    //             console.error('Error fetching summary:', error);
+    //         }
+    //     };
+
+    //     fetchData(); // Call the async function
+    // }, []); // Empty dependency array to run only once on mount
 
     useEffect(() => {
         // setLoading(true)

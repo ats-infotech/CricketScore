@@ -437,9 +437,9 @@ const LiveAuctionPage = () => {
         if (id === 'complete-auction') {
             if (auctiondata?.soldPlayers?.length > 0) {
 
-                const unSoldplayerIds = auctiondata?.unsoldPlayers?.length > 0 && auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer);
+                const unSoldplayerIds = auctiondata?.unsoldPlayers?.length > 0 && auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer) || [];
                 const playerIds = availablePlayers?.length > 0 && availablePlayers.map(player => player?.id);
-                let allIds = [...unSoldplayerIds, ...playerIds]
+                let allIds =  unSoldplayerIds.concat(playerIds)
 
                 if (playerIds.length > 0) {
                     await dispatch(deleteMultiplePlayerData({ playerId: allIds }));
