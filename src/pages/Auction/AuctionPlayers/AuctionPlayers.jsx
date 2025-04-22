@@ -120,12 +120,14 @@ const AuctionPlayersPage = () => {
 
     // Filter players by search text
     const filteredPlayers = currentTabPlayers.filter((items) => {
+        const team = teamData.find((item) => item?.id === items?.teamId)
         const player = playerData.find((item) =>
             item?.id === items?.soldPlayer || item?.id === items?.unsoldPlayer || item?.id === items?.id
         );
         if (!player) return false;
-        const playerName = player?.playerName?.toLowerCase() || '';
-        return playerName.includes(searchResults.toLowerCase());
+        const playerName =  player?.playerName?.toLowerCase() || '';
+        const teamName = team?.team_name?.toLowerCase() || ''
+        return playerName.includes(searchResults.toLowerCase()) || teamName.includes(searchResults.toLowerCase());
     });
 
     return (

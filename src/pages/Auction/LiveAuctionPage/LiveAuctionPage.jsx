@@ -437,9 +437,9 @@ const LiveAuctionPage = () => {
         if (id === 'complete-auction') {
             if (auctiondata?.soldPlayers?.length > 0) {
 
-                const unSoldplayerIds = auctiondata?.unsoldPlayers?.length > 0 && auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer) || [];
-                const playerIds = availablePlayers?.length > 0 && availablePlayers.map(player => player?.id);
-                let allIds =  unSoldplayerIds.concat(playerIds)
+                const unSoldplayerIds = auctiondata?.unsoldPlayers?.length > 0 ? auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer) : [];
+                const playerIds = availablePlayers?.length > 0 ? availablePlayers.map(player => player?.id) : [];
+                let allIds = [...unSoldplayerIds, ...playerIds]
 
                 if (playerIds.length > 0) {
                     await dispatch(deleteMultiplePlayerData({ playerId: allIds }));
@@ -565,7 +565,7 @@ const LiveAuctionPage = () => {
                         const availableWallet = Number(item?.wallet) - (Number(areadyBidCalledTeams) || 0)
                         const maxBid = formatNumberShort(Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
                         const reachBid = (Number(availableWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (alreadyPurchasedPlayer || 0))))
-                        const maxBidReached = !currentTeamBidding ? currentBid > reachBid : currentBid >= reachBid
+                        const maxBidReached = TeamWallet < Number(auctiondata?.minimum_bid) ? true : !currentTeamBidding ? currentBid > reachBid : currentBid >= reachBid
 
                         return (
                             <Box

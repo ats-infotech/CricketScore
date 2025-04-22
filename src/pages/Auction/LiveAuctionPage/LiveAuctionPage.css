@@ -113,7 +113,7 @@
 }
 
 .auction-team-section {
-    height: calc(100vh - 415px);
+    height: calc(100vh - 440px);
     overflow-y: auto;
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
@@ -123,7 +123,7 @@
 }
 
 .auction-team-section.skills{
-    height: calc(100vh - 465px);
+    height: calc(100vh - 485px);
 }
 
 .auction-team {
@@ -475,7 +475,7 @@
 }
 
 
-@media screen and (max-width:438px) {
+@media screen and (max-width:460px) {
     .live-auction {
         padding: 18px;
         position: relative;
@@ -560,14 +560,18 @@
     .auction-team {
         grid-template-columns: repeat(1, 1fr);
     }
+
+    .auction-bidding, .au-pl-details .auction-player-skills {
+        padding: 8px;
+    }
 }
 
 @media screen and (max-height: 665px) {
     .auction-team-section {
-        height: calc(100vh - 435px);
+        height: calc(100vh - 415px);
     }
 
     .auction-team-section.skills{
-        height: calc(100vh - 480px);
+        height: calc(100vh - 450px);
     }
 }

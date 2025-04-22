@@ -1,10 +1,9 @@
 import { formatNumberShort } from '@/components/common/commomFunction'
+import CustomeBack from '@/components/common/commonUi/CustomeBack'
 import CustomeMessageBox from '@/components/common/commonUi/CustomeMessageBox'
 import PlayerCard from '@/components/common/commonUi/PlayerCard/PlayerCard'
 import { Box, Typography } from '@mui/material'
 import './AuctionMVP.css'
-import CommonBack from '@/components/common/commonUi/commonBack'
-import CustomeBack from '@/components/common/commonUi/CustomeBack'
 
 const AuctionMVP = ({ auctionData, teamData, playerData, type = null }) => {
     const topPlayersPerTeam = () => {
@@ -17,7 +16,7 @@ const AuctionMVP = ({ auctionData, teamData, playerData, type = null }) => {
         })
         return Object.values(topPlayersMap)
     }
-    const filteredPlayers = topPlayersPerTeam()
+    const filteredPlayers = topPlayersPerTeam().sort((a,b) => b.bidPrice - a.bidPrice)
 
     return (
         <Box className="auction_mvp_section">

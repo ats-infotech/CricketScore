@@ -14,15 +14,17 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { uploadFile, uploadPlayerFile } from '../../../components/common/uploadFileApis'
 import './TeamPage.css'
+import { auctionState } from '@/redux/slices/auctionSlice'
 
 
-const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = false, isAuction = false }) => {
+const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = false, isAuction = false, isUserTeams = false }) => {
     const [anchorEl, setAnchorEl] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const userAuction = isUserTeams && isAuction ? true : false
 
     const handleClick = (event, item) => {
         setAnchorEl(event.currentTarget);
@@ -71,9 +73,9 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
                                 </Box>
                             </Box>
                             <Box>
-                                <IconButton onClick={(e) => handleClick(e, item)} aria-controls="simple-menu" aria-haspopup="true" className='menu-icon-box'>
+                                {!userAuction && <IconButton onClick={(e) => handleClick(e, item)} aria-controls="simple-menu" aria-haspopup="true" className='menu-icon-box'>
                                     <MoreVertIcon />
-                                </IconButton>
+                                </IconButton>}
 
                                 <Menu
                                     anchorEl={anchorEl}
@@ -84,12 +86,12 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
                                     {
                                         title !== 'View Players' ?
                                             <div>
-                                                <MenuItem onClick={() => handleMenuItemClick('add_player')}>
+                                                {!isAuction && <MenuItem onClick={() => handleMenuItemClick('add_player')}>
                                                     <Box className='AddPlayerTag' >
                                                         <SvgIcon id={'add-player'} />
                                                         <Typography variant='body2'>{title}</Typography>
                                                     </Box>
-                                                </MenuItem>
+                                                </MenuItem>}
                                                 <MenuItem onClick={() => handleMenuItemClick('edit')}>
                                                     <Box className='AddPlayerTag' >
                                                         <EditIcon />
@@ -105,12 +107,12 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
                                             </div>
                                             :
                                             <div>
-                                                <MenuItem onClick={() => handleMenuItemClick('view_player')}>
+                                                {!isAuction && <MenuItem onClick={() => handleMenuItemClick('view_player')}>
                                                     <Box className='AddPlayerTag' >
                                                         <SvgIcon id={'add-player'} />
                                                         <Typography variant='body2'>{title}</Typography>
                                                     </Box>
-                                                </MenuItem>
+                                                </MenuItem>}
                                                 {
                                                     boolean &&
                                                     <MenuItem onClick={() => handleMenuItemClick('delete')}>
@@ -137,9 +139,10 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const playerData = useSelector(playersState);
-
+    const auctionData = useSelector(auctionState)
     const [teamId, setTeamId] = useState(null);
     const [teamPlayers, setTeamPlayers] = useState([]);
+    const [auction, setAuction] = useState({})
     const [alertModal, setAlertModal] = useState({ open: false, success: false, message: "" });
     const [processing, setProcessing] = useState(false);
 
@@ -150,7 +153,14 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
         tournamentData?.tournament_start_date,
         tournamentData?.tournament_end_date
     ) === "completed", [tournamentData]);
-    const isAuction = tournamentData?.auction || false
+    const isAuction = tournamentData?.auction && !auction ? true : tournamentData?.auction && auction?.auctionStatus !== 3 && true || false
+
+    useEffect(() => {
+        if (isAuction) {
+            let tournamentAuctionData = auctionData?.data?.find((item) => item?.tournamentId === tournamentData?.id)
+            setAuction(tournamentAuctionData)
+        }
+    }, [isAuction, auctionData, tournamentData])
 
     const handleModalClose = () => {
         setAlertModal({ open: false, success: false, message: "" });
@@ -249,12 +259,12 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                             describe='Quickly Add Teams with ease. Get personalized suggestions based on your preferences'
                         >
                         </CustomeMessageBox>
-                        <Box sx={{ marginTop: '40px' }}>
+                        {!isUserTeams && <Box sx={{ marginTop: '40px' }}>
                             <CustomeButton width={'80%'} height={'45px'} bgColor={'var(--primary-color) !important'} hover='none' title='Add Team' onClick={() => router.push(`/teams/${tournamentId}`)} />
-                        </Box>
+                        </Box>}
                     </Box>
                     :
-                    <CustomeButton
+                    !isUserTeams && <CustomeButton
                         icon="addTeams"
                         title="Add Team"
                         onClick={() => router.push(`/teams/${tournamentId}`)}
@@ -268,6 +278,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                             {!isAuction ?
                                 <SectionBox icon="teams2" title="My Teams">
                                     <CommonTeamSection
+                                        isUserTeams={isUserTeams}
                                         teamData={teamData}
                                         onClick={handleEvent}
                                         isAuction={isAuction}
@@ -277,6 +288,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                                 </SectionBox>
                                 :
                                 <CommonTeamSection
+                                    isUserTeams={isUserTeams}
                                     teamData={teamData}
                                     onClick={handleEvent}
                                     isAuction={isAuction}
@@ -292,6 +304,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                             {teamData.length > 0 ? (
                                 <CommonTeamSection
                                     teamData={teamData}
+                                    isUserTeams={isUserTeams}
                                     isAuction={isAuction}
                                     onClick={handleEvent}
                                     title="View Players"
@@ -307,7 +320,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                     )}
                 </Box>
             ) : (
-               !isAuction && <Box sx={{ marginX: "15px" }}>
+                !isAuction && <Box sx={{ marginX: "15px" }}>
                     <CustomeErrorBox icon="noFile" title="Teams data not available" />
                 </Box>
             )}

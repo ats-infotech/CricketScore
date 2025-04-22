@@ -19,6 +19,10 @@
     margin: 0;
 }
 
+.auction-header-main svg{
+    cursor: pointer;
+}
+
 .auction-header-main .auction_icon {
     width: 18px;
     height: 18px;

@@ -47,6 +47,7 @@ const CreateAuctionPlayer = ({ edit }) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const [FormData, setFormData] = useState([...AuctionPlayerForm]);
+    const [swippedUp, setSwippedUp] = useState(false)
 
     useEffect(() => {
         if (edit) {
@@ -153,6 +154,9 @@ const CreateAuctionPlayer = ({ edit }) => {
                         valid = false;
                     }
                 }
+                if (!valid) {
+                    setSwippedUp(true)
+                }
             });
             return err;
         });
@@ -257,11 +261,33 @@ const CreateAuctionPlayer = ({ edit }) => {
         }
     };
 
+    useEffect(() => {
+        if (swippedUp) {
+            let firstErrorIndex = -1;
+
+            errors.forEach((error, index) => {
+                const keys = Object.keys(error);
+                const hasNonEmptyError = keys.some(key => error[key]?.trim() !== "");
+                if (hasNonEmptyError && firstErrorIndex === -1) {
+                    firstErrorIndex = index;
+                }
+            });
+
+            if (firstErrorIndex !== -1) {
+                document.querySelectorAll(".auction_players_form")[firstErrorIndex]?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+            setSwippedUp(false)
+        }
+    }, [errors, swippedUp]);
+
     return (
         <Box className="create_auction_players">
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <CustomeBack onclick={() => router.back()} type={'commonback'} />
-               {playersData.length === 1 && !edit && <CustomeButton
+                {playersData.length === 1 && !edit && <CustomeButton
                     margin={'0'}
                     onClick={handleAddPlayer}
                     title="Add Bulk Player"
@@ -269,7 +295,7 @@ const CreateAuctionPlayer = ({ edit }) => {
                 />}
             </Box>
             {playersData.map((player, index) => (
-                <Box key={index} sx={{ marginBlock: 3, borderRadius: '10px', position: 'relative', border: '1px solid var(--primary-color)', padding: '0 10px' }}>
+                <Box className="auction_players_form" key={index}>
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                         {playersData.length > 1 && (
                             <IconButton
@@ -356,7 +382,7 @@ const CreateAuctionPlayer = ({ edit }) => {
                     startIcon={<Add />}
                 />
             </Box>}
-            <CustomeButton onClick={handleSubmit} title={edit ? "Update Player" : "Add Players"} width={'100%'} />
+            <CustomeButton onClick={handleSubmit} title={edit ? "Update Player" : `${playersData.length > 1 ? `Add All (${playersData?.length})` : 'Add Player'}`} width={'100%'} />
         </Box>
     );
 }
