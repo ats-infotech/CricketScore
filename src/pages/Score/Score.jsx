@@ -88,12 +88,13 @@ const ScorePage = ({
     Extras,
     ChangeStrike,
     post,
-    terminateMatch,
-    reviseTarget,
-    handleBreakOpen,
+    // terminateMatch,
+    // reviseTarget,
+    // handleBreakOpen,
     winSituation,
     team1Data,
-    team2Data
+    team2Data,
+    showMore
 }) => {
 
     const router = useRouter()
@@ -275,7 +276,7 @@ const ScorePage = ({
                             <Box className="score-gradient-line"></Box>
                         </Box>
 
-                        <ExtraRunSection totalLBRuns={Extras?.LB} totalNBRuns={Extras.NB} totalWDRuns={Extras.WD} totalPRRuns={Extras.PR} totalNRRuns={Extras.NR} />
+                        <ExtraRunSection totalLBRuns={Extras?.LB} totalNBRuns={Extras.NB} totalBYERuns={Extras.BYE} totalWDRuns={Extras.WD} totalPRRuns={Extras.PR} totalNRRuns={Extras.NR} />
 
                     </Box>
 
@@ -288,7 +289,7 @@ const ScorePage = ({
                                             const isPRActive = active.active && (active.data === "PR" || active.data === "NR" || active.data === "RNO");
                                             const isWide = active.active && active.data === "WD"
                                             const isNoBall = active.active && active.data === "NB"
-                                            const islegbye = active.data === "LB" && active.active
+                                            const islegbye = active.data === "LB" && active.active || active.data === "BYE"
                                             const isRunoutActive = active.secondactive === "RNO"
                                             // const isStumping = active.secondactive === "STO"
                                             const isButtonDisabled = (isRunoutActive && !['0', '1', '2', '3', '4', '5,7', '6'].includes(items)) || (isWide && !['0', '1', '2', '3', '4', '5,7', '6', 'RNO', 'STO'].includes(items)) || (isNoBall && !['0', '1', '2', '3', '4', '5,7', '6', 'RNO'].includes(items)) || isPRActive && !['0', '1', '2', '3', '4', '5,7', '6'].includes(items) || islegbye && !['1', '2', '3', '4', '5,7', '6'].includes(items) || isButtonsDisabled;
@@ -315,13 +316,9 @@ const ScorePage = ({
                                         onClick={scoreBack}
                                         hover={'none'} />
                                 </Box>
-                                <Box className='test_score_render_button'>
-                                    <CustomeButton height={'50px'} title={currentinnings === 1 || !currentinnings ? "Revise Overs" : currentinnings === 2 ? "DLS Target" : "Break"} width={'100%'} onClick={currentinnings === 1 || !currentinnings ? () => reviseTarget("Overs") : currentinnings === 2 ? () => reviseTarget("DLS") : handleBreakOpen} hover={'none'} disabled={winner} />
-                                    <CustomeButton height={'50px'} title={"Match Terminate"} width={'100%'} onClick={terminateMatch} hover={'none'} disabled={winner} />
+                                <Box className="show_more_button">
+                                    <CustomeButton disabled={active.active} height={'50px'} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
                                 </Box>
-                                {(currentinnings === 2 || currentinnings === 1 || !currentinnings) && <Box className='test_score_render_button' >
-                                    <CustomeButton height={'50px'} title={"Break"} width={'100%'} onClick={handleBreakOpen} hover={'none'} disabled={winner} />
-                                </Box>}
                             </Box>
                         }
                         {

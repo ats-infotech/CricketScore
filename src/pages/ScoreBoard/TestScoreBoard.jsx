@@ -6,7 +6,7 @@ import { AddCommentary, AddDeclareStatus, AddExtra, AddInnings, AddOver, AddPart
 import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
 import { updateTournamentStats } from "@/redux/slices/tournamentSlice";
-import { Box, Dialog, FormControl, MenuItem, Typography } from "@mui/material";
+import { Box, Dialog, FormControl, MenuItem, Typography, useMediaQuery } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,15 +29,20 @@ const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
     let bowlingover = 0;
     let bowlingwickets = 0;
     let bowlingdot = 0;
+    let battingnotout = 0;
+    let battinghundred = 0;
+    let bowlingmaiden = 0;
 
     // Batting Score Calculation
     const playerscores = wickets?.filter(wicket => wicket.BatterId === player.id);
     playerscores.forEach(wicket => {
         battingout += wicket?.reason === 'Not Out' ? 0 : 1
+        battingnotout += wicket?.reason === 'Not Out' ? 1 : 0
         battingrun += parseInt(wicket.run)
         battingfour += parseInt(wicket.four)
         battingsix += parseInt(wicket.six)
         battingball += parseInt(wicket.balls)
+        battinghundred += parseInt(wicket.run) >= 100 ? 1 : 0
     });
 
     // Bowling Score Calculation
@@ -76,7 +81,10 @@ const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
         bowlingwickets,
         bowlingover,
         bowlingdot,
-        innings
+        innings,
+        battingnotout,
+        battinghundred,
+        bowlingmaiden
     };
 };
 
@@ -249,9 +257,9 @@ const calculateMatchStats = (wicket, economy, finalOvers, firstInningswickets, s
                 .filter(key => !isNaN(key))
                 .map(key => bowlerScore[key]);
 
-            const dots = intKeysValues.filter(value => value === "0" || value === "W" || value.includes("LB"));
+            const dots = intKeysValues.filter(value => value === "0" || value === "W" || value.includes("LB") || value.includes("BYE"));
 
-            if (intKeysValues.every(value => (value === "0" || value === "W" || value.includes("LB")))) {
+            if (intKeysValues.every(value => (value === "0" || value === "W" || value.includes("LB") || value.includes("BYE")))) {
                 maidens += 1;
             }
             if (dots.length > 0) {
@@ -354,7 +362,7 @@ const TestScoreBoard = () => {
 
     const reason = ['LBW', 'Bowled', 'Catch', 'Hit Wicket', 'Stumped', 'Run Out']
 
-    const runtype = ['0', '1', '2', '3', '4', '6', '5,7', 'WD', 'NB', 'LB', 'W', 'RNO', 'STO', 'PR', 'NR'];
+    const runtype = ['0', '1', '2', '3', '4', '6', '5,7', 'WD', 'NB', 'LB', 'BYE', 'W', 'RNO', 'STO', '+/-'];
 
     const followon = ['Follow On', 'Bat Again']
 
@@ -491,7 +499,8 @@ const TestScoreBoard = () => {
         NB: 0,
         LB: 0,
         PR: 0,
-        NR: 0
+        NR: 0,
+        BYE: 0
     })
     const [undo, setUndo] = useState(false)
     const [customRun, setCustomRun] = useState(false)
@@ -541,6 +550,8 @@ const TestScoreBoard = () => {
         batter2run: 0,
         batter2balls: 0,
     })
+    const [showMore, setShowMore] = useState(false)
+    const [penaltyCall, setPenaltyCall] = useState(false)
 
     // Redux Data
     const match_data = useSelector(matchesState)
@@ -564,22 +575,28 @@ const TestScoreBoard = () => {
         let Extra = currentMatch?.[innings]?.Extras
         let WDs = Extra?.filter((items) => items.reason === "WD")
         let LBs = Extra?.filter((items) => items.reason === "LB")
+        let BYEs = Extra?.filter((items) => items.reason === "BYE")
         let NBs = Extra?.filter((items) => items.reason === "NB")
         let PRs = Extra?.filter((items) => items.reason === "PR")
         let NRs = Extra?.filter((items) => items.reason === "NR")
         let totalWDRuns = WDs?.reduce((sum, item) => sum + item.runs, 0);
         let totalLBRuns = LBs?.reduce((sum, item) => sum + item.runs, 0);
+        let totalBYERuns = BYEs?.reduce((sum, item) => sum + item.runs, 0);
         let totalNBRuns = NBs?.reduce((sum, item) => sum + item.runs, 0);
         let totalPRRuns = PRs?.reduce((sum, item) => sum + item.runs, 0);
         let totalNRRuns = NRs?.reduce((sum, item) => sum + item.runs, 0);
         setExtras({
             WD: totalWDRuns,
             NB: totalNBRuns,
+            BYE: totalBYERuns,
             LB: totalLBRuns,
             PR: totalPRRuns,
             NR: totalNRRuns
         })
     }, [currentMatch?.[innings]?.Extras])
+
+    console.log(Extras);
+
 
     useEffect(() => {
         const startDate = new Date(currentMatch?.match_start_time);
@@ -714,6 +731,8 @@ const TestScoreBoard = () => {
             revise: false,
             over: ''
         })
+        setShowMore(false)
+        setPenaltyCall(false)
         if (active.data !== 'PR' && active.data !== 'NR') {
             if ((wicketReason.batter === "" || wicketReason.fielder === "") || ((wicketReason.batter !== '' || wicketReason.fielder !== '') && !allOut && wicketReason.newBatter === '')) {
                 setActive({
@@ -1561,8 +1580,8 @@ const TestScoreBoard = () => {
         const isZeroRun = data === "0";
         const isFourRun = data === "4";
         const isSixRun = data === "6";
-        const isWicketorLB = active.data === "LB" || data === "W" || data === "STO";
-        const isNonRunNonBall = active.data === "PR" || active.data === "NR" || data === "PR" || data === "NR" || data === "NB" || data === "WD" || active.data === "WD" || data === "LB" || data === "RNO";
+        const isWicketorLB = active.data === "LB" || data === "W" || data === "STO" || active.data === "BYE";
+        const isNonRunNonBall = active.data === "PR" || active.data === "NR" || data === "PR" || data === "NR" || data === "NB" || data === "WD" || active.data === "WD" || data === "LB" || data === "RNO" || data === "BYE";
         const isActiveNoBall = active.data === "NB"
         const isRunout = active.data === 'RNO'
 
@@ -1619,12 +1638,26 @@ const TestScoreBoard = () => {
         setWicketReason({ bowler: "", reason: 0, batter: "", newBatter: "", fielder: "", penalty: "", penaltyto: 0, overtype: 0, scoreTo: 0, runs: '', followon: 0 })
     }
 
+    const handlePenaltyCall = (type) => {
+        setPenaltyCall(false)
+        if (type === "Positive") {
+            handleScore('PR')
+        } else if (type === "Negative") {
+            handleScore('NR')
+        }
+    }
+
     const handleScore = async (data) => {
+        if (data === '+/-') {
+            setOpen(true)
+            setPenaltyCall(true)
+            return
+        }
         const action = CurrentInnings === 4 ? AddSuperOverSecondInningsExtra : CurrentInnings === 3 ? AddSuperOverExtra : CurrentInnings === 2 ? AddSecondInningsExtra : AddExtra;
         if (legalBallCount < 6) {
             let newBallScores = [...ballScores];
             let updatedBowlerScore = { ...bowlerScore };
-            if (['WD', 'NB', 'LB', 'RNO', 'PR', 'NR', '5,7'].includes(data)) {
+            if (['WD', 'NB', 'LB', 'RNO', 'PR', 'NR', '5,7', 'BYE'].includes(data)) {
                 if (data === '5,7') {
                     setOpen(true)
                     setCustomRun(true)
@@ -1814,17 +1847,17 @@ const TestScoreBoard = () => {
                         setInningsComplete(true)
                     }
                 }
-            } else if (active.data === "LB") {
+            } else if (active.data === "LB" || active.data === "BYE") {
                 if (data !== '5,7') {
                     addRun(parseInt(data));
                     setActive({ active: false, data: data });
-                    newBallScores[ball.ballNo] = data + "LB";
+                    newBallScores[ball.ballNo] = data + active.data;
                     setBallScores(newBallScores);
                     addBall();
                     setLegalBallCount(legalBallCount + 1);
                     const ExtraObject = {
                         Bowler: playerselection.bowler,
-                        reason: "LB",
+                        reason: active.data,
                         runs: parseInt(data)
                     };
                     const ExtraData = {
@@ -1910,13 +1943,13 @@ const TestScoreBoard = () => {
                     updateBatterScores("batter2", data);
                 }
             }
-            if (data !== "W" && data !== 'RNO' && data !== "STO" && data !== 'WD' && data !== 'NB' && data !== "LB" && active.data !== "LB" && active.data !== "PR" && active.data !== "NR" && data !== "PR" && data !== "NR" && active.data !== "RNO" && data !== '5,7') {
+            if (data !== "W" && data !== 'RNO' && data !== "STO" && data !== 'WD' && data !== 'NB' && data !== "LB" && active.data !== "LB" && data !== "BYE" && active.data !== "BYE" && active.data !== "PR" && active.data !== "NR" && data !== "PR" && data !== "NR" && active.data !== "RNO" && data !== '5,7') {
                 updatedBowlerScore.run += parseInt(data);
             }
             if (active.data === "RNO" && data !== '5,7') {
                 updatedBowlerScore.run += parseInt(data);
             }
-            if (data === '0' || data === "LB" || data === 'W' || data === "STO" && data !== '5,7') {
+            if (data === '0' || data === "LB" || data === 'W' || data === "STO" && data !== '5,7' || data === "BYE") {
                 updatedBowlerScore.dot += 1;
             }
             setBowlerScore(updatedBowlerScore);
@@ -2328,7 +2361,7 @@ const TestScoreBoard = () => {
                 : pattern.test(Commentary.score)
         )) {
             handleCommentary(Commentary);
-        } else if (Commentary.score === 'W' && active.data !== "WD" && active.data !== "NB" && active.data !== "LB") {
+        } else if (Commentary.score === 'W' && active.data !== "WD" && active.data !== "NB" && active.data !== "LB" && active.data !== "BYE") {
             setActive((prev) => ({
                 ...prev,
                 data: ""
@@ -2888,7 +2921,7 @@ const TestScoreBoard = () => {
                 }
                 const runValue = parseInt(lastScore);
                 const illegalScoresPattern = /^(\d+)(WD|NB)(\+W)?$/;
-                const regex = /^[13579]\d*[WD|LB|NB]+(\+W)?$/;
+                const regex = /^[13579]\d*[WD|LB|NB|BYE]+(\+W)?$/;
                 const numbers = lastScore.match(/\d+/g);
                 const isOdd = regex.test(lastScore)
                 const oddRuns = parseInt(lastScore) % 2 !== 0;
@@ -3125,6 +3158,22 @@ const TestScoreBoard = () => {
                         })
                     }
 
+                    // Byes (BYE)
+                    if (/^\d*BYE$/.test(lastScore)) {
+                        dispatch(ExtraRemoveAction({ id: currentMatch?.id }))
+                        const legByes = parseInt(lastScore.replace('BYE', ''));
+                        setInitialscore(prev => ({ ...prev, run: prev.run - legByes }));
+                        setBowlerScore(prev => ({ ...prev, ballNo: prev.ballNo - 1, dot: prev.dot - 1 }));
+                        const batterKey = activeStrike === 1 && isOdd ? 'batter2' : activeStrike === 1 && !isOdd ? 'batter1' : activeStrike === 2 && isOdd ? 'batter1' : 'batter2';
+                        setBatterScores(prev => ({ ...prev, [`${batterKey}balls`]: prev[`${batterKey}balls`] - 1 }));
+                        setPartnerShip({
+                            batter1run: wickets?.batter1Contribution,
+                            batter1balls: (activeStrike === 1 && !isOdd) || (activeStrike === 2 && isOdd) ? wickets?.batter1balls - 1 : wickets?.batter1balls,
+                            batter2run: wickets?.batter2Contribution,
+                            batter2balls: (activeStrike === 1 && isOdd) || (activeStrike === 2 && !isOdd) ? wickets?.batter2balls - 1 : wickets?.batter2balls,
+                        })
+                    }
+
                     // Change Strike for odd runs
                     if (oddRunoutValues && (lastScore !== "WD" && lastScore !== "NB" && lastScore !== "W" && lastScore !== "WD+W" && lastScore !== "NB+W")) {
                         handleChangeStrike();
@@ -3182,13 +3231,15 @@ const TestScoreBoard = () => {
     };
 
     const handleDeclare = () => {
-        setOpen(true)
+        // setOpen(true)
+        setShowMore(false)
         setDeclare(true)
     }
 
     const handleStumps = () => {
-        setOpen(true)
+        // setOpen(true)
         setStumps(true)
+        setShowMore(false)
     }
 
     const handleStumpsConfirm = async () => {
@@ -3215,7 +3266,8 @@ const TestScoreBoard = () => {
     }
 
     const handleMatchDraw = () => {
-        setOpen(true)
+        // setOpen(true)
+        setShowMore(false)
         setMatchDraw(true)
     }
 
@@ -3223,8 +3275,9 @@ const TestScoreBoard = () => {
 
     const handleBreakOpen = () => {
         setSelectBreakType('')
+        setShowMore(false)
         setBreakStart(true)
-        setOpen(true)
+        // setOpen(true)
     }
 
     const handleBreakSelect = (value, key) => {
@@ -3255,7 +3308,8 @@ const TestScoreBoard = () => {
     };
 
     const handleReviseTargetOver = () => {
-        setOpen(true)
+        // setOpen(true)
+        setShowMore(false)
         setReviseOver({
             revise: true,
             over: ""
@@ -3276,9 +3330,49 @@ const TestScoreBoard = () => {
         setOpen(false)
     }
 
+    // Show More Button Logic
+    const handleShowMore = () => {
+        setOpen(true)
+        setShowMore(true)
+    }
+
+    const ShowMoreButton = [
+        {
+            title: "Break",
+            height: "50px",
+            disabled: winningTeam,
+            onClick: handleBreakOpen,
+            hover: "none"
+        },
+        {
+            title: "Stumps",
+            height: "50px",
+            disabled: winningTeam,
+            onClick: handleStumps,
+            hover: "none"
+        },
+        {
+            title: CurrentInnings === 4 ? "Revise Over" : "Declare",
+            height: "50px",
+            disabled: (CurrentInnings === 4 ? false : (target?.runs > 0 && CurrentInnings !== 1) || winningTeam),
+            onClick: CurrentInnings === 4 ? handleReviseTargetOver : handleDeclare,
+            hover: "none"
+        },
+        {
+            title: "Match Draw",
+            height: "50px",
+            disabled: winningTeam,
+            onClick: handleMatchDraw,
+            hover: "none"
+        }
+    ];
+
+    const sm = useMediaQuery('(max-width: 329px)');
+    const md = useMediaQuery('(max-width: 350px)');
+
     const buttonConfigs = [
         {
-            condition: !InningsComplete && !changeBatter && !retiredHurt && !customRun && !declare && !stumps && !followOn && !matchDraw && !breakStart && !matchForcedDraw && !reviseOver.revise,
+            condition: !InningsComplete && !changeBatter && !retiredHurt && !customRun && !declare && !stumps && !followOn && !matchDraw && !breakStart && !matchForcedDraw && !reviseOver.revise && !showMore && !penaltyCall,
             onClick: handleClick(),
             title: 'Update Scoreboard',
             disabled: isDisabled(),
@@ -3413,21 +3507,36 @@ const TestScoreBoard = () => {
                 Extras={Extras}
                 ChangeStrike={handleChangeStrike}
                 post={playersPost}
-                declare={handleDeclare}
-                stumps={handleStumps}
+                // declare={handleDeclare}
+                // stumps={handleStumps}
                 CurrentRunningDay={CurrentRunningDay}
-                matchDraw={handleMatchDraw}
+                // matchDraw={handleMatchDraw}
                 lead={Team1Lead}
-                handleBreakOpen={handleBreakOpen}
+                // handleBreakOpen={handleBreakOpen}
                 winSituation={winSituation}
-                revise={handleReviseTargetOver}
+                // revise={handleReviseTargetOver}
                 team1Data={Team1Data}
                 team2Data={Team2Data}
+                showMore={handleShowMore}
                 Overs={CurrentInnings === 4 && currentMatch?.targetedOver - (matchFourthInnings?.Completedovers ? matchFourthInnings?.Completedovers?.length : 0) > 20 ? true : false}
             />
             <Dialog open={open} onClose={() => { }} className="scoreboard_dialog_section">
                 {!followOn && !matchForcedDraw && <Close sx={{ color: 'var(--text-white)', cursor: 'pointer', position: 'absolute', right: '2%', top: '3%' }} onClick={handleClose} />}
                 <Box>
+                    {/* Show More Buttons */}
+                    {
+                        showMore && <Box className="scoreboard_show_more">
+                            {
+                                ShowMoreButton.length > 0 && ShowMoreButton.map((items, i) => {
+                                    return (
+                                        <CustomeButton key={i} width={sm ? '100%' : '47%'} margin={sm && i === 0 ? '15px 0 0' : !sm && md && (i === 0 || i === 1) ? '10px 0 0' : '0px'}
+                                            title={items?.title} hover={items?.hover} height={items?.height} onClick={items?.onClick} disabled={items?.disabled} />
+                                    )
+                                })
+                            }
+                        </Box>
+                    }
+
                     {/* Revise Target Over */}
                     {
                         reviseOver?.revise &&
@@ -3590,6 +3699,23 @@ const TestScoreBoard = () => {
                         </Box>
                     )}
 
+                    {/* penalty Call */}
+                    {
+                        penaltyCall &&
+                        <Box className="penalty_call_section">
+                            <Typography variant="body2">Penatly</Typography>
+                            <Box className="scoreboard_show_more">
+                                {
+                                    ['Positive', 'Negative'].map((items, i) => {
+                                        return (
+                                            <CustomeButton title={items} onClick={() => handlePenaltyCall(items)} key={i} height={'50px'} />
+                                        )
+                                    })
+                                }
+                            </Box>
+                        </Box>
+                    }
+
                     {/* Penalty Section */}
                     {penalty && (
                         <Box className="scoreboard_dialog_penalty_section">
@@ -3623,11 +3749,11 @@ const TestScoreBoard = () => {
                     )}
 
                     {/* Button Section */}
-                    <Box className="scoreboard_dialog_button_section">
+                    {!showMore && !penaltyCall && <Box className="scoreboard_dialog_button_section">
                         {buttonConfigs.map(({ condition, onClick, title, disabled }, index) => (
                             condition && <RenderButton key={index} onClick={onClick} title={title} disabled={disabled} />
                         ))}
-                    </Box>
+                    </Box>}
 
                 </Box>
             </Dialog>

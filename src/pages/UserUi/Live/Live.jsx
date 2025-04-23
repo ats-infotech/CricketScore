@@ -149,7 +149,8 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
         NB: 0,
         LB: 0,
         PR: 0,
-        NR: 0
+        NR: 0,
+        BYE: 0
     })
     const [playersPost, setPlayersPost] = useState({
         team1Captain: '',
@@ -216,11 +217,13 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
                     : fourthInning?.Extra
         let WDs = ExtraRuns?.filter((items) => items.reason === "WD")
         let LBs = ExtraRuns?.filter((items) => items.reason === "LB")
+        let BYEs = ExtraRuns?.filter((items) => items.reason === "BYE")
         let NBs = ExtraRuns?.filter((items) => items.reason === "NB")
         let PRs = ExtraRuns?.filter((items) => items.reason === "PR")
         let NRs = ExtraRuns?.filter((items) => items.reason === "NR")
         let totalWDRuns = WDs?.reduce((sum, item) => sum + item.runs, 0);
         let totalLBRuns = LBs?.reduce((sum, item) => sum + item.runs, 0);
+        let totalBYERuns = BYEs?.reduce((sum, item) => sum + item.runs, 0);
         let totalNBRuns = NBs?.reduce((sum, item) => sum + item.runs, 0);
         let totalPRRuns = PRs?.reduce((sum, item) => sum + item.runs, 0);
         let totalNRRuns = NRs?.reduce((sum, item) => sum + item.runs, 0);
@@ -229,7 +232,8 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
             NB: totalNBRuns,
             LB: totalLBRuns,
             PR: totalPRRuns,
-            NR: totalNRRuns
+            NR: totalNRRuns,
+            BYE: totalBYERuns
         })
     }, [CurrentInnings])
 
@@ -360,7 +364,7 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
                     <Box className="live-gradient-line"></Box>
                 </Box>
 
-                <ExtraRunSection totalLBRuns={Extras?.LB} totalNBRuns={Extras.NB} totalWDRuns={Extras.WD} totalNRRuns={Extras.NR} totalPRRuns={Extras.PR} />
+                <ExtraRunSection totalLBRuns={Extras?.LB} totalNBRuns={Extras.NB} totalWDRuns={Extras.WD} totalNRRuns={Extras.NR} totalBYERuns={Extras.BYE} totalPRRuns={Extras.PR} />
 
                 <CommonTable header={batterheader} data={batter1data} playerscore={CurrentOverScore} post={playersPost} playerName={playerOnField.striker} data2={batter2data} playerName2={playerOnField.nonStriker} activeStrike={activeStrike} icon={"striker"} />
 

@@ -348,6 +348,11 @@ const PlayersPage = ({ teamdata, playersData }) => {
                 catches: getStat('catches'),
                 mvppoints: getStat('mvppoints'),
                 innings: getStat('innings'),
+                highestScore: getStat('highestScore'),
+                highestWicket: getStat('highestWicket'),
+                battingnotout: getStat('battingnotout'),
+                bowlingmaiden: getStat('bowlingmaiden'),
+                battinghundred: getStat('battinghundred')
             };
         });
     };

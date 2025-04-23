@@ -208,6 +208,10 @@
     padding: 0px 20px;
 }
 
+.show_more_button{
+    padding: 0 20px;
+}
+
 .score_gif_main_section {
     display: flex;
     justify-content: center;
@@ -304,7 +308,7 @@
         padding: 0px 0px;
     }
 
-    .test_score_render_button {
+    .test_score_render_button, .show_more_button {
         padding: 0px;
     }
 }

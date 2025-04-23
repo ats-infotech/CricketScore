@@ -50,11 +50,16 @@ const playerSlice = createSlice({
                         battingballs: (state.data[index].battingballs || 0) + (stats.battingball || 0),
                         battingfour: (state.data[index].battingfour || 0) + (stats.battingfour || 0),
                         battingsix: (state.data[index].battingsix || 0) + (stats.battingsix || 0),
+                        battinghundred: (state.data[index].battinghundred || 0) + (stats.battinghundred || 0),
                         battingout: (state.data[index].battingout || 0) + (stats.battingout || 0),
+                        battingnotout: (state.data[index].battingnotout || 0) + (stats.battingnotout || 0),
                         bowlingruns: (state.data[index].bowlingruns || 0) + (stats.bowlingrun || 0),
                         bowlingballs: (state.data[index].bowlingballs || 0) + (stats.bowlingball || 0),
+                        bowlingmaiden: (state.data[index].bowlingmaiden || 0) + (stats.bowlingmaiden || 0),
                         bowlingwickets: (state.data[index].bowlingwickets || 0) + (stats.bowlingwickets || 0),
-                        bowlingovers: (state.data[index].bowlingovers || 0) + (stats.bowlingover || 0)
+                        bowlingovers: (state.data[index].bowlingovers || 0) + (stats.bowlingover || 0),
+                        highestScore: (state.data[index].highestScore || 0) > (stats.battingrun || 0) ? state.data[index].highestScore || 0 : stats.battingrun || 0,
+                        highestWicket: (state.data[index].highestWicket || 0) > (stats.bowlingwickets || 0) ? state.data[index].highestWicket || 0 : stats.bowlingwickets || 0
                     };
                 }
             });

@@ -5,7 +5,7 @@ import Banner from "@/components/common/commonUi/Banner/Banner";
 import CommonBack from "@/components/common/commonUi/commonBack";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import { Edit, SwapHoriz } from "@mui/icons-material";
-import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -90,17 +90,18 @@ const TestScorePage = ({
     Extras,
     ChangeStrike,
     post,
-    declare,
-    stumps,
+    // declare,
+    // stumps,
     CurrentRunningDay,
-    matchDraw,
+    // matchDraw,
     lead,
     Overs,
     winSituation,
-    revise,
-    handleBreakOpen,
+    // revise,
+    // handleBreakOpen,
     team1Data,
-    team2Data
+    team2Data,
+    showMore
 }) => {
 
     const router = useRouter()
@@ -171,9 +172,6 @@ const TestScorePage = ({
         bowlerletter: "",
         bowlercolor: ""
     })
-    const sm = useMediaQuery('(max-width: 354px)')
-    const md = useMediaQuery('(max-width: 390px)')
-    const lg = useMediaQuery('(max-width: 410px)')
     let Innings1Declare = match?.firstInnings?.declare === "yes" ? true : false
     let Innings2Declare = match?.secondInnings?.declare === "yes" ? true : false
     let Innings3Declare = match?.superOverFirstInnings?.declare === "yes" ? true : false
@@ -230,7 +228,6 @@ const TestScorePage = ({
             title={title}
             width={'100%'}
             onClick={click}
-            fontSize={sm ? '10px' : md ? '11px' : lg ? '13px' : '14px'}
             disabled={disable ? false : true}
         />
     };
@@ -300,7 +297,7 @@ const TestScorePage = ({
                             <Box className="score-gradient-line"></Box>
                         </Box>
 
-                        <ExtraRunSection totalLBRuns={Extras?.LB} totalNBRuns={Extras.NB} totalWDRuns={Extras.WD} totalPRRuns={Extras.PR} totalNRRuns={Extras.NR} />
+                        <ExtraRunSection totalLBRuns={Extras?.LB} totalBYERuns={Extras.BYE} totalNBRuns={Extras.NB} totalWDRuns={Extras.WD} totalPRRuns={Extras.PR} totalNRRuns={Extras.NR} />
 
                     </Box>
 
@@ -313,7 +310,7 @@ const TestScorePage = ({
                                             const isPRActive = active.active && (active.data === "PR" || active.data === "NR" || active.data === "RNO");
                                             const isWide = active.active && active.data === "WD"
                                             const isNoBall = active.active && active.data === "NB"
-                                            const islegbye = active.data === "LB" && active.active
+                                            const islegbye = active.data === "LB" && active.active || active.data === "BYE"
                                             const isRunoutActive = active.secondactive === "RNO"
                                             const isButtonDisabled = (isRunoutActive && !['0', '1', '2', '3', '4', '5,7', '6'].includes(items)) || (isWide && !['0', '1', '2', '3', '4', '5,7', '6', 'RNO', 'STO'].includes(items)) || (isNoBall && !['0', '1', '2', '3', '4', '5,7', '6', 'RNO'].includes(items)) || isPRActive && !['0', '1', '2', '3', '4', '5,7', '6'].includes(items) || islegbye && !['1', '2', '3', '4', '5,7', '6'].includes(items) || isButtonsDisabled;
 
@@ -337,42 +334,10 @@ const TestScorePage = ({
                                         title={"Undo"}
                                         width={'100%'}
                                         onClick={back}
-                                        fontSize={sm ? '10px' : md ? '11px' : lg ? '13px' : '14px'}
-                                        hover={'none'} />
-                                    <CustomeButton
-                                        title={"Break"}
-                                        width={'100%'}
-                                        height={'50px'}
-                                        disabled={winner || balls.ballNo === 0 || active.active ? true : false}
-                                        onClick={handleBreakOpen}
-                                        fontSize={sm ? '10px' : md ? '11px' : lg ? '13px' : '14px'}
                                         hover={'none'} />
                                 </Box>
-                                <Box className='test_score_render_button'>
-                                    <CustomeButton
-                                        title={"Stumps"}
-                                        width={'100%'}
-                                        height={'50px'}
-                                        onClick={stumps}
-                                        disabled={winner ? true : false}
-                                        fontSize={sm ? '10px' : md ? '11px' : lg ? '13px' : '14px'}
-                                        hover={'none'} />
-                                    <CustomeButton
-                                        title={currentinnings === 4 ? "Revise Over" : "Declare"}
-                                        width={'100%'}
-                                        onClick={currentinnings === 4 ? revise : declare}
-                                        height={'50px'}
-                                        disabled={currentinnings === 4 ? false : (target?.runs > 0 && currentinnings !== 1) || winner}
-                                        fontSize={sm ? '10px' : md ? '11px' : lg ? '13px' : '14px'}
-                                        hover={'none'} />
-                                    <CustomeButton
-                                        title={"Match Draw"}
-                                        width={'100%'}
-                                        onClick={matchDraw}
-                                        disabled={winner ? true : false}
-                                        fontSize={sm ? '10px' : md ? '11px' : lg ? '13px' : '14px'}
-                                        height={'50px'}
-                                        hover={'none'} />
+                                <Box className="show_more_button">
+                                    <CustomeButton height={'50px'} disabled={active.active} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
                                 </Box>
                             </Box>
                         }

@@ -130,6 +130,22 @@
     font-weight: 500 !important;
 }
 
+/* Show more section */
+.scoreboard_show_more{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-around;
+}
+
+/* Penalty Section */
+.penalty_call_section p{
+    color: var(--text-white);
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
 @media screen and (max-width: 440px) {
     .scoreboard_dialog_wicket_section.reason {
         padding: 0;

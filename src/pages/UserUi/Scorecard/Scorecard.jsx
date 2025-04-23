@@ -22,11 +22,13 @@ const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonst
     }
     const WDs = Extras ? Extras?.filter((items) => items.reason === 'WD') : [];
     const LBs = Extras ? Extras?.filter((items) => items.reason === 'LB') : [];
+    const BYEs = Extras ? Extras?.filter((items) => items.reason === 'BYE') : [];
     const NBs = Extras ? Extras?.filter((items) => items.reason === 'NB') : [];
     const PRs = Extras ? Extras?.filter((items) => items.reason === 'PR') : [];
     const NRs = Extras ? Extras?.filter((items) => items.reason === 'NR') : [];
     let totalWDRuns = WDs?.reduce((sum, item) => sum + item.runs, 0);
     let totalLBRuns = LBs?.reduce((sum, item) => sum + item.runs, 0);
+    let totalBYERuns = BYEs?.reduce((sum, item) => sum + item.runs, 0);
     let totalNBRuns = NBs?.reduce((sum, item) => sum + item.runs, 0);
     let totalPRRuns = PRs?.reduce((sum, item) => sum + item.runs, 0);
     let totalNRRuns = NRs?.reduce((sum, item) => sum + item.runs, 0);
@@ -156,7 +158,7 @@ const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonst
                     </TableBody>
                 </Table>
             </TableContainer>
-            <ExtraRunSection totalLBRuns={totalLBRuns} totalWDRuns={totalWDRuns} totalNBRuns={totalNBRuns} totalPRRuns={totalPRRuns} totalNRRuns={totalNRRuns} type={'scorecard'} />
+            <ExtraRunSection totalLBRuns={totalLBRuns} totalWDRuns={totalWDRuns} totalBYERuns={totalBYERuns} totalNBRuns={totalNBRuns} totalPRRuns={totalPRRuns} totalNRRuns={totalNRRuns} type={'scorecard'} />
             {outplayerstats?.length > length && (
                 <Button onClick={onClick} className="user_scorecard_button">
                     {show ? 'Show Less' : 'Show More'}

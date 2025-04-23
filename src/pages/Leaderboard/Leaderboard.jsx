@@ -43,6 +43,7 @@ const Leaderboard = ({ playerData, teamData }) => {
 
     const [activeTab, setActiveTab] = useState(0);
     const [animate, setAnimate] = useState(false);
+    const [activeId, setActiveId] = useState('')
 
     useEffect(() => {
         setAnimate(true);
@@ -97,13 +98,14 @@ const Leaderboard = ({ playerData, teamData }) => {
                                     let overs = Math.floor(bowlingball / 6);
                                     let bowls = bowlingball % 6;
                                     let bowlingovers = `${overs}.${bowls}`;
-                                    let bowlingaverage = bowlingruns > 0 && bowlingwickets === 0 ? bowlingruns : bowlingruns > 0 && bowlingwickets > 0 ? Math.floor(bowlingruns / bowlingwickets) : 0
+                                    let bowlingaverage = bowlingruns > 0 && bowlingwickets === 0 ? '-' : bowlingruns > 0 && bowlingwickets > 0 ? Math.floor(bowlingruns / bowlingwickets) : 0
+                                    let bowlingStrikeRate = bowlingball > 0 && bowlingwickets === 0 ? '-' : bowlingball > 0 && bowlingwickets > 0 ? Math.floor(bowlingball / bowlingwickets) : 0
                                     let ecostring = bowlingruns > 0 && bowlingball > 0 ? bowlingruns / bowlingovers : 0
                                     let eco = ecostring.toFixed(1)
                                     let teamName = teamData?.filter((item) => item?.id === items?.teamId)?.[0]
 
                                     return (
-                                        <Box key={i} >
+                                        <Box key={i} onClick={() => setActiveId(items?.id)}>
                                             <Box className='leaderboard_stats_section'>
                                                 <Box className='leaderboard_image_section'>
                                                     {
