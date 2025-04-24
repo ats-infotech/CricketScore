@@ -163,6 +163,10 @@
     cursor: pointer;
 }
 
+.team_card.not-cursor {
+    cursor: auto;
+}
+
 .team_card.active-bidder {
     background-color: var(--green);
     opacity: 0.8;
@@ -279,18 +283,23 @@
     text-transform: capitalize;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     gap: 5px;
 }
 
-.info-btn-group .info-btn:nth-child(2) {
+.info-btn-group .info-btn.isAdmin:nth-child(2),
+.info-btn-group .info-btn.isUser:nth-child(1) {
     background-color: var(--boundary);
 }
 
-.info-btn-group .info-btn:nth-child(3) {
+.info-btn-group .info-btn.isAdmin:nth-child(3),
+.info-btn-group .info-btn.isUser:nth-child(2) {
     background-color: var(--text-red);
 }
 
-.info-btn-group .info-btn:nth-child(5) {
+.info-btn-group .info-btn.isAdmin:nth-child(5),
+.info-btn-group .info-btn.isUser:nth-child(4) {
     background-color: var(--text-green);
 }
 

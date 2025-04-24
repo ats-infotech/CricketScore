@@ -65,7 +65,7 @@ const AUCTION_ACTIONS = [
     }
 ]
 
-const LiveAuctionPage = () => {
+const LiveAuctionPage = ({ type }) => {
     const { auctionId } = useParams()
     const dispatch = useDispatch()
     const router = useRouter()
@@ -129,6 +129,8 @@ const LiveAuctionPage = () => {
     const showPlayerData = searchResults.trim()
         ? availablePlayers.filter(item => item?.playerName?.toLowerCase()?.includes(searchResults.toLowerCase()))
         : availablePlayers
+
+    const isUser = type === 'user'
 
     // menulist handle
     const handleMenuClick = (event) => {
@@ -540,7 +542,7 @@ const LiveAuctionPage = () => {
                         <Box className='auction-bidding'>
                             <SvgIcon id='gold-coin' className='gold-coin' />
                             <Typography variant='h6' className="bidding-count">{currentBid}</Typography>
-                            <SvgIcon id='edit' className='edit-icon' onClick={() => handleWhatOpen(MODAL_TYPES.BID)} />
+                            {!isUser ? <SvgIcon id='edit' className='edit-icon' onClick={() => handleWhatOpen(MODAL_TYPES.BID)} /> : <Box></Box>}
                         </Box>
                         <Typography variant='h6' className="auction-team-name">
                             {currentTeamBidding ? currentTeamBidding.team_name : "No bidder"}
@@ -569,9 +571,9 @@ const LiveAuctionPage = () => {
 
                         return (
                             <Box
-                                className={`team_card ${currentTeamBidding?.id === item.id ? 'active-bidder' : ''} ${maxBidReached ? 'disable-bidder' : ''}`}
+                                className={`team_card ${isUser ? 'not-cursor' : ''} ${currentTeamBidding?.id === item.id ? 'active-bidder' : ''} ${maxBidReached ? 'disable-bidder' : ''}`}
                                 key={i}
-                                onClick={maxBidReached ? undefined : () => handleTeamBid(item)}
+                                onClick={isUser || maxBidReached ? undefined : () => handleTeamBid(item)}
                             >
                                 <Box
                                     className='team-logo'
@@ -609,7 +611,7 @@ const LiveAuctionPage = () => {
 
             {/* Bottom Action Bar */}
             <Box className='info-bottom'>
-                <Box className='button-group'>
+                {!isUser && <Box className='button-group'>
                     {BTN_GROUP.map((item, i) => (
                         <Button
                             variant='contained'
@@ -621,14 +623,14 @@ const LiveAuctionPage = () => {
                             <span>{item.name}</span>
                         </Button>
                     ))}
-                </Box>
+                </Box>}
                 <Box className='info-btn-group'>
-                    <SvgIcon id='three-line-menu' onClick={() => {
+                    {!isUser && <SvgIcon id='three-line-menu' onClick={() => {
                         setOpenSettingModal(true)
                         setOpen(true)
-                    }} />
+                    }} />}
                     {InfoOfAuction.map((item, i) => (
-                        <Box className='info-btn' key={i}>
+                        <Box className={`info-btn ${isUser ? 'isUser' : 'isAdmin'}`} key={i}>
                             <span>{item.title}</span>
                             <span>{item.count}</span>
                         </Box>

@@ -3,7 +3,7 @@ import LiveAuctionPage from "@/pages/Auction/LiveAuctionPage/LiveAuctionPage"
 
 const LiveAuction = () => {
     return (
-        <LiveAuctionPage type='admin'/>
+        <LiveAuctionPage type='user'/>
     )
 }
 
