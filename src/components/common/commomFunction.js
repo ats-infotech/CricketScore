@@ -373,3 +373,16 @@ export function formatNumberShort(num, decimalPlaces = 1) {
 
     return num.toString();
 }
+
+export const classifyShot = (angle) => {
+    if (angle >= 5.9 || angle < 0.4) return "Straight Drive";
+    if (angle >= 0.4 && angle < 1.2) return "On Drive";
+    if (angle >= 1.2 && angle < 2.0) return "Flick";
+    if (angle >= 2.0 && angle < 2.8) return "Pull";
+    if (angle >= 2.8 && angle < 3.6) return "Cut";
+    if (angle >= 3.6 && angle < 4.4) return "Square Drive";
+    if (angle >= 4.4 && angle < 5.2) return "Cover Drive";
+    if (angle >= 5.2 && angle < 5.9) return "Off Drive";
+    if (angle >= 3.5 && angle < 5.5) return "Swipe";
+    return "Unknown";
+};

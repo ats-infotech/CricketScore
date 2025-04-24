@@ -1,0 +1,10 @@
+/* Wagon Wheel */
+.wagon_wheel{
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    max-width: 440px;
+    margin: 0 auto;
+    text-align: center;
+}

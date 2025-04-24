@@ -27,4 +27,15 @@ export const ScheduleMatchJson = [
         key_name: 'perteamplayers',
         show_type: 'input'
     },
+    {
+        label: 'Wagon Wheel',
+        placeholder: '',
+        type: 'text',
+        key_name: 'wagonWheel',
+        show_type: 'tags',
+        data: [
+            { title: 'Yes', key_name: "yes" },
+            { title: 'No', key_name: "no" },
+        ]
+    },
 ]

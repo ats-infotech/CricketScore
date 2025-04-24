@@ -51,6 +51,7 @@ const playerSlice = createSlice({
                         battingfour: (state.data[index].battingfour || 0) + (stats.battingfour || 0),
                         battingsix: (state.data[index].battingsix || 0) + (stats.battingsix || 0),
                         battinghundred: (state.data[index].battinghundred || 0) + (stats.battinghundred || 0),
+                        battingfifty: (state.data[index].battingfifty || 0) + (stats.battingfifty || 0),
                         battingout: (state.data[index].battingout || 0) + (stats.battingout || 0),
                         battingnotout: (state.data[index].battingnotout || 0) + (stats.battingnotout || 0),
                         bowlingruns: (state.data[index].bowlingruns || 0) + (stats.bowlingrun || 0),

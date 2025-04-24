@@ -94,7 +94,8 @@ const ScorePage = ({
     winSituation,
     team1Data,
     team2Data,
-    showMore
+    showMore,
+    wagonWheel
 }) => {
 
     const router = useRouter()
@@ -149,7 +150,7 @@ const ScorePage = ({
         );
     }
 
-    const isButtonsDisabled = currentinnings <= 0 || inningsComplete || overChanged || active.secondactive === "STO";
+    const isButtonsDisabled = currentinnings <= 0 || inningsComplete || overChanged || active.secondactive === "STO" || wagonWheel;
 
     const [playerOnField, setPlayerOnField] = useState({
         striker: "",
@@ -218,13 +219,13 @@ const ScorePage = ({
             title={title}
             width={'100%'}
             onClick={click}
-            disabled={disable ? false : true}
+            disabled={wagonWheel ? true : disable ? false : true}
         />
     };
 
     return (
         <Box>
-            <Box sx={{ position: 'absolute', }}>
+            <Box sx={{ position: 'absolute' }}>
                 <CommonBack onClick={() => router.push(`/mytournament/${match?.tournamentId}/match`)} />
             </Box>
 
@@ -310,14 +311,14 @@ const ScorePage = ({
                                 <Box className='test_score_render_button'>
                                     <RenderButton />
                                     <CustomeButton
-                                        disabled={balls.ballNo === 0 || active.active ? true : false}
+                                        disabled={balls.ballNo === 0 || active.active || wagonWheel ? true : false}
                                         title={"Undo"}
                                         width={'100%'}
                                         onClick={scoreBack}
                                         hover={'none'} />
                                 </Box>
                                 <Box className="show_more_button">
-                                    <CustomeButton disabled={active.active} height={'50px'} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
+                                    <CustomeButton disabled={active.active || wagonWheel} height={'50px'} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
                                 </Box>
                             </Box>
                         }

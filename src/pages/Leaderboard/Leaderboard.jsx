@@ -20,6 +20,16 @@ const typePlayer = [
 ];
 
 const CommonStatsSection = React.memo(({ name, innings, average, sr, runs, type, wickets, eco, teamName }) => {
+    const allStats = [
+        { label: "Inn", value: innings },
+        { label: "Wickets", value: wickets },
+        { label: "Runs", value: runs },
+        { label: "Avg", value: average },
+        { label: "Eco", value: eco },
+        { label: "SR", value: sr },
+    ];
+    const stats = allStats.filter(stat => stat.value !== undefined && stat.value !== null);
+
     return (
         <Box>
             <Box sx={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
@@ -27,14 +37,51 @@ const CommonStatsSection = React.memo(({ name, innings, average, sr, runs, type,
                 <Typography variant='p'>{`(${teamName})`}</Typography>
             </Box>
             <Box className='leaderboard_stats'>
-                <Typography variant='body2'>{`Inn: ${innings}`}</Typography>
-                <Divider orientation="vertical" className='leaderboard_divider' />
-                <Typography variant='body2'>{type === 'bowler' ? `Wickets: ${wickets}` : `Runs: ${runs}`}</Typography>
-                <Divider orientation="vertical" className='leaderboard_divider' />
-                <Typography variant='body2'>{`Avg: ${average}`}</Typography>
-                <Divider orientation="vertical" className='leaderboard_divider' />
-                <Typography variant='body2'>{type === 'bowler' ? `Eco: ${eco}` : `SR: ${sr}`}</Typography>
+                {stats.map((stat, index) =>
+                stat.value !== undefined && stat.value !== null ? (
+                    <Box key={index} className="player_milestone_section">
+                        <Typography variant='body2'>
+                            {stat.label}: {stat.value}
+                        </Typography>
+                        {index !== stats.length - 1 && (
+                            <Divider orientation="vertical" className='leaderboard_divider' />
+                        )}
+                    </Box>
+                ) : null
+            )}
             </Box>
+        </Box>
+    )
+})
+
+const PlayerMilestoneStats = React.memo(({ notOuts, highestScore, fours, sixes, hundreds, maidens, highestWicket, strikeRate, fiftys }) => {
+    const allStats = [
+        { label: "Hs", value: highestScore },
+        { label: "N/O", value: notOuts },
+        { label: "4s", value: fours },
+        { label: "6s", value: sixes },
+        { label: "50s", value: fiftys },
+        { label: "100s", value: hundreds },
+        { label: "Maiden", value: maidens },
+        { label: "HW", value: highestWicket },
+        { label: "SR", value: strikeRate },
+    ];
+    const stats = allStats.filter(stat => stat.value !== undefined && stat.value !== null);
+
+    return (
+        <Box className="leaderboard_player_milestone">
+            {stats.map((stat, index) =>
+                stat.value !== undefined && stat.value !== null ? (
+                    <Box key={index} className="player_milestone_section">
+                        <Typography className="milestone_item">
+                            {stat.label}: {stat.value}
+                        </Typography>
+                        {index !== stats.length - 1 && (
+                            <Divider orientation="vertical" className='leaderboard_divider' />
+                        )}
+                    </Box>
+                ) : null
+            )}
         </Box>
     )
 })
@@ -46,6 +93,7 @@ const Leaderboard = ({ playerData, teamData }) => {
     const [activeId, setActiveId] = useState('')
 
     useEffect(() => {
+        setActiveId('')
         setAnimate(true);
         const timer = setTimeout(() => setAnimate(false), 500);
         return () => clearTimeout(timer);
@@ -105,8 +153,8 @@ const Leaderboard = ({ playerData, teamData }) => {
                                     let teamName = teamData?.filter((item) => item?.id === items?.teamId)?.[0]
 
                                     return (
-                                        <Box key={i} onClick={() => setActiveId(items?.id)}>
-                                            <Box className='leaderboard_stats_section'>
+                                        <Box key={i} sx={{ cursor: 'pointer' }} onClick={() => setActiveId(items?.id)}>
+                                            <Box className="leaderboard_stats_section">
                                                 <Box className='leaderboard_image_section'>
                                                     {
                                                         items.playerImage
@@ -121,13 +169,26 @@ const Leaderboard = ({ playerData, teamData }) => {
                                                             </Box>
                                                     }
                                                 </Box>
-                                                {activeTab === 0 &&
-                                                    <CommonStatsSection name={items.playerName} teamName={teamName?.team_name} innings={innings} runs={runs} average={battingaverage} sr={sr} />
-                                                }
-                                                {
-                                                    activeTab === 1 &&
-                                                    <CommonStatsSection type={'bowler'} teamName={teamName?.team_name} name={items.playerName} innings={innings} wickets={bowlingwickets} average={bowlingaverage} eco={eco} />
-                                                }
+                                                <Box>
+                                                    {activeTab === 0 &&
+                                                        <CommonStatsSection name={items.playerName} teamName={teamName?.team_name} innings={innings} runs={runs} average={battingaverage} sr={sr} />
+                                                    }
+                                                    {
+                                                        activeTab === 1 &&
+                                                        <CommonStatsSection type={'bowler'} teamName={teamName?.team_name} name={items.playerName} innings={innings} wickets={bowlingwickets} average={bowlingaverage} eco={eco} />
+                                                    }
+                                                    {items?.id === activeId && <React.Fragment>
+                                                        {
+                                                            activeTab === 0 &&
+                                                            <PlayerMilestoneStats highestScore={items?.highestScore} notOuts={items?.battingnotout} fours={items?.battingfour}
+                                                                sixes={items?.battingsix} hundreds={items?.battinghundred} fiftys={items?.battingfifty} />
+                                                        }
+                                                        {
+                                                            activeTab === 1 &&
+                                                            <PlayerMilestoneStats highestWicket={items?.highestWicket} maidens={items?.bowlingmaiden} strikeRate={bowlingStrikeRate} />
+                                                        }
+                                                    </React.Fragment>}
+                                                </Box>
                                             </Box>
                                         </Box>
                                     )

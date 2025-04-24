@@ -45,8 +45,10 @@
 }
 
 .leaderboard_image_section {
-    height: 42px;
-    width: 42px;
+    min-height: 42px;
+    min-width: 42px;
+    max-height: 42px;
+    max-width: 42px;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -67,7 +69,7 @@
     padding: 20px 30px;
     display: flex;
     gap: 20px;
-    border-bottom: 2px solid var(--black);
+    border-bottom: 2px solid var(--primary-color);
 }
 
 .leaderboard_stats_section p {
@@ -98,7 +100,8 @@
 .leaderboard_stats {
     display: flex;
     gap: 9px;
-    height:15px;
+    min-height:15px;
+    flex-wrap: wrap;
 }
 
 .leaderboard_stats p {
@@ -109,26 +112,46 @@
 
 .leaderboard_divider {
     border: 1px solid var(--primary-color) !important;
-    /* max-height: 15px; */
 }
 
+/* Player Milestone */
+.leaderboard_player_milestone{
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.player_milestone_section{
+    height: 15px;
+    display: flex;
+    gap: 9px;
+}
+
+.leaderboard_player_milestone p{
+    font-size: var(--ex-small) !important;
+    font-weight: 500 !important;
+    color: var(--text-grey) !important;
+}
 
 @media screen and (max-width:375px) {
     .leaderboard_stats_section {
         padding: 12px 20px;
     }
 
-    .leaderboard_stats_section p {
+    .leaderboard_stats_section p{
         font-size: var(--small) !important;
     }
 
-    .leaderboard_stats p {
+    .leaderboard_stats p, .leaderboard_player_milestone p  {
         font-size: var(--ex-small) !important;
     }
 
     .leaderboard_image_section {
-        width: 35px;
-        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
+        max-width: 35px;
+        max-height: 35px;
     }
 
     .leaderboard_image_section .imageTextBox {

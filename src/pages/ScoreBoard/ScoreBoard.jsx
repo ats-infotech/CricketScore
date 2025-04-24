@@ -1,5 +1,5 @@
 'use client'
-import { calculateDLSTarget } from "@/components/common/commomFunction";
+import { calculateDLSTarget, classifyShot } from "@/components/common/commomFunction";
 import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeTags from "@/components/common/commonUi/CustomeTags";
@@ -8,12 +8,12 @@ import { breakType } from "@/components/common/json/commonJson";
 import { generateSummary } from "@/components/common/openaiApis";
 import ScorePage from "@/pages/Score/Score";
 import {
-    AddCommentary, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsWicket, AddSuperOverExtra,
-    AddSuperOverInnings, AddSuperOverSecondInnings, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsWicket, AddSuperOverWicket, AddWicket, ChangeInnings,
-    ChangeMatchTarget, ChangePlayer, ChangeStatus, DescreaseMatchOvers, MatchBreakSchedule, matchesState, MatchTerminate, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra,
-    RemoveSecondInningsPartnership,
-    RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder,
-    ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership
+    AddCommentary, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsShots,
+    AddSecondInningsWicket, AddShots, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverSecondInnings, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsWicket,
+    AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchTarget, ChangePlayer, ChangeStatus, ChangeWagonWheelChoice, DescreaseMatchOvers, MatchBreakSchedule, matchesState,
+    MatchTerminate, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra,
+    RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule,
+    ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership
 } from "@/redux/slices/matchSlice";
 import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
@@ -24,6 +24,7 @@ import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './ScoreBoard.css';
+import WagonWheel from "@/components/common/commonUi/WagonWheel/WagonWheel";
 
 const calculatePlayerStats = (player, wickets, economy) => {
     let battingrun = 0;
@@ -40,6 +41,7 @@ const calculatePlayerStats = (player, wickets, economy) => {
     let bowlingdot = 0;
     let battingnotout = 0;
     let battinghundred = 0;
+    let battingfifty = 0;
     let bowlingmaiden = 0;
 
     // Batting Score Calculation
@@ -52,6 +54,7 @@ const calculatePlayerStats = (player, wickets, economy) => {
         battingsix = parseInt(wicket.six)
         battingball = parseInt(wicket.balls)
         battinghundred = parseInt(wicket.run) >= 100 ? 1 : 0
+        battingfifty = parseInt(wicket.run) >= 50 ? 1 : 0
     });
 
     // Bowling Score Calculation
@@ -61,6 +64,16 @@ const calculatePlayerStats = (player, wickets, economy) => {
         bowlingwickets += bowler.bowlerwicket
         bowlingball += bowler.legalBall;
     });
+
+    // Maiden Calculation
+    if (bowlerTotalScore) {
+        bowlerTotalScore.forEach(bowlerScore => {
+            const intKeysValues = Object.keys(bowlerScore).filter(key => !isNaN(key)).map(key => bowlerScore[key]);
+            if (intKeysValues.every(value => (value === "0" || value === "W" || value.includes("LB") || value.includes("BYE")))) {
+                bowlingmaiden += 1;
+            }
+        });
+    }
 
     return {
         playerId: player.id,
@@ -77,7 +90,9 @@ const calculatePlayerStats = (player, wickets, economy) => {
         bowlingdot,
         innings,
         battingnotout,
-        bowlingmaiden
+        bowlingmaiden,
+        battinghundred,
+        battingfifty
     };
 };
 
@@ -466,6 +481,10 @@ const ScoreBoard = () => {
     })
     const [showMore, setShowMore] = useState(false)
     const [penaltyCall, setPenaltyCall] = useState(false)
+    const [wagonWheel, setWagonWheel] = useState(false)
+    const [shots, setShots] = useState([]);
+    const [currentShot, setCurrentShot] = useState()
+    const [wagonWheelSetting, setWagonWheelSetting] = useState(false)
 
     // Redux Data
     const match_data = useSelector(matchesState)
@@ -659,6 +678,7 @@ const ScoreBoard = () => {
         setBreakStart(false)
         setShowMore(false)
         setPenaltyCall(false)
+        setWagonWheelSetting(false)
         setMatchTerminate({
             terminate: false,
             mainreason: 0,
@@ -1600,6 +1620,50 @@ const ScoreBoard = () => {
         }
     }
 
+    // Wagon Wheel Function
+    function handleWagonWheelClick(event) {
+        const svg = event.currentTarget;
+        const rect = svg.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
+
+        const batterX = 200;
+        const batterY = 140;
+
+        const dx = clickX - batterX;
+        const dy = clickY - batterY;
+        let angle = Math.atan2(dy, dx);
+        angle = angle - Math.PI / 2;
+        if (angle < 0) angle += 2 * Math.PI;
+
+        const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 180);
+
+        if (!isNaN(currentShot)) {
+            const shotType = classifyShot(angle);
+            const regex = /^[13579]\d?$/;
+            const isShotOdd = regex.test(currentShot)
+            const batterId = activeStrike === 1 && isShotOdd ? playerselection.nonStriker : activeStrike === 2 && isShotOdd ? playerselection.striker
+                : activeStrike === 2 ? playerselection.nonStriker : playerselection.striker
+            const bowlerId = playerselection.bowler
+            const currentBall = ball.ballNo
+            const currentOver = ball.overNo
+            const newShot = { angle, distance, currentShot, shotType, batterId, bowlerId, currentBall, currentOver };
+            const action = CurrentInnings === 2 ? AddSecondInningsShots : AddShots
+            const newObj = {
+                id: currentMatch?.id,
+                [innings]: {
+                    Shots: newShot
+                }
+            };
+            setShots([...shots, newShot]);
+            setCurrentShot()
+            setWagonWheel(false)
+            if (CurrentInnings === 1 || CurrentInnings === 2) {
+                dispatch(action(newObj))
+            }
+        }
+    }
+
     const handleScore = async (data) => {
         if (data === '+/-') {
             setOpen(true)
@@ -1608,6 +1672,14 @@ const ScoreBoard = () => {
         }
         const action = CurrentInnings === 4 ? AddSuperOverSecondInningsExtra : CurrentInnings === 3 ? AddSuperOverExtra : CurrentInnings === 2 ? AddSecondInningsExtra : AddExtra;
         if (legalBallCount < 6) {
+            if (currentMatch?.wagonWheel && CurrentInnings < 3) {
+                const intdata = parseInt(data)
+                if (!isNaN(intdata) && Number.isInteger(intdata) && active.data !== "WD" && active.data !== "LB" &&
+                    active.data !== "BYE" && active.data !== "PR" && active.data !== "NR" && data !== '5,7') {
+                    setWagonWheel(true);
+                    setCurrentShot(intdata);
+                }
+            }
             let newBallScores = [...ballScores];
             let updatedBowlerScore = { ...bowlerScore };
             if (['WD', 'NB', 'LB', 'RNO', 'PR', 'NR', '5,7', 'BYE'].includes(data)) {
@@ -2005,6 +2077,7 @@ const ScoreBoard = () => {
         const winner = currentMatch?.matchWinner
         const BattingOrder = currentInnings === 4 ? matchFourthInnings?.BattingOrder?.[0] : currentInnings === 3 ? matchThirdInnings?.BattingOrder?.[0] : currentInnings === 2 ? matchSecondInnings?.BattingOrder?.[0] : currentInnings === 1 ? matchFirstInnings?.BattingOrder?.[0] : ''
         const PartnerShip = currentMatch?.partnership || partnership
+        const CurrentInnningsShots = currentInnings === 1 ? matchFirstInnings?.Shots : matchSecondInnings?.Shots
 
         if (currentInnings !== undefined) {
             StoreTeamScore()
@@ -2031,6 +2104,10 @@ const ScoreBoard = () => {
                     batter2run: PartnerShip?.batter2run ?? 0,
                     batter2balls: PartnerShip?.batter2balls ?? 0,
                 })
+            }
+
+            if (!hasRunRef.current && CurrentInnningsShots && CurrentInnings < 3) {
+                setShots([...CurrentInnningsShots])
             }
 
             // if (target && !hasRunRef.current && (currentInnings !== 1 || currentInnings !== 4)) {
@@ -2441,7 +2518,8 @@ const ScoreBoard = () => {
                 Wickets: [],
                 Extras: [],
                 BattingOrder: [],
-                Partnerships: CurrentInnings === 1 || CurrentInnings === 2 ? [] : undefined
+                Partnerships: CurrentInnings === 1 || CurrentInnings === 2 ? [] : undefined,
+                Shots: CurrentInnings === 1 || CurrentInnings === 2 ? [] : undefined
             },
             ...currentInning.additionalData
         };
@@ -3401,6 +3479,21 @@ const ScoreBoard = () => {
         handleClose()
     }
 
+    // change wagon Wheel setting
+    const handleWagonWheel = () => {
+        setWagonWheelSetting(true)
+        setShowMore(false)
+    }
+
+    const handleWagonWheelSetting = (type) => {
+        const newObj = {
+            id: currentMatch?.id,
+            wagonWheel: type === "No" ? false : true
+        }
+        dispatch(ChangeWagonWheelChoice(newObj))
+        handleClose()
+    }
+
     // Show More Buttons
     const handleShowMore = () => {
         setOpen(true)
@@ -3434,6 +3527,14 @@ const ScoreBoard = () => {
                 disabled: winningTeam,
                 margin: "0px"
             }
+        },
+        {
+            height: "50px",
+            title: "Wagon Wheel",
+            onClick: handleWagonWheel,
+            hover: "none",
+            disabled: winningTeam,
+            margin: "0px"
         }
     ];
 
@@ -3441,7 +3542,7 @@ const ScoreBoard = () => {
 
     const buttonConfigs = [
         {
-            condition: !InningsComplete && !superOver && !changeBatter && !retiredHurt && !customRun && !breakStart && !matchTerminate.terminate && !reviseTarget.revise && !showMore && !penaltyCall,
+            condition: !InningsComplete && !superOver && !changeBatter && !retiredHurt && !customRun && !breakStart && !matchTerminate.terminate && !reviseTarget.revise && !showMore && !penaltyCall && !wagonWheelSetting,
             onClick: handleClick(),
             title: 'Update Scoreboard',
             disabled: isDisabled(),
@@ -3536,7 +3637,11 @@ const ScoreBoard = () => {
                 team1Data={Team1Data}
                 team2Data={Team2Data}
                 showMore={handleShowMore}
+                wagonWheel={wagonWheel}
             />
+
+            {/* Wagon Wheel */}
+            {wagonWheel && <WagonWheel shots={shots} onClick={handleWagonWheelClick} />}
 
             <Dialog open={open} onClose={() => { }} className="scoreboard_dialog_section">
                 {!superOver && <Close sx={{ color: 'var(--text-white)', cursor: 'pointer', position: 'absolute', right: '2%', top: '3%' }} onClick={handleClose} />}
@@ -3563,6 +3668,23 @@ const ScoreBoard = () => {
                                 })}
                             </Box>
                         )
+                    }
+
+                    {/* Wagon Wheel */}
+                    {
+                        wagonWheelSetting &&
+                        <>
+                            <Typography sx={{ color: 'var(--text-white)', fontWeight: 500, textAlign: 'center', marginBottom: '15px' }}>Want Wagon Wheel</Typography>
+                            <Box sx={{ display: 'flex' }}>
+                                {
+                                    ['Yes', 'No'].map((items, i) => {
+                                        return (
+                                            <CustomeButton key={i} height={'50%'} title={items} onClick={() => handleWagonWheelSetting(items)} />
+                                        )
+                                    })
+                                }
+                            </Box>
+                        </>
                     }
 
                     {/* Revise Match Overs & DLS */}
@@ -3816,7 +3938,7 @@ const ScoreBoard = () => {
                     )}
 
                     {/* Button Section */}
-                    {!showMore && !penaltyCall && <Box className="scoreboard_dialog_button_section">
+                    {!showMore && !penaltyCall && !wagonWheelSetting && <Box className="scoreboard_dialog_button_section">
                         {buttonConfigs.map(({ condition, onClick, title, disabled }, index) => (
                             condition && <RenderButton key={index} onClick={onClick} title={title} disabled={disabled} />
                         ))}

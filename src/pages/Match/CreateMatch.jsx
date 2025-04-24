@@ -12,10 +12,11 @@ import { createMatchSchedule, editMatchSchedule } from "@/redux/slices/matchSlic
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import vsPic from '../../assets/img/vs.png';
 import './CreateMatch.css';
+import CustomeTags from "@/components/common/commonUi/CustomeTags";
 
 const TeamSelectionBox = ({ title, previewPath, onClick, keyName, error, SelectedTeamData }) => {
     return (
@@ -79,7 +80,8 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
         match_start_time: new Date(new Date().getTime() + 5 * 60 * 1000).toISOString(),
         numberOfOvers: '',
         overPerBowler: '',
-        perteamplayers: ''
+        perteamplayers: '',
+        wagonWheel: false
     })
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false)
@@ -231,10 +233,10 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
     const validateForm = () => {
         const newErrors = {};
         let isValid = true;
-        const formFields = tournament?.match_type === "Test Match" ? ScheduleMatchJson.filter((item) => !["overPerBowler", "numberOfOvers"].includes(item?.key_name)) : ScheduleMatchJson; 
+        const formFields = tournament?.match_type === "Test Match" ? ScheduleMatchJson.filter((item) => !["overPerBowler", "numberOfOvers"].includes(item?.key_name)) : ScheduleMatchJson.filter((item) => !["wagonWheel"].includes(item?.key_name));
         formFields.forEach(field => {
             const value = scheduleMatch[field.key_name];
-            if (!value || (typeof value === 'string' && value.trim() === '')) {
+            if (!value || (typeof value === 'string' && value.trim() === '') && field.key_name !== "wagonWheel") {
                 newErrors[field.key_name] = `${field.label} is required`;
                 isValid = false;
             }
@@ -284,7 +286,7 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
 
         setErrors(newErrors);
         return isValid;
-    }; 
+    };
 
     // const validateForm = () => {
     //     const newErrors = {};
@@ -364,6 +366,7 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
                     totalovers: scheduleMatch?.numberOfOvers,
                     overPerBowler: scheduleMatch?.overPerBowler,
                     perteamplayers: scheduleMatch?.perteamplayers,
+                    wagonWheel: scheduleMatch?.wagonWheel,
                     tournamentId: tournament?.id,
                     status: 1
                 };
@@ -377,6 +380,7 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
                     totalovers: scheduleMatch?.numberOfOvers,
                     overPerBowler: scheduleMatch?.overPerBowler,
                     perteamplayers: scheduleMatch?.perteamplayers,
+                    wagonWheel: scheduleMatch?.wagonWheel,
                     tournamentId: tournament?.id,
                     status: 1
                 };
@@ -414,10 +418,10 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
             <Box className='matchFrom'>
                 {
                     ScheduleMatchJson.length > 0 && ScheduleMatchJson.map((field, index) => {
-                        let value = scheduleMatch[field?.key_name];
+                        let value = field?.key_name === 'wagonWheel' ? scheduleMatch[field?.key_name] === true ? 'Yes' : 'No' : scheduleMatch[field?.key_name];
                         const error = errors[field.key_name];
                         let isNotShow = tournament?.match_type === "Test Match" && ["overPerBowler", "numberOfOvers"]?.includes(field?.key_name)
-                        if (!isNotShow) {
+                        if (!isNotShow && field?.show_type === "input") {
                             return (
                                 <CustomeInput
                                     tournament={tournament}
@@ -431,6 +435,20 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
                                     onChange={handleOnChange}
                                 />
                             )
+                        } else if (field?.show_type === 'tags') {
+                            return (
+                                <React.Fragment key={index}>
+                                    <CustomeTags
+                                        key={index}
+                                        label={field?.label}
+                                        data={field?.data}
+                                        value={value}
+                                        error={error}
+                                        keyName={field?.key_name}
+                                        onClick={handleOnChange}
+                                    />
+                                </React.Fragment>
+                            );
                         }
                     })
                 }

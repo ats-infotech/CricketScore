@@ -56,6 +56,14 @@ const matchSlice = createSlice({
                     status
                 } : item)
         },
+        ChangeWagonWheelChoice: (state, action) => {
+            const { id, wagonWheel } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    wagonWheel
+                } : item)
+        },
         UpdatePartnership: (state, action) => {
             const { id, partnership } = action.payload;
             state.data = state.data.map((item) =>
@@ -195,6 +203,21 @@ const matchSlice = createSlice({
                         Wickets: [
                             ...(item.firstInnings.Wickets || []),
                             firstInnings.Wickets,
+                        ]
+                    }
+                } : item
+            );
+        },
+        AddShots: (state, action) => {
+            const { id, firstInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    firstInnings: {
+                        ...item.firstInnings,
+                        Shots: [
+                            ...(item.firstInnings.Shots || []),
+                            firstInnings.Shots,
                         ]
                     }
                 } : item
@@ -358,6 +381,21 @@ const matchSlice = createSlice({
                     secondInnings: {
                         ...item.secondInnings,
                         Partnerships: item.secondInnings.Partnerships.filter(partnership => !(partnership.batter1Id === batter1Id && partnership.batter2Id === batter2Id))
+                    }
+                } : item
+            );
+        },
+        AddSecondInningsShots: (state, action) => {
+            const { id, secondInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    secondInnings: {
+                        ...item.secondInnings,
+                        Shots: [
+                            ...(item.secondInnings.Shots || []),
+                            secondInnings.Shots,
+                        ]
                     }
                 } : item
             );
@@ -726,6 +764,7 @@ export const { createMatchSchedule, editMatchSchedule, deleteMatchSchedule, dele
     RemoveSuperOverExtra, AddSuperOverSecondInningsWicket, AddSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, AddCommentary, RemoveOver,
     ReplaceBattingOrder, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, AddSuperOverCompletedOver, AddSuperOverSecondInningsCompletedOver,
     RemoveSuperOverCompletedOver, RemoveSuperOverSecondInningsCompletedOver, MatchBreakSchedule, ChangeOverPerDay, AddDeclareStatus, AddSecondInningsDeclareStatus, AddSuperOverDeclareStatus,
-    AddPartnership, AddSecondInningsPartnership, RemovePartnership, RemoveSecondInningsPartnership, AddSuperOverPartnership, RemoveSuperOverPartnership, AddSuperOverSecondInningsPartnership, RemoveSuperOverSecondInningsPartnership } = matchSlice.actions
+    AddPartnership, AddSecondInningsPartnership, RemovePartnership, RemoveSecondInningsPartnership, AddSuperOverPartnership, RemoveSuperOverPartnership, AddSuperOverSecondInningsPartnership, 
+    RemoveSuperOverSecondInningsPartnership, ChangeWagonWheelChoice, AddShots, AddSecondInningsShots } = matchSlice.actions
 export const matchesState = (state) => state.matches
 export default matchSlice.reducer
