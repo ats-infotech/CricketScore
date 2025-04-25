@@ -269,6 +269,19 @@ text {
     color: var(--primary-color) !important;
 }
 
+/* Players Select */
+.analysis_player_select{
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 15px;
+}
+
+.filter_section.disable .MuiInputBase-root{
+    background-color: var(--text-lightgrey) !important;
+    border-color: transparent !important;
+}
+
 
 @media screen and (max-width: 350px) {
     .recharts-legend-item {

@@ -7,14 +7,7 @@ import InputSelect from "@/components/common/commonUi/InputSelect";
 import { breakType } from "@/components/common/json/commonJson";
 import { generateSummary } from "@/components/common/openaiApis";
 import ScorePage from "@/pages/Score/Score";
-import {
-    AddCommentary, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsShots,
-    AddSecondInningsWicket, AddShots, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverSecondInnings, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsWicket,
-    AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchTarget, ChangePlayer, ChangeStatus, ChangeWagonWheelChoice, DescreaseMatchOvers, MatchBreakSchedule, matchesState,
-    MatchTerminate, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra,
-    RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule,
-    ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership
-} from "@/redux/slices/matchSlice";
+import { AddCommentary, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsShots, AddSecondInningsWicket, AddShots, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverSecondInnings, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsShots, AddSuperOverSecondInningsWicket, AddSuperOverShots, AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchTarget, ChangePlayer, ChangeStatus, ChangeWagonWheelChoice, DescreaseMatchOvers, MatchBreakSchedule, matchesState, MatchTerminate, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership } from "@/redux/slices/matchSlice";
 import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
 import { updateTournamentStats } from "@/redux/slices/tournamentSlice";
@@ -43,6 +36,8 @@ const calculatePlayerStats = (player, wickets, economy) => {
     let battinghundred = 0;
     let battingfifty = 0;
     let bowlingmaiden = 0;
+    let highestWicket = 0;
+    let highestScore = 0;
 
     // Batting Score Calculation
     const playerscores = wickets?.filter(wicket => wicket.BatterId === player.id);
@@ -55,6 +50,7 @@ const calculatePlayerStats = (player, wickets, economy) => {
         battingball = parseInt(wicket.balls)
         battinghundred = parseInt(wicket.run) >= 100 ? 1 : 0
         battingfifty = parseInt(wicket.run) >= 50 ? 1 : 0
+        highestScore = parseInt(wicket.run)
     });
 
     // Bowling Score Calculation
@@ -63,6 +59,7 @@ const calculatePlayerStats = (player, wickets, economy) => {
         bowlingrun += bowler.bowlerrun
         bowlingwickets += bowler.bowlerwicket
         bowlingball += bowler.legalBall;
+        highestWicket += bowler.bowlerwicket
     });
 
     // Maiden Calculation
@@ -92,7 +89,9 @@ const calculatePlayerStats = (player, wickets, economy) => {
         battingnotout,
         bowlingmaiden,
         battinghundred,
-        battingfifty
+        battingfifty,
+        highestWicket,
+        highestScore
     };
 };
 
@@ -1648,7 +1647,7 @@ const ScoreBoard = () => {
             const currentBall = ball.ballNo
             const currentOver = ball.overNo
             const newShot = { angle, distance, currentShot, shotType, batterId, bowlerId, currentBall, currentOver };
-            const action = CurrentInnings === 2 ? AddSecondInningsShots : AddShots
+            const action = CurrentInnings === 2 ? AddSecondInningsShots : CurrentInnings === 3 ? AddSuperOverShots : CurrentInnings === 4 ? AddSuperOverSecondInningsShots : AddShots
             const newObj = {
                 id: currentMatch?.id,
                 [innings]: {
@@ -1658,9 +1657,7 @@ const ScoreBoard = () => {
             setShots([...shots, newShot]);
             setCurrentShot()
             setWagonWheel(false)
-            if (CurrentInnings === 1 || CurrentInnings === 2) {
-                dispatch(action(newObj))
-            }
+            dispatch(action(newObj))
         }
     }
 
@@ -1672,7 +1669,7 @@ const ScoreBoard = () => {
         }
         const action = CurrentInnings === 4 ? AddSuperOverSecondInningsExtra : CurrentInnings === 3 ? AddSuperOverExtra : CurrentInnings === 2 ? AddSecondInningsExtra : AddExtra;
         if (legalBallCount < 6) {
-            if (currentMatch?.wagonWheel && CurrentInnings < 3) {
+            if (currentMatch?.wagonWheel) {
                 const intdata = parseInt(data)
                 if (!isNaN(intdata) && Number.isInteger(intdata) && active.data !== "WD" && active.data !== "LB" &&
                     active.data !== "BYE" && active.data !== "PR" && active.data !== "NR" && data !== '5,7') {
@@ -2077,7 +2074,7 @@ const ScoreBoard = () => {
         const winner = currentMatch?.matchWinner
         const BattingOrder = currentInnings === 4 ? matchFourthInnings?.BattingOrder?.[0] : currentInnings === 3 ? matchThirdInnings?.BattingOrder?.[0] : currentInnings === 2 ? matchSecondInnings?.BattingOrder?.[0] : currentInnings === 1 ? matchFirstInnings?.BattingOrder?.[0] : ''
         const PartnerShip = currentMatch?.partnership || partnership
-        const CurrentInnningsShots = currentInnings === 1 ? matchFirstInnings?.Shots : matchSecondInnings?.Shots
+        const CurrentInnningsShots = currentInnings === 1 ? matchFirstInnings?.Shots : currentInnings === 3 ? matchThirdInnings?.Shots : currentInnings === 4 ? matchFourthInnings?.Shots : matchSecondInnings?.Shots
 
         if (currentInnings !== undefined) {
             StoreTeamScore()
@@ -2106,7 +2103,7 @@ const ScoreBoard = () => {
                 })
             }
 
-            if (!hasRunRef.current && CurrentInnningsShots && CurrentInnings < 3) {
+            if (!hasRunRef.current && CurrentInnningsShots) {
                 setShots([...CurrentInnningsShots])
             }
 
@@ -2519,7 +2516,7 @@ const ScoreBoard = () => {
                 Extras: [],
                 BattingOrder: [],
                 Partnerships: CurrentInnings === 1 || CurrentInnings === 2 ? [] : undefined,
-                Shots: CurrentInnings === 1 || CurrentInnings === 2 ? [] : undefined
+                Shots: []
             },
             ...currentInning.additionalData
         };
@@ -3488,7 +3485,7 @@ const ScoreBoard = () => {
     const handleWagonWheelSetting = (type) => {
         const newObj = {
             id: currentMatch?.id,
-            wagonWheel: type === "No" ? false : true
+            wagonWheel: type === "Yes" ? !currentMatch?.wagonWheel : currentMatch?.wagonWheel
         }
         dispatch(ChangeWagonWheelChoice(newObj))
         handleClose()
@@ -3674,7 +3671,9 @@ const ScoreBoard = () => {
                     {
                         wagonWheelSetting &&
                         <>
-                            <Typography sx={{ color: 'var(--text-white)', fontWeight: 500, textAlign: 'center', marginBottom: '15px' }}>Want Wagon Wheel</Typography>
+                            <Typography sx={{ color: 'var(--text-white)', fontWeight: 500, textAlign: 'center', marginBottom: '15px' }}>
+                                {`Do you want to ${currentMatch?.wagonWheel === true ? 'close' : 'open'} the wagon wheel?`}
+                            </Typography>
                             <Box sx={{ display: 'flex' }}>
                                 {
                                     ['Yes', 'No'].map((items, i) => {

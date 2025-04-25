@@ -8,9 +8,10 @@ import { AutoMatchScheduleJson } from '@/components/common/json/AutoMatchSchedul
 import { autoMatchSchedule } from '@/redux/slices/matchSlice'
 import { Box } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import './AutoMatchSchedule.css'
+import CustomeTags from '@/components/common/commonUi/CustomeTags'
 
 const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
     const [errors, setErrors] = useState({})
@@ -24,7 +25,8 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
         breakMinutes: '',
         perteamplayers: '',
         match_start_date: new Date().toISOString(),
-        match_end_date: new Date().toISOString()
+        match_end_date: new Date().toISOString(),
+        wagonWheel: false
     })
     const [teamsPair, setTeamsPair] = useState([])
     const [loading, setLoading] = useState(false)
@@ -135,7 +137,8 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
             breakMinutes: '',
             perteamplayers: '',
             match_start_date: '',
-            match_end_date: ''
+            match_end_date: '',
+            wagonWheel: false
         })
         setErrors({})
         setTeamsPair([])
@@ -155,7 +158,7 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
     const validationForm = () => {
         const newErrors = {}
         let isValid = true
-        const formFields = tournament?.match_type === "Test Match" ? AutoMatchScheduleJson.filter((item) => !["overPerBowler", "numberOfOvers"].includes(item?.key_name)) : AutoMatchScheduleJson;
+        const formFields = tournament?.match_type === "Test Match" ? AutoMatchScheduleJson.filter((item) => !["overPerBowler", "numberOfOvers", "wagonWheel"].includes(item?.key_name)) : AutoMatchScheduleJson.filter((item) => !["wagonWheel"].includes(item?.key_name));
 
         formFields.forEach((field) => {
             const value = autoSchedule[field?.key_name]
@@ -273,11 +276,11 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
                 <Box className='auto_match_form'>
                     {
                         AutoMatchScheduleJson.length > 0 && AutoMatchScheduleJson.map((field) => {
-                            let value = autoSchedule[field?.key_name]
+                            let value = field?.key_name === 'wagonWheel' ? autoSchedule[field?.key_name] === true ? 'Yes' : 'No' : autoSchedule[field?.key_name]
                             const error = errors[field.key_name];
                             let startDate = autoSchedule['match_start_date']
                             let isNotShow = tournament?.match_type === "Test Match" && ["overPerBowler", "numberOfOvers"]?.includes(field?.key_name)
-                            if (!isNotShow) {
+                            if (!isNotShow && field?.show_type === "input") {
                                 return (
                                     <CustomeInput
                                         tournament={tournament}
@@ -292,6 +295,19 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
                                         onChange={handleChangeInput}
                                     />
                                 )
+                            } else if (field?.show_type === 'tags') {
+                                return (
+                                    <React.Fragment key={field?.key_name}>
+                                        <CustomeTags
+                                            label={field?.label}
+                                            data={field?.data}
+                                            value={value}
+                                            error={error}
+                                            keyName={field?.key_name}
+                                            onClick={handleChangeInput}
+                                        />
+                                    </React.Fragment>
+                                );
                             }
                         })
                     }

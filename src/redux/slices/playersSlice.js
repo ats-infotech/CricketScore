@@ -59,8 +59,8 @@ const playerSlice = createSlice({
                         bowlingmaiden: (state.data[index].bowlingmaiden || 0) + (stats.bowlingmaiden || 0),
                         bowlingwickets: (state.data[index].bowlingwickets || 0) + (stats.bowlingwickets || 0),
                         bowlingovers: (state.data[index].bowlingovers || 0) + (stats.bowlingover || 0),
-                        highestScore: (state.data[index].highestScore || 0) > (stats.battingrun || 0) ? state.data[index].highestScore || 0 : stats.battingrun || 0,
-                        highestWicket: (state.data[index].highestWicket || 0) > (stats.bowlingwickets || 0) ? state.data[index].highestWicket || 0 : stats.bowlingwickets || 0
+                        highestScore: (state.data[index].highestScore || 0) > (stats.highestScore || 0) ? state.data[index].highestScore || 0 : stats.highestScore || 0,
+                        highestWicket: (state.data[index].highestWicket || 0) > (stats.highestWicket || 0) ? state.data[index].highestWicket || 0 : stats.highestWicket || 0
                     };
                 }
             });

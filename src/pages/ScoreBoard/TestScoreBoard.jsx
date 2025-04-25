@@ -2,7 +2,7 @@
 import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import InputSelect from "@/components/common/commonUi/InputSelect";
-import { AddCommentary, AddDeclareStatus, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsDeclareStatus, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsWicket, AddSuperOverCompletedOver, AddSuperOverDeclareStatus, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverPartnership, AddSuperOverSecondInnings, AddSuperOverSecondInningsCompletedOver, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsPartnership, AddSuperOverSecondInningsWicket, AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchOver, ChangeOverPerDay, ChangePlayer, ChangeStatus, MatchBreakSchedule, matchesState, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverPartnership, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsPartnership, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership } from "@/redux/slices/matchSlice";
+import { AddCommentary, AddDeclareStatus, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsDeclareStatus, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsShots, AddSecondInningsWicket, AddShots, AddSuperOverCompletedOver, AddSuperOverDeclareStatus, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverPartnership, AddSuperOverSecondInnings, AddSuperOverSecondInningsCompletedOver, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsPartnership, AddSuperOverSecondInningsShots, AddSuperOverSecondInningsWicket, AddSuperOverShots, AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchOver, ChangeOverPerDay, ChangePlayer, ChangeStatus, ChangeWagonWheelChoice, MatchBreakSchedule, matchesState, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverPartnership, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsPartnership, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership } from "@/redux/slices/matchSlice";
 import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
 import { updateTournamentStats } from "@/redux/slices/tournamentSlice";
@@ -15,6 +15,8 @@ import TestScorePage from "../Score/TestScore";
 import { TestBreakType } from "@/components/common/json/commonJson";
 import CustomeTags from "@/components/common/commonUi/CustomeTags";
 import { Close } from "@mui/icons-material";
+import { classifyShot } from "@/components/common/commomFunction";
+import WagonWheel from "@/components/common/commonUi/WagonWheel/WagonWheel";
 
 const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
     let battingrun = 0;
@@ -32,6 +34,10 @@ const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
     let battingnotout = 0;
     let battinghundred = 0;
     let bowlingmaiden = 0;
+    let firstInningsWickets = 0;
+    let secondInningsWickets = 0;
+    let highestWicket = 0;
+    let highestScore = 0;
 
     // Batting Score Calculation
     const playerscores = wickets?.filter(wicket => wicket.BatterId === player.id);
@@ -43,6 +49,7 @@ const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
         battingsix += parseInt(wicket.six)
         battingball += parseInt(wicket.balls)
         battinghundred += parseInt(wicket.run) >= 100 ? 1 : 0
+        highestScore = highestScore < wicket.run ? wicket.run : highestScore
     });
 
     // Bowling Score Calculation
@@ -56,16 +63,42 @@ const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
         bowlingball += bowler.legalBall || 0;
     });
 
+    // first Innings bowlers stats calculations
     if (bowlerTotalScore.length > 0) {
         let lastBowler = bowlerTotalScore[bowlerTotalScore.length - 1];
         bowlingrun += lastBowler.bowlerrun || 0;
         bowlingwickets += lastBowler.bowlerwicket || 0;
+        firstInningsWickets += lastBowler.bowlerwicket || 0;
     }
-
+    // second Innings bowlers stats calculations
     if (firstBowlingTotalScore.length > 0) {
         let lastBowler = firstBowlingTotalScore[firstBowlingTotalScore.length - 1];
         bowlingrun += lastBowler.bowlerrun || 0;
         bowlingwickets += lastBowler.bowlerwicket || 0;
+        secondInningsWickets += lastBowler.bowlerwicket || 0;
+    }
+
+    // Which innings highest wicket taken
+    highestWicket = firstInningsWickets > secondInningsWickets ? firstInningsWickets : secondInningsWickets
+
+    // Maiden Calculation for first Innings
+    if (bowlerTotalScore) {
+        bowlerTotalScore.forEach(bowlerScore => {
+            const intKeysValues = Object.keys(bowlerScore).filter(key => !isNaN(key)).map(key => bowlerScore[key]);
+            if (intKeysValues.every(value => (value === "0" || value === "W" || value.includes("LB") || value.includes("BYE")))) {
+                bowlingmaiden += 1;
+            }
+        });
+    }
+
+    // Maiden Calculation for second Innings
+    if (firstBowlingTotalScore) {
+        firstBowlingTotalScore.forEach(bowlerScore => {
+            const intKeysValues = Object.keys(bowlerScore).filter(key => !isNaN(key)).map(key => bowlerScore[key]);
+            if (intKeysValues.every(value => (value === "0" || value === "W" || value.includes("LB") || value.includes("BYE")))) {
+                bowlingmaiden += 1;
+            }
+        });
     }
 
     return {
@@ -84,7 +117,9 @@ const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
         innings,
         battingnotout,
         battinghundred,
-        bowlingmaiden
+        bowlingmaiden,
+        highestWicket,
+        highestScore
     };
 };
 
@@ -552,6 +587,10 @@ const TestScoreBoard = () => {
     })
     const [showMore, setShowMore] = useState(false)
     const [penaltyCall, setPenaltyCall] = useState(false)
+    const [wagonWheel, setWagonWheel] = useState(false)
+    const [shots, setShots] = useState([]);
+    const [currentShot, setCurrentShot] = useState()
+    const [wagonWheelSetting, setWagonWheelSetting] = useState(false)
 
     // Redux Data
     const match_data = useSelector(matchesState)
@@ -594,9 +633,6 @@ const TestScoreBoard = () => {
             NR: totalNRRuns
         })
     }, [currentMatch?.[innings]?.Extras])
-
-    console.log(Extras);
-
 
     useEffect(() => {
         const startDate = new Date(currentMatch?.match_start_time);
@@ -727,6 +763,7 @@ const TestScoreBoard = () => {
         setCustomRun(false)
         setMatchDraw(false)
         setBreakStart(false)
+        setWagonWheelSetting(false)
         setReviseOver({
             revise: false,
             over: ''
@@ -1647,6 +1684,48 @@ const TestScoreBoard = () => {
         }
     }
 
+    // Wagon Wheel Function
+    function handleWagonWheelClick(event) {
+        const svg = event.currentTarget;
+        const rect = svg.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
+
+        const batterX = 200;
+        const batterY = 140;
+
+        const dx = clickX - batterX;
+        const dy = clickY - batterY;
+        let angle = Math.atan2(dy, dx);
+        angle = angle - Math.PI / 2;
+        if (angle < 0) angle += 2 * Math.PI;
+
+        const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 180);
+
+        if (!isNaN(currentShot)) {
+            const shotType = classifyShot(angle);
+            const regex = /^[13579]\d?$/;
+            const isShotOdd = regex.test(currentShot)
+            const batterId = activeStrike === 1 && isShotOdd ? playerselection.nonStriker : activeStrike === 2 && isShotOdd ? playerselection.striker
+                : activeStrike === 2 ? playerselection.nonStriker : playerselection.striker
+            const bowlerId = playerselection.bowler
+            const currentBall = ball.ballNo
+            const currentOver = ball.overNo
+            const newShot = { angle, distance, currentShot, shotType, batterId, bowlerId, currentBall, currentOver };
+            const action = CurrentInnings === 2 ? AddSecondInningsShots : CurrentInnings === 3 ? AddSuperOverShots : CurrentInnings === 4 ? AddSuperOverSecondInningsShots : AddShots
+            const newObj = {
+                id: currentMatch?.id,
+                [innings]: {
+                    Shots: newShot
+                }
+            };
+            setShots([...shots, newShot]);
+            setCurrentShot()
+            setWagonWheel(false)
+            dispatch(action(newObj))
+        }
+    }
+
     const handleScore = async (data) => {
         if (data === '+/-') {
             setOpen(true)
@@ -1655,6 +1734,14 @@ const TestScoreBoard = () => {
         }
         const action = CurrentInnings === 4 ? AddSuperOverSecondInningsExtra : CurrentInnings === 3 ? AddSuperOverExtra : CurrentInnings === 2 ? AddSecondInningsExtra : AddExtra;
         if (legalBallCount < 6) {
+            if (currentMatch?.wagonWheel) {
+                const intdata = parseInt(data)
+                if (!isNaN(intdata) && Number.isInteger(intdata) && active.data !== "WD" && active.data !== "LB" &&
+                    active.data !== "BYE" && active.data !== "PR" && active.data !== "NR" && data !== '5,7') {
+                    setWagonWheel(true);
+                    setCurrentShot(intdata);
+                }
+            }
             let newBallScores = [...ballScores];
             let updatedBowlerScore = { ...bowlerScore };
             if (['WD', 'NB', 'LB', 'RNO', 'PR', 'NR', '5,7', 'BYE'].includes(data)) {
@@ -2059,6 +2146,7 @@ const TestScoreBoard = () => {
         const completedOver = currentInnings === 3 ? matchThirdInnings?.Completedovers : currentInnings === 2 ? matchSecondInnings?.Completedovers : currentInnings === 1 ? matchFirstInnings?.Completedovers : currentInnings === 4 ? matchFourthInnings?.Completedovers : [];
         const OverPerDayData = currentMatch?.perDayOver
         const PartnerShip = currentMatch?.partnership || partnership
+        const CurrentInnningsShots = currentInnings === 1 ? matchFirstInnings?.Shots : currentInnings === 3 ? matchThirdInnings?.Shots : currentInnings === 4 ? matchFourthInnings?.Shots : matchSecondInnings?.Shots
 
         if (currentInnings !== undefined) {
             if (completedOver && !hasRunRef.current) {
@@ -2085,6 +2173,10 @@ const TestScoreBoard = () => {
                     batter2run: PartnerShip?.batter2run ?? 0,
                     batter2balls: PartnerShip?.batter2balls ?? 0,
                 })
+            }
+
+            if (!hasRunRef.current && CurrentInnningsShots) {
+                setShots([...CurrentInnningsShots])
             }
 
             if (currentOver && !hasRunRef.current) {
@@ -2165,26 +2257,23 @@ const TestScoreBoard = () => {
     }, [winningTeam, winSituation])
 
     useEffect(() => {
-        if (CurrentInnings === 4 && !hasRunwinningRef.current && currentMatch?.superOverSecondInnings?.Currentover?.[0]?.runs === initailscore.run && target.totalruns <= initailscore.run
+        if (CurrentInnings === 4 && currentMatch?.superOverSecondInnings?.Currentover?.[0]?.runs === initailscore.run && target.totalruns <= initailscore.run
             && winningTeam && currentMatch?.superOverSecondInnings?.Wickets?.filter(player => player.reason === "Not Out").length < 2) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
-        } else if (CurrentInnings === 3 && !hasRunwinningRef.current && target.totalruns > initailscore.run && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
+            // hasRunwinningRef.current = true;
+        } else if (CurrentInnings === 3 && target.totalruns > initailscore.run && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
             && matchThirdInnings?.Currentover[0]?.bowlerId !== matchThirdInnings?.Completedovers?.[matchThirdInnings?.Completedovers.length - 1]?.bowlerId) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
-        } else if (CurrentInnings === 4 && !hasRunwinningRef.current && target.totalruns > initailscore.run && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
+            // hasRunwinningRef.current = true;
+        } else if (CurrentInnings === 4 && target.totalruns > initailscore.run && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
             && matchFourthInnings?.Currentover[0]?.bowlerId !== matchFourthInnings?.Completedovers?.[matchFourthInnings?.Completedovers.length - 1]?.bowlerId) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
-        } else if (CurrentInnings === 3 && !hasRunwinningRef.current && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
+            // hasRunwinningRef.current = true;
+        } else if (CurrentInnings === 3 && initailscore.wicket === battinglength + filterBatterWithHurt && winningTeam
             && matchThirdInnings?.Currentover[0]?.bowlerId !== matchThirdInnings?.Completedovers?.[matchThirdInnings?.Completedovers.length - 1]?.bowlerId
             && ((matchFirstInnings?.Currentover?.[0]?.runs + matchThirdInnings?.Currentover?.[0]?.runs) < matchSecondInnings?.Currentover?.[0]?.runs)) {
             handleInningsComplete();
-            hasRunwinningRef.current = true;
-        } else if (CurrentInnings === 4 && target.totalruns > initailscore.run && target.overs === 0 && legalBallCount === 6 && winningTeam && !hasRunwinningRef.current) {
-            handleInningsComplete();
-            hasRunwinningRef.current = true;
+            // hasRunwinningRef.current = true;
         }
     }, [winningTeam, currentMatch, initailscore.run, initailscore.wicket, winSituation])
 
@@ -2207,7 +2296,7 @@ const TestScoreBoard = () => {
                 reason = `won the match ${legalBallCount === 6 ? FinalBallShow + 1 : FinalBallShow}.${6 - legalBallCount} Overs left`
             } else if (CurrentInnings === 3 && tossWinner.bowlingSide === winTeam && winningTeam) {
                 reason = `won the match by an innings and ${target.runs} runs`
-            } else if (CurrentInnings === 4 && target.totalruns > initailscore.run && target.overs === 0 && legalBallCount === 6 && winningTeam) {
+            } else if (CurrentInnings === 4 && target.totalruns > initailscore.run && target.overs === 0 && legalBallCount === 6) {
                 reason = `Match Draw`
             }
 
@@ -2479,7 +2568,8 @@ const TestScoreBoard = () => {
                 Completedovers: [],
                 Wickets: [],
                 Extras: [],
-                BattingOrder: []
+                BattingOrder: [],
+                Shots: []
             },
             ...currentInning.additionalData
         };
@@ -3272,7 +3362,6 @@ const TestScoreBoard = () => {
     }
 
     // break flow
-
     const handleBreakOpen = () => {
         setSelectBreakType('')
         setShowMore(false)
@@ -3330,6 +3419,21 @@ const TestScoreBoard = () => {
         setOpen(false)
     }
 
+    // change wagon Wheel setting
+    const handleWagonWheel = () => {
+        setWagonWheelSetting(true)
+        setShowMore(false)
+    }
+
+    const handleWagonWheelSetting = (type) => {
+        const newObj = {
+            id: currentMatch?.id,
+            wagonWheel: type === "Yes" ? !currentMatch?.wagonWheel : currentMatch?.wagonWheel
+        }
+        dispatch(ChangeWagonWheelChoice(newObj))
+        handleClose()
+    }
+
     // Show More Button Logic
     const handleShowMore = () => {
         setOpen(true)
@@ -3364,6 +3468,14 @@ const TestScoreBoard = () => {
             disabled: winningTeam,
             onClick: handleMatchDraw,
             hover: "none"
+        },
+        {
+            height: "50px",
+            title: "Wagon Wheel",
+            onClick: handleWagonWheel,
+            hover: "none",
+            disabled: winningTeam,
+            margin: "0px"
         }
     ];
 
@@ -3372,7 +3484,7 @@ const TestScoreBoard = () => {
 
     const buttonConfigs = [
         {
-            condition: !InningsComplete && !changeBatter && !retiredHurt && !customRun && !declare && !stumps && !followOn && !matchDraw && !breakStart && !matchForcedDraw && !reviseOver.revise && !showMore && !penaltyCall,
+            condition: !InningsComplete && !changeBatter && !retiredHurt && !customRun && !declare && !stumps && !followOn && !matchDraw && !breakStart && !matchForcedDraw && !reviseOver.revise && !showMore && !penaltyCall && !wagonWheelSetting,
             onClick: handleClick(),
             title: 'Update Scoreboard',
             disabled: isDisabled(),
@@ -3518,8 +3630,13 @@ const TestScoreBoard = () => {
                 team1Data={Team1Data}
                 team2Data={Team2Data}
                 showMore={handleShowMore}
+                wagonWheel={wagonWheel}
                 Overs={CurrentInnings === 4 && currentMatch?.targetedOver - (matchFourthInnings?.Completedovers ? matchFourthInnings?.Completedovers?.length : 0) > 20 ? true : false}
             />
+
+            {/* Wagon Wheel */}
+            {wagonWheel && <WagonWheel shots={shots} onClick={handleWagonWheelClick} />}
+
             <Dialog open={open} onClose={() => { }} className="scoreboard_dialog_section">
                 {!followOn && !matchForcedDraw && <Close sx={{ color: 'var(--text-white)', cursor: 'pointer', position: 'absolute', right: '2%', top: '3%' }} onClick={handleClose} />}
                 <Box>
@@ -3535,6 +3652,25 @@ const TestScoreBoard = () => {
                                 })
                             }
                         </Box>
+                    }
+
+                    {/* Wagon Wheel */}
+                    {
+                        wagonWheelSetting &&
+                        <>
+                            <Typography sx={{ color: 'var(--text-white)', fontWeight: 500, textAlign: 'center', marginBottom: '15px' }}>
+                                {`Do you want to ${currentMatch?.wagonWheel === true ? 'close' : 'open'} the wagon wheel?`}
+                            </Typography>
+                            <Box sx={{ display: 'flex' }}>
+                                {
+                                    ['Yes', 'No'].map((items, i) => {
+                                        return (
+                                            <CustomeButton key={i} height={'50%'} title={items} onClick={() => handleWagonWheelSetting(items)} />
+                                        )
+                                    })
+                                }
+                            </Box>
+                        </>
                     }
 
                     {/* Revise Target Over */}
@@ -3749,7 +3885,7 @@ const TestScoreBoard = () => {
                     )}
 
                     {/* Button Section */}
-                    {!showMore && !penaltyCall && <Box className="scoreboard_dialog_button_section">
+                    {!showMore && !penaltyCall && !wagonWheelSetting && <Box className="scoreboard_dialog_button_section">
                         {buttonConfigs.map(({ condition, onClick, title, disabled }, index) => (
                             condition && <RenderButton key={index} onClick={onClick} title={title} disabled={disabled} />
                         ))}

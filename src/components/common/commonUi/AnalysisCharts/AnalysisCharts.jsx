@@ -1,10 +1,11 @@
 import { Box, Typography, Select, MenuItem } from '@mui/material';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, } from 'recharts';
 import './AnalysisCharts.css'
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import WagonWheel from '../WagonWheel/WagonWheel';
 
 // Top Section contains title and Select for Graphs
-const TopSection = ({ value, onChange, title, team1, team2, type, isTestMatch }) => {
+const TopSection = ({ value, onChange, title, team1, team2, type, isTestMatch, team1Players, team2Players, onBowlerChange, onBatterChange, BowlerValue, BatterValue }) => {
     return (
         <>
             <Box className="chart_title">
@@ -15,6 +16,13 @@ const TopSection = ({ value, onChange, title, team1, team2, type, isTestMatch })
             {
                 isTestMatch ? <TestFilterSelect value={value} onChange={onChange} team1={team1} team2={team2} type={type} />
                     : <FilterSelect value={value} onChange={onChange} team1={team1} team2={team2} type={type} />
+            }
+            {
+                type === 'wagonWheel' &&
+                <Box className="analysis_player_select">
+                    <FilterPlayerSelect disable={value === "Both" || value === "Both 1" || value === "Both 2"} players={value === "Team1" || value === "Team1firstinning" || value === "Team1secondinning" ? team1Players : team2Players} onChange={onBatterChange} value={BatterValue} type={"batter"}/>
+                    <FilterPlayerSelect disable={value === "Both" || value === "Both 1" || value === "Both 2"} players={value === "Team1" || value === "Team1firstinning" || value === "Team1secondinning" ? team2Players : team1Players} onChange={onBowlerChange} value={BowlerValue} type={"bowler"}/>
+                </Box>
             }
         </>
     )
@@ -44,6 +52,24 @@ const TestFilterSelect = ({ value, onChange, team1, team2, type }) => {
                 <MenuItem value="Team1secondinning">{team1?.team_name || 'Team 1'} 2nd inning</MenuItem>
                 <MenuItem value="Team2firstinning">{team2?.team_name || 'Team 2'} 1st inning</MenuItem>
                 <MenuItem value="Team2secondinning">{team2?.team_name || 'Team 2'} 2nd inning</MenuItem>
+            </Select>
+        </Box>
+    )
+}
+
+// Players Select
+const FilterPlayerSelect = ({ value, onChange, players, type, disable }) => {
+    return (
+        <Box className={`filter_section ${disable ? 'disable' : ''}`}>
+            <Select displayEmpty value={value || ''}  onChange={onChange} disabled={disable} size="small" variant="outlined" >
+                <MenuItem value=''>{type === "batter" ? 'All Batters' : 'All Bowler'}</MenuItem>
+                {
+                    players.length > 0 && players.map((items,i) => {
+                        return(
+                            <MenuItem key={i} value={items?.id} >{items?.playerName}</MenuItem>
+                        )
+                    })
+                }
             </Select>
         </Box>
     )
@@ -291,7 +317,7 @@ export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data, 
                         cy="50%"
                         innerRadius={60}
                         outerRadius={100}
-                        style={{outline: 'none'}}
+                        style={{ outline: 'none' }}
                         labelLine={false}
                         label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
                             const RADIAN = Math.PI / 180;
@@ -342,5 +368,58 @@ export const AnalysisPartnership = ({ data, playerdata, team1, team2, title, onC
                 ))}
             </Box>
         </>
+    )
+}
+
+// Wagon Wheel
+export const WagonWheelGraph = ({ team1, team2, title, filter, onChange, isTestMatch, data, team1Players, team2Players, onBatterChange, onBowlerChange, BatterValue, BowlerValue }) => {
+    const [percentages, setPercentages] = useState([]);
+    const shotsColors = {
+        0: { label: '0s', color: 'var(--dots)' },
+        1: { label: '1s', color: 'var(--singles)' },
+        2: { label: '2s', color: 'var(--doubles)' },
+        3: { label: '3s', color: 'var(--triples)' },
+        4: { label: '4s', color: 'var(--fours)' },
+        5: { label: '5s', color: 'var(--fives)' },
+        6: { label: '6s', color: 'var(--sixes)' },
+        7: { label: 'Others', color: 'var(--othershots)' },
+    }
+
+    useEffect(() => {
+        const totalShots = data.length;
+        const shotFrequency = data.reduce((acc, shot) => {
+            acc[shot.currentShot] = (acc[shot.currentShot] || 0) + 1;
+            return acc;
+        }, {});
+        const percentageData = Object.keys(shotFrequency).map((shot) => {
+            const count = shotFrequency[shot];
+            const percentage = ((count / totalShots) * 100).toFixed(2);
+            return {
+                shot: shot,
+                percentage: percentage,
+            };
+        });
+        setPercentages(percentageData)
+    }, [data]);
+
+    return (
+        <Box sx={{marginTop: '30px'}}>
+            <TopSection team1={team1} team2={team2} value={filter} onChange={onChange} title={title} onBatterChange={onBatterChange} onBowlerChange={onBowlerChange}
+                isTestMatch={isTestMatch} type={'wagonWheel'} team1Players={team1Players} team2Players={team2Players} BatterValue={BatterValue} BowlerValue={BowlerValue} />
+            <Box className="wagon_wheel_lable_section">
+                {
+                    percentages.length > 0 && percentages.map((items, i) => {
+                        return (
+                            <Box key={i} className="wagon_wheel_label" sx={{ backgroundColor: items?.shot > 6 ? shotsColors[7].color : shotsColors[parseInt(items.shot)].color }}>
+                                <Typography variant='body2'>{items?.shot > 6 ? shotsColors[7].label : shotsColors[parseInt(items.shot)].label}</Typography>
+                                <Typography variant='body2'>{items?.percentage}%</Typography>
+                            </Box>
+                        )
+                    })
+                }
+            </Box>
+            <WagonWheel shots={data} onClick={undefined} type="graph" />
+            <Typography className='errorText' sx={{ textAlign: 'center', marginTop: '10px', fontWeight: '500' }}>*Runs may not tally if scorer has not used WW properly</Typography>
+        </Box>
     )
 }

@@ -101,7 +101,8 @@ const TestScorePage = ({
     // handleBreakOpen,
     team1Data,
     team2Data,
-    showMore
+    showMore,
+    wagonWheel
 }) => {
 
     const router = useRouter()
@@ -156,7 +157,7 @@ const TestScorePage = ({
         );
     }
 
-    const isButtonsDisabled = currentinnings <= 0 || inningsComplete || overChanged || active.secondactive === "STO";
+    const isButtonsDisabled = currentinnings <= 0 || inningsComplete || overChanged || active.secondactive === "STO" || wagonWheel;
 
     const [playerOnField, setPlayerOnField] = useState({
         striker: "",
@@ -228,7 +229,7 @@ const TestScorePage = ({
             title={title}
             width={'100%'}
             onClick={click}
-            disabled={disable ? false : true}
+            disabled={wagonWheel ? true : disable ? false : true}
         />
     };
 
@@ -330,14 +331,14 @@ const TestScorePage = ({
                                 <Box className='test_score_render_button'>
                                     <RenderButton />
                                     <CustomeButton
-                                        disabled={balls.ballNo === 0 || active.active ? true : false}
+                                        disabled={balls.ballNo === 0 || active.active || wagonWheel ? true : false}
                                         title={"Undo"}
                                         width={'100%'}
                                         onClick={back}
                                         hover={'none'} />
                                 </Box>
                                 <Box className="show_more_button">
-                                    <CustomeButton height={'50px'} disabled={active.active} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
+                                    <CustomeButton height={'50px'} disabled={active.active || wagonWheel} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
                                 </Box>
                             </Box>
                         }

@@ -5,11 +5,13 @@ import { useEffect, useState } from 'react';
 import { teamsState } from '@/redux/slices/teamSlice';
 import { useSelector } from 'react-redux';
 import { playersState } from '@/redux/slices/playersSlice';
-import { AnalysisBarChart, AnalysisLineChart, AnalysisPartnership, AnalysisPieChart } from '@/components/common/commonUi/AnalysisCharts/AnalysisCharts';
+import { AnalysisBarChart, AnalysisLineChart, AnalysisPartnership, AnalysisPieChart, WagonWheelGraph } from '@/components/common/commonUi/AnalysisCharts/AnalysisCharts';
 
 const ScoreAnalysis = ({ matchData, tournamentData }) => {
     const [team1, setTeam1] = useState({});
     const [team2, setTeam2] = useState({});
+    const [team1Players, setTeam1Players] = useState([]);
+    const [team2Players, setTeam2Players] = useState([]);
     let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false
     let isFollowOn = matchData?.followOn === "Follow On" ? true : false
     const [filter, setFilter] = useState({
@@ -18,10 +20,13 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
         worm: isTestMatch ? 'Both 1' : 'Both',
         wickets: isTestMatch ? 'Both 1' : 'Both',
         typesofruns: isTestMatch ? 'Both 1' : 'Both',
-        partnerships: isTestMatch ? 'Team1firstinning' : 'Team1'
+        partnerships: isTestMatch ? 'Team1firstinning' : 'Team1',
+        wagonwheel: isTestMatch ? 'Both 1' : 'Both',
+        batter: '',
+        bowler: ''
     });
     const team_data = useSelector(teamsState);
-    const player_data = useSelector(playersState)
+    const player_data = useSelector(playersState);
 
     // Innings Data
     const inningsOneOversData = matchData?.firstInnings?.Completedovers || [];
@@ -36,6 +41,10 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
     const inningsTwoBattingOrder = matchData?.secondInnings?.BattingOrder?.[0] || [];
     const inningsThreeBattingOrder = matchData?.superOverFirstInnings?.BattingOrder?.[0] || [];
     const inningsFourBattingOrder = matchData?.superOverSecondInnings?.BattingOrder?.[0] || [];
+    const inningsOneWagonWheel = matchData?.firstInnings?.Shots || [];
+    const inningsTwoWagonWheel = matchData?.secondInnings?.Shots || [];
+    const inningsThreeWagonWheel = matchData?.superOverFirstInnings?.Shots || [];
+    const inningsFourWagonWheel = matchData?.superOverSecondInnings?.Shots || [];
     // const inningsOnePartnership = matchData?.firstInnings?.Partnerships || []
     // const inningsTwoPartnership = matchData?.secondInnings?.Partnerships || []
     // const inningsThreePartnership = matchData?.superOverFirstInnings?.Partnerships || []
@@ -49,9 +58,13 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
     useEffect(() => {
         const team1Data = team_data?.data?.find((item) => item?.id === matchData?.team1?.id);
         const team2Data = team_data?.data?.find((item) => item?.id === matchData?.team2?.id);
+        const team1Player = player_data?.data?.filter((item) => item?.teamId === team1Data?.id)
+        const team2Player = player_data?.data?.filter((item) => item?.teamId === team2Data?.id)
         setTeam1(team1Data || {});
         setTeam2(team2Data || {});
-    }, [team_data, matchData]);
+        setTeam1Players(team1Player || [])
+        setTeam2Players(team2Player || [])
+    }, [team_data, matchData, player_data]);
 
     const handleChange = (field) => event => {
         setFilter(prev => ({ ...prev, [field]: event.target.value }));
@@ -412,7 +425,7 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
     const inningsThreeShotsCount = countShots(inningsThreeOversData)
     const inningsFourShotsCount = countShots(inningsFourOversData)
 
-    const prepareChartData = (inningsOneShotsCount, inningsTwoShotsCount) => {
+    const prepareChartData = (inningsOneShotsCount, inningsTwoShotsCount, innings) => {
         const uniqueKeys = Array.from(
             new Set([
                 ...Object.keys(inningsOneShotsCount),
@@ -425,12 +438,12 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
 
         return sortedKeys.map((key) => ({
             shotType: `${key}`,
-            inningsOne: isFollowOn ? inningsTwoShotsCount[key] || 0 : inningsOneShotsCount[key] || 0,
-            inningsTwo: isFollowOn ? inningsOneShotsCount[key] || 0 : inningsTwoShotsCount[key] || 0,
+            inningsOne: isFollowOn && innings === "two" ? inningsTwoShotsCount[key] || 0 : inningsOneShotsCount[key] || 0,
+            inningsTwo: isFollowOn && innings === "two" ? inningsOneShotsCount[key] || 0 : inningsTwoShotsCount[key] || 0,
         })).reverse();
     };
     const shots = prepareChartData(inningsOneShotsCount, inningsTwoShotsCount)
-    const inningsTwoShots = prepareChartData(inningsThreeShotsCount, inningsFourShotsCount)
+    const inningsTwoShots = prepareChartData(inningsThreeShotsCount, inningsFourShotsCount, 'two')
 
     // Partnerships
     const WicketPairs = ({ wickets, BattingOrder }) => {
@@ -454,16 +467,16 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
         return pairs;
     };
 
-     const CalculatePartnerships = ({ over, wickets, pairs }) => {
+    const CalculatePartnerships = ({ over, wickets, pairs }) => {
         let partnerships = [];
         let previousPartnership = 0;
         let previousPairId = null;
-    
+
         for (let i = 0; i < wickets.length; i++) {
             let wicket = wickets[i];
             let pair = pairs.find(p => p.includes(wicket.BatterId));
             let partnershipRun = wicket.partnership - previousPartnership;
-    
+
             if (pair) {
                 let batter1Run = wicket.batter1Contribution ? wicket.batter1Contribution : partnershipRun - wicket.batter2Contribution;
                 let batter2Run = wicket.batter2Contribution ? wicket.batter2Contribution : partnershipRun - wicket.batter1Contribution;
@@ -471,11 +484,11 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
                 let batter2Ball = wicket.batter2balls;
                 let batter1Id = wicket.batter1Id;
                 let batter2Id = wicket.batter2Id;
-    
+
                 if (batter1Id === "" || batter2Id === "") {
                     continue;
                 }
-    
+
                 let pairId = [batter1Id, batter2Id].sort().join("-");
                 if (previousPairId === pairId) {
                     continue;
@@ -510,7 +523,33 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
             || (filter.partnerships === "Team2secondinning" && isFollowOn) ? inningsThreePartnerships
             : inningsFourPartnerships
     const showPieData = filter.wickets === 'Both' && pieData.length === 0 ? false : true
-    
+
+    // Wagon Wheel
+    const WagonWheelData = filter.wagonwheel === 'Both' || filter.wagonwheel === 'Both 1' ? [...inningsOneWagonWheel, ...inningsTwoWagonWheel]
+    : filter.wagonwheel === 'Both 2' ? [...inningsThreeWagonWheel, ...inningsFourWagonWheel]
+    : filter.wagonwheel === 'Team1' || filter.wagonwheel === "Team1firstinning" ? [...inningsOneWagonWheel]
+    : filter.wagonwheel === 'Team2' || filter.wagonwheel === "Team2firstinning" ? [...inningsTwoWagonWheel]
+    : filter.wagonwheel === 'Team1secondinning' && !isFollowOn ? [...inningsThreeWagonWheel]
+    : filter.wagonwheel === 'Team1secondinning' && isFollowOn ? [...inningsFourWagonWheel]
+    : filter.wagonwheel === 'Team2secondinning' && !isFollowOn ? [...inningsFourWagonWheel]
+    : filter.wagonwheel === 'Team2secondinning' && isFollowOn ? [...inningsThreeWagonWheel]
+    : [];
+
+    const showWagonWheel = isTestMatch && inningsOneWagonWheel.length === 0 && inningsTwoWagonWheel.length === 0 && inningsThreeWagonWheel.length === 0
+        && inningsFourWagonWheel.length === 0 ? false : filter.wagonwheel === 'Both' && WagonWheelData.length === 0 ? false : true
+
+    // Wagon Wheel Data Update Based on Batter and Bowler
+    const FilterWagonWheelBasedOnPlayers = filter.batter === '' && filter.bowler === '' ? WagonWheelData : filter.batter !== '' && filter.bowler === '' ? WagonWheelData?.filter((items) => items.batterId === filter.batter)
+        : filter.batter === '' && filter.bowler !== '' ? WagonWheelData?.filter((items) => items.bowlerId === filter.bowler) : WagonWheelData?.filter((items) => items.batterId === filter.batter && items?.bowlerId === filter.bowler)
+
+    useEffect(() => {
+        setFilter((prev) => ({
+            ...prev,
+            batter: '',
+            bowler: ''
+        }))
+    }, [filter.wagonwheel])
+
     return (
         <Box className="main_analysis_section">
             {/* Manhattan Bar Chart */}
@@ -543,6 +582,11 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
             {/* Partnerships */}
             <AnalysisPartnership team1={TeamOne} team2={TeamTwo} onChange={handleChange('partnerships')} title={"Partnerships"} topsectionvalue={filter.partnerships}
                 playerdata={player_data} data={PartnershipData} isTestMatch={isTestMatch} />
+
+            {/* Wagon Wheel */}
+            {showWagonWheel && <WagonWheelGraph team1={TeamOne} team2={TeamTwo} filter={filter.wagonwheel} onChange={handleChange('wagonwheel')} title={"Wagon Wheel"} isTestMatch={isTestMatch}
+                data={FilterWagonWheelBasedOnPlayers} team1Players={team1Players} team2Players={team2Players} BatterValue={filter.batter} BowlerValue={filter.bowler} onBatterChange={handleChange('batter')}
+                onBowlerChange={handleChange('bowler')} />}
 
         </Box>
     );

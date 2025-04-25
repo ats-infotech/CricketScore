@@ -233,7 +233,7 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
     const validateForm = () => {
         const newErrors = {};
         let isValid = true;
-        const formFields = tournament?.match_type === "Test Match" ? ScheduleMatchJson.filter((item) => !["overPerBowler", "numberOfOvers"].includes(item?.key_name)) : ScheduleMatchJson.filter((item) => !["wagonWheel"].includes(item?.key_name));
+        const formFields = tournament?.match_type === "Test Match" ? ScheduleMatchJson.filter((item) => !["overPerBowler", "numberOfOvers", "wagonWheel"].includes(item?.key_name)) : ScheduleMatchJson.filter((item) => !["wagonWheel"].includes(item?.key_name));
         formFields.forEach(field => {
             const value = scheduleMatch[field.key_name];
             if (!value || (typeof value === 'string' && value.trim() === '') && field.key_name !== "wagonWheel") {

@@ -36,6 +36,16 @@
   --pink: #ffb4e6;
   --green: #28a745;
 
+  /* Wagon Wheel */
+  --dots: #95a5a6;
+  --singles: #f1c40f;
+  --doubles: #2980b9;
+  --triples:  #e74c3c;
+  --fours: #2ecc71;
+  --fives: #8e44ad;
+  --sixes: #f39c12;
+  --othershots: #34495e;
+
   /* News Feed Colors */
   --festival-title: linear-gradient(90deg, #276EB6 0%, #443995 100%);
   --festival-button: linear-gradient(90deg, #2A6DB5 0%, #443995 100%);

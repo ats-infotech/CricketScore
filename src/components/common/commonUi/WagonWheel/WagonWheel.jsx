@@ -1,16 +1,25 @@
-import { Box, useMediaQuery } from "@mui/material"
-import './WagonWheel.css'
+import { Box, useMediaQuery } from "@mui/material";
+import './WagonWheel.css';
 
-const WagonWheel = ({ shots, onClick }) => {
-
+const WagonWheel = ({ shots, onClick, type }) => {
     const sm = useMediaQuery('(max-width: 350px)')
     const md = useMediaQuery('(max-width: 380px)')
     const lg = useMediaQuery('(max-width: 430px)')
     const size = sm ? '300' : md ? '330' : lg ? '360' : '400'
+    const shotsColors = {
+        0: 'var(--dots)',
+        1: 'var(--singles)',
+        2: 'var(--doubles)',
+        3: 'var(--triples)',
+        4: 'var(--fours)',
+        5: 'var(--fives)',
+        6: 'var(--sixes)',
+        7: 'var(--othershots)',
+    };
 
     return (
         <Box>
-            <Box className="wagon_wheel">
+            <Box className={type === "graph" ? 'graph_wagon_wheel' : 'wagon_wheel'}>
                 <svg
                     width={size}
                     height={size}
@@ -20,7 +29,7 @@ const WagonWheel = ({ shots, onClick }) => {
                         backgroundColor: "#388e3c",
                         borderRadius: "50%",
                         border: "2px solid #888",
-                        cursor: "crosshair",
+                        cursor: type === "graph" ? 'auto' : "crosshair",
                     }}
                 >
                     {/* Outer Ground */}
@@ -75,22 +84,18 @@ const WagonWheel = ({ shots, onClick }) => {
                         // Midpoint and control point for 6s
                         const midX = (startX + endX) / 2;
                         const midY = (startY + endY) / 2;
-                        const normalX = -(endY - startY);
-                        const normalY = endX - startX;
-                        const length = Math.sqrt(normalX ** 2 + normalY ** 2);
-                        const normalUnitX = normalX / length;
-                        const normalUnitY = normalY / length;
 
-                        const bulge = 30;
-                        const controlX = midX + normalUnitX * bulge;
-                        const controlY = midY + normalUnitY * bulge;
+                        // Create slight upward shift for the curve (keeping the same angle)
+                        const curveShift = 100; // Adjust this value for how high you want the curve to be
+                        const controlX = midX;
+                        const controlY = midY - curveShift; // Shift upwards
 
                         return (
                             <g key={index}>
                                 {shot.currentShot === 6 ? (
                                     <path
                                         d={`M ${startX} ${startY} Q ${controlX} ${controlY}, ${endX} ${endY}`}
-                                        stroke="red"
+                                        stroke={shotsColors[shot.currentShot]}
                                         strokeWidth={2}
                                         fill="none"
                                     />
@@ -100,9 +105,8 @@ const WagonWheel = ({ shots, onClick }) => {
                                         y1={startY}
                                         x2={endX}
                                         y2={endY}
-                                        stroke={shot.currentShot === 4 ? "orange" : "yellow"}
-                                        strokeWidth={2}
-                                        // strokeWidth={shot.currentShot === 4 || shot.currentShot === 6 ?  shot.currentShot : 3}
+                                        stroke={shot.currentShot > 6 ? shotsColors[7] : shotsColors[shot.currentShot]}
+                                        strokeWidth={1.5}
                                         strokeLinecap="round"
                                     />
                                 )}
@@ -119,7 +123,7 @@ const WagonWheel = ({ shots, onClick }) => {
                 </svg>
             </Box>
         </Box>
-    )
-}
+    );
+};
 
-export default WagonWheel
+export default WagonWheel;

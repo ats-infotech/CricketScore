@@ -537,6 +537,21 @@ const matchSlice = createSlice({
                 } : item
             );
         },
+        AddSuperOverShots: (state, action) => {
+            const { id, superOverFirstInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    superOverFirstInnings: {
+                        ...item.superOverFirstInnings,
+                        Shots: [
+                            ...(item.superOverFirstInnings.Shots || []),
+                            superOverFirstInnings.Shots,
+                        ]
+                    }
+                } : item
+            );
+        },
         AddSuperOverPartnership: (state, action) => {
             const { id, superOverFirstInnings } = action.payload;
             state.data = state.data.map((item) =>
@@ -701,6 +716,21 @@ const matchSlice = createSlice({
                 } : item
             );
         },
+        AddSuperOverSecondInningsShots: (state, action) => {
+            const { id, superOverSecondInnings } = action.payload;
+            state.data = state.data.map((item) =>
+                item.id === id ? {
+                    ...item,
+                    superOverSecondInnings: {
+                        ...item.superOverSecondInnings,
+                        Shots: [
+                            ...(item.superOverSecondInnings.Shots || []),
+                            superOverSecondInnings.Shots,
+                        ]
+                    }
+                } : item
+            );
+        },
         AddSuperOverSecondInningsExtra: (state, action) => {
             const { id, superOverSecondInnings } = action.payload;
             state.data = state.data.map((item) =>
@@ -765,6 +795,6 @@ export const { createMatchSchedule, editMatchSchedule, deleteMatchSchedule, dele
     ReplaceBattingOrder, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, AddSuperOverCompletedOver, AddSuperOverSecondInningsCompletedOver,
     RemoveSuperOverCompletedOver, RemoveSuperOverSecondInningsCompletedOver, MatchBreakSchedule, ChangeOverPerDay, AddDeclareStatus, AddSecondInningsDeclareStatus, AddSuperOverDeclareStatus,
     AddPartnership, AddSecondInningsPartnership, RemovePartnership, RemoveSecondInningsPartnership, AddSuperOverPartnership, RemoveSuperOverPartnership, AddSuperOverSecondInningsPartnership, 
-    RemoveSuperOverSecondInningsPartnership, ChangeWagonWheelChoice, AddShots, AddSecondInningsShots } = matchSlice.actions
+    RemoveSuperOverSecondInningsPartnership, ChangeWagonWheelChoice, AddShots, AddSecondInningsShots, AddSuperOverShots, AddSuperOverSecondInningsShots } = matchSlice.actions
 export const matchesState = (state) => state.matches
 export default matchSlice.reducer
