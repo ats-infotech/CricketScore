@@ -376,18 +376,18 @@ const Toss = () => {
                         {gif.firework && !gif.result && !gif.toss &&
                             <Box sx={{ position: 'absolute', display: 'flex', top: 0 }}>
                                 <Box>
-                                    <Box sx={{ height: '150px' }}>
+                                    <Box sx={{ height: '150px', width: '250px' }}>
                                         <Image unoptimized src={leftfireworkgif} alt="gif" height={500} width={500} />
                                     </Box>
-                                    <Box sx={{ height: '150px' }}>
+                                    <Box sx={{ height: '150px', width: '250px' }}>
                                         <Image unoptimized src={leftfireworkgif} alt="gif" height={500} width={500} />
                                     </Box>
                                 </Box>
                                 <Box>
-                                    <Box sx={{ height: '150px' }}>
+                                    <Box sx={{ height: '150px', width: '250px' }}>
                                         <Image unoptimized src={fireworkgif} alt="gif" height={500} width={500} />
                                     </Box>
-                                    <Box sx={{ height: '150px' }}>
+                                    <Box sx={{ height: '150px', width: '250px' }}>
                                         <Image unoptimized src={fireworkgif} alt="gif" height={500} width={500} />
                                     </Box>
                                 </Box>

@@ -39,7 +39,7 @@ const WagonWheel = ({ shots, onClick, type }) => {
                     <ellipse cx="200" cy="200" rx="110" ry="110" fill="none" stroke="white" strokeWidth="2" />
 
                     {/* Pitch */}
-                    <rect x="180" y="130" width="40" height="140" fill="#c7a17a" stroke="#8d6e63" strokeWidth="2" rx="5" />
+                    <rect x="180" y="125" width="40" height="145" fill="#c7a17a" stroke="#8d6e63" strokeWidth="2" rx="5" />
 
                     {/* Shots */}
                     {shots.map((shot, index) => {
@@ -113,6 +113,21 @@ const WagonWheel = ({ shots, onClick, type }) => {
                             </g>
                         );
                     })}
+
+                    {/* Guide lines */}
+                    {/* <line x1="170" x2="230" y1={"145"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="180" x2="220" y1={"125"} y2={"125"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="220" x2="220" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="210" x2="210" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="180" x2="180" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="190" x2="190" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+
+                    <line x1="170" x2="230" y1={"250"} y2={"250"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="180" x2="220" y1={"270"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="220" x2="220" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="210" x2="210" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="180" x2="180" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
+                    <line x1="190" x2="190" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" /> */}
 
                     {/* Batter Position */}
                     <circle cx="200" cy="140" r="5" fill="blue" />

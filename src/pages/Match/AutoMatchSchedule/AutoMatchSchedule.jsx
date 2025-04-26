@@ -145,6 +145,14 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
     }
 
     const handleChangeInput = (val, key) => {
+        if (key === 'wagonWheel') {
+            setAutoSchedule(prev => ({
+                ...prev,
+                [key]: val === 'Yes'
+            }));
+            return
+        }
+
         if (key === 'match_start_date') {
             let isTrue = val > autoSchedule.match_end_date
             if (isTrue) {

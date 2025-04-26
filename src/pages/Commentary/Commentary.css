@@ -8,6 +8,29 @@
   height: calc(100vh - 320px);
 }
 
+/* For Safari, Chrome, Edge */
+.commentary_main_section::-webkit-scrollbar, .commentryMaxHeight::-webkit-scrollbar{
+  width: 0px !important;
+  height: 8px;
+}
+
+.commentary_main_section::-webkit-scrollbar-track, .commentryMaxHeight::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.commentary_main_section::-webkit-scrollbar-thumb, .commentryMaxHeight::-webkit-scrollbar-thumb {
+  background-color: transparent !important;
+  border-radius: 10px !important;
+  border: 2px solid transparent !important;
+}
+
+/* Optional: Hover effect */
+.commentary_main_section::-webkit-scrollbar-thumb:hover, .commentryMaxHeight::-webkit-scrollbar-thumb:hover{
+  background-color: transparent !important;
+}
+
+
+
 .commentary_main_section.islive {
   padding: 30px 0px 0;
   height: auto;

@@ -17,6 +17,27 @@
     text-align: center !important;
 }
 
+/* For Safari, Chrome, Edge */
+.player11_max_height_section::-webkit-scrollbar, .player11_playerselection_section::-webkit-scrollbar, .player11_players_section::-webkit-scrollbar {
+    width: 0px !important;
+    height: 8px;
+}
+
+.player11_max_height_section::-webkit-scrollbar-track, .player11_playerselection_section::-webkit-scrollbar-track, .player11_players_section::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.player11_max_height_section::-webkit-scrollbar-thumb, .player11_playerselection_section::-webkit-scrollbar-thumb, .player11_players_section::-webkit-scrollbar-thumb {
+    background-color: transparent !important;
+    border-radius: 10px !important;
+    border: 2px solid transparent !important;
+}
+
+/* Optional: Hover effect */
+.player11_max_height_section::-webkit-scrollbar-thumb:hover, .player11_playerselection_section::-webkit-scrollbar-thumb:hover, .player11_players_section::-webkit-scrollbar-thumb:hover {
+    background-color: transparent !important;
+}
+
 .player11_max_height_section {
     height: calc(100vh - 330px);
     overflow-y: auto;

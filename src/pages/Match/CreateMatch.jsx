@@ -340,6 +340,14 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
     // };
 
     const handleOnChange = (value, key) => {
+        if (key === 'wagonWheel') {
+            setScheduleMatch(prev => ({
+                ...prev,
+                [key]: value === 'Yes'
+            }));
+            return
+        }
+
         setScheduleMatch(prev => ({
             ...prev,
             [key]: value

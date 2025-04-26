@@ -23,17 +23,24 @@
 
 /* WebKit (Chrome, Edge, Safari) */
 .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar {
-    width: thin;
-}
-
-.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb {
+    width: 0px;
+    height: 5px;
+  }
+  
+  .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-track {
     background: transparent;
+  }
+  
+  .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb {
+    background-color: var(--text-lightgrey);
     border-radius: 10px;
-}
-
-.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-track {
-    background: transparent;
-}
+    border: 2px solid transparent;
+  }
+  
+  /* Optional: Hover effect */
+  .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-lightgrey);
+  }
 
 .tabs_main .childTab {
     color: var(--text-white);

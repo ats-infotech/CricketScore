@@ -98,6 +98,7 @@
     left: 0;
     right: 0;
     background: #0000008C;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     z-index: 100;
 }
