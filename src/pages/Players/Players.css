@@ -25,6 +25,7 @@
     justify-content: center;
     padding: 20px 0;
 }
+
 .smallText {
     font-family: var(--primary-font);
     font-size: var(--small);
@@ -35,7 +36,7 @@
 
 .ex-smallText {
     font-family: var(--primary-font);
-    font-size: var(--ex-small)!important;
+    font-size: var(--ex-small) !important;
     font-weight: 500;
     color: var(--text-lightgrey);
     text-align: center;
@@ -47,6 +48,7 @@
     justify-content: center;
     margin-top: 20px;
 }
+
 /* ------ manual_add_player_main  ---- */
 
 .manual_add_player_main {
@@ -66,6 +68,7 @@
     gap: 15px;
     margin-top: 20px;
 }
+
 .manual_add_player_main .form_box .upload_player_image {
     width: 90px;
     height: 90px;
@@ -77,8 +80,8 @@
     margin: 0 auto;
     background-position: center;
     background-size: cover;
-    position: relative;  
-    cursor: pointer; 
+    position: relative;
+    cursor: pointer;
 }
 
 .manual_add_player_main .form_box .upload_player_image .iconBig {
@@ -86,22 +89,23 @@
     height: 30px;
     color: var(--text-grey);
 }
+
 .manual_add_player_main .form_box .upload_player_image .errorText {
     font-family: var(--primary-font);
     font-size: var(--ex-small);
     margin: 0 auto;
     text-align: center;
-}   
-
-.manual_add_player_main  .deleteUpdateBtn {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   gap: 10px;
-   margin-bottom: 20px;
 }
 
-.manual_add_player_main  .deleteUpdateBtn.actionBottomfixed {
+.manual_add_player_main .deleteUpdateBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.manual_add_player_main .deleteUpdateBtn.actionBottomfixed {
     position: fixed;
     left: 0;
     right: 0;
@@ -131,7 +135,7 @@
 }
 
 .top-arrows svg.back {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 .top-arrows svg,
@@ -150,7 +154,7 @@
 
 
 /* count of add player */
-.countOfPlayer{
+.countOfPlayer {
     position: fixed;
     left: 0;
     top: 50px;
@@ -180,22 +184,27 @@
     .players_page_main .player_box_main {
         padding: 15px 0;
     }
+
     .strike_player_selection_box {
-        height: calc(100vh - 160px)!important;
+        height: calc(100vh - 160px) !important;
     }
 }
+
 @media screen and (max-width:414px) {
     .players_page_main .player_box_main {
         padding: 10px 0;
     }
+
     .strike_player_selection_box {
-        height: calc(100vh - 160px)!important;
+        height: calc(100vh - 160px) !important;
     }
 }
+
 @media screen and (max-width:375px) {
     .strike_player_selection_box {
-        height: calc(100vh - 150px)!important;
+        height: calc(100vh - 150px) !important;
     }
+
     .players_page_main .player_box_main {
         padding: 0;
     }

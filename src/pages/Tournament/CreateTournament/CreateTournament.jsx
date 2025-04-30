@@ -245,15 +245,6 @@ const CreateTournament = ({ tournamentData }) => {
                     ['tournament_end_date']: ''
                 }));
             }
-
-            // const now = new Date();
-            // const formattedDate = now.toISOString().split('T')[0];
-            // if (value >= formattedDate) {
-            //     setCreateTornaments(prev => ({
-            //         ...prev,
-            //         [key]: value
-            //     }));
-            // }
         }
 
         if (key === 'tournament_name' && !value) {
@@ -340,15 +331,6 @@ const CreateTournament = ({ tournamentData }) => {
             }
 
         });
-        // if (!createTornaments['tournament_banner']) {
-        //     newErrors['tournament_banner'] = 'Tournament Banner is required';
-        //     isValid = false;
-        // }
-
-        // if (!createTornaments['tournament_image']) {
-        //     newErrors['tournament_image'] = 'Tournament Profile Image is required';
-        //     isValid = false;
-        // }
         setErrors(newErrors);
         return isValid;
     }

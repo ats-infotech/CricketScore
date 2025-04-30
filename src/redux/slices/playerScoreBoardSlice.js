@@ -15,6 +15,5 @@ const playerScoreBoardSlice = createSlice({
     }
 })
 
-// export const { } = playerSlice.actions
 export const playerScoreState = (state) => state.playerscoreboard
 export default playerScoreBoardSlice.reducer

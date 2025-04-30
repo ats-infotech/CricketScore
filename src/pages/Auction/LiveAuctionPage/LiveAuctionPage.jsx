@@ -525,7 +525,6 @@ const LiveAuctionPage = ({ type }) => {
                                     width={100}
                                     height={100}
                                     priority
-                                    // quality={85}
                                     unoptimized
                                 />
                             ) : (
@@ -588,7 +587,6 @@ const LiveAuctionPage = ({ type }) => {
                                             width={100}
                                             height={100}
                                             priority={i < 4}
-                                            // quality={85}
                                             unoptimized
                                         />
                                     ) : (
@@ -680,7 +678,6 @@ const LiveAuctionPage = ({ type }) => {
                                                                 alt="player"
                                                                 width={50}
                                                                 height={50}
-                                                                // quality={85}
                                                                 unoptimized
                                                             />
                                                         ) : (

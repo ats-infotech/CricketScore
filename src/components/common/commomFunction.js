@@ -163,9 +163,6 @@ export const leaderBoardShorting = (players, type) => {
                 return ecoA - ecoB;
             }
             return 0;
-
-            // const ecoDiff = (a.bowlingruns / a.bowlingovers) - (b.bowlingruns / b.bowlingovers);
-            // return ecoDiff;
         }
     });
 };
@@ -258,13 +255,6 @@ export const calculateMVPPoints = (player, wickets, economy, team1, team2, winne
         bowlerwickets += lastBowler.bowlerwicket || 0;
     }
 
-    // over = bowlerTotalScore.reduce((totalOvers, data) => {
-    //     console.log(data);
-
-    //     return !data.legalBall ? 0 : totalOvers > 0 ? totalOvers + (data.legalBall === 6 ? 1 : data.legalBall / 10) : (bowlingball === 6 ? 1 : bowlingball / 10);
-    // }, 0).toFixed(1);
-
-    // over = (Math.floor(bowlingball / 6 * 10) / 10).toFixed(1)
     over = Math.floor(bowlingball / 6) + "." + (bowlingball % 6);
     bowlingPoints += bowlerwickets * 10;
     if (bowlerwickets >= 3 && bowlerwickets < 5) bowlingPoints += 5;

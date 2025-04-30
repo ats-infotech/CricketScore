@@ -1,3 +1,4 @@
+'use client'
 import SvgIcon from '@/assets/icons/SvgIcon'
 import { CheckTournamentIsRunning } from '@/components/common/commomFunction'
 import CustomeButton from '@/components/common/commonUi/CustomeButton'
@@ -66,9 +67,6 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
                                         <SvgIcon id={'location'} />
                                         <span>{item?.location}</span>
                                     </Typography>
-                                    {/* {
-                                        title === 'View Players' &&
-                                    } */}
                                     <Box className='team_background_effect' ></Box>
                                 </Box>
                             </Box>

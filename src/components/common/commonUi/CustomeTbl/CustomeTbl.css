@@ -9,24 +9,24 @@
 }
 
 /* For Safari, Chrome, Edge */
-.matchFrom::-webkit-scrollbar {
-    width: 4px !important;
-    /* height: 8px; */
+.tableContainer::-webkit-scrollbar {
+    width: 0px !important;
+    height: 8px;
 }
 
-.matchFrom::-webkit-scrollbar-track {
-    background: var(--text-white) !important;
+.tableContainer::-webkit-scrollbar-track {
+    background: var(--primary-color) !important;
 }
 
-.matchFrom::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color) !important;
+.tableContainer::-webkit-scrollbar-thumb {
+    background-color: var(--text-white) !important;
     border-radius: 10px !important;
     border: 2px solid transparent !important;
 }
 
 /* Optional: Hover effect */
-.matchFrom::-webkit-scrollbar-thumb:hover {
-    background-color: var(--primary-color) !important;
+.tableContainer::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-white) !important;
 }
 
 .table_main {

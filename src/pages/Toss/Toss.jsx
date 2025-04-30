@@ -6,6 +6,7 @@ import { SwipeUpDrawer } from "@/components/common/commonUi/CustomeCommon"
 import { ImageBox, TeamSelection } from "@/components/common/commonUi/CustomeSelectionSquareBox"
 import Loader from "@/components/common/commonUi/Loader"
 import { matchesState, ReplaceMatchSchedule } from "@/redux/slices/matchSlice"
+import { teamsState } from "@/redux/slices/teamSlice"
 import { Box, Typography, useMediaQuery } from "@mui/material"
 import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
@@ -22,7 +23,6 @@ import fireworkgif from '../../assets/img/toss/rightfirework.gif'
 import tailgif from '../../assets/img/toss/Tail.gif'
 import tailcoin from '../../assets/img/toss/Tail.png'
 import './Toss.css'
-import { teamsState } from "@/redux/slices/teamSlice"
 
 const Toss = () => {
     const params = useParams()
@@ -69,7 +69,6 @@ const Toss = () => {
 
     useEffect(() => {
         if (!match_data?.data) return;
-        // setLoading(true);
         const matchById = match_data.data.find(item => item.id === params.matchId);
         let team1 = team_data?.data?.find((items) => items?.id === matchById?.team1?.id)
         let team2 = team_data?.data?.find((items) => items?.id === matchById?.team2?.id)
@@ -77,7 +76,6 @@ const Toss = () => {
             setTeams([team1, team2]);
             setMatch(matchById);
         }
-        // setLoading(false);
     }, [params.matchId, match_data]);
 
     const toggleDrawer = useCallback((newOpen) => {
@@ -100,7 +98,6 @@ const Toss = () => {
 
     const handleBatBallSelection = (selection) => {
         setBatBallSelection(selection);
-        // const updatedMatch = { ...match, toss: { ...match.toss, selectSide: selection } };
     };
 
     useEffect(() => {
@@ -120,7 +117,7 @@ const Toss = () => {
     useEffect(() => {
         setLoading(true)
         if (loading && !match?.id) {
-            router.push('/custom404');
+            router.push('/not-found');
         } else if (match?.toss?.selectSide && match?.id) {
             router.push(`/player11/${match?.id}`);
         } else if (loading || match?.id) {
@@ -151,21 +148,6 @@ const Toss = () => {
         }
     }, [match?.toss?.tossWinner])
 
-    // const handleTossSelection = (toss) => {
-    //     let key = tossSelectionTeam?.teamIndex === 0 ? 'team1' : 'team2';
-    //     setTossTeams(prev => ({
-    //         ...prev,
-    //         [key]: toss,
-    //     }));
-    //     const oppositeToss = toss === 'Head' ? 'Tail' : 'Head';
-    //     const oppositeKey = key === 'team1' ? 'team2' : 'team1';
-    //     setTossTeams(prev => ({
-    //         ...prev,
-    //         [oppositeKey]: oppositeToss,
-    //     }));
-    //     setSelectedToss(toss);
-    // }
-
     const handleTossSelection = useCallback((toss) => {
         let key = tossSelectionTeam?.teamIndex === 0 ? 'team1' : 'team2';
         setTossTeams(prev => ({
@@ -187,55 +169,6 @@ const Toss = () => {
     const handleStepZero = () => {
         setTossStep(1);
     };
-
-    // const handleStepOne = () => {
-    //     const coinFlip = Math.floor(Math.random() * 100000);
-    //     const winningSide = coinFlip % 2 === 0 ? "Head" : "Tail";
-    //     setSide(winningSide);
-    //     if (tossTeams?.team1 === winningSide) {
-    //         setTossWinner(teams[0]);
-    //         const createNewObj = {
-    //             ...match,
-    //             toss: {
-    //                 tossWinner: teams[0]?.id,
-    //             }
-    //         }
-    //         dispatch(ReplaceMatchSchedule(createNewObj))
-    //     } else if (tossTeams?.team2 === winningSide) {
-    //         setTossWinner(teams[1]);
-    //         const createNewObj = {
-    //             ...match,
-    //             toss: {
-    //                 tossWinner: teams[1]?.id,
-    //             }
-    //         }
-    //         dispatch(ReplaceMatchSchedule(createNewObj))
-    //     }
-    //     setGif((prev) => ({
-    //         ...prev,
-    //         toss: true
-    //     }))
-    //     const tossTimer = setTimeout(() => {
-    //         setGif((prev) => ({
-    //             ...prev,
-    //             toss: false,
-    //             result: true
-    //         }))
-    //         setOpenModal(false);
-    //         setTossStep(2);
-    //     }, 600);
-    //     const resultTimer = setTimeout(() => {
-    //         setGif((prev) => ({
-    //             ...prev,
-    //             result: false
-    //         }))
-    //         setOpenModal(true);
-    //     }, 3000);
-    //     return () => {
-    //         clearTimeout(tossTimer);
-    //         clearTimeout(resultTimer);
-    //     };
-    // };
 
     const handleStepOne = () => {
         const coinFlip = Math.floor(Math.random() * 100);
@@ -260,34 +193,6 @@ const Toss = () => {
         }, 6000);
     };
 
-    // const handleStepTwo = () => {
-    //     setTossStep(3);
-    //     setOpenModal(false);
-    //     setGif((prev) => ({
-    //         ...prev,
-    //         firework: true
-    //     }))
-    //     const FireTimer = setTimeout(() => {
-    //         setGif((prev) => ({
-    //             ...prev,
-    //             firework: false
-    //         }))
-    //     }, 2000);
-    //     return () => {
-    //         clearTimeout(FireTimer)
-    //     }
-    // };
-
-    // const handleStepTwo = () => {
-    //     setTossStep(3);
-    //     setOpenModal(false);
-    //     setGif(prev => ({ ...prev, firework: true }));
-    //     fireworkTimerRef.current = setTimeout(() => {
-    //         setGif(prev => ({ ...prev, firework: false }));
-    //     }, 2000);
-    // };
-
-
     const handleToss = () => {
         switch (tossStep) {
             case 0:
@@ -296,9 +201,6 @@ const Toss = () => {
             case 1:
                 handleStepOne();
                 break;
-            // case 2:
-            //     handleStepTwo();
-            //     break;
             default:
                 console.warn('Unexpected tossStep:', tossStep);
         }
@@ -328,9 +230,6 @@ const Toss = () => {
         setSelectedToss(prev => (prev ? '' : prev));
         setBatBallSelection(prev => (prev ? null : prev));
     }
-
-    // if (!loading && !match?.id) return <Custom404 />
-    // if (match?.toss?.selectSide) return router.push(`http://localhost:3000/player11/${match?.id}`)
 
     const renderCoinFlip = () => {
         if (!gif.result || side === '') return null;
@@ -445,7 +344,6 @@ const Toss = () => {
                     >
                         <>
                             <Box className='side_selection_title'>
-                                {/* <Typography variant="body2">{tossStep === 0 ? 'Choose Your Side' : tossStep === 1 ? 'Tap the Toss' : 'Tap the Continue'}</Typography> */}
                                 <Typography variant="body2">{tossStep === 0 ? 'Choose Your Side' : tossStep === 1 ? '' : 'Tap the Continue'}</Typography>
                             </Box>
                             {tossStep === 0 ?

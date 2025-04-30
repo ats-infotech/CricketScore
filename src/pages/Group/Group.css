@@ -13,23 +13,31 @@
 }
 
 /* For Safari, Chrome, Edge */
-.all_groups::-webkit-scrollbar, .group_post_main_section::-webkit-scrollbar, .Selected_team_section::-webkit-scrollbar {
+.all_groups::-webkit-scrollbar,
+.group_post_main_section::-webkit-scrollbar,
+.Selected_team_section::-webkit-scrollbar {
     width: 0px !important;
     height: 8px;
 }
 
-.all_groups::-webkit-scrollbar-track, .group_post_main_section::-webkit-scrollbar-track, .Selected_team_section::-webkit-scrollbar-track {
+.all_groups::-webkit-scrollbar-track,
+.group_post_main_section::-webkit-scrollbar-track,
+.Selected_team_section::-webkit-scrollbar-track {
     background: transparent !important;
 }
 
-.all_groups::-webkit-scrollbar-thumb, .group_post_main_section::-webkit-scrollbar-thumb, .Selected_team_section::-webkit-scrollbar-thumb {
+.all_groups::-webkit-scrollbar-thumb,
+.group_post_main_section::-webkit-scrollbar-thumb,
+.Selected_team_section::-webkit-scrollbar-thumb {
     background-color: transparent !important;
     border-radius: 10px !important;
     border: 2px solid transparent !important;
 }
 
 /* Optional: Hover effect */
-.all_groups::-webkit-scrollbar-thumb:hover, .group_post_main_section::-webkit-scrollbar-thumb:hover, .Selected_team_section::-webkit-scrollbar-thumb:hover {
+.all_groups::-webkit-scrollbar-thumb:hover,
+.group_post_main_section::-webkit-scrollbar-thumb:hover,
+.Selected_team_section::-webkit-scrollbar-thumb:hover {
     background-color: transparent !important;
 }
 

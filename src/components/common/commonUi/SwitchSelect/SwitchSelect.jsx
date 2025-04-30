@@ -19,7 +19,6 @@ const SwitchSelect = ({ options, defaultSelected, onChange }) => {
             exclusive
             onChange={handleChange}
             sx={{
-                // background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
                 backgroundColor: 'var(--text-white)',
                 borderRadius: "30px",
                 padding: "5px",

@@ -202,7 +202,6 @@ const AboutPage = ({ tournamentData, teamData, playerData }) => {
                                 keyName={items?.key_name}
                                 value={tournamentDetails[items?.key_name]}
                                 onClick={() => { }}
-                                // disabled={true}
                                 readOnly={true}
                                 
                             />

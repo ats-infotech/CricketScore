@@ -1,11 +1,11 @@
-.login_section{
+.login_section {
     background-image: url('../../assets/img/login/success.png') !important;
     background-position: center;
     background-size: cover;
     height: 100vh;
 }
 
-.slider_section{
+.slider_section {
     position: relative;
     width: 100%;
     height: 480px;
@@ -28,15 +28,15 @@
     visibility: hidden;
     transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
     z-index: 0;
-  }
-  
-  .login_slider_images.active {
+}
+
+.login_slider_images.active {
     opacity: 1;
     visibility: visible;
     z-index: 0;
-  }
+}
 
-.login_slider_images::before{
+.login_slider_images::before {
     background-color: black;
     content: '';
     position: absolute;
@@ -47,7 +47,7 @@
     opacity: 0;
 }
 
-.login_slider_images::after{
+.login_slider_images::after {
     position: absolute;
     background: linear-gradient(180deg, rgba(12, 24, 48, 0) 0%, #0C1830 100%);
     content: '';
@@ -59,7 +59,7 @@
     filter: blur(5px);
 }
 
-.login_welcome_section{
+.login_welcome_section {
     position: absolute;
     z-index: 10;
     left: 0;
@@ -69,16 +69,17 @@
     animation: slideUp 0.3s ease-in-out;
 }
 
-@keyframes slideUp{
+@keyframes slideUp {
     0% {
         top: -100px;
     }
+
     100% {
         top: -180px;
     }
 }
 
-.slider_progress_section{
+.slider_progress_section {
     position: absolute;
     left: 0;
     right: 0;
@@ -89,26 +90,26 @@
     gap: 5px;
 }
 
-.slider_linear_progress{
+.slider_linear_progress {
     width: 14px;
     height: 4px;
     border-radius: 10px;
     background-color: var(--text-white) !important;
 }
 
-.slider_linear_progress .MuiLinearProgress-bar{
+.slider_linear_progress .MuiLinearProgress-bar {
     background-color: var(--text-white) !important;
 }
 
-.slider_linear_progress.active{
+.slider_linear_progress.active {
     width: 40px;
 }
 
-.slider_linear_progress.active .MuiLinearProgress-bar{
+.slider_linear_progress.active .MuiLinearProgress-bar {
     background-color: var(--primary-color) !important;
 }
 
-.login_form_section{
+.login_form_section {
     height: calc(100vh - 440px);
     min-height: 320px;
     background-color: var(--box-blue);
@@ -145,17 +146,17 @@
     background-color: var(--text-white);
 }
 
-input::placeholder{
+input::placeholder {
     color: var(--text-grey);
     font-weight: 500;
 }
 
-.login_skip{
+.login_skip {
     display: flex;
     justify-content: flex-end;
 }
 
-.login_skip p{
+.login_skip p {
     font-size: var(--normal);
     color: var(--text-white);
     font-weight: 500;
@@ -165,14 +166,14 @@ input::placeholder{
     cursor: pointer;
 }
 
-.login_skip svg{
+.login_skip svg {
     height: 22px;
     width: 22px;
     color: var(--text-white);
     transform: rotate(270deg);
 }
 
-.login_back_step_section{
+.login_back_step_section {
     position: absolute;
     z-index: 10;
     left: 20px;
@@ -188,37 +189,40 @@ input::placeholder{
     cursor: pointer;
 }
 
-.login_back_step_section svg{
+.login_back_step_section svg {
     height: 24px;
     width: 24px;
     color: var(--primary-color);
     transform: rotate(90deg);
 }
 
-.login_otp_verfication p, .login_welcome_section p{
+.login_otp_verfication p,
+.login_welcome_section p {
     font-size: var(--ex-large);
     color: var(--text-white);
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-.login_otp_verfication span, .login_welcome_section span{
+.login_otp_verfication span,
+.login_welcome_section span {
     font-size: var(--small);
     color: var(--text-grey);
     font-weight: 400;
 }
 
-.login_welcome_section span{
+.login_welcome_section span {
     color: var(--text-lightgrey);
 }
 
-.otp_input_container, .login_gender_section{
+.otp_input_container,
+.login_gender_section {
     display: flex;
     gap: 15px;
     margin-top: 30px;
 }
 
-.otp_input_container input{
+.otp_input_container input {
     border-radius: 10px;
     padding: 20px;
     height: 60px;
@@ -230,19 +234,19 @@ input::placeholder{
     outline: none !important;
 }
 
-.otp_input_container input:focus{
+.otp_input_container input:focus {
     outline: none !important;
 }
 
-.login_gender_section{
+.login_gender_section {
     gap: 30px;
 }
 
-.login_gender_button{
+.login_gender_button {
     width: 100%;
 }
 
-.login_gender_button button{
+.login_gender_button button {
     border: 2px solid var(--text-lightgrey);
     width: 100%;
     height: 60px;
@@ -253,36 +257,36 @@ input::placeholder{
     font-weight: 500;
 }
 
-.login_gender_button.active button{
+.login_gender_button.active button {
     background-color: var(--text-white);
     color: var(--primary-color);
 }
 
 @media screen and (max-width: 380px) {
-    .login_form_section{
+    .login_form_section {
         padding-inline: 25px !important;
     }
 
-    .otp_input_container input{
+    .otp_input_container input {
         height: 55px;
         width: 55px;
     }
 }
 
 @media screen and (max-width: 350px) {
-    .login_form_section{
+    .login_form_section {
         padding-inline: 20px !important;
     }
 
-    .login_otp_verfication p{
+    .login_otp_verfication p {
         font-size: var(--large);
     }
-    
-    .login_otp_verfication span{
+
+    .login_otp_verfication span {
         font-size: var(--ex-small);
     }
 
-    .otp_input_container input{
+    .otp_input_container input {
         height: 50px;
         width: 50px;
     }

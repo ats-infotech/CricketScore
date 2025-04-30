@@ -194,37 +194,6 @@ const Player11 = () => {
         }
     };
 
-    // const handleClose = () => {
-    //     setOpen(false)
-    //     if (activeTab === 1 && !teamConfirmed.team1) {
-    //         setSelectedPlayer((prev) => ({
-    //             ...prev,
-    //             team1: [],
-    //         }))
-    //         setCaptain((prev) => ({
-    //             ...prev,
-    //             team1: ''
-    //         }))
-    //         setWicketKeeper((prev) => ({
-    //             ...prev,
-    //             team1: ''
-    //         }))
-    //     } else if (activeTab === 2 && !teamConfirmed.team2) {
-    //         setSelectedPlayer((prev) => ({
-    //             ...prev,
-    //             team2: [],
-    //         }))
-    //         setCaptain((prev) => ({
-    //             ...prev,
-    //             team2: ''
-    //         }))
-    //         setWicketKeeper((prev) => ({
-    //             ...prev,
-    //             team2: ''
-    //         }))
-    //     }
-    // };
-
     const handleClose = () => {
         setOpen(false)
         setSelectedPlayer((prev) => ({
@@ -256,7 +225,6 @@ const Player11 = () => {
     };
 
     useEffect(() => {
-        // setLoading(true)
         setMatchId(params.matchId)
         let match = match_data.data.find(item => item?.id === params.matchId)
         setMatchObj(match);
@@ -266,7 +234,6 @@ const Player11 = () => {
         if (AllSelectedPlayers) {
             setSelectedPlayer(match?.selectedPlayer)
         }
-        // setLoading(false)
     }, [params]);
 
     useEffect(() => {
@@ -277,8 +244,6 @@ const Player11 = () => {
     }, [activeTab]);
 
     useEffect(() => {
-        // const team1 = matchObj?.team1
-        // const team2 = matchObj?.team2
         let team1 = team_data?.data?.find((items) => items?.id === matchObj?.team1?.id)
         let team2 = team_data?.data?.find((items) => items?.id === matchObj?.team2?.id)
         const playersallowed = parseInt(matchObj?.perteamplayers)
@@ -314,17 +279,6 @@ const Player11 = () => {
                 [type === 'wk' ? 'wicketKeeper' : 'captain']: playerId
             }
         }));
-        // if (type === 'wk') {
-        //     setWicketKeeper(prev => ({
-        //         ...prev,
-        //         [teamKey]: playerId
-        //     }));
-        // } else if (type === 'cap') {
-        //     setCaptain(prev => ({
-        //         ...prev,
-        //         [teamKey]: playerId
-        //     }));
-        // }
     }
 
     const handleCheckboxChange = (event, item) => {
@@ -352,33 +306,14 @@ const Player11 = () => {
     }, [selectedPlayer[teamKey]])
 
     const IsWk = (item) => {
-        // if (activeTab === 1) {
-        //     return WicketKeeper?.team1?.includes(item?.id)
-        // } else {
-        //     return WicketKeeper?.team2?.includes(item?.id)
-        // }
         return selectCwk[teamKey]?.wicketKeeper === item?.id
-        // if (selectCwk[teamKey].wicketKeeper) {
-        // } else {
-        //     return WicketKeeper?.[teamKey] === item?.id;
-        // }
     }
 
     const IsCap = (item) => {
-        // if (activeTab === 1) {
-        //     return Captain?.team1?.includes(item?.id)
-        // } else {
-        //     return Captain?.team2?.includes(item?.id)
-        // }
         return selectCwk[teamKey]?.captain === item?.id
-        // if (selectCwk[teamKey].captain) {
-        // } else {
-        //     return Captain?.[teamKey] === item?.id;
-        // }
     }
 
     const IsinCludes = (item) => {
-        // const teamKey = activeTab === 1 ? 'team1' : 'team2';
         return selectedPlayer?.[teamKey]?.includes(item?.id);
     };
 
@@ -558,8 +493,6 @@ const Player11 = () => {
     //     }
     // }
 
-    // if (!loading && (!matchObj || !matchObj?.toss)) return <Custom404 />
-
     const handleBack = () => {
         router.push(`/mytournament/${matchObj?.tournamentId}/match`)
     }
@@ -605,55 +538,7 @@ const Player11 = () => {
         }
     }
 
-    // const handleRemovePlayer = () => {
-    //     let id = deletedId
-    //     setProcessing(true)
-    //     const filterPlayer = selectedPlayer[teamKey]?.filter((items) => items !== id)
-    //     if (activeTab === 1) {
-    //         setSelectedPlayer((prev) => ({
-    //             ...prev,
-    //             team1: filterPlayer
-    //         }))
-    //         if (Captain.team1 === id) {
-    //             setCaptain((prev) => ({
-    //                 ...prev,
-    //                 team1: ''
-    //             }))
-    //         }
-    //         if (WicketKeeper.team1 === id) {
-    //             setWicketKeeper((prev) => ({
-    //                 ...prev,
-    //                 team1: ''
-    //             }))
-    //         }
-    //     } else if (activeTab === 2) {
-    //         setSelectedPlayer((prev) => ({
-    //             ...prev,
-    //             team2: filterPlayer
-    //         }))
-    //         if (Captain.team2 === id) {
-    //             setCaptain((prev) => ({
-    //                 ...prev,
-    //                 team2: ''
-    //             }))
-    //         }
-    //         if (WicketKeeper.team2 === id) {
-    //             setWicketKeeper((prev) => ({
-    //                 ...prev,
-    //                 team2: ''
-    //             }))
-    //         }
-    //     }
-    //     let timer = setTimeout(() => {
-    //         setProcessing(false)
-    //         setAlertModal({
-    //             success: true,
-    //             open: true,
-    //             message: 'Player removed successfully'
-    //         })
-    //         return () => clearTimeout(timer)
-    //     }, 1000);
-    // }
+
     const handleRemovePlayer = () => {
         if (!deletedId || !teamKey) return;
 

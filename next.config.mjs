@@ -15,7 +15,7 @@ const nextConfig = {
         formats: ['image/avif', 'image/webp'], // Modern image formats for faster loading
     },
     experimental: {
-        optimizeCss: true,  // Reduce CSS size
+        optimizeCss: false,  // Reduce CSS size
         scrollRestoration: true, // Maintain scroll position on navigation
     },
     webpack: (config) => {

@@ -1,7 +1,6 @@
 import SvgIcon from '@/assets/icons/SvgIcon';
-import { Box, Drawer, Typography } from '@mui/material';
-// import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import CloseIcon from '@mui/icons-material/Close';
+import { Box, Drawer, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import './CustomeFileCss/CustomeCommon.css';
 

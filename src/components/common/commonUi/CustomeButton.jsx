@@ -27,7 +27,6 @@ const CustomeButton = ({ icon, title, width, height, bgColor, borderRadius, boxS
                 textTransform: 'capitalize',
                 minWidth: '0px',
                 width: width ? width : '148px',
-                // width:'100%',
                 height: height ? height : 'auto',
                 padding: '8px',
                 boxShadow: boxShadow ? boxShadow : 'none',

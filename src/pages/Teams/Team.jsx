@@ -1,3 +1,4 @@
+'use client'
 import SvgIcon from "@/assets/icons/SvgIcon";
 import { generateNumberId } from "@/components/common/commomFunction";
 import { CommonText } from "@/components/common/commonText";
@@ -32,7 +33,6 @@ const TeamBanner = React.memo(({ banner, describe, onChange, previewPath, tourna
             <CommonBack onClick={handleBack} />
             <Box className='upload_Team_logo' onClick={() => handleBoxClick('team_logo')} sx={{ backgroundImage: `url('${previewPath}')` }} >
                 <input ref={fileInputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={(e) => onChange(e, 'team_logo')} />
-                {/* {!previewPath && <SvgIcon id='profile' width='30px' height='30px' color='var(--text-white)' />} */}
                 {
                     teamData?.team_name ?
                         <>
@@ -292,10 +292,7 @@ const Team = ({ tournamentData = null, type, teamData = null }) => {
             if (response) {
                 setTimeout(() => {
                     router.back(-1)
-                    // if (type !== 'edit') {
-                    // } else {
                     //     router.push(`/mytournament/${tournamentId}/teams`);
-                    // }
                     setLoading(false);
                 }, 1000);
             }

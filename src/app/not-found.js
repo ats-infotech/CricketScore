@@ -1,17 +1,16 @@
 'use client'
 import { Box } from "@mui/material";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-const Custom404 = () => {
-  const router = useRouter()
-    return(
-      <Box className='notFound'>
-        <div className="child-text">
-            <h1>404</h1>
-            <h3>Page Not Found</h3>
-            <a onClick={() => router.push('/')}>Go to Home Page</a>
-        </div>
-      </Box>
-    )
-  };
-  export default Custom404;
+const NotFound = () => {
+  return (
+    <Box className='notFound'>
+      <div className="child-text">
+        <h1>404</h1>
+        <h3>Page Not Found</h3>
+        <Link href={'/'}>Go to Home Page</Link>
+      </div>
+    </Box>
+  )
+};
+export default NotFound;

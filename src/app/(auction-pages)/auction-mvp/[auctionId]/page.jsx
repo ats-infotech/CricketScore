@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 const AuctionMvp = () => {
     const { auctionId } = useParams()
+    
     const teams = useSelector(teamsState);
     const player_data = useSelector(playersState);
     const auction_data = useSelector(auctionState)

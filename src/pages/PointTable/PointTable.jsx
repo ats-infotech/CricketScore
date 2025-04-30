@@ -4,52 +4,12 @@ import CustomeTbl from "@/components/common/commonUi/CustomeTbl/CustomeTbl"
 import { Box, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import './PointTable.css'
+import { PointTableheaderData } from "./PointTableJson"
 
-const headerData = [
-    {
-        title: 'Team',
-        keyname: 'team_name'
-    },
-    {
-        title: 'M',
-        keyname: 'match'
-    },
-    {
-        title: 'W',
-        keyname: 'win'
-    },
-    {
-        title: 'L',
-        keyname: 'lose'
-    },
-    {
-        title: 'T',
-        keyname: 'tie'
-    },
-    {
-        title: 'NR',
-        keyname: 'noresult'
-    },
-    {
-        title: 'For',
-        keyname: 'for'
-    },
-    {
-        title: 'Against',
-        keyname: 'againts'
-    },
-    {
-        title: 'Pt.',
-        keyname: 'point'
-    },
-    {
-        title: 'NRR',
-        keyname: 'nrr'
-    },
-]
 const PointTable = ({ teamData, tournamentData }) => {
-
     const [Teams, setTeams] = useState([])
+    const headerData = PointTableheaderData
+    
     useEffect(() => {
         const sortedTeams = Array.isArray(teamData) ? teamData.sort((a, b) => {
             if (b.point !== a.point) {

@@ -3,6 +3,27 @@
     overflow: auto;
 }
 
+/* For Safari, Chrome, Edge */
+.toss_main_section::-webkit-scrollbar {
+    width: 0px !important;
+    height: 8px;
+}
+
+.toss_main_section::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.toss_main_section::-webkit-scrollbar-thumb {
+    background-color: transparent !important;
+    border-radius: 10px !important;
+    border: 2px solid transparent !important;
+}
+
+/* Optional: Hover effect */
+.toss_main_section::-webkit-scrollbar-thumb:hover {
+    background-color: transparent !important;
+}
+
 .toss_team_section{
     display: flex;
     align-items: center;

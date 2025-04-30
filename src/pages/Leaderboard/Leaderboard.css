@@ -79,7 +79,7 @@
     margin-bottom: 5px;
 }
 
-.leaderboard_stats_section span{
+.leaderboard_stats_section span {
     font-size: var(--small) !important;
     font-weight: 500 !important;
     color: var(--text-grey) !important;
@@ -100,7 +100,7 @@
 .leaderboard_stats {
     display: flex;
     gap: 9px;
-    min-height:15px;
+    min-height: 15px;
     flex-wrap: wrap;
 }
 
@@ -115,20 +115,20 @@
 }
 
 /* Player Milestone */
-.leaderboard_player_milestone{
+.leaderboard_player_milestone {
     display: flex;
     gap: 10px;
     margin-top: 15px;
     flex-wrap: wrap;
 }
 
-.player_milestone_section{
+.player_milestone_section {
     height: 15px;
     display: flex;
     gap: 9px;
 }
 
-.leaderboard_player_milestone p{
+.leaderboard_player_milestone p {
     font-size: var(--ex-small) !important;
     font-weight: 500 !important;
     color: var(--text-grey) !important;
@@ -139,11 +139,12 @@
         padding: 12px 20px;
     }
 
-    .leaderboard_stats_section p{
+    .leaderboard_stats_section p {
         font-size: var(--small) !important;
     }
 
-    .leaderboard_stats p, .leaderboard_player_milestone p  {
+    .leaderboard_stats p,
+    .leaderboard_player_milestone p {
         font-size: var(--ex-small) !important;
     }
 

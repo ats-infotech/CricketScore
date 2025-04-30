@@ -141,15 +141,6 @@ const GroupPage = () => {
         return groupData?.Teams?.includes(item?.id)
     }
 
-    // useEffect(() => {
-    //     const hasError = groupData.Teams.length >= 2;
-    //     setErrors(!hasError);
-    //     setErrorMessage(prevError => ({
-    //         ...prevError,
-    //         group: hasError ? '' : 'Please select minimum two teams'
-    //     }));
-    // }, [groupData.Teams]);
-
     const handleCheckboxChange = (event, item) => {
         const teamId = item?.id;
         setGroupData((prev) => {
@@ -161,7 +152,6 @@ const GroupPage = () => {
         });
     
         setGroupData((prev) => {
-            // const hasError = prev.Teams.length + (prev.Teams.includes(teamId) ? -1 : 1) >= 2;
             const hasError = prev.Teams.length >= 2;
             setErrors(!hasError);
             setErrorMessage(prevError => ({
@@ -171,15 +161,6 @@ const GroupPage = () => {
     
             return prev;
         });
-        // setGroupData((prev) => {
-        //     const newTeams = prev.Teams.includes(teamId);
-        //     return {
-        //         ...prev,
-        //         Teams: newTeams
-        //             ? prev.Teams.filter(id => id !== teamId)
-        //             : [...prev.Teams, teamId]
-        //     };
-        // });
     }
 
     const handleAddClick = () => {
@@ -255,8 +236,6 @@ const GroupPage = () => {
         } else if (matchmaking === 'auto_match') {
             router.push(`/automatchschedule/${pathName?.tournamentId}`)
         }
-        // sessionStorage.removeItem('matchmaking')
-        // sessionStorage.removeItem('selectedRound')
     }
 
     const handleBack = () => {
@@ -389,9 +368,6 @@ const GroupPage = () => {
             {
                 activeTab === 1 &&
                 <>
-                    {/* <Box sx={{ margin: '0px 0px 20px 0px' }}>
-                        <CustomeButton title={'Add More Team'} onClick={() => router.push(`/teams/${pathName?.tournamentId}`)} />
-                    </Box> */}
                     {
                         GroupForm.length > 0 && GroupForm.map((items, i) => {
                             return (
@@ -434,7 +410,6 @@ const GroupPage = () => {
                                             <Typography variant="body2">{teamName}</Typography>
                                             <Box className='group_common_sub_section'>
                                                 <Box className={`group_checkbox_section ${isSelect ? 'active' : ''}`}>
-                                                    {/* {isSelect && <SvgIcon id={'checked'} height={14} width={14} style={{ color: 'var(--text-white)' }} />} */}
                                                     {isSelect && <SvgIcon id={'trueIcon'} height={20} width={20} style={{ color: 'var(--text-white)' }} />}
                                                 </Box>
                                             </Box>
@@ -446,10 +421,6 @@ const GroupPage = () => {
                     </Box>
                 </>
             }
-            {/* {
-                console.log(groupData, 'errors')
-                
-            } */}
             {<Box className='group_final_button'>
                 {
                     activeTab === 0 && tournamentGroupData?.length > 0 ?

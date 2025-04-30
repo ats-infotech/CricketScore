@@ -18,23 +18,31 @@
 }
 
 /* For Safari, Chrome, Edge */
-.player11_max_height_section::-webkit-scrollbar, .player11_playerselection_section::-webkit-scrollbar, .player11_players_section::-webkit-scrollbar {
+.player11_max_height_section::-webkit-scrollbar,
+.player11_playerselection_section::-webkit-scrollbar,
+.player11_players_section::-webkit-scrollbar {
     width: 0px !important;
     height: 8px;
 }
 
-.player11_max_height_section::-webkit-scrollbar-track, .player11_playerselection_section::-webkit-scrollbar-track, .player11_players_section::-webkit-scrollbar-track {
+.player11_max_height_section::-webkit-scrollbar-track,
+.player11_playerselection_section::-webkit-scrollbar-track,
+.player11_players_section::-webkit-scrollbar-track {
     background: transparent !important;
 }
 
-.player11_max_height_section::-webkit-scrollbar-thumb, .player11_playerselection_section::-webkit-scrollbar-thumb, .player11_players_section::-webkit-scrollbar-thumb {
+.player11_max_height_section::-webkit-scrollbar-thumb,
+.player11_playerselection_section::-webkit-scrollbar-thumb,
+.player11_players_section::-webkit-scrollbar-thumb {
     background-color: transparent !important;
     border-radius: 10px !important;
     border: 2px solid transparent !important;
 }
 
 /* Optional: Hover effect */
-.player11_max_height_section::-webkit-scrollbar-thumb:hover, .player11_playerselection_section::-webkit-scrollbar-thumb:hover, .player11_players_section::-webkit-scrollbar-thumb:hover {
+.player11_max_height_section::-webkit-scrollbar-thumb:hover,
+.player11_playerselection_section::-webkit-scrollbar-thumb:hover,
+.player11_players_section::-webkit-scrollbar-thumb:hover {
     background-color: transparent !important;
 }
 
@@ -291,7 +299,7 @@
 
 .player11_playerselection_section {
     padding: 20px;
-    max-height: calc(100vh - 350px);    
+    max-height: calc(100vh - 350px);
     overflow-y: auto;
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
@@ -374,7 +382,7 @@
     color: var(--text-grey);
 }
 
-.player11_selected_players_section{ 
+.player11_selected_players_section {
     width: 100%;
     max-width: min-content;
 }
@@ -452,22 +460,22 @@
 }
 
 .player11_post {
-    visibility: hidden; 
+    visibility: hidden;
     opacity: 0;
-    transform: scale(0.9); 
-    pointer-events: none; 
+    transform: scale(0.9);
+    pointer-events: none;
     display: flex;
     gap: 10px;
     overflow: hidden;
-    max-height: 0; 
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s 0.3s, max-height 0.3s ease-in-out; 
+    max-height: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s 0.3s, max-height 0.3s ease-in-out;
 }
 
 .player11_post.active {
-    visibility: visible; 
+    visibility: visible;
     opacity: 1;
     transform: scale(1);
-    pointer-events: all; 
+    pointer-events: all;
     max-height: 1000px;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s 0s, max-height 0.3s ease-in-out;
 }
@@ -652,7 +660,7 @@
         right: 20px;
     }
 
-    .player11_playerselection_main_section{
+    .player11_playerselection_main_section {
         padding: 40px 20px;
     }
 
@@ -674,7 +682,7 @@
         padding-inline: 6%;
     }
 
-    .player11_sub_post p{
+    .player11_sub_post p {
         font-size: var(--ex-ex-small) !important;
     }
 }
@@ -725,7 +733,7 @@
     .player11_common_section_down_section {
         margin: 0 0 0px 10px;
     }
-    
+
     .player11_playerselection_sub_section.active {
         padding-inline: 3%;
     }
@@ -754,7 +762,7 @@
         padding-inline: 2%;
     }
 
-    .player11_sub_post{
+    .player11_sub_post {
         gap: 5px;
     }
 }
@@ -974,6 +982,11 @@
     .player11_playerselection_sub_section.active {
         padding-inline: 7.5%;
     }
+
+
+    .player11_common_section_down_section {
+        margin: 0 0 0 0px;
+    }
 }
 
 @media screen and (max-width: 345px) {
@@ -1012,6 +1025,10 @@
     .player11_playerselection_sub_section.active {
         padding-inline: 4%;
     }
+
+    .player11_common_section_down_section {
+        margin: 0 0 0 5px;
+    }
 }
 
 @media screen and (max-width: 330px) {
@@ -1025,6 +1042,10 @@
 
     .player11_playerselection_sub_section.active {
         padding-inline: 3.5%;
+    }
+
+    .player11_common_section_down_section {
+        margin: 0 0 0 10px
     }
 }
 

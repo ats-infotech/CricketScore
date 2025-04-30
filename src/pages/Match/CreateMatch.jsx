@@ -118,14 +118,6 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
         }))
     }, [matchData])
 
-    // useEffect(() => {
-    //     const selectedTeamGroup = Groups?.find(group => group.teams.includes(selectdTeam?.team1?.id || selectdTeam?.team2?.id));
-    //     if (selectedTeamGroup) {
-    //         const selectableTeams = teams.filter(team => selectedTeamGroup.teams.includes(team.id));
-    //         setSelectableTeams(selectableTeams);
-    //     }
-    // }, [selectdTeam, matchData])
-
     useEffect(() => {
         if (scheduleType === 'group_match') {
             const selectedKeyTeam = (selectedKey === 'team1' ? 'team2' : selectedKey)
@@ -288,57 +280,6 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
         return isValid;
     };
 
-    // const validateForm = () => {
-    //     const newErrors = {};
-    //     let isValid = true;
-    //     const formFields = ScheduleMatchJson;
-
-    //     formFields.forEach(field => {
-    //         const value = scheduleMatch[field.key_name];
-    //         if (!value || (typeof value === 'string' && value.trim() === '')) {
-    //             newErrors[field.key_name] = `${field.label} is required`;
-    //             isValid = false;
-    //         }
-    //     });
-
-    //     if (!scheduleMatch['team1']) {
-    //         newErrors['team1'] = CommonText.Team1Required;
-    //         isValid = false;
-    //     }
-    //     if (!scheduleMatch['team2']) {
-    //         newErrors['team2'] = CommonText.Team2Required;
-    //         isValid = false;
-    //     }
-
-    //     // Match start time validation
-    //     const selectedDateTime = new Date(scheduleMatch.match_start_time);
-    //     const now = new Date();
-
-    //     // Ensure the selected date/time is valid
-    //     if (isNaN(selectedDateTime.getTime())) {
-    //         newErrors['match_start_time'] = 'Invalid date selected';
-    //         isValid = false;
-    //     } else {
-    //         const selectedDate = selectedDateTime.toISOString().split('T')[0]; // YYYY-MM-DD
-    //         const currentDate = now.toISOString().split('T')[0]; // YYYY-MM-DD
-
-    //         if (selectedDate < currentDate) {
-    //             // Selected date is in the past
-    //             newErrors['match_start_time'] = 'The selected date has already passed. Please choose a future date.';
-    //             isValid = false;
-    //         } else if (selectedDate === currentDate) {
-    //             // Selected date is today, validate time
-    //             if (selectedDateTime.getTime() < now.getTime()) {
-    //                 newErrors['match_start_time'] = 'The selected time has already passed. Please choose a future time.';
-    //                 isValid = false;
-    //             }
-    //         }
-    //     }
-
-    //     setErrors(newErrors);
-    //     return isValid;
-    // };
-
     const handleOnChange = (value, key) => {
         if (key === 'wagonWheel') {
             setScheduleMatch(prev => ({
@@ -485,7 +426,6 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
                                             {!item?.team_logo && <ImageAvatar text={item?.letter} width={'80px'} height={'80px'} bgColor={item?.team_color} />}
                                             {(isSelected || isAlredySelected) && (
                                                 <Box className='checkIcon'>
-                                                    {/* <SvgIcon id='checked' /> */}
                                                     <SvgIcon id='trueIcon' />
                                                 </Box>
                                             )}

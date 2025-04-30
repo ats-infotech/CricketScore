@@ -1,3 +1,4 @@
+'use client'
 import { CheckTournamentIsRunning, DateFormat } from "@/components/common/commomFunction"
 import Banner from "@/components/common/commonUi/Banner/Banner"
 import ImageAvatar from "@/components/common/commonUi/ImageAvatar/ImageAvatar"
@@ -134,8 +135,6 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
     const isPastTournament = CheckTournamentIsRunning(tData?.tournament_start_date, tData?.tournament_end_date) === 'completed'
     let isTestMatch = tournamentData && tournamentData?.match_type === "Test Match" ? true : false
     let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp' && items?.value !== 'summary' && items?.value !== 'analysis') : matchButtonGroups
-    // let pastMatchGroups = isPastTournament ? buttonGroups.filter((items) => items.value !== 'about') : buttonGroups
-    // const pastMatchGroups = (!data?.auction && auctionData?.auctionStatus !== 3) ? buttonGroups.filter(item => item?.value !== 'auction') : auctionData?.auctionStatus !== 3 ? auctionbuttonGroups : buttonGroups;
     let pastMatchGroups;
     if (data?.auction && auctionData?.auctionStatus !== 3) {
         pastMatchGroups = auctionbuttonGroups;
@@ -170,11 +169,6 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
             setLegalBallCount(matchFourthInnings?.Currentover?.[0]?.legalBall ?? 0)
         }
     }, [CurrentInnings, matchFirstInnings, matchSecondInnings, matchThirdInnings, matchFourthInnings])
-
-    // let matchGroups = tData?.status === 4 ? matchButtonGroups.filter((items) => items?.value !== 'live') 
-    // : tData?.status === 2 || tData?.status === 3 ? matchButtonGroups.filter((items) => items?.value !== 'cricketbox' && items?.value !== 'mvp') 
-    // : matchButtonGroups
-    // let pastMatchGroups = isPastTournament ? buttonGroups.filter((items) => items.value !== 'about') : buttonGroups
 
     useEffect(() => {
         let team1 = team_data?.data?.find((items) => items?.id === tData?.team1?.id)
@@ -230,32 +224,11 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
         }
     }, [tData?.currentInnings, tData?.toss?.selectSide, tData?.toss?.tossWinner, team1, team2]);
 
-    // const category = useMemo(() => {
-    //     if (!params?.category) return null;
-    //     return type === 'match'
-    //         ? matchGroups.find(val => val?.value === params?.category)?.value
-    //         : pastMatchGroups.find(val => val?.value === params?.category)?.value;
-    // }, [params?.category, type, matchGroups, pastMatchGroups]);
-
     useEffect(() => {
         if (type === 'match' && tData?.status === 4 && tabValue === 'live') {
             setTabValue('summary');
         }
     }, [tData?.status, tabValue, type]);
-
-    // useEffect(() => {
-    //     if (category) {
-    //         setTabValue(category);
-    //     } else {
-    //         const MatchTab = type === 'match' && tData?.status === 4 ? 'cricketbox' : 'live'
-    //         const navigate = type === 'match'
-    //             ? `/match/${params?.matchId}/${MatchTab}`
-    //             : type === 'adminTournament' ? `/mytournament/${params?.id}/match` : type === 'userTournament' ? `/tournament/${params?.id}/match` : '/';
-    //         if (router.pathname !== navigate) {
-    //             router.push(navigate);
-    //         }
-    //     }
-    // }, [category, params?.id, type, tData?.status]);
 
     const handleTabChange = (val) => {
         setLoading(true)
@@ -289,14 +262,6 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
                                 : (matchStatus === 4 || matchwinner) && innings?.legalBall !== 6 ? completedOvers?.length - 1
                                     : innings?.legalBall === 6 && currentInnings === currentinnings && (!matchwinner && matchStatus !== 4) ? completedOvers?.length + 1 : completedOvers?.length || 0,
         });
-
-        // const firstInnings = tData?.firstInnings?.Currentover[0];
-        // const secondInnings = tData?.status !== 4
-        //     ? tData?.secondInnings?.Currentover[0]
-        //     : tData?.secondInnings?.Completedovers[tData?.secondInnings?.Completedovers?.length - 1];
-        // const thirdInnings = tData?.superOverFirstInnings?.Currentover[0];
-        // const fourthInnings = tData?.superOverSecondInnings?.Currentover[0];
-        // initailscore = CurrentInnings === 2 ? secondInnings : CurrentInnings === 3 ? thirdInnings : CurrentInnings === 4 ? fourthInnings : 0
 
         const firstInningsCompletedOvers = tData?.firstInnings?.Completedovers;
         const secondInningsCompletedOvers = tData?.secondInnings?.Completedovers;
@@ -521,7 +486,6 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
         if (!tabElement || !pageElement || !mainContainer) return;
 
         const handleScroll = () => {
-            // const scrollY = window.scrollY
             const scrollY = mainContainer.scrollTop
             const tabTop = tabElement.getBoundingClientRect().top;
             const pageBottom = pageElement.getBoundingClientRect().bottom;

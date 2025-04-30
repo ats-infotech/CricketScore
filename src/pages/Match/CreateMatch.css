@@ -121,9 +121,7 @@
 .show_all_Team {
     display: flex;
     align-items: center;
-    /* justify-content: flex-start; */
     gap: 15px;
-    /* padding: 0 6%; */
 }
 
 .show_all_Team.wrap {
@@ -145,8 +143,8 @@
     margin: 0 20px;
     max-height: 120px;
     cursor: pointer;
-    /* margin: 0 auto; */
 }
+
 .show_all_Team .Team_box.showBox {
     width: 30%;
     margin: 0;

@@ -6,13 +6,9 @@
     left: 0;
     right: 0;
     z-index: 100;
-    /* background: var(--primary-light-color); */
-    /* background:inherit; */
     max-width: var(--screen-max-width);
     margin: 0 auto;
     padding: 5px 0 0;
-    /* backdrop-filter: blur(5px); */
-    /* -webkit-backdrop-filter: blur(5px); */
 }
 
 .footer {
@@ -28,7 +24,6 @@
     padding: 0;
     overflow: hidden;
     transition: transform 0.3s ease-out;
-    /* transform: translateY(-5px); */
 }
 
 .footer-item {
@@ -99,8 +94,6 @@
 
 @media (max-width: 600px) {
     .footer {
-        /* height: auto; */
-        /* max-width: 83%; */
         padding: 10px;
         margin: 0 auto;
     }

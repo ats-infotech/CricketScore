@@ -1,5 +1,5 @@
 .section-box {
-    width:100%;
+    width: 100%;
     min-height: 110px;
     background-color: var(--box-blue);
     border-radius: 15px;
@@ -21,11 +21,13 @@
     gap: 10px;
     justify-content: center;
 }
+
 .section-box .iconText svg {
     width: 16px;
     height: 16px;
     color: var(--text-white);
 }
+
 .section-box .iconText p {
     color: var(--text-white);
     font-family: var(--primary-font);
@@ -34,16 +36,8 @@
     padding: 0 0 10px 0;
 }
 
-/* .bottomLine {
-    margin: 0 auto;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, #0C1830 9.39%, #FFFFFF 53.83%, #0C1830 92.27%);
-} */
-
-
 @media screen and (max-width:375px) {
     .section-box {
-       padding: 20px;
+        padding: 20px;
     }
 }

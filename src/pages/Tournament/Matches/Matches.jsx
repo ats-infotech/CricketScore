@@ -246,7 +246,6 @@ const Matches = () => {
         if (selectedRound) {
           sessionStorage.setItem('selectedRound', selectedRound)
           navigation = `/matchgroup/${TournamentData?.id}`
-          // navigation = `/automatchschedule/${TournamentData?.id}`
         }
       }
     }

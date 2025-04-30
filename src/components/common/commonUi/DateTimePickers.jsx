@@ -1,11 +1,8 @@
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import dayjs from 'dayjs';
 import './CustomeFileCss/DateTimePickers.css';
@@ -14,7 +11,6 @@ export default function DateTimePickers({ type, keyName, disabled, value, min, m
   const validValue = dayjs(value);
   const mindate = dayjs(min).isValid() ? dayjs(min).startOf('day') : null
   const maxdate = dayjs(max).isValid() ? dayjs(max).endOf('day') : null
-  // console.log(dayjs(value, 'HH:mm:ss a'));
 
   const handleDateTimeChange = (newValue) => {
     if (type === 'time' && newValue) {

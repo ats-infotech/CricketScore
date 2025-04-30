@@ -8,12 +8,6 @@ import React, { useEffect, useState } from 'react';
 import CustomeTabs from '../../components/common/commonUi/CustomeTabs';
 import './Leaderboard.css';
 
-// const typePlayer = [
-//     { id: 0, type: 'Bat' },
-//     { id: 1, type: 'Bowl' },
-//     // { id: 2, type: 'AR' },
-// ];
-
 const typePlayer = [
     { label: 'Bat', key_name: 0 },
     { label: 'Bowl', key_name: 1 }
@@ -38,17 +32,17 @@ const CommonStatsSection = React.memo(({ name, innings, average, sr, runs, type,
             </Box>
             <Box className='leaderboard_stats'>
                 {stats.map((stat, index) =>
-                stat.value !== undefined && stat.value !== null ? (
-                    <Box key={index} className="player_milestone_section">
-                        <Typography variant='body2'>
-                            {stat.label}: {stat.value}
-                        </Typography>
-                        {index !== stats.length - 1 && (
-                            <Divider orientation="vertical" className='leaderboard_divider' />
-                        )}
-                    </Box>
-                ) : null
-            )}
+                    stat.value !== undefined && stat.value !== null ? (
+                        <Box key={index} className="player_milestone_section">
+                            <Typography variant='body2'>
+                                {stat.label}: {stat.value}
+                            </Typography>
+                            {index !== stats.length - 1 && (
+                                <Divider orientation="vertical" className='leaderboard_divider' />
+                            )}
+                        </Box>
+                    ) : null
+                )}
             </Box>
         </Box>
     )

@@ -359,7 +359,6 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     const team_data = useSelector(teamsState)
     const CurrentInnings = matchData?.currentInnings
     let isTestMatch = tournamentData?.match_type === "Test Match" ? true : false
-    // let isFollowOn = matchData?.followOn === "Follow On" ? true : false
     const firstInnings = matchData?.firstInnings
     const secondInnings = matchData?.secondInnings
     const thirdInnings = matchData?.superOverFirstInnings

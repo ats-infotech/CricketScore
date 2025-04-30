@@ -1,3 +1,4 @@
+'use client'
 import SvgIcon from "@/assets/icons/SvgIcon";
 import { DateFormat } from "@/components/common/commomFunction";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";

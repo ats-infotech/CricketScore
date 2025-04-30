@@ -81,22 +81,6 @@ const PlayersPage = ({ teamdata, playersData }) => {
         setOpen(true);
     };
 
-    // useEffect(() => {
-    //     let firstErrorIndex = -1;
-    //     errors.forEach((error, index) => {
-    //         if (Object.keys(error).length > 0 && firstErrorIndex === -1) {
-    //             firstErrorIndex = index;
-    //         }
-    //     });
-
-    //     if (firstErrorIndex !== -1) {
-    //         document.querySelectorAll(".form_box")[firstErrorIndex]?.scrollIntoView({
-    //             behavior: "smooth",
-    //             block: "center"
-    //         });
-    //     }
-    // }, [errors]);
-
     useEffect(() => {
         let firstErrorIndex = -1;
     
@@ -192,9 +176,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
             });
             newErrorsArr.push(newErrors)
         });
-        // setErrors(newErrorsArr);
         return newErrorsArr;
-        // return isValid;
     };
 
     const handleFileChange = (e, index) => {
@@ -243,7 +225,6 @@ const PlayersPage = ({ teamdata, playersData }) => {
     };
 
     const handleDrawerClose = () => {
-        // setErrors([]);
         setOpen(false);
         setAddPlayer([{
             playerImage: '',
@@ -258,9 +239,6 @@ const PlayersPage = ({ teamdata, playersData }) => {
 
     const handleAddOrUpdatePlayer = async (index) => {
         try {
-            // if (!validateForm(index)) {
-            //    return
-            // };
             const newErrorsArr = validateForm();
             setErrors(newErrorsArr);
             if (newErrorsArr.some(error => Object.keys(error).length > 0)) {
@@ -448,12 +426,8 @@ const PlayersPage = ({ teamdata, playersData }) => {
                 }
                 <Box>
                     <SwipeUpDrawer open={open} onClose={handleDrawerClose} onOpen={() => setOpen(false)} id='scrollBottomPlayer'>
-                        {/* {AddPlayerManual && <Box className='countOfPlayer'>
-                            <Typography variant="body2">{addPlayer.length || 0}</Typography>
-                        </Box>} */}
                         <Box className='top-arrows'>
                             {AddPlayerManual && !updatePlayer ? <SvgIcon id='down-arrow' className='back' onClick={() => setAddPlayerManual(false)} /> : <Box></Box>}
-                            {/* <CloseIcon className="close" onClick={() => setOpen(false)} /> */}
                         </Box>
 
                         {!AddPlayerManual ?

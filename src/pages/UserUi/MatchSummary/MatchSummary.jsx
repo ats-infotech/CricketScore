@@ -17,8 +17,8 @@ const MatchSummary = ({ matchData, playerData, teamData, tournamentData }) => {
     const [secondInningsPoints, setSecondInningsPoints] = useState([])
     const [team1, setTeam1] = useState([])
     const [team2, setTeam2] = useState([])
-    const tournament_data = useSelector(tournamentState)
-    const team_data = useSelector(teamsState)
+    const tournament_data = useSelector(tournamentState) ?? null
+    const team_data = useSelector(teamsState) ?? null
     let firstinnings = matchData?.firstInnings
     let secondinnings = matchData?.secondInnings
     let thirdinnings = matchData?.superOverFirstInnings

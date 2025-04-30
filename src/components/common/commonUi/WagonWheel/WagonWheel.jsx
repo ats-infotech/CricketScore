@@ -46,12 +46,11 @@ const WagonWheel = ({ shots, onClick, type }) => {
                         const startX = 200;
                         const startY = 140;
                         const adjustedAngle = shot.angle + Math.PI / 2;
-
                         const centerX = 200;
                         const centerY = 200;
                         const radius = 180;
 
-                        // Vector direction
+                        // Vector direction for shots
                         const dx = Math.cos(adjustedAngle);
                         const dy = Math.sin(adjustedAngle);
 
@@ -59,57 +58,84 @@ const WagonWheel = ({ shots, onClick, type }) => {
                         const vx = startX - centerX;
                         const vy = startY - centerY;
 
-                        const A = dx * dx + dy * dy;
-                        const B = 2 * (vx * dx + vy * dy);
-                        const C = vx * vx + vy * vy - radius * radius;
+                        // Default end coordinates for non-4/6 shots
+                        let endX = shot.currentShot !== 4 && shot.currentShot !== 6 ? shot.clickX : 0;
+                        let endY = shot.currentShot !== 4 && shot.currentShot !== 6 ? shot.clickY : 0;
 
-                        const discriminant = B * B - 4 * A * C;
-                        let t = 0;
-                        if (discriminant >= 0) {
-                            const sqrtDisc = Math.sqrt(discriminant);
-                            const t1 = (-B + sqrtDisc) / (2 * A);
-                            const t2 = (-B - sqrtDisc) / (2 * A);
-                            t = Math.max(t1, t2);
+                        // Ensure valid end coordinates
+                        if (isNaN(endX) || isNaN(endY)) {
+                            endX = startX;
+                            endY = startY;
                         }
 
-                        // Adjust endpoint:
-                        const extendLength =
-                            shot.currentShot === 4 ? 15 : // if shot is a FOUR, go a bit outside
-                                shot.currentShot === 6 ? -10 : 10; // regular shots stop before circle, sixes are curved anyway
+                        // Logic for shots 4 and 6
+                        if (shot.currentShot === 4 || shot.currentShot === 6) {
+                            const A = dx * dx + dy * dy;
+                            const B = 2 * (vx * dx + vy * dy);
+                            const C = vx * vx + vy * vy - radius * radius;
 
-                        const scale = t + (shot.currentShot === 4 ? extendLength : -extendLength) / Math.sqrt(dx * dx + dy * dy);
-                        const endX = startX + dx * scale;
-                        const endY = startY + dy * scale;
+                            const discriminant = B * B - 4 * A * C;
+                            let t = 0;
+                            if (discriminant >= 0) {
+                                const sqrtDisc = Math.sqrt(discriminant);
+                                const t1 = (-B + sqrtDisc) / (2 * A);
+                                const t2 = (-B - sqrtDisc) / (2 * A);
+                                t = Math.max(t1, t2);
+                            }
 
-                        // Midpoint and control point for 6s
-                        const midX = (startX + endX) / 2;
-                        const midY = (startY + endY) / 2;
+                            const extendLength = shot.currentShot === 4 ? 15 : -10; // 4 gets a bit extended
+                            const scale = t + (shot.currentShot === 4 ? extendLength : -extendLength) / Math.sqrt(dx * dx + dy * dy);
+                            endX = startX + dx * scale;
+                            endY = startY + dy * scale;
 
-                        // Create slight upward shift for the curve (keeping the same angle)
-                        const curveShift = 100; // Adjust this value for how high you want the curve to be
-                        const controlX = midX;
-                        const controlY = midY - curveShift; // Shift upwards
+                            // Midpoint and control point for 6s
+                            const midX = (startX + endX) / 2;
+                            const midY = (startY + endY) / 2;
+                            const curveShift = 100; // Shift curve for the six
+                            const controlX = midX;
+                            const controlY = midY - curveShift;
+
+                            return (
+                                <g key={index}>
+                                    {shot.currentShot === 6 ? (
+                                        <path
+                                            d={`M ${startX} ${startY} Q ${controlX} ${controlY}, ${endX} ${endY}`}
+                                            stroke={shotsColors[shot.currentShot]}
+                                            strokeWidth={2}
+                                            fill="none"
+                                        />
+                                    ) : (
+                                        <line
+                                            x1={startX}
+                                            y1={startY}
+                                            x2={endX}
+                                            y2={endY}
+                                            stroke={shotsColors[shot.currentShot]}
+                                            strokeWidth={1.5}
+                                            strokeLinecap="round"
+                                        />
+                                    )}
+                                </g>
+                            );
+                        }
+
+                        // Logic for other shots (non-4/6)
+                        const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+                        const scale = distance / 180; // Regular shots scale
+                        const scaledEndX = startX + dx * scale * 180;
+                        const scaledEndY = startY + dy * scale * 180;
 
                         return (
                             <g key={index}>
-                                {shot.currentShot === 6 ? (
-                                    <path
-                                        d={`M ${startX} ${startY} Q ${controlX} ${controlY}, ${endX} ${endY}`}
-                                        stroke={shotsColors[shot.currentShot]}
-                                        strokeWidth={2}
-                                        fill="none"
-                                    />
-                                ) : (
-                                    <line
-                                        x1={startX}
-                                        y1={startY}
-                                        x2={endX}
-                                        y2={endY}
-                                        stroke={shot.currentShot > 6 ? shotsColors[7] : shotsColors[shot.currentShot]}
-                                        strokeWidth={1.5}
-                                        strokeLinecap="round"
-                                    />
-                                )}
+                                <line
+                                    x1={startX}
+                                    y1={startY}
+                                    x2={scaledEndX}
+                                    y2={scaledEndY}
+                                    stroke={shot.currentShot > 6 ? shotsColors[7] : shotsColors[shot.currentShot]}
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                />
                             </g>
                         );
                     })}

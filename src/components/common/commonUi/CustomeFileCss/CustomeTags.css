@@ -11,8 +11,6 @@
 }
 
 .custome_tags .tags_box {
-    /* display: grid;
-    grid-template-columns: auto auto auto ; */
     display: flex;
     justify-content:start ;
     align-items: center;
@@ -26,7 +24,6 @@
 }
 
 .custome_tags .tags_box.nowrap {
-    /* flex-wrap: nowrap; */
     justify-content: space-around;
 }
 

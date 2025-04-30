@@ -40,12 +40,6 @@
     width: 0px !important;
 }
 
-@media only screen and (orientation: portrait) {
-    .tornament_form {
-        padding: 65px 20px 0 !important;
-    }
-}
-
 @media screen and (max-width: 380px) {
     .tornament_form {
         padding: 65px 20px 0px !important;

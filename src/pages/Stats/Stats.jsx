@@ -17,7 +17,7 @@ const Stats = ({ tournamentData }) => {
     const dotBallPercentage = getStat('dotballs') > 0 ? ((getStat('dotballs')*100)/getStat('balls')).toFixed(2) : 0
 
     return (
-            <Box className='stats_card_section activeAnimation'>
+            <Box className='stats_card_section'>
                 <CommonBox data={getStat('matches')} title={'Matches'}/>
                 <CommonBox data={getStat('innings')} title={'Innings'}/>
                 <CommonBox data={getStat('runs')} title={'Runs'}/>

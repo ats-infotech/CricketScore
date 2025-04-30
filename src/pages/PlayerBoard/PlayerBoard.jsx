@@ -1,3 +1,4 @@
+'use client'
 import SvgIcon from "@/assets/icons/SvgIcon";
 import { CommonText } from "@/components/common/commonText";
 import Banner from "@/components/common/commonUi/Banner/Banner";

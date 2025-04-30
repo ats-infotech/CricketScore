@@ -180,14 +180,6 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
                 isValid = false
             }
         })
-        // const selectedDateTime = new Date(autoMatchSchedule.match_start_date);
-        // const now = new Date();
-        // const currentUtcTimeInMinutes = now.getTime();
-        // const selectedDateTimeInMinutes = selectedDateTime.getTime();
-        // if (selectedDateTimeInMinutes <= currentUtcTimeInMinutes) {
-        //     newErrors['match_start_time'] = 'Selected time cannot be in the past';
-        //     isValid = false;
-        // }
         // Match start time validation
         const selectedDateTime = new Date(autoSchedule.match_start_date);
         const now = new Date();

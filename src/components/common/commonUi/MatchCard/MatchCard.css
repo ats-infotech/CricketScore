@@ -14,7 +14,6 @@
 }
 
 .all_matched.isPastTournament {
-    /* height: auto !important; */
     height: calc(100vh - 346px) !important;
 }
 
@@ -33,7 +32,6 @@
     padding: 30px;
     position: relative;
     overflow: hidden;
-    /* margin-bottom: 30px; */
 }
 
 .match_card .match_location.break,
@@ -42,7 +40,6 @@
     padding: 5px 6px 4px 10px;
     position: absolute;
     top: 0;
-    /* right: 0; */
     left: 0px;
     margin: 0;
     border-radius: 15px 0 5px 0;
@@ -61,11 +58,11 @@
     color: var(--text-white);
     text-align: center;
     margin-bottom: 10px;
-    /* text-transform: capitalize; */
     letter-spacing: 0.06em;
 }
 
-.match_card .match_type.winner , .match_card .match_type.terminate {
+.match_card .match_type.winner,
+.match_card .match_type.terminate {
     background-color: #348f04;
     padding: 5px 6px 4px 10px;
     position: absolute;
@@ -76,7 +73,7 @@
     border-radius: 15px 15px 0 0;
 }
 
-.match_card .match_type.terminate{
+.match_card .match_type.terminate {
     background-color: #c40023 !important;
 }
 
@@ -180,7 +177,7 @@
     }
 }
 
-@media only screen and (orientation: portrait) and (max-width: 410px) {
+@media screen and (max-width: 410px) {
     .TeamScoreBox .teamLogo {
         width: 70px !important;
         height: 70px !important;

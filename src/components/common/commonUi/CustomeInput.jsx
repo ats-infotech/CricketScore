@@ -2,7 +2,13 @@
 import { Box, Typography } from "@mui/material";
 import { useRef } from "react";
 import './CustomeFileCss/CustomeInput.css';
-import DateTimePickers from "./DateTimePickers";
+// import DateTimePickers from "./DateTimePickers";
+import dynamic from "next/dynamic";
+
+const DateTimePickers = dynamic(
+    () => import("./DateTimePickers"),
+    { ssr: false }
+);
 
 const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '', onChange, error, startDate, disabled, onClick, readOnly = false, ampm }) => {
     const openTornamentEndDate = (type === 'date' && keyName === 'tournament_end_date' && !startDate)
@@ -10,7 +16,7 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
     const isDateType = type === 'date' || type === 'datetime-local' || type === 'time';
     const isDate = type === 'date' || type === 'datetime-local'
     const inputRef = useRef(null);
-    
+
     const handleOnChange = (val, keyName) => {
         let value = val
         if (value?.length === 1 && value?.[0] === ' ') {
@@ -117,10 +123,6 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
         return ''
     }
 
-    // const handleWheel = (e) => {
-    //     e.preventDefault();
-    // };
-
     let openEndDate = (keyName === 'match_end_date' ? openAutoMatchEndDate : openTornamentEndDate)
     let dateType = type === 'datetime-local' ? 'datetime' : type === 'date' ? 'date' : type === 'time' ? 'time' : ''
 
@@ -148,7 +150,6 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
                         ref={inputRef}
                         onClick={onClick ? onClick : handleFocus}
                         value={value}
-                        // onWheel={handleWheel}
                         onKeyDown={(e) => handleOnlyNumbers(e, keyName)}
                         className={`${openEndDate ? '' : 'notOpen'}`}
                         onChange={(e) => handleOnChange(e.target.value, keyName)}

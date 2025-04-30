@@ -14,7 +14,6 @@ const SectionBox = ({ icon, title, description, children, sx, type, className })
                 {title && <Typography variant='body2'>{title}</Typography>}
             </Box>
             {description && <Typography variant='body2' className='describeText'>Quickly Add teams From Your Network.</Typography>}
-            <Box className='bottomLine'></Box>
             {children}
         </Box>
     )

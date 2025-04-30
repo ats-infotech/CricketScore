@@ -101,7 +101,6 @@ const TournamentCategory = () => {
       //   overflowY: "auto"
       // }}
       id='alltabBoxMain'>
-      {/* <Box> */}
       {RenderContent}
     </Box>
   )

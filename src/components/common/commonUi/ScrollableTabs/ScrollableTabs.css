@@ -2,7 +2,7 @@
     display: none;
 }
 
-.tabs_main .MuiTabs-scroller{
+.tabs_main .MuiTabs-scroller {
     display: flex !important;
 }
 
@@ -25,22 +25,22 @@
 .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar {
     width: 0px;
     height: 5px;
-  }
-  
-  .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-track {
+}
+
+.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-track {
     background: transparent;
-  }
-  
-  .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb {
+}
+
+.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb {
     background-color: var(--text-lightgrey);
     border-radius: 10px;
     border: 2px solid transparent;
-  }
-  
-  /* Optional: Hover effect */
-  .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb:hover {
+}
+
+/* Optional: Hover effect */
+.tabs_main .MuiTabs-flexContainer::-webkit-scrollbar-thumb:hover {
     background-color: var(--text-lightgrey);
-  }
+}
 
 .tabs_main .childTab {
     color: var(--text-white);
@@ -49,15 +49,15 @@
     border: 1px solid var(--text-white);
     border-radius: 50px;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     gap: 10px;
     flex-direction: row;
     transition: all 0.5s ease;
-    padding: 0px 10px; 
+    padding: 0px 10px;
 }
 
-.tabs_main .childTab p{
+.tabs_main .childTab p {
     font-family: var(--primary-font);
     font-size: var(--small);
     font-weight: 600;
@@ -68,7 +68,7 @@
 
 .tabs_main .childTab .MuiSvgIcon-root {
     display: inline-block;
-    margin: 0; 
+    margin: 0;
 }
 
 .tabs_main .childTab.Mui-selected {
@@ -76,7 +76,7 @@
     background-color: var(--text-white);
 }
 
-@media screen and  (max-width:576px) {
+@media screen and (max-width:576px) {
     .tabs_main .MuiTabs-flexContainer {
         scrollbar-color: transparent transparent;
     }

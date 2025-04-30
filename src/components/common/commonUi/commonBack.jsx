@@ -16,9 +16,7 @@ const CommonBack = ({ onClick, title }) => {
     }
     return (
         <Box className='back-box' onClick={handleBackFuction}>
-            {/* <Box className='btn_box'> */}
             <CustomeBack onclick={'onClick'} type={'commonback'} />
-            {/* </Box> */}
         </Box>
     )
 }

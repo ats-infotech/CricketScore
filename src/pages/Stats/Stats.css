@@ -1,6 +1,6 @@
 .stats_card_section {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
     /* height: calc(100vh - 356px);
@@ -8,7 +8,7 @@
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
     scrollbar-width: none; */
-    margin: 40px 30px 0 !important;
+    margin: 40px 30px 0;
 }
 
 .stats_card {
@@ -33,29 +33,30 @@
 .stats_card p {
     color: var(--stats-grey) !important;
     text-align: center;
-    font-size: var(--ex-small) !important; 
-    font-weight: 500 !important; 
+    font-size: var(--ex-small) !important;
+    font-weight: 500 !important;
 }
 
 @media screen and (max-width: 375px) {
     .stats_card_section {
-        /* height: calc(100vh - 356px); */
-        margin: 30px 20px 0 !important;
+        margin: 30px 20px 0;
     }
 }
+
 @media screen and (max-width: 370px) {
     .stats_card h6 {
-        font-size: var(--ex-small) !important;
+        font-size: var(--ex-small);
     }
 
     .stats_card p {
-        font-size: var(--ex-small) !important;
+        font-size: var(--ex-small);
     }
 }
-@media screen and (max-width: 330px) {
+
+@media screen and (max-width: 320px) {
     .stats_card_section {
-        margin: 20px 20px 0px !important;
+        margin: 20px 20px 0px;
         gap: 10px;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
     }
 }

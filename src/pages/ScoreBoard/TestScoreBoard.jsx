@@ -1,22 +1,23 @@
 'use client'
+import { classifyShot } from "@/components/common/commomFunction";
 import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
+import CustomeTags from "@/components/common/commonUi/CustomeTags";
 import InputSelect from "@/components/common/commonUi/InputSelect";
+import WagonWheel from "@/components/common/commonUi/WagonWheel/WagonWheel";
+import { TestBreakType } from "@/components/common/json/commonJson";
 import { AddCommentary, AddDeclareStatus, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsDeclareStatus, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsShots, AddSecondInningsWicket, AddShots, AddSuperOverCompletedOver, AddSuperOverDeclareStatus, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverPartnership, AddSuperOverSecondInnings, AddSuperOverSecondInningsCompletedOver, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsPartnership, AddSuperOverSecondInningsShots, AddSuperOverSecondInningsWicket, AddSuperOverShots, AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchOver, ChangeOverPerDay, ChangePlayer, ChangeStatus, ChangeWagonWheelChoice, MatchBreakSchedule, matchesState, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverPartnership, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsPartnership, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership } from "@/redux/slices/matchSlice";
 import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
 import { updateTournamentStats } from "@/redux/slices/tournamentSlice";
+import { Close } from "@mui/icons-material";
 import { Box, Dialog, FormControl, MenuItem, Typography, useMediaQuery } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import './ScoreBoard.css';
 import TestScorePage from "../Score/TestScore";
-import { TestBreakType } from "@/components/common/json/commonJson";
-import CustomeTags from "@/components/common/commonUi/CustomeTags";
-import { Close } from "@mui/icons-material";
-import { classifyShot } from "@/components/common/commomFunction";
-import WagonWheel from "@/components/common/commonUi/WagonWheel/WagonWheel";
+import './ScoreBoard.css';
+import { reason, runtype } from "./ScoreBoardJson";
 
 const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
     let battingrun = 0;
@@ -394,11 +395,6 @@ const RenderButton = React.memo(({ onClick, title, disabled }) => {
 });
 
 const TestScoreBoard = () => {
-
-    const reason = ['LBW', 'Bowled', 'Catch', 'Hit Wicket', 'Stumped', 'Run Out']
-
-    const runtype = ['0', '1', '2', '3', '4', '6', '5,7', 'WD', 'NB', 'LB', 'BYE', 'W', 'RNO', 'STO', '+/-'];
-
     const followon = ['Follow On', 'Bat Again']
 
     const [initailscore, setInitialscore] = useState({
@@ -1690,29 +1686,60 @@ const TestScoreBoard = () => {
         const rect = svg.getBoundingClientRect();
         const clickX = event.clientX - rect.left;
         const clickY = event.clientY - rect.top;
-
+    
         const batterX = 200;
         const batterY = 140;
-
+    
         const dx = clickX - batterX;
         const dy = clickY - batterY;
         let angle = Math.atan2(dy, dx);
         angle = angle - Math.PI / 2;
         if (angle < 0) angle += 2 * Math.PI;
-
+    
         const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 180);
-
+    
         if (!isNaN(currentShot)) {
             const shotType = classifyShot(angle);
             const regex = /^[13579]\d?$/;
-            const isShotOdd = regex.test(currentShot)
-            const batterId = activeStrike === 1 && isShotOdd ? playerselection.nonStriker : activeStrike === 2 && isShotOdd ? playerselection.striker
-                : activeStrike === 2 ? playerselection.nonStriker : playerselection.striker
-            const bowlerId = playerselection.bowler
-            const currentBall = ball.ballNo
-            const currentOver = ball.overNo
-            const newShot = { angle, distance, currentShot, shotType, batterId, bowlerId, currentBall, currentOver };
-            const action = CurrentInnings === 2 ? AddSecondInningsShots : CurrentInnings === 3 ? AddSuperOverShots : CurrentInnings === 4 ? AddSuperOverSecondInningsShots : AddShots
+            const isShotOdd = regex.test(currentShot);
+            
+            // Determine batterId based on activeStrike and shot type (odd/even shot)
+            const batterId = activeStrike === 1 && isShotOdd 
+                ? playerselection.nonStriker 
+                : activeStrike === 2 && isShotOdd 
+                    ? playerselection.striker 
+                    : activeStrike === 2 
+                        ? playerselection.nonStriker 
+                        : playerselection.striker;
+    
+            const bowlerId = playerselection.bowler;
+            const currentBall = ball.ballNo;
+            const currentOver = ball.overNo;
+    
+            const newShot = {
+                angle,
+                distance,
+                currentShot,
+                shotType,
+                batterId,
+                bowlerId,
+                currentBall,
+                currentOver,
+                clickX, // Include clickX and clickY to use them in rendering
+                clickY
+            };
+    
+            // Depending on innings, dispatch the correct action
+            const action = 
+                CurrentInnings === 2 
+                    ? AddSecondInningsShots 
+                    : CurrentInnings === 3 
+                        ? AddSuperOverShots 
+                        : CurrentInnings === 4 
+                            ? AddSuperOverSecondInningsShots 
+                            : AddShots;
+            
+            // Update the shots array
             const newObj = {
                 id: currentMatch?.id,
                 [innings]: {
@@ -1720,9 +1747,9 @@ const TestScoreBoard = () => {
                 }
             };
             setShots([...shots, newShot]);
-            setCurrentShot()
-            setWagonWheel(false)
-            dispatch(action(newObj))
+            setCurrentShot();
+            setWagonWheel(false);
+            dispatch(action(newObj));
         }
     }
 
@@ -3577,6 +3604,9 @@ const TestScoreBoard = () => {
             setRno(false)
         }
     }, [wicketReason.reason])
+
+    console.log(shots);
+    
 
     return (
         <>

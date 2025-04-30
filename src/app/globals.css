@@ -40,7 +40,7 @@
   --dots: #95a5a6;
   --singles: #f1c40f;
   --doubles: #2980b9;
-  --triples:  #e74c3c;
+  --triples: #e74c3c;
   --fours: #2ecc71;
   --fives: #8e44ad;
   --sixes: #f39c12;
@@ -117,7 +117,7 @@ body::-webkit-scrollbar {
   overflow-y: auto;
   width: 100%;
   scroll-behavior: smooth;
-  
+
   /* For Firefox */
   scrollbar-width: none;
   scrollbar-color: transparent transparent;

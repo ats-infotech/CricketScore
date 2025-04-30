@@ -1,5 +1,4 @@
 'use client'
-// import Custom404 from "@/app/not-found";
 import PlayerBoard from "@/pages/PlayerBoard/PlayerBoard";
 import { matchesState, ReplaceMatchSchedule } from "@/redux/slices/matchSlice";
 import { playersState } from "@/redux/slices/playersSlice";
@@ -39,7 +38,6 @@ const PlayerBoards = () => {
     })
     const [team1, setTeam1] = useState([])
     const [team2, setTeam2] = useState([])
-    // const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         let team1 = team_data?.data?.find((items) => items?.id === selectedMatch?.team1?.id)
@@ -49,7 +47,6 @@ const PlayerBoards = () => {
     },[team_data, selectedMatch])
 
     useEffect(() => {
-        // setLoading(true)
         let startedMatch = match_data.data?.find((item) => item?.id === params['slug'][0])
         let filterCurrentTournament = tournament_data?.data?.find((items) => items?.id === startedMatch?.tournamentId)
         setTournamentData(filterCurrentTournament)
@@ -75,7 +72,6 @@ const PlayerBoards = () => {
                 });
             }
         }
-        // setLoading(false)
     }, [params, match_data, team_data, tournament_data, team1, team2]);
 
 

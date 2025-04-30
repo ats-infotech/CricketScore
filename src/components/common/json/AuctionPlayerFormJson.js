@@ -53,7 +53,6 @@ export const AuctionPlayerForm = [
     },
     {
         label: 'Specification 1',
-        // placeholder: 'Enter Specification 1',
         type: 'text',
         key_name: 'specification1',
         show_type: 'select',
@@ -61,7 +60,6 @@ export const AuctionPlayerForm = [
     },
     {
         label: 'Specification 2',
-        // placeholder: 'Enter Specification 2',
         type: 'text',
         key_name: 'specification2',
         show_type: 'select',
@@ -69,7 +67,6 @@ export const AuctionPlayerForm = [
     },
     {
         label: 'Specification 3',
-        // placeholder: 'Enter Specification 3',
         type: 'text',
         key_name: 'specification3',
         show_type: 'select',

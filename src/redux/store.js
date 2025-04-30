@@ -13,6 +13,7 @@ import storage from './storage';
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: ['tournament', 'teams', 'players', 'matches', 'playerscoreboard', 'auction'],
 }
 
 const rootReducer = combineReducers({
@@ -31,10 +32,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: false,
-            // serializableCheck: {
-            //     ignoredActions: ['persist/PERSIST'],
-            //     ignoredActionPaths: ['payload.auction_time', 'payload.auction_date', 'auction.data.*.auction_date'],
-            // },
         }),
 });
+
 export const persistor = persistStore(store);

@@ -1,3 +1,4 @@
+'use client'
 import SvgIcon from "@/assets/icons/SvgIcon";
 import { CheckTournamentIsRunning, DateFormat, debounce } from "@/components/common/commomFunction";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
@@ -16,7 +17,6 @@ const pageTabs = [
     { title: 'All', value: 0 },
     { title: 'Tournament', value: 1 },
     { title: 'Upcoming', value: 2 },
-    // { title: 'Result', value: 3 },
 ]
 
 const tournamentTabs = [
@@ -47,7 +47,6 @@ const Tournament = ({ tournamentData, matchData, type }) => {
         (item?.tournament_name?.toLowerCase()?.includes(searchQuery) ||
             item?.tournament_location?.toLowerCase()?.includes(searchQuery) ||
             item?.ground?.toLowerCase()?.includes(searchQuery) ||
-            // item?.organizer_name?.toLowerCase()?.includes(searchQuery) ||
             item?.tournaments_category?.toLowerCase()?.includes(searchQuery))
         );
     };

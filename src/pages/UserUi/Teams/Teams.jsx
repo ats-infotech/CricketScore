@@ -1,11 +1,11 @@
 'use client'
 import ImageAvatar from "@/components/common/commonUi/ImageAvatar/ImageAvatar"
+import { teamsState } from "@/redux/slices/teamSlice"
 import { Box, Typography } from "@mui/material"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import './Teams.css'
 import { useSelector } from "react-redux"
-import { teamsState } from "@/redux/slices/teamSlice"
+import './Teams.css'
 
 const CommonSection = ({ data, teamlogo, teamname, matchData, letter, color }) => {
     let captain1Id = matchData?.post?.team1Captain || ''

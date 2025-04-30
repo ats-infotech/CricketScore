@@ -21,7 +21,6 @@ export const ImageBox = React.memo(({ src, title, width, height, onClick, isActi
                 '&:hover': {
                     border: '2px solid var(--text-white)',
                     boxShadow: 'var(--shadow-dark)',
-                    // padding: '22px',
                 },
                 cursor: 'pointer'
             }} onClick={onClick}>
