@@ -146,7 +146,6 @@ const LiveAuctionPage = ({ type }) => {
         handleMenuClose()
     }
 
-
     useEffect(() => {
         if (availablePlayers && !currentPlayer) {
             setCurrentPlayer(availablePlayers[0])
@@ -155,7 +154,7 @@ const LiveAuctionPage = ({ type }) => {
 
     // Effects
     useEffect(() => {
-        if (isAuctionCompleted) {
+        if (!isUser && isAuctionCompleted) {
             const newObj = {
                 id: auctionId,
                 currentPlayer: {
@@ -167,6 +166,10 @@ const LiveAuctionPage = ({ type }) => {
             dispatch(addCurrentPlayer(newObj))
             setOpenSettingModal(true)
             setOpen(true)
+        } else {
+            if (isUser) {
+                router.replace(`/auction-players/${auctiondata?.id}`)
+            }
         }
     }, [isAuctionCompleted])
 
