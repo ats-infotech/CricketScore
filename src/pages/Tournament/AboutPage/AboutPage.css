@@ -15,7 +15,8 @@
     height: calc(100vh - 400px);
     overflow-y: auto;
     margin: 0px auto;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
+    scrollbar-color: none none; 
     scrollbar-width: none; 
 }
 
@@ -25,15 +26,15 @@
 }
 
 .tournament_about_details::-webkit-scrollbar-track {
-    background: transparent;
+    background: none !important;
 }
 
 .tournament_about_details::-webkit-scrollbar-thumb {
-    background: transparent;
+    background: none !important;
 }
 
 .tournament_about_details::-webkit-scrollbar-corner {
-    background: transparent;
+    background: none !important;
 }
 
 .tournament_edit_button{

@@ -112,6 +112,8 @@ const LiveAuctionPage = ({ type }) => {
     const [isUnsold, setIsUnsold] = useState(false)
     const [open, setOpen] = useState(false)
     const [openSettingModal, setOpenSettingModal] = useState(false)
+    const [auctionComplete, setAuctionComplete] = useState(false)
+    const [resetAuction, setResetAuction] = useState(false)
     const auctionCompleted = openSettingModal || isAuctionCompleted
     const [reauctionUnsold, setReauctionUnsold] = useState(false)
 
@@ -167,11 +169,11 @@ const LiveAuctionPage = ({ type }) => {
             setOpenSettingModal(true)
             setOpen(true)
         } else {
-            if (isUser) {
+            if (isUser && isAuctionCompleted) {
                 router.replace(`/auction-players/${auctiondata?.id}`)
             }
         }
-    }, [isAuctionCompleted])
+    }, [isAuctionCompleted, isUser])
 
     useEffect(() => {
         const newTeams = teamState.data.filter(item => item?.tournamentId === auctiondata?.tournamentId &&
@@ -428,20 +430,30 @@ const LiveAuctionPage = ({ type }) => {
 
     function handleManualPlayerSelection() {
         if (selectManualPlayer) {
+            const resetState = {
+                teamId: null,
+                currentPlayer: selectManualPlayer,
+                bidPrice: auctiondata?.minimum_bid || 0
+            }
+            dispatch(addCurrentPlayer({
+                id: auctionId,
+                currentPlayer: resetState
+            }))
+            setCurrentBid(auctiondata?.minimum_bid || 0)
+            setCurrentTeamBidding(null)
             setCurrentPlayer(selectManualPlayer)
         }
         handleClose()
     }
 
-    const handleAuctionAction = async (id) => {
-        const resetState = {
-            teamId: null,
-            currentPlayer: availablePlayers[0],
-            bidPrice: auctiondata?.minimum_bid || 0
-        }
-        if (id === 'complete-auction') {
-            if (auctiondata?.soldPlayers?.length > 0) {
-
+    const handleAuctionComplete = async (type) => {
+        if (type === "Yes") {
+            const resetState = {
+                teamId: null,
+                currentPlayer: availablePlayers[0],
+                bidPrice: auctiondata?.minimum_bid || 0
+            }
+            if (auctiondata?.soldPlayers?.length > 0 && auctionComplete) {
                 const unSoldplayerIds = auctiondata?.unsoldPlayers?.length > 0 ? auctiondata?.unsoldPlayers.map(player => player?.unsoldPlayer) : [];
                 const playerIds = availablePlayers?.length > 0 ? availablePlayers.map(player => player?.id) : [];
                 let allIds = [...unSoldplayerIds, ...playerIds]
@@ -467,23 +479,47 @@ const LiveAuctionPage = ({ type }) => {
                         router.replace(`/mytournament/${auctiondata?.tournamentId}/auction`)
                     }
                 }
+            } else if (resetAuction) {
+                await dispatch(handleResetAuction({ id: auctionId }))
             }
+            await dispatch(addCurrentPlayer({
+                id: auctionId,
+                currentPlayer: resetState
+            }))
+            setCurrentPlayer(availablePlayers[0] || null)
+            setCurrentBid(auctiondata?.minimum_bid || 0)
+            setCurrentTeamBidding(null)
+        }
+        handleClose()
+        setAuctionComplete(false)
+        setResetAuction(false)
+    }
+
+    const handleAuctionAction = async (id) => {
+        const resetState = {
+            teamId: null,
+            currentPlayer: availablePlayers[0],
+            bidPrice: auctiondata?.minimum_bid || 0
+        }
+        if (id === 'complete-auction') {
+            setAuctionComplete(true)
         }
         else if (id === 'reauction-unsold') {
             await dispatch(handleReauctionUnsold({ id: auctionId }))
         }
         else if (id === 'reset-auction') {
-            await dispatch(handleResetAuction({ id: auctionId }))
+            setResetAuction(true)
         }
-
-        await dispatch(addCurrentPlayer({
-            id: auctionId,
-            currentPlayer: resetState
-        }))
-        setCurrentPlayer(availablePlayers[0] || null)
-        setCurrentBid(auctiondata?.minimum_bid || 0)
-        setCurrentTeamBidding(null)
-        handleClose()
+        if (id !== 'complete-auction' && id !== 'reset-auction') {
+            await dispatch(addCurrentPlayer({
+                id: auctionId,
+                currentPlayer: resetState
+            }))
+            setCurrentPlayer(availablePlayers[0] || null)
+            setCurrentBid(auctiondata?.minimum_bid || 0)
+            setCurrentTeamBidding(null)
+            handleClose()
+        }
     }
 
     // Render
@@ -642,7 +678,19 @@ const LiveAuctionPage = ({ type }) => {
             {/* Modals */}
             <CustomeModal open={open} bgColor={'var(--text-white)'}>
 
-                {!auctionCompleted ? (
+                {auctionComplete || resetAuction ? <Box className="auction_complete_warning">
+                    <Typography variant="body2" className="errorText">{`${auctionComplete ? 'Are you sure auction is completed?'
+                        : 'Are you sure you want to reset this auction?'}`}</Typography>
+                    <Box className="auction_complete_buttons">
+                        {
+                            ['Yes', 'No'].map((item, i) => {
+                                return (
+                                    <CustomeButton title={item} key={i} margin={'0px'} onClick={() => handleAuctionComplete(item)} />
+                                )
+                            })
+                        }
+                    </Box>
+                </Box> : !auctionCompleted ? (
                     <Box className='auction_modal'>
                         <Box className='auction-modal-header'>
                             <Typography variant="h6">

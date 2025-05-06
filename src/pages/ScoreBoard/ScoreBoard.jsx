@@ -2174,12 +2174,12 @@ const ScoreBoard = () => {
             }
 
             // if (target && !hasRunRef.current && (currentInnings !== 1 || currentInnings !== 4)) {
-            //     // setTarget({
-            //     //     runs: target + 1,
-            //     //     overs: parseInt(currentMatch?.totalovers) * 6,
-            //     //     totalruns: target + 1,
-            //     //     totalballs: parseInt(currentMatch?.totalovers) * 6
-            //     // })
+                // setTarget({
+                //     runs: target + 1,
+                //     overs: parseInt(currentMatch?.totalovers) * 6,
+                //     totalruns: target + 1,
+                //     totalballs: parseInt(currentMatch?.totalovers) * 6
+                // })
             // }
 
             if (currentOver && !hasRunRef.current) {

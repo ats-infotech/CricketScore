@@ -1,7 +1,6 @@
 'use client'
 import SvgDefs from "@/assets/icons/icons";
 import Reduxprovider from "@/redux/ReduxProvider";
-import { persistor, store } from "@/redux/store";
 import { Box } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 import { useParams } from "next/navigation";
@@ -39,14 +38,8 @@ export default function RootLayout({ children }) {
       <body>
         <SvgDefs />
         <ThemeProvider theme={theme}>
-          <Reduxprovider store={store} persistor={persistor}>
-            <Box sx={{
-              background: 'var(--background-forever) !important',
-              color: 'var(--primary-color)',
-              minHeight: '100vh',
-              maxWidth: 'var(--screen-max-width)',
-              margin: '0 auto'
-            }}>
+          <Reduxprovider>
+            <Box className='mobile-container'>
               <Box className={!shouldHideFooter && 'main-container'} id='mainContainer'>
                 {children}
               </Box>

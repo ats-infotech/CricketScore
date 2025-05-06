@@ -124,27 +124,31 @@
 
 /* For Safari, Chrome, Edge */
 .auction-team-section::-webkit-scrollbar,
+.info-btn-group::-webkit-scrollbar,
 .overflow-player::-webkit-scrollbar {
     width: 0px !important;
     height: 8px;
 }
 
 .auction-team-section::-webkit-scrollbar-track,
+.info-btn-group::-webkit-scrollbar-track,
 .overflow-player::-webkit-scrollbar-track {
-    background: transparent !important;
+    background: none !important;
 }
 
 .auction-team-section::-webkit-scrollbar-thumb,
+.info-btn-group::-webkit-scrollbar-thumb,
 .overflow-player::-webkit-scrollbar-thumb {
-    background-color: transparent !important;
+    background-color: none !important;
     border-radius: 10px !important;
-    border: 2px solid transparent !important;
+    border: 2px solid none !important;
 }
 
 /* Optional: Hover effect */
 .auction-team-section::-webkit-scrollbar-thumb:hover,
+.info-btn-group::-webkit-scrollbar-thumb:hover,
 .overflow-player::-webkit-scrollbar-thumb:hover {
-    background-color: transparent !important;
+    background-color: none !important;
 }
 
 .auction-team-section.skills {
@@ -499,11 +503,23 @@
     font-weight: 600;
 }
 
+/* Auction Complete Warning */
+.auction_complete_warning p{
+    font-weight: 500;
+    text-align: center;
+    margin-block: 20px;
+}
+
+.auction_complete_buttons{
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+    gap: 30px;
+}
 
 @media screen and (max-width:460px) {
     .live-auction {
         padding: 18px;
-        position: relative;
     }
 
     .auction-team {

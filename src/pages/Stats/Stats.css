@@ -55,8 +55,8 @@
 
 @media screen and (max-width: 320px) {
     .stats_card_section {
-        margin: 20px 20px 0px;
-        gap: 10px;
-        flex-wrap: wrap;
+        margin: 20px 20px 0px !important;
+        gap: 10px !important;
+        flex-wrap: wrap !important;
     }
 }

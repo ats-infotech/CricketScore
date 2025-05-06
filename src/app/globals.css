@@ -112,6 +112,15 @@ body::-webkit-scrollbar {
   scrollbar-width: none;
 } */
 
+.mobile-container {
+  width: 100%;
+  background: var(--background-forever) !important;
+  color: var(--primary-color);
+  max-width: var(--screen-max-width);
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
 .main-container {
   height: calc(100vh - 75px);
   overflow-y: auto;

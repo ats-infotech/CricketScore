@@ -46,34 +46,19 @@ const WagonWheel = ({ shots, onClick, type }) => {
                         const startX = 200;
                         const startY = 140;
                         const adjustedAngle = shot.angle + Math.PI / 2;
-                        const centerX = 200;
-                        const centerY = 200;
-                        const radius = 180;
-
-                        // Vector direction for shots
                         const dx = Math.cos(adjustedAngle);
                         const dy = Math.sin(adjustedAngle);
+                        const radius = 180;
 
-                        // Shot origin to circle center vector
-                        const vx = startX - centerX;
-                        const vy = startY - centerY;
+                        let endX = shot.clickX;
+                        let endY = shot.clickY;
 
-                        // Default end coordinates for non-4/6 shots
-                        let endX = shot.currentShot !== 4 && shot.currentShot !== 6 ? shot.clickX : 0;
-                        let endY = shot.currentShot !== 4 && shot.currentShot !== 6 ? shot.clickY : 0;
-
-                        // Ensure valid end coordinates
-                        if (isNaN(endX) || isNaN(endY)) {
-                            endX = startX;
-                            endY = startY;
-                        }
-
-                        // Logic for shots 4 and 6
                         if (shot.currentShot === 4 || shot.currentShot === 6) {
+                            const vx = startX - 200;
+                            const vy = startY - 200;
                             const A = dx * dx + dy * dy;
                             const B = 2 * (vx * dx + vy * dy);
                             const C = vx * vx + vy * vy - radius * radius;
-
                             const discriminant = B * B - 4 * A * C;
                             let t = 0;
                             if (discriminant >= 0) {
@@ -83,15 +68,14 @@ const WagonWheel = ({ shots, onClick, type }) => {
                                 t = Math.max(t1, t2);
                             }
 
-                            const extendLength = shot.currentShot === 4 ? 15 : -10; // 4 gets a bit extended
+                            const extendLength = shot.currentShot === 4 ? 15 : -10;
                             const scale = t + (shot.currentShot === 4 ? extendLength : -extendLength) / Math.sqrt(dx * dx + dy * dy);
                             endX = startX + dx * scale;
                             endY = startY + dy * scale;
 
-                            // Midpoint and control point for 6s
                             const midX = (startX + endX) / 2;
                             const midY = (startY + endY) / 2;
-                            const curveShift = 100; // Shift curve for the six
+                            const curveShift = 100;
                             const controlX = midX;
                             const controlY = midY - curveShift;
 
@@ -119,19 +103,14 @@ const WagonWheel = ({ shots, onClick, type }) => {
                             );
                         }
 
-                        // Logic for other shots (non-4/6)
-                        const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-                        const scale = distance / 180; // Regular shots scale
-                        const scaledEndX = startX + dx * scale * 180;
-                        const scaledEndY = startY + dy * scale * 180;
-
+                        // For other shots (not 4 or 6), draw directly to click point
                         return (
                             <g key={index}>
                                 <line
                                     x1={startX}
                                     y1={startY}
-                                    x2={scaledEndX}
-                                    y2={scaledEndY}
+                                    x2={endX}
+                                    y2={endY}
                                     stroke={shot.currentShot > 6 ? shotsColors[7] : shotsColors[shot.currentShot]}
                                     strokeWidth={1.5}
                                     strokeLinecap="round"
@@ -140,27 +119,8 @@ const WagonWheel = ({ shots, onClick, type }) => {
                         );
                     })}
 
-                    {/* Guide lines */}
-                    {/* <line x1="170" x2="230" y1={"145"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="180" x2="220" y1={"125"} y2={"125"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="220" x2="220" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="210" x2="210" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="180" x2="180" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="190" x2="190" y1={"125"} y2={"145"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-
-                    <line x1="170" x2="230" y1={"250"} y2={"250"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="180" x2="220" y1={"270"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="220" x2="220" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="210" x2="210" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="180" x2="180" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" />
-                    <line x1="190" x2="190" y1={"250"} y2={"270"} strokeWidth={2} y="130" stroke="var(--text-white)" /> */}
-
                     {/* Batter Position */}
                     <circle cx="200" cy="140" r="5" fill="blue" />
-
-                    {/* Offside & Legside labels */}
-                    {/* <text x="55" y="205" fill="white" fontSize="16" fontWeight="bold">OFFSIDE</text> */}
-                    {/* <text x="275" y="205" fill="white" fontSize="16" fontWeight="bold">LEGSIDE</text> */}
                 </svg>
             </Box>
         </Box>

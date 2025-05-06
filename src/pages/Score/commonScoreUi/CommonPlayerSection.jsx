@@ -1,3 +1,6 @@
+import SvgIcon from "@/assets/icons/SvgIcon"
+import { Edit } from "@mui/icons-material"
+import { Box, Typography } from "@mui/material"
 import React from "react"
 
 const CommonPlayerSection = ({ name, run, ball, activeStrike, type, icon, onClick, balls, length, wickets, post }) => {

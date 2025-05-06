@@ -74,7 +74,7 @@ const TournamentCategory = () => {
       case 'stats':
         return <Stats tournamentData={tournamentData} />
       case 'teams':
-        return <AboutPage tournamenId={id} teamData={teamData} type={'userteams'} />;
+        return <AboutPage tournamentData={tournamentData} tournamenId={id} teamData={teamData} type={'userteams'} />;
       case 'pointable':
         return <PointTable teamData={teamData} tournamentData={tournamentData} />;
       case 'match':

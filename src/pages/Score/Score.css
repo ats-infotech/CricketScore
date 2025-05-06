@@ -99,7 +99,7 @@
     justify-content: space-between;
     width: 100%;
     gap: 20px;
-    height: calc(100vh - 220px);
+    /* height: calc(100vh - 220px); */
 }
 
 .score_player_card_sub_section {

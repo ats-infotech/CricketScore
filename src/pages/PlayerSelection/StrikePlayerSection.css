@@ -72,7 +72,7 @@
 
 .strike_player_selection_box .strike_player_row_box .strike_player_box .container .checkmark {
     border: 1px solid var(--text-white);
-    box-shadow: var(--shadow-grey-light);
+    /* box-shadow: var(--shadow-grey-light); */
 }
 
 .strike_player_selection_box .strike_player_row_box .strike_player_box .box_column .strike_player_image {
