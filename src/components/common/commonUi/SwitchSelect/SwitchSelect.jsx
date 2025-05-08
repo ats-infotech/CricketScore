@@ -19,7 +19,7 @@ const SwitchSelect = ({ options, defaultSelected, onChange }) => {
             exclusive
             onChange={handleChange}
             sx={{
-                backgroundColor: 'var(--text-white)',
+                backgroundColor: 'var(--color-white)',
                 borderRadius: "30px",
                 padding: "5px",
                 boxShadow: 'var(--shadow-grey)',
@@ -35,14 +35,14 @@ const SwitchSelect = ({ options, defaultSelected, onChange }) => {
                             borderRadius: "30px !important",
                             padding: "5px 20px",
                             border: "none",
-                            color: defaultSelected === index ? "var(--text-white) !important" : "var(--primary-color)",
-                            backgroundColor: defaultSelected === index ? "var(--primary-color) !important" : 'transparent',
+                            color: defaultSelected === index ? "var(--color-white) !important" : "var(--theme-primary)",
+                            backgroundColor: defaultSelected === index ? "var(--theme-primary) !important" : 'transparent',
                             transition: "0.3s",
                             "&.Mui-selected": {
                                 borderRadius: "30px",
                             },
                             "&:hover": {
-                                backgroundColor: defaultSelected === index ? "var(--primary-color)" : "transparent",
+                                backgroundColor: defaultSelected === index ? "var(--theme-primary)" : "transparent",
                             },
                         }}
                         disableRipple

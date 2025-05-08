@@ -20,9 +20,12 @@ const MyTournament = () => {
     }, [tornament_data]);
 
     return (
-        <>
-            <Tournament type={'admin'} tournamentData={tournamentData || []} matchData={matchData} openDrawer={() => router.push('registeredTornaments')} />
-        </>
+        <Tournament
+            type={'admin'}
+            tournamentData={tournamentData || []}
+            matchData={matchData}
+            openDrawer={() => router.push('registeredTornaments')}
+        />
     )
 }
 

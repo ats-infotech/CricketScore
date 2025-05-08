@@ -29,7 +29,12 @@ const EditMatch = () => {
     }, [tournament_data, params, team_data, matchData]);
 
     return (
-        <CreateMatchPage tournament={tournament} teams={teams} type={"edit"} matchData={matchData} />
+        <CreateMatchPage
+            tournament={tournament}
+            teams={teams}
+            type={"edit"}
+            matchData={matchData}
+        />
     )
 
 }

@@ -11,8 +11,7 @@ const initialState = {
 const playerScoreBoardSlice = createSlice({
     name: 'playerscoreboard',
     initialState,
-    reducers: {
-    }
+    reducers: {}
 })
 
 export const playerScoreState = (state) => state.playerscoreboard

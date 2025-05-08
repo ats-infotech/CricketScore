@@ -122,7 +122,7 @@
 .group_Text_circle_section {
     height: 150px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-bottom-right-radius: 40px;
     border-bottom-left-radius: 40px;
     box-shadow: var(--shadow-grey-light);
@@ -142,15 +142,15 @@
 }
 
 .group_common_main_section p {
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
     font-weight: 600 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     margin-block: 10px !important;
     text-align: center !important;
 }
 
 .group_Text_circle p {
-    font-size: var(--large) !important;
+    font-size: var(--fs-xl) !important;
 }
 
 .group_common_sub_section {
@@ -161,7 +161,7 @@
 .group_checkbox_section {
     height: 28px;
     width: 28px;
-    border: 1px solid var(--text-white);
+    border: 1px solid var(--color-white);
     border-radius: 50%;
     box-shadow: none;
     display: flex;
@@ -183,14 +183,14 @@
     justify-content: center;
     align-items: center;
     z-index: 2; */
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
 }
 
 .group_team_title {
-    color: var(--text-grey);
+    color: var(--color-grey-300);
     margin-left: 10px !important;
     font-weight: 400;
-    font-size: var(--small);
+    font-size: var(--fs-md);
 }
 
 .group_final_button {
@@ -211,9 +211,9 @@
     margin: 40px 0 0 0;
     padding: 30px;
     border-radius: 15px;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     position: relative;
-    box-shadow: var(--group-box-shadow);
+    box-shadow: var(--shadow-group-box);
 }
 
 .group_action_section {
@@ -229,7 +229,7 @@
 .group_actions {
     width: 32px;
     height: 32px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     box-shadow: var(--shadow-grey);
     border-radius: 70px;
     display: flex;
@@ -239,21 +239,21 @@
 
 .group_actions:nth-child(1) {
     background-color: transparent;
-    border: 1px solid var(--black);
+    border: 1px solid var(--color-black);
 }
 
 .group_actions svg {
-    font-size: var(--semi-normal) !important;
+    font-size: var(--fs-lg) !important;
     cursor: pointer;
 }
 
 .group_actions svg:nth-child(1) {
-    color: var(--black);
+    color: var(--color-black);
 }
 
 .Selected_teams_main_section .Group_name_field p {
-    color: var(--text-white) !important;
-    font-size: var(--normal) !important;
+    color: var(--color-white) !important;
+    font-size: var(--fs-base) !important;
     font-weight: 500 !important;
     text-align: center;
 }
@@ -275,7 +275,7 @@
     gap: 20px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch !important;
-    scrollbar-color: var(--text-white) transparent;
+    scrollbar-color: var(--color-white) transparent;
     scrollbar-width: thin;
 }
 
@@ -312,8 +312,8 @@
 }
 
 .Selected_team_section .team_box p {
-    color: var(--text-white) !important;
-    font-size: var(--small) !important;
+    color: var(--color-white) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
     text-align: center;
     margin: 0;
@@ -328,7 +328,7 @@
 .add_team_in_group .team_group_box {
     height: 100px;
     width: 100px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 15px;
     box-shadow: var(--shadow-grey-light);
     display: flex;
@@ -343,20 +343,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--black);
+    border: 1px solid var(--color-black);
     border-radius: 100px;
 }
 
 .add_team_in_group .team_group_box .svgBox svg {
     width: 20px;
     height: 20px;
-    color: var(--black);
+    color: var(--color-black);
 }
 
 .add_team_in_group p {
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
     font-weight: 600 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     margin: 20px 0 10px 0 !important;
     text-align: center !important;
 }

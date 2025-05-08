@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 const AuctionMvp = () => {
     const { auctionId } = useParams()
-    
+
     const teams = useSelector(teamsState);
     const player_data = useSelector(playersState);
     const auction_data = useSelector(auctionState)
@@ -29,7 +29,12 @@ const AuctionMvp = () => {
     }, [auctionId, teams?.data, player_data?.data, auction_data?.data]);
 
     return (
-        <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} type='page'/>
+        <AuctionMVP
+            auctionData={auctionData}
+            teamData={teamData}
+            playerData={playerData}
+            type='page'
+        />
     )
 }
 

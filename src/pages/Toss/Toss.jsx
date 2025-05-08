@@ -274,22 +274,15 @@ const Toss = () => {
                         }
                         {gif.firework && !gif.result && !gif.toss &&
                             <Box sx={{ position: 'absolute', display: 'flex', top: 0 }}>
-                                <Box>
-                                    <Box sx={{ height: '150px', width: '250px' }}>
-                                        <Image unoptimized src={leftfireworkgif} alt="gif" height={500} width={500} />
+                                {[leftfireworkgif, fireworkgif].map((src, i) => (
+                                    <Box key={i}>
+                                        {[0, 1].map(j => (
+                                            <Box key={j} sx={{ height: '150px', width: '250px' }}>
+                                                <Image unoptimized src={src} alt="gif" height={500} width={500} />
+                                            </Box>
+                                        ))}
                                     </Box>
-                                    <Box sx={{ height: '150px', width: '250px' }}>
-                                        <Image unoptimized src={leftfireworkgif} alt="gif" height={500} width={500} />
-                                    </Box>
-                                </Box>
-                                <Box>
-                                    <Box sx={{ height: '150px', width: '250px' }}>
-                                        <Image unoptimized src={fireworkgif} alt="gif" height={500} width={500} />
-                                    </Box>
-                                    <Box sx={{ height: '150px', width: '250px' }}>
-                                        <Image unoptimized src={fireworkgif} alt="gif" height={500} width={500} />
-                                    </Box>
-                                </Box>
+                                ))}
                             </Box>
                         }
                         {
@@ -314,14 +307,14 @@ const Toss = () => {
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', justifyContent: 'center', padding: '0px 30px 20px 30px' }}>
-                                <CustomeButton border={'1px solid var(--primary-color)'} title={'Retoss'}
-                                    width={'100%'} bgColor={'var(--text-white)'} color={'var(--primary-color)'}
-                                    hoverbg={'var(--primary-color)'} hovertext={'var(--text-white)'}
+                                <CustomeButton border={'1px solid var(--theme-primary)'} title={'Retoss'}
+                                    width={'100%'} bgColor={'var(--color-white)'} color={'var(--theme-primary)'}
+                                    hoverbg={'var(--theme-primary)'} hovertext={'var(--color-white)'}
                                     onClick={handleRetoss}
                                 />
                             </Box>
                             <Box sx={{ padding: '0px 30px 20px 30px' }}>
-                                <CustomeButton title={`Let's Play`} width={'100%'} bgColor={'var(--blue-background)'} onClick={handleMatchTossData} />
+                                <CustomeButton title={`Let's Play`} width={'100%'} bgColor={'var(--theme-blue-bg)'} onClick={handleMatchTossData} />
                             </Box>
                         </>
                     }
@@ -334,7 +327,7 @@ const Toss = () => {
                         onClose={tossStep === 1 ? handleToss : () => toggleDrawer(false)}
                         // onOpen={() => toggleDrawer(false)}
                         closeIconShow={tossStep === 1}
-                        backgroundColor={'var(--box-blue)'}
+                        backgroundColor={'var(--theme-box-blue)'}
                         sx={{
                             '& .MuiDrawer-paper': {
                                 borderRadius: '40px 40px 0 0',
@@ -360,7 +353,7 @@ const Toss = () => {
                                 <CustomeButton
                                     onClick={handleToss}
                                     title={tossStep === 0 ? 'Next' : tossStep === 1 ? 'Toss' : 'Continue'}
-                                    bgColor={'var(--primary-color)'}
+                                    bgColor={'var(--theme-primary)'}
                                     width={'180px'}
                                     height={'46px'}
                                     disabled={!selectedToss && tossStep === 0}

@@ -49,8 +49,8 @@
 
 .playerboard_heading_section_title {
     font-weight: 600 !important;
-    color: var(--primary-color);
-    font-size: var(--normal) !important;
+    color: var(--theme-primary);
+    font-size: var(--fs-base) !important;
 }
 
 /* ---------- Team Section ---------- */
@@ -95,8 +95,8 @@
 }
 
 .playerboard_player_selection_section p {
-    font-size: var(--semi-normal) !important;
-    color: var(--primary-color) !important;
+    font-size: var(--fs-lg) !important;
+    color: var(--theme-primary) !important;
     font-weight: 500 !important;
 }
 

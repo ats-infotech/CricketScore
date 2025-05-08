@@ -46,9 +46,9 @@
 }
 
 .select_side_section p {
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
     font-weight: 500 !important;
-    font-size: var(--normal) !important;
+    font-size: var(--fs-base) !important;
     text-align: center;
 }
 
@@ -70,14 +70,14 @@
 }
 
 .select_side_card{
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
     text-align: center !important;
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
 }
 
 .select_active_side_card{
-    font-size: var(--normal) !important;
+    font-size: var(--fs-base) !important;
     color: var(--text-primary) !important;
     font-weight: 500 !important;
     text-align: center !important;
@@ -101,9 +101,9 @@
 }
 
 .side_selection_title p {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     text-align: center;
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
     margin-bottom: 25px;
 }

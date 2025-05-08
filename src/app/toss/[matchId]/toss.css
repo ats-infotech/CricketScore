@@ -1,9 +1,9 @@
-.toss_main_section{
+.toss_main_section {
     height: calc(100vh - 80px);
     overflow: auto;
 }
 
-.toss_team_section{
+.toss_team_section {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,7 +11,7 @@
     flex-direction: column;
 }
 
-.toss_winner_team_section{
+.toss_winner_team_section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,18 +20,18 @@
     z-index: 10;
 }
 
-.select_side_section{
+.select_side_section {
     padding: 25px 0 0 0;
 }
 
 .select_side_section p {
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
     font-weight: 500 !important;
-    font-size: var(--normal) !important;
+    font-size: var(--fs-base) !important;
     text-align: center;
 }
 
-.select_side_card_section{
+.select_side_card_section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,15 +39,15 @@
     padding: 45px 0;
 }
 
-.select_side_card{
-    font-size: var(--small) !important;
+.select_side_card {
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
     text-align: center !important;
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
 }
 
-.select_active_side_card{
-    font-size: var(--normal) !important;
+.select_active_side_card {
+    font-size: var(--fs-base) !important;
     color: var(--text-primary) !important;
     font-weight: 500 !important;
     text-align: center !important;
@@ -55,14 +55,14 @@
 
 /* ----------- Drawer ---------- */
 
-.side_selection_section{
+.side_selection_section {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
 }
 
-.side_selection_button_section{
+.side_selection_button_section {
     margin: 20px 0 0;
     width: 100%;
     display: flex;
@@ -71,16 +71,16 @@
 }
 
 .side_selection_title p {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     text-align: center;
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
     margin-bottom: 25px;
 }
 
 /* --------- Coin Flip ---------- */
 
-.coin_flip_main_section{
+.coin_flip_main_section {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -89,11 +89,12 @@
     left: 0;
     right: 0;
     background: #0000008C;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     z-index: 100;
 }
 
-.coin_flip_section{
+.coin_flip_section {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -104,7 +105,7 @@
     align-items: center;
 }
 
-.coin_flip{
+.coin_flip {
     width: 250px;
     z-index: 100%;
 }

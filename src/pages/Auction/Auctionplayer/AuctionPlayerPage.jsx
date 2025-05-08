@@ -83,7 +83,7 @@ const AuctionPlayerPage = ({ tournamentData, playerData, isUser = false }) => {
                 <CustomeButton
                     width={"70%"}
                     title="Add Player"
-                    bgColor={"var(--primary-color)"}
+                    bgColor={"var(--theme-primary)"}
                     onClick={() => router.push(`/create-auction-player/${tournamentData?.id}`)}
                 />
             </Box>}

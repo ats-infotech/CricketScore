@@ -38,7 +38,7 @@
     opacity: 0.5;
 }
 .banner_main::after{
-    background-color:var(--primary-color);
+    background-color:var(--theme-primary);
     content: '';
     position: absolute;
     left: 0;
@@ -80,8 +80,8 @@
 
 .TossWinner p {
     font-family: var(--primary-font);
-    color: var(--text-white);
-    font-size: var(--ex-small);
+    color: var(--color-white);
+    font-size: var(--fs-sm);
     font-weight: 600;
 }
 
@@ -111,28 +111,28 @@
 }
 
 .logo_image_box .logo_child_box .title_name {
-    font-size: var(--semi-normal);
-    color: var(--text-white);
+    font-size: var(--fs-lg);
+    color: var(--color-white);
 }
 
 .logo_image_box .logo_child_box .score_number {
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     color: var(--text-lightgrey);
 }
 
 .logo_image_box .logo_superover_child_box .title_name {
-    font-size: var(--normal);
-    color: var(--text-white);
+    font-size: var(--fs-base);
+    color: var(--color-white);
 }
 
 .logo_image_box .logo_superover_child_box .score_number {
-    font-size: var(--ex-ex-small);
+    font-size: var(--fs-xs);
     color: var(--text-lightgrey);
 }
 
 .team_name{
-    font-size: var(--ex-small) !important;
-    color: var(--text-white);
+    font-size: var(--fs-sm) !important;
+    color: var(--color-white);
     text-align: center !important;
     margin-top: 5px !important;
     font-weight: 500 !important;

@@ -60,7 +60,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--linear-gradient);
+    background: var(--gradient-fade-to-primary);
 }
 
 .create_team_banner .box_child {
@@ -83,13 +83,13 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1;
-    box-shadow: var(--shadow-light);
+    box-shadow: var(--shadow-md);
     background-size: cover;
     background-position: top center;
     margin: 0 auto 20px auto;
@@ -98,14 +98,14 @@
 .team_selection_Box .selecte_team_logo svg {
     width: 30px;
     height: 30px;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .team_selection_Box p.describe {
     font-family: var(--primary-font);
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     font-weight: 600;
-    color: var(--text-white);
+    color: var(--color-white);
     z-index: 1;
     text-align: center;
 }
@@ -152,16 +152,16 @@
 
 .show_all_Team .Team_box p {
     font-family: var(--primary-font);
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     font-weight: 600;
-    color: var(--text-white);
+    color: var(--color-white);
     z-index: 1;
     text-align: center;
     padding: 10px 0;
 }
 
 .show_all_Team .Team_box .team_logo_box {
-    box-shadow: var(--shadow-dark);
+    box-shadow: var(--shadow-lg);
     width: 80px;
     height: 80px;
     border-radius: 100px;
@@ -195,7 +195,7 @@
 .show_all_Team .Team_box .team_logo_box .checkIcon svg {
     width: 50px;
     height: 50px;
-    color: var(--text-white);
+    color: var(--color-white);
     z-index: 1;
 }
 
@@ -211,8 +211,8 @@
 }
 
 .show_all_add_button p {
-    font-size: var(--small) !important;
-    color: var(--wicket) !important;
+    font-size: var(--fs-md) !important;
+    color: var(--cricket-wicket) !important;
     text-align: center;
     font-weight: 500 !important;
 }

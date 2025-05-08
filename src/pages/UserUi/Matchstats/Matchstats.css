@@ -36,7 +36,7 @@
 .matchstats_top3_section{
     height: 345px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 30px;
     padding: 20px;
     display: flex;
@@ -83,7 +83,7 @@
 }
 
 .matchstats_top3 h5{
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     color: var(--text-lightgrey) !important;
     font-weight: 500 !important;
     text-align: center;
@@ -91,22 +91,22 @@
 }
 
 .matchstats_top3 h6{
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     color: var(--text-lightgrey) !important;
     font-weight: 500 !important;
     text-align: center;
 }
 
 .matchstats_top3 p{
-    font-size: var(--semi-normal) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-lg) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
     text-align: center;
 }
 
 .matchstats_top1 h5, .matchstats_top1 h6{
-    font-size: var(--normal) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-base) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
     text-align: center;
     margin: 10px 0 0px 0;
@@ -117,16 +117,16 @@
 }
 
 .matchstats_top1 p{
-    font-size: var(--ex-large) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-2xl) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
     text-align: center;
 }
 
 .mvp_title p{
-    font-size: var(--semi-normal) !important;
+    font-size: var(--fs-lg) !important;
     font-weight: 500 !important;
-    color: var(--primary-color);
+    color: var(--theme-primary);
     margin-top: 20px;
 }
 
@@ -148,26 +148,26 @@
 }
 
 .mvp_stats_section p{
-    font-size: var(--normal) !important;
+    font-size: var(--fs-base) !important;
     font-weight: 500 !important;
-    color: var(--primary-color);
+    color: var(--theme-primary);
 }
 
 .mvp_stats_section span{
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 500 !important;
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
     margin-bottom: 5px;
 }
 
 .mvp_stats p{
-    font-size: var(--ex-ex-small) !important;
+    font-size: var(--fs-xs) !important;
     font-weight: 600 !important;
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
 }
 
 .mvp_divider{
-    border: 1px solid var(--primary-color) !important;
+    border: 1px solid var(--theme-primary) !important;
     max-height: 15px;
 }
 
@@ -180,7 +180,7 @@
 
 @media screen and (max-width: 410px) {
     .mvp_stats p{
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
     .mvp_all_players_stats_section{
         padding: 0 0px;
@@ -212,6 +212,6 @@
         width: 80px;
     }
     .mvp_stats p{
-        font-size: var(--ex-ex-ex-small) !important;
+        font-size: var(--fs-2xs) !important;
     }
 }

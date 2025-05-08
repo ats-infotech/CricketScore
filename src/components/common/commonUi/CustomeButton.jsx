@@ -17,9 +17,9 @@ const CustomeButton = ({ icon, title, width, height, bgColor, borderRadius, boxS
             variant='contained'
             className="custome_button"
             sx={{
-                backgroundColor: !disabled ? bgColor ? bgColor : 'var(--blue-background)' : 'var(--light-grey) !important',
+                backgroundColor: !disabled ? bgColor ? bgColor : 'var(--theme-blue-bg)' : 'var(--color-grey-200) !important',
                 borderRadius: borderRadius ? borderRadius : '10px',
-                color: !disabled ? color ? color : 'var(--text-white)' : 'var(--gray) !important',
+                color: !disabled ? color ? color : 'var(--color-white)' : 'var(--color-grey-400) !important',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
@@ -35,13 +35,13 @@ const CustomeButton = ({ icon, title, width, height, bgColor, borderRadius, boxS
                 fontSize: fontSize ? fontSize : '14px',
                 margin: margin ? margin : '0 auto',
                 '&:hover': {
-                    // backgroundColor: hover === 'none' ? bgColor : hoverbg ? hoverbg : !disabled ? 'var(--secondary-color)' : '',
-                    // color: hover === 'none' ? color : hovertext ? hovertext : !disabled ? 'var(--text-white)' : '',
+                    // backgroundColor: hover === 'none' ? bgColor : hoverbg ? hoverbg : !disabled ? 'var(--theme-secondary)' : '',
+                    // color: hover === 'none' ? color : hovertext ? hovertext : !disabled ? 'var(--color-white)' : '',
                     boxShadow: 'none',
                 },
                 '&:disabled': {
-                    backgroundColor: 'var(--light-grey) !important',
-                    color: 'var(--gray) !important'
+                    backgroundColor: 'var(--color-grey-200) !important',
+                    color: 'var(--color-grey-400) !important'
                 },
                 border: border ? border : 'none',
             }}

@@ -40,9 +40,9 @@
 .match_card_sum {
     width: 100%;
     max-width: 600px;
-    box-shadow: var(--group-box-shadow) !important;
+    box-shadow: var(--shadow-group-box) !important;
     border-radius: 10px;
-    background-color: var(--box-blue) !important;
+    background-color: var(--theme-box-blue) !important;
     padding: 10px;
     border-radius: 15px !important;
 }
@@ -55,17 +55,17 @@
 }
 
 .innings_title {
-    font-size: var(--normal) !important;
+    font-size: var(--fs-base) !important;
     font-weight: bold;
     text-align: center;
-    color: var(--text-white);
+    color: var(--color-white);
     font-family: var(--primary-font) !important;
 }
 
 .info {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
-    color: var(--text-white);
+    color: var(--color-white);
     text-align: center;
     font-family: var(--primary-font) !important;
     margin: 5px 0 !important;
@@ -73,6 +73,6 @@
 
 @media screen and (max-width: 350px) {
     .info {
-        font-size: var(--ex-small) !important;
+        font-size: var(--fs-sm) !important;
     }
 }

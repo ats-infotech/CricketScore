@@ -60,13 +60,13 @@ const GroupPage = () => {
     const [deletedData, setDeletedData] = useState(null)
     const [editId, setEditId] = useState('')
     const [processing, setProcessing] = useState(false)
-    
+
     const [loading, setLoading] = useState(false)
     // redux data
     const team_data = useSelector(teamsState)
     const tournament_data = useSelector(tournamentState)
     const addTeamFromGroup = JSON.parse(localStorage.getItem('addTeamFromGroup') || 'null')
-    const dataFromGroup = JSON.parse(localStorage.getItem('dataFromGroup')|| 'null')
+    const dataFromGroup = JSON.parse(localStorage.getItem('dataFromGroup') || 'null')
     const actionInTeamFromGroup = localStorage.getItem('actionInTeamFromGroup')
 
     const handleClose = () => {
@@ -147,10 +147,10 @@ const GroupPage = () => {
             const newTeams = prev.Teams.includes(teamId)
                 ? prev.Teams.filter(id => id !== teamId)
                 : [...prev.Teams, teamId];
-    
+
             return { ...prev, Teams: newTeams };
         });
-    
+
         setGroupData((prev) => {
             const hasError = prev.Teams.length >= 2;
             setErrors(!hasError);
@@ -158,7 +158,7 @@ const GroupPage = () => {
                 ...prevError,
                 group: hasError ? '' : ''
             }));
-    
+
             return prev;
         });
     }
@@ -220,8 +220,8 @@ const GroupPage = () => {
         setEdit(false)
         setErrors(false)
         setErrorMessage({
-            input:'',
-            group:''
+            input: '',
+            group: ''
         })
         setActiveTab(0)
         setGroupData({
@@ -319,17 +319,17 @@ const GroupPage = () => {
             }} />
             {activeTab === 0 &&
                 <Box className={`all_groups`}>
-                    {loading && <Loader/>}
+                    {loading && <Loader />}
                     {
                         tournamentGroupData?.length > 0 ? tournamentGroupData?.map((items, i) => {
                             return (
-                              <Box key={i} className='Selected_teams_main_section'>
+                                <Box key={i} className='Selected_teams_main_section'>
                                     <Box className='group_action_section'>
                                         <Box className='group_actions' onClick={() => handleEdit(items)}>
                                             <Edit />
                                         </Box>
                                         <Box className='group_actions' onClick={() => handleDeleteInfo(items)}>
-                                            <Delete sx={{ color: 'var(--text-red)!important' }} />
+                                            <Delete sx={{ color: 'var(--color-red)!important' }} />
                                         </Box>
                                     </Box>
                                     <Box className='Group_name_field'>
@@ -344,7 +344,7 @@ const GroupPage = () => {
                                                 return (
                                                     <Box className='team_box' key={i}>
                                                         <Box className={`Selected_teams ${items?.teams.length <= 2 && 'activeSize'}`}>
-                                                            {team?.team_logo && <Image src={`/${team?.team_logo}`} alt="team" height={500} width={500} unoptimized/>}
+                                                            {team?.team_logo && <Image src={`/${team?.team_logo}`} alt="team" height={500} width={500} unoptimized />}
                                                             {!team?.team_logo && <ImageAvatar text={team?.letter} bgColor={team?.team_color} borderRadius={'10px'} />}
                                                         </Box>
                                                         <Typography variant="body2">{team?.team_name}</Typography>
@@ -410,7 +410,7 @@ const GroupPage = () => {
                                             <Typography variant="body2">{teamName}</Typography>
                                             <Box className='group_common_sub_section'>
                                                 <Box className={`group_checkbox_section ${isSelect ? 'active' : ''}`}>
-                                                    {isSelect && <SvgIcon id={'trueIcon'} height={20} width={20} style={{ color: 'var(--text-white)' }} />}
+                                                    {isSelect && <SvgIcon id={'trueIcon'} height={20} width={20} style={{ color: 'var(--color-white)' }} />}
                                                 </Box>
                                             </Box>
                                         </Box>
@@ -425,8 +425,19 @@ const GroupPage = () => {
                 {
                     activeTab === 0 && tournamentGroupData?.length > 0 ?
                         <>
-                            <CustomeButton width={'50%'} title={"Add Group"} bgColor={'var(--text-white)'} color={'var(--primary-color)'} border={'1px solid var(--primary-color)'} onClick={handleAddClick} />
-                            <CustomeButton width={tournamentGroupData?.length > 0 ? '50%' : '80%'} title={"Next"} onClick={handleComplete} />
+                            <CustomeButton
+                                width={'50%'}
+                                title={"Add Group"}
+                                bgColor={'var(--color-white)'}
+                                color={'var(--theme-primary)'}
+                                border={'1px solid var(--theme-primary)'}
+                                onClick={handleAddClick}
+                            />
+                            <CustomeButton
+                                width={tournamentGroupData?.length > 0 ? '50%' : '80%'}
+                                title={"Next"}
+                                onClick={handleComplete}
+                            />
                         </>
                         :
                         activeTab === 1 && <CustomeButton

@@ -14,16 +14,20 @@ const AutoMatchSchedule = () => {
     const tornamentdata = useSelector(tournamentState)
     const teamdata = useSelector(teamsState)
     const matchdata = useSelector(matchesState)
-    
+
     useEffect(() => {
         let filterTournament = tornamentdata?.data.find((item) => item?.id === params?.tournamentId)
         let filterMatches = teamdata?.data.filter((item) => item?.tournamentId === params?.tournamentId)
         setTeams(filterMatches)
         setTournament(filterTournament)
     }, [params]);
-    
+
     return (
-        <AutoMatchSchedulePage teamData={teams} tournamentId={params?.tournamentId} tournament={tournament}/>
+        <AutoMatchSchedulePage
+            teamData={teams}
+            tournamentId={params?.tournamentId}
+            tournament={tournament}
+        />
     )
 }
 

@@ -25,7 +25,7 @@
 }
 
 .teamlink_main button {
-  background-color: var(--primary-color);
+  background-color: var(--theme-primary);
 }
 
 .teams_data_box {
@@ -52,7 +52,7 @@
     align-items: center;
     gap: 20px;
     padding: 15px;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 10px;
     margin-bottom: 15px;
     justify-content: space-between;
@@ -72,7 +72,7 @@
 .teamDetails::before{
     content: '';
     position: absolute;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     filter: blur(135.5px);
     height: 50px;
     width: 70px;
@@ -85,15 +85,15 @@
 .teamBox .teamDetails h6 {
     font-family: var(--primary-font);
     font-weight: 500;
-    font-size: var(--small);
-    color: var(--text-white);
+    font-size: var(--fs-md);
+    color: var(--color-white);
     margin-bottom: 5px;
 }
 
 .teamBox .teamDetails p {
     font-family: var(--primary-font);
     font-weight: 500;
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     color: var(--text-lightgrey);
     display: flex;
     /* align-items: center; */
@@ -112,7 +112,7 @@
     align-items: center;
     gap: 20px;
     padding: 20px;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 10px;
     margin-bottom: 15px;
     justify-content: space-between;
@@ -138,16 +138,16 @@
 .userteamBox .teamDetails h6 {
     font-family: var(--primary-font);
     font-weight: 500;
-    font-size: var(--ex-small);
-    color: var(--text-white);
+    font-size: var(--fs-sm);
+    color: var(--color-white);
     margin-bottom: 5px;
 }
 
 .userteamBox .teamDetails p {
     font-family: var(--primary-font);
     font-weight: 500;
-    font-size: var(--ex-small);
-    color: var(--text-white);
+    font-size: var(--fs-sm);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -156,7 +156,7 @@
 .userteamBox .teamDetails p svg {
     width: 14px;
     height: 14px;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .userteamBox .AddPlayerTag {
@@ -171,20 +171,20 @@
 .userteamBox .AddPlayerTag svg {
     width: 18px;
     height: 18px;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .userteamBox .AddPlayerTag p {
     font-family: var(--primary-font);
     font-weight: 500;
-    font-size: var(--ex-ex-small);
-    color: var(--text-white);
+    font-size: var(--fs-xs);
+    color: var(--color-white);
 }
 
 .team_background_effect {
     position: absolute;
     z-index: 0;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     filter: blur(135.5px);
     height: 50px;
     width: 70px;
@@ -213,7 +213,7 @@
 }
 
 .team_letter_section p{
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
 }
 
@@ -223,7 +223,7 @@
     padding: 0!important;
 }
 .menu-icon-box svg {
-    color: var(--text-white);
+    color: var(--color-white);
     width: 26px;
     height: 26px;
 }
@@ -239,20 +239,20 @@
 .AddPlayerTag svg {
     width: 18px;
     height: 18px;
-    color: var(--primary-color);
+    color: var(--theme-primary);
 }
 
 .AddPlayerTag.delete svg,
 .AddPlayerTag.delete p {
-    color: var(--text-red) !important;
+    color: var(--color-red) !important;
 }
 
 .AddPlayerTag p {
     display: inline-block;
     font-family: var(--primary-font);
     font-weight: 500;
-    font-size: var(--ex-small);
-    color: var(--primary-color);
+    font-size: var(--fs-sm);
+    color: var(--theme-primary);
 }
 
 .list-menu .MuiPaper-root {
@@ -261,8 +261,8 @@
 }
 
 .list-menu ul {
-    background-color: var(--text-white);
-    border: 1px solid var(--text-grey);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-grey-300);
     overflow: hidden;
     border-radius: 10px;
     padding: 0;
@@ -281,7 +281,7 @@
 
 @media screen and (max-width:375px) {
     .teamBox .teamDetails h6 {
-        font-size: var(--ex-small);
+        font-size: var(--fs-sm);
     }
     
     .activeTeam {
@@ -291,7 +291,7 @@
 
 @media screen and (max-width:345px) {
     .teamBox .teamDetails h6 {
-        font-size: var(--ex-ex-small);
+        font-size: var(--fs-xs);
     } 
 }
 

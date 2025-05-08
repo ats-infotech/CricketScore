@@ -11,7 +11,7 @@ const About = ({ tournamentData }) => {
 
     return (
         <Box className='qrHeight'>
-            <Box className='qr_main_section activeAnimation'>
+            <Box className='qr_main_section'>
                 <Box className='qr_title'>
                     <Typography variant="body2" >{CommonText.TournamentQr}</Typography>
                 </Box>
@@ -42,10 +42,10 @@ const About = ({ tournamentData }) => {
                         width={'170px'}
                         height={'50px'}
                         borderRadius={'15px'}
-                        bgColor={'var(--primary-color)'}
-                        color={'var(--text-white)'}
-                        hoverbg={'var(--text-white)'}
-                        hovertext={'var(--primary-color)'}
+                        bgColor={'var(--theme-primary)'}
+                        color={'var(--color-white)'}
+                        hoverbg={'var(--color-white)'}
+                        hovertext={'var(--theme-primary)'}
                         iconWidth={24}
                         iconHeight={24}
                         // onClick={() => setAddPlayerManual(true)}

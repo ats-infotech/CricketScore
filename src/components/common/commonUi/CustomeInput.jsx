@@ -160,7 +160,7 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
                         readOnly={readOnly}
                     />
             }
-            {error && <Typography color="error" variant="body2" sx={{ fontSize: "var(--ex-small)", padding: '6px 10px 0' }}>{error}</Typography>}
+            {error && <Typography color="error" variant="body2" sx={{ fontSize: "var(--fs-sm)", padding: '6px 10px 0' }}>{error}</Typography>}
         </Box>
     )
 }

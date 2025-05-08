@@ -52,8 +52,8 @@
 }
 
 .commentary_title_section p {
-  font-size: var(--semi-normal) !important;
-  color: var(--primary-color) !important;
+  font-size: var(--fs-lg) !important;
+  color: var(--theme-primary) !important;
   font-weight: 600 !important;
   text-align: center !important;
   display: inline-block;
@@ -83,8 +83,8 @@
 }
 
 .commentary_info_main_section p {
-  font-size: var(--ex-small) !important;
-  color: var(--primary-color) !important;
+  font-size: var(--fs-sm) !important;
+  color: var(--theme-primary) !important;
   font-weight: 500 !important;
 }
 
@@ -103,7 +103,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--text-white);
+  color: var(--color-white);
   font-weight: bold;
 }
 
@@ -127,8 +127,8 @@
 
 .commentary_team_select_section p {
   display: inline-block;
-  font-size: var(--semi-normal) !important;
-  color: var(--primary-color) !important;
+  font-size: var(--fs-lg) !important;
+  color: var(--theme-primary) !important;
   font-weight: 600 !important;
   text-align: center !important;
 }
@@ -139,31 +139,31 @@
 }
 
 .commentary_superover_title {
-  font-size: var(--normal) !important;
-  color: var(--primary-color) !important;
+  font-size: var(--fs-base) !important;
+  color: var(--theme-primary) !important;
   font-weight: 600 !important;
   text-align: center !important;
 }
 
 /* .commentary_team_select .MuiInputBase-root {
   font-family: var(--primary-font);
-  color: var(--text-white);
-  background-color: var(--primary-color);
+  color: var(--color-white);
+  background-color: var(--theme-primary);
   height: 40px;
-  font-size: var(--ex-small);
+  font-size: var(--fs-sm);
   font-weight: 600;
   border-radius: 10px;
   outline: none;
 } */
 
 .commentary_team_select .MuiInputBase-root .MuiSvgIcon-root {
-  color: var(--text-white);
+  color: var(--color-white);
 }
 
 .MuiMenuItem-root {
   font-family: var(--primary-font) !important;
   min-height: auto !important;
-  font-size: var(--ex-small) !important;
+  font-size: var(--fs-sm) !important;
   font-weight: 500 !important;
   padding: 5px 12px !important;
 }

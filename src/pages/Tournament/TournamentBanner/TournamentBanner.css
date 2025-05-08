@@ -21,7 +21,7 @@
 .menu-open-box svg{
     width: 26px;
     height: 26px;
-    color: var(--text-white);
+    color: var(--color-white);
     cursor: pointer;
 } */
 
@@ -66,14 +66,14 @@
 
 .tournament_details h6 {
     font-family: var(--primary-font);
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 700;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .tournament_details p {
     font-family: var(--primary-font);
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--text-lightgrey);
 }
@@ -87,10 +87,10 @@
 }
 
 .tournament_target_section p {
-    color: var(--text-white);
+    color: var(--color-white);
     text-align: center;
     font-weight: 500;
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
 }
 
 /* ------- */
@@ -103,7 +103,7 @@
     box-shadow: var(--shadow-grey-light);
     z-index: 99;
     height: 40px;
-    max-width: var(--screen-max-width);
+    max-width: var(--layout-max-width);
     margin: 0 auto;
     transition: all 0.3s linear;
 }

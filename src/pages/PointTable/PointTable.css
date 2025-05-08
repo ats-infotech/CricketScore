@@ -9,8 +9,8 @@
 }
 
 .point_table p {
-    color: var(--primary-color) !important;
-    font-size: var(--small) !important;
+    color: var(--theme-primary) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
     text-align: center;
     margin-top: 10px;

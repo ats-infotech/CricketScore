@@ -17,15 +17,15 @@
 }
 
 .qr_title p{
-    font-size: var(--semi-normal) !important;
+    font-size: var(--fs-lg) !important;
     font-weight: 500 !important;
-    color: var(--primary-color);
+    color: var(--theme-primary);
 }
 
 .qr_section{
     height: 190px;
     width: 190px;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,9 +33,9 @@
 }
 
 .qr_sub_title p{
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 500 !important;
-    color: var(--text-grey);
+    color: var(--color-grey-300);
     max-width: 80%;
     text-align: center;
     margin: 0 auto;

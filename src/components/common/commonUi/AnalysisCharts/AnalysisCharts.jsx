@@ -1,8 +1,8 @@
-import { Box, Typography, Select, MenuItem } from '@mui/material';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LabelList, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, } from 'recharts';
-import './AnalysisCharts.css'
+import { Box, MenuItem, Select, Typography } from '@mui/material';
 import { useEffect, useMemo, useState } from "react";
+import { Bar, BarChart, Cell, LabelList, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, } from 'recharts';
 import WagonWheel from '../WagonWheel/WagonWheel';
+import './AnalysisCharts.css';
 
 // Top Section contains title and Select for Graphs
 const TopSection = ({ value, onChange, title, team1, team2, type, isTestMatch, team1Players, team2Players, onBowlerChange, onBatterChange, BowlerValue, BatterValue }) => {
@@ -175,10 +175,10 @@ const PartnershipCard = ({ data, playerdata }) => {
             <Box className="partnership_runs_main_section">
                 <Box className="partnership_run_color_partition">
                     <Box className="partnership_run_left_section">
-                        <Box sx={{ width: batter1Percentage, backgroundColor: 'var(--light-green)', height: '40px' }} ></Box>
+                        <Box sx={{ width: batter1Percentage, backgroundColor: 'var(--chart-light-green)', height: '40px' }} ></Box>
                     </Box>
                     <Box className="partnership_run_right_section">
-                        <Box sx={{ width: batter2Percentage, backgroundColor: 'var(--yellow)', height: '40px' }} ></Box>
+                        <Box sx={{ width: batter2Percentage, backgroundColor: 'var(--chart-yellow)', height: '40px' }} ></Box>
                     </Box>
                 </Box>
                 <Box className='partnership_runs_section'>
@@ -229,12 +229,12 @@ export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inn
                             {!isTypeOfRunsGraph ? <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} /> : <Tooltip cursor={{ fill: 'transparent' }} />}
 
                             {(filter === "Both" || filter === "Team1" || filter === "Both 1" || filter === "Both 2" || filter === "Team1firstinning" || filter === "Team1secondinning") && (
-                                <Bar dataKey={bar1datakey} fill="var(--light-green)" name={inningsOneLabel} barSize={15}>
+                                <Bar dataKey={bar1datakey} fill="var(--chart-light-green)" name={inningsOneLabel} barSize={15}>
                                     {!isTypeOfRunsGraph && <LabelList dataKey={bar1wicketslabel} position="right" content={(props) => <CustomWicketLabel {...props} />} />}
                                 </Bar>
                             )}
                             {(filter === "Both" || filter === "Team2" || filter === "Both 1" || filter === "Both 2" || filter === "Team2firstinning" || filter === "Team2secondinning") && (
-                                <Bar dataKey={bar2datakey} fill="var(--yellow)" name={inningsTwoLabel} barSize={15}>
+                                <Bar dataKey={bar2datakey} fill="var(--chart-yellow)" name={inningsTwoLabel} barSize={15}>
                                     {!isTypeOfRunsGraph && <LabelList dataKey={bar2wicketslabel} position="right" content={(props) => <CustomWicketLabel {...props} />} />}
                                 </Bar>
                             )}
@@ -270,11 +270,11 @@ export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team
                             <Legend verticalAlign="top" align="center" wrapperStyle={{ top: 0 }} />
 
                             {(filter === "Both" || filter === "Team1" || filter === "Both 1" || filter === "Both 2" || filter === "Team1firstinning" || filter === "Team1secondinning") && (
-                                <Line fill="var(--light-green)" type="monotone" dataKey={team1dataKey} strokeWidth={2} name={inningsOneLabel} stroke="var(--light-green)" connectNulls />
+                                <Line fill="var(--chart-light-green)" type="monotone" dataKey={team1dataKey} strokeWidth={2} name={inningsOneLabel} stroke="var(--chart-light-green)" connectNulls />
                             )}
 
                             {(filter === "Both" || filter === "Team2" || filter === "Both 1" || filter === "Both 2" || filter === "Team2firstinning" || filter === "Team2secondinning") && (
-                                <Line fill="var(--yellow)" type="monotone" dataKey={team2dataKey} strokeWidth={2} name={inningsTwoLabel} stroke="var(--yellow)" connectNulls />
+                                <Line fill="var(--chart-yellow)" type="monotone" dataKey={team2dataKey} strokeWidth={2} name={inningsTwoLabel} stroke="var(--chart-yellow)" connectNulls />
                             )}
 
                         </LineChart>
@@ -288,13 +288,13 @@ export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team
 // Pie Chart
 export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data, isTestMatch }) => {
     const colorMap = {
-        'LBW': 'var(--light-green)',
-        'Stumping': 'var(--purple)',
+        'LBW': 'var(--chart-light-green)',
+        'Stumping': 'var(--chart-purple)',
         'Catches': 'var(--chart-blue)',
-        'Run Out': 'var(--orange-red)',
-        'Bowled': 'var(--yellow)',
-        'Hit Wicket': 'var(--pink)',
-        'Retired Hurt': 'var(--coral)',
+        'Run Out': 'var(--chart-orange-red)',
+        'Bowled': 'var(--chart-yellow)',
+        'Hit Wicket': 'var(--chart-pink)',
+        'Retired Hurt': 'var(--chart-coral)',
     };
 
     return (
@@ -337,7 +337,7 @@ export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data, 
                                         fill={fillColor}
                                         textAnchor="middle"
                                         dominantBaseline="central"
-                                        style={{ fontSize: 'var(--ex-small) !important', fill: `${fillColor} !important` }}
+                                        style={{ fontSize: 'var(--fs-sm) !important', fill: `${fillColor} !important` }}
                                         fontWeight="bold"
                                     >
                                         {value}
@@ -375,14 +375,14 @@ export const AnalysisPartnership = ({ data, playerdata, team1, team2, title, onC
 export const WagonWheelGraph = ({ team1, team2, title, filter, onChange, isTestMatch, data, team1Players, team2Players, onBatterChange, onBowlerChange, BatterValue, BowlerValue }) => {
     const [percentages, setPercentages] = useState([]);
     const shotsColors = {
-        0: { label: '0s', color: 'var(--dots)' },
-        1: { label: '1s', color: 'var(--singles)' },
-        2: { label: '2s', color: 'var(--doubles)' },
-        3: { label: '3s', color: 'var(--triples)' },
-        4: { label: '4s', color: 'var(--fours)' },
-        5: { label: '5s', color: 'var(--fives)' },
-        6: { label: '6s', color: 'var(--sixes)' },
-        7: { label: 'Others', color: 'var(--othershots)' },
+        0: { label: '0s', color: 'var(--shot-dots)' },
+        1: { label: '1s', color: 'var(--shot-singles)' },
+        2: { label: '2s', color: 'var(--shot-doubles)' },
+        3: { label: '3s', color: 'var(--shot-triples)' },
+        4: { label: '4s', color: 'var(--shot-fours)' },
+        5: { label: '5s', color: 'var(--shot-fives)' },
+        6: { label: '6s', color: 'var(--shot-sixes)' },
+        7: { label: 'Others', color: 'var(--shot-others)' },
     }
 
     useEffect(() => {

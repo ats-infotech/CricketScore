@@ -19,7 +19,10 @@ const EditTeam = () => {
     }, [params]);
 
     return (
-        <Team type={'edit'} teamData={teamData} />
+        <Team
+            type={'edit'}
+            teamData={teamData}
+        />
     )
 }
 

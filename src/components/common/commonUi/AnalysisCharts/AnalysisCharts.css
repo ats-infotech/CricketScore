@@ -3,9 +3,9 @@
 }
 
 .chart_title p {
-    font-size: var(--semi-normal) !important;
+    font-size: var(--fs-lg) !important;
     text-align: center;
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
     font-weight: 500;
 }
 
@@ -20,31 +20,31 @@
 .bar_chart_container, .line_chart_container{
     width: 90%;
     overflow-x: auto;
-    scrollbar-color: var(--primary-color) var(--text-white);
+    scrollbar-color: var(--theme-primary) var(--color-white);
     scrollbar-width: thin;
     margin: 20px auto 30px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 15px;
     padding: 20px;
 }
 
 .bar_chart_container::-webkit-scrollbar-thumb,
 .line_chart_container::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+  background-color: var(--theme-primary);
   border-radius: 10px;
 }
 
 .bar_chart_container::-webkit-scrollbar-track,
 .line_chart_container::-webkit-scrollbar-track {
-  background: var(--text-white);
+  background: var(--color-white);
 }
 
 .pie_chart_container {
     margin: 20px auto 30px;
     padding: 10px 0px;
     border-radius: 15px;
-    background-color: var(--text-white);
-    box-shadow: var(--group-box-shadow);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-group-box);
 }
 
 .filter_section {
@@ -55,14 +55,14 @@
 }
 
 .filter_section p {
-    font-size: var(--small) !important;
-    color: var(--primary-color) !important;
+    font-size: var(--fs-md) !important;
+    color: var(--theme-primary) !important;
     font-weight: 500;
 }
 
 .filter_section .MuiInputBase-root {
     background-color: transparent !important;
-    border: 2px solid var(--primary-color) !important;
+    border: 2px solid var(--theme-primary) !important;
     min-width: 100px;
     width: fit-content;
     border-radius: 10px !important;
@@ -84,7 +84,7 @@
 
 /* Style for X-Axis labels (Runs) */
 .recharts-xAxis .recharts-cartesian-axis-tick {
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     fill: #333;
     font-weight: 600 !important;
     padding-top: 5px;
@@ -92,10 +92,10 @@
 
 /* Tooltip styles */
 .recharts-tooltip-wrapper {
-    background-color: var(--text-white) !important;
+    background-color: var(--color-white) !important;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     padding: 5px;
     white-space: nowrap;
     overflow: hidden;
@@ -104,7 +104,7 @@
 
 /* Style for Legends */
 .recharts-legend-item {
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     margin-right: 12px;
     font-weight: 600 !important;
     cursor: pointer;
@@ -112,21 +112,21 @@
 
 /* Bar Label Text */
 text {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 600 !important;
     fill: #444 !important;
     font-family: var(--primary-font) !important;
 }
 
 .Wicket_Text {
-    font-size: var(--ex-ex-small) !important;
-    fill: var(--text-white) !important;
+    font-size: var(--fs-xs) !important;
+    fill: var(--color-white) !important;
 }
 
 /* Wicket Label Styling */
 .wicket-label {
-    fill: var(--text-red) !important;
-    font-size: var(--ex-ex-small) !important;
+    fill: var(--color-red) !important;
+    font-size: var(--fs-xs) !important;
     font-weight: bold;
     text-anchor: start;
 }
@@ -134,7 +134,7 @@ text {
 /* Optional padding for better spacing */
 .bar-chart-container {
     padding: 20px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -211,8 +211,8 @@ text {
 .batter_name {
     font-weight: 600;
     margin-bottom: 5px;
-    font-size: var(--ex-small);
-    color: var(--primary-color) !important;
+    font-size: var(--fs-sm);
+    color: var(--theme-primary) !important;
     max-width: 100px;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -223,8 +223,8 @@ text {
 .batter_score {
     font-size: 14px;
     font-weight: 500;
-    font-size: var(--ex-small);
-    color: var(--primary-color) !important;
+    font-size: var(--fs-sm);
+    color: var(--theme-primary) !important;
 }
 
 .partnership_runs_main_section {
@@ -234,7 +234,7 @@ text {
 .partnership_runs_section {
     position: relative;
     z-index: 10;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     width: fit-content;
     padding: 3px 2px 3px;
 }
@@ -266,7 +266,7 @@ text {
 .partnership_runs {
     font-weight: bold;
     font-size: 12px;
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
 }
 
 /* Players Select */
@@ -285,10 +285,10 @@ text {
 
 @media screen and (max-width: 350px) {
     .recharts-legend-item {
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
     .batter_name {
-        font-size: var(--ex-ex-small);
+        font-size: var(--fs-xs);
         max-width: 70px;
     }
 }

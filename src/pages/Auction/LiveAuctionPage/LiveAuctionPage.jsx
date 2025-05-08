@@ -676,7 +676,7 @@ const LiveAuctionPage = ({ type }) => {
             </Box>
 
             {/* Modals */}
-            <CustomeModal open={open} bgColor={'var(--text-white)'}>
+            <CustomeModal open={open} bgColor={'var(--color-white)'}>
 
                 {auctionComplete || resetAuction ? <Box className="auction_complete_warning">
                     <Typography variant="body2" className="errorText">{`${auctionComplete ? 'Are you sure auction is completed?'

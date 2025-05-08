@@ -14,7 +14,7 @@
 .stats_card {
     width: 30%;
     min-height: 58px;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 10px;
     padding: 10px;
     display: flex;
@@ -24,16 +24,16 @@
 }
 
 .stats_card h6 {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     text-align: center;
-    font-size: var(--normal) !important;
+    font-size: var(--fs-base) !important;
     font-weight: 600 !important;
 }
 
 .stats_card p {
     color: var(--stats-grey) !important;
     text-align: center;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 500 !important;
 }
 
@@ -45,11 +45,11 @@
 
 @media screen and (max-width: 370px) {
     .stats_card h6 {
-        font-size: var(--ex-small);
+        font-size: var(--fs-sm);
     }
 
     .stats_card p {
-        font-size: var(--ex-small);
+        font-size: var(--fs-sm);
     }
 }
 

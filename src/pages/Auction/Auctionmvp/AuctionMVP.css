@@ -13,7 +13,7 @@
 }
 
 .mvp_players_list h4{
-    font-size: var(--normal);
+    font-size: var(--fs-base);
     text-align: center;
     font-weight: 500;
 }

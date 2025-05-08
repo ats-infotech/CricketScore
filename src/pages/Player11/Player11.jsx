@@ -8,6 +8,7 @@ import MessageModal from "@/components/common/commonUi/Modal/MessageModal";
 import CommonBack from "@/components/common/commonUi/commonBack";
 import { matchesState, ReplaceMatchSchedule } from "@/redux/slices/matchSlice";
 import { playersState } from "@/redux/slices/playersSlice";
+import { teamsState } from "@/redux/slices/teamSlice";
 import { Close } from "@mui/icons-material";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import Image from "next/image";
@@ -17,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CaptainImage from '../../assets/img/playing11/captain.png';
 import WicketKeeperImage from '../../assets/img/playing11/wk.png';
 import './player11.css';
-import { teamsState } from "@/redux/slices/teamSlice";
 
 const CommonButton = ({ title, onClick, isActive, activeTab }) => {
     return (
@@ -77,7 +77,7 @@ const CommonButton = ({ title, onClick, isActive, activeTab }) => {
 //                                 <Typography variant="body2">{item?.playerName}</Typography>
 //                                 <Box className='player11_common_sub_section'>
 //                                     {Step === 1 && <Box className={isSelect ? 'player11_active_checkbox_section' : 'player11_checkbox_section'}>
-//                                         {isSelect && Step === 1 && <SvgIcon id={'checked'} height={14} width={14} style={{ color: 'var(--text-white)' }} />}
+//                                         {isSelect && Step === 1 && <SvgIcon id={'checked'} height={14} width={14} style={{ color: 'var(--color-white)' }} />}
 //                                     </Box>}
 //                                     {
 //                                         Step === 2 &&
@@ -103,7 +103,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: '95%',
     maxWidth: '420px',
-    bgcolor: 'var(--text-white)',
+    bgcolor: 'var(--color-white)',
     boxShadow: 24,
     p: 3,
     outline: 'none',
@@ -198,11 +198,11 @@ const Player11 = () => {
         setOpen(false)
         setSelectedPlayer((prev) => ({
             ...prev,
-            [teamKey] : activeSelectedPlayers[teamKey]
+            [teamKey]: activeSelectedPlayers[teamKey]
         }))
         setSelectCwk((prev) => ({
             ...prev,
-            [teamKey] : { captain: Captain[teamKey], wicketKeeper: WicketKeeper[teamKey]}
+            [teamKey]: { captain: Captain[teamKey], wicketKeeper: WicketKeeper[teamKey] }
         }))
         if (!teamConfirmed[teamKey]) {
             setSelectedPlayer((prev) => ({
@@ -295,7 +295,7 @@ const Player11 = () => {
                 [teamKey]: [...prevState[teamKey], playerId]
             }));
         } else {
-            setErr(`${teamKey === "team1" ? 'Team 1' :'Team 2'} already reached the maximum players (${perTeamPlayers})`);
+            setErr(`${teamKey === "team1" ? 'Team 1' : 'Team 2'} already reached the maximum players (${perTeamPlayers})`);
         }
     }
 
@@ -698,10 +698,15 @@ const Player11 = () => {
                 </Box>
             </Box>}
             <Box sx={{ marginTop: '10px' }}>
-                <CustomeButton onClick={handleSubmit} title={playeravailableerror.team1playererror || playeravailableerror.team2playererror ? 'Next' : 'Submit'} width={'80%'} height={'50px'}
+                <CustomeButton
+                    onClick={handleSubmit}
+                    title={playeravailableerror.team1playererror || playeravailableerror.team2playererror ? 'Next' : 'Submit'}
+                    width={'80%'}
+                    height={'50px'}
                     disabled={activeTab === 1 && !playeravailableerror.team1playererror ? false
                         : activeTab === 2 && !playeravailableerror.team2playererror ? false
-                            : !playeravailableerror.bothteamerror ? false : true} />
+                            : !playeravailableerror.bothteamerror ? false : true}
+                />
             </Box>
             <Modal
                 open={open}
@@ -711,7 +716,7 @@ const Player11 = () => {
             >
                 <Box sx={style}>
                     <Box className='player11_close_button'>
-                        <Close sx={{ color: 'var(--primary-color)', cursor: 'pointer' }} onClick={handleClose} />
+                        <Close sx={{ color: 'var(--theme-primary)', cursor: 'pointer' }} onClick={handleClose} />
                     </Box>
                     {err && <Typography sx={{ textAlign: 'center' }} className="errorText">{err}</Typography>}
                     <Box className='player11_players_section'>

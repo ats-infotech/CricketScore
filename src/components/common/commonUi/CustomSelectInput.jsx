@@ -7,9 +7,9 @@ const CustomSelectInput = ({ value, label, onChange, options, disabled = false, 
         <FormControl >
             {/* <InputLabel
                 sx={{
-                    color: 'var(--text-white)',
+                    color: 'var(--color-white)',
                     '&.Mui-focused': {
-                        color: 'var(--text-white)',
+                        color: 'var(--color-white)',
                     },
                     '&': {
                         transform: value ? 'translate(14px, -6px) scale(0.75)' : 'translate(14px, 16px) scale(1)',
@@ -34,10 +34,10 @@ const CustomSelectInput = ({ value, label, onChange, options, disabled = false, 
                 color={color}
                 fontWeight={fontWeight}
             // sx={{
-            //     backgroundColor: 'var(--blue-background)',
-            //     color: 'var(--text-white)',
+            //     backgroundColor: 'var(--theme-blue-bg)',
+            //     color: 'var(--color-white)',
             //     '& .MuiSvgIcon-root': {
-            //         color: 'var(--text-white)',
+            //         color: 'var(--color-white)',
             //     },
             //     '&.Mui-focused': {
             //         border: 'none',

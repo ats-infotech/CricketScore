@@ -17,7 +17,7 @@
     scrollbar-width: thin;
     scrollbar-color: var(--text-lightgrey) transparent;
     scroll-snap-type: x mandatory;
-    max-width: var(--screen-max-width);
+    max-width: var(--layout-max-width);
     -webkit-overflow-scrolling: touch;
 }
 
@@ -43,10 +43,10 @@
 }
 
 .tabs_main .childTab {
-    color: var(--text-white);
+    color: var(--color-white);
     min-height: 35px;
     min-width: auto;
-    border: 1px solid var(--text-white);
+    border: 1px solid var(--color-white);
     border-radius: 50px;
     display: flex;
     justify-content: center;
@@ -59,7 +59,7 @@
 
 .tabs_main .childTab p {
     font-family: var(--primary-font);
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 600;
     text-transform: capitalize;
     margin: 0;
@@ -72,8 +72,8 @@
 }
 
 .tabs_main .childTab.Mui-selected {
-    color: var(--primary-color);
-    background-color: var(--text-white);
+    color: var(--theme-primary);
+    background-color: var(--color-white);
 }
 
 @media screen and (max-width:576px) {
@@ -90,9 +90,9 @@
     position: fixed;
     top: 0;
     z-index: 99;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     padding: 10px 0 0;
-    box-shadow: var(--shadow-light);
+    box-shadow: var(--shadow-md);
     transition: all 0.3 linear;
 }
 

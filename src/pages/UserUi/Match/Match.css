@@ -4,7 +4,7 @@
     padding: 8px;
     margin: 30px 25px 30px;
     /* max-width: 370px; */
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,7 +14,7 @@
     padding: 9px 35px;
     border-radius: 40px;
     display: flex;
-    color: var(--text-white);
+    color: var(--color-white);
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -22,12 +22,12 @@
 
 .matchText {
     font-family: var(--primary-font);
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
 }
 
 .Details.active {
-    background-color: var(--text-white);
-    color: var(--primary-color);
+    background-color: var(--color-white);
+    color: var(--theme-primary);
 }
 
 .match_list_main_section {
@@ -49,7 +49,7 @@
     width: 100%;
     /* max-width: 350px !important;
     min-height: 265px !important; */
-    background-color: var(--box-blue) !important;
+    background-color: var(--theme-box-blue) !important;
     border-radius: 15px;
     padding: 30px 20px 20px;
     display: flex;
@@ -65,15 +65,15 @@
 }
 
 .match_info_section h6 {
-    font-size: var(--small) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-md) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
     text-align: center;
 }
 
 .match_info_section p {
-    font-size: var(--ex-small) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-sm) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
     text-align: center;
 }
@@ -118,17 +118,17 @@
 }
 
 .TeamScoreBox .team_details .team_name {
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     font-weight: 700;
-    color: var(--text-white);
+    color: var(--color-white);
     text-align: center;
     text-transform: capitalize;
 }
 
 .TeamScoreBox .team_details .team_score {
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 700;
-    color: var(--text-white);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -137,13 +137,13 @@
 }
 
 .TeamScoreBox .team_details .team_score .runs {
-    font-size: var(--normal);
+    font-size: var(--fs-base);
 }
 
 .TeamScoreBox .team_details .team_score .overs {
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     font-weight: 500;
-    color: var(--text-grey);
+    color: var(--color-grey-300);
 }
 
 .teamVsLogo {
@@ -157,7 +157,7 @@
 }
 
 .match_button p {
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     text-transform: capitalize !important;
     font-weight: 600 !important;
     color: var(--text-lightblue);
@@ -170,7 +170,7 @@
     }
 
     .match_info_section h6 {
-        font-size: var(--ex-small) !important;
+        font-size: var(--fs-sm) !important;
     }
 
 }
@@ -201,11 +201,11 @@
     }
 
     .TeamScoreBox .team_details .team_score .runs {
-        font-size: var(--ex-small);
+        font-size: var(--fs-sm);
     }
 
     .match_info_section p {
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
 }
 
@@ -220,7 +220,7 @@
     border-radius: 0;
     z-index: 99;
     box-shadow: var(--shadow-grey-light);
-    max-width: var(--screen-max-width);
+    max-width: var(--layout-max-width);
     margin: 0 auto;
     transition: border-radius 0.3s ease-in-out,
         position 0.4s ease-in-out,

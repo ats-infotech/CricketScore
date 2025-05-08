@@ -1,5 +1,5 @@
 .search_input {
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     width: 100%;
     border-radius: 50px;
     padding: 16px 18px;
@@ -11,7 +11,7 @@
 .search_input svg, .searchClose {
   width: 18px;
   height: 18px;
-  color: var(--text-white);
+  color: var(--color-white);
 }
 
 .search_input input {
@@ -23,7 +23,7 @@
     font-family: var(--primary-font);
     color:  var(--text-lightgrey);
     font-weight: 500;
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
 }
 .search_input input::placeholder {
     font-family: var(--primary-font);

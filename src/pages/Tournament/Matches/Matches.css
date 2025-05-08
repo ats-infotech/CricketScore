@@ -56,11 +56,11 @@
 }
 
 .SelectionButton {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
-    background-color: var(--blue-background) !important;
+    background-color: var(--theme-blue-bg) !important;
     border-radius: 10px !important;
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     text-transform: capitalize !important;
     border: 1.4px solid transparent !important;
     padding: 15px !important;
@@ -69,11 +69,11 @@
 }
 
 .SelectionButton.active {
-    border: 1.4px solid var(--text-white) !important;
+    border: 1.4px solid var(--color-white) !important;
 }
 
 .match-menu-icon-box svg {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     width: 26px;
     height: 26px;
 }
@@ -85,7 +85,7 @@
     left: 0;
     right: 0;
     z-index: 99;
-    max-width: var(--screen-max-width);
+    max-width: var(--layout-max-width);
     background: var(--primary-light-color);
     margin: 0 auto;
     transition: all .3s linear;

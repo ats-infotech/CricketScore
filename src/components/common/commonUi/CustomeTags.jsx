@@ -37,7 +37,7 @@ const CustomeTags = ({ label, data, keyName, onClick, value, error, disabled }) 
                     })
                 }
             </Box>
-            {error && <Typography color="error" variant="body2" sx={{ fontSize: "var(--ex-small)", padding: '6px 10px 0' }}>{error}</Typography>}
+            {error && <Typography color="error" variant="body2" sx={{ fontSize: "var(--fs-sm)", padding: '6px 10px 0' }}>{error}</Typography>}
         </Box>
     )
 }

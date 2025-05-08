@@ -7,14 +7,14 @@ const WagonWheel = ({ shots, onClick, type }) => {
     const lg = useMediaQuery('(max-width: 430px)')
     const size = sm ? '300' : md ? '330' : lg ? '360' : '400'
     const shotsColors = {
-        0: 'var(--dots)',
-        1: 'var(--singles)',
-        2: 'var(--doubles)',
-        3: 'var(--triples)',
-        4: 'var(--fours)',
-        5: 'var(--fives)',
-        6: 'var(--sixes)',
-        7: 'var(--othershots)',
+        0: 'var(--shot-dots)',
+        1: 'var(--shot-singles)',
+        2: 'var(--shot-doubles)',
+        3: 'var(--shot-triples)',
+        4: 'var(--shot-fours)',
+        5: 'var(--shot-fives)',
+        6: 'var(--shot-sixes)',
+        7: 'var(--shot-others)',
     };
 
     return (

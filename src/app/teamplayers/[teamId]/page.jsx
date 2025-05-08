@@ -23,8 +23,11 @@ const Teamplayers = () => {
         setPlayersData(players_data_result)
     }, [players_data])
 
-    return(
-        <UserPlayers teamdata={teamdata} playersData={playersData} />
+    return (
+        <UserPlayers
+            teamdata={teamdata}
+            playersData={playersData}
+        />
     )
 }
 

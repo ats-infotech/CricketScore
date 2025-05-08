@@ -44,7 +44,7 @@ const Banner = ({ image1, image2, type, team1score, team2score, winnerName = '',
     team2name, status, tossWinner, team1letter, team1color, team2letter, team2color, soteam1scorehidden = false, soteam2scorehidden = false, team1Declare = false,
     team2Declare = false, team1SuperOverDeclare = false, team2SuperOverDeclare = false }) => {
     return (
-        <Box className={`banner_main activeAnimation ${type === 'score' || type === 'scoring' && 'active'}`}>
+        <Box className={`banner_main ${type === 'score' || type === 'scoring' && 'active'}`}>
             <Image unoptimized src={banner} alt="banner" width={500} height={500} />
             {
                 (status === 2 || status === 1) &&

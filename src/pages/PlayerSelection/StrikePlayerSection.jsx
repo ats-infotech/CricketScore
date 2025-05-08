@@ -1,7 +1,7 @@
+import CustomeCheckBox from "@/components/common/commonUi/CustomeCheckBox/CustomeCheckBox"
 import { Box, Typography, useMediaQuery } from "@mui/material"
 import Image from "next/image"
 import './StrikePlayerSection.css'
-import CustomeCheckBox from "@/components/common/commonUi/CustomeCheckBox/CustomeCheckBox"
 
 const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlayer, type, isPlayerShow = false, side }) => {
     let isShow = (type && type === 'readonly')
@@ -38,7 +38,7 @@ const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlaye
                                                             height: sm ? '80px' : md ? '90px' : '95px',
                                                             borderRadius: '100px',
                                                             border: 'none',
-                                                            color: 'var(--text-white)',
+                                                            color: 'var(--color-white)',
                                                             display: 'flex',
                                                             alignItems: 'center',
                                                             justifyContent: 'center',

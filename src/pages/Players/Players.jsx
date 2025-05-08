@@ -413,7 +413,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
                             <>
                                 <CustomeMessageBox title='No Players Available' describe='Click on Add Player And add Player here' />
                                 <Box className='player_add_when_No_data'>
-                                    <CustomeButton title={'Add Player'} width={'80%'} bgColor={'var(--primary-color)'} height={'45px'} onClick={handleOpen} />
+                                    <CustomeButton title={'Add Player'} width={'80%'} bgColor={'var(--theme-primary)'} height={'45px'} onClick={handleOpen} />
                                 </Box>
                             </>
                     }
@@ -421,7 +421,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
                 {
                     playersData && playersData.length > 0 &&
                     <Box className='button_box'>
-                        <CustomeButton title={'Add Player'} width={'80%'} bgColor={'var(--primary-color)'} height={'45px'} onClick={handleOpen} />
+                        <CustomeButton title={'Add Player'} width={'80%'} bgColor={'var(--theme-primary)'} height={'45px'} onClick={handleOpen} />
                     </Box>
                 }
                 <Box>
@@ -457,8 +457,8 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                             icon={'share-line'}
                                             width={'130px'}
                                             borderRadius={'15px'}
-                                            bgColor={'var(--text-white)'}
-                                            color={'var(--primary-color)'}
+                                            bgColor={'var(--color-white)'}
+                                            color={'var(--theme-primary)'}
                                             iconWidth={24}
                                             iconHeight={24}
                                         // onClick={() => setAddPlayerManual(true)}
@@ -469,7 +469,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                 <Box sx={{ margin: '30px 0' }}
                                     onClick={() => setAddPlayerManual(true)}
                                 >
-                                    <SectionBox icon={"via-phone"} title={CommonText.AddPhoneNumberorEmail} sx={{ boxShadow: 'var(--shadow-light)', backgroundColor: 'var(--primary-color)' }}
+                                    <SectionBox icon={"via-phone"} title={CommonText.AddPhoneNumberorEmail} sx={{ boxShadow: 'var(--shadow-md)', backgroundColor: 'var(--theme-primary)' }}
 
                                     >
                                         <Box className='buttonBoxNormal'>
@@ -486,7 +486,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                         let itsNotAccess = (!updatePlayer && lastIndex) || updatePlayer
 
                                         return (
-                                            <SectionBox key={i} className={`${addPlayer.length > 1 && (addPlayer.length - 1) === i && 'activeLastSpaceBottom'}`} icon={"via-phone"} title={!updatePlayer ? CommonText.AddPlayerDetails : CommonText.UpdatePlayerDetails} sx={{ boxShadow: 'var(--shadow-light)', backgroundColor: 'var(--primary-color)', position: 'relative' }} >
+                                            <SectionBox key={i} className={`${addPlayer.length > 1 && (addPlayer.length - 1) === i && 'activeLastSpaceBottom'}`} icon={"via-phone"} title={!updatePlayer ? CommonText.AddPlayerDetails : CommonText.UpdatePlayerDetails} sx={{ boxShadow: 'var(--shadow-md)', backgroundColor: 'var(--theme-primary)', position: 'relative' }} >
                                                 {!updatePlayer && addPlayer.length > 1 && <CloseIcon className="close_player" onClick={() => removePalyerFromTheArr(item, i)} />}
                                                 <Box className='form_box'>
                                                     <Box className='upload_player_image' sx={{ backgroundImage: `url('${blobpath[i]}')` }} onClick={() => handleBoxClick(i)}>
@@ -495,7 +495,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                                             <>
                                                                 {!blobpath[i] && <Avtar name={item.playerName} prevState={item} type={'players'} bgColor={item.playerColor} onChange={handleAvatarColor} index={i} />}
                                                                 <Box sx={{
-                                                                    backgroundColor: 'var(--text-white)',
+                                                                    backgroundColor: 'var(--color-white)',
                                                                     borderRadius: '300px',
                                                                     height: '30px',
                                                                     width: '30px',
@@ -506,7 +506,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                                                     bottom: '0',
                                                                     right: '0'
                                                                 }}>
-                                                                    <SvgIcon id='addImage2' height={14} width={14} color='var(--primary-color)' />
+                                                                    <SvgIcon id='addImage2' height={14} width={14} color='var(--theme-primary)' />
                                                                 </Box>
                                                             </>
                                                             :
@@ -523,7 +523,7 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                                         </select> */}
                                                         <BlueInput placeholder={'Phone Number'} type='number' value={item['playerContact']} error={errors[i]['playerContact']} onChange={(e) => handleChange(e, 'playerContact', i)} disabled={!updatePlayer && !lastIndex} />
                                                     </Box>
-                                                    {!updatePlayer && addPlayer.length === 1 && <CustomeButton title={CommonText.AddPlayer} bgColor={'var(--text-white)'} color={'var(--primary-color)'} onClick={(i) => handleAddOrUpdatePlayer(i)} />}
+                                                    {!updatePlayer && addPlayer.length === 1 && <CustomeButton title={CommonText.AddPlayer} bgColor={'var(--color-white)'} color={'var(--theme-primary)'} onClick={(i) => handleAddOrUpdatePlayer(i)} />}
                                                 </Box>
                                             </SectionBox>
                                         )
@@ -533,8 +533,8 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                     {!updatePlayer && (
                                         <CustomeButton
                                             title='Add More Player'
-                                            bgColor={'var(--text-white)'}
-                                            color={'var(--primary-color)'}
+                                            bgColor={'var(--color-white)'}
+                                            color={'var(--theme-primary)'}
                                             onClick={handleAddMoreForm}
                                         />
                                     )}
@@ -542,8 +542,8 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                     {!updatePlayer && addPlayer.length > 1 && (
                                         <CustomeButton
                                             title={`Add All (${addPlayer.length || 0})`}
-                                            bgColor={'var(--text-white)'}
-                                            color={'var(--primary-color)'}
+                                            bgColor={'var(--color-white)'}
+                                            color={'var(--theme-primary)'}
                                             onClick={handleAddOrUpdatePlayer}
                                         />
                                     )}
@@ -552,14 +552,14 @@ const PlayersPage = ({ teamdata, playersData }) => {
                                         <>
                                             <CustomeButton
                                                 title={CommonText.UpdatePlayer}
-                                                bgColor={'var(--text-white)'}
-                                                color={'var(--primary-color)'}
+                                                bgColor={'var(--color-white)'}
+                                                color={'var(--theme-primary)'}
                                                 onClick={handleAddOrUpdatePlayer}
                                             />
                                             <CustomeButton
                                                 width={'auto'}
-                                                bgColor={'var(--text-red)'}
-                                                color={'var(--text-white)'}
+                                                bgColor={'var(--color-red)'}
+                                                color={'var(--color-white)'}
                                                 title='Delete'
                                                 onClick={handleDeleteModalInfo}
                                             />

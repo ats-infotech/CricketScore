@@ -17,9 +17,9 @@
 }
 
 .scoreboard_common_section p {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
 }
 
 .scoreboard_common_section.active {
@@ -34,7 +34,7 @@
     margin: 0px 20px;
     max-width: 430px;
     padding: 40px;
-    background: var(--primary-color);
+    background: var(--theme-primary);
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.16);
     position: relative;
 }
@@ -107,16 +107,16 @@
 
 .custom_run_section p,
 .custom_team_section p {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
 }
 
 .declare_warning {
-    color: var(--text-red) !important;
+    color: var(--color-red) !important;
     font-weight: 600 !important;
     text-align: center;
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
 }
 
 .reviseOver {
@@ -128,7 +128,7 @@
 }
 
 .reviseOver p {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
 }
 
@@ -142,7 +142,7 @@
 
 /* Penalty Section */
 .penalty_call_section p {
-    color: var(--text-white);
+    color: var(--color-white);
     text-align: center;
     font-weight: 500;
     margin-bottom: 15px;

@@ -1,7 +1,7 @@
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import Image from "next/image"
-import './CustomeTbl.css'
 import ImageAvatar from "../ImageAvatar/ImageAvatar"
+import './CustomeTbl.css'
 
 const CustomeTbl = ({ headRow, data }) => {
     return (
@@ -46,7 +46,7 @@ const CustomeTbl = ({ headRow, data }) => {
                                                             <Box className='image_col'>
                                                                 <Box className='image_box'>
                                                                     {item['team_logo'] && <Image unoptimized src={`/${item['team_logo']}`} alt={row?.keyname} width={100} height={100} />}
-                                                                    {!item['team_logo'] && <ImageAvatar fontSize={'var(--small)'} height={'40px'} width={'40px'}
+                                                                    {!item['team_logo'] && <ImageAvatar fontSize={'var(--fs-md)'} height={'40px'} width={'40px'}
                                                                         text={item['letter']} bgColor={item['team_color']} smallHeight={'40px'} smallWidth={'40px'} meduimHeight={'40px'} meduimWidth={'40px'} />}
                                                                 </Box>
                                                                 <Typography variant='body2' className="para">{item[row?.keyname]?.toLowerCase()}</Typography>

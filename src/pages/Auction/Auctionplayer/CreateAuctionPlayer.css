@@ -10,16 +10,16 @@
 }
 
 .select_title_section p {
-    color: var(--text-grey);
+    color: var(--color-grey-300);
     margin-bottom: 6px;
     margin-left: 10px;
     font-weight: 500;
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
 }
 
 .auction_players_form{
     position: relative;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--theme-primary);
     border-radius: 10px;
     padding: 0 10px;
     margin-block: 24px;

@@ -31,7 +31,6 @@ const Tournament = ({ tournamentData, matchData, type }) => {
     const [openDrawer, setOpenDrawer] = useState(false)
     const [activeUserTab, setActiveUserTab] = useState(0)
     const [activeTournamentTab, setActiveTournamentTab] = useState(0)
-    const [animation, setAnimation] = useState(false)
     const [searchValue, setSearchValue] = useState("");
     const [searchResults, setSearchResults] = useState('');
 
@@ -78,7 +77,6 @@ const Tournament = ({ tournamentData, matchData, type }) => {
 
     const handleTabClick = (val) => {
         if (tournamentData) {
-            setAnimation(true)
             let tournamentFilter;
             switch (val) {
                 case 0:
@@ -100,13 +98,10 @@ const Tournament = ({ tournamentData, matchData, type }) => {
             } else {
                 setT_Data(tournamentFilter || [])
             }
-            let timer = setTimeout(() => setAnimation(false), 500);
-            return () => clearTimeout(timer)
         }
     }
 
     const handleUserTab = (val) => {
-        setAnimation(true)
         let tournamentFilter;
         switch (val) {
             case 0:
@@ -128,8 +123,6 @@ const Tournament = ({ tournamentData, matchData, type }) => {
         } else {
             setT_Data(tournamentFilter || [])
         }
-        let timer = setTimeout(() => setAnimation(false), 500);
-        return () => clearTimeout(timer)
     }
 
     const fetchSearchResults = (query) => {
@@ -193,7 +186,7 @@ const Tournament = ({ tournamentData, matchData, type }) => {
                     <CustomeTabs data={tournamentTabs || []} onClick={handleTabClick} activeTab={activeTournamentTab} />
                 </Box>
             }
-            <Box className={`all_tournaments ${type === 'admin' ? 'adminHeight' : ''} ${animation ? 'activeAnimation' : ''} `}>
+            <Box className={`all_tournaments ${type === 'admin' ? 'adminHeight' : ''}`}>
                 {
                     t_data.length > 0 && t_data.map((item, i) => {
                         return (
@@ -223,7 +216,7 @@ const Tournament = ({ tournamentData, matchData, type }) => {
                         {
                             // type === 'admin' ?
                             <Box className='create_tournament_button'>
-                                <CustomeButton width={'100%'} height={'50px'} bgColor={'var(--primary-color) !important'} hover='none' title='Create Your Tournaments' onClick={() => router.push('/registeredTornaments')} />
+                                <CustomeButton width={'100%'} height={'50px'} bgColor={'var(--theme-primary) !important'} hover='none' title='Create Your Tournaments' onClick={() => router.push('/registeredTornaments')} />
                             </Box>
                             // : ''
                         }

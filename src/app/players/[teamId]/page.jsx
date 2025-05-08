@@ -25,7 +25,10 @@ const Players = () => {
 
     return (
         teamdata && playersData &&
-        <PlayersPage teamdata={teamdata} playersData={playersData} />
+        <PlayersPage
+            teamdata={teamdata}
+            playersData={playersData}
+        />
     )
 }
 

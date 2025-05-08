@@ -307,7 +307,7 @@ const CreateAuctionPlayer = ({ edit }) => {
                                 onClick={() => handleRemovePlayer(index)}
                                 sx={{ position: 'absolute', top: 5, right: 5 }}
                             >
-                                <Delete sx={{ color: 'var(--primary-color) !important' }} />
+                                <Delete sx={{ color: 'var(--theme-primary) !important' }} />
                             </IconButton>
                         )}
                     </Box>
@@ -351,8 +351,8 @@ const CreateAuctionPlayer = ({ edit }) => {
                                         <CustomSelectInput
                                             fontWeight={500}
                                             color={'var(--text-lightgrey)'}
-                                            labelfont={'var(--ex-small)'}
-                                            bgColor={'var(--primary-color)'}
+                                            labelfont={'var(--fs-sm)'}
+                                            bgColor={'var(--theme-primary)'}
                                             value={value}
                                             minWidth={'377px'}
                                             borderRadius={'10px!important'}
@@ -361,7 +361,7 @@ const CreateAuctionPlayer = ({ edit }) => {
                                             onChange={handleChange(index, field.key_name)}
                                         />
                                     </Box>
-                                    {error && <Typography color="error" variant="body2" sx={{ fontSize: "var(--ex-small)", padding: '6px 10px 0' }}>{error}</Typography>}
+                                    {error && <Typography color="error" variant="body2" sx={{ fontSize: "var(--fs-sm)", padding: '6px 10px 0' }}>{error}</Typography>}
                                 </Box>
                             )
                         } else if (field.show_type === 'tags') {

@@ -18,6 +18,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './ScoreBoard.css';
 import { reason, runtype } from "./ScoreBoardJson";
+import { CommonInput, RenderButton, SelectionOptionSection } from "./SbCommonUi";
 
 const calculatePlayerStats = (player, wickets, economy) => {
     let battingrun = 0;
@@ -238,71 +239,71 @@ const calculateMatchStats = (wicket, economy, finalOvers, firstInningswickets, s
     };
 };
 
-const CommonInput = React.memo(({ value, onchange, loop, title, disabled, type, minWidth }) => {
-    return (
-        <FormControl className="scoreboard_form">
-            <InputSelect
-                value={value}
-                onChange={onchange}
-                disabled={disabled}
-                minWidth={minWidth}
-                sx={{
-                    backgroundColor: 'var(--blue-background)',
-                    color: 'var(--text-white)',
-                    '& .MuiSvgIcon-root': {
-                        color: 'var(--text-white)',
-                    },
-                    '&.Mui-focused': {
-                        border: 'none',
-                    },
-                    '& .MuiOutlinedInput-notchedOutline': {
-                        border: 'none',
-                    },
-                    '&:hover': {
-                        border: 'none',
-                    },
-                }}
-            >
-                <MenuItem value={0}>{title}</MenuItem>
-                {
-                    loop.map((items, i) => {
-                        return (
-                            <MenuItem key={i} value={i + 1} >{type === "reason" ? items : items.playerName}</MenuItem>
-                        )
-                    })
-                }
-            </InputSelect>
-        </FormControl>
-    )
-})
+// const CommonInput = React.memo(({ value, onchange, loop, title, disabled, type, minWidth }) => {
+//     return (
+//         <FormControl className="scoreboard_form">
+//             <InputSelect
+//                 value={value}
+//                 onChange={onchange}
+//                 disabled={disabled}
+//                 minWidth={minWidth}
+//                 sx={{
+//                     backgroundColor: 'var(--theme-blue-bg)',
+//                     color: 'var(--color-white)',
+//                     '& .MuiSvgIcon-root': {
+//                         color: 'var(--color-white)',
+//                     },
+//                     '&.Mui-focused': {
+//                         border: 'none',
+//                     },
+//                     '& .MuiOutlinedInput-notchedOutline': {
+//                         border: 'none',
+//                     },
+//                     '&:hover': {
+//                         border: 'none',
+//                     },
+//                 }}
+//             >
+//                 <MenuItem value={0}>{title}</MenuItem>
+//                 {
+//                     loop.map((items, i) => {
+//                         return (
+//                             <MenuItem key={i} value={i + 1} >{type === "reason" ? items : items.playerName}</MenuItem>
+//                         )
+//                     })
+//                 }
+//             </InputSelect>
+//         </FormControl>
+//     )
+// })
 
-const SelectionOptionSection = React.memo(({ title, value, option, firstoption, onchange, width, className }) => {
-    return (
-        <Box className={`scoreboard_common_section ${width && 'active'} ${className}`}>
-            <Box>
-                <Typography variant="body2">{title}</Typography>
-            </Box>
-            <Box sx={{ width: width ? width : '60%' }}>
-                <CustomSelectInput label={firstoption} options={option.map(player => ({ key: player.id, name: player.playerName }))} onChange={onchange} value={value} />
-            </Box>
-        </Box>
-    )
-})
+// const SelectionOptionSection = React.memo(({ title, value, option, firstoption, onchange, width, className }) => {
+//     return (
+//         <Box className={`scoreboard_common_section ${width && 'active'} ${className}`}>
+//             <Box>
+//                 <Typography variant="body2">{title}</Typography>
+//             </Box>
+//             <Box sx={{ width: width ? width : '60%' }}>
+//                 <CustomSelectInput label={firstoption} options={option.map(player => ({ key: player.id, name: player.playerName }))} onChange={onchange} value={value} />
+//             </Box>
+//         </Box>
+//     )
+// })
 
-const RenderButton = React.memo(({ onClick, title, disabled }) => {
-    return (
-        <CustomeButton
-            onClick={onClick}
-            bgColor={'var(--text-white)'}
-            color={'var(--primary-color)'}
-            hover={'none'}
-            title={title}
-            width={'100%'}
-            height={'44px'}
-            disabled={disabled}
-        />
-    )
-});
+// const RenderButton = React.memo(({ onClick, title, disabled }) => {
+//     return (
+//         <CustomeButton
+//             onClick={onClick}
+//             bgColor={'var(--color-white)'}
+//             color={'var(--theme-primary)'}
+//             hover={'none'}
+//             title={title}
+//             width={'100%'}
+//             height={'44px'}
+//             disabled={disabled}
+//         />
+//     )
+// });
 
 const ScoreBoard = () => {
     const Tied = ['Superover', 'Tied']
@@ -3707,7 +3708,7 @@ const ScoreBoard = () => {
             {wagonWheel && <WagonWheel shots={shots} onClick={handleWagonWheelClick} />}
 
             <Dialog open={open} onClose={() => { }} className="scoreboard_dialog_section">
-                {!superOver && <Close sx={{ color: 'var(--text-white)', cursor: 'pointer', position: 'absolute', right: '2%', top: '3%' }} onClick={handleClose} />}
+                {!superOver && <Close sx={{ color: 'var(--color-white)', cursor: 'pointer', position: 'absolute', right: '2%', top: '3%' }} onClick={handleClose} />}
                 <>
                     {/* Show More Buttons */}
                     {
@@ -3737,7 +3738,7 @@ const ScoreBoard = () => {
                     {
                         wagonWheelSetting &&
                         <>
-                            <Typography sx={{ color: 'var(--text-white)', fontWeight: 500, textAlign: 'center', marginBottom: '15px' }}>
+                            <Typography sx={{ color: 'var(--color-white)', fontWeight: 500, textAlign: 'center', marginBottom: '15px' }}>
                                 {`Do you want to ${currentMatch?.wagonWheel === true ? 'close' : 'open'} the wagon wheel?`}
                             </Typography>
                             <Box sx={{ display: 'flex' }}>
@@ -3835,7 +3836,7 @@ const ScoreBoard = () => {
                     {/* Change Batter or Retired Hurt */}
                     {(changeBatter || retiredHurt) && !wicket && (
                         <Box>
-                            <Typography sx={{ color: 'var(--text-white)', fontWeight: 600, marginBottom: '20px', textAlign: 'center' }}>
+                            <Typography sx={{ color: 'var(--color-white)', fontWeight: 600, marginBottom: '20px', textAlign: 'center' }}>
                                 {retiredHurt ? 'Retired Hurt' : 'Change Batter'}
                             </Typography>
                             <SelectionOptionSection
@@ -3857,7 +3858,7 @@ const ScoreBoard = () => {
                                     <CommonInput type="reason" value={wicketReason.reason} loop={reason} onchange={handleChange('reason')} title="Reason" />
                                 )}
                                 {(wicketReason.reason === 3 || wicketReason.reason === 5) && (
-                                    <Typography sx={{ fontWeight: 600, color: 'var(--text-white)' }}>
+                                    <Typography sx={{ fontWeight: 600, color: 'var(--color-white)' }}>
                                         {/* {wicketReason.reason === 5 ? "Stumping By" : "By"} */}
                                         By
                                     </Typography>
@@ -3967,7 +3968,7 @@ const ScoreBoard = () => {
                     {penalty && (
                         <Box className="scoreboard_dialog_penalty_section">
                             <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                <Typography sx={{ color: 'var(--text-white)', fontWeight: 600 }}>Reason</Typography>
+                                <Typography sx={{ color: 'var(--color-white)', fontWeight: 600 }}>Reason</Typography>
                                 <textarea
                                     className="scoreboard_dialog_penalty_textarea"
                                     type="text"
@@ -3988,7 +3989,7 @@ const ScoreBoard = () => {
                     {/* break Buttons */}
                     {breakStart && (
                         <Box>
-                            <Typography sx={{ color: 'var(--text-white)', fontWeight: 600, marginBottom: '20px', textAlign: 'center' }}>
+                            <Typography sx={{ color: 'var(--color-white)', fontWeight: 600, marginBottom: '20px', textAlign: 'center' }}>
                                 Select Break Type
                             </Typography>
                             <CustomeTags

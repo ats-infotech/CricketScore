@@ -1,7 +1,7 @@
 .player_card_section {
     width: 100%;
     height: auto;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 8px;
     padding: 10px 10px;
     display: flex;
@@ -48,8 +48,8 @@
 }
 
 .player_card_avatar p {
-    color: var(--text-white);
-    font-size: var(--small);
+    color: var(--color-white);
+    font-size: var(--fs-md);
     font-weight: bold;
 }
 
@@ -65,7 +65,7 @@
 .player_card_name::before {
     content: '';
     position: absolute;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     filter: blur(147.5px);
     height: 50px;
     width: 70px;
@@ -76,17 +76,17 @@
 }
 
 .player_card_name h5, .player_card_name span {
-    color: var(--text-white);
+    color: var(--color-white);
     font-weight: 500;
-    font-size: var(--small);
+    font-size: var(--fs-md);
 }
 
 .player_card_name p{
     display: flex;
     align-items: center;
-    color: var(--text-white);
+    color: var(--color-white);
     gap: 10px;
     margin-block: 5px;
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 500;
 }

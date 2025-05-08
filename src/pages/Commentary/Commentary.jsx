@@ -1,11 +1,11 @@
 'use client'
 import { CommonText } from "@/components/common/commonText";
 import SwitchSelect from "@/components/common/commonUi/SwitchSelect/SwitchSelect";
+import { teamsState } from "@/redux/slices/teamSlice";
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import './Commentary.css';
 import { useSelector } from "react-redux";
-import { teamsState } from "@/redux/slices/teamSlice";
+import './Commentary.css';
 
 const CommentaryPage = ({ matchData, teamData, playerData, type, tournamentData }) => {
 
@@ -188,21 +188,21 @@ const CommentaryPage = ({ matchData, teamData, playerData, type, tournamentData 
 
                                     const getBallColor = () => {
                                         if ((items?.score === "-1" || items?.score === "-2" || items?.score === "-3" || items?.score === "-4" || items?.score === "-5" || items?.score === "-6") && items?.reason) {
-                                            return 'var(--wicket)'
+                                            return 'var(--cricket-wicket)'
                                         }
                                         if (items?.score === "4" || items?.score === "6") {
-                                            return 'var(--boundary)';
+                                            return 'var(--cricket-boundary)';
                                         }
                                         if (items?.score?.includes("WD") || items?.score?.includes("NB")) {
-                                            return 'var(--extra-run)';
+                                            return 'var(--cricket-extra-run)';
                                         }
                                         if (items?.score?.includes("W")) {
-                                            return 'var(--wicket)';
+                                            return 'var(--cricket-wicket)';
                                         }
                                         if ((items?.score === "1" || items?.score === "2" || items?.score === "3" || items?.score === "4" || items?.score === "5" || items?.score === "6") && items?.reason) {
-                                            return 'var(--boundary)'
+                                            return 'var(--cricket-boundary)'
                                         }
-                                        return 'var(--normal-ball)';
+                                        return 'var(--cricket-ball)';
                                     };
 
                                     const score = (scr, reason) => {

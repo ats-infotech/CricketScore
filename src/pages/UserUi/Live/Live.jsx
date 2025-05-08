@@ -1,11 +1,11 @@
 'use client'
 import SvgIcon from "@/assets/icons/SvgIcon"
+import ExtraRunSection from "@/components/common/commonUi/ExtrasSection/ExtraSection"
 import CommentaryPage from "@/pages/Commentary/Commentary"
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import './Live.css'
-import { useRouter } from "next/navigation"
-import ExtraRunSection from "@/components/common/commonUi/ExtrasSection/ExtraSection"
 
 
 const CommonTable = ({ header, data, playerscore, playerName, data2, playerName2, activeStrike, type, icon, maiden, post }) => {
@@ -270,15 +270,15 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
 
     const getBallColor = (score) => {
         if (score === "4" || score === "6") {
-            return 'var(--boundary)';
+            return 'var(--cricket-boundary)';
         }
         if (score.includes("WD") || score.includes("NB")) {
-            return 'var(--extra-run)';
+            return 'var(--cricket-extra-run)';
         }
         if (score.includes("W")) {
-            return 'var(--wicket)';
+            return 'var(--cricket-wicket)';
         }
-        return 'var(--normal-ball)';
+        return 'var(--cricket-ball)';
     };
 
     const getBallSize = (score) => {
@@ -342,19 +342,37 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
 
     return (
         <>
-            {matchData?.status !== 4 && <Box className='live_main_section activeAnimation'>
+            {matchData?.status !== 4 && <Box className='live_main_section'>
 
                 <Box className='live_batter_player_card'>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                        <CommonPlayerSection name={playerOnField.striker ?? 'TBD'} post={playersPost} icon={"striker"} run={CurrentOverScore?.batter1run ?? 0} ball={CurrentOverScore?.batter1balls ?? 0} activeStrike={activeStrike === 1} />
-                        <CommonPlayerSection type={"non-striker"} icon={"striker"} post={playersPost} name={playerOnField.nonStriker ?? 'TBD'} run={CurrentOverScore?.batter2run ?? 0} ball={CurrentOverScore?.batter2balls ?? 0} activeStrike={activeStrike === 2} />
+                        <CommonPlayerSection
+                            name={playerOnField.striker ?? 'TBD'}
+                            post={playersPost} icon={"striker"}
+                            run={CurrentOverScore?.batter1run ?? 0}
+                            ball={CurrentOverScore?.batter1balls ?? 0}
+                            activeStrike={activeStrike === 1}
+                        />
+                        <CommonPlayerSection
+                            type={"non-striker"}
+                            icon={"striker"}
+                            post={playersPost}
+                            name={playerOnField.nonStriker ?? 'TBD'}
+                            run={CurrentOverScore?.batter2run ?? 0}
+                            ball={CurrentOverScore?.batter2balls ?? 0}
+                            activeStrike={activeStrike === 2}
+                        />
                     </Box>
                     <Box className='silver-gradient-line'></Box>
                     <Box>
-                        <CommonPlayerSection type={"bowler"} name={playerOnField.bowler ?? 'TBD'} post={playersPost}
+                        <CommonPlayerSection
+                            type={"bowler"}
+                            name={playerOnField.bowler ?? 'TBD'}
+                            post={playersPost}
                             run={`${CurrentOverScore?.bowlerrun ?? 0} / ${CurrentOverScore?.bowlerwicket ?? 0}`}
                             ball={`${(CurrentOverScore?.bowleroverNo === 0 || CurrentOverScore?.bowleroverNo) && CurrentOverScore?.legalBall === 6 ? CurrentOverScore?.bowleroverNo + 1 : CurrentOverScore?.bowleroverNo && CurrentOverScore?.legalBall !== 6 ? CurrentOverScore?.bowleroverNo : 0}.${CurrentOverScore?.legalBall && CurrentOverScore?.legalBall !== 6 ? CurrentOverScore?.legalBall : 0}`}
-                            icon={"ball"} />
+                            icon={"ball"}
+                        />
                     </Box>
                 </Box>
 
@@ -364,13 +382,45 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
                     <Box className="live-gradient-line"></Box>
                 </Box>
 
-                <ExtraRunSection totalLBRuns={Extras?.LB} totalNBRuns={Extras.NB} totalWDRuns={Extras.WD} totalNRRuns={Extras.NR} totalBYERuns={Extras.BYE} totalPRRuns={Extras.PR} />
+                <ExtraRunSection
+                    totalLBRuns={Extras?.LB}
+                    totalNBRuns={Extras?.NB}
+                    totalWDRuns={Extras?.WD}
+                    totalNRRuns={Extras?.NR}
+                    totalBYERuns={Extras?.BYE}
+                    totalPRRuns={Extras?.PR}
+                />
 
-                <CommonTable header={batterheader} data={batter1data} playerscore={CurrentOverScore} post={playersPost} playerName={playerOnField.striker} data2={batter2data} playerName2={playerOnField.nonStriker} activeStrike={activeStrike} icon={"striker"} />
+                <CommonTable
+                    header={batterheader}
+                    data={batter1data}
+                    playerscore={CurrentOverScore}
+                    post={playersPost}
+                    playerName={playerOnField?.striker}
+                    data2={batter2data}
+                    playerName2={playerOnField?.nonStriker}
+                    activeStrike={activeStrike}
+                    icon={"striker"}
+                />
 
-                <CommonTable header={bowlerheader} data={bowlerdata} playerscore={CurrentOverScore} post={playersPost} playerName={playerOnField.bowler} type={"bowler"} icon={"ball"} maiden={maiden} />
+                <CommonTable
+                    header={bowlerheader}
+                    data={bowlerdata}
+                    playerscore={CurrentOverScore}
+                    post={playersPost}
+                    playerName={playerOnField?.bowler}
+                    type={"bowler"}
+                    icon={"ball"}
+                    maiden={maiden}
+                />
 
-                <CommentaryPage matchData={matchData} teamData={teamData} playerData={playerData} type={'live'} tournamentData={tournamentData} />
+                <CommentaryPage
+                    matchData={matchData}
+                    teamData={teamData}
+                    playerData={playerData}
+                    type={'live'}
+                    tournamentData={tournamentData}
+                />
 
             </Box>}
         </>

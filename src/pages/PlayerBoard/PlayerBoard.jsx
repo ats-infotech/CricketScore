@@ -5,10 +5,12 @@ import Banner from "@/components/common/commonUi/Banner/Banner";
 import CommonBack from "@/components/common/commonUi/commonBack";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import { TeamSelection } from "@/components/common/commonUi/CustomeSelectionSquareBox";
+import { teamsState } from "@/redux/slices/teamSlice";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import ball from '../../assets/img/cricket/ball.png';
 import bat from '../../assets/img/cricket/batball.png';
 import bowlerpic from '../../assets/img/cricket/bowler.png';
@@ -16,8 +18,6 @@ import nonstrikerpic from '../../assets/img/cricket/nonstriker.png';
 import strikerpic from '../../assets/img/cricket/striker.png';
 import PlayerSelection from "../PlayerSelection/StrikePlayerSection";
 import './PlayerBoard.css';
-import { useSelector } from "react-redux";
-import { teamsState } from "@/redux/slices/teamSlice";
 
 const ImageHeading = ({ src, title }) => {
     return (
@@ -167,8 +167,8 @@ const PlayerBoard = ({ teamplay, players, handleOnPlayerChange, selectePlayer, s
                         {
                             START_SCORING &&
                             <Box className='playerboard_buttons'>
-                                <CustomeButton border={'1px solid var(--primary-color)'} title={CommonText.StartScoring}
-                                    width={'100%'} bgColor={'var(--text-white)'} color={'var(--primary-color)'}
+                                <CustomeButton border={'1px solid var(--theme-primary)'} title={CommonText.StartScoring}
+                                    width={'100%'} bgColor={'var(--color-white)'} color={'var(--theme-primary)'}
                                     onClick={startmatch} hover={'none'}
                                 />
                             </Box>

@@ -6,7 +6,7 @@
 }
 
 .title_box .child_box {
-    color: var(--text-white);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -15,7 +15,7 @@
 }
 
 .title_box .child_box .title {
-    font-size: var(--normal);
+    font-size: var(--fs-base);
     font-weight: 600;
 }
 
@@ -30,13 +30,13 @@
 /* --------------- BlueInput ----------- */
 .blue_input,
 .blue_select_input {
-    background-color: var(--blue-background);
+    background-color: var(--theme-blue-bg);
     border: none;
     outline: none;
     padding: 14px 20px;
     border-radius: 10px;
     width: 100%;
-    color: var(--text-white);
+    color: var(--color-white);
     font-weight: 500;
 }
 
@@ -48,7 +48,7 @@
 
 .blue_input .errorMessageText,
 .blue_select_input .errorMessageText {
-    font-size: var(--ex-small)!important;
+    font-size: var(--fs-sm)!important;
     text-align: left!important;
     margin: 6px 0 0 5px!important;
 }

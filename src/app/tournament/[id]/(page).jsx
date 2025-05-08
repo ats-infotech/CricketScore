@@ -8,13 +8,15 @@ import { useSelector } from "react-redux";
 const Tournament = () => {
     const params = useParams()
     const router = useRouter()
+    const tournamentData = useSelector(state => state?.tournament?.data || [])
     const [getTournament, setGetTournament] = useState(null)
-    const tournamentData = useSelector(state => state?.tournament?.data)
 
     useEffect(() => {
+        if (!params?.id || !Array.isArray(tournamentData)) return;
+
         let result = tournamentData.find((d, i) => d?.id === params?.id)
         setGetTournament(result);
-    }, [params]);
+    }, [params?.id, tournamentData]);
 
     const handleNavigation = (value) => {
         router.push(`/tournament/${params.id}/${value}`);

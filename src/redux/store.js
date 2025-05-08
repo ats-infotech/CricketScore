@@ -13,7 +13,7 @@ import storage from './storage';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['tournament', 'teams', 'players', 'matches', 'playerscoreboard', 'auction'],
+    // whitelist: ['tournament', 'teams', 'players', 'matches', 'playerscoreboard', 'auction'],
 }
 
 const rootReducer = combineReducers({

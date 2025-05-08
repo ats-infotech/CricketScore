@@ -94,11 +94,11 @@
     width: 14px;
     height: 4px;
     border-radius: 10px;
-    background-color: var(--text-white) !important;
+    background-color: var(--color-white) !important;
 }
 
 .slider_linear_progress .MuiLinearProgress-bar {
-    background-color: var(--text-white) !important;
+    background-color: var(--color-white) !important;
 }
 
 .slider_linear_progress.active {
@@ -106,13 +106,13 @@
 }
 
 .slider_linear_progress.active .MuiLinearProgress-bar {
-    background-color: var(--primary-color) !important;
+    background-color: var(--theme-primary) !important;
 }
 
 .login_form_section {
     height: calc(100vh - 440px);
     min-height: 320px;
-    background-color: var(--box-blue);
+    background-color: var(--theme-box-blue);
     position: fixed;
     left: 0;
     right: 0;
@@ -137,17 +137,17 @@
     border-radius: 12px;
     padding: 14px 20px;
     font-weight: 500;
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     border: 0px;
     appearance: none;
     width: 100%;
     height: 46px;
-    color: var(--primary-color);
-    background-color: var(--text-white);
+    color: var(--theme-primary);
+    background-color: var(--color-white);
 }
 
 input::placeholder {
-    color: var(--text-grey);
+    color: var(--color-grey-300);
     font-weight: 500;
 }
 
@@ -157,8 +157,8 @@ input::placeholder {
 }
 
 .login_skip p {
-    font-size: var(--normal);
-    color: var(--text-white);
+    font-size: var(--fs-base);
+    color: var(--color-white);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -169,7 +169,7 @@ input::placeholder {
 .login_skip svg {
     height: 22px;
     width: 22px;
-    color: var(--text-white);
+    color: var(--color-white);
     transform: rotate(270deg);
 }
 
@@ -179,7 +179,7 @@ input::placeholder {
     left: 20px;
     right: 0;
     top: 20px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     height: 40px;
     width: 40px;
     border-radius: 10px;
@@ -192,22 +192,22 @@ input::placeholder {
 .login_back_step_section svg {
     height: 24px;
     width: 24px;
-    color: var(--primary-color);
+    color: var(--theme-primary);
     transform: rotate(90deg);
 }
 
 .login_otp_verfication p,
 .login_welcome_section p {
-    font-size: var(--ex-large);
-    color: var(--text-white);
+    font-size: var(--fs-2xl);
+    color: var(--color-white);
     font-weight: 500;
     margin-bottom: 10px;
 }
 
 .login_otp_verfication span,
 .login_welcome_section span {
-    font-size: var(--small);
-    color: var(--text-grey);
+    font-size: var(--fs-md);
+    color: var(--color-grey-300);
     font-weight: 400;
 }
 
@@ -228,8 +228,8 @@ input::placeholder {
     height: 60px;
     width: 60px;
     text-align: center;
-    font-size: var(--normal);
-    color: var(--primary-color) !important;
+    font-size: var(--fs-base);
+    color: var(--theme-primary) !important;
     font-weight: 600 !important;
     outline: none !important;
 }
@@ -251,15 +251,15 @@ input::placeholder {
     width: 100%;
     height: 60px;
     border-radius: 10px;
-    color: var(--text-white);
+    color: var(--color-white);
     text-transform: none;
-    font-size: var(--semi-normal);
+    font-size: var(--fs-lg);
     font-weight: 500;
 }
 
 .login_gender_button.active button {
-    background-color: var(--text-white);
-    color: var(--primary-color);
+    background-color: var(--color-white);
+    color: var(--theme-primary);
 }
 
 @media screen and (max-width: 380px) {
@@ -279,11 +279,11 @@ input::placeholder {
     }
 
     .login_otp_verfication p {
-        font-size: var(--large);
+        font-size: var(--fs-xl);
     }
 
     .login_otp_verfication span {
-        font-size: var(--ex-small);
+        font-size: var(--fs-sm);
     }
 
     .otp_input_container input {

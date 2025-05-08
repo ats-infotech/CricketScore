@@ -40,7 +40,6 @@ const Matches = () => {
   const tournament_data = useSelector(tournamentState)
 
   const [matches, setMatches] = useState([])
-  const [animation, setAnimation] = useState(false)
   const [openModal, setOpenModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [autoSelect, setAutoSelect] = useState(false)
@@ -192,7 +191,6 @@ const Matches = () => {
   }, []);
 
   const handleTabClick = (val) => {
-    setAnimation(true)
     let matchesFilter;
     let currentTournamentMatches = match_data?.data?.filter((items) => items?.tournamentId === TournamentData?.id)
     switch (val) {
@@ -210,8 +208,6 @@ const Matches = () => {
     }
     setMatches(matchesFilter || [])
     setActiveTab(val)
-    let timer = setTimeout(() => setAnimation(false), 500);
-    return () => clearTimeout(timer)
   }
 
   const handleModalTab = (val) => {
@@ -313,7 +309,7 @@ const Matches = () => {
   if (loading && !processing) return <Loader />
 
   return (
-    <Box className='matches_main activeAnimation'>
+    <Box className='matches_main'>
       {
         !isPastTournament &&
         <CustomeTabs data={tabKeys || []} onClick={handleTabClick} activeTab={activeTab} />
@@ -323,13 +319,13 @@ const Matches = () => {
           {!loading && matches.length === 0 && <CustomeMessageBox icon='batsman2' title='Match Guide'
             describe='Quickly start or schedule matches with ease. Get personalized suggestions based on your preferences'
           >
-            <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--primary-color) !important'} hover='none' title='Schedule Match' onClick={handleOpen} />
+            <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--theme-primary) !important'} hover='none' title='Schedule Match' onClick={handleOpen} />
           </CustomeMessageBox>
           }
           {
             !isPastTournament && matches.length > 0 &&
             <Box className='schedule_button' id='schedule-button' ref={scheduleRef}>
-              <CustomeButton width={'80%'} height={'45px'} bgColor={'var(--primary-color) !important'} hover='none' title='Schedule Match' onClick={handleOpen} />
+              <CustomeButton width={'80%'} height={'45px'} bgColor={'var(--theme-primary) !important'} hover='none' title='Schedule Match' onClick={handleOpen} />
             </Box>
           }
         </Box>
@@ -337,7 +333,6 @@ const Matches = () => {
       <MatchCard
         matches={matches}
         isPastTournament={isPastTournament}
-        animation={animation}
         tournamentData={TournamentData}
         isAdmin={true}
         activeTab={activeTab}
@@ -370,13 +365,13 @@ const Matches = () => {
                     )
                   })
                 }
-                <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--text-white)'} hoverbg={'var(--text-white)'} hovertext={'var(--primary-color)'} color={'var(--primary-color)'} title='Next' onClick={() => handleRedirect('next_auto_match')} />
+                <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--color-white)'} hoverbg={'var(--color-white)'} hovertext={'var(--theme-primary)'} color={'var(--theme-primary)'} title='Next' onClick={() => handleRedirect('next_auto_match')} />
               </Box>
             </>
             :
             <Box className='showButtonBox'>
-              <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--secondary-color)'} title='Schedule Match' onClick={() => handleRedirect('manual_schedule_match')} />
-              <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--text-white)'} color={'var(--primary-color)'} title='Auto Schedule Match' onClick={() => handleRedirect('auto_match')} />
+              <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--theme-secondary)'} title='Schedule Match' onClick={() => handleRedirect('manual_schedule_match')} />
+              <CustomeButton width={'100%'} height={'45px'} bgColor={'var(--color-white)'} color={'var(--theme-primary)'} title='Auto Schedule Match' onClick={() => handleRedirect('auto_match')} />
             </Box>
         }
       </CustomeModal>

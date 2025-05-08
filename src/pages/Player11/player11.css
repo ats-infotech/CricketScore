@@ -11,9 +11,9 @@
 }
 
 .player11_title p {
-    font-size: var(--normal) !important;
+    font-size: var(--fs-base) !important;
     font-weight: 500 !important;
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
     text-align: center !important;
 }
 
@@ -81,7 +81,7 @@
 .player11_post_selection_section {
     height: 28px;
     width: 28px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -89,11 +89,11 @@
 }
 
 .player11_post_selection_section.isCap {
-    border: 2px solid var(--text-orange);
+    border: 2px solid var(--color-orange);
 }
 
 .player11_post_selection_section.isWk {
-    border: 2px solid var(--text-green);
+    border: 2px solid var(--color-green);
 }
 
 .player11_post_selection_sub_section {
@@ -118,7 +118,7 @@
 .player11_common_main_section {
     height: 230px;
     width: 160px;
-    background-color: var(--blue-background);
+    background-color: var(--theme-blue-bg);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -141,7 +141,7 @@
 .player11_common_section {
     height: 150px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-bottom-right-radius: 40px;
     border-bottom-left-radius: 40px;
     box-shadow: 0px 5px 15px rgba(12, 24, 48, 0.6);
@@ -154,7 +154,7 @@
 .player11_Text_circle_section {
     height: 150px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-bottom-right-radius: 40px;
     border-bottom-left-radius: 40px;
     box-shadow: 0px 5px 15px rgba(12, 24, 48, 0.6);
@@ -174,15 +174,15 @@
 }
 
 .player11_common_main_section p {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     font-weight: 600 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     margin-block: 10px !important;
     text-align: center !important;
 }
 
 .player11_Text_circle p {
-    font-size: var(--large) !important;
+    font-size: var(--fs-xl) !important;
 }
 
 .player11_common_sub_section {
@@ -193,7 +193,7 @@
 .player11_checkbox_section {
     height: 28px;
     width: 28px;
-    border: 2px solid var(--text-white);
+    border: 2px solid var(--color-white);
     border-radius: 50%;
     box-shadow: none;
     display: flex;
@@ -249,10 +249,10 @@
 .player11_common_button {
     width: 180px !important;
     height: 40px !important;
-    border: 1px solid var(--text-white) !important;
-    color: var(--text-white) !important;
+    border: 1px solid var(--color-white) !important;
+    color: var(--color-white) !important;
     border-radius: 15px !important;
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
     text-transform: capitalize !important;
     background-color: transparent !important;
@@ -263,7 +263,7 @@
 
 .player11_common_button.active {
     border: 1px solid transparent !important;
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
 }
 
 /* 
@@ -308,8 +308,8 @@
 }
 
 .player11_playerselection_section p {
-    color: var(--primary-color) !important;
-    font-size: var(--normal) !important;
+    color: var(--theme-primary) !important;
+    font-size: var(--fs-base) !important;
     font-weight: 500 !important;
     text-align: center;
 }
@@ -324,7 +324,7 @@
 .player11_playerselection_main_section {
     width: 100%;
     height: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 15px;
     padding: 40px;
     margin-top: 30px;
@@ -359,7 +359,7 @@
 .add_player_in_playing11 .team_group_box {
     height: 80px;
     width: 80px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 15px;
     box-shadow: var(--shadow-grey-light);
     display: flex;
@@ -379,7 +379,7 @@
 .add_player_in_playing11 .team_group_box .svgBox svg {
     width: 20px;
     height: 20px;
-    color: var(--text-grey);
+    color: var(--color-grey-300);
 }
 
 .player11_selected_players_section {
@@ -389,15 +389,15 @@
 
 .add_player_in_playing11 p,
 .player11_selected_players_section p {
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
     font-weight: 600 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     margin-block: 20px !important;
     text-align: center !important;
 }
 
 .player11_selected_players_section p {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
 }
 
 .player11_players_section {
@@ -427,7 +427,7 @@
 }
 
 .player11_player_name_section {
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 10px;
     padding: 15px 20px;
     width: 100%;
@@ -438,15 +438,15 @@
 }
 
 .player11_player_name_section p {
-    color: var(--text-white) !important;
-    font-size: var(--small) !important;
+    color: var(--color-white) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
 }
 
 .player11_checkbox {
     height: 22px;
     width: 22px;
-    border: 2px solid var(--text-white);
+    border: 2px solid var(--color-white);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -456,7 +456,7 @@
 .player11_checkbox svg {
     height: 22px;
     width: 22px;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .player11_post {
@@ -484,7 +484,7 @@
     width: 50%;
     padding: 10px 5px;
     display: flex;
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--theme-primary);
     margin-top: 10px;
     border-radius: 10px;
     justify-content: center;
@@ -494,16 +494,16 @@
 }
 
 .player11_sub_post.active {
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
 }
 
 .player11_sub_post.active>p {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
 }
 
 .player11_sub_post p {
-    color: var(--primary-color) !important;
-    font-size: var(--ex-small) !important;
+    color: var(--theme-primary) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 600 !important;
 }
 
@@ -516,7 +516,7 @@
 
 .player11_post_image.active {
     padding: 3px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 50%;
 }
 
@@ -546,13 +546,13 @@
 .player11_selected_post_player {
     height: 26px;
     width: 26px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 50%;
     padding: 4px;
 }
 
 .player11_player_error_title {
-    color: var(--text-red) !important;
+    color: var(--color-red) !important;
     text-align: center !important;
     font-weight: 500 !important;
     margin: 0 auto;
@@ -571,7 +571,7 @@
 .player11_player_remove_section {
     height: 16px;
     width: 16px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -683,7 +683,7 @@
     }
 
     .player11_sub_post p {
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
 }
 
@@ -962,7 +962,7 @@
     }
 
     .player11_sub_post p {
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
 
     .player11_post_image.active {

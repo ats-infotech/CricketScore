@@ -642,7 +642,7 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     const SecondBowlingTeamSuperover = isFirstBattingTeamPlayingSuperover ? currentBowlingTableProps : completedSuperoverBowlingTableProps
 
     return (
-        <Box className='user_scorecard_main_section activeAnimation'>
+        <Box className='user_scorecard_main_section'>
             <Box className='commentary_team_select_section'>
                 <SwitchSelect options={inningsTeam} defaultSelected={currentTeam} onChange={(val) => setCurrentTeam(val)} />
             </Box>

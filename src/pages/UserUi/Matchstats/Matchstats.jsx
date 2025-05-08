@@ -53,7 +53,7 @@ const Matchstats = ({ currentMatch, mvpPoints }) => {
                     </Typography>
                 </Box>
             }
-            {!currentMatch?.terminate && <Box className='matchstats_main_section activeAnimation'>
+            {!currentMatch?.terminate && <Box className='matchstats_main_section'>
                 <Box className='matchstats_top3_section'>
                     {
                         rearrangedPlayers.length > 0 && rearrangedPlayers.map((items, i) => {
@@ -64,7 +64,7 @@ const Matchstats = ({ currentMatch, mvpPoints }) => {
                                             <Box className={i === 1 ? 'matchstats_top1_image' : 'matchstats_top3_image'}>
                                                 {items?.playerthumbnail === '' ?
                                                     <Box sx={{ backgroundColor: items?.playercolor, height: '100%', borderRadius: '15px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                        <Typography sx={{ fontSize: 'var(--normal)', color: 'var(--text-white)' }}>{items.playerletter}</Typography>
+                                                        <Typography sx={{ fontSize: 'var(--fs-base)', color: 'var(--color-white)' }}>{items.playerletter}</Typography>
                                                     </Box>
                                                     :
                                                     <Image unoptimized src={`/${items.playerthumbnail}`} alt="players" height={500} width={500} />}
@@ -92,11 +92,11 @@ const Matchstats = ({ currentMatch, mvpPoints }) => {
                                 <Box key={i} className='mvp_all_players_stats_section'>
                                     {items?.playerthumbnail === '' ?
                                         <Box sx={{ backgroundColor: items?.playercolor, height: '40px', width: '40px', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                            <Typography sx={{ fontSize: 'var(--normal)', color: 'var(--text-white)' }}>{items.playerletter}</Typography>
+                                            <Typography sx={{ fontSize: 'var(--fs-base)', color: 'var(--color-white)' }}>{items.playerletter}</Typography>
                                         </Box>
                                         :
                                         <Box className='mvp_all_players_stats'>
-                                            <Image unoptimized src={`/${items.playerthumbnail}`} width={500} height={500} alt='' />
+                                            <Image unoptimized src={`/${items.playerthumbnail}`} width={500} height={500} alt='mvp_player' />
                                         </Box>
                                     }
                                     <CommonStatsSection team_name={items.team} name={items.playerName} batting={items?.battingPoints} bowling={items?.bowlingPoints} fielding={items?.fieldingPoints} total={items?.totalPoints} />

@@ -188,7 +188,7 @@ const AboutPage = ({ tournamentData, teamData, playerData }) => {
                         <Edit />
                     </Box>
                     <Box className='tournament_actions' onClick={handleDeleteTournamentInfo}>
-                        <Delete sx={{ color: 'var(--text-red)!important' }} />
+                        <Delete sx={{ color: 'var(--color-red)!important' }} />
                     </Box>
                 </Box>
             </Box>

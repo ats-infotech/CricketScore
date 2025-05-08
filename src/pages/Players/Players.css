@@ -28,7 +28,7 @@
 
 .smallText {
     font-family: var(--primary-font);
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 500;
     color: var(--text-lightgrey);
     text-align: center;
@@ -36,7 +36,7 @@
 
 .ex-smallText {
     font-family: var(--primary-font);
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 500;
     color: var(--text-lightgrey);
     text-align: center;
@@ -73,7 +73,7 @@
     width: 90px;
     height: 90px;
     border-radius: 100px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,12 +87,12 @@
 .manual_add_player_main .form_box .upload_player_image .iconBig {
     width: 30px;
     height: 30px;
-    color: var(--text-grey);
+    color: var(--color-grey-300);
 }
 
 .manual_add_player_main .form_box .upload_player_image .errorText {
     font-family: var(--primary-font);
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     margin: 0 auto;
     text-align: center;
 }
@@ -111,9 +111,9 @@
     right: 0;
     bottom: 0;
     margin: 0 auto;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     padding: 10px;
-    max-width: var(--screen-max-width);
+    max-width: var(--layout-max-width);
     transition: all 0.3s ease;
 }
 
@@ -143,7 +143,7 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .close_player {
@@ -159,7 +159,7 @@
     left: 0;
     top: 50px;
     z-index: 10;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     width: 50px;
     height: 50px;
     border-radius: 300px;
@@ -170,9 +170,9 @@
 
 .countOfPlayer p {
     font-family: var(--primary-font);
-    color: var(--primary-color);
+    color: var(--theme-primary);
     font-weight: 500;
-    font-size: var(--normal);
+    font-size: var(--fs-base);
 }
 
 .section-box.activeLastSpaceBottom:nth-last-child(3n-1) {

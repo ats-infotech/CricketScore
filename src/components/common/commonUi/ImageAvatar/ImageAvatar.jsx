@@ -8,7 +8,7 @@ const ImageAvatar = (props) => {
         borderRadius = '50%',
         height = '100%',
         width = '100%',
-        fontSize = 'var(--ex-large)',
+        fontSize = 'var(--fs-2xl)',
         smallHeight = '100%',
         smallWidth = '100%',
         meduimHeight = '100%',
@@ -27,7 +27,7 @@ const ImageAvatar = (props) => {
             justifyContent: 'center',
             alignItems: 'center',
         }}>
-            <Typography variant="h6" sx={{ fontSize: fontSize, color: 'var(--text-white)', fontWeight: '600' }}>{text}</Typography>
+            <Typography variant="h6" sx={{ fontSize: fontSize, color: 'var(--color-white)', fontWeight: '600' }}>{text}</Typography>
         </Box>
     )
 }

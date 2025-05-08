@@ -1,14 +1,14 @@
 'use client'
-import { Box, Button, LinearProgress, Typography } from "@mui/material"
-import './Login.css'
-import { genderJson, loginJson } from "@/components/common/login"
-import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
-import CustomeButton from "@/components/common/commonUi/CustomeButton"
 import SvgIcon from "@/assets/icons/SvgIcon"
-import { useRouter } from "next/navigation"
 import { CommonText } from "@/components/common/commonText"
+import CustomeButton from "@/components/common/commonUi/CustomeButton"
 import MessageModal from "@/components/common/commonUi/Modal/MessageModal"
+import { genderJson, loginJson } from "@/components/common/login"
+import { Box, Button, LinearProgress, Typography } from "@mui/material"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
+import './Login.css'
 
 const LoginPage = () => {
     const [sliderImage, setSliderImage] = useState(1)
@@ -215,7 +215,7 @@ const LoginPage = () => {
                                     {errorState && <span style={{ fontWeight: '500', marginTop: '5px', marginBottom: '25px' }} className="errorText">{errorState}</span>}
                                 </Box>
                             }
-                            <CustomeButton onClick={handleSubmit} margin={"15px 0px 0px"} title={loginStep === 1 ? "Login" : "Confirm"} height={"50px"} width={"100%"} bgColor={"var(--primary-color)"} />
+                            <CustomeButton onClick={handleSubmit} margin={"15px 0px 0px"} title={loginStep === 1 ? "Login" : "Confirm"} height={"50px"} width={"100%"} bgColor={"var(--theme-primary)"} />
                         </Box>
                         {/* Skip Button for step 1 */}
                         {

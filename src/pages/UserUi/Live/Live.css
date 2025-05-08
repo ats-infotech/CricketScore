@@ -47,8 +47,8 @@
 }
 
 .live_player_section p {
-    font-size: var(--ex-small) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-sm) !important;
+    color: var(--color-white) !important;
     font-weight: 600 !important;
     text-align: center !important;
 }
@@ -56,7 +56,7 @@
 .live_player_icon_section{
     height: 30px;
     width: 30px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,7 +64,7 @@
 }
 
 .live_player_icon_section.active{
-    background-color: var(--boundary) !important;
+    background-color: var(--cricket-boundary) !important;
 }
 
 .live_player_icon_section svg{
@@ -87,14 +87,14 @@
 }
 
 .live_player_live_section p{
-    font-size: var(--ex-small) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-sm) !important;
+    color: var(--color-white) !important;
     font-weight: 600 !important;
 }
 
 .live_batter_player_card{
     max-width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 15px;
     box-shadow: 0px -5px 20px rgba(255, 255, 255, 0.08), 0px 5px 35px rgba(12, 24, 48, 0.3);
     display: flex;
@@ -114,7 +114,7 @@
 .live_bowler_player_card{
     height: 118px;
     max-width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 15px;
     box-shadow: 0px -5px 20px rgba(255, 255, 255, 0.08), 0px 5px 35px rgba(12, 24, 48, 0.3);
     display: flex;
@@ -145,7 +145,7 @@
 
 .live_table_section{
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     margin: 25px 0 0 0;
     border-radius: 15px;
     display: flex;
@@ -164,19 +164,19 @@
 .table-cell svg{
     height: 14px;
     width: 14px;
-    color: var(--text-white);
+    color: var(--color-white);
     margin-right: 10px;
 }
 
 .table-cell{
-    color: var(--text-white) !important;
-    font-size: var(--small) !important;
+    color: var(--color-white) !important;
+    font-size: var(--fs-md) !important;
     padding: 10px !important;
 }
 
 .player-name{
-    color: var(--text-white) !important;
-    font-size: var(--small) !important;
+    color: var(--color-white) !important;
+    font-size: var(--fs-md) !important;
 }
 
 .table-cell.data{
@@ -186,7 +186,7 @@
 .live_player_table_icon_section{
     height: 28px;
     width: 28px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -195,7 +195,7 @@
 }
 
 .live_player_table_icon_section.active{
-    background-color: var(--boundary) !important;
+    background-color: var(--cricket-boundary) !important;
 }
 
 .live_player_table_icon_section svg{
@@ -212,9 +212,9 @@
 }
 
 .Live_Extra_Runs p {
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
     font-weight: 600 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
 }
 
 @media screen and (max-width: 380px) {

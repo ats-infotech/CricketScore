@@ -3,6 +3,7 @@ import { generatePair, generateUniqueId } from '@/components/common/commomFuncti
 import CustomeBack from '@/components/common/commonUi/CustomeBack'
 import CustomeButton from '@/components/common/commonUi/CustomeButton'
 import CustomeInput from '@/components/common/commonUi/CustomeInput'
+import CustomeTags from '@/components/common/commonUi/CustomeTags'
 import Loader from '@/components/common/commonUi/Loader'
 import { AutoMatchScheduleJson } from '@/components/common/json/AutoMatchScheduleJson'
 import { autoMatchSchedule } from '@/redux/slices/matchSlice'
@@ -11,7 +12,6 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import './AutoMatchSchedule.css'
-import CustomeTags from '@/components/common/commonUi/CustomeTags'
 
 const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
     const [errors, setErrors] = useState({})
@@ -312,7 +312,7 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
                         })
                     }
                     <Box className='button_box'>
-                        <CustomeButton title='Schedule Match' width='80%' height='45px' bgColor={'var(--secondary-color)'} onClick={handleCreateAutoMatches} />
+                        <CustomeButton title='Schedule Match' width='80%' height='45px' bgColor={'var(--theme-secondary)'} onClick={handleCreateAutoMatches} />
                     </Box>
                 </Box>
             </Box>

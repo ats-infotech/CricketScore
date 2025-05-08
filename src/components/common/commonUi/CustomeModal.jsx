@@ -6,10 +6,10 @@ const CustomeModal = ({ open, onClose, children, bgColor }) => {
             open={open}
             onClose={onClose}
             sx={{
-                maxWidth: 'var(--screen-max-width)',
+                maxWidth: 'var(--layout-max-width)',
                 margin: '0 auto',
                 '.MuiPaper-root': {
-                    backgroundColor: bgColor || "var(--primary-color)",
+                    backgroundColor: bgColor || "var(--theme-primary)",
                     borderRadius: '20px',
                     width: '100%',
                     margin:'18px'

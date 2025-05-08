@@ -1,11 +1,11 @@
 import { Box, Dialog, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
-import successGif from '../../../../assets/img/login-successfull.gif';
 import ErrorGif from '../../../../assets/img/Error.gif';
+import successGif from '../../../../assets/img/login-successfull.gif';
+import leftfireworkgif from '../../../../assets/img/toss/leftfirework.gif';
+import fireworkgif from '../../../../assets/img/toss/rightfirework.gif';
 import CustomeButton from '../CustomeButton';
-import leftfireworkgif from '../../../../assets/img/toss/leftfirework.gif'
-import fireworkgif from '../../../../assets/img/toss/rightfirework.gif'
 import './MessageModal.css';
 
 const MessageModal = ({ open, handleClose, handleSubmit, success, message, processing, type }) => {
@@ -23,13 +23,13 @@ const MessageModal = ({ open, handleClose, handleSubmit, success, message, proce
         open &&
         <Dialog onClose={() => { }} open={open} sx={{
             '.MuiDialog-container': {
-                maxWidth: 'var(--screen-max-width)',
+                maxWidth: 'var(--layout-max-width)',
                 margin: '0 auto',
                 // transform: 'translateX(-8px)'
             },
             '.MuiPaper-root': {
                 backgroundColor: 'transparent',
-                boxShadow: 'var(--alert-popup-shadow)',
+                boxShadow: 'var(--shadow-popup)',
                 borderRadius: '30px',
                 // maxWidth:'400px',
                 width: '100%'
@@ -58,9 +58,9 @@ const MessageModal = ({ open, handleClose, handleSubmit, success, message, proce
                             width={'45%'}
                             height={'50px'}
                             hover={'none'}
-                            border={'1px solid var(--text-grey)'}
+                            border={'1px solid var(--color-grey-300)'}
                             bgColor={'transparent'}
-                            color={'var(--gray)!important'}
+                            color={'var(--color-grey-400)!important'}
                             onClick={handleClose}
                         />}
                         <CustomeButton

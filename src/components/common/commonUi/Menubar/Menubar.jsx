@@ -37,7 +37,7 @@ const Menubar = ({ open, direction = 'left', handleClose }) => {
             onClose={handleClose}
             sx={{
                 '& .MuiPaper-root': {
-                    backgroundColor: 'var(--primary-color)',
+                    backgroundColor: 'var(--theme-primary)',
                     borderRadius: '0 50px 50px 0',
                     padding: sm ? '50px 20px' : md ? '50px 30px' : lg ? '50px 40px' : '50px 50px',
                     minWidth: sm ? '250px' : '320px'

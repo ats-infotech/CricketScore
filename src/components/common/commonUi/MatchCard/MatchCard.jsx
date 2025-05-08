@@ -1,4 +1,5 @@
 'use client'
+import { teamsState } from '@/redux/slices/teamSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -6,13 +7,12 @@ import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import React from "react";
+import { useSelector } from 'react-redux';
 import vsLogo from '../../../../assets/img/Vs1.png';
 import { breakType, TestBreakType } from "../../json/commonJson";
 import CustomeButton from '../CustomeButton';
 import ImageAvatar from '../ImageAvatar/ImageAvatar';
 import './MatchCard.css';
-import { useSelector } from 'react-redux';
-import { teamsState } from '@/redux/slices/teamSlice';
 
 const TeamScoreBox = React.memo(({ teamLogo, teamName, runs, wicket, overs, superover, soruns, sowicket, soovers, letter, color, scorehidden, Innings1Declare, Innings2Declare, teamWon }) => {
     return (
@@ -41,7 +41,6 @@ const TeamScoreBox = React.memo(({ teamLogo, teamName, runs, wicket, overs, supe
 const MatchCard = (props) => {
     const {
         matches,
-        animation,
         isPastTournament,
         tournamentData,
         activeTab,
@@ -112,7 +111,7 @@ const MatchCard = (props) => {
 
     return (
         matches.length > 0 &&
-        <Box className={`all_matched ${animation ? 'activeAnimation' : ''} ${isPastTournament ? 'isPastTournament' : ''}`}>
+        <Box className={`all_matched ${isPastTournament ? 'isPastTournament' : ''}`}>
             {
                 matches
                     .sort((a, b) => new Date(b?.datetime || b?.match_start_time) - new Date(a?.datetime || a?.match_start_time))
@@ -201,7 +200,7 @@ const MatchCard = (props) => {
                         return (
                             <React.Fragment key={i}>
                                 {item?.tournamentId === tournamentData?.id && <Box className='match_card' onClick={() => handleRouteClick(item)}>
-                                    {item?.status < 3 && isAdmin && <Box sx={{ position: 'absolute', right: '10px', }}>
+                                    {item?.status <= 3 && isAdmin && <Box sx={{ position: 'absolute', right: '10px', }}>
                                         <IconButton onClick={(e) => handleMenuClick(e, item)} aria-controls="simple-menu" aria-haspopup="true" className='match-menu-icon-box' sx={{ padding: '0px !important' }}>
                                             <MoreVertIcon />
                                         </IconButton>
@@ -284,14 +283,14 @@ const MatchCard = (props) => {
                                             isUser ?
                                                 <CustomeButton
                                                     title={"Show Match"}
-                                                    bgColor={'var(--primary-color)'}
-                                                    color={'var(--text-white)'}
+                                                    bgColor={'var(--theme-primary)'}
+                                                    color={'var(--color-white)'}
                                                     width={'188px'}
                                                     height={'44px'}
                                                 />
                                                 : isAdmin ?
                                                     <CustomeButton
-                                                        bgColor={'var(--primary-color) !important'}
+                                                        bgColor={'var(--theme-primary) !important'}
                                                         title={getMatchButtonTitle()}
                                                         width={'180px'}
                                                         height={'44px'}

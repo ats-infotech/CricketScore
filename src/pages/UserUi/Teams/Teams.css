@@ -37,9 +37,9 @@
 }
 
 .match_teams_section p {
-    font-size: var(--semi-normal) !important;
+    font-size: var(--fs-lg) !important;
     font-weight: 500 !important;
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
 }
 
 .match_teams_image_section {
@@ -67,7 +67,7 @@
 .match_team_main_section {
     height: 220px;
     width: 150px;
-    background-color: var(--blue-background);
+    background-color: var(--theme-blue-bg);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -76,9 +76,9 @@
 }
 
 .match_team_main_section p {
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     font-weight: 600 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     text-align: center !important;
 }
 
@@ -95,7 +95,7 @@
 .match_team_common_section {
     height: 150px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-bottom-right-radius: 40px;
     border-bottom-left-radius: 40px;
     box-shadow: 0px 5px 15px rgba(12, 24, 48, 0.6);
@@ -107,7 +107,7 @@
 .match_team_post_selection_section {
     height: 28px;
     width: 28px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -252,7 +252,7 @@
     }
 
     .match_team_main_section p {
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
 
     .match_team_player_name_section {

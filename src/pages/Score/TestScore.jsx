@@ -3,16 +3,18 @@ import { CommonText } from "@/components/common/commonText";
 import Banner from "@/components/common/commonUi/Banner/Banner";
 import CommonBack from "@/components/common/commonUi/commonBack";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
-import ExtraRunSection from "@/components/common/commonUi/ExtrasSection/ExtraSection";
-import { SwapHoriz } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
-import Image from "next/image";
+// import ExtraRunSection from "@/components/common/commonUi/ExtrasSection/ExtraSection";
+// import { SwapHoriz } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import fourgif from '../../assets/img/score/four.gif';
-import sixgif from '../../assets/img/score/six.gif';
-import wicketgif from '../../assets/img/score/wicket.gif';
-import CommonPlayerSection from "./commonScoreUi/CommonPlayerSection";
+// import fourgif from '../../assets/img/score/four.gif';
+// import sixgif from '../../assets/img/score/six.gif';
+// import wicketgif from '../../assets/img/score/wicket.gif';
+// import CommonPlayerSection from "./commonScoreUi/CommonPlayerSection";
+import PlayerScoreBoard from "./commonScoreUi/PlayerScoreBoard";
+import ScoringKeyboard from "./commonScoreUi/ScoringKeyboard";
 import './Score.css';
 
 const TestScorePage = ({
@@ -71,58 +73,6 @@ const TestScorePage = ({
 
     const router = useRouter()
 
-    const getBallColor = (score) => {
-        if (score === "4" || score === "6") {
-            return 'var(--boundary)';
-        }
-        if (score.includes("WD") || score.includes("NB")) {
-            return 'var(--extra-run)';
-        }
-        if (score.includes("W")) {
-            return 'var(--wicket)';
-        }
-        return 'var(--normal-ball)';
-    };
-
-    const getBallSize = (score) => {
-        if (score.includes("WD+W") || score.includes("NB+W")) {
-            return "7px";
-        }
-        return '9px'
-    }
-
-    const ballCircles = [];
-
-    for (let i = 0; i < length; i++) {
-        const score = ballScores[i];
-
-        const ballColor = score ? getBallColor(score) : 'lightgray';
-        const TextSize = score ? getBallSize(score) : '10px'
-
-        ballCircles.push(
-            <div
-                key={i}
-                style={{
-                    width: '35px',
-                    height: '35px',
-                    borderRadius: '50%',
-                    backgroundColor: i < balls.ballNo ? ballColor : 'lightgray',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: i < balls.ballNo ? TextSize : '10px',
-                    overflow: 'hidden'
-                }}
-            >
-                {score !== null ? score : ''}
-            </div>
-        );
-    }
-
-    const isButtonsDisabled = currentinnings <= 0 || inningsComplete || overChanged || active.secondactive === "STO" || wagonWheel;
-
     const [playerOnField, setPlayerOnField] = useState({
         striker: "",
         strikerimage: "",
@@ -137,6 +87,58 @@ const TestScorePage = ({
         bowlerletter: "",
         bowlercolor: ""
     })
+
+    // const getBallColor = (score) => {
+    //     if (score === "4" || score === "6") {
+    //         return 'var(--cricket-boundary)';
+    //     }
+    //     if (score.includes("WD") || score.includes("NB")) {
+    //         return 'var(--cricket-extra-run)';
+    //     }
+    //     if (score.includes("W")) {
+    //         return 'var(--cricket-wicket)';
+    //     }
+    //     return 'var(--cricket-ball)';
+    // };
+
+    // const getBallSize = (score) => {
+    //     if (score.includes("WD+W") || score.includes("NB+W")) {
+    //         return "7px";
+    //     }
+    //     return '9px'
+    // }
+
+    // const ballCircles = [];
+
+    // for (let i = 0; i < length; i++) {
+    //     const score = ballScores[i];
+
+    //     const ballColor = score ? getBallColor(score) : 'lightgray';
+    //     const TextSize = score ? getBallSize(score) : '10px'
+
+    //     ballCircles.push(
+    //         <div
+    //             key={i}
+    //             style={{
+    //                 width: '35px',
+    //                 height: '35px',
+    //                 borderRadius: '50%',
+    //                 backgroundColor: i < balls.ballNo ? ballColor : 'lightgray',
+    //                 display: 'flex',
+    //                 justifyContent: 'center',
+    //                 alignItems: 'center',
+    //                 color: 'white',
+    //                 fontWeight: 'bold',
+    //                 fontSize: i < balls.ballNo ? TextSize : '10px',
+    //                 overflow: 'hidden'
+    //             }}
+    //         >
+    //             {score !== null ? score : ''}
+    //         </div>
+    //     );
+    // }
+
+    const isButtonsDisabled = currentinnings <= 0 || inningsComplete || overChanged || active.secondactive === "STO" || wagonWheel;
     let Innings1Declare = match?.firstInnings?.declare === "yes" ? true : false
     let Innings2Declare = match?.secondInnings?.declare === "yes" ? true : false
     let Innings3Declare = match?.superOverFirstInnings?.declare === "yes" ? true : false
@@ -237,14 +239,14 @@ const TestScorePage = ({
 
             <Box className='score_main_section' >
                 <Box className='score_player_card_section'>
-                    <Box>
+                    {/* <Box>
                         <Box className='score_player_card_sub_section'>
                             <Box className='score_batter_player_card'>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '5px', alignItems: 'center' }}>
                                     <CommonPlayerSection length={battinglength} wickets={initailscore.wicket} name={playerOnField.striker} icon={"striker"}
                                         onClick={ChangeBatter} run={batterScore.batter1run} ball={batterScore.batter1balls}
                                         activeStrike={activeStrike === 1} post={post} />
-                                    <SwapHoriz sx={{ color: 'var(--text-white)', cursor: 'pointer' }} onClick={ChangeStrike} />
+                                    <SwapHoriz sx={{ color: 'var(--color-white)', cursor: 'pointer' }} onClick={ChangeStrike} />
                                     <CommonPlayerSection length={battinglength} wickets={initailscore.wicket} type={"non-striker"} icon={"striker"}
                                         onClick={ChangeBatter} name={playerOnField.nonStriker} run={batterScore.batter2run} ball={batterScore.batter2balls}
                                         activeStrike={activeStrike === 2} post={post} />
@@ -262,11 +264,43 @@ const TestScorePage = ({
                             <Box className="score-gradient-line"></Box>
                         </Box>
 
-                        <ExtraRunSection totalLBRuns={Extras?.LB} totalBYERuns={Extras.BYE} totalNBRuns={Extras.NB} totalWDRuns={Extras.WD} totalPRRuns={Extras.PR} totalNRRuns={Extras.NR} />
+                        <ExtraRunSection totalLBRuns={Extras?.LB} totalBYERuns={Extras?.BYE} totalNBRuns={Extras?.NB} totalWDRuns={Extras?.WD} totalPRRuns={Extras?.PR} totalNRRuns={Extras.NR} />
 
-                    </Box>
+                    </Box> */}
 
-                    <Box className="score_section" >
+                    <PlayerScoreBoard
+                        battinglength={battinglength}
+                        initailscore={initailscore}
+                        playerOnField={playerOnField}
+                        batterScore={batterScore}
+                        bowlerScore={bowlerScore}
+                        balls={balls}
+                        legalBallCount={legalBallCount}
+                        Extras={Extras}
+                        ChangeStrike={ChangeStrike}
+                        ChangeBatter={ChangeBatter}
+                        ChangeBowler={ChangeBowler}
+                        activeStrike={activeStrike}
+                        post={post}
+                        runBallLength={length}
+                        ballScores={ballScores}
+                    />
+                    <ScoringKeyboard
+                        gif={gif}
+                        runTypes={runtype}
+                        active={active}
+                        currentInnings={currentinnings}
+                        bowlerAvailable={bowlerthere}
+                        handleScore={handleScore}
+                        isButtonsDisabled={isButtonsDisabled}
+                        balls={balls}
+                        onUndo={back}
+                        wagonWheel={wagonWheel}
+                        winner={winner}
+                        onShowMore={showMore}
+                        RenderButton={RenderButton}
+                    />
+                    {/* <Box className="score_section" >
                         {!gif.gif &&
                             <Box className="scoring_section">
                                 <Box className="score_button_section">
@@ -295,14 +329,14 @@ const TestScorePage = ({
                                 <Box className='test_score_render_button'>
                                     <RenderButton />
                                     <CustomeButton
-                                        disabled={balls.ballNo === 0 || active.active || wagonWheel ? true : false}
+                                        disabled={balls.ballNo === 0 || active?.active || wagonWheel ? true : false}
                                         title={"Undo"}
                                         width={'100%'}
                                         onClick={back}
                                         hover={'none'} />
                                 </Box>
                                 <Box className="show_more_button">
-                                    <CustomeButton height={'50px'} disabled={active.active || wagonWheel || winner} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
+                                    <CustomeButton height={'50px'} disabled={active?.active || wagonWheel || winner} width={'100%'} hover={'none'} title={"Scoring Shortcuts"} onClick={showMore} />
                                 </Box>
                             </Box>
                         }
@@ -314,7 +348,7 @@ const TestScorePage = ({
                                 </Box>
                             </Box>
                         }
-                    </Box>
+                    </Box> */}
                 </Box>
 
             </Box>

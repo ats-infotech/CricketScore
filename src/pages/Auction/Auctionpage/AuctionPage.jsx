@@ -129,8 +129,8 @@ const AuctionPage = ({ tournamentData, isUser = false }) => {
                             height={'50px'}
                             hover={'none'}
                             bgColor={'transparent'}
-                            color={'var(--primary-color)'}
-                            border={'2px solid var(--primary-color)'}
+                            color={'var(--theme-primary)'}
+                            border={'2px solid var(--theme-primary)'}
                             onClick={handleScheduleAuction}
                         />
                     </Box>}

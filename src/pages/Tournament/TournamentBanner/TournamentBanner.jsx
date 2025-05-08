@@ -45,6 +45,10 @@ const matchButtonGroups = [
 ]
 
 const TournamentBanner = ({ data, handleNavigation, params, type, back, tournamentData }) => {
+    const router = useRouter()
+    const team_data = useSelector(teamsState)
+    const auctionData = useSelector(auctionState)?.data?.find(item => item?.tournamentId === data?.id) || null
+
     // const [openDrawer, setOpenDrawer] = useState(false)
     const [tabValue, setTabValue] = useState(params?.category);
     const [team1Score, setTeam1Score] = useState({
@@ -95,9 +99,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
         run: 0
     })
     const [Over, setOver] = useState(true)
-    const team_data = useSelector(teamsState)
-    const auctionData = useSelector(auctionState)?.data?.find(item => item?.tournamentId === data?.id) || null
-    const router = useRouter()
+
     const tData = data || {};
     const bannerImage = tData?.tournament_banner;
     const logoImage = tData?.tournament_image;
@@ -528,7 +530,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
             }
             <Box
                 id='tournament-Banner'
-                className='tournamentBanner activeAnimation'
+                className='tournamentBanner'
                 sx={{
                     backgroundImage: `url('${bannerImage}')`,
                     backgroundColor: `${!bannerImage ? tournamentColor : ''}`
@@ -544,7 +546,7 @@ const TournamentBanner = ({ data, handleNavigation, params, type, back, tourname
                             <Box className={!logoImage ? 'avatar_logo' : 'tournament_logo_img'}>
                                 {logoImage && <Image src={`${logoImage}`} alt="logo image" unoptimized width={70} height={70} />}
                                 {!logoImage && <ImageAvatar bgColor={tournamentColor} meduimHeight={'100%'} meduimWidth={'100%'} text={tournamentLetter} width={'100%'} height={'100%'} borderRadius={'10px'}
-                                    smallWidth={'100%'} smallHeight={'100%'} fontSize={'var(--small)'} />}
+                                    smallWidth={'100%'} smallHeight={'100%'} fontSize={'var(--fs-md)'} />}
                             </Box>
                             <Box className='tournament_details'>
                                 <Typography variant="h6">{tData?.tournament_name + ' ' + `( ${tData?.city} )`}</Typography>

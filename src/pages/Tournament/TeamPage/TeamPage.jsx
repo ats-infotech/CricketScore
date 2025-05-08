@@ -7,6 +7,7 @@ import CustomeMessageBox from '@/components/common/commonUi/CustomeMessageBox'
 import ImageAvatar from '@/components/common/commonUi/ImageAvatar/ImageAvatar'
 import MessageModal from '@/components/common/commonUi/Modal/MessageModal'
 import SectionBox from '@/components/common/commonUi/SectionBox/SectionBox'
+import { auctionState } from '@/redux/slices/auctionSlice'
 import { deleteMultiplePlayerData, playersState } from '@/redux/slices/playersSlice'
 import { deleteTeam } from '@/redux/slices/teamSlice'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -19,7 +20,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { uploadFile, uploadPlayerFile } from '../../../components/common/uploadFileApis'
 import './TeamPage.css'
-import { auctionState } from '@/redux/slices/auctionSlice'
 
 
 const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = false, isAuction = false, isUserTeams = false }) => {
@@ -58,7 +58,7 @@ const CommonTeamSection = React.memo(({ teamData, onClick, title, boolean = fals
                                     }
                                     {!item?.team_logo &&
                                         <ImageAvatar bgColor={item?.team_color} text={item?.letter} borderRadius={'10px'}
-                                            fontSize={'var(--small)'} />
+                                            fontSize={'var(--fs-md)'} />
                                     }
                                 </Box>
                                 <Box className='teamDetails'>
@@ -258,7 +258,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                         >
                         </CustomeMessageBox>
                         {!isUserTeams && <Box sx={{ marginTop: '40px' }}>
-                            <CustomeButton width={'80%'} height={'45px'} bgColor={'var(--primary-color) !important'} hover='none' title='Add Team' onClick={() => router.push(`/teams/${tournamentId}`)} />
+                            <CustomeButton width={'80%'} height={'45px'} bgColor={'var(--theme-primary) !important'} hover='none' title='Add Team' onClick={() => router.push(`/teams/${tournamentId}`)} />
                         </Box>}
                     </Box>
                     :
@@ -298,7 +298,7 @@ const TeamPage = ({ tournamentData, teamData, type }) => {
                     )}
 
                     {isUserTeams && (
-                        <Box className="activeAnimation">
+                        <Box>
                             {teamData.length > 0 ? (
                                 <CommonTeamSection
                                     teamData={teamData}

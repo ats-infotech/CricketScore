@@ -83,23 +83,16 @@ const PlayerMilestoneStats = React.memo(({ notOuts, highestScore, fours, sixes, 
 const Leaderboard = ({ playerData, teamData }) => {
 
     const [activeTab, setActiveTab] = useState(0);
-    const [animate, setAnimate] = useState(false);
     const [activeId, setActiveId] = useState('')
 
     useEffect(() => {
         setActiveId('')
-        setAnimate(true);
-        const timer = setTimeout(() => setAnimate(false), 500);
-        return () => clearTimeout(timer);
     }, [activeTab]);
 
     const handleTypeSelection = (type) => {
-        setAnimate(true);
         scrollTopDiv('leaderboard_stats_max_height')
         setActiveTab(type)
         leaderBoardShorting(playerData, type);
-        const timer = setTimeout(() => setAnimate(false), 500);
-        return () => clearTimeout(timer);
     };
 
     return (
@@ -125,7 +118,7 @@ const Leaderboard = ({ playerData, teamData }) => {
                         <Box className="typeBox">
                             <CustomeTabs data={typePlayer || []} onClick={handleTypeSelection} activeTab={activeTab} />
                         </Box>
-                        <Box className={`leaderboard_stats_max_height ${animate ? 'activeAnimation' : ''}`}>
+                        <Box className={`leaderboard_stats_max_height`}>
                             {
                                 playerData.length > 0 && playerData.map((items, i) => {
                                     let innings = items.innings
@@ -165,21 +158,44 @@ const Leaderboard = ({ playerData, teamData }) => {
                                                 </Box>
                                                 <Box>
                                                     {activeTab === 0 &&
-                                                        <CommonStatsSection name={items.playerName} teamName={teamName?.team_name} innings={innings} runs={runs} average={battingaverage} sr={sr} />
+                                                        <CommonStatsSection
+                                                            name={items.playerName}
+                                                            teamName={teamName?.team_name}
+                                                            innings={innings}
+                                                            runs={runs}
+                                                            average={battingaverage}
+                                                            sr={sr}
+                                                        />
                                                     }
                                                     {
                                                         activeTab === 1 &&
-                                                        <CommonStatsSection type={'bowler'} teamName={teamName?.team_name} name={items.playerName} innings={innings} wickets={bowlingwickets} average={bowlingaverage} eco={eco} />
+                                                        <CommonStatsSection
+                                                            type={'bowler'}
+                                                            teamName={teamName?.team_name}
+                                                            name={items.playerName}
+                                                            innings={innings}
+                                                            wickets={bowlingwickets}
+                                                            average={bowlingaverage} eco={eco}
+                                                        />
                                                     }
                                                     {items?.id === activeId && <React.Fragment>
                                                         {
                                                             activeTab === 0 &&
-                                                            <PlayerMilestoneStats highestScore={items?.highestScore} notOuts={items?.battingnotout} fours={items?.battingfour}
-                                                                sixes={items?.battingsix} hundreds={items?.battinghundred} fiftys={items?.battingfifty} />
+                                                            <PlayerMilestoneStats
+                                                                highestScore={items?.highestScore}
+                                                                notOuts={items?.battingnotout}
+                                                                fours={items?.battingfour}
+                                                                sixes={items?.battingsix}
+                                                                hundreds={items?.battinghundred}
+                                                                fiftys={items?.battingfifty} />
                                                         }
                                                         {
                                                             activeTab === 1 &&
-                                                            <PlayerMilestoneStats highestWicket={items?.highestWicket} maidens={items?.bowlingmaiden} strikeRate={bowlingStrikeRate} />
+                                                            <PlayerMilestoneStats
+                                                                highestWicket={items?.highestWicket}
+                                                                maidens={items?.bowlingmaiden}
+                                                                strikeRate={bowlingStrikeRate}
+                                                            />
                                                         }
                                                     </React.Fragment>}
                                                 </Box>

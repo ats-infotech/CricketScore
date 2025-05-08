@@ -24,7 +24,7 @@ const PointTable = ({ teamData, tournamentData }) => {
         <>
             {
                 tournamentData?.Group?.length > 0 ?
-                    <Box className='point_table_section activeAnimation'>
+                    <Box className='point_table_section'>
                         {
                             tournamentData?.Group?.map((items, i) => {
                                 const teams = items?.teams?.map((teamId) => {

@@ -13,14 +13,14 @@
 }
 
 .describe-msg {
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 500 !important;
     color: var(--text-black) !important;
 }
 
 /* ===== auction card ========= */
 .auction_card {
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     padding: 20px;
     border-radius: 15px;
     display: flex;
@@ -45,15 +45,15 @@
 }
 
 .auction_image.isText h5 {
-    font-size: var(--large);
+    font-size: var(--fs-xl);
     font-weight: 500;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .auction-details h5 {
-    font-size: var(--normal);
+    font-size: var(--fs-base);
     font-weight: 500;
-    color: var(--text-white);
+    color: var(--color-white);
     margin-bottom: 12px;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .icon-text span {
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--text-lightgrey);
 }
@@ -86,7 +86,7 @@
 .menu-icon {
     width: 20px;
     height: 20px;
-    color: var(--text-white);
+    color: var(--color-white);
     cursor: pointer;
 }
 

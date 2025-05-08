@@ -1,11 +1,11 @@
 'use client';
-import { Box } from '@mui/material';
-import './Analysis.css';
-import { useEffect, useState } from 'react';
-import { teamsState } from '@/redux/slices/teamSlice';
-import { useSelector } from 'react-redux';
-import { playersState } from '@/redux/slices/playersSlice';
 import { AnalysisBarChart, AnalysisLineChart, AnalysisPartnership, AnalysisPieChart, WagonWheelGraph } from '@/components/common/commonUi/AnalysisCharts/AnalysisCharts';
+import { playersState } from '@/redux/slices/playersSlice';
+import { teamsState } from '@/redux/slices/teamSlice';
+import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import './Analysis.css';
 
 const ScoreAnalysis = ({ matchData, tournamentData }) => {
     const [team1, setTeam1] = useState({});
@@ -374,17 +374,17 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
     };
     const preparePieData = (wicketData) => {
         const data = [
-            { name: 'LBW', value: wicketData?.lbw || 0, color: 'var(--light-green)' },
+            { name: 'LBW', value: wicketData?.lbw || 0, color: 'var(--chart-light-green)' },
             { name: 'Catches', value: wicketData?.Catches || 0, color: 'var(--chart-blue)' },
-            { name: 'Stumping', value: wicketData?.Stumping || 0, color: 'var(--purple)' },
-            { name: 'Run Out', value: wicketData?.RunOut || 0, color: 'var(--orange-red)' },
-            { name: 'Bowled', value: wicketData?.Bowled || 0, color: 'var(--yellow)' },
-            { name: 'Hit Wicket', value: wicketData?.Hitwicket || 0, color: 'var(--pink)' },
-            { name: 'Retired Hurt', value: wicketData?.RetiredHurt || 0, color: 'var(--coral)' },
+            { name: 'Stumping', value: wicketData?.Stumping || 0, color: 'var(--chart-purple)' },
+            { name: 'Run Out', value: wicketData?.RunOut || 0, color: 'var(--chart-orange-red)' },
+            { name: 'Bowled', value: wicketData?.Bowled || 0, color: 'var(--chart-yellow)' },
+            { name: 'Hit Wicket', value: wicketData?.Hitwicket || 0, color: 'var(--chart-pink)' },
+            { name: 'Retired Hurt', value: wicketData?.RetiredHurt || 0, color: 'var(--chart-coral)' },
         ];
         const totalValue = data.reduce((sum, item) => sum + item.value, 0);
         if (totalValue === 0 && filter.wickets !== "Both") {
-            return [{ name: 'No Wickets Lost', value: 0, color: 'var(--green)' }];
+            return [{ name: 'No Wickets Lost', value: 0, color: 'var(--chart-green)' }];
         }
         return data.filter((item) => item.value > 0);
     };
@@ -526,14 +526,14 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
 
     // Wagon Wheel
     const WagonWheelData = filter.wagonwheel === 'Both' || filter.wagonwheel === 'Both 1' ? [...inningsOneWagonWheel, ...inningsTwoWagonWheel]
-    : filter.wagonwheel === 'Both 2' ? [...inningsThreeWagonWheel, ...inningsFourWagonWheel]
-    : filter.wagonwheel === 'Team1' || filter.wagonwheel === "Team1firstinning" ? [...inningsOneWagonWheel]
-    : filter.wagonwheel === 'Team2' || filter.wagonwheel === "Team2firstinning" ? [...inningsTwoWagonWheel]
-    : filter.wagonwheel === 'Team1secondinning' && !isFollowOn ? [...inningsThreeWagonWheel]
-    : filter.wagonwheel === 'Team1secondinning' && isFollowOn ? [...inningsFourWagonWheel]
-    : filter.wagonwheel === 'Team2secondinning' && !isFollowOn ? [...inningsFourWagonWheel]
-    : filter.wagonwheel === 'Team2secondinning' && isFollowOn ? [...inningsThreeWagonWheel]
-    : [];
+        : filter.wagonwheel === 'Both 2' ? [...inningsThreeWagonWheel, ...inningsFourWagonWheel]
+            : filter.wagonwheel === 'Team1' || filter.wagonwheel === "Team1firstinning" ? [...inningsOneWagonWheel]
+                : filter.wagonwheel === 'Team2' || filter.wagonwheel === "Team2firstinning" ? [...inningsTwoWagonWheel]
+                    : filter.wagonwheel === 'Team1secondinning' && !isFollowOn ? [...inningsThreeWagonWheel]
+                        : filter.wagonwheel === 'Team1secondinning' && isFollowOn ? [...inningsFourWagonWheel]
+                            : filter.wagonwheel === 'Team2secondinning' && !isFollowOn ? [...inningsFourWagonWheel]
+                                : filter.wagonwheel === 'Team2secondinning' && isFollowOn ? [...inningsThreeWagonWheel]
+                                    : [];
 
     const showWagonWheel = isTestMatch && inningsOneWagonWheel.length === 0 && inningsTwoWagonWheel.length === 0 && inningsThreeWagonWheel.length === 0
         && inningsFourWagonWheel.length === 0 ? false : filter.wagonwheel === 'Both' && WagonWheelData.length === 0 ? false : true
@@ -553,40 +553,122 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
     return (
         <Box className="main_analysis_section">
             {/* Manhattan Bar Chart */}
-            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.manhattan} handleChange={handleChange('manhattan')}
+            <AnalysisBarChart
+                team1={TeamOne}
+                team2={TeamTwo}
+                filter={filter.manhattan} handleChange={handleChange('manhattan')}
                 data={isTestMatch && (filter.manhattan === "Both 1" || filter.manhattan === "Team1firstinning" || filter.manhattan === "Team2firstinning") ? filteredInningsOneData
                     : isTestMatch && (filter.manhattan === "Both 2" || filter.manhattan === "Team1secondinning" || filter.manhattan === "Team2secondinning") ? filteredInningsTwoData
-                        : filteredData} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Manhattan"} yaxisdatakey={"over"} yaxislabel={"Overs"}
-                isTestMatch={isTestMatch} xaxislabel={"Runs"} bar1datakey={"inningsOneRuns"} bar2datakey={"inningsTwoRuns"} bar1wicketslabel={"inningsOneWickets"} bar2wicketslabel={"inningsTwoWickets"} />
+                        : filteredData}
+                inningsOneLabel={inningsOneLabel}
+                inningsTwoLabel={inningsTwoLabel}
+                title={"Manhattan"}
+                yaxisdatakey={"over"}
+                yaxislabel={"Overs"}
+                isTestMatch={isTestMatch}
+                xaxislabel={"Runs"}
+                bar1datakey={"inningsOneRuns"}
+                bar2datakey={"inningsTwoRuns"}
+                bar1wicketslabel={"inningsOneWickets"}
+                bar2wicketslabel={"inningsTwoWickets"}
+            />
 
             {/* Run Rate Line Chart*/}
-            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('runrate')} value={filter.runrate} title={"Run Rate"} isTestMatch={isTestMatch}
+            <AnalysisLineChart
+                TeamOne={TeamOne}
+                TeamTwo={TeamTwo}
+                onChange={handleChange('runrate')}
+                value={filter.runrate}
+                title={"Run Rate"}
+                isTestMatch={isTestMatch}
                 data={isTestMatch && (filter.runrate === "Both 2" || filter.runrate === "Team1secondinning" || filter.runrate === "Team2secondinning") ? formattedInningsTwoRunRateData
-                    : formattedRunRateData} filter={filter.runrate} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel}
-                team1dataKey={'team1RunRate'} team2dataKey={'team2RunRate'} />
+                    : formattedRunRateData}
+                filter={filter.runrate}
+                inningsOneLabel={inningsOneLabel}
+                inningsTwoLabel={inningsTwoLabel}
+                team1dataKey={'team1RunRate'}
+                team2dataKey={'team2RunRate'}
+            />
 
             {/* Worm Line Chart */}
-            <AnalysisLineChart TeamOne={TeamOne} TeamTwo={TeamTwo} onChange={handleChange('worm')} value={filter.worm} title={"Worm"} isTestMatch={isTestMatch}
+            <AnalysisLineChart
+                TeamOne={TeamOne}
+                TeamTwo={TeamTwo}
+                onChange={handleChange('worm')}
+                value={filter.worm}
+                title={"Worm"}
+                isTestMatch={isTestMatch}
                 data={isTestMatch && (filter.worm === "Both 2" || filter.worm === "Team1secondinning" || filter.worm === "Team2secondinning") ? formattedInningsTwoRunsData
-                    : formattedRunsData} filter={filter.worm} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} team1dataKey={'team1Runs'} team2dataKey={'team2Runs'} />
+                    : formattedRunsData}
+                filter={filter.worm}
+                inningsOneLabel={inningsOneLabel}
+                inningsTwoLabel={inningsTwoLabel}
+                team1dataKey={'team1Runs'}
+                team2dataKey={'team2Runs'}
+            />
 
             {/* Wickets Pie Chart */}
-            {showPieData && <AnalysisPieChart team1={TeamOne} team2={TeamTwo} filter={filter.wickets} onChange={handleChange('wickets')} title={"Wickets Pie"} data={pieData} isTestMatch={isTestMatch} />}
+            {showPieData &&
+                <AnalysisPieChart
+                    team1={TeamOne}
+                    team2={TeamTwo}
+                    filter={filter.wickets}
+                    onChange={handleChange('wickets')}
+                    title={"Wickets Pie"}
+                    data={pieData}
+                    isTestMatch={isTestMatch}
+                />
+            }
 
             {/* Types of Runs Bar Chart */}
-            <AnalysisBarChart team1={TeamOne} team2={TeamTwo} filter={filter.typesofruns} handleChange={handleChange('typesofruns')}
+            <AnalysisBarChart
+                team1={TeamOne}
+                team2={TeamTwo}
+                filter={filter.typesofruns}
+                handleChange={handleChange('typesofruns')}
                 data={isTestMatch && (filter.typesofruns === "Both 2" || filter.typesofruns === "Team1secondinning" || filter.typesofruns === "Team2secondinning") ? inningsTwoShots
-                    : shots} inningsOneLabel={inningsOneLabel} inningsTwoLabel={inningsTwoLabel} title={"Types of Runs"} yaxisdatakey={"shotType"} yaxislabel={'Shots'}
-                xaxislabel={'No of shots'} bar1datakey={"inningsOne"} bar2datakey={"inningsTwo"} isTestMatch={isTestMatch} />
+                    : shots}
+                inningsOneLabel={inningsOneLabel}
+                inningsTwoLabel={inningsTwoLabel}
+                title={"Types of Runs"}
+                yaxisdatakey={"shotType"}
+                yaxislabel={'Shots'}
+                xaxislabel={'No of shots'}
+                bar1datakey={"inningsOne"}
+                bar2datakey={"inningsTwo"}
+                isTestMatch={isTestMatch}
+            />
 
             {/* Partnerships */}
-            <AnalysisPartnership team1={TeamOne} team2={TeamTwo} onChange={handleChange('partnerships')} title={"Partnerships"} topsectionvalue={filter.partnerships}
-                playerdata={player_data} data={PartnershipData} isTestMatch={isTestMatch} />
+            <AnalysisPartnership
+                team1={TeamOne}
+                team2={TeamTwo}
+                onChange={handleChange('partnerships')}
+                title={"Partnerships"}
+                topsectionvalue={filter.partnerships}
+                playerdata={player_data}
+                data={PartnershipData}
+                isTestMatch={isTestMatch}
+            />
 
             {/* Wagon Wheel */}
-            {showWagonWheel && <WagonWheelGraph team1={TeamOne} team2={TeamTwo} filter={filter.wagonwheel} onChange={handleChange('wagonwheel')} title={"Wagon Wheel"} isTestMatch={isTestMatch}
-                data={FilterWagonWheelBasedOnPlayers} team1Players={team1Players} team2Players={team2Players} BatterValue={filter.batter} BowlerValue={filter.bowler} onBatterChange={handleChange('batter')}
-                onBowlerChange={handleChange('bowler')} />}
+            {showWagonWheel &&
+                <WagonWheelGraph
+                    team1={TeamOne}
+                    team2={TeamTwo}
+                    filter={filter.wagonwheel}
+                    onChange={handleChange('wagonwheel')}
+                    title={"Wagon Wheel"}
+                    isTestMatch={isTestMatch}
+                    data={FilterWagonWheelBasedOnPlayers}
+                    team1Players={team1Players}
+                    team2Players={team2Players}
+                    BatterValue={filter.batter}
+                    BowlerValue={filter.bowler}
+                    onBatterChange={handleChange('batter')}
+                    onBowlerChange={handleChange('bowler')}
+                />
+            }
 
         </Box>
     );

@@ -32,7 +32,10 @@ const CreateMatch = () => {
     if (loading || !tournament) return <Loader />;
 
     return (
-        <CreateMatchPage tournament={tournament} teams={teams} />
+        <CreateMatchPage
+            tournament={tournament}
+            teams={teams}
+        />
     )
 }
 

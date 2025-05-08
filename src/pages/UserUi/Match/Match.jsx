@@ -15,7 +15,6 @@ const MatchPage = ({ teamData, tournamentData, matchData, tournamenId }) => {
 
     const [activeTab, setActiveTab] = useState(0);
     const [matches, setMatches] = useState([])
-    const [animation, setAnimation] = useState(false)
     const [addMargin, setAddMargin] = useState(false)
 
     useEffect(() => {
@@ -52,7 +51,6 @@ const MatchPage = ({ teamData, tournamentData, matchData, tournamenId }) => {
     }, []);
 
     const handleTabClick = (val) => {
-        setAnimation(true)
         let matchesFilter;
         switch (val) {
             case 0:
@@ -70,12 +68,10 @@ const MatchPage = ({ teamData, tournamentData, matchData, tournamenId }) => {
         }
         setMatches(matchesFilter || [])
         setActiveTab(val)
-        let timer = setTimeout(() => setAnimation(false), 500);
-        return clearTimeout(timer)
     }
 
     return (
-        <Box className='activeAnimation'>
+        <Box>
             <Box className='matchOption' id='user-sub-tab'>
                 {
                     tabKeys.map((field, index) => (
@@ -93,7 +89,6 @@ const MatchPage = ({ teamData, tournamentData, matchData, tournamenId }) => {
             <Box className='match_list_main_section' sx={{ marginTop: addMargin ? '14px' : '0' }}>
                 <MatchCard
                     matches={matches}
-                    animation={animation}
                     tournamentData={tournamentData}
                     activeTab={activeTab}
                     isAdmin={false}

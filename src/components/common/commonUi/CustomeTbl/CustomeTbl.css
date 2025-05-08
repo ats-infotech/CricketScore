@@ -3,9 +3,9 @@
     background: transparent !important;
     padding: 15px !important;
     overflow-x: scroll;
-    background-color: var(--primary-color) !important;
+    background-color: var(--theme-primary) !important;
     scrollbar-width: thin;
-    scrollbar-color: var(--text-white) var(--primary-color);
+    scrollbar-color: var(--color-white) var(--theme-primary);
 }
 
 /* For Safari, Chrome, Edge */
@@ -15,31 +15,31 @@
 }
 
 .tableContainer::-webkit-scrollbar-track {
-    background: var(--primary-color) !important;
+    background: var(--theme-primary) !important;
 }
 
 .tableContainer::-webkit-scrollbar-thumb {
-    background-color: var(--text-white) !important;
+    background-color: var(--color-white) !important;
     border-radius: 10px !important;
     border: 2px solid transparent !important;
 }
 
 /* Optional: Hover effect */
 .tableContainer::-webkit-scrollbar-thumb:hover {
-    background-color: var(--text-white) !important;
+    background-color: var(--color-white) !important;
 }
 
 .table_main {
     min-width: auto !important;
     width: 100% !important;
-    background-color: var(--primary-color) !important;
+    background-color: var(--theme-primary) !important;
 }
 
 .table_main_head_tr_th {
     font-weight: 600 !important;
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     padding: 5px !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
 }
 
 .table_main_head_tr_th_index_0 {
@@ -48,10 +48,10 @@
 
 .table_main_body_tr_td {
     font-weight: 600 !important;
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     padding: 15px 5px 5px !important;
     border: 0 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
 }
 
 .table_main_body_tr_td_index_0 {
@@ -74,9 +74,9 @@
 
 .table_main_body_tr_td .image_col .para,
 .para {
-    font-size: var(--ex-ex-small) !important;
+    font-size: var(--fs-xs) !important;
     font-weight: 500 !important;
     text-transform: capitalize !important;
-    color: var(--text-white) !important;
+    color: var(--color-white) !important;
     margin: 0 !important;
 }

@@ -26,8 +26,8 @@ export const SwipeUpDrawer = React.memo(({ open, children, onClose, backgroundCo
                         sx={{
                             margin:'0 auto',
                             display:'block',
-                            color:'var(--black)',
-                            backgroundColor: 'var(--text-white)',
+                            color:'var(--color-black)',
+                            backgroundColor: 'var(--color-white)',
                             width: '30px',
                             height: '30px',
                             cursor: 'pointer',
@@ -52,16 +52,16 @@ export const SwipeUpDrawer = React.memo(({ open, children, onClose, backgroundCo
                 }}
                 sx={{
                     position: 'relative',
-                    maxWidth: 'var(--screen-max-width)',
+                    maxWidth: 'var(--layout-max-width)',
                     zIndex: '10',
                     '& .MuiDrawer-paper': {
                         borderRadius: '40px 40px 0 0',
                         padding: '50px 30px 20px',
                         scrollbarColor: 'transparent transparent',
-                        backgroundColor: backgroundColor || 'var(--primary-color)',
+                        backgroundColor: backgroundColor || 'var(--theme-primary)',
                         zIndex: '10',
                         maxHeight: maxHeight || '92%',
-                        maxWidth: 'var(--screen-max-width)',
+                        maxWidth: 'var(--layout-max-width)',
                         margin: 'auto',
                         scrollbarWidth: 'none'
                     }
@@ -69,7 +69,7 @@ export const SwipeUpDrawer = React.memo(({ open, children, onClose, backgroundCo
                 ref={ref}
                 id={'drawerId'}
             >
-                {/* {!closeIconShow && <CloseIcon sx={{ position: 'absolute', top: '-35px', right: '-10px', color: 'var(--text-white)', width: '24px', height: '24px', cursor: 'pointer' }} onClick={onClose} />} */}
+                {/* {!closeIconShow && <CloseIcon sx={{ position: 'absolute', top: '-35px', right: '-10px', color: 'var(--color-white)', width: '24px', height: '24px', cursor: 'pointer' }} onClick={onClose} />} */}
                 <Box sx={{ position: 'relative', width: '100%', height: '100%' }} ref={ref} >
                     {children}
                 </Box>

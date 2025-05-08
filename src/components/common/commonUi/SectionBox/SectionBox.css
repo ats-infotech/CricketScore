@@ -1,15 +1,15 @@
 .section-box {
     width: 100%;
     min-height: 110px;
-    background-color: var(--box-blue);
+    background-color: var(--theme-box-blue);
     border-radius: 15px;
     padding: 30px;
 }
 
 .section-box p.describeText {
-    color: var(--text-grey);
+    color: var(--color-grey-300);
     font-family: var(--primary-font);
-    font-size: var(--ex-ex-small);
+    font-size: var(--fs-xs);
     font-weight: 600;
     text-align: center;
     padding: 0 0 10px 0;
@@ -25,13 +25,13 @@
 .section-box .iconText svg {
     width: 16px;
     height: 16px;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .section-box .iconText p {
-    color: var(--text-white);
+    color: var(--color-white);
     font-family: var(--primary-font);
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 600;
     padding: 0 0 10px 0;
 }

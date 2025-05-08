@@ -47,7 +47,7 @@ const TeamBanner = React.memo(({ banner, describe, onChange, previewPath, tourna
                         </>
                         :
                         <>
-                            {(!previewPath) && <SvgIcon id='profile' width='30px' height='30px' color='var(--text-white)' />}
+                            {(!previewPath) && <SvgIcon id='profile' width='30px' height='30px' color='var(--color-white)' />}
                         </>
                 }
             </Box>
@@ -330,9 +330,9 @@ const Team = ({ tournamentData = null, type, teamData = null }) => {
                     <Box className='button_box'>
                         {
                             type === 'edit' ?
-                                <CustomeButton title={CommonText.EditTeam} width='80%' height='45px' bgColor={'var(--blue-background)'} onClick={handleUpdateTeam} />
+                                <CustomeButton title={CommonText.EditTeam} width='80%' height='45px' bgColor={'var(--theme-blue-bg)'} onClick={handleUpdateTeam} />
                                 :
-                                <CustomeButton title={CommonText.AddTeam} width='80%' height='45px' bgColor={'var(--blue-background)'} onClick={handleAddTeam} />
+                                <CustomeButton title={CommonText.AddTeam} width='80%' height='45px' bgColor={'var(--theme-blue-bg)'} onClick={handleAddTeam} />
                         }
                     </Box>
                 </Box>

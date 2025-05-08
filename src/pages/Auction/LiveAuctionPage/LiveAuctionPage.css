@@ -16,7 +16,7 @@
 .menu_auction_icon {
     width: 28px;
     height: 28px;
-    color: var(--black);
+    color: var(--color-black);
 }
 
 /* ------------ .au-player-details ---------- */
@@ -27,13 +27,13 @@
     gap: 15px;
     padding: 20px;
     border-radius: 15px;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     margin-top: 30px;
     position: relative;
 }
 
 .au-player-details .au-pl-age p {
-    color: var(--text-white);
+    color: var(--color-white);
     font-weight: 600;
     text-align: center;
     margin-top: 5px;
@@ -50,8 +50,8 @@
 }
 
 .au-player-details .au-pl-img h6 {
-    font-size: var(--semi-normal);
-    color: var(--text-white);
+    font-size: var(--fs-lg);
+    color: var(--color-white);
     font-weight: 600;
 }
 
@@ -60,17 +60,17 @@
 }
 
 .au-pl-details .auction-player {
-    font-size: var(--semi-normal);
+    font-size: var(--fs-lg);
     font-weight: 600;
-    color: var(--text-white);
+    color: var(--color-white);
     margin-bottom: 10px;
 }
 
 .au-pl-details .auction-team-name {
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 500;
     text-align: center;
-    color: var(--text-green);
+    color: var(--color-green);
     margin-top: 5px;
 }
 
@@ -79,7 +79,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: var(--blue-background);
+    background-color: var(--theme-blue-bg);
     border-radius: 7px;
     padding: 8px 20px;
 }
@@ -89,16 +89,16 @@
 }
 
 .au-pl-details .auction-player-skills p {
-    color: var(--text-white);
-    font-size: var(--small);
+    color: var(--color-white);
+    font-size: var(--fs-md);
     font-weight: 600;
     text-transform: capitalize;
 }
 
 .auction-bidding .bidding-count {
-    font-size: var(--large);
+    font-size: var(--fs-xl);
     font-weight: 600;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .auction-bidding svg.gold-coin {
@@ -109,7 +109,7 @@
 .auction-bidding svg.edit-icon {
     width: 16px;
     height: 16px;
-    color: var(--text-grey);
+    color: var(--color-grey-300);
 }
 
 .auction-team-section {
@@ -176,7 +176,7 @@
 /* ======= team card ========= */
 
 .team_card {
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     padding: 10px 15px;
     border-radius: 10px;
     display: flex;
@@ -193,12 +193,12 @@
 }
 
 .team_card.active-bidder {
-    background-color: var(--green);
+    background-color: var(--chart-green);
     opacity: 0.8;
 }
 
 .team_card.disable-bidder {
-    background-color: var(--gray);
+    background-color: var(--color-grey-400);
 }
 
 .team_card .team-logo {
@@ -209,19 +209,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-light);
+    box-shadow: var(--shadow-md);
 }
 
 .team_card .team-logo h6 {
-    font-size: var(--small);
-    color: var(--text-white);
+    font-size: var(--fs-md);
+    color: var(--color-white);
     font-weight: 600;
 }
 
 .team_card .team_details h6 {
-    font-size: var(--ex-ex-small);
+    font-size: var(--fs-xs);
     font-weight: 500;
-    color: var(--text-white);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     gap: 4px;
@@ -256,10 +256,10 @@
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
-    background-color: var(--text-white) !important;
-    color: var(--black) !important;
+    background-color: var(--color-white) !important;
+    color: var(--color-black) !important;
     padding: 8px 12px !important;
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 600 !important;
     box-shadow: none !important;
     border-radius: 10px !important;
@@ -270,7 +270,7 @@
 .action-btn svg {
     width: 19px;
     height: 18px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
 }
 
 
@@ -279,7 +279,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 10px;
     padding: 12px 16px;
 }
@@ -289,16 +289,16 @@
     max-width: 26px;
     min-height: 26px;
     max-height: 26px;
-    color: var(--text-white);
+    color: var(--color-white);
     cursor: pointer;
 }
 
 .info-btn-group .info-btn {
     padding: 6px;
     border-radius: 5px;
-    background-color: var(--text-grey);
-    color: var(--text-white);
-    font-size: var(--ex-small);
+    background-color: var(--color-grey-300);
+    color: var(--color-white);
+    font-size: var(--fs-sm);
     font-weight: 500;
     text-transform: capitalize;
     display: flex;
@@ -310,17 +310,17 @@
 
 .info-btn-group .info-btn.isAdmin:nth-child(2),
 .info-btn-group .info-btn.isUser:nth-child(1) {
-    background-color: var(--boundary);
+    background-color: var(--cricket-boundary);
 }
 
 .info-btn-group .info-btn.isAdmin:nth-child(3),
 .info-btn-group .info-btn.isUser:nth-child(2) {
-    background-color: var(--text-red);
+    background-color: var(--color-red);
 }
 
 .info-btn-group .info-btn.isAdmin:nth-child(5),
 .info-btn-group .info-btn.isUser:nth-child(4) {
-    background-color: var(--text-green);
+    background-color: var(--color-green);
 }
 
 
@@ -346,15 +346,15 @@
 }
 
 .auction-modal-header h6 {
-    font-size: var(--normal);
+    font-size: var(--fs-base);
     font-weight: 500;
-    color: var(--black);
+    color: var(--color-black);
 }
 
 .auction-modal-header svg {
     width: 18px;
     height: 18px;
-    color: var(--black);
+    color: var(--color-black);
 }
 
 .update-bid-main {
@@ -369,7 +369,7 @@
     justify-content: space-between;
     gap: 10px;
     margin: 10px 0;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     padding: 10px 8px;
     border-radius: 10px;
 }
@@ -381,9 +381,9 @@
 }
 
 .auction_player {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 600 !important;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .auction-player-section {
@@ -398,8 +398,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-white);
-    box-shadow: var(--shadow-light);
+    color: var(--color-white);
+    box-shadow: var(--shadow-md);
 }
 
 .manual-player-selection .player-img p {
@@ -409,7 +409,7 @@
 .auction-checkbox {
     width: 24px;
     height: 24px;
-    border: 1px solid var(--text-grey);
+    border: 1px solid var(--color-grey-300);
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -417,19 +417,19 @@
 }
 
 .auction-checkbox.isSelect {
-    background-color: var(--text-white);
+    background-color: var(--color-white);
 }
 
 .auction-checkbox svg {
     width: 20px;
     height: 20px;
-    color: var(--primary-color);
+    color: var(--theme-primary);
 }
 
 /* ------------ message Info --------------- */
 
 .message-info {
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     padding: 10px 15px;
 }
 
@@ -442,20 +442,20 @@
 }
 
 .info-details .info h6 {
-    font-size: var(--normal);
+    font-size: var(--fs-base);
     font-weight: 500;
-    color: var(--black);
+    color: var(--color-black);
     margin-bottom: 6px;
 }
 
 .info-details .info p {
-    font-size: var(--small);
+    font-size: var(--fs-md);
     font-weight: 500;
-    color: var(--text-grey);
+    color: var(--color-grey-300);
 }
 
 .info-details .icon-info {
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 100%;
     padding: 18px;
     width: 58px;
@@ -465,7 +465,7 @@
 .info-details .icon-info svg {
     width: 22px;
     height: 22px;
-    color: var(--text-white);
+    color: var(--color-white);
 }
 
 .info-divider {
@@ -474,9 +474,9 @@
 }
 
 .info-close {
-    font-size: var(--large);
+    font-size: var(--fs-xl);
     font-weight: 600;
-    color: var(--text-red);
+    color: var(--color-red);
     text-align: center;
     padding: 10px 0 20px 0;
     cursor: pointer;
@@ -494,11 +494,11 @@
 .auction-player-menu svg {
     width: 16px;
     height: 16px;
-    color: var(--primary-color);
+    color: var(--theme-primary);
 }
 
 .auction-player-menu p {
-    font-size: var(--small);
+    font-size: var(--fs-md);
     color: var(--text-primary);
     font-weight: 600;
 }
@@ -532,7 +532,7 @@
 
     .action-btn {
         gap: 8px !important;
-        color: var(--black) !important;
+        color: var(--color-black) !important;
         padding: 7px 8px !important;
     }
 
@@ -542,6 +542,7 @@
 
     .info-btn-group {
         overflow: scroll;
+        scrollbar-width:none;
     }
 }
 
@@ -573,11 +574,10 @@
     .info-btn-group {
         gap: 6px;
         padding: 8px 10px;
-        overflow: scroll;
     }
 
     .action-btn {
-        font-size: var(--ex-small) !important;
+        font-size: var(--fs-sm) !important;
     }
 
     .button-group {

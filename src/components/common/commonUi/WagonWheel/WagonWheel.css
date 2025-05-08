@@ -30,7 +30,7 @@
 
 .wagon_wheel_label p {
     text-align: center;
-    color: var(--text-white);
-    font-size: var(--ex-small);
+    color: var(--color-white);
+    font-size: var(--fs-sm);
     font-weight: 600;
 }

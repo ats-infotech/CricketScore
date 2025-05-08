@@ -21,10 +21,10 @@ const CheckBoxRequired = ({ label, onChecked, value = false }) => {
             control={
                 <Checkbox
                     sx={{
-                        color: 'var(--primary-color)',
+                        color: 'var(--theme-primary)',
                         padding: '5px',
                         '&.Mui-checked': {
-                            color: 'var(--primary-color)',
+                            color: 'var(--theme-primary)',
                         },
                     }}
                     onChange={onChecked}
@@ -34,7 +34,7 @@ const CheckBoxRequired = ({ label, onChecked, value = false }) => {
             label={label}
             sx={{
                 '.MuiTypography-root': {
-                    fontSize: 'var(--ex-small)',
+                    fontSize: 'var(--fs-sm)',
                     fontWeight: '500'
                 }
             }}
@@ -429,7 +429,7 @@ const CreateTournament = ({ tournamentData }) => {
                                     justifyContent: 'center',
                                     position: 'relative',
                                     backgroundImage: `url(${blobpath?.tournament_banner})`,
-                                    backgroundColor: `${createTornaments?.tournament_name && !blobpath?.tournament_image && createTornaments?.tournament_logo_color ? createTornaments?.tournament_logo_color : 'var(--primary-color)'} `,
+                                    backgroundColor: `${createTornaments?.tournament_name && !blobpath?.tournament_image && createTornaments?.tournament_logo_color ? createTornaments?.tournament_logo_color : 'var(--theme-primary)'} `,
                                     backgroundSize: 'cover',
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'top center',
@@ -439,9 +439,9 @@ const CreateTournament = ({ tournamentData }) => {
                                 <Box sx={{
                                     height: '45px',
                                     width: '45px',
-                                    backgroundColor: 'var(--primary-color)',
-                                    boxShadow: 'var(--shadow-light)',
-                                    border: '1px solid var(--text-white)',
+                                    backgroundColor: 'var(--theme-primary)',
+                                    boxShadow: 'var(--shadow-md)',
+                                    border: '1px solid var(--color-white)',
                                     borderRadius: '50px',
                                     display: 'flex',
                                     alignItems: 'center',
@@ -452,7 +452,7 @@ const CreateTournament = ({ tournamentData }) => {
                                     cursor: 'pointer',
                                     zIndex: '10',
                                 }} onClick={() => handleBoxClick('back')}>
-                                    <KeyboardArrowLeftIcon sx={{ fontSize: 'var(--ex-large)', color: 'var(--text-white)', }} />
+                                    <KeyboardArrowLeftIcon sx={{ fontSize: 'var(--fs-2xl)', color: 'var(--color-white)', }} />
                                 </Box>
                                 <input
                                     ref={fileInputRef}
@@ -462,13 +462,13 @@ const CreateTournament = ({ tournamentData }) => {
                                     onChange={(e) => handleImageUpload(e, 'tournament_banner')}
                                 />
                                 {!createTornaments?.tournament_banner && <Box sx={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => handleBoxClick('tournament_banner')}>
-                                    <SvgIcon id='addImage' width='30px' height='30px' color='var(--text-white)' />
+                                    <SvgIcon id='addImage' width='30px' height='30px' color='var(--color-white)' />
                                     <Typography
                                         variant="body2"
                                         sx={{
-                                            fontSize: 'var(--small)',
+                                            fontSize: 'var(--fs-md)',
                                             fontWeight: '500',
-                                            color: 'var(--text-white)',
+                                            color: 'var(--color-white)',
                                             marginTop: '15px'
                                         }}
                                     >
@@ -477,7 +477,7 @@ const CreateTournament = ({ tournamentData }) => {
                                     {errors['tournament_banner'] && <Typography color="error" variant="body2">{errors['tournament_banner']}</Typography>}
                                 </Box>}
                                 <Box sx={{
-                                    backgroundColor: 'var(--text-white)',
+                                    backgroundColor: 'var(--color-white)',
                                     borderRadius: '300px',
                                     height: '36px',
                                     width: '36px',
@@ -489,7 +489,7 @@ const CreateTournament = ({ tournamentData }) => {
                                     right: '12px',
                                     cursor: 'pointer',
                                 }} onClick={() => handleBoxClick('tournament_banner')}>
-                                    <SvgIcon id='addImage2' width='14px' height='14px' color='var(--primary-color)' />
+                                    <SvgIcon id='addImage2' width='14px' height='14px' color='var(--theme-primary)' />
                                 </Box>
                             </Box>
                         }
@@ -498,19 +498,19 @@ const CreateTournament = ({ tournamentData }) => {
                                 openTab === 2 ?
                                     <>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px', position: 'relative', left: '-10px' }} onClick={() => setOpenTab(1)}>
-                                            <KeyboardArrowLeftIcon sx={{ fontSize: 'var(--ex-large)' }} />
-                                            <Typography variant="p" sx={{ fontSize: 'var(--small)', fontWeight: '600' }}>Back</Typography>
+                                            <KeyboardArrowLeftIcon sx={{ fontSize: 'var(--fs-2xl)' }} />
+                                            <Typography variant="p" sx={{ fontSize: 'var(--fs-md)', fontWeight: '600' }}>Back</Typography>
                                         </Box>
                                         <Box sx={{ padding: '25px 0' }}>
-                                            <Typography variant="h6" sx={{ fontSize: 'var(--semi-normal)', fontWeight: '600' }}>Tournament Details</Typography>
-                                            <Typography variant="body2" sx={{ fontSize: 'var(--ex-small)', fontWeight: '500', color: 'var(--text-grey)' }}>Because you Need Teams For Your Tournament</Typography>
+                                            <Typography variant="h6" sx={{ fontSize: 'var(--fs-lg)', fontWeight: '600' }}>Tournament Details</Typography>
+                                            <Typography variant="body2" sx={{ fontSize: 'var(--fs-sm)', fontWeight: '500', color: 'var(--color-grey-300)' }}>Because you Need Teams For Your Tournament</Typography>
                                         </Box>
                                     </>
                                     :
                                     <>
                                         <Box
                                             sx={{
-                                                backgroundColor: 'var(--primary-color)',
+                                                backgroundColor: 'var(--theme-primary)',
                                                 borderRadius: '300px',
                                                 height: '110px',
                                                 width: '110px',
@@ -522,7 +522,7 @@ const CreateTournament = ({ tournamentData }) => {
                                                 top: '-60px',
                                                 left: '0',
                                                 right: '0',
-                                                boxShadow: 'var(--shadow-light)',
+                                                boxShadow: 'var(--shadow-md)',
                                                 backgroundImage: `url(${blobpath?.tournament_image})`,
                                                 backgroundSize: 'cover',
                                                 backgroundPosition: 'top center',
@@ -544,10 +544,10 @@ const CreateTournament = ({ tournamentData }) => {
                                                 id='profile'
                                                 width='30px'
                                                 height='30px'
-                                                color='var(--text-white)'
+                                                color='var(--color-white)'
                                             />}
                                             {!blobpath?.tournament_image && <Box sx={{
-                                                backgroundColor: 'var(--text-white)',
+                                                backgroundColor: 'var(--color-white)',
                                                 borderRadius: '300px',
                                                 height: '30px',
                                                 width: '30px',
@@ -558,7 +558,7 @@ const CreateTournament = ({ tournamentData }) => {
                                                 bottom: '0',
                                                 right: '0'
                                             }}>
-                                                <SvgIcon id='addImage2' width='14px' height='14px' color='var(--primary-color)' />
+                                                <SvgIcon id='addImage2' width='14px' height='14px' color='var(--theme-primary)' />
                                             </Box>}
                                         </Box>
                                         {errors['tournament_image'] && <Typography color="error" variant="body2" sx={{ textAlign: 'center', margin: '-5px 0 20px' }}>{errors['tournament_image']}</Typography>}
@@ -610,10 +610,10 @@ const CreateTournament = ({ tournamentData }) => {
                                     <label
                                         style={{
                                             display: 'block',
-                                            color: 'var(--text-grey)',
+                                            color: 'var(--color-grey-300)',
                                             marginBottom: '15px',
                                             fontWeight: '500',
-                                            fontSize: 'var(--small)'
+                                            fontSize: 'var(--fs-md)'
                                         }}
                                     >{'Any Additional Details?'}</label>
                                     <textarea
@@ -624,13 +624,13 @@ const CreateTournament = ({ tournamentData }) => {
                                         style={{
                                             fontFamily: 'var(--primary-font)',
                                             color: 'var(--text-lightgrey)',
-                                            backgroundColor: 'var(--primary-color)',
+                                            backgroundColor: 'var(--theme-primary)',
                                             outline: 'none',
                                             height: '160px',
                                             borderRadius: '12px',
                                             padding: '17px 30px',
                                             fontWeight: '500',
-                                            fontSize: 'var(--small)',
+                                            fontSize: 'var(--fs-md)',
                                             border: '0px',
                                             width: '100%',
                                             lineHeight: '22px'
@@ -671,8 +671,8 @@ const CreateTournament = ({ tournamentData }) => {
                         <Box sx={{ width: '80px', height: '80px', marginBottom: '20px' }}>
                             <Image src={require('../../../assets/img/done.gif')} alt="batsman" width={80} height={80} unoptimized />
                         </Box>
-                        <Typography variant="h6" sx={{ fontSize: "var(--semi-normal)", fontWeight: "600", color: 'var(--primary-color)' }}>{edit ? 'Tournament Updated' : 'Tournament Registered'}</Typography>
-                        <Typography variant="p" sx={{ fontSize: "var(--ex-small)", fontWeight: "500", color: 'var(--text-grey)', marginBottom: '20px' }}>Continue to Complete The Setup</Typography>
+                        <Typography variant="h6" sx={{ fontSize: "var(--fs-lg)", fontWeight: "600", color: 'var(--theme-primary)' }}>{edit ? 'Tournament Updated' : 'Tournament Registered'}</Typography>
+                        <Typography variant="p" sx={{ fontSize: "var(--fs-sm)", fontWeight: "500", color: 'var(--color-grey-300)', marginBottom: '20px' }}>Continue to Complete The Setup</Typography>
                         <Button variant="contained" className="blue_btn" sx={{ maxWidth: '80%' }} onClick={() => router.push('/')}>Continue</Button>
                     </Box>
             }

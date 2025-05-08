@@ -26,15 +26,15 @@
 }
 
 .score_player_letter_section p {
-    font-size: var(--semi-normal) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-lg) !important;
+    color: var(--color-white) !important;
     font-weight: 500 !important;
 }
 
 .score_player_icon_section {
     height: 25px;
     width: 25px;
-    background-color: var(--text-white);
+    background-color: var(--color-white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +42,7 @@
 }
 
 .score_player_icon_section.active {
-    background-color: var(--boundary) !important;
+    background-color: var(--cricket-boundary) !important;
 }
 
 .score_player_icon_section svg {
@@ -58,14 +58,14 @@
 }
 
 .score_player_info_section p {
-    font-size: var(--ex-small) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-sm) !important;
+    color: var(--color-white) !important;
     font-weight: 600 !important;
 }
 
 .score_player_icon_section p {
-    font-size: var(--ex-ex-small) !important;
-    color: var(--primary-color) !important;
+    font-size: var(--fs-xs) !important;
+    color: var(--theme-primary) !important;
     font-weight: 600 !important;
     line-height: 0;
 }
@@ -85,8 +85,8 @@
 }
 
 .score_player_score_section p {
-    font-size: var(--ex-small) !important;
-    color: var(--text-white) !important;
+    font-size: var(--fs-sm) !important;
+    color: var(--color-white) !important;
     font-weight: 600 !important;
 }
 
@@ -111,7 +111,7 @@
 .score_batter_player_card {
     /* height: 190px; */
     max-width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     border-radius: 15px;
     box-shadow: 0px -5px 20px rgba(255, 255, 255, 0.08), 0px 5px 35px rgba(12, 24, 48, 0.3);
     display: flex;
@@ -149,7 +149,7 @@
 /* Score Button Section */
 
 .score_section {
-    background-color: var(--primary-color);
+    background-color: var(--theme-primary);
     padding: 20px;
     border-top-left-radius: 35px;
     border-top-right-radius: 35px;
@@ -172,22 +172,22 @@
 }
 
 .score_button.active {
-    color: var(--text-white) !important;
-    background-color: var(--black) !important;
+    color: var(--color-white) !important;
+    background-color: var(--color-black) !important;
 }
 
 .score_button {
     border-radius: 50% !important;
     height: 50px !important;
     min-width: 50px !important;
-    background-color: var(--text-white) !important;
-    color: var(--primary-color) !important;
+    background-color: var(--color-white) !important;
+    color: var(--theme-primary) !important;
     font-weight: 600 !important;
 }
 
 .score_button:disabled {
-    background-color: var(--light-grey) !important;
-    color: var(--gray) !important;
+    background-color: var(--color-grey-200) !important;
+    color: var(--color-grey-400) !important;
 }
 
 .score_render_button {
@@ -233,10 +233,10 @@
 }
 
 .target_section p {
-    color: var(--text-white);
+    color: var(--color-white);
     text-align: center;
     font-weight: 500;
-    font-size: var(--ex-small);
+    font-size: var(--fs-sm);
 }
 
 .Extra_Runs {
@@ -247,9 +247,9 @@
 }
 
 .Extra_Runs p {
-    color: var(--primary-color) !important;
+    color: var(--theme-primary) !important;
     font-weight: 600 !important;
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
 }
 
 @media screen and (max-width: 410px) {
@@ -275,7 +275,7 @@
     }
 
     .score_player_info_section p {
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
 
     .score_render_button {
@@ -292,7 +292,7 @@
     .score_button {
         height: 40px !important;
         min-width: 40px !important;
-        font-size: var(--ex-ex-small) !important;
+        font-size: var(--fs-xs) !important;
     }
 
     .score_batter_player_card {

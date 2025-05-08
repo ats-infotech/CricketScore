@@ -33,15 +33,15 @@
 
 .typePlayerText {
     font-weight: 500 !important;
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     cursor: pointer;
     text-align: center;
-    color: var(--text-grey);
+    color: var(--color-grey-300);
     transition: all 0.5s;
 }
 
 .typePlayerTextActive {
-    color: var(--primary-color);
+    color: var(--theme-primary);
 }
 
 .leaderboard_image_section {
@@ -58,31 +58,31 @@
     height: 100%;
     border-radius: 100px;
     border: none;
-    color: var(--text-white);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--normal),
+    font-size: var(--fs-base),
 }
 
 .leaderboard_stats_section {
     padding: 20px 30px;
     display: flex;
     gap: 20px;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--theme-primary);
 }
 
 .leaderboard_stats_section p {
     font-weight: 500 !important;
-    font-size: var(--normal) !important;
-    color: var(--primary-color) !important;
+    font-size: var(--fs-base) !important;
+    color: var(--theme-primary) !important;
     margin-bottom: 5px;
 }
 
 .leaderboard_stats_section span {
-    font-size: var(--small) !important;
+    font-size: var(--fs-md) !important;
     font-weight: 500 !important;
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
     margin-bottom: 5px;
 }
 
@@ -105,13 +105,13 @@
 }
 
 .leaderboard_stats p {
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 500 !important;
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
 }
 
 .leaderboard_divider {
-    border: 1px solid var(--primary-color) !important;
+    border: 1px solid var(--theme-primary) !important;
 }
 
 /* Player Milestone */
@@ -129,9 +129,9 @@
 }
 
 .leaderboard_player_milestone p {
-    font-size: var(--ex-small) !important;
+    font-size: var(--fs-sm) !important;
     font-weight: 500 !important;
-    color: var(--text-grey) !important;
+    color: var(--color-grey-300) !important;
 }
 
 @media screen and (max-width:375px) {
@@ -140,12 +140,12 @@
     }
 
     .leaderboard_stats_section p {
-        font-size: var(--small) !important;
+        font-size: var(--fs-md) !important;
     }
 
     .leaderboard_stats p,
     .leaderboard_player_milestone p {
-        font-size: var(--ex-small) !important;
+        font-size: var(--fs-sm) !important;
     }
 
     .leaderboard_image_section {
@@ -156,6 +156,6 @@
     }
 
     .leaderboard_image_section .imageTextBox {
-        font-size: var(--ex-small);
+        font-size: var(--fs-sm);
     }
 }

@@ -1,6 +1,7 @@
 import { Box } from "@mui/material"
 import { useRouter } from "next/navigation"
 import CustomeBack from "./CustomeBack"
+import React from "react"
 
 
 
@@ -21,4 +22,4 @@ const CommonBack = ({ onClick, title }) => {
     )
 }
 
-export default CommonBack
+export default React.memo(CommonBack)
