@@ -85,14 +85,14 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
                         // Handle Wickets
                         if (value.includes('W')) {
                             wickets += 1;
-                            const runPart = value.split('+')[1];
+                            const runPart = value?.split('+')[1];
                             if (runPart && !isNaN(runPart)) {
                                 runCount += parseInt(runPart);
                             }
                         }
 
                         // Handle WD, NB, 2WD, 8NB, etc.
-                        const extrasMatch = value.match(/(\d*)(WD|NB)/);
+                        const extrasMatch = value?.match(/(\d*)(WD|NB)/);
                         if (extrasMatch) {
                             const extraRuns = extrasMatch[1] ? parseInt(extrasMatch[1]) : 1;
                             runCount += extraRuns + 1; // Extra runs + 1 for delivery
@@ -100,7 +100,7 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
                     }
 
                     // Add normal runs
-                    const runs = parseInt(value.replace(/[^\d]/g, ''));
+                    const runs = parseInt(value?.replace(/[^\d]/g, ''));
                     if (!isNaN(runs)) {
                         runCount += runs;
                     }
@@ -410,7 +410,7 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
         data.forEach((over) => {
             Object.keys(over).forEach((key) => {
                 if (!isNaN(parseInt(key))) {
-                    const valueMatch = over[key].match(/(\d+)/);
+                    const valueMatch = over[key]?.match(/(\d+)/);
                     if (valueMatch) {
                         const value = parseInt(valueMatch[0]);
                         shotCounts[value] = (shotCounts[value] || 0) + 1;

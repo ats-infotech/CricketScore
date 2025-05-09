@@ -1,9 +1,7 @@
 'use client'
 import { calculateDLSTarget, classifyShot } from "@/components/common/commomFunction";
-import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeTags from "@/components/common/commonUi/CustomeTags";
-import InputSelect from "@/components/common/commonUi/InputSelect";
 import WagonWheel from "@/components/common/commonUi/WagonWheel/WagonWheel";
 import { breakType } from "@/components/common/json/commonJson";
 import ScorePage from "@/pages/Score/Score";
@@ -12,13 +10,13 @@ import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
 import { updateTournamentStats } from "@/redux/slices/tournamentSlice";
 import { Close } from "@mui/icons-material";
-import { Box, Dialog, FormControl, MenuItem, Typography, useMediaQuery } from "@mui/material";
+import { Box, Dialog, Typography, useMediaQuery } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CommonInput, RenderButton, SelectionOptionSection } from "./SbCommonUi";
 import './ScoreBoard.css';
 import { reason, runtype } from "./ScoreBoardJson";
-import { CommonInput, RenderButton, SelectionOptionSection } from "./SbCommonUi";
 
 const calculatePlayerStats = (player, wickets, economy) => {
     let battingrun = 0;
@@ -67,7 +65,7 @@ const calculatePlayerStats = (player, wickets, economy) => {
     if (bowlerTotalScore) {
         bowlerTotalScore.forEach(bowlerScore => {
             const intKeysValues = Object.keys(bowlerScore).filter(key => !isNaN(key)).map(key => bowlerScore[key]);
-            if (intKeysValues.every(value => (value === "0" || value === "W" || value.includes("LB") || value.includes("BYE")))) {
+            if (intKeysValues.every(value => (value === "0" || value === "W" || value?.includes("LB") || value?.includes("BYE")))) {
                 bowlingmaiden += 1;
             }
         });
@@ -203,9 +201,9 @@ const calculateMatchStats = (wicket, economy, finalOvers, firstInningswickets, s
                 .filter(key => !isNaN(key))
                 .map(key => bowlerScore[key]);
 
-            const dots = intKeysValues.filter(value => value === "0" || value === "W" || value.includes("LB") || value.includes("BYE"));
+            const dots = intKeysValues.filter(value => value === "0" || value === "W" || value?.includes("LB") || value?.includes("BYE"));
 
-            if (intKeysValues.every(value => (value === "0" || value === "W" || value.includes("LB") || value.includes("BYE")))) {
+            if (intKeysValues.every(value => (value === "0" || value === "W" || value?.includes("LB") || value?.includes("BYE")))) {
                 maidens += 1;
             }
             if (dots.length > 0) {

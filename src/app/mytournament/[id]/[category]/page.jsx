@@ -67,30 +67,58 @@ const TournamentCategory = () => {
     setWindowDimensions(getWindowDimensions());
   };
 
-  const RenderContent = useMemo(() => {
-    switch (category) {
-      case 'about':
-        return <AboutPage tournamentData={tournamentData} teamData={teamData} playerData={playerData} />;
-      case 'stats':
-        return <Stats tournamentData={tournamentData} />
-      case 'teams':
-        return <TeamPage tournamentData={tournamentData} tournamenId={id} teamData={teamData} type={'about'} />;
-      case 'pointable':
-        return <PointTable teamData={teamData} tournamentData={tournamentData} matchData={matchData} />;
-      case 'match':
-        return <Matches />;
-      case 'leaderboard':
-        return <Leaderboard playerData={playerData} teamData={teamData} />;
-      case 'auction':
-        return <AuctionPage tournamentData={tournamentData} />;
-      case 'players':
-        return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} />
-      case 'mvp':
-        return <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} />
-      default:
-        return null;
-    }
-  }, [category, id, tournamentData, teamData, matchData, playerData]);
+  const commonProps = {
+    tournamentData,
+    teamData,
+    playerData,
+  };
+
+  const componentMap = {
+    about: <AboutPage {...commonProps} />,
+    stats: <Stats tournamentData={tournamentData} />,
+    teams: <TeamPage tournamentData={tournamentData} tournamenId={id} teamData={teamData} type="about" />,
+    pointable: <PointTable teamData={teamData} tournamentData={tournamentData} matchData={matchData} />,
+    match: <Matches />,
+    leaderboard: <Leaderboard playerData={playerData} teamData={teamData} />,
+    auction: <AuctionPage tournamentData={tournamentData} />,
+    players: <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} />,
+    mvp: <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} />,
+  };
+
+  const RenderContent = useMemo(() => componentMap[category] ?? null, [
+    category,
+    id,
+    tournamentData,
+    teamData,
+    matchData,
+    playerData,
+    auctionData,
+  ]);
+
+  // const RenderContent = useMemo(() => {
+  //   switch (category) {
+  //     case 'about':
+  //       return <AboutPage tournamentData={tournamentData} teamData={teamData} playerData={playerData} />;
+  //     case 'stats':
+  //       return <Stats tournamentData={tournamentData} />
+  //     case 'teams':
+  //       return <TeamPage tournamentData={tournamentData} tournamenId={id} teamData={teamData} type={'about'} />;
+  //     case 'pointable':
+  //       return <PointTable teamData={teamData} tournamentData={tournamentData} matchData={matchData} />;
+  //     case 'match':
+  //       return <Matches />;
+  //     case 'leaderboard':
+  //       return <Leaderboard playerData={playerData} teamData={teamData} />;
+  //     case 'auction':
+  //       return <AuctionPage tournamentData={tournamentData} />;
+  //     case 'players':
+  //       return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} />
+  //     case 'mvp':
+  //       return <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} />
+  //     default:
+  //       return null;
+  //   }
+  // }, [category, id, tournamentData, teamData, matchData, playerData]);
 
   let contentHeight = windowDimensions?.height - bannerHeight;
 

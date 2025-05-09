@@ -1,15 +1,14 @@
 'use client'
 import SvgIcon from "@/assets/icons/SvgIcon"
-import { CommonText } from "@/components/common/commonText"
 import ExtraRunSection from "@/components/common/commonUi/ExtrasSection/ExtraSection"
-import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
-import React, { useEffect, useRef, useState } from "react"
-import './Scorecard.css'
 import SwitchSelect from "@/components/common/commonUi/SwitchSelect/SwitchSelect"
 import { teamsState } from "@/redux/slices/teamSlice"
+import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import React, { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
+import './Scorecard.css'
 
-const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonstrikeplayer, playerstats, outbatterdata, playerdata, outplayerstats, show, length, onClick, status, Extras, winner, BattingOrder, post, playingPlayers }) => {
+const BattingTable = React.memo(({ header, strikerdata, nonstrikerdata, strikeplayer, nonstrikeplayer, playerstats, outbatterdata, playerdata, outplayerstats, show, length, onClick, status, Extras, winner, BattingOrder, post, playingPlayers }) => {
 
     const strikebatter = playerdata?.filter(players => players?.playerName === strikeplayer)[0]
     const nonstrikebatter = playerdata?.filter(players => players?.playerName === nonstrikeplayer)[0]
@@ -167,9 +166,9 @@ const BattingTable = ({ header, strikerdata, nonstrikerdata, strikeplayer, nonst
             )}
         </Box>
     );
-};
+});
 
-const BowlingTable = ({ header, data, currentOver, completedOver, playerdata, currentbowler, show, length, onClick, status, post }) => {
+const BowlingTable = React.memo(({ header, data, currentOver, completedOver, playerdata, currentbowler, show, length, onClick, status, post }) => {
 
     const calculateMaiden = (bowlerId) => {
         let maidenCount = 0;
@@ -318,7 +317,7 @@ const BowlingTable = ({ header, data, currentOver, completedOver, playerdata, cu
             )}
         </Box>
     );
-}
+})
 
 const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
 
@@ -436,39 +435,39 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     };
 
     useEffect(() => {
-        const Team1Captain = playerData.filter(player => player.id === matchData?.post?.team1Captain)?.[0]
-        const Team1WicketKeeper = playerData.filter(player => player.id === matchData?.post?.team1WicketKeeper)?.[0]
-        const Team2Captain = playerData.filter(player => player.id === matchData?.post?.team2Captain)?.[0]
-        const Team2WicketKeeper = playerData.filter(player => player.id === matchData?.post?.team2WicketKeeper)?.[0]
+        const team1Captain = playerData.find(player => player.id === matchData?.post?.team1Captain)
+        const team1WicketKeeper = playerData.find(player => player.id === matchData?.post?.team1WicketKeeper)
+        const team2Captain = playerData.find(player => player.id === matchData?.post?.team2Captain)
+        const team2WicketKeeper = playerData.find(player => player.id === matchData?.post?.team2WicketKeeper)
         let team1 = team_data?.data?.find((items) => items?.id === matchData?.team1?.id)
         let team2 = team_data?.data?.find((items) => items?.id === matchData?.team2?.id)
         setTeam1(team1)
         setTeam2(team2)
         setPlayersPost({
-            team1Captain: Team1Captain,
-            team1WicketKeeper: Team1WicketKeeper,
-            team2Captain: Team2Captain,
-            team2WicketKeeper: Team2WicketKeeper
+            team1Captain,
+            team1WicketKeeper,
+            team2Captain,
+            team2WicketKeeper
         })
     }, [matchData, team_data])
 
     useEffect(() => {
-        const striker = playerData.filter(player => player.id === matchData?.playerselection?.striker)
-        const nonStriker = playerData.filter(player => player.id === matchData?.playerselection?.nonStriker)
-        const bowler = playerData.filter(player => player.id === matchData?.playerselection?.bowler)
+        const striker = playerData.find(player => player.id === matchData?.playerselection?.striker)
+        const nonStriker = playerData.find(player => player.id === matchData?.playerselection?.nonStriker)
+        const bowler = playerData.find(player => player.id === matchData?.playerselection?.bowler)
         setPlayerOnField({
-            striker: striker[0]?.playerName,
-            strikerimage: striker[0]?.playerImage,
-            strikerletter: striker[0]?.letter,
-            strikercolor: striker[0]?.playerColor,
-            nonStriker: nonStriker[0]?.playerName,
-            nonStrikerimage: nonStriker[0]?.playerImage,
-            nonStrikerletter: nonStriker[0]?.letter,
-            nonStrikercolor: nonStriker[0]?.playerColor,
-            bowler: bowler[0]?.playerName,
-            bowlerimage: bowler[0]?.playerImage,
-            bowlerletter: bowler[0]?.letter,
-            bowlercolor: bowler[0]?.playerColor
+            striker: striker?.playerName,
+            strikerimage: striker?.playerImage,
+            strikerletter: striker?.letter,
+            strikercolor: striker?.playerColor,
+            nonStriker: nonStriker?.playerName,
+            nonStrikerimage: nonStriker?.playerImage,
+            nonStrikerletter: nonStriker?.letter,
+            nonStrikercolor: nonStriker?.playerColor,
+            bowler: bowler?.playerName,
+            bowlerimage: bowler?.playerImage,
+            bowlerletter: bowler?.letter,
+            bowlercolor: bowler?.playerColor
         })
 
     }, [matchData?.playerselection])
@@ -692,4 +691,4 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     )
 }
 
-export default Scorecard
+export default React.memo(Scorecard)

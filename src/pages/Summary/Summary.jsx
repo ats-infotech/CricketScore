@@ -6,10 +6,10 @@ import CommonBack from "@/components/common/commonUi/commonBack"
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import './Summary.css'
 
-const CommonTable = ({ header, data, highestPointsPlayer }) => {
+const CommonTable = React.memo(({ header, data, highestPointsPlayer }) => {
     return (
         <Box className='summary_table_section'>
             <TableContainer className="summary_table_container" >
@@ -39,9 +39,9 @@ const CommonTable = ({ header, data, highestPointsPlayer }) => {
             </TableContainer>
         </Box>
     )
-}
+})
 
-const CommonSection = ({ title, batterheader, batterdata, highestPointsPlayer, type, bowlerheader, bowlerdata }) => {
+const CommonSection = React.memo(({ title, batterheader, batterdata, highestPointsPlayer, type, bowlerheader, bowlerdata }) => {
     return (
         <Box className='summary_common_section'>
             <Box className='summary_common_section_title'>
@@ -78,7 +78,7 @@ const CommonSection = ({ title, batterheader, batterdata, highestPointsPlayer, t
             </Box>
         </Box>
     )
-}
+})
 
 const SummaryPage = ({
     currentMatch,
@@ -281,4 +281,4 @@ const SummaryPage = ({
     )
 }
 
-export default SummaryPage
+export default React.memo(SummaryPage)

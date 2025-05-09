@@ -1,8 +1,8 @@
 import ExtraRunSection from '@/components/common/commonUi/ExtrasSection/ExtraSection';
 import { SwapHoriz } from '@mui/icons-material';
 import { Box } from '@mui/material';
-import CommonPlayerSection from './CommonPlayerSection';
 import React from 'react';
+import CommonPlayerSection from './CommonPlayerSection';
 
 const PlayerScoreBoard = ({
     battinglength,
@@ -45,7 +45,7 @@ const PlayerScoreBoard = ({
 
     for (let i = 0; i < runBallLength; i++) {
         const score = ballScores[i];
-
+         
         const ballColor = score ? getBallColor(score) : 'lightgray';
         const TextSize = score ? getBallSize(score) : '10px'
 
@@ -70,7 +70,7 @@ const PlayerScoreBoard = ({
             </div>
         );
     }
-
+    
     return (
         <Box>
             <Box className='score_player_card_sub_section'>

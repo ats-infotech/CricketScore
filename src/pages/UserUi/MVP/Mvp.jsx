@@ -1,11 +1,11 @@
 'use client'
 import { calculateMVPPoints } from "@/components/common/commomFunction";
 import SummaryPage from "@/pages/Summary/Summary";
+import { teamsState } from "@/redux/slices/teamSlice";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Matchstats from "../Matchstats/Matchstats";
 import { useSelector } from "react-redux";
-import { teamsState } from "@/redux/slices/teamSlice";
+import Matchstats from "../Matchstats/Matchstats";
 
 const Mvp = ({ matchData, playerData, type, teamData, tournamentData }) => {
     const router = useRouter()

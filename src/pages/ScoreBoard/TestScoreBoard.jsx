@@ -1,9 +1,7 @@
 'use client'
 import { classifyShot } from "@/components/common/commomFunction";
-import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput";
 import CustomeButton from "@/components/common/commonUi/CustomeButton";
 import CustomeTags from "@/components/common/commonUi/CustomeTags";
-import InputSelect from "@/components/common/commonUi/InputSelect";
 import WagonWheel from "@/components/common/commonUi/WagonWheel/WagonWheel";
 import { TestBreakType } from "@/components/common/json/commonJson";
 import { AddCommentary, AddDeclareStatus, AddExtra, AddInnings, AddOver, AddPartnership, AddSecondInnings, AddSecondInningsDeclareStatus, AddSecondInningsExtra, AddSecondInningsOver, AddSecondInningsPartnership, AddSecondInningsShots, AddSecondInningsWicket, AddShots, AddSuperOverCompletedOver, AddSuperOverDeclareStatus, AddSuperOverExtra, AddSuperOverInnings, AddSuperOverPartnership, AddSuperOverSecondInnings, AddSuperOverSecondInningsCompletedOver, AddSuperOverSecondInningsExtra, AddSuperOverSecondInningsPartnership, AddSuperOverSecondInningsShots, AddSuperOverSecondInningsWicket, AddSuperOverShots, AddSuperOverWicket, AddWicket, ChangeInnings, ChangeMatchOver, ChangeOverPerDay, ChangePlayer, ChangeStatus, ChangeWagonWheelChoice, MatchBreakSchedule, matchesState, RemoveExtra, RemoveOver, RemovePartnership, RemoveSecondInningsExtra, RemoveSecondInningsPartnership, RemoveSecondInningsWicket, RemoveSuperOverExtra, RemoveSuperOverPartnership, RemoveSuperOverSecondInningsExtra, RemoveSuperOverSecondInningsPartnership, RemoveSuperOverSecondInningsWicket, RemoveSuperOverWicket, RemoveWicket, ReplaceBattingOrder, ReplaceMatchSchedule, ReplaceSecondInningsBattingOrder, ReplaceSuperOverBattingOrder, ReplaceSuperOverSecondInningsBattingOrder, UpdatePartnership } from "@/redux/slices/matchSlice";
@@ -11,14 +9,14 @@ import { playersState, updatePlayersStats } from "@/redux/slices/playersSlice";
 import { teamsState, updateTeamStats } from "@/redux/slices/teamSlice";
 import { updateTournamentStats } from "@/redux/slices/tournamentSlice";
 import { Close } from "@mui/icons-material";
-import { Box, Dialog, FormControl, MenuItem, Typography, useMediaQuery } from "@mui/material";
+import { Box, Dialog, Typography, useMediaQuery } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TestScorePage from "../Score/TestScore";
+import { CommonInput, RenderButton, SelectionOptionSection } from "./SbCommonUi";
 import './ScoreBoard.css';
 import { reason, runtype } from "./ScoreBoardJson";
-import { CommonInput, RenderButton, SelectionOptionSection } from "./SbCommonUi";
 
 const calculatePlayerStats = (player, wickets, economy, InningsTwoEconony) => {
     let battingrun = 0;
@@ -221,8 +219,8 @@ const calculateMatchStats = (wicket, economy, finalOvers, firstInningswickets, s
                 if (partnershipRun >= 100) {
                     if (lastNotOutPartnershipSecondInnings === 1) {
                         hundredspartnerships += 1;
-                    
-                                     lastNotOutPartnershipSecondInnings = 1;
+
+                        lastNotOutPartnershipSecondInnings = 1;
                     }
                 }
             }
@@ -1688,36 +1686,36 @@ const TestScoreBoard = () => {
         const rect = svg.getBoundingClientRect();
         const clickX = event.clientX - rect.left;
         const clickY = event.clientY - rect.top;
-    
+
         const batterX = 200;
         const batterY = 140;
-    
+
         const dx = clickX - batterX;
         const dy = clickY - batterY;
         let angle = Math.atan2(dy, dx);
         angle = angle - Math.PI / 2;
         if (angle < 0) angle += 2 * Math.PI;
-    
+
         const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 180);
-    
+
         if (!isNaN(currentShot)) {
             const shotType = classifyShot(angle);
             const regex = /^[13579]\d?$/;
             const isShotOdd = regex.test(currentShot);
-            
+
             // Determine batterId based on activeStrike and shot type (odd/even shot)
-            const batterId = activeStrike === 1 && isShotOdd 
-                ? playerselection.nonStriker 
-                : activeStrike === 2 && isShotOdd 
-                    ? playerselection.striker 
-                    : activeStrike === 2 
-                        ? playerselection.nonStriker 
+            const batterId = activeStrike === 1 && isShotOdd
+                ? playerselection.nonStriker
+                : activeStrike === 2 && isShotOdd
+                    ? playerselection.striker
+                    : activeStrike === 2
+                        ? playerselection.nonStriker
                         : playerselection.striker;
-    
+
             const bowlerId = playerselection.bowler;
             const currentBall = ball.ballNo;
             const currentOver = ball.overNo;
-    
+
             const newShot = {
                 angle,
                 distance,
@@ -1730,17 +1728,17 @@ const TestScoreBoard = () => {
                 clickX, // Include clickX and clickY to use them in rendering
                 clickY
             };
-    
+
             // Depending on innings, dispatch the correct action
-            const action = 
-                CurrentInnings === 2 
-                    ? AddSecondInningsShots 
-                    : CurrentInnings === 3 
-                        ? AddSuperOverShots 
-                        : CurrentInnings === 4 
-                            ? AddSuperOverSecondInningsShots 
+            const action =
+                CurrentInnings === 2
+                    ? AddSecondInningsShots
+                    : CurrentInnings === 3
+                        ? AddSuperOverShots
+                        : CurrentInnings === 4
+                            ? AddSuperOverSecondInningsShots
                             : AddShots;
-            
+
             // Update the shots array
             const newObj = {
                 id: currentMatch?.id,
@@ -2871,28 +2869,43 @@ const TestScoreBoard = () => {
             };
             await dispatch(action(createNewObj));
         };
-        if (playerselection.striker !== "") {
-            dispatchWicket(playerselection.striker, {
-                run: batterScores.batter1run,
-                balls: batterScores.batter1balls,
-                dot: batterScores.batter1dot,
-                four: batterScores.batter1four,
-                six: batterScores.batter1six,
-                sr: batterScores.batter1sr,
-                partnership: initailscore.run
-            });
-        }
-        if (playerselection.nonStriker !== "") {
-            dispatchWicket(playerselection.nonStriker, {
-                run: batterScores.batter2run,
-                balls: batterScores.batter2balls,
-                dot: batterScores.batter2dot,
-                four: batterScores.batter2four,
-                six: batterScores.batter2six,
-                sr: batterScores.batter2sr,
-                partnership: initailscore.run
-            });
-        }
+        ["striker", "nonStriker"].forEach((role, index) => {
+            const player = playerselection[role];
+            if (player) {
+                dispatchWicket(player, {
+                    run: batterScores[`batter${index + 1}run`],
+                    balls: batterScores[`batter${index + 1}balls`],
+                    dot: batterScores[`batter${index + 1}dot`],
+                    four: batterScores[`batter${index + 1}four`],
+                    six: batterScores[`batter${index + 1}six`],
+                    sr: batterScores[`batter${index + 1}sr`],
+                    partnership: initailscore.run
+                });
+            }
+        });
+
+        // if (playerselection.striker !== "") {
+        //     dispatchWicket(playerselection.striker, {
+        //         run: batterScores.batter1run,
+        //         balls: batterScores.batter1balls,
+        //         dot: batterScores.batter1dot,
+        //         four: batterScores.batter1four,
+        //         six: batterScores.batter1six,
+        //         sr: batterScores.batter1sr,
+        //         partnership: initailscore.run
+        //     });
+        // }
+        // if (playerselection.nonStriker !== "") {
+        //     dispatchWicket(playerselection.nonStriker, {
+        //         run: batterScores.batter2run,
+        //         balls: batterScores.batter2balls,
+        //         dot: batterScores.batter2dot,
+        //         four: batterScores.batter2four,
+        //         six: batterScores.batter2six,
+        //         sr: batterScores.batter2sr,
+        //         partnership: initailscore.run
+        //     });
+        // }
         dispatch(UpdatePartnership(PartnershipObj))
     }
 
@@ -3607,8 +3620,6 @@ const TestScoreBoard = () => {
         }
     }, [wicketReason.reason])
 
-    console.log(shots);
-    
 
     return (
         <>

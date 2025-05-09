@@ -1,3 +1,7 @@
+import CustomeButton from "@/components/common/commonUi/CustomeButton"
+import CustomSelectInput from "@/components/common/commonUi/CustomSelectInput"
+import InputSelect from "@/components/common/commonUi/InputSelect"
+import { Box, FormControl, MenuItem, Typography } from "@mui/material"
 import React from "react"
 
 export const CommonInput = React.memo(({ value, onchange, loop, title, disabled, type, minWidth }) => {

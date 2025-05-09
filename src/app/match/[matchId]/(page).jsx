@@ -20,7 +20,7 @@ const Match = () => {
         const filterTournament = tournament_data.data.find((items) => items?.id === result?.tournamentId)
         setTournamentData(filterTournament)
         setGetMatch(result);
-    }, [params]);
+    }, [params?.matchId]);
 
     const handleNavigation = (value) => {
         router.push(`/match/${params.matchId}/${value}`);

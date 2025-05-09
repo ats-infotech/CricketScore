@@ -172,25 +172,29 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
                     CurrentInnings === 4 && fourthInning?.Currentover?.[0]?.totalBall ? fourthInning?.Currentover?.[0]?.totalBall : 6
 
     useEffect(() => {
-        if (matchData?.status !== 4) {
-            const striker = playerData.filter(player => player.id === matchData?.playerselection?.striker)
-            const nonStriker = playerData.filter(player => player.id === matchData?.playerselection?.nonStriker)
-            const bowler = playerData.filter(player => player.id === matchData?.playerselection?.bowler)
-            setPlayerOnField({
-                striker: striker[0]?.playerName,
-                strikerimage: striker[0]?.playerImage,
-                strikerletter: striker[0]?.letter,
-                strikercolor: striker[0]?.playerColor,
-                nonStriker: nonStriker[0]?.playerName,
-                nonStrikerimage: nonStriker[0]?.playerImage,
-                nonStrikerletter: nonStriker[0]?.letter,
-                nonStrikercolor: nonStriker[0]?.playerColor,
-                bowler: bowler[0]?.playerName,
-                bowlerimage: bowler[0]?.playerImage,
-                bowlerletter: bowler[0]?.letter,
-                bowlercolor: bowler[0]?.playerColor
-            })
-        }
+        if (!matchData?.playerselection || matchData?.status === 4) return;
+
+        const getPlayerById = (id) => playerData.find(player => player.id === id) || {};
+
+        const striker = getPlayerById(matchData.playerselection.striker)
+        const nonStriker = getPlayerById(matchData.playerselection.nonStriker);
+        const bowler = getPlayerById(matchData.playerselection.bowler);
+
+        setPlayerOnField({
+            striker: striker?.playerName,
+            strikerimage: striker?.playerImage,
+            strikerletter: striker?.letter,
+            strikercolor: striker?.playerColor,
+            nonStriker: nonStriker?.playerName,
+            nonStrikerimage: nonStriker?.playerImage,
+            nonStrikerletter: nonStriker?.letter,
+            nonStrikercolor: nonStriker?.playerColor,
+            bowler: bowler?.playerName,
+            bowlerimage: bowler?.playerImage,
+            bowlerletter: bowler?.letter,
+            bowlercolor: bowler?.playerColor
+        })
+
         // else if (matchData?.status === 4) {
         //     router.push(`/match/${matchData?.id}/cricketbox`)
         // }
@@ -198,15 +202,17 @@ const LiveMatch = ({ matchData, playerData, teamData, tournamentData }) => {
     }, [matchData?.playerselection])
 
     useEffect(() => {
-        const Team1Captain = playerData.filter(player => player.id === matchData?.post?.team1Captain)?.[0]
-        const Team1WicketKeeper = playerData.filter(player => player.id === matchData?.post?.team1WicketKeeper)?.[0]
-        const Team2Captain = playerData.filter(player => player.id === matchData?.post?.team2Captain)?.[0]
-        const Team2WicketKeeper = playerData.filter(player => player.id === matchData?.post?.team2WicketKeeper)?.[0]
+        const getPlayerById = (id) => playerData.find(player => player.id === id);
+        const team1Captain = getPlayerById(matchData?.post?.team1Captain)
+        const team1WicketKeeper = getPlayerById(matchData?.post?.team1WicketKeeper)
+        const team2Captain = getPlayerById(matchData?.post?.team2Captain)
+        const team2WicketKeeper = getPlayerById(matchData?.post?.team2WicketKeeper)
+
         setPlayersPost({
-            team1Captain: Team1Captain,
-            team1WicketKeeper: Team1WicketKeeper,
-            team2Captain: Team2Captain,
-            team2WicketKeeper: Team2WicketKeeper
+            team1Captain,
+            team1WicketKeeper,
+            team2Captain,
+            team2WicketKeeper
         })
     }, [matchData])
 

@@ -47,6 +47,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    box-shadow: var(--shadow-white);
 }
 
 .au-player-details .au-pl-img h6 {

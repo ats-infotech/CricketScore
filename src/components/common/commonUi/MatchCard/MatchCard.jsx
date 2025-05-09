@@ -79,8 +79,8 @@ const MatchCard = (props) => {
 
     const getWinnerMessage = (item) => {
         let winner;
-        const winningTeam = team_data?.data?.find((items) => items?.id === item?.matchWinner)?.team_name || item?.matchWinner === item?.team1?.id ? item?.team1?.team_name : item?.team2?.team_name
-        const terminatedTeam = team_data?.data?.find((items) => items?.id === item?.terminate?.teamdisqualify)?.team_name || item?.terminate?.teamdisqualify === item?.team1?.id ? item?.team1?.team_name : item?.team2?.team_name
+        const winningTeam = team_data?.data?.find((items) => (items?.id === item?.matchWinner)?.team_name) || (item?.matchWinner === item?.team1?.id ? item?.team1?.team_name : item?.team2?.team_name)
+        const terminatedTeam = team_data?.data?.find((items) => (items?.id === item?.terminate?.teamdisqualify)?.team_name) || (item?.terminate?.teamdisqualify === item?.team1?.id ? item?.team1?.team_name : item?.team2?.team_name)
         if (item?.terminate) {
             if (item?.terminate?.mainreason === "rain") {
                 winner = (`Match abandoned due to ${item?.terminate?.mainreason}`)
@@ -140,7 +140,7 @@ const MatchCard = (props) => {
                         let secondInningsCompletedOver = item?.secondInnings?.Completedovers?.length;
                         let thirdInningsCompletedOver = item?.superOverFirstInnings?.Completedovers?.length;
                         let fourthInningsCompletedOver = item?.superOverSecondInnings?.Completedovers?.length;
-                        
+
                         let FirstInningsbatting = (item?.toss?.tossWinner === team1.id && item?.toss?.selectSide === "Bat") || (item?.toss?.tossWinner !== team1.id && item?.toss?.selectSide !== "Bat");
                         let secondInningsBattingSide = (item?.toss?.tossWinner !== team1.id && item?.toss?.selectSide === "Bat") || (item?.toss?.tossWinner === team1.id && item?.toss?.selectSide !== "Bat");
                         let thirdInningsBattingSide = item?.superOverFirstInnings?.battingside === item?.team1?.team_name;

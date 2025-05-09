@@ -1,6 +1,5 @@
 'use client'
 import { debounce, leaderBoardShorting } from "@/components/common/commomFunction";
-import Loader from "@/components/common/commonUi/Loader";
 import { getWindowDimensions } from "@/components/common/maxHeightFunction";
 import AuctionMVP from "@/pages/Auction/Auctionmvp/AuctionMVP";
 import AuctionPage from "@/pages/Auction/Auctionpage/AuctionPage";
@@ -67,30 +66,58 @@ const TournamentCategory = () => {
     setWindowDimensions(getWindowDimensions());
   };
 
-  const RenderContent = useMemo(() => {
-    switch (category) {
-      case 'about':
-        return <About tournamentData={tournamentData} />;
-      case 'stats':
-        return <Stats tournamentData={tournamentData} />
-      case 'teams':
-        return <AboutPage tournamentData={tournamentData} tournamenId={id} teamData={teamData} type={'userteams'} />;
-      case 'pointable':
-        return <PointTable teamData={teamData} tournamentData={tournamentData} />;
-      case 'match':
-        return <MatchPage teamData={teamData} tournamentData={tournamentData} matchData={matchData} tournamenId={id} />;
-      case 'leaderboard':
-        return <Leaderboard playerData={playerData} teamData={teamData} />;
-      case 'auction':
-        return <AuctionPage tournamentData={tournamentData} isUser={true} />;
-      case 'players':
-        return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} isUser={true} />
-      case 'mvp':
-        return <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} />
-      default:
-        return null;
-    }
-  }, [category, id, tournamentData, teamData, matchData, playerData]);
+  const commonProps = {
+    tournamentData,
+    teamData,
+    playerData,
+  };
+
+  const componentMap = {
+    about: <About tournamentData={tournamentData} />,
+    stats: <Stats tournamentData={tournamentData} />,
+    teams: <AboutPage tournamentData={tournamentData} tournamenId={id} teamData={teamData} type="userteams" />,
+    pointable: <PointTable teamData={teamData} tournamentData={tournamentData} />,
+    match: <MatchPage teamData={teamData} tournamentData={tournamentData} matchData={matchData} tournamenId={id} />,
+    leaderboard: <Leaderboard playerData={playerData} teamData={teamData} />,
+    auction: <AuctionPage tournamentData={tournamentData} isUser={true} />,
+    players: <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} isUser={true} />,
+    mvp: <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} />,
+  };
+
+  const RenderContent = useMemo(() => componentMap[category] ?? null, [
+    category,
+    id,
+    tournamentData,
+    teamData,
+    matchData,
+    playerData,
+    auctionData,
+  ]);
+
+  // const RenderContent = useMemo(() => {
+  //   switch (category) {
+  //     case 'about':
+  //       return <About tournamentData={tournamentData} />;
+  //     case 'stats':
+  //       return <Stats tournamentData={tournamentData} />
+  //     case 'teams':
+  //       return <AboutPage tournamentData={tournamentData} tournamenId={id} teamData={teamData} type={'userteams'} />;
+  //     case 'pointable':
+  //       return <PointTable teamData={teamData} tournamentData={tournamentData} />;
+  //     case 'match':
+  //       return <MatchPage teamData={teamData} tournamentData={tournamentData} matchData={matchData} tournamenId={id} />;
+  //     case 'leaderboard':
+  //       return <Leaderboard playerData={playerData} teamData={teamData} />;
+  //     case 'auction':
+  //       return <AuctionPage tournamentData={tournamentData} isUser={true} />;
+  //     case 'players':
+  //       return <AuctionPlayerPage tournamentData={tournamentData} playerData={playerData} isUser={true} />
+  //     case 'mvp':
+  //       return <AuctionMVP auctionData={auctionData} teamData={teamData} playerData={playerData} />
+  //     default:
+  //       return null;
+  //   }
+  // }, [category, id, tournamentData, teamData, matchData, playerData]);
 
   let contentHeight = windowDimensions?.height - bannerHeight;
 

@@ -2,9 +2,10 @@
 import { CommonText } from "@/components/common/commonText"
 import { Box, Divider, Typography } from "@mui/material"
 import Image from "next/image"
+import React from "react"
 import './Matchstats.css'
 
-const CommonStatsSection = ({ team_name, name, batting, fielding, bowling, total }) => {
+const CommonStatsSection = React.memo(({ team_name, name, batting, fielding, bowling, total }) => {
 
     return (
         <Box className='mvp_stats_section'>
@@ -23,7 +24,7 @@ const CommonStatsSection = ({ team_name, name, batting, fielding, bowling, total
             </Box>
         </Box>
     )
-}
+})
 
 const Matchstats = ({ currentMatch, mvpPoints }) => {
     const sortedPlayers = [...mvpPoints].sort((a, b) => b.totalPoints - a.totalPoints);
@@ -110,4 +111,4 @@ const Matchstats = ({ currentMatch, mvpPoints }) => {
     )
 }
 
-export default Matchstats
+export default React.memo(Matchstats)
