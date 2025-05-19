@@ -69,15 +69,16 @@ const Matches = () => {
   useEffect(() => {
     setShownModalData(activeModalTab === 0 ? RoundsName : SelectScheduleType)
   }, [activeModalTab]);
+
   const handleOpen = () => {
     setOpenModal(true)
     setAutoSelect(false)
   }
+
   const handleClose = () => {
     setOpenModal(false)
     setSelectedRound('')
     setError('')
-    setSelectedRound('')
     setScheduleType('')
     sessionStorage.removeItem(selectedRound)
     sessionStorage.removeItem(scheduleType)

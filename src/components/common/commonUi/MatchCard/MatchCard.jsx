@@ -114,7 +114,7 @@ const MatchCard = (props) => {
         <Box className={`all_matched ${isPastTournament ? 'isPastTournament' : ''}`}>
             {
                 matches
-                    .sort((a, b) => new Date(b?.datetime || b?.match_start_time) - new Date(a?.datetime || a?.match_start_time))
+                    .sort((a, b) => new Date(activeTab === 1 ? a?.datetime || a?.match_start_time : b?.datetime || b?.match_start_time) - new Date(activeTab === 1 ? b?.datetime || b?.match_start_time : a?.datetime || a?.match_start_time))
                     .map((item, i) => {
                         const formattedDate = formatDate(item?.datetime || item?.match_start_time);
                         const winner = getWinnerMessage(item);
@@ -307,4 +307,4 @@ const MatchCard = (props) => {
     )
 }
 
-export default MatchCard
+export default React.memo(MatchCard)

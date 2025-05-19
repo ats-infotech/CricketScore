@@ -1,4 +1,5 @@
 import SvgIcon from '@/assets/icons/SvgIcon';
+import React from 'react';
 import './CustomeCheckBox.css';
 
 const CustomeCheckBox = ({ title, checked, onChange }) => {
@@ -10,4 +11,4 @@ const CustomeCheckBox = ({ title, checked, onChange }) => {
     );
 };
 
-export default CustomeCheckBox;
+export default React.memo(CustomeCheckBox);

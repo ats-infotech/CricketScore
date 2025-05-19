@@ -439,7 +439,6 @@ const CreateTournament = ({ tournamentData }) => {
                                 <Box sx={{
                                     height: '45px',
                                     width: '45px',
-                                    backgroundColor: 'var(--theme-primary)',
                                     boxShadow: 'var(--shadow-md)',
                                     border: '1px solid var(--color-white)',
                                     borderRadius: '50px',

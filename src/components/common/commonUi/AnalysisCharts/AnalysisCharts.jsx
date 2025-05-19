@@ -1,11 +1,11 @@
 import { Box, MenuItem, Select, Typography } from '@mui/material';
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, Cell, LabelList, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, } from 'recharts';
 import WagonWheel from '../WagonWheel/WagonWheel';
 import './AnalysisCharts.css';
 
 // Top Section contains title and Select for Graphs
-const TopSection = ({ value, onChange, title, team1, team2, type, isTestMatch, team1Players, team2Players, onBowlerChange, onBatterChange, BowlerValue, BatterValue }) => {
+const TopSection = React.memo(({ value, onChange, title, team1, team2, type, isTestMatch, team1Players, team2Players, onBowlerChange, onBatterChange, BowlerValue, BatterValue }) => {
     return (
         <>
             <Box className="chart_title">
@@ -26,10 +26,10 @@ const TopSection = ({ value, onChange, title, team1, team2, type, isTestMatch, t
             }
         </>
     )
-}
+})
 
 // limited over Match select
-const FilterSelect = ({ value, onChange, team1, team2, type }) => {
+const FilterSelect = React.memo(({ value, onChange, team1, team2, type }) => {
     return (
         <Box className="filter_section">
             <Select value={value} onChange={onChange} size="small" variant="outlined">
@@ -39,10 +39,10 @@ const FilterSelect = ({ value, onChange, team1, team2, type }) => {
             </Select>
         </Box>
     )
-}
+})
 
 // Test Match select
-const TestFilterSelect = ({ value, onChange, team1, team2, type }) => {
+const TestFilterSelect = React.memo(({ value, onChange, team1, team2, type }) => {
     return (
         <Box className="filter_section">
             <Select value={value} onChange={onChange} size="small" variant="outlined" >
@@ -55,10 +55,10 @@ const TestFilterSelect = ({ value, onChange, team1, team2, type }) => {
             </Select>
         </Box>
     )
-}
+})
 
 // Players Select
-const FilterPlayerSelect = ({ value, onChange, players, type, disable }) => {
+const FilterPlayerSelect = React.memo(({ value, onChange, players, type, disable }) => {
     return (
         <Box className={`filter_section ${disable ? 'disable' : ''}`}>
             <Select displayEmpty value={value || ''}  onChange={onChange} disabled={disable} size="small" variant="outlined" >
@@ -73,10 +73,10 @@ const FilterPlayerSelect = ({ value, onChange, players, type, disable }) => {
             </Select>
         </Box>
     )
-}
+})
 
 // This Wicket Label is for Manhattan graph
-const CustomWicketLabel = ({ x, y, value, height }) => {
+const CustomWicketLabel = React.memo(({ x, y, value, height }) => {
     if (value > 0) {
         return (
             <g>
@@ -105,10 +105,10 @@ const CustomWicketLabel = ({ x, y, value, height }) => {
         );
     }
     return null;
-};
+});
 
 // This tooltip is specially for Manhattan graph
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltip = React.memo(({ active, payload }) => {
     if (active && payload && payload.length > 0) {
         const inningsOneData = payload.find(item => item.dataKey === "inningsOneRuns");
         const inningsTwoData = payload.find(item => item.dataKey === "inningsTwoRuns");
@@ -154,10 +154,10 @@ const CustomTooltip = ({ active, payload }) => {
         );
     }
     return null;
-};
+});
 
 // This section is only for Partnership
-const PartnershipCard = ({ data, playerdata }) => {
+const PartnershipCard = React.memo(({ data, playerdata }) => {
     const { batter1Id, batter1run, batter1ball, batter2Id, batter2run, batter2ball, partnershipRun } = data;
     const batter1name = playerdata?.data?.find((items) => items.id === batter1Id)?.playerName || 'Striker'
     const batter2name = playerdata?.data?.find((items) => items.id === batter2Id)?.playerName || 'Non-Striker'
@@ -192,10 +192,10 @@ const PartnershipCard = ({ data, playerdata }) => {
             </Box>
         </Box>
     );
-};
+});
 
 // bar chart
-export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inningsOneLabel, inningsTwoLabel, title, yaxisdatakey,
+export const AnalysisBarChart = React.memo(({ team1, team2, filter, handleChange, data, inningsOneLabel, inningsTwoLabel, title, yaxisdatakey,
     yaxislabel, xaxislabel, bar1datakey, bar2datakey, bar1wicketslabel, bar2wicketslabel, isTestMatch }) => {
     const isTypeOfRunsGraph = title === "Types of Runs" ? true : false
     const chartWidth = useMemo(() => {
@@ -244,10 +244,10 @@ export const AnalysisBarChart = ({ team1, team2, filter, handleChange, data, inn
             </Box>
         </>
     );
-};
+})
 
 // Line Chart
-export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team1dataKey, team2dataKey, filter, TeamOne, TeamTwo, onChange, title, value, isTestMatch }) => {
+export const AnalysisLineChart = React.memo(({ data, inningsOneLabel, inningsTwoLabel, team1dataKey, team2dataKey, filter, TeamOne, TeamTwo, onChange, title, value, isTestMatch }) => {
     const chartWidth = useMemo(() => {
         const minWidthPerData = 30;
         return Math.max(data.length * minWidthPerData, 350);
@@ -283,10 +283,10 @@ export const AnalysisLineChart = ({ data, inningsOneLabel, inningsTwoLabel, team
             </Box>
         </>
     );
-};
+})
 
 // Pie Chart
-export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data, isTestMatch }) => {
+export const AnalysisPieChart = React.memo(({ team1, team2, filter, onChange, title, data, isTestMatch }) => {
     const colorMap = {
         'LBW': 'var(--chart-light-green)',
         'Stumping': 'var(--chart-purple)',
@@ -355,10 +355,10 @@ export const AnalysisPieChart = ({ team1, team2, filter, onChange, title, data, 
             </ResponsiveContainer>
         </>
     )
-}
+})
 
 // Partnership Section
-export const AnalysisPartnership = ({ data, playerdata, team1, team2, title, onChange, topsectionvalue, isTestMatch }) => {
+export const AnalysisPartnership = React.memo(({ data, playerdata, team1, team2, title, onChange, topsectionvalue, isTestMatch }) => {
     return (
         <>
             <TopSection value={topsectionvalue} onChange={onChange} team1={team1} team2={team2} title={title} type={"partnerships"} isTestMatch={isTestMatch} />
@@ -369,10 +369,10 @@ export const AnalysisPartnership = ({ data, playerdata, team1, team2, title, onC
             </Box>
         </>
     )
-}
+})
 
 // Wagon Wheel
-export const WagonWheelGraph = ({ team1, team2, title, filter, onChange, isTestMatch, data, team1Players, team2Players, onBatterChange, onBowlerChange, BatterValue, BowlerValue }) => {
+export const WagonWheelGraph = React.memo(({ team1, team2, title, filter, onChange, isTestMatch, data, team1Players, team2Players, onBatterChange, onBowlerChange, BatterValue, BowlerValue }) => {
     const [percentages, setPercentages] = useState([]);
     const shotsColors = {
         0: { label: '0s', color: 'var(--shot-dots)' },
@@ -422,4 +422,4 @@ export const WagonWheelGraph = ({ team1, team2, title, filter, onChange, isTestM
             <Typography className='errorText' sx={{ textAlign: 'center', marginTop: '10px', fontWeight: '500' }}>*Runs may not tally if scorer has not used WW properly</Typography>
         </Box>
     )
-}
+})

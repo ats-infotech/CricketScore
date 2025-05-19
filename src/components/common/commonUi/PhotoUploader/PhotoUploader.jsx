@@ -1,6 +1,6 @@
 import SvgIcon from "@/assets/icons/SvgIcon";
 import { Box } from "@mui/material";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import './PhotoUploader.css'
 import Avtar from "../Avtar/Avtar";
 
@@ -44,4 +44,4 @@ const PhotoUploader = ({ file, onChange, name, onNameChange, bgColor, type, prev
     )
 }
 
-export default PhotoUploader
+export default React.memo(PhotoUploader)

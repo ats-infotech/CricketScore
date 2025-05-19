@@ -46,8 +46,11 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
                 return;
             }
 
-            const matchDurationInSeconds = timeToSeconds(autoSchedule?.perMatchMinutes);
-            const breakDurationInSeconds = timeToSeconds(autoSchedule?.breakMinutes);
+            const perMatchTimeStr = formatDurationToHHMMSS(autoSchedule?.perMatchMinutes);
+            const breakTimeStr = formatDurationToHHMMSS(autoSchedule?.breakMinutes);
+
+            const matchDurationInSeconds = timeToSeconds(perMatchTimeStr);
+            const breakDurationInSeconds = timeToSeconds(breakTimeStr);
             const totalMatchDurationInSeconds = matchDurationInSeconds + breakDurationInSeconds;
             const oneDayMatchesTotal = parseInt(autoSchedule?.oneDayMatchesTotal) || 0;
 
@@ -221,9 +224,25 @@ const AutoMatchSchedulePage = ({ teamData, tournamentId, tournament }) => {
         return isValid
     }
 
+    // const timeToSeconds = (time) => {
+    //     const [hours, minutes, seconds] = time.split(':').map(Number);
+    //     return hours * 3600 + minutes * 60 + seconds;
+    // };
     const timeToSeconds = (time) => {
+        if (!time || typeof time !== 'string') {
+            console.log('Invalid time format:', time);
+            return 0;
+        }
+
         const [hours, minutes, seconds] = time.split(':').map(Number);
-        return hours * 3600 + minutes * 60 + seconds;
+        return (hours || 0) * 3600 + (minutes || 0) * 60 + (seconds || 0);
+    };
+
+    const formatDurationToHHMMSS = (durationObj) => {
+        const hours = String(durationObj.hour()).padStart(2, '0');
+        const minutes = String(durationObj.minute()).padStart(2, '0');
+        const seconds = String(durationObj.second()).padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
     };
 
     const handleCreateAutoMatches = async () => {

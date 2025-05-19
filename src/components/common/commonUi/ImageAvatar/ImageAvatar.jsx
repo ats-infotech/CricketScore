@@ -1,4 +1,5 @@
 import { Box, Typography, useMediaQuery } from "@mui/material"
+import React from "react"
 
 const ImageAvatar = (props) => {
     const {
@@ -32,4 +33,4 @@ const ImageAvatar = (props) => {
     )
 }
 
-export default ImageAvatar
+export default React.memo(ImageAvatar)

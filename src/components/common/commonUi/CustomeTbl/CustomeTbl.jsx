@@ -2,6 +2,7 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import Image from "next/image"
 import ImageAvatar from "../ImageAvatar/ImageAvatar"
 import './CustomeTbl.css'
+import React from "react"
 
 const CustomeTbl = ({ headRow, data }) => {
     return (
@@ -75,4 +76,4 @@ const CustomeTbl = ({ headRow, data }) => {
     )
 }
 
-export default CustomeTbl
+export default React.memo(CustomeTbl)

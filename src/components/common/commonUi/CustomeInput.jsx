@@ -1,13 +1,13 @@
 "use client"
 import { Box, Typography } from "@mui/material";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import './CustomeFileCss/CustomeInput.css';
 // import DateTimePickers from "./DateTimePickers";
 import dynamic from "next/dynamic";
 
 const DateTimePickers = dynamic(
     () => import("./DateTimePickers"),
-    { ssr: false }
+    // { ssr: false }
 );
 
 const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '', onChange, error, startDate, disabled, onClick, readOnly = false, ampm }) => {
@@ -165,4 +165,4 @@ const CustomeInput = ({ tournament, placeholder, keyName, label, type, value = '
     )
 }
 
-export default CustomeInput
+export default React.memo(CustomeInput)

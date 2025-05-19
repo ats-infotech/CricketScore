@@ -267,41 +267,53 @@ const BowlingTable = React.memo(({ header, data, currentOver, completedOver, pla
                             }
                         </TableRow>
                         {
-                            Array.isArray(visibleOverPlayerStats) && visibleOverPlayerStats?.length > 0 && visibleOverPlayerStats?.reduce((acc, items) => {
-                                const existingBowler = acc.find(item => item?.bowlerId === items?.bowlerId);
-                                if (!existingBowler && (status !== 4 && items?.bowlerId !== currentOver?.bowlerId)) {
-                                    acc.push(items);
-                                } else if (status === 4 && !existingBowler) {
-                                    acc.push(items);
+                            visibleOverPlayerStats && Array.isArray(visibleOverPlayerStats) && visibleOverPlayerStats?.length > 0 && visibleOverPlayerStats.reduce((acc, items) => {
+                                const existingBowler = acc.some(item => item?.bowlerId === items?.bowlerId);
+                                if (!existingBowler) {
+                                    const isNotCurrentBowler = items?.bowlerId !== currentOver?.bowlerId;
+                                    if ((status !== 4 && isNotCurrentBowler) || status === 4) {
+                                        acc.push(items);
+                                    }
                                 }
                                 return acc;
                             }, []).map((items, i) => {
-                                const playerName = playerdata?.filter((item) => item?.id === items?.bowlerId)[0]?.playerName;
-                                const lastOver = completedOver?.filter((bowler) => bowler.bowlerId === items.bowlerId).pop();
-                                const overlength = lastOver.legalBall === 6 ? completedOver?.filter((bowler) => bowler.bowlerId === items.bowlerId)?.length
-                                    : (completedOver?.filter((bowler) => bowler.bowlerId === items.bowlerId)?.length - 1) + (lastOver?.legalBall / 10);
+                                const playerName = playerdata?.find((item) => item?.id === items?.bowlerId)?.playerName;
+                                const lastOver = completedOver?.filter((bowler) => bowler?.bowlerId === items?.bowlerId).pop();
+
+                                const overlength = lastOver?.legalBall === 6 ? completedOver?.filter((bowler) => bowler.bowlerId === items.bowlerId)?.length
+                                    : (completedOver?.filter((bowler) => bowler?.bowlerId === items?.bowlerId)?.length - 1) + (lastOver?.legalBall / 10);
                                 const economy = lastOver?.bowlerrun / overlength;
                                 const maiden = calculateMaiden(items?.bowlerId);
 
                                 return (
                                     <TableRow key={i}>
-                                        {data.map((field) => (
-                                            <TableCell key={field} className="user_scorecard_table-cell data">
-                                                {field === 'playerName' ? (
-                                                    <Box className='user_post_image_main_section'>
+                                        {data.map((field) => {
+                                            let value;
+
+                                            if (field === 'playerName') {
+                                                value = (
+                                                    <Box className="user_post_image_main_section">
                                                         <Typography className="player-name">
                                                             {`${playerName}${(playerName === post.team1Captain?.playerName || playerName === post.team2Captain?.playerName) ? ' (C)' : ''}${(playerName === post.team1WicketKeeper?.playerName || playerName === post.team2WicketKeeper?.playerName) ? ' (Wk)' : ''}`}
                                                         </Typography>
                                                     </Box>
-                                                ) : field === 'maiden' ? (
-                                                    maiden === NaN ? 0 : maiden
-                                                ) : field === 'bowlereco' ? (
-                                                    economy ? economy.toFixed(2) : 0
-                                                ) : field === 'bowleroverNo' ? overlength : (
-                                                    lastOver?.[field] || 0
-                                                )}
-                                            </TableCell>
-                                        ))}
+                                                );
+                                            } else if (field === 'maiden') {
+                                                value = Number.isNaN(maiden) ? 0 : maiden;
+                                            } else if (field === 'bowlereco') {
+                                                value = !Number.isNaN(economy) && economy !== undefined ? economy.toFixed(2) : '0.00';
+                                            } else if (field === 'bowleroverNo') {
+                                                value = Number.isNaN(overlength) ? 0 : overlength;
+                                            } else {
+                                                value = lastOver?.[field] ?? 0;
+                                            }
+
+                                            return (
+                                                <TableCell key={field} className="user_scorecard_table-cell data">
+                                                    {value}
+                                                </TableCell>
+                                            );
+                                        })}
                                     </TableRow>
                                 );
                             })
@@ -435,6 +447,7 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     };
 
     useEffect(() => {
+        if (!playerData || !matchData) return
         const team1Captain = playerData.find(player => player.id === matchData?.post?.team1Captain)
         const team1WicketKeeper = playerData.find(player => player.id === matchData?.post?.team1WicketKeeper)
         const team2Captain = playerData.find(player => player.id === matchData?.post?.team2Captain)
@@ -452,6 +465,7 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
     }, [matchData, team_data])
 
     useEffect(() => {
+        if (!playerData || !matchData) return
         const striker = playerData.find(player => player.id === matchData?.playerselection?.striker)
         const nonStriker = playerData.find(player => player.id === matchData?.playerselection?.nonStriker)
         const bowler = playerData.find(player => player.id === matchData?.playerselection?.bowler)

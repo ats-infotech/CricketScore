@@ -478,8 +478,10 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
             let partnershipRun = wicket.partnership - previousPartnership;
 
             if (pair) {
-                let batter1Run = wicket.batter1Contribution ? wicket.batter1Contribution : partnershipRun - wicket.batter2Contribution;
-                let batter2Run = wicket.batter2Contribution ? wicket.batter2Contribution : partnershipRun - wicket.batter1Contribution;
+                // let batter1Run = wicket.batter1Contribution ? wicket.batter1Contribution : partnershipRun - wicket.batter2Contribution;
+                let batter1Run = wicket.batter1Contribution || 0;
+                let batter2Run = wicket.batter2Contribution || 0;
+                // let batter2Run = wicket.batter2Contribution ? wicket.batter2Contribution : partnershipRun - wicket.batter1Contribution;
                 let batter1Ball = wicket.batter1balls;
                 let batter2Ball = wicket.batter2balls;
                 let batter1Id = wicket.batter1Id;

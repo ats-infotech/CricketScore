@@ -13,13 +13,13 @@ import { Close } from "@mui/icons-material";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CaptainImage from '../../assets/img/playing11/captain.png';
 import WicketKeeperImage from '../../assets/img/playing11/wk.png';
 import './player11.css';
 
-const CommonButton = ({ title, onClick, isActive, activeTab }) => {
+const CommonButton = React.memo(({ title, onClick, isActive, activeTab }) => {
     return (
         <Box className='player11_common_button_section'>
             <Box className={`ecplise_box ${activeTab === 1 ? 'left' : 'right'}`} >
@@ -37,7 +37,7 @@ const CommonButton = ({ title, onClick, isActive, activeTab }) => {
             </Box>
         </Box>
     )
-}
+})
 
 // const CommonBox = ({ src, handleCheck, isCap, isWk }) => {
 //     return (

@@ -1,6 +1,5 @@
 import SvgIcon from "@/assets/icons/SvgIcon"
 import { Button } from "@mui/material"
-import React from "react"
 
 const CustomeButton = ({ icon, title, width, height, bgColor, borderRadius, boxShadow, color, onClick, iconWidth, iconHeight, border, hoverbg, hovertext, hover, disabled, margin, fontSize }) => {
 
@@ -54,4 +53,4 @@ const CustomeButton = ({ icon, title, width, height, bgColor, borderRadius, boxS
     )
 }
 
-export default React.memo(CustomeButton)
+export default CustomeButton

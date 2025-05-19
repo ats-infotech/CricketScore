@@ -1727,7 +1727,7 @@ const ScoreBoard = () => {
     }
 
     const handleScore = async (data) => {
-        if (data === '+/-') {
+        if (data === '+/-' && legalBallCount < 6) {
             setOpen(true)
             setPenaltyCall(true)
             return

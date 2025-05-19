@@ -1,6 +1,6 @@
 import { Box, Dialog, Typography } from '@mui/material';
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ErrorGif from '../../../../assets/img/Error.gif';
 import successGif from '../../../../assets/img/login-successfull.gif';
 import leftfireworkgif from '../../../../assets/img/toss/leftfirework.gif';

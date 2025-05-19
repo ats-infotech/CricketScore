@@ -1,11 +1,11 @@
-import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material"
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import Image from "next/image"
+import SvgIcon from "@/assets/icons/SvgIcon"
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material"
+import Image from "next/image"
 import { useState } from "react"
 import './PlayerCard.css'
-import SvgIcon from "@/assets/icons/SvgIcon"
 
 const PlayerCard = ({ data, isUser, onClick, isMVP }) => {
     const [anchorEl, setAnchorEl] = useState(false);

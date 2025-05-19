@@ -1,5 +1,6 @@
 import { FormControl, MenuItem } from "@mui/material";
 import InputSelect from "./InputSelect";
+import React from "react";
 
 const CustomSelectInput = ({ value, label, onChange, options, disabled = false, disabledOptions = [], minWidth, borderRadius, bgColor, labelfont, color, fontWeight }) => {
 
@@ -72,4 +73,4 @@ const CustomSelectInput = ({ value, label, onChange, options, disabled = false, 
     );
 };
 
-export default CustomSelectInput;
+export default React.memo(CustomSelectInput);

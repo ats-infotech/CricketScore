@@ -253,6 +253,10 @@
     margin-bottom: 10px;
 }
 
+.button-group button:disabled{
+    background-color: var(--color-grey-300) !important;
+}
+
 .action-btn {
     display: flex !important;
     align-items: center !important;
@@ -271,7 +275,7 @@
 .action-btn svg {
     width: 19px;
     height: 18px;
-    background-color: var(--color-white);
+    /* background-color: var(--color-white); */
 }
 
 

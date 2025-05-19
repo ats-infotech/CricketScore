@@ -190,7 +190,7 @@ const ScorePage = ({
     });
 
     return (
-        <Box>
+        <Box className='scoring_section'>
             <Box sx={{ position: 'absolute' }}>
                 <CommonBack onClick={() => router.push(`/mytournament/${match?.tournamentId}/match`)} />
             </Box>
@@ -330,7 +330,6 @@ const ScorePage = ({
                         }
                     </Box> */}
                 </Box>
-
             </Box>
         </Box>
     );

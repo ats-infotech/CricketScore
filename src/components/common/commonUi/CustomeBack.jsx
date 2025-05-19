@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import React from "react"
 import './CustomeFileCss/CustomeBack.css'
 
-const CustomeBack = React.memo(({ title, onclick, type, align }) => {
+const CustomeBack = ({ title, onclick, type, align }) => {
     const router = useRouter()
 
     const handleBack = () => {
@@ -22,6 +22,6 @@ const CustomeBack = React.memo(({ title, onclick, type, align }) => {
             {type !== 'commonback' && title && <Typography variant="p" className="backButtonNearText" sx={{ textAlign: align || 'left', width: '75%' }}>{title}</Typography>}
         </Box>
     )
-})
+}
 
-export default CustomeBack
+export default React.memo(CustomeBack)

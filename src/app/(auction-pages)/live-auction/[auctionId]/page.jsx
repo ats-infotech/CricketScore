@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 const LiveAuctionPage = dynamic(
     () => import('@/pages/Auction/LiveAuctionPage/LiveAuctionPage'),
-    { ssr: false }
+    // { ssr: false }
 );
 
 const LiveAuction = () => {

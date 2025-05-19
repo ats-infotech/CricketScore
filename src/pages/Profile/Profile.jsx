@@ -1,10 +1,10 @@
 'use client'
-import { Box } from "@mui/material"
-import './Profile.css'
-import React, { useState } from "react"
-import CustomeInput from "@/components/common/commonUi/CustomeInput"
 import CustomeButton from "@/components/common/commonUi/CustomeButton"
+import CustomeInput from "@/components/common/commonUi/CustomeInput"
+import { Box } from "@mui/material"
 import Image from "next/image"
+import React, { useState } from "react"
+import './Profile.css'
 
 const ProfileInputs = [
     {
@@ -49,21 +49,52 @@ const ProfilePage = () => {
         }));
     };
 
+    // const validateInputs = () => {
+    //     let newErrors = {};
+    //     if (!profileData.name.trim()) {
+    //         newErrors.name = "Name is required";
+    //     }
+    //     if (!profileData.number.trim()) {
+    //         newErrors.number = "Mobile Number is required";
+    //     } else if (!/^[0-9]{10}$/.test(profileData.number)) {
+    //         newErrors.number = "Enter a valid 10-digit mobile number";
+    //     }
+    //     if (!profileData.email.trim()) {
+    //         newErrors.email = "Email is required";
+    //     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profileData.email)) {
+    //         newErrors.email = "Enter a valid email address";
+    //     }
+    //     setErrors(newErrors);
+    //     return Object.keys(newErrors).length === 0;
+    // };
     const validateInputs = () => {
-        let newErrors = {};
-        if (!profileData.name.trim()) {
-            newErrors.name = "Name is required";
-        }
-        if (!profileData.number.trim()) {
-            newErrors.number = "Mobile Number is required";
-        } else if (!/^[0-9]{10}$/.test(profileData.number)) {
-            newErrors.number = "Enter a valid 10-digit mobile number";
-        }
-        if (!profileData.email.trim()) {
-            newErrors.email = "Email is required";
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profileData.email)) {
-            newErrors.email = "Enter a valid email address";
-        }
+        const validations = {
+            name: {
+                required: true,
+                message: "Name is required"
+            },
+            number: {
+                required: true,
+                pattern: /^[0-9]{10}$/,
+                message: "Enter a valid 10-digit mobile number"
+            },
+            email: {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email address"
+            }
+        };
+
+        const newErrors = Object.entries(validations).reduce((acc, [key, rule]) => {
+            const value = profileData[key]?.trim();
+            if (!value) {
+                acc[key] = rule.message;
+            } else if (rule.pattern && !rule.pattern.test(value)) {
+                acc[key] = rule.message;
+            }
+            return acc;
+        }, {});
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };

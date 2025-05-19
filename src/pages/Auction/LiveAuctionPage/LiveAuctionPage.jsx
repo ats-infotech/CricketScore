@@ -35,15 +35,6 @@ const MODAL_TYPES = {
     ACTIONS: 'actions'
 }
 
-const BTN_GROUP = [
-    { icon: 'random', name: 'Random', keyname: 'random' },
-    { icon: 'bidding-up', name: 'Bid Up', keyname: 'bid-up' },
-    { icon: 'bidding-down', name: 'Bid Down', keyname: 'bid-down' },
-    { icon: 'manual', name: 'Manual', keyname: 'manual' },
-    { icon: 'sold', name: 'Sold', keyname: 'sold' },
-    { icon: 'unsold', name: 'Unsold', keyname: 'unsold' },
-]
-
 const AUCTION_ACTIONS = [
     {
         id: 'complete-auction',
@@ -114,11 +105,19 @@ const LiveAuctionPage = ({ type }) => {
     const [openSettingModal, setOpenSettingModal] = useState(false)
     const [auctionComplete, setAuctionComplete] = useState(false)
     const [resetAuction, setResetAuction] = useState(false)
-    const auctionCompleted = openSettingModal || isAuctionCompleted
+    const auctionCompleted = (openSettingModal || isAuctionCompleted)
     const [reauctionUnsold, setReauctionUnsold] = useState(false)
 
     // meulist state
     const [anchorEl, setAnchorEl] = useState(false);
+
+    // gets the current bidding teams info
+    let currentTeamAlreadyOwnedPlayers = auctiondata?.soldPlayers
+        ?.filter(sold => sold?.teamId === currentTeamBidding?.id)
+        ?.reduce((sum, sold) => sum + (sold?.bidPrice || 0), 0) || 0
+    let currentTeamPurchasedPlayerCount = auctiondata?.soldPlayers?.filter(sold => sold?.teamId === currentTeamBidding?.id).length || 0
+    let currentTeamWallet = Number(currentTeamBidding?.wallet) - (Number(currentTeamAlreadyOwnedPlayers) || 0)
+    let currentTeamMaxBid = (Number(currentTeamWallet) - (Number(auctiondata?.minimum_bid) * (Number(auctiondata?.player_per_team) - (currentTeamPurchasedPlayerCount || 0))))
 
     // Derived UI data
     const InfoOfAuction = [
@@ -126,6 +125,16 @@ const LiveAuctionPage = ({ type }) => {
         { title: 'unsold', count: auctiondata?.unsoldPlayers?.length || 0 },
         { title: 'Available', count: availablePlayers.length },
         { title: 'Team', count: teamsData.length }
+    ]
+
+    // button group UI data
+    const BTN_GROUP = [
+        { icon: 'random', name: 'Random', keyname: 'random' },
+        { icon: 'bidding-up', name: 'Bid Up', keyname: 'bid-up', disable: currentTeamMaxBid < (currentBid + parseInt(auctiondata?.bid_increase_by)) },
+        { icon: 'bidding-down', name: 'Bid Down', keyname: 'bid-down', disable: currentBid <= parseInt(auctiondata?.minimum_bid) },
+        { icon: 'manual', name: 'Manual', keyname: 'manual' },
+        { icon: 'sold', name: 'Sold', keyname: 'sold', disable: !currentTeamBidding },
+        { icon: 'unsold', name: 'Unsold', keyname: 'unsold' },
     ]
 
     const showPlayerData = searchResults.trim()
@@ -162,7 +171,7 @@ const LiveAuctionPage = ({ type }) => {
                 currentPlayer: {
                     teamId: null,
                     currentPlayer: null,
-                    bidPrice: Number(auctiondata.minimum_bid) || 0
+                    bidPrice: Number(auctiondata?.minimum_bid) || 0
                 }
             }
             dispatch(addCurrentPlayer(newObj))
@@ -193,7 +202,7 @@ const LiveAuctionPage = ({ type }) => {
         if (!auctiondata || !teamsData?.length) return
 
         const playersPerTeam = parseInt(auctiondata.player_per_team) || 0
-        const minBid = parseInt(auctiondata.minimum_bid) || 0
+        const minBid = parseInt(auctiondata?.minimum_bid) || 0
 
         const teamWithHighestMaxBid = teamsData.reduce((maxTeam, currentTeam) => {
             return maxTeam
@@ -207,7 +216,7 @@ const LiveAuctionPage = ({ type }) => {
 
     useEffect(() => {
         if (!isUpdated && auctiondata) {
-            const currentBidStatus = currentAuctionStatus ? (currentAuctionStatus?.bidPrice || Number(auctiondata.minimum_bid)) : Number(auctiondata.minimum_bid)
+            const currentBidStatus = currentAuctionStatus ? (currentAuctionStatus?.bidPrice || Number(auctiondata?.minimum_bid)) : Number(auctiondata?.minimum_bid)
             setCurrentBid(currentBidStatus || 0)
             currentBidRef.current = currentBidStatus || 0
             updateCurrentPlayerState()
@@ -280,14 +289,14 @@ const LiveAuctionPage = ({ type }) => {
         if (!auctiondata && !action) return
         let current = Number(currentBid)
         const increment = Number(auctiondata?.bid_increase_by) || 100
-        const minBid = Number(auctiondata.minimum_bid)
+        const minBid = Number(auctiondata?.minimum_bid)
 
         if (action === 'up') {
             if ((current + increment) <= maxBidHeighestAmount) {
                 current = current + increment
             }
         } else {
-            if (current > auctiondata.minimum_bid) {
+            if (current > auctiondata?.minimum_bid) {
                 current = Math.max(minBid, current - increment)
             }
         }
@@ -384,7 +393,7 @@ const LiveAuctionPage = ({ type }) => {
                 setIsUnsold(true)
                 break
             default:
-                return
+                break
         }
     }
 
@@ -398,6 +407,11 @@ const LiveAuctionPage = ({ type }) => {
     }
 
     function handleOnChange(val, key) {
+        if (key === 'bid_amount') {
+            if (!/^[0-9]*$/.test(val)) {
+                return; // Stop further execution if invalid
+            }
+        }
         setUpdateInputBid(val)
         setError({})
     }
@@ -649,17 +663,20 @@ const LiveAuctionPage = ({ type }) => {
             {/* Bottom Action Bar */}
             <Box className='info-bottom'>
                 {!isUser && <Box className='button-group'>
-                    {BTN_GROUP.map((item, i) => (
-                        <Button
-                            variant='contained'
-                            className='action-btn'
-                            key={i}
-                            onClick={() => bidHandling(item.keyname)}
-                        >
-                            <SvgIcon id={item.icon} />
-                            <span>{item.name}</span>
-                        </Button>
-                    ))}
+                    {BTN_GROUP.map((item, i) => {
+                        return (
+                            <Button
+                                variant='contained'
+                                className='action-btn'
+                                key={i}
+                                onClick={() => bidHandling(item.keyname)}
+                                disabled={item?.disable}
+                            >
+                                <SvgIcon id={item.icon} />
+                                <span>{item.name}</span>
+                            </Button>
+                        )
+                    })}
                 </Box>}
                 <Box className='info-btn-group'>
                     {!isUser && <SvgIcon id='three-line-menu' onClick={() => {
@@ -678,7 +695,7 @@ const LiveAuctionPage = ({ type }) => {
             {/* Modals */}
             <CustomeModal open={open} bgColor={'var(--color-white)'}>
 
-                {auctionComplete || resetAuction ? <Box className="auction_complete_warning">
+                {(auctionComplete || resetAuction) ? <Box className="auction_complete_warning">
                     <Typography variant="body2" className="errorText">{`${auctionComplete ? 'Are you sure auction is completed?'
                         : 'Are you sure you want to reset this auction?'}`}</Typography>
                     <Box className="auction_complete_buttons">
