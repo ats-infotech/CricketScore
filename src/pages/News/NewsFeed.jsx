@@ -75,12 +75,12 @@ const NewsFeed = () => {
 
     return (
         <Box className="news_feed_main_section">
-            <Box className='news_feed_menu'>
+            {/* <Box className='news_feed_menu'>
                 <SvgIcon id='three-line-menu' onClick={handleOpen} />
                 <Box className='notificationBox'>
                     <SvgIcon id='notification' />
                 </Box>
-            </Box>
+            </Box> */}
             <Menubar open={openDrawer} handleClose={handleClose} />
 
             <Box className="news_feed_section">

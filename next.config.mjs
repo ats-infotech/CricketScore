@@ -12,6 +12,7 @@ const nextConfig = {
     compress: true,         // Enables Gzip compression
     output: 'standalone',   // Makes app more independent for deployment
     images: {
+        domains: ['cricketchampion.co.in','images.sportdevs.com', 'gcdnimages.entitysport.com'],
         formats: ['image/avif', 'image/webp'], // Modern image formats for faster loading
     },
     experimental: {

@@ -1,0 +1,152 @@
+.international-matches-main-section {
+    padding: 30px 25px 0px;
+}
+
+.scores-card-main-section{
+    height: calc(100vh - 160px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.scores-card-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.scores-card {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--theme-box-blue) !important;
+}
+
+.scores-card p {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--color-white);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.scores-card-logo-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.scores-card-team-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.scores-vs-logo {
+    width: 30px;
+    height: 40px;
+    margin-top: 26px;
+}
+
+.scores-team-details {
+    padding: 8px 0px 0px;
+}
+
+.scores-team-details p {
+    color: var(--color-white);
+    font-size: var(--fs-sm) !important;
+    text-align: center !important;
+    margin-top: 5px !important;
+    font-weight: 500 !important;
+    margin-bottom: 0px;
+}
+
+.scores-team-scores {
+    font-size: var(--fs-md);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+    justify-content: center;
+    font-weight: 500 !important;
+}
+
+.scores-team-details.winner p {
+    color: var(--chart-yellow);
+}
+
+.scores-team-runs {
+    font-size: var(--fs-base) !important;
+}
+
+.scores-team-over {
+    font-size: var(--fs-sm) !important;
+    font-weight: 500;
+    color: var(--color-grey-300);
+}
+
+.scores-match-result {
+    background-color: #348f04;
+    padding: 5px 6px 4px 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 15px 15px 0 0;
+}
+
+.scores-match-result.terminated {
+    background-color: var(--color-red) !important;
+}
+
+.scores-match-result.live {
+    background-color: var(--color-orange) !important;
+}
+
+@media screen and (max-width: 410px) {
+    .scores-card-team-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .scores-card-team-logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .scores-vs-logo {
+        margin-top: 20px;
+    }
+
+    .scores-card p {
+        font-size: var(--fs-xs) !important;
+    }
+
+    .scores-team-runs {
+        font-size: var(--fs-sm) !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .scores-card-team-logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .scores-vs-logo {
+        margin-top: 10px;
+    }
+}

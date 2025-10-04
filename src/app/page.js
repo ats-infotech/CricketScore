@@ -1,4 +1,5 @@
 'use client'
+import InternationalMatchesScores from "@/pages/InternationalMatchesScores/InternationalMatchesScores";
 import Tournament from "@/pages/Tournament/Tournament";
 import { matchesState } from "@/redux/slices/matchSlice";
 import { tournamentState } from "@/redux/slices/tournamentSlice";
@@ -7,22 +8,23 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  const [tournamentData, setTournamentData] = useState([])
-  const [matchData, setmatchData] = useState([])
+  // const [tournamentData, setTournamentData] = useState([])
+  // const [matchData, setmatchData] = useState([])
 
-  const tornament_data = useSelector(tournamentState);
-  const match_data = useSelector(matchesState);
-  const router = useRouter()
+  // const tornament_data = useSelector(tournamentState);
+  // const match_data = useSelector(matchesState);
+  // const router = useRouter()
 
-  useEffect(() => {
-    setmatchData(match_data?.data)
-  }, [tornament_data]);
+  // useEffect(() => {
+  //   setmatchData(match_data?.data)
+  // }, [tornament_data]);
 
-  useEffect(() => {
-    setTournamentData(tornament_data?.data)
-  }, [tornament_data]);
+  // useEffect(() => {
+  //   setTournamentData(tornament_data?.data)
+  // }, [tornament_data]);
 
   return (
-    <Tournament tournamentData={tournamentData} matchData={matchData} openDrawer={() => router.push('registeredTornaments')}/>
+    // <Tournament tournamentData={tournamentData} matchData={matchData} openDrawer={() => router.push('registeredTornaments')}/>
+    <InternationalMatchesScores />
   );
 }

@@ -1,0 +1,2052 @@
+{
+  "2445604": {
+    "data": [
+      {
+        "match_id": 2445604,
+        "incidents": [
+          {
+            "time": 12,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 0,
+            "reversed_period_time": 34,
+            "reversed_period_time_seconds": 1980
+          },
+          {
+            "time": 28,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 2,
+            "home_score": 0,
+            "reversed_period_time": 18,
+            "reversed_period_time_seconds": 1020
+          },
+          {
+            "time": 43,
+            "type": "card",
+            "class": "red",
+            "is_home": true,
+            "reversed_period_time": 3,
+            "reversed_period_time_seconds": 120
+          },
+          {
+            "time": 43,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 3,
+            "reversed_period_time_seconds": 120
+          },
+          {
+            "time": 54,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 2,
+            "home_score": 1,
+            "reversed_period_time": 37,
+            "reversed_period_time_seconds": 2160
+          },
+          {
+            "time": 58,
+            "type": "card",
+            "class": "yellow",
+            "is_home": true,
+            "reversed_period_time": 33,
+            "reversed_period_time_seconds": 1920
+          },
+          {
+            "time": 77,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 14,
+            "reversed_period_time_seconds": 780
+          },
+          {
+            "time": 82,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 9,
+            "reversed_period_time_seconds": 480
+          },
+          {
+            "time": 85,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 2,
+            "home_score": 2,
+            "reversed_period_time": 6,
+            "reversed_period_time_seconds": 300
+          },
+          {
+            "time": 87,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 4,
+            "reversed_period_time_seconds": 180
+          },
+          {
+            "time": 88,
+            "type": "card",
+            "class": "yellow",
+            "is_home": true,
+            "reversed_period_time": 3,
+            "reversed_period_time_seconds": 120
+          },
+          {
+            "time": 90,
+            "type": "card",
+            "class": "red",
+            "is_home": true,
+            "added_time": 1,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          },
+          {
+            "text": "HT",
+            "time": 45,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756183316538
+  },
+  "2463495": {
+    "data": [
+      {
+        "match_id": 2463495,
+        "incidents": [
+          {
+            "time": 11,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 1003013,
+            "away_score": 0,
+            "home_score": 1,
+            "player_name": "Thelma Lóa Hermannsdóttir",
+            "player_hash_image": "2dad3406fd7bd71c6b2f73682cda45c2108f417c4c84285fd5d986d2c0450066",
+            "reversed_period_time": 35,
+            "reversed_period_time_seconds": 2040
+          },
+          {
+            "time": 13,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 978675,
+            "away_score": 1,
+            "home_score": 1,
+            "player_name": "Sonja Björg Sigurðardóttir",
+            "player_hash_image": "e090ef130496cffcce178f1f7b71b0aa4834fc477ac40c0558adb3279f97346e",
+            "reversed_period_time": 33
+          },
+          {
+            "time": 21,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "player_id": 978665,
+            "player_name": "Henríetta Ágústsdóttir",
+            "player_hash_image": "cbd4eb3b78cc7071af22625ec630b7b6d0165c92aa6f0e229a7c444a15ffb755",
+            "reversed_period_time": 25
+          },
+          {
+            "time": 23,
+            "type": "card",
+            "class": "yellow",
+            "is_home": true,
+            "player_id": 149827,
+            "player_name": "Andrea Rán Snæfeld Hauksdóttir",
+            "player_hash_image": "d368ad216edc836ba3a4518abda46d949ccc197cceb4dc84f5cbcaf92e0cb248",
+            "reversed_period_time": 23
+          },
+          {
+            "time": 25,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 74686,
+            "away_score": 2,
+            "home_score": 1,
+            "player_name": "Sandra Jessen",
+            "player_hash_image": "0d54bba378b3b57b0ba8608ba681af5cf3a58e4cf4e1ae98ae6f315d69af6f1d",
+            "reversed_period_time": 21
+          },
+          {
+            "time": 26,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 1003009,
+            "away_score": 2,
+            "home_score": 2,
+            "player_name": "Maya Lauren Hansen",
+            "player_hash_image": "e97ece1e11e504c4cee5a1238f9933bc32e21cbe799187e1baef130c21f32779",
+            "reversed_period_time": 20
+          },
+          {
+            "time": 31,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 1003013,
+            "away_score": 2,
+            "home_score": 3,
+            "player_name": "Thelma Lóa Hermannsdóttir",
+            "player_hash_image": "2dad3406fd7bd71c6b2f73682cda45c2108f417c4c84285fd5d986d2c0450066",
+            "reversed_period_time": 15
+          },
+          {
+            "time": 33,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 3,
+            "home_score": 3,
+            "player_name": "Margrét Árnadóttir",
+            "reversed_period_time": 13
+          },
+          {
+            "time": 37,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 914398,
+            "player_out_id": 978665,
+            "player_in_name": "Bríet Jóhannsdóttir",
+            "player_out_name": "Henríetta Ágústsdóttir",
+            "player_in_hash_image": "297bc61ac8c095ad279f95018fe1651de3af4616547e189fed172be2b36ce98b",
+            "reversed_period_time": 9,
+            "player_out_hash_image": "cbd4eb3b78cc7071af22625ec630b7b6d0165c92aa6f0e229a7c444a15ffb755"
+          },
+          {
+            "time": 46,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 914399,
+            "player_out_id": 978675,
+            "player_in_name": "Amalía Árnadóttir",
+            "player_out_name": "Sonja Björg Sigurðardóttir",
+            "player_in_hash_image": "cf0e8be7cdc74ba18d5fa27efd3b98e7ed4991a300328f7e1895151a6e372422",
+            "reversed_period_time": 45,
+            "player_out_hash_image": "e090ef130496cffcce178f1f7b71b0aa4834fc477ac40c0558adb3279f97346e"
+          },
+          {
+            "time": 46,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 930913,
+            "player_in_name": "Ellie Rose Moreno",
+            "player_in_hash_image": "674e4015432a636eb3ee67f017e1fdb4c5be0088d44c912fc336b6cc210600b0",
+            "reversed_period_time": 45
+          },
+          {
+            "time": 54,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "reversed_period_time": 37
+          },
+          {
+            "time": 58,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 1003013,
+            "away_score": 3,
+            "home_score": 4,
+            "player_name": "Thelma Lóa Hermannsdóttir",
+            "player_hash_image": "2dad3406fd7bd71c6b2f73682cda45c2108f417c4c84285fd5d986d2c0450066",
+            "reversed_period_time": 33
+          },
+          {
+            "time": 65,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 1003010,
+            "player_out_id": 979837,
+            "player_in_name": "Ingibjörg Magnúsdóttir",
+            "player_out_name": "Thelma Karen Pálmadóttir",
+            "player_in_hash_image": "8403f23d27bc7c74e72fa6f227702dfb1cd947d472b07d4a076f83d7f247708f",
+            "reversed_period_time": 26,
+            "player_out_hash_image": "7b804a62589f1855e10bead709580758fb3669f3550f7e5683db5e5874c54bc6"
+          },
+          {
+            "time": 65,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 1003016,
+            "player_out_id": 960127,
+            "player_in_name": "Valgerður Ósk Valsdóttir",
+            "player_out_name": "Elisa Lana Sigurjónsdóttir",
+            "player_in_hash_image": "cc1f951ba1878a1161fc304178816e7c35b06f5d40f68bf2427c33ac43322f84",
+            "reversed_period_time": 26,
+            "player_out_hash_image": "35c6ff27e6be9616a79e9ec028723f782800493320e804eefbd88ca33c285cc3"
+          },
+          {
+            "time": 75,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 914401,
+            "player_in_name": "Bríet Fjóla Bjarnadóttir",
+            "player_in_hash_image": "78051a0a10ef058bce6042566f07fddf1c6d3616a76166aa659de52c90fce607",
+            "reversed_period_time": 16
+          },
+          {
+            "time": 78,
+            "type": "card",
+            "class": "yellow",
+            "is_home": true,
+            "player_id": 1003013,
+            "player_name": "Thelma Lóa Hermannsdóttir",
+            "player_hash_image": "2dad3406fd7bd71c6b2f73682cda45c2108f417c4c84285fd5d986d2c0450066",
+            "reversed_period_time": 13
+          },
+          {
+            "time": 85,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_out_id": 1003013,
+            "player_out_name": "Thelma Lóa Hermannsdóttir",
+            "reversed_period_time": 6,
+            "player_out_hash_image": "2dad3406fd7bd71c6b2f73682cda45c2108f417c4c84285fd5d986d2c0450066"
+          },
+          {
+            "time": 89,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "reversed_period_time": 2
+          },
+          {
+            "time": 90,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 1003010,
+            "away_score": 3,
+            "home_score": 5,
+            "player_name": "Ingibjörg Magnúsdóttir",
+            "player_hash_image": "8403f23d27bc7c74e72fa6f227702dfb1cd947d472b07d4a076f83d7f247708f",
+            "reversed_period_time": 1
+          },
+          {
+            "text": "HT",
+            "time": 45,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1755492663961
+  },
+  "2463530": {
+    "data": [
+      {
+        "match_id": 2463530,
+        "incidents": [
+          {
+            "time": 2,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 1,
+            "reversed_period_time": 44
+          },
+          {
+            "time": 18,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 1,
+            "reversed_period_time": 28
+          },
+          {
+            "time": 30,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 2,
+            "reversed_period_time": 16
+          },
+          {
+            "time": 42,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 3,
+            "reversed_period_time": 4
+          },
+          {
+            "time": 50,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 4,
+            "reversed_period_time": 41
+          },
+          {
+            "time": 68,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 2,
+            "home_score": 4,
+            "reversed_period_time": 23
+          },
+          {
+            "text": "First half",
+            "time": 45,
+            "type": "period",
+            "is_live": true,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756183383196
+  },
+  "2463531": {
+    "data": [
+      {
+        "match_id": 2463531,
+        "incidents": [
+          {
+            "time": 5,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 1,
+            "reversed_period_time": 41
+          },
+          {
+            "time": 23,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 1,
+            "reversed_period_time": 23
+          },
+          {
+            "time": 55,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 2,
+            "reversed_period_time": 36
+          },
+          {
+            "time": 61,
+            "type": "goal",
+            "class": "penalty",
+            "is_home": false,
+            "away_score": 2,
+            "home_score": 2,
+            "reversed_period_time": 30
+          },
+          {
+            "time": 87,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 2,
+            "home_score": 3,
+            "reversed_period_time": 4
+          },
+          {
+            "text": "HT",
+            "time": 45,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756183395161
+  },
+  "2463536": {
+    "data": [
+      {
+        "match_id": 2463536,
+        "incidents": [
+          {
+            "time": 14,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 639510,
+            "away_score": 0,
+            "home_score": 1,
+            "player_name": "Marinó Snær Birgisson",
+            "player_hash_image": "ac3266d182f7450e20b9bf95ca384e114065ce9b68fe1b3dd7ad3b97eb94b638",
+            "reversed_period_time": 32
+          },
+          {
+            "time": 17,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 2,
+            "player_name": "Johannes Helgi Alfredsson",
+            "reversed_period_time": 29
+          },
+          {
+            "time": 22,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 384360,
+            "away_score": 1,
+            "home_score": 2,
+            "player_name": "Arnar Ólafsson",
+            "player_hash_image": "1d2ece46b6a91157ac1b63ab906ce188c3321af0aa1f1d6a7f670614be9124d1",
+            "reversed_period_time": 24
+          },
+          {
+            "time": 40,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 3,
+            "player_name": "Dorsteinn Mar Dorvaldsoson",
+            "reversed_period_time": 6
+          },
+          {
+            "time": 45,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "added_time": 1,
+            "away_score": 2,
+            "home_score": 3,
+            "player_name": "Kolbeinn Tumi Sveinsson",
+            "reversed_period_time": 1
+          },
+          {
+            "time": 45,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "added_time": 2,
+            "away_score": 3,
+            "home_score": 3,
+            "player_name": "Kolbeinn Tumi Sveinsson",
+            "reversed_period_time": 1
+          },
+          {
+            "time": 59,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 384360,
+            "away_score": 4,
+            "home_score": 3,
+            "player_name": "Arnar Ólafsson",
+            "player_hash_image": "1d2ece46b6a91157ac1b63ab906ce188c3321af0aa1f1d6a7f670614be9124d1",
+            "reversed_period_time": 32
+          },
+          {
+            "text": "FT",
+            "time": 90,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 4,
+            "home_score": 3,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756183432466
+  },
+  "2471693": {
+    "data": [
+      {
+        "match_id": 2471693,
+        "incidents": [
+          {
+            "time": 7,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 0,
+            "reversed_period_time": 39,
+            "reversed_period_time_seconds": 2280
+          },
+          {
+            "time": 29,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 17,
+            "reversed_period_time_seconds": 960
+          },
+          {
+            "time": 44,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 2,
+            "home_score": 0,
+            "reversed_period_time": 2,
+            "reversed_period_time_seconds": 60
+          },
+          {
+            "time": 45,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "added_time": 1,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          },
+          {
+            "time": 52,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 3,
+            "home_score": 0,
+            "reversed_period_time": 39,
+            "reversed_period_time_seconds": 2280
+          },
+          {
+            "time": 53,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 38,
+            "reversed_period_time_seconds": 2220
+          },
+          {
+            "time": 53,
+            "type": "card",
+            "class": "yellow",
+            "is_home": true,
+            "reversed_period_time": 38,
+            "reversed_period_time_seconds": 2220
+          },
+          {
+            "time": 61,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 3,
+            "home_score": 1,
+            "reversed_period_time": 30,
+            "reversed_period_time_seconds": 1740
+          },
+          {
+            "time": 74,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 3,
+            "home_score": 2,
+            "reversed_period_time": 17,
+            "reversed_period_time_seconds": 960
+          },
+          {
+            "time": 75,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 3,
+            "home_score": 3,
+            "reversed_period_time": 16,
+            "reversed_period_time_seconds": 900
+          },
+          {
+            "time": 76,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 4,
+            "home_score": 3,
+            "reversed_period_time": 15,
+            "reversed_period_time_seconds": 840
+          },
+          {
+            "time": 89,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 4,
+            "home_score": 4,
+            "reversed_period_time": 2,
+            "reversed_period_time_seconds": 60
+          },
+          {
+            "time": 90,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "added_time": 8,
+            "away_score": 5,
+            "home_score": 5,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          },
+          {
+            "time": 90,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "added_time": 5,
+            "away_score": 4,
+            "home_score": 5,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          },
+          {
+            "text": "HT",
+            "time": 45,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756183486228
+  },
+  "2490816": {
+    "data": [
+      {
+        "match_id": 2490816,
+        "incidents": [
+          {
+            "time": 3,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 68939,
+            "assist1_id": 60077,
+            "away_score": 0,
+            "home_score": 1,
+            "player_name": "Jessica Fishlock",
+            "assist1_name": "Jordyn Huitema",
+            "player_hash_image": "12ae491ddfa69fb5f1f47ad5daf679ba1302213f5e72e370258d4135a0434575",
+            "assist1_hash_image": "3fc668976ce7e4b82c864e6833d0a6ba06a52e65137dbfcca744aba82a01d3f9",
+            "reversed_period_time": 43
+          },
+          {
+            "time": 14,
+            "type": "substitution",
+            "class": "injury",
+            "is_home": false,
+            "player_in_id": 139458,
+            "player_out_id": 42949,
+            "player_in_name": "Camryn Biegalski",
+            "player_out_name": "Natalia Kuikka",
+            "player_in_hash_image": "9504497381062189f36234bdba8b054c175a69984fc963120a3bbdf4493a07ae",
+            "reversed_period_time": 32,
+            "player_out_hash_image": "d37166931125ac0ddad022cd8d392a7000e76166444b98236e9d71d5355025ad"
+          },
+          {
+            "time": 32,
+            "type": "substitution",
+            "class": "injury",
+            "is_home": false,
+            "player_in_id": 768735,
+            "player_out_id": 137591,
+            "player_in_name": "Manaka Hayashi",
+            "player_out_name": "Shea Groom",
+            "player_in_hash_image": "bc6e8d75bb6b540a1f6d33bffcddae6bf6c8fe6a494d075328ecf295089ee5ad",
+            "reversed_period_time": 14,
+            "player_out_hash_image": "c4b49fd80201f2157d8673b5efe83b45dffafb701879146ee0b551e4c4d6debc"
+          },
+          {
+            "time": 34,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 60077,
+            "away_score": 0,
+            "home_score": 2,
+            "player_name": "Jordyn Huitema",
+            "player_hash_image": "3fc668976ce7e4b82c864e6833d0a6ba06a52e65137dbfcca744aba82a01d3f9",
+            "reversed_period_time": 12
+          },
+          {
+            "time": 45,
+            "type": "injuryTime",
+            "length": 6,
+            "added_time": 0,
+            "reversed_period_time": 1
+          },
+          {
+            "time": 46,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 62380,
+            "away_score": 0,
+            "home_score": 3,
+            "player_name": "Emeri Adames",
+            "player_hash_image": "3a7034d2b9c232b83277d7a1ae14eb73652a4738e491f2e2e3a54771eb603a71",
+            "reversed_period_time": 45
+          },
+          {
+            "time": 46,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 769920,
+            "player_out_id": 79139,
+            "player_in_name": "Bea Franklin",
+            "player_out_name": "Maitane López",
+            "player_in_hash_image": "04d4905341cb7f1c14c4a668aaf7c030dec8d6a70dc4f1257b1e56047c4f6fdf",
+            "reversed_period_time": 45,
+            "player_out_hash_image": "c951d9f595d25bef5144e7e1c2a5147010cf81c39f3e0c027c3d8629a0151ff1"
+          },
+          {
+            "time": 55,
+            "type": "substitution",
+            "class": "injury",
+            "is_home": false,
+            "player_in_id": 772011,
+            "player_out_id": 141499,
+            "player_in_name": "Jameese Joseph",
+            "player_out_name": "Jenna Bike",
+            "player_in_hash_image": "19c02c35e02d4f3536c261ac02af32a1203d3aab3489edb3bb962781d1fa0e1e",
+            "reversed_period_time": 36,
+            "player_out_hash_image": "fa887f81cde30392f69639f248f404389e86bf9fd1ac0863528787ff6af8ad3a"
+          },
+          {
+            "time": 56,
+            "type": "card",
+            "class": "yellow",
+            "reason": "Foul",
+            "is_home": false,
+            "player_id": 70528,
+            "player_name": "Sam Staab",
+            "player_hash_image": "0cd2668f6b586efe89fc5d90475ac35ab86019722e6ec3fc4b3640a4ea0b5dd0",
+            "reversed_period_time": 35
+          },
+          {
+            "time": 66,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 40006,
+            "player_out_id": 809302,
+            "player_in_name": "Mia Fishel",
+            "player_out_name": "Maddie Dahlien",
+            "player_in_hash_image": "776e6b9e645b2fdd3a93840a80a88f340387a70a524dbe70bb7503b620bc60aa",
+            "reversed_period_time": 25,
+            "player_out_hash_image": "0465db2bd037662fa43bc9b4d4473ad24a64af7a755ec5d92197da21909af158"
+          },
+          {
+            "time": 66,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 62354,
+            "player_out_id": 60077,
+            "player_in_name": "Lynn Williams",
+            "player_out_name": "Jordyn Huitema",
+            "player_in_hash_image": "f02a361d3adff09fbc649ad4855e5a30277756262adc8f45446ad24a18c9c7b6",
+            "reversed_period_time": 25,
+            "player_out_hash_image": "3fc668976ce7e4b82c864e6833d0a6ba06a52e65137dbfcca744aba82a01d3f9"
+          },
+          {
+            "time": 66,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 69311,
+            "player_out_id": 771682,
+            "player_in_name": "Jordyn Bugg",
+            "player_out_name": "Madison Curry",
+            "player_in_hash_image": "87e4e3a93fce4138271383f333356120b5b68dabe2ee6450fade0261eae2d67b",
+            "reversed_period_time": 25,
+            "player_out_hash_image": "a13e3ded6ae741f5a11e725a95139e162067caff9b2acbc827ec04e32e24a6fd"
+          },
+          {
+            "time": 73,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 47696,
+            "away_score": 1,
+            "home_score": 3,
+            "player_name": "Ludmila da Silva",
+            "player_hash_image": "dc6fced04299d40b34d80e7d949da82ee6dbe93651833bd850367adcf3a2943a",
+            "reversed_period_time": 18
+          },
+          {
+            "time": 78,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 139458,
+            "away_score": 2,
+            "home_score": 3,
+            "player_name": "Camryn Biegalski",
+            "player_hash_image": "9504497381062189f36234bdba8b054c175a69984fc963120a3bbdf4493a07ae",
+            "reversed_period_time": 13
+          },
+          {
+            "time": 85,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 770316,
+            "player_out_id": 68939,
+            "player_in_name": "Samantha Meza",
+            "player_out_name": "Jessica Fishlock",
+            "player_in_hash_image": "7dadb8a40fc25205698e29eb80a9460b4fa1f4fa14b309cffc37aef74424f3e9",
+            "reversed_period_time": 6,
+            "player_out_hash_image": "12ae491ddfa69fb5f1f47ad5daf679ba1302213f5e72e370258d4135a0434575"
+          },
+          {
+            "time": 86,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 55619,
+            "player_out_id": 62380,
+            "player_in_name": "Emily Morgan Mason",
+            "player_out_name": "Emeri Adames",
+            "player_in_hash_image": "c4217e2f256befe54b527e6434383f7e1751621dcba9dc4c8f21c2b59fa9a512",
+            "reversed_period_time": 5,
+            "player_out_hash_image": "3a7034d2b9c232b83277d7a1ae14eb73652a4738e491f2e2e3a54771eb603a71"
+          },
+          {
+            "time": 88,
+            "type": "card",
+            "class": "yellow",
+            "reason": "Foul",
+            "is_home": true,
+            "player_id": 770316,
+            "player_name": "Samantha Meza",
+            "player_hash_image": "7dadb8a40fc25205698e29eb80a9460b4fa1f4fa14b309cffc37aef74424f3e9",
+            "reversed_period_time": 3
+          },
+          {
+            "time": 90,
+            "type": "goal",
+            "class": "ownGoal",
+            "is_home": false,
+            "player_id": 142618,
+            "added_time": 9,
+            "away_score": 3,
+            "home_score": 3,
+            "player_name": "Claudia Dickey",
+            "player_hash_image": "1680f5a05e81b4e2f4d63eb147eb8bb08a0c027670f32bc749d4a04bc22052d9",
+            "reversed_period_time": 1
+          },
+          {
+            "text": "First half",
+            "time": 45,
+            "type": "period",
+            "is_live": true,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756092379830
+  },
+  "2528515": {
+    "data": [
+      {
+        "match_id": 2528515,
+        "incidents": [
+          {
+            "time": 17,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 36528,
+            "assist1_id": 24775,
+            "away_score": 0,
+            "home_score": 1,
+            "player_name": "Gen Shoji",
+            "assist1_name": "Sang-Ho Na",
+            "player_hash_image": "696e6a70cc425f428d8c15de9fc8e5c9056ef346feca03b59c499fd691ce8f88",
+            "assist1_hash_image": "14f988f583bb5a158a794c5f69637d66b044787334e445a58fe436f793682df4",
+            "reversed_period_time": 29
+          },
+          {
+            "time": 45,
+            "type": "injuryTime",
+            "length": 3,
+            "added_time": 0,
+            "reversed_period_time": 1
+          },
+          {
+            "time": 46,
+            "type": "card",
+            "class": "yellow",
+            "reason": "Foul",
+            "is_home": true,
+            "player_id": 163698,
+            "player_name": "Shota Fujio",
+            "player_hash_image": "42a4098a3e310671f79ba70befe3d15b7c5dc9337f30ce232427ceb989873073",
+            "reversed_period_time": 45
+          },
+          {
+            "time": 56,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 54663,
+            "player_out_id": 62377,
+            "player_in_name": "Welton",
+            "player_out_name": "Kanji Okunuki",
+            "player_in_hash_image": "7cfc17180092717546e8c41f89620ec78162d97b479488dc747635428582c184",
+            "reversed_period_time": 35,
+            "player_out_hash_image": "31b46a2ff661627d95392e7077e5edc38eab1a537a5e426cc4ebced7cbda4d65"
+          },
+          {
+            "time": 59,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 9956,
+            "player_out_id": 163698,
+            "player_in_name": "Se-hun Oh",
+            "player_out_name": "Shota Fujio",
+            "player_in_hash_image": "493f785c988ee3705dbc2faa0a151773841abfd5271e5db2c97545bd5d947e47",
+            "reversed_period_time": 32,
+            "player_out_hash_image": "42a4098a3e310671f79ba70befe3d15b7c5dc9337f30ce232427ceb989873073"
+          },
+          {
+            "time": 59,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 11678,
+            "player_out_id": 24775,
+            "player_in_name": "Keiya Sento",
+            "player_out_name": "Sang-Ho Na",
+            "player_in_hash_image": "e4a9be1490a3396572cae012e1a461943589cc407622a3c2b6af5e61680114fb",
+            "reversed_period_time": 32,
+            "player_out_hash_image": "14f988f583bb5a158a794c5f69637d66b044787334e445a58fe436f793682df4"
+          },
+          {
+            "time": 61,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 150476,
+            "away_score": 1,
+            "home_score": 1,
+            "player_name": "Deniz Hümmet",
+            "player_hash_image": "8201b9d3cc4cd967bfbf240b0fba384226b02fb359e4c84650e0a4f071d04861",
+            "reversed_period_time": 30
+          },
+          {
+            "time": 75,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 17546,
+            "player_out_id": 21022,
+            "player_in_name": "Ryotaro Meshino",
+            "player_out_name": "Juan Alano",
+            "player_in_hash_image": "7649722b6bd77fe2b175a3eeed2cb8fe1ce1b4e8a6f3aeeebd7e4c0ffd76a627",
+            "reversed_period_time": 16,
+            "player_out_hash_image": "4b85cebd0b6c140b030d7ceb40766aa960db9cb7c24cccebb6b74d7926357989"
+          },
+          {
+            "time": 78,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 295154,
+            "away_score": 1,
+            "home_score": 2,
+            "player_name": "Kotaro Hayashi",
+            "player_hash_image": "27ad3bcadcf60dce02ba8bf49b0b34bb85fd42406c53f8731454afab5725dc4a",
+            "reversed_period_time": 13
+          },
+          {
+            "time": 79,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 164132,
+            "player_out_id": 17632,
+            "player_in_name": "Neta Lavi",
+            "player_out_name": "Hiroyuki Mae",
+            "player_in_hash_image": "9cd3630027a24054565d2a97e157be5a393174202c2ba68873e77fc4c95dec67",
+            "reversed_period_time": 12,
+            "player_out_hash_image": "b7f7d2424a3822c50229446f61b661232293072ef2b65c5dc9391ecbb1555f15"
+          },
+          {
+            "time": 82,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 7415,
+            "player_out_id": 18635,
+            "player_in_name": "Rin Mito",
+            "player_out_name": "Tokuma Suzuki",
+            "player_in_hash_image": "845cb6be3f8ac59c190737dcd633004fb422080d161833390852d99a67af7778",
+            "reversed_period_time": 9,
+            "player_out_hash_image": "8399f7e7124be1d2566c32788bcc2d07e94917a5acbcebde8f78d5d23be8a381"
+          },
+          {
+            "time": 82,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 20665,
+            "player_out_id": 18699,
+            "player_in_name": "Keisuke Kurokawa",
+            "player_out_name": "Shota Fukuoka",
+            "player_in_hash_image": "86943d1573a5f2c874299092e59a25cafec80255b86dff61725922840a53d8dc",
+            "reversed_period_time": 9,
+            "player_out_hash_image": "f811038ea35ea3092f2335254730dd6106f61617738dbdb89d27452d6b87834e"
+          },
+          {
+            "time": 90,
+            "type": "goal",
+            "class": "penalty",
+            "is_home": true,
+            "player_id": 15537,
+            "away_score": 1,
+            "home_score": 3,
+            "player_name": "Takuma Nishimura",
+            "player_hash_image": "5cd8b2e51e430ab614baade422639060353bc51fe63f6ba63a408a3e3cd251f3",
+            "reversed_period_time": 1
+          },
+          {
+            "time": 90,
+            "type": "substitution",
+            "class": "injury",
+            "is_home": true,
+            "added_time": 5,
+            "player_in_id": 21246,
+            "player_out_id": 7439,
+            "player_in_name": "Hokuto Shimoda",
+            "player_out_name": "Yuta Nakayama",
+            "player_in_hash_image": "479379bb9193d00f66475c0b98ecdd889c0bce8e3516a3ba805f66253cecfdbd",
+            "reversed_period_time": 1,
+            "player_out_hash_image": "3856d871e459e94724a121e13d43e2f867f644254501daac1189f447068ae98c"
+          },
+          {
+            "time": 90,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "added_time": 5,
+            "player_in_id": 219173,
+            "player_out_id": 15537,
+            "player_in_name": "Takaya Numata",
+            "player_out_name": "Takuma Nishimura",
+            "player_in_hash_image": "a297dff015f57c5a60100bae3a3f35020a0e5e6bbe34db4dba7010fb841e975e",
+            "reversed_period_time": 1,
+            "player_out_hash_image": "5cd8b2e51e430ab614baade422639060353bc51fe63f6ba63a408a3e3cd251f3"
+          },
+          {
+            "text": "First half",
+            "time": 45,
+            "type": "period",
+            "is_live": true,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756183497948
+  },
+  "2573497": {
+    "data": [
+      {
+        "match_id": 2573497,
+        "incidents": [
+          {
+            "time": -1,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 1,
+            "reversed_period_time": 2
+          },
+          {
+            "time": 11,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 2,
+            "reversed_period_time": 35
+          },
+          {
+            "time": 15,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 461491,
+            "away_score": 0,
+            "home_score": 3,
+            "player_name": "Anthony Ostrun",
+            "player_hash_image": "a719c1ff11634727ece62c859e99a6fb78e4b381ec928c92907a911efb1602da",
+            "reversed_period_time": 31
+          },
+          {
+            "time": 16,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 4,
+            "reversed_period_time": 30
+          },
+          {
+            "time": 17,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 1,
+            "reversed_period_time": 29
+          },
+          {
+            "time": 18,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 5,
+            "reversed_period_time": 28
+          },
+          {
+            "time": 38,
+            "type": "goal",
+            "class": "penalty",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 2,
+            "reversed_period_time": 8
+          },
+          {
+            "time": 38,
+            "type": "goal",
+            "class": "penalty",
+            "is_home": true,
+            "player_id": 370624,
+            "away_score": 0,
+            "home_score": 2,
+            "player_name": "Gray Yates",
+            "player_hash_image": "77071968f5a60d6970320cba812565b36769cebbde458e6cd145c90539021d45",
+            "reversed_period_time": 8
+          },
+          {
+            "time": 43,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 2,
+            "reversed_period_time": 3
+          },
+          {
+            "time": 45,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "added_time": 4,
+            "away_score": 2,
+            "home_score": 2,
+            "reversed_period_time": 1
+          },
+          {
+            "time": 72,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 3,
+            "home_score": 2,
+            "reversed_period_time": 19
+          },
+          {
+            "time": 84,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 4,
+            "home_score": 2,
+            "reversed_period_time": 7
+          },
+          {
+            "time": 86,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 5,
+            "home_score": 2,
+            "reversed_period_time": 5
+          },
+          {
+            "text": "FT",
+            "time": 90,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 5,
+            "home_score": 2,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1755589548577
+  },
+  "2581346": {
+    "data": [],
+    "timestamp": 1755589638182
+  },
+  "2617419": {
+    "data": [
+      {
+        "match_id": 2617419,
+        "incidents": [
+          {
+            "time": 1,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 0,
+            "reversed_period_time": 45
+          },
+          {
+            "time": 9,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 1,
+            "reversed_period_time": 37
+          },
+          {
+            "time": 22,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 24
+          },
+          {
+            "time": 22,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 2,
+            "home_score": 1,
+            "reversed_period_time": 24
+          },
+          {
+            "time": 31,
+            "type": "card",
+            "class": "yellow",
+            "is_home": true,
+            "reversed_period_time": 15
+          },
+          {
+            "time": 50,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 2,
+            "home_score": 2,
+            "reversed_period_time": 41
+          },
+          {
+            "time": 52,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 3,
+            "home_score": 2,
+            "reversed_period_time": 39
+          },
+          {
+            "time": 66,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 4,
+            "home_score": 2,
+            "reversed_period_time": 25
+          },
+          {
+            "time": 74,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 4,
+            "home_score": 3,
+            "reversed_period_time": 17
+          },
+          {
+            "time": 81,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 4,
+            "home_score": 4,
+            "reversed_period_time": 10
+          },
+          {
+            "text": "FT",
+            "time": 90,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 4,
+            "home_score": 4,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1755589690365
+  },
+  "2686455": {
+    "data": [
+      {
+        "match_id": 2686455,
+        "incidents": [
+          {
+            "time": 7,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 0,
+            "player_name": "Christopher Sliwo",
+            "reversed_period_time": 39
+          },
+          {
+            "time": 11,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 1,
+            "player_name": "Zadok Yohanna",
+            "reversed_period_time": 35
+          },
+          {
+            "time": 33,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 2,
+            "home_score": 1,
+            "player_name": "Christopher Sliwo",
+            "reversed_period_time": 13
+          },
+          {
+            "text": "HT",
+            "time": 45,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 2,
+            "home_score": 1,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1755589660169
+  },
+  "2767454": {
+    "data": [
+      {
+        "match_id": 2767454,
+        "incidents": [
+          {
+            "time": 7,
+            "type": "card",
+            "class": "yellow",
+            "reason": "Foul",
+            "is_home": true,
+            "player_id": 382957,
+            "player_name": "Joyce Ossa",
+            "player_hash_image": "c0ab4c579b281012e9f096944737f198ce25307306d4c94d6b15fd3030081b8e",
+            "reversed_period_time": 39
+          },
+          {
+            "time": 24,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 145326,
+            "away_score": 0,
+            "home_score": 1,
+            "player_name": "David Camacho",
+            "player_hash_image": "5420d32ad7cd33ca11dd396a4579e5071125cf2ce00743415d521d77b50f5410",
+            "reversed_period_time": 22
+          },
+          {
+            "time": 36,
+            "type": "card",
+            "class": "yellow",
+            "reason": "Foul",
+            "is_home": false,
+            "player_id": 144769,
+            "player_name": "Daniel Londoño",
+            "player_hash_image": "caadab2e2a10dcbfc95ddfddf8860151c698e47d29fa005463fa4eb747f0bad0",
+            "reversed_period_time": 10
+          },
+          {
+            "time": 45,
+            "type": "injuryTime",
+            "length": 3,
+            "added_time": 0,
+            "reversed_period_time": 1
+          },
+          {
+            "time": 46,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 141500,
+            "player_out_id": 9232,
+            "player_in_name": "Esneyder Mena",
+            "player_out_name": "Mender García",
+            "player_in_hash_image": "c2470a81b019b2e2942ada9cf6553859be350316a26c37c96041b05ff8312afa",
+            "reversed_period_time": 45,
+            "player_out_hash_image": "954f8e713d8c1ff1bf114e29d34144a7f8ff6261470254611c749234e2e0406e"
+          },
+          {
+            "time": 46,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 142796,
+            "player_out_id": 144587,
+            "player_in_name": "Francisco Chaverra",
+            "player_out_name": "José Ortiz",
+            "player_in_hash_image": "4929a37db3a817e74041ab670625dbf436e95a2d7f4ed3844b625f983a6c0b8a",
+            "reversed_period_time": 45,
+            "player_out_hash_image": "b563814143711b60c2e428f4f9ed019c00c5e083cec0213d08729f653d89bf86"
+          },
+          {
+            "time": 59,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 141716,
+            "player_out_id": 205258,
+            "player_in_name": "Freddy Espinal",
+            "player_out_name": "John Méndez",
+            "player_in_hash_image": "7512b9c565463793fd23f1c4517c552e759082de556ff983e7c636c1ac0735c3",
+            "reversed_period_time": 32,
+            "player_out_hash_image": "aef56ef7b2a0a96e7af2955b768df181b426e87b8112deed55236db6d9ce1ae5"
+          },
+          {
+            "time": 60,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 141429,
+            "player_out_id": 68571,
+            "player_in_name": "Luis Caicedo",
+            "player_out_name": "Jose Bernal",
+            "player_in_hash_image": "e137cb3b1eb286114b44bf8e64cf80ce76f95fc437bfad6bc299ee709b75764f",
+            "reversed_period_time": 31,
+            "player_out_hash_image": "33a75fd39962345ecbd205343b32a4465f843ae2388c00cc09539620fcc9ea89"
+          },
+          {
+            "time": 63,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 43535,
+            "player_out_id": 50436,
+            "player_in_name": "Jarlan Barrera",
+            "player_out_name": "Jader Valencia",
+            "player_in_hash_image": "9590a93be663027b6ea827d60e2c8863e9123773a2cf30e5a22586267a7c6659",
+            "reversed_period_time": 28,
+            "player_out_hash_image": "8a4a3300d70e39f65cc0c1b6b09a4d2d079ff6b88e6d6cd61eea0b1bb64179cf"
+          },
+          {
+            "time": 63,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 143774,
+            "player_out_id": 926799,
+            "player_in_name": "Luis Sandoval",
+            "player_out_name": "Halam Loboa",
+            "player_in_hash_image": "1b32fc58f02d828f3470ac58466eb220110fc874287f2783f66c8c9e9471f92b",
+            "reversed_period_time": 28,
+            "player_out_hash_image": "4e256da8167c9d3bef636d9e8df4b97bbc325b626f4c87a7e9cfeb4426786ec0"
+          },
+          {
+            "time": 67,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 1263,
+            "assist1_id": 139904,
+            "away_score": 1,
+            "home_score": 1,
+            "player_name": "Francisco Fydriszewski",
+            "assist1_name": "Léider Berrío",
+            "player_hash_image": "dd8f9fac123b11bf16d7e374163b22a7e793cd4125d54d8c2f7926637ba579a3",
+            "assist1_hash_image": "d07eb5e604d65b4aec24a3e4a0f94ad3067a8a1b6cde22443c9f7c09db9f84f7",
+            "reversed_period_time": 24
+          },
+          {
+            "time": 70,
+            "type": "varDecision",
+            "class": "goalNotAwarded",
+            "is_home": false,
+            "player_id": 143774,
+            "player_name": "Luis Sandoval",
+            "player_hash_image": "1b32fc58f02d828f3470ac58466eb220110fc874287f2783f66c8c9e9471f92b",
+            "reversed_period_time": 21
+          },
+          {
+            "time": 71,
+            "type": "card",
+            "class": "yellow",
+            "reason": "Foul",
+            "is_home": true,
+            "player_id": 141716,
+            "player_name": "Freddy Espinal",
+            "player_hash_image": "7512b9c565463793fd23f1c4517c552e759082de556ff983e7c636c1ac0735c3",
+            "reversed_period_time": 20
+          },
+          {
+            "time": 76,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 1263,
+            "assist1_id": 141500,
+            "away_score": 2,
+            "home_score": 1,
+            "player_name": "Francisco Fydriszewski",
+            "assist1_name": "Esneyder Mena",
+            "player_hash_image": "dd8f9fac123b11bf16d7e374163b22a7e793cd4125d54d8c2f7926637ba579a3",
+            "assist1_hash_image": "c2470a81b019b2e2942ada9cf6553859be350316a26c37c96041b05ff8312afa",
+            "reversed_period_time": 15
+          },
+          {
+            "time": 79,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 140907,
+            "player_out_id": 145326,
+            "player_in_name": "Facundo Boné",
+            "player_out_name": "David Camacho",
+            "player_in_hash_image": "5fe0525e3a2acf785556e1e1c0f1c9a29ec759452d41cbb8e6e3b22f3cce5836",
+            "reversed_period_time": 12,
+            "player_out_hash_image": "5420d32ad7cd33ca11dd396a4579e5071125cf2ce00743415d521d77b50f5410"
+          },
+          {
+            "time": 82,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 165835,
+            "player_out_id": 147166,
+            "player_in_name": "Felipe Ordonez",
+            "player_out_name": "Felipe Jaramillo",
+            "player_in_hash_image": "337588c6096d08afc2ac9cdb6aaa8867633c63a4f91dc6f6901989856116f264",
+            "reversed_period_time": 9,
+            "player_out_hash_image": "dd03456f35f31241d51f72ee93b4d17c9ca06b8b78f0f667946a0b782c88a741"
+          },
+          {
+            "time": 83,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 143059,
+            "player_out_id": 784345,
+            "player_in_name": "Jeferson Rivas",
+            "player_out_name": "Yoshan Valois",
+            "player_in_hash_image": "fa5cd63aa9bba53bb7b7f967373b18fc0247d779c8eb61962ca6d8104004feec",
+            "reversed_period_time": 8,
+            "player_out_hash_image": "2262c14f1f583609e93e8383751aa238232cd90de499ccfc32cb4cda71605ff6"
+          },
+          {
+            "time": 87,
+            "type": "card",
+            "class": "yellow",
+            "reason": "Foul",
+            "is_home": true,
+            "player_id": 144757,
+            "player_name": "Mauricio Castaño",
+            "player_hash_image": "2e02fcc6e920a2e52feaefe5b5f289d24f40f29da7cfa9ef566aa806ef19ee00",
+            "reversed_period_time": 4
+          },
+          {
+            "time": 90,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "added_time": 1,
+            "player_in_id": 189117,
+            "player_out_id": 1263,
+            "player_in_name": "Jhon Palacios",
+            "player_out_name": "Francisco Fydriszewski",
+            "player_in_hash_image": "f8cd38956eccbcbbb8190d5caecde60686cc7a3f2563f97ff24ef8751ded4ef6",
+            "reversed_period_time": 1,
+            "player_out_hash_image": "dd8f9fac123b11bf16d7e374163b22a7e793cd4125d54d8c2f7926637ba579a3"
+          },
+          {
+            "text": "First half",
+            "time": 45,
+            "type": "period",
+            "is_live": true,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756094744536
+  },
+  "2781245": {
+    "data": [
+      {
+        "match_id": 2781245,
+        "incidents": [
+          {
+            "time": 9,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 1,
+            "reversed_period_time": 37,
+            "reversed_period_time_seconds": 2160
+          },
+          {
+            "time": 13,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 2,
+            "reversed_period_time": 33,
+            "reversed_period_time_seconds": 1920
+          },
+          {
+            "time": 29,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 0,
+            "home_score": 3,
+            "reversed_period_time": 17,
+            "reversed_period_time_seconds": 960
+          },
+          {
+            "time": 42,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 3,
+            "reversed_period_time": 4,
+            "reversed_period_time_seconds": 180
+          },
+          {
+            "time": 80,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 4,
+            "reversed_period_time": 11,
+            "reversed_period_time_seconds": 600
+          },
+          {
+            "text": "First half",
+            "time": 45,
+            "type": "period",
+            "is_live": true,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1755589727433
+  },
+  "2792172": {
+    "data": [
+      {
+        "match_id": 2792172,
+        "incidents": [
+          {
+            "time": 39,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 1,
+            "home_score": 0,
+            "reversed_period_time": 7,
+            "reversed_period_time_seconds": 360
+          },
+          {
+            "time": 39,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "player_id": 308152,
+            "away_score": 1,
+            "home_score": 0,
+            "player_name": "Edna Santamaria",
+            "player_hash_image": "9492f60aad72cc68b47fc8e6266a94d7fcba875e69811a5fc06c841f669174ea",
+            "reversed_period_time": 7,
+            "reversed_period_time_seconds": 360
+          },
+          {
+            "time": 46,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 185775,
+            "player_out_id": 300107,
+            "player_in_name": "Emily Flores",
+            "player_out_name": "Dalia Molina",
+            "player_in_hash_image": "ab3b2088bc744b96bb69950f4cf645c16772f20a3cee74b56ff3a5e0cbd05289",
+            "reversed_period_time": 45,
+            "player_out_hash_image": "8686ca4ad48b8b96a9901bcf1420b6ff1b1a81e3e16c83d494f473ae166f51eb"
+          },
+          {
+            "time": 46,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 299584,
+            "player_out_id": 299409,
+            "player_in_name": "Yashira Barrientos",
+            "player_out_name": "Julieta Lema",
+            "player_in_hash_image": "22dc9d35edc5d2087d9ecb43e9347b51a61a565c1cfada6dc3fc852d10cf9cb4",
+            "reversed_period_time": 45,
+            "player_out_hash_image": "f6c4b613fbbfc233426ccc95b45f8bfdc7945ddf73753ed90adc52ebbf74a3b9"
+          },
+          {
+            "time": 49,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "away_score": 1,
+            "home_score": 1,
+            "reversed_period_time": 42
+          },
+          {
+            "time": 57,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "reversed_period_time": 34
+          },
+          {
+            "time": 58,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 570302,
+            "player_out_id": 302613,
+            "player_in_name": "Danna Melissa Pesántez Carmona",
+            "player_out_name": "Barbrha Figueroa",
+            "player_in_hash_image": "2525d2c33687da7330898afbfb82725d431a8ea496684bde96d5a4aab6fbadc5",
+            "reversed_period_time": 33,
+            "player_out_hash_image": "6a4999d697f2bf753d6f8ae63400c6f5e705744a55709f40c0cfd816d0128513"
+          },
+          {
+            "time": 66,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 115322,
+            "player_out_id": 786252,
+            "player_in_name": "Trudi Carter",
+            "player_out_name": "Alessandra Ramirez",
+            "player_in_hash_image": "da95a4c4cb8f705a0bb2c5c0539d6958d0923daf20a3d3f5af61a365eeaa2712",
+            "reversed_period_time": 25,
+            "player_out_hash_image": "d3dae616424db1f4bfce77e7e3170c5b60593a78bcf8dd96803f5afd182f3902"
+          },
+          {
+            "time": 68,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 487273,
+            "player_out_id": 185669,
+            "player_in_name": "Gabriela Álvarez",
+            "player_out_name": "Alexa Herrera",
+            "player_in_hash_image": "d23490b3c108cadd9dd56fb41811effde66f45cf53cdc6b2e8dc509cdb403b02",
+            "reversed_period_time": 23,
+            "player_out_hash_image": "88703288898f9b7022db46e5cbc2168664237da51d9d307dddcf551695963662"
+          },
+          {
+            "time": 76,
+            "type": "goal",
+            "class": "regular",
+            "is_home": false,
+            "away_score": 2,
+            "home_score": 1,
+            "reversed_period_time": 15
+          },
+          {
+            "time": 76,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 462746,
+            "player_out_id": 300104,
+            "player_in_name": "Luciana García",
+            "player_out_name": "Brenda Díaz",
+            "player_in_hash_image": "e328cf05c767aa1c50ad7561ebc4812965cab6f05d8b6b6e19ca9927e7e4a05a",
+            "reversed_period_time": 15,
+            "player_out_hash_image": "51fb200503e87e66458a554f289be9f606d4446fed46e89ae42c5117d958a159"
+          },
+          {
+            "time": 81,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": false,
+            "player_in_id": 994457,
+            "player_out_id": 219682,
+            "player_in_name": "Jennifer Sánchez",
+            "player_out_name": "Daniela Carrandi",
+            "player_in_hash_image": "4ace9f8e135ecd4e24778036051d072a877d1cb99746809dca409fa62214c4b4",
+            "reversed_period_time": 10,
+            "player_out_hash_image": "0ca7628956c4066e8131ad61b0e1d54c09fe063b5378a034d4ccf5a8ad117085"
+          },
+          {
+            "time": 84,
+            "type": "goal",
+            "class": "regular",
+            "is_home": true,
+            "player_id": 147232,
+            "away_score": 2,
+            "home_score": 2,
+            "player_name": "Linda Ruth Bravo",
+            "player_hash_image": "997e4db52a6c0aa6fb407453ea2acf929d7720bd4744113aec08d075a8c23d9c",
+            "reversed_period_time": 7
+          },
+          {
+            "time": 88,
+            "type": "substitution",
+            "class": "regular",
+            "is_home": true,
+            "player_in_id": 1010725,
+            "player_out_id": 302637,
+            "player_in_name": "Chelsea Lien",
+            "player_out_name": "Kristal Soto",
+            "player_in_hash_image": "03ebfd7c27cb3fd2b6b8a215168dab36967efc80828c3f249b7c5c64684a51c8",
+            "reversed_period_time": 3,
+            "player_out_hash_image": "1600c3b21955623c3d74716c78a3dfb67901fc370527a9c6b173d0ad3fbe316d"
+          },
+          {
+            "time": 90,
+            "type": "card",
+            "class": "yellow",
+            "is_home": false,
+            "added_time": 7,
+            "reversed_period_time": 1
+          },
+          {
+            "time": 90,
+            "type": "card",
+            "class": "yellow",
+            "is_home": true,
+            "added_time": 8,
+            "reversed_period_time": 1
+          },
+          {
+            "text": "HT",
+            "time": 45,
+            "type": "period",
+            "is_live": false,
+            "added_time": 999,
+            "away_score": 0,
+            "home_score": 0,
+            "reversed_period_time": 1,
+            "reversed_period_time_seconds": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": 1756094760364
+  }
+}

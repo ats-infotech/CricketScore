@@ -21,6 +21,12 @@
     -webkit-overflow-scrolling: touch;
 }
 
+.tabs_main.football .MuiTabs-flexContainer {
+    padding: 0 15px;
+    justify-content: center;
+    width: 100%;
+}
+
 /* WebKit (Chrome, Edge, Safari) */
 .tabs_main .MuiTabs-flexContainer::-webkit-scrollbar {
     width: 0px;

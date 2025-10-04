@@ -1,0 +1,160 @@
+
+.logo_image {
+    width: 66px;
+    height: 66px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.logo_image.score {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* -------- banner main -------- */
+
+.banner_main{
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.banner_main.active{
+    height: 260px;
+}
+
+.banner_main::before{
+    background-color: black;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+}
+.banner_main::after{
+    background-color:var(--theme-primary);
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    filter: blur(5px);
+    box-shadow: var(--shadow-primary);
+}
+
+.banner_child_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    z-index: 2;
+}
+
+.banner_child_box.score {
+    justify-content: space-evenly;
+    padding: 0 20px;
+}
+
+.TossWinner {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 3;
+}
+
+.TossWinner p {
+    font-family: var(--primary-font);
+    color: var(--color-white);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+}
+
+/* ------ logo image box ------ */
+
+.logo_image_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo_image_box.team2{
+    flex-direction: row-reverse;
+}
+.logo_image_box.team2 .logo_child_box{
+    align-items: flex-start;
+}
+.logo_image_box.team2 .logo_superover_child_box {
+    align-items: flex-start;
+}
+
+.logo_image_box .logo_child_box, .logo_image_box .logo_superover_child_box {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo_image_box .logo_child_box .title_name {
+    font-size: var(--fs-lg);
+    color: var(--color-white);
+}
+
+.logo_image_box .logo_child_box .score_number {
+    font-size: var(--fs-sm);
+    color: var(--text-lightgrey);
+}
+
+.logo_image_box .logo_superover_child_box .title_name {
+    font-size: var(--fs-base);
+    color: var(--color-white);
+}
+
+.logo_image_box .logo_superover_child_box .score_number {
+    font-size: var(--fs-xs);
+    color: var(--text-lightgrey);
+}
+
+.team_name{
+    font-size: var(--fs-sm) !important;
+    color: var(--color-white);
+    text-align: center !important;
+    margin-top: 5px !important;
+    font-weight: 500 !important;
+}
+
+.football-banner-scores {
+    width: 20%;
+    background-color: #FFFFFF33;
+    height: 27px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 10px;
+    color: var(--color-white);
+}
+
+.bannerTeamLose {
+    color: var(--text-lightgrey) !important;
+}
+
+.football-banner-scores p {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+}

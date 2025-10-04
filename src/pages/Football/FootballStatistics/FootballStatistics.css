@@ -1,0 +1,109 @@
+.football-statistics-main-section {
+    padding: 20px 20px 0;
+}
+
+.football-statistics-card {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--theme-primary);
+    border-radius: 15px;
+}
+
+.football-ball-possession-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.football-ball-possession-team-image-section {
+    height: 25px;
+    width: 36px;
+}
+
+.football-ball-possession-team-image-section img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.football-ball-possession-team-section p {
+    font-size: var(--fs-xl);
+    color: var(--color-white);
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.football-ball-possession-graph-main-section {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    border-radius: 50%;
+}
+
+.football-ball-possession-graph {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme-primary);
+}
+
+.football-ball-possession-graph-main-section p {
+    font-size: var(--fs-md);
+    color: var(--text-lightgrey);
+    font-weight: 700;
+}
+
+.football-statistics-all-stats-info-section {
+    margin-top: 30px;
+}
+
+.football-statistics-all-stats-info-sub-section {
+    margin-bottom: 20px;
+}
+
+.football-statistics-all-stats-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.football-statistics-all-stats-info p {
+    font-size: var(--fs-base);
+    color: var(--color-white);
+}
+
+.football-statistics-progress-graph {
+    display: flex;
+    gap: 40px;
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.football-statistics-graph {
+    width: 50%;
+}
+
+.football-statistics-graph.MuiLinearProgress-root {
+    background-color: #FFFFFF33 !important;
+    border-radius: 30px;
+    position: relative;
+}
+
+.football-statistics-graph.home {
+    transform: rotate(180deg);
+}
+
+.football-statistics-graph.home .MuiLinearProgress-bar {
+    background-color: #355EB1;
+}
+
+.football-statistics-graph.away .MuiLinearProgress-bar {
+    background-color: #FF8319;
+}

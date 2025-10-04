@@ -663,8 +663,8 @@ const ScoreAnalysis = ({ matchData, tournamentData }) => {
                     title={"Wagon Wheel"}
                     isTestMatch={isTestMatch}
                     data={FilterWagonWheelBasedOnPlayers}
-                    team1Players={team1Players}
-                    team2Players={team2Players}
+                    team1Players={isTeam1BattingFirst ? team1Players : team2Players}
+                    team2Players={isTeam1BattingFirst? team2Players : team1Players}
                     BatterValue={filter.batter}
                     BowlerValue={filter.bowler}
                     onBatterChange={handleChange('batter')}

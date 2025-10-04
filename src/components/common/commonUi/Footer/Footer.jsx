@@ -4,12 +4,17 @@ import { Box } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import './Footer.css';
+import { HeadsetMic, SportsCricket, SportsFootball } from "@mui/icons-material";
 
 const FooterContent = [
-    { id: 1, icon: 'home', name: 'Home', navigate: '/' },
-    { id: 2, icon: 'group', name: 'My Cricket', navigate: '/mytournaments' },
-    { id: 3, icon: 'news', name: 'News', navigate: '/news' },
-    { id: 4, icon: 'profile', name: 'Profile', navigate: '/profile' },
+    // { id: 1, icon: 'home', name: 'Home', navigate: '/' },
+    // { id: 2, icon: 'group', name: 'My Cricket', navigate: '/mytournaments' },
+    // { id: 3, icon: 'news', name: 'News', navigate: '/news' },
+    // { id: 4, icon: 'profile', name: 'Profile', navigate: '/profile' },
+    { id: 1, icon: 'cricket', name: 'Cricket', navigate: '/' },
+    { id: 2, icon: 'football', name: 'Football', navigate: '/football' },
+    { id: 3, icon: 'news', name: 'Apps', navigate: '/news' },
+    { id: 4, icon: 'contact', name: 'Support', navigate: '/support' }
 ];
 
 export const Footer = () => {
@@ -19,8 +24,8 @@ export const Footer = () => {
 
     const determineActive = useCallback(() => {
         const currentPath = pathname;
-        const currentPathForUserPage = ['tournament',]
-        const currentPathForAdminPage = ['mytournament', 'mytournaments', 'matchgroup', '/mytounament/teams']
+        const currentPathForUserPage = ['tournament', '/scorecard/']
+        const currentPathForAdminPage = ['mytournament', 'mytournaments', 'matchgroup', '/mytounament/teams', '/footballmatch']
         let UserPagePATH = currentPathForUserPage.some((p) => currentPath.includes(p));
         let AdminPagePATH = currentPathForAdminPage.some((p) => currentPath.includes(p));
         if (AdminPagePATH) {
@@ -53,7 +58,7 @@ export const Footer = () => {
                             onClick={() => handleClick(field)}
                         >
                             <Box className={`footer-icon ${active === field.id ? 'active' : ''}`}>
-                                <SvgIcon id={field.icon} />
+                                {field.icon === 'cricket' ? <SportsCricket /> : field.icon === 'football' ? <SportsFootball /> : field.icon === 'contact' ? <HeadsetMic /> : <SvgIcon id={field.icon} />}
                             </Box>
                             <h2 className={`footer-text ${active === field.id ? 'active' : ''}`}>
                                 {active === field.id ? field.name : ''}

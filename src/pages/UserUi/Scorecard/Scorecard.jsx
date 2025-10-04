@@ -469,7 +469,8 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
         const striker = playerData.find(player => player.id === matchData?.playerselection?.striker)
         const nonStriker = playerData.find(player => player.id === matchData?.playerselection?.nonStriker)
         const bowler = playerData.find(player => player.id === matchData?.playerselection?.bowler)
-        setPlayerOnField({
+
+        const newField = {
             striker: striker?.playerName,
             strikerimage: striker?.playerImage,
             strikerletter: striker?.letter,
@@ -482,8 +483,24 @@ const Scorecard = ({ matchData, teamData, playerData, tournamentData }) => {
             bowlerimage: bowler?.playerImage,
             bowlerletter: bowler?.letter,
             bowlercolor: bowler?.playerColor
+        }
+        // setPlayerOnField({
+        //     striker: striker?.playerName,
+        //     strikerimage: striker?.playerImage,
+        //     strikerletter: striker?.letter,
+        //     strikercolor: striker?.playerColor,
+        //     nonStriker: nonStriker?.playerName,
+        //     nonStrikerimage: nonStriker?.playerImage,
+        //     nonStrikerletter: nonStriker?.letter,
+        //     nonStrikercolor: nonStriker?.playerColor,
+        //     bowler: bowler?.playerName,
+        //     bowlerimage: bowler?.playerImage,
+        //     bowlerletter: bowler?.letter,
+        //     bowlercolor: bowler?.playerColor
+        // })
+        setPlayerOnField(prev => {
+            return JSON.stringify(prev) === JSON.stringify(newField) ? prev : newField;
         })
-
     }, [matchData?.playerselection])
 
     useEffect(() => {

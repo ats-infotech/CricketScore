@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import './ExtraSection.css';
 
-const ExtraRunSection = ({ totalLBRuns, totalNBRuns, totalWDRuns, totalPRRuns, totalNRRuns, totalBYERuns, type }) => {
+const ExtraRunSection = ({ totalLBRuns = 0, totalNBRuns = 0, totalWDRuns = 0, totalPRRuns = 0, totalNRRuns = 0, totalBYERuns = 0, type }) => {
 
     const hasExtras = (
         totalLBRuns > 0 ||

@@ -4,7 +4,7 @@ import { Tab, Tabs, Typography } from '@mui/material';
 import React, { useEffect, useRef } from 'react';
 import './ScrollableTabs.css';
 
-function ScrollableTabs({ buttonGroups, tabActive, handleChange, data }) {
+function ScrollableTabs({ buttonGroups, tabActive, handleChange, data, type }) {
     const tabRefs = useRef([]);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ function ScrollableTabs({ buttonGroups, tabActive, handleChange, data }) {
                     handleChange(newValue);
                 }
             }}
-            className={`tabs_main`}
+            className={`tabs_main ${type}`}
             id='tab-list'
         >
             {

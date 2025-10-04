@@ -1,0 +1,133 @@
+@keyframes smoothbounceball {
+    from {
+        transform: translate3d(0, -4px, 0);
+    }
+
+    to {
+        transform: translate3d(0, 1px, 0);
+    }
+}
+
+.football-summary-main-section {
+    padding: 20px 20px 0;
+}
+
+.football-summary-title p {
+    font-weight: 600;
+    font-size: var(--fs-lg);
+}
+
+.football-summary-card {
+    height: 250px;
+    background-color: var(--theme-primary);
+    border-radius: 15px;
+    margin-top: 25px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.football-summary-card-team-details {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.football-summary-card-team-details img {
+    height: 36px;
+    width: 36px;
+}
+
+.football-summary-card-team-details p {
+    font-size: var(--fs-sm);
+    color: var(--color-white);
+}
+
+.football-summary-match-progress {
+    height: 18px !important;
+    border-radius: 20px;
+}
+
+.football-summary-match-progress .MuiLinearProgress-bar {
+    background-color: var(--cricket-boundary);
+}
+
+.football-summary-match-progress-section {
+    position: relative;
+}
+
+.incident-label {
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    top: 2px;
+    transform: translate(-50%);
+    color: var(--color-white);
+    z-index: 2;
+}
+
+.incident-label.ht {
+    top: 1px;
+    color: var(--theme-primary);
+    background-color: var(--color-white);
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.incident-svg {
+    position: absolute;
+    top: 24px;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.incident-svg.home {
+    top: -20px;
+}
+
+.incident-svg svg {
+    height: 16px;
+    width: 14px;
+}
+
+.incident-svg.goal svg {
+    animation: smoothbounceball 0.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.card {
+    height: 14px;
+    width: 10px;
+    background: linear-gradient(90deg, #FFF177 0%, #FDD836 100%);
+}
+
+.card.red {
+    background: linear-gradient(90deg, #FF2121 0%, #FF0000 100%);
+}
+
+.MuiTooltip-tooltip {
+    background-color: var(--color-orange) !important;
+    color: var(--color-white) !important;
+}
+
+.incidents_summary_main_section {
+    margin-top: 15px;
+    background-color: var(--theme-primary);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.incidents_summary {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.incidents_summary p {
+    color: var(--color-white);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}

@@ -1,0 +1,11 @@
+.football-pitch-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.football-pitch {
+  width: 100%;
+  height: auto;
+  background-color: #228B22;
+}

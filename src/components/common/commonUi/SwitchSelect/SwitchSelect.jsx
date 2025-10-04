@@ -1,9 +1,10 @@
 "use client";
 
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import Image from "next/image";
 import { useState } from "react";
 
-const SwitchSelect = ({ options, defaultSelected, onChange }) => {
+const SwitchSelect = ({ options, defaultSelected, onChange, type }) => {
     const [selected, setSelected] = useState(0);
 
     const handleChange = (event, newSelection) => {
@@ -48,7 +49,10 @@ const SwitchSelect = ({ options, defaultSelected, onChange }) => {
                         disableRipple
                     >
                         {/* {defaultSelected === index ? option : (index + 1)} */}
-                        {option}
+                        {type === 'football' ? <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                            <Image style={{width: '16px', height: '16px'}} src={option?.img} alt="logo" height={100} width={100} unoptimized />
+                            {option?.name}
+                        </Box> : option}
                     </ToggleButton>
                 )
             }

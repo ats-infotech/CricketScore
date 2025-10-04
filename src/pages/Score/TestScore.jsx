@@ -144,25 +144,29 @@ const TestScorePage = ({
     let Innings3Declare = match?.superOverFirstInnings?.declare === "yes" ? true : false
 
     useEffect(() => {
-        const striker = players?.filter(player => player?.id === playerselection?.striker)
-        const nonStriker = players?.filter(player => player?.id === playerselection?.nonStriker)
-        const bowler = players?.filter(player => player?.id === playerselection?.bowler)
-        setPlayerOnField({
-            striker: striker[0]?.playerName || "",
-            strikerimage: striker[0]?.playerImage || "",
-            strikerletter: striker[0]?.letter || "TA",
-            strikercolor: striker[0]?.playerColor || "",
-            nonStriker: nonStriker[0]?.playerName || "",
-            nonStrikerimage: nonStriker[0]?.playerImage || "",
-            nonStrikerletter: nonStriker[0]?.letter || "TA",
-            nonStrikercolor: nonStriker[0]?.playerColor || "",
-            bowler: bowler[0]?.playerName || "",
-            bowlerimage: bowler[0]?.playerImage || "",
-            bowlerletter: bowler[0]?.letter || "TA",
-            bowlercolor: bowler[0]?.playerColor || ""
+        const striker = players?.find(player => player?.id === playerselection?.striker)
+        const nonStriker = players?.find(player => player?.id === playerselection?.nonStriker)
+        const bowler = players?.find(player => player?.id === playerselection?.bowler)
+
+        const newField = {
+            striker: striker?.playerName || "",
+            strikerimage: striker?.playerImage || "",
+            strikerletter: striker?.letter || "TA",
+            strikercolor: striker?.playerColor || "",
+            nonStriker: nonStriker?.playerName || "",
+            nonStrikerimage: nonStriker?.playerImage || "",
+            nonStrikerletter: nonStriker?.letter || "TA",
+            nonStrikercolor: nonStriker?.playerColor || "",
+            bowler: bowler?.playerName || "",
+            bowlerimage: bowler?.playerImage || "",
+            bowlerletter: bowler?.letter || "TA",
+            bowlercolor: bowler?.playerColor || ""
+        }
+        setPlayerOnField(prev => {
+            return JSON.stringify(prev) === JSON.stringify(newField) ? prev : newField;
         })
 
-    }, [playerselection])
+    }, [playerselection, players])
 
     const bowlerthere = currentinnings === 2 ? match?.secondInnings?.Currentover?.[0]?.bowlerId : currentinnings === 3 ? match?.superOverFirstInnings?.Currentover?.[0]?.bowlerId : currentinnings === 4 ? match?.superOverSecondInnings?.Currentover?.[0]?.bowlerId : "";
     const isStartInnings = (

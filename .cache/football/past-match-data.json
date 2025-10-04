@@ -1,0 +1,908 @@
+{
+  "2445604": {
+    "data": [
+      {
+        "id": 2445604,
+        "name": "Kingston City FC vs Eastern Lions SC",
+        "tournament_id": 15500,
+        "tournament_name": "Victoria NPL 2",
+        "tournament_importance": 0,
+        "season_id": 55405,
+        "season_name": "Victoria Premier League 1 2025",
+        "round_id": 468996,
+        "round": {
+          "id": 468996,
+          "round": 26,
+          "end_time": "2025-08-24",
+          "start_time": "2025-08-24"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "49'",
+        "home_team_id": 16478,
+        "home_team_name": "Kingston City FC",
+        "home_team_hash_image": "9a95709df163dcbed1154db3d2b34c421f9ce52c2637ea64e4849089444bd493",
+        "away_team_id": 16517,
+        "away_team_name": "Eastern Lions SC",
+        "away_team_hash_image": "b1f46259a122d5f6bad833b92cdb4731effed919ec2bd3c56e90174d9d675c4c",
+        "home_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 0,
+          "period_2": 2,
+          "default_time": 2
+        },
+        "away_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 2,
+          "period_2": 0,
+          "default_time": 2
+        },
+        "times": {
+          "specific_start_time": "2025-08-24T06:03:00+00:00"
+        },
+        "specific_start_time": "2025-08-24T06:01:55+00:00",
+        "start_time": "2025-08-24T05:00:00+00:00",
+        "duration": 9000,
+        "class_id": 140,
+        "class_name": "Australia",
+        "class_hash_image": "c706a201cb84cb532048e57a6462d1aa8e4696c3e0543dfd2e1fc0a7a91eeaa4",
+        "league_id": 7473,
+        "league_name": "NPL 2, Victoria",
+        "league_hash_image": "65bc684df62723abbb091589309038ff96bc87fbfdfb5a57e7ea667e04e71095"
+      }
+    ],
+    "timestamp": 1756183316568
+  },
+  "2463495": {
+    "data": [
+      {
+        "id": 2463495,
+        "name": "FH Hafnarfjörður Women vs Þór/KA Akureyri",
+        "tournament_id": 316,
+        "tournament_name": "Urvalsdeild, Women",
+        "tournament_importance": 0,
+        "season_id": 56050,
+        "season_name": "Besta deild, Women 2025",
+        "round_id": 473102,
+        "round": {
+          "id": 473102,
+          "round": 13,
+          "end_time": "2025-08-14",
+          "start_time": "2025-08-12"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "50'",
+        "home_team_id": 23714,
+        "home_team_name": "FH Hafnarfjörður Women",
+        "home_team_hash_image": "a885d4c8a67ac4b1cc46a988ab058827b6f0337eda344077549043995bf30089",
+        "away_team_id": 5934,
+        "away_team_name": "Þór/KA Akureyri",
+        "away_team_hash_image": "25dc9f70b542c161da0893f0957ee97e151d4362bc4527c9eb296e3400ecfaae",
+        "home_team_score": {
+          "current": 5,
+          "display": 5,
+          "period_1": 3,
+          "period_2": 2,
+          "default_time": 5
+        },
+        "away_team_score": {
+          "current": 3,
+          "display": 3,
+          "period_1": 3,
+          "period_2": 0,
+          "default_time": 3
+        },
+        "times": {
+          "specific_start_time": "2025-08-12T19:04:16+00:00"
+        },
+        "coaches": {
+          "away_coach_id": 4377,
+          "away_coach_name": "Jóhann Kristinn Gunnarsson",
+          "away_coach_hash_image": "32101a99b0e8768126f6b358b0541fa2fd67086f41e4dd2dad80cb752a280be4"
+        },
+        "specific_start_time": "2025-08-12T19:04:16+00:00",
+        "start_time": "2025-08-12T18:00:00+00:00",
+        "duration": 9000,
+        "coaches_id": 880040,
+        "class_id": 207,
+        "class_name": "Iceland",
+        "class_hash_image": "a3a05a70b7736ad13cacd167bd3bf326d238b4f278c6df95d2fd4cdb0ed01b08",
+        "league_id": 786,
+        "league_name": "Urvalsdeild, Women",
+        "league_hash_image": "448237d04c17f061d9a3975d020eff978dddd9bc54712dabf0e2206c9ccef54f"
+      }
+    ],
+    "timestamp": 1755492663966
+  },
+  "2463530": {
+    "data": [
+      {
+        "id": 2463530,
+        "name": "Arbaer vs KV Vesturbaer",
+        "tournament_id": 312,
+        "tournament_name": "3 deild",
+        "tournament_importance": 0,
+        "season_id": 56052,
+        "season_name": "3. deild 2025",
+        "round_id": 473166,
+        "round": {
+          "id": 473166,
+          "round": 18,
+          "end_time": "2025-08-20",
+          "start_time": "2025-08-20"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "90+08'",
+        "home_team_id": 5862,
+        "home_team_name": "Arbaer",
+        "home_team_hash_image": "3ed88499f122e3984e12f6ce1670a066d9105734e7d89a4f31840a8e9d4c62e2",
+        "away_team_id": 5880,
+        "away_team_name": "KV Vesturbaer",
+        "away_team_hash_image": "204f74b4f2d373e3f3f4a2b01c02bb4ff645b6c49949dbe9789f9831a0c7145f",
+        "home_team_score": {
+          "current": 4,
+          "display": 4,
+          "period_1": 3,
+          "period_2": 1,
+          "default_time": 4
+        },
+        "away_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 1,
+          "period_2": 1,
+          "default_time": 2
+        },
+        "times": {
+          "specific_start_time": "2025-08-20T20:22:43+00:00"
+        },
+        "specific_start_time": "2025-08-20T20:16:18+00:00",
+        "start_time": "2025-08-20T19:15:00+00:00",
+        "duration": 9000,
+        "last_period": "period2",
+        "class_id": 207,
+        "class_name": "Iceland",
+        "class_hash_image": "a3a05a70b7736ad13cacd167bd3bf326d238b4f278c6df95d2fd4cdb0ed01b08",
+        "league_id": 776,
+        "league_name": "3. deild",
+        "league_hash_image": "eceaa2154512a9b906c63605f893a6a6de8fe60e045c0637b4d053768b82f589"
+      }
+    ],
+    "timestamp": 1756183383171
+  },
+  "2463531": {
+    "data": [
+      {
+        "id": 2463531,
+        "name": "Reynir Sandgerdi vs Sindri",
+        "tournament_id": 312,
+        "tournament_name": "3 deild",
+        "tournament_importance": 0,
+        "season_id": 56052,
+        "season_name": "3. deild 2025",
+        "round_id": 473166,
+        "round": {
+          "id": 473166,
+          "round": 18,
+          "end_time": "2025-08-20",
+          "start_time": "2025-08-20"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "53'",
+        "home_team_id": 5837,
+        "home_team_name": "Reynir Sandgerdi",
+        "home_team_hash_image": "81b41dc0bc549a7a43ba4ec4f409a209962c3d777f5f68058255498b58a8f8e3",
+        "away_team_id": 631,
+        "away_team_name": "Sindri",
+        "away_team_hash_image": "dc87813f265d3f7e2873d887e578649f6523605678545569b61c56eb3e6f4b72",
+        "home_team_score": {
+          "current": 3,
+          "display": 3,
+          "period_1": 1,
+          "period_2": 2,
+          "default_time": 3
+        },
+        "away_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 1,
+          "period_2": 1,
+          "default_time": 2
+        },
+        "times": {
+          "specific_start_time": "2025-08-20T19:05:49+00:00"
+        },
+        "specific_start_time": "2025-08-20T19:04:09+00:00",
+        "start_time": "2025-08-20T18:00:00+00:00",
+        "duration": 9000,
+        "class_id": 207,
+        "class_name": "Iceland",
+        "class_hash_image": "a3a05a70b7736ad13cacd167bd3bf326d238b4f278c6df95d2fd4cdb0ed01b08",
+        "league_id": 776,
+        "league_name": "3. deild",
+        "league_hash_image": "eceaa2154512a9b906c63605f893a6a6de8fe60e045c0637b4d053768b82f589"
+      }
+    ],
+    "timestamp": 1756183395182
+  },
+  "2463536": {
+    "data": [
+      {
+        "id": 2463536,
+        "name": "KF Fjallabyggdar vs UMF Tindastóll",
+        "tournament_id": 312,
+        "tournament_name": "3 deild",
+        "tournament_importance": 0,
+        "season_id": 56052,
+        "season_name": "3. deild 2025",
+        "round_id": 473166,
+        "round": {
+          "id": 473166,
+          "round": 18,
+          "end_time": "2025-08-20",
+          "start_time": "2025-08-20"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "90+77'",
+        "home_team_id": 6060,
+        "home_team_name": "KF Fjallabyggdar",
+        "home_team_hash_image": "434feea2d86270dd3e639279bbf09b0d1a277ff411258e9a8f050f9fee971900",
+        "away_team_id": 6017,
+        "away_team_name": "UMF Tindastóll",
+        "away_team_hash_image": "249faad3a6843747fe0538b5f3a139461943811783f1cf7023da94705e2bc3de",
+        "home_team_score": {
+          "current": 3,
+          "display": 3,
+          "period_1": 3,
+          "period_2": 0,
+          "default_time": 3
+        },
+        "away_team_score": {
+          "current": 4,
+          "display": 4,
+          "period_1": 3,
+          "period_2": 1,
+          "default_time": 4
+        },
+        "start_time": "2025-08-20T18:00:00+00:00",
+        "duration": 9000,
+        "class_id": 207,
+        "class_name": "Iceland",
+        "class_hash_image": "a3a05a70b7736ad13cacd167bd3bf326d238b4f278c6df95d2fd4cdb0ed01b08",
+        "league_id": 776,
+        "league_name": "3. deild",
+        "league_hash_image": "eceaa2154512a9b906c63605f893a6a6de8fe60e045c0637b4d053768b82f589"
+      }
+    ],
+    "timestamp": 1756183432484
+  },
+  "2471693": {
+    "data": [
+      {
+        "id": 2471693,
+        "name": "Granville Rage vs Fraser Park FC",
+        "tournament_id": 89517,
+        "tournament_name": "NSW League Two",
+        "tournament_importance": 0,
+        "season_id": 56244,
+        "season_name": "2025",
+        "round_id": 474332,
+        "round": {
+          "id": 474332,
+          "round": 29,
+          "end_time": "2025-08-23",
+          "start_time": "2025-08-21"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "53'",
+        "home_team_id": 326903,
+        "home_team_name": "Granville Rage",
+        "home_team_hash_image": "4382d82707833df6e622a0139174ee7de0e0352e52ae7887f7d24ed6940c92d8",
+        "away_team_id": 65884,
+        "away_team_name": "Fraser Park FC",
+        "away_team_hash_image": "addbd03ada82c287f08f8afaab26d57637618ca360236c0fcdfec592bb226676",
+        "home_team_score": {
+          "current": 5,
+          "display": 5,
+          "period_1": 0,
+          "period_2": 5,
+          "default_time": 5
+        },
+        "away_team_score": {
+          "current": 5,
+          "display": 5,
+          "period_1": 2,
+          "period_2": 3,
+          "default_time": 5
+        },
+        "times": {
+          "specific_start_time": "2025-08-21T11:13:38+00:00"
+        },
+        "specific_start_time": "2025-08-21T11:10:33+00:00",
+        "start_time": "2025-08-21T10:00:00+00:00",
+        "duration": 9000,
+        "last_period": "period1",
+        "class_id": 140,
+        "class_name": "Australia",
+        "class_hash_image": "c706a201cb84cb532048e57a6462d1aa8e4696c3e0543dfd2e1fc0a7a91eeaa4",
+        "league_id": 20881,
+        "league_name": "NSW League Two",
+        "league_hash_image": "50a4fc4926511439ad57c3b66dee1d0c5d7fe5d8aa0fbfc2168ced1111bc4be9"
+      }
+    ],
+    "timestamp": 1756183486254
+  },
+  "2490816": {
+    "data": [
+      {
+        "id": 2490816,
+        "name": "Seattle Reign FC vs Chicago Stars FC",
+        "tournament_id": 118,
+        "tournament_name": "NWSL",
+        "tournament_importance": 85,
+        "season_id": 56735,
+        "season_name": "National Womens Soccer League 2025",
+        "round_id": 477908,
+        "round": {
+          "id": 477908,
+          "round": 16,
+          "end_time": "2025-08-19",
+          "start_time": "2025-08-16"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "59'",
+        "arena_id": 2831,
+        "arena_name": "Lumen Field",
+        "arena_hash_image": "551349f4e604c4bb61675f5f6169dbe25527a5991d1d1cd471ff8de1d7ad08ac",
+        "home_team_id": 12125,
+        "home_team_name": "Seattle Reign FC",
+        "home_team_hash_image": "2047e30bd27ea9c5029ca1f5d10e393e8769c88fa42021680a715f658c2c8530",
+        "away_team_id": 12259,
+        "away_team_name": "Chicago Stars FC",
+        "away_team_hash_image": "df19d9050d981982e5a575d601cab4fd442b8729dbfaf8cbe3c84026a2ec571e",
+        "home_team_score": {
+          "current": 3,
+          "display": 3,
+          "period_1": 2,
+          "period_2": 1,
+          "default_time": 3
+        },
+        "away_team_score": {
+          "current": 3,
+          "display": 3,
+          "period_1": 0,
+          "period_2": 3,
+          "default_time": 3
+        },
+        "times": {
+          "extend_time_1": 6,
+          "extend_time_2": 7,
+          "specific_start_time": "2025-08-19T03:14:03+00:00"
+        },
+        "coaches": {
+          "away_coach_id": 9879,
+          "home_coach_id": 2934,
+          "away_coach_name": "Lorne Donaldson",
+          "home_coach_name": "Laura Harvey",
+          "away_coach_hash_image": "5b0d2996007162e422960edb81449050c6868a33c89ba3d4c322e7b3d0f37270",
+          "home_coach_hash_image": "f61728254f88d4de77a401d1aa11d0baeebbe96c7b29c00e219ab78236473815"
+        },
+        "specific_start_time": "2025-08-19T03:14:03+00:00",
+        "start_time": "2025-08-19T02:00:00+00:00",
+        "duration": 9000,
+        "last_period": "period2",
+        "season_statistics_type": "overall",
+        "lineups_id": 565242,
+        "graphs_id": 190903,
+        "coaches_id": 758235,
+        "class_id": 133,
+        "class_name": "USA",
+        "class_hash_image": "e53e0fb3c55a28a318bccf6b7a5c78afe4fe9f22181c922fcab556349db72cf4",
+        "league_id": 285,
+        "league_name": "NWSL",
+        "league_hash_image": "321328b245136cd2102b91f8dfeca6009ff02679172f7291fba7e77706bb2756"
+      }
+    ],
+    "timestamp": 1756092379740
+  },
+  "2528515": {
+    "data": [
+      {
+        "id": 2528515,
+        "name": "Machida Zelvia vs Gamba Osaka",
+        "tournament_id": 20,
+        "tournament_name": "J1 League",
+        "tournament_importance": 181,
+        "season_id": 55149,
+        "season_name": "J.League 2025",
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "53'",
+        "arena_id": 4750,
+        "arena_name": "Machida Stadium",
+        "arena_hash_image": "d288764602422bef9f011c8963ca82c3f199ca8c4d195d7df6df49c1d5110ff0",
+        "home_team_id": 12701,
+        "home_team_name": "Machida Zelvia",
+        "home_team_hash_image": "d65091a1ad5f68686f158a48534f643170327770bf9623a5c11b761060d963e1",
+        "away_team_id": 12290,
+        "away_team_name": "Gamba Osaka",
+        "away_team_hash_image": "c02dec1b509d1d7ef5a16776a91c130103534e518f205f981e97348b946a7259",
+        "home_team_score": {
+          "current": 3,
+          "display": 3,
+          "period_1": 1,
+          "period_2": 2,
+          "default_time": 3
+        },
+        "away_team_score": {
+          "current": 1,
+          "display": 1,
+          "period_1": 0,
+          "period_2": 1,
+          "default_time": 1
+        },
+        "times": {
+          "extend_time_1": 3,
+          "extend_time_2": 7,
+          "specific_start_time": "2025-08-20T11:06:43+00:00"
+        },
+        "coaches": {
+          "away_coach_id": 2952,
+          "home_coach_id": 16283,
+          "away_coach_name": "Dani Poyatos",
+          "home_coach_name": "Go Kuroda",
+          "away_coach_hash_image": "fe424bd27f6e3af225b5de00957bf4aa8e595f9f64ebccba6ba02bc9a7e0d278",
+          "home_coach_hash_image": "306262eab7091a3d88ae9c0d832165b9a4f83fd162d7702e1502d9d39d4dc98b"
+        },
+        "specific_start_time": "2025-08-20T11:06:43+00:00",
+        "start_time": "2025-08-20T10:00:00+00:00",
+        "duration": 9000,
+        "season_statistics_type": "overall",
+        "lineups_id": 565512,
+        "coaches_id": 769184,
+        "class_id": 214,
+        "class_name": "Japan",
+        "class_hash_image": "ab8275aa14f643c9b4c4240e4c623ddf97bd36b81ca69968b7686972fe28ee89",
+        "league_id": 35,
+        "league_name": "J1 League",
+        "league_hash_image": "ec1c636c43e571fe5746ffde54b6076b30af6f46e010d45cf84e54a4711cbb00"
+      }
+    ],
+    "timestamp": 1756183497964
+  },
+  "2573497": {
+    "data": [
+      {
+        "id": 2573497,
+        "name": "Guelph United FC vs Unionville Milliken SC",
+        "tournament_id": 78334,
+        "tournament_name": "League1 Ontario Championship",
+        "tournament_importance": 0,
+        "season_id": 58580,
+        "season_name": "League1 Ontario Championship 2025",
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "90+61'",
+        "home_team_id": 22357,
+        "home_team_name": "Guelph United FC",
+        "home_team_hash_image": "215decc9a873d813b2f7b44d3bf329f44949381e7fc1483ecde8a8c2e322196e",
+        "away_team_id": 22663,
+        "away_team_name": "Unionville Milliken SC",
+        "away_team_hash_image": "f852ac0de773f2b743a612e281250bacc7f9aad3984f70a79540b15a618f40c3",
+        "home_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 2,
+          "period_2": 0,
+          "default_time": 2
+        },
+        "away_team_score": {
+          "current": 5,
+          "display": 5,
+          "period_1": 2,
+          "period_2": 3,
+          "default_time": 5
+        },
+        "coaches": {
+          "home_coach_id": 4498,
+          "home_coach_name": "Keith Mason",
+          "home_coach_hash_image": "fd84ebd9d0e0a59251d73ddd7fd055b0c9edfb339b871b96b7392c421da2fe78"
+        },
+        "start_time": "2025-08-13T00:00:00+00:00",
+        "duration": 9000,
+        "coaches_id": 781445,
+        "class_id": 185,
+        "class_name": "Canada",
+        "class_hash_image": "91b0b4bdeda53c70f994a046e870128c367f143b2b14af3ed89304456289009d",
+        "league_id": 16058,
+        "league_name": "League1 Ontario Championship",
+        "league_hash_image": "0e3089b054762f9fe35ac7930cce834e51268f2df5f33d7555362e3fdbc84979"
+      }
+    ],
+    "timestamp": 1755589548652
+  },
+  "2581346": {
+    "data": [
+      {
+        "id": 2581346,
+        "name": "Saue JK vs Saku Sporting II",
+        "tournament_id": 5326,
+        "tournament_name": "II Liiga - Lõuna/Lääne piirkond",
+        "tournament_importance": 0,
+        "season_id": 58683,
+        "season_name": "II Liiga 2025",
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "-216975'",
+        "home_team_id": 22839,
+        "home_team_name": "Saue JK",
+        "home_team_hash_image": "335f2cfef376aa91bbcf43e7c02af29e614eac321fc3554c7b9b608a1e6167ae",
+        "away_team_id": 11279,
+        "away_team_name": "Saku Sporting II",
+        "away_team_hash_image": "511ac455ae9f106cbb80ef0e65d40bcdbbe146e1efbbb883e4681404f25b6e40",
+        "home_team_score": {
+          "current": 3,
+          "display": 3
+        },
+        "away_team_score": {
+          "current": 0,
+          "display": 0
+        },
+        "coaches": {
+          "home_coach_id": 17154,
+          "home_coach_name": "Henrik Kummer",
+          "home_coach_hash_image": "23b317afb0eb88335abcc1a2264a066d22e59c44b649a617422e516d1650265a"
+        },
+        "start_time": "2025-08-13T16:00:00+00:00",
+        "duration": 9000,
+        "coaches_id": 783658,
+        "class_id": 195,
+        "class_name": "Estonia",
+        "class_hash_image": "92a3172baf83bbce64c863e07cdf90766418887ba7e0af9528c0468f1ed2df6b",
+        "league_id": 710,
+        "league_name": "II Liiga",
+        "league_hash_image": "531318eab5e1a20b7b18ee2ca50520e1febb7f78a4044dc90b6bc3104f368874"
+      }
+    ],
+    "timestamp": 1755589638150
+  },
+  "2617419": {
+    "data": [
+      {
+        "id": 2617419,
+        "name": "Forus Og Gausel IL vs Kopervik IL",
+        "tournament_id": 93545,
+        "tournament_name": "4th Division - Rogaland, Group 2",
+        "tournament_importance": 0,
+        "season_id": 59833,
+        "season_name": "4th Division - Rogaland 2025",
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "90+958'",
+        "home_team_id": 241259,
+        "home_team_name": "Forus Og Gausel IL",
+        "home_team_hash_image": "40ec0dd244f08a08ad4a60b05febe22e2924ff32f84289eb9f5d2b65a9727055",
+        "away_team_id": 61406,
+        "away_team_name": "Kopervik IL",
+        "away_team_hash_image": "0afb505ed596b04b6cf8a78192035da4b08cfe3bb4af345ba57a487c64a7ee32",
+        "home_team_score": {
+          "current": 4,
+          "display": 4,
+          "period_1": 1,
+          "period_2": 3,
+          "default_time": 4
+        },
+        "away_team_score": {
+          "current": 4,
+          "display": 4,
+          "period_1": 2,
+          "period_2": 2,
+          "default_time": 4
+        },
+        "start_time": "2025-08-14T17:00:00+00:00",
+        "duration": 9000,
+        "class_id": 324,
+        "class_name": "Norway Amateur",
+        "class_hash_image": "5d26032d8bdb4c877d74bb9f8652e8302d1eadb927cdc93b3df0a54b64d6f85d",
+        "league_id": 23195,
+        "league_name": "4th Division - Rogaland",
+        "league_hash_image": "9bd7e501cfa438bcd0ea69304397e28f4be447d878c4aa86cdbe027cbf9ac30c"
+      }
+    ],
+    "timestamp": 1755589690442
+  },
+  "2686455": {
+    "data": [
+      {
+        "id": 2686455,
+        "name": "AIK U19 vs Djurgårdens U19",
+        "tournament_id": 4590,
+        "tournament_name": "U19 Allsvenskan",
+        "tournament_importance": 0,
+        "season_id": 56733,
+        "season_name": "U19 Allsvenskan 2025",
+        "round_id": 477865,
+        "round": {
+          "id": 477865,
+          "round": 14,
+          "end_time": "2025-08-13",
+          "start_time": "2025-07-25"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "55'",
+        "home_team_id": 18513,
+        "home_team_name": "AIK U19",
+        "home_team_hash_image": "d752680749d3969590163831e40583da8ce92ea3fa7a7033bf77816837898bbd",
+        "away_team_id": 18562,
+        "away_team_name": "Djurgårdens U19",
+        "away_team_hash_image": "2d38520f5973c472f456b391be40dd8e8677794d8a585c6d14fe9443244c62bb",
+        "home_team_score": {
+          "current": 1,
+          "display": 1,
+          "period_1": 1,
+          "period_2": 0,
+          "default_time": 1
+        },
+        "away_team_score": {
+          "current": 3,
+          "display": 3,
+          "period_1": 2,
+          "period_2": 1,
+          "default_time": 3
+        },
+        "times": {
+          "specific_start_time": "2025-08-13T12:06:00+00:00"
+        },
+        "specific_start_time": "2025-08-13T12:06:00+00:00",
+        "start_time": "2025-08-13T11:00:00+00:00",
+        "duration": 9000,
+        "class_id": 160,
+        "class_name": "Sweden Amateur",
+        "class_hash_image": "d6e0ee019fa5e74c19245154c3d68c3503e3508b2c68123112f421091a850b3b",
+        "league_id": 474,
+        "league_name": "U19 Allsvenskan",
+        "league_hash_image": "53752a6628c198e8f692f3eab67290da75855042e627a8e32dd2c4f08154c106"
+      }
+    ],
+    "timestamp": 1755589660173
+  },
+  "2767454": {
+    "data": [
+      {
+        "id": 2767454,
+        "name": "Deportivo Pasto vs Independiente Medellín",
+        "tournament_id": 249,
+        "tournament_name": "Primera A, Clausura",
+        "tournament_importance": 248,
+        "season_id": 64790,
+        "season_name": "Primera A, Clausura 2025",
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "54'",
+        "arena_id": 6362,
+        "arena_name": "Estadio Departamental Libertad",
+        "arena_hash_image": "b3f6c2a341a6d4ab762e4b2c0872e0deb646c03839332bfd3e0f61eff408f2a1",
+        "referee_id": 3192,
+        "referee_name": "Nolberto Ararat Mora",
+        "referee_hash_image": "8bfaed3ae1df0be2f5e3566694e4bb4d0721e49ee04f69043d9ac0558995f5f4",
+        "home_team_id": 19966,
+        "home_team_name": "Deportivo Pasto",
+        "home_team_hash_image": "e855df832d887aa601643f6d7270ef01ab5b5d7dfd50088c1dd5b58e7ee23ece",
+        "away_team_id": 14218,
+        "away_team_name": "Independiente Medellín",
+        "away_team_hash_image": "6f7807828cdffae6891980dbefbaa6fe9cd2089d5a2ffd50b1f2ab23ac55a2b3",
+        "home_team_score": {
+          "current": 1,
+          "display": 1,
+          "period_1": 1,
+          "period_2": 0,
+          "default_time": 1
+        },
+        "away_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 0,
+          "period_2": 2,
+          "default_time": 2
+        },
+        "times": {
+          "extend_time_1": 3,
+          "extend_time_2": 6,
+          "specific_start_time": "2025-08-19T01:40:59+00:00"
+        },
+        "coaches": {
+          "away_coach_id": 361,
+          "home_coach_id": 21469,
+          "away_coach_name": "Alejandro Restrepo",
+          "home_coach_name": "Camilo Ayala",
+          "away_coach_hash_image": "76ccc629d1f4fb75d97f8dc27704a51c9166e779282f8125ef8c4737bbf80c83",
+          "home_coach_hash_image": "f761953eb318e5367701d75667e441029e4196b17d927750fc342bf8a1a9968c"
+        },
+        "specific_start_time": "2025-08-19T01:40:59+00:00",
+        "start_time": "2025-08-19T00:30:00+00:00",
+        "duration": 9000,
+        "last_period": "period2",
+        "season_statistics_type": "overall",
+        "lineups_id": 565238,
+        "graphs_id": 190902,
+        "coaches_id": 839457,
+        "class_id": 188,
+        "class_name": "Colombia",
+        "class_hash_image": "5ba38b55783ddb6f3ff0b3c4fed2a15a91df8184d52343c74ae94671e8b84678",
+        "league_id": 610,
+        "league_name": "Primera A, Clausura",
+        "league_hash_image": "fd83d835420c58c3454b4c40ec138cafed84e2bce16a00803bb747e6c97d016b"
+      }
+    ],
+    "timestamp": 1756094744531
+  },
+  "2781245": {
+    "data": [
+      {
+        "id": 2781245,
+        "name": "Hyundai NTC U19 vs Perth RedStar SC",
+        "tournament_id": 34220,
+        "tournament_name": "NPL Western Australia, Women",
+        "tournament_importance": 0,
+        "season_id": 61140,
+        "season_name": "Western Australia NPL, Women 2025",
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "56'",
+        "home_team_id": 387867,
+        "home_team_name": "Hyundai NTC U19",
+        "home_team_hash_image": "8be958965a4e9d96b0a737d7cb5c1202513e77fddd3f173e1a8a91c51cb3c049",
+        "away_team_id": 326071,
+        "away_team_name": "Perth RedStar SC",
+        "away_team_hash_image": "75c9e71ab91a8d45e7cf1bb5a3cf5720aaa39dbf30dd6076d873e3fd56d797c0",
+        "home_team_score": {
+          "current": 4,
+          "display": 4,
+          "period_1": 3,
+          "period_2": 0,
+          "default_time": 3
+        },
+        "away_team_score": {
+          "current": 1,
+          "display": 1,
+          "period_1": 1,
+          "period_2": 0,
+          "default_time": 1
+        },
+        "times": {
+          "specific_start_time": "2025-08-13T11:36:22+00:00"
+        },
+        "specific_start_time": "2025-08-13T11:36:22+00:00",
+        "start_time": "2025-08-13T10:30:00+00:00",
+        "duration": 9000,
+        "class_id": 140,
+        "class_name": "Australia",
+        "class_hash_image": "c706a201cb84cb532048e57a6462d1aa8e4696c3e0543dfd2e1fc0a7a91eeaa4",
+        "league_id": 24167,
+        "league_name": "Western Australia NPL, Women",
+        "league_hash_image": "8a114892884a2e1e64c498e0c3bb2bbddac88c553586cd2e77f5f37f6225b6e8"
+      }
+    ],
+    "timestamp": 1755589727541
+  },
+  "2792172": {
+    "data": [
+      {
+        "id": 2792172,
+        "name": "Club León vs Querétaro",
+        "tournament_id": 5996,
+        "tournament_name": "Liga MX, Women, Apertura",
+        "tournament_importance": 0,
+        "season_id": 64370,
+        "season_name": "Liga MX, Women, Apertura 2025",
+        "round_id": 517319,
+        "round": {
+          "id": 517319,
+          "round": 7,
+          "end_time": "2025-08-19",
+          "start_time": "2025-08-16"
+        },
+        "status": {
+          "type": "finished",
+          "reason": "Ended"
+        },
+        "status_type": "finished",
+        "time": "54'",
+        "home_team_id": 26043,
+        "home_team_name": "Club León",
+        "home_team_hash_image": "19c3f220fa063a7f2ffbe630391499cdd133fa8faab7889decbd31270d0d8273",
+        "away_team_id": 26071,
+        "away_team_name": "Querétaro",
+        "away_team_hash_image": "9478d87d86a330df8daa5975ea59e24779ea049c8001bee83d2e9600022b830c",
+        "home_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 0,
+          "period_2": 2,
+          "default_time": 2
+        },
+        "away_team_score": {
+          "current": 2,
+          "display": 2,
+          "period_1": 1,
+          "period_2": 1,
+          "default_time": 2
+        },
+        "times": {
+          "specific_start_time": "2025-08-19T02:05:55+00:00"
+        },
+        "coaches": {
+          "away_coach_id": 5035,
+          "home_coach_id": 5033,
+          "away_coach_name": "Carla Rossi",
+          "home_coach_name": "Adrián Martínez",
+          "away_coach_hash_image": "e1e1e4cbdf1a64812c1d9c0c57b3c58122279567fefcbba898d840c7bd50c0ee",
+          "home_coach_hash_image": "6215d1324327adb9b1c2fdacac0f13aba98f39279fd26c10c37756385bd7d8b8"
+        },
+        "specific_start_time": "2025-08-19T02:05:55+00:00",
+        "start_time": "2025-08-19T01:00:00+00:00",
+        "duration": 9000,
+        "lineups_id": 565239,
+        "coaches_id": 849686,
+        "class_id": 226,
+        "class_name": "Mexico",
+        "class_hash_image": "dc324f6f16b9bf62949e8d7f063bb6f5a5ecca382cc28357822129793c6581b4",
+        "league_id": 897,
+        "league_name": "Liga MX, Women, Apertura",
+        "league_hash_image": "9edc4cff017424a5242900f4a16366d83cf5a8dbeb694c720757a94cc80d0cd6"
+      }
+    ],
+    "timestamp": 1756094760368
+  }
+}

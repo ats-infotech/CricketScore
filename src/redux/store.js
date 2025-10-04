@@ -8,6 +8,8 @@ import playerScoreBoardSlice from './slices/playerScoreBoardSlice';
 import playersSlice from './slices/playersSlice';
 import teamSlice from './slices/teamSlice';
 import tournamentSlice from './slices/tournamentSlice';
+import matchesSlice from './internationalMatchesSlices/matchesSlice';
+import footballMatchesSlice from './footballMatchesSlices/footballSlice';
 import storage from './storage';
 
 const persistConfig = {
@@ -22,7 +24,9 @@ const rootReducer = combineReducers({
     players: playersSlice,
     matches: matchSlice,
     playerscoreboard: playerScoreBoardSlice,
-    auction: auctionSlice
+    auction: auctionSlice,
+    matchData: matchesSlice,
+    footballData: footballMatchesSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

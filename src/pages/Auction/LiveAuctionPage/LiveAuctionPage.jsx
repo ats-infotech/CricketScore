@@ -725,7 +725,9 @@ const LiveAuctionPage = ({ type }) => {
                                     />
                                 </Box>
                                 <Box className={showPlayerData.length > 5 ? 'overflow-player' : ''}>
-                                    {showPlayerData.map((item, i) => {
+                                    {showPlayerData?.length === 0 ?
+                                    <Typography>{`No player found with name ${searchResults}`}</Typography>
+                                    : showPlayerData.map((item, i) => {
                                         const isSelect = selectManualPlayer?.id === item.id
                                         return (
                                             <Box

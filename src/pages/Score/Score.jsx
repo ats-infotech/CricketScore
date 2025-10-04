@@ -134,22 +134,40 @@ const ScorePage = ({
     const isButtonsDisabled = currentinnings <= 0 || inningsComplete || overChanged || active.secondactive === "STO" || wagonWheel;
 
     useEffect(() => {
-        const striker = players.filter(player => player.id === playerselection.striker)
-        const nonStriker = players.filter(player => player.id === playerselection.nonStriker)
-        const bowler = players.filter(player => player.id === playerselection.bowler)
-        setPlayerOnField({
-            striker: striker[0]?.playerName,
-            strikerimage: striker[0]?.playerImage,
-            strikerletter: striker[0]?.letter,
-            strikercolor: striker[0]?.playerColor,
-            nonStriker: nonStriker[0]?.playerName,
-            nonStrikerimage: nonStriker[0]?.playerImage,
-            nonStrikerletter: nonStriker[0]?.letter,
-            nonStrikercolor: nonStriker[0]?.playerColor,
-            bowler: bowler[0]?.playerName,
-            bowlerimage: bowler[0]?.playerImage,
-            bowlerletter: bowler[0]?.letter,
-            bowlercolor: bowler[0]?.playerColor
+        const striker = players.find(player => player.id === playerselection.striker)
+        const nonStriker = players.find(player => player.id === playerselection.nonStriker)
+        const bowler = players.find(player => player.id === playerselection.bowler)
+        // setPlayerOnField({
+        //     striker: striker[0]?.playerName,
+        //     strikerimage: striker[0]?.playerImage,
+        //     strikerletter: striker[0]?.letter,
+        //     strikercolor: striker[0]?.playerColor,
+        //     nonStriker: nonStriker[0]?.playerName,
+        //     nonStrikerimage: nonStriker[0]?.playerImage,
+        //     nonStrikerletter: nonStriker[0]?.letter,
+        //     nonStrikercolor: nonStriker[0]?.playerColor,
+        //     bowler: bowler[0]?.playerName,
+        //     bowlerimage: bowler[0]?.playerImage,
+        //     bowlerletter: bowler[0]?.letter,
+        //     bowlercolor: bowler[0]?.playerColor
+        // })
+        const newField = {
+            striker: striker?.playerName,
+            strikerimage: striker?.playerImage,
+            strikerletter: striker?.letter,
+            strikercolor: striker?.playerColor,
+            nonStriker: nonStriker?.playerName,
+            nonStrikerimage: nonStriker?.playerImage,
+            nonStrikerletter: nonStriker?.letter,
+            nonStrikercolor: nonStriker?.playerColor,
+            bowler: bowler?.playerName,
+            bowlerimage: bowler?.playerImage,
+            bowlerletter: bowler?.letter,
+            bowlercolor: bowler?.playerColor
+        }
+
+        setPlayerOnField(prev => {
+            return JSON.stringify(prev) === JSON.stringify(newField) ? prev : newField;
         })
 
     }, [playerselection])

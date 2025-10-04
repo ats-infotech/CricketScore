@@ -1,0 +1,45 @@
+.football-lineup-main-section {
+    padding: 20px 20px 0;
+}
+
+.football-lineup-team-switch {
+    display: flex;
+    justify-content: center;
+}
+
+.football-lineup-team-player-data {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.football-lineup-team-players-information {
+    margin-top: 30px;
+}
+
+.football-lineup-team-players-information h6 {
+    font-weight: 600;
+    color: var(--theme-primary);
+    text-align: center;
+    font-size: var(--fs-lg);
+    text-transform: uppercase;
+}
+
+.football-lineup-team-players-information_lineargradient {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 9.39%, #0c1830 50.73%, transparent 98.27%);
+    margin: 10px 0 30px 0;
+}
+
+.football-lineup-team-players-information p {
+    font-size: var(--fs-base);
+    font-weight: 500;
+    color: var(--theme-primary);
+}
+
+.football-lineup-team-players-information span {
+    font-size: var(--fs-md);
+    font-weight: 600;
+    color: var(--theme-primary);
+}

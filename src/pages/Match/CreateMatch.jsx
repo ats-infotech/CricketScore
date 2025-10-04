@@ -331,7 +331,7 @@ const CreateMatchPage = ({ tournament, teams, type, matchData }) => {
                     perteamplayers: scheduleMatch?.perteamplayers,
                     wagonWheel: scheduleMatch?.wagonWheel,
                     tournamentId: tournament?.id,
-                    status: 1
+                    status: matchData?.status
                 };
                 res = await dispatch(editMatchSchedule(editmatchData))
             }

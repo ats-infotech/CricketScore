@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Footer } from "../components/common/commonUi/Footer/Footer";
 import { theme } from "../components/common/theme";
 import "./globals.css";
+// import Head from "next/head";
 
 export default function RootLayout({ children }) {
 
@@ -18,7 +19,6 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     UpdatePath()
   }, [params]);
-
 
   const UpdatePath = () => {
     const path = window.location.pathname;
