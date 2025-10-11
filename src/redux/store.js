@@ -10,12 +10,14 @@ import teamSlice from './slices/teamSlice';
 import tournamentSlice from './slices/tournamentSlice';
 import matchesSlice from './internationalMatchesSlices/matchesSlice';
 import footballMatchesSlice from './footballMatchesSlices/footballSlice';
+import footballLocalSlice from './footballMatchesSlices/footballLocalSlice';
 import storage from './storage';
 
 const persistConfig = {
     key: 'root',
     storage,
     // whitelist: ['tournament', 'teams', 'players', 'matches', 'playerscoreboard', 'auction'],
+    blacklist: ['footballData', 'matchData']
 }
 
 const rootReducer = combineReducers({
@@ -26,7 +28,8 @@ const rootReducer = combineReducers({
     playerscoreboard: playerScoreBoardSlice,
     auction: auctionSlice,
     matchData: matchesSlice,
-    footballData: footballMatchesSlice
+    footballData: footballMatchesSlice,
+    footballLocal: footballLocalSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

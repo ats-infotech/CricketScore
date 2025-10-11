@@ -39,10 +39,16 @@ export async function GET(req, context) {
     // Fetch fresh data from API
     const response = await apiRequest(
       'GET',
-      `${apiRoutes.FOOTBALL.MATCHES}?id=eq.${id}`,
+      `${apiRoutes.FOOTBALL.FIXTURES}`,
+      {
+        id: id,
+        timezone: 'Asia/Kolkata'
+      },
+      {
+        'x-rapidapi-key': process.env.NEXT_PUBLIC_FOOTBALL_TEST_DEV_KEY,
+        'x-rapidapi-host': 'v3.football.api-sports.io'
+      },
       '',
-      '',
-      process.env.NEXT_PUBLIC_FOOTBALL_APP_DEV_KEY,
       'football'
     );
 

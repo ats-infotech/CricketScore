@@ -1,12 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import { apiRequest } from '../../../../utils/api';
-import { apiRoutes } from '../../../../utils/apiRoutes';
 
 export const dynamic = 'force-dynamic';
 
-const CACHE_FILE = path.resolve('./.cache/football/liveMatches.json');
-const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+const CACHE_FILE = path.resolve('./.cache/football/england_france_leagues.json');
+const CACHE_TTL = 24 * 60 * 60 * 1000; // 1 day
 
 export async function GET(req) {
   try {
@@ -26,17 +25,14 @@ export async function GET(req) {
     // Fetch fresh data
     const response = await apiRequest(
         'GET',
-        `${apiRoutes.FOOTBALL.FIXTURES}`,
+        '',
         {
-          live: 'all',
-          timezone: 'Asia/Kolkata'
-        },
-        {
-          'x-rapidapi-key': process.env.NEXT_PUBLIC_FOOTBALL_TEST_DEV_KEY,
-          'x-rapidapi-host': 'v3.football.api-sports.io'
+          action: 'get_leagues',
+          APIkey: process.env.NEXT_PUBLIC_FOOTBALL_LEAGUE_KEY
         },
         '',
-        'football'
+        '',
+        'footballenglandfranceleague'
       );
 
     // Save to cache
@@ -54,7 +50,7 @@ export async function GET(req) {
     });
   } catch (error) {
     return new Response(
-      JSON.stringify({ error: 'Server is temporarily down. Please try again in a little while.' }),
+      JSON.stringify({ error: 'Server is temporarily down. Please try again in a little while.', error }),
       { status: 500 }
     );
   }

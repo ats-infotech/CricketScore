@@ -1,0 +1,120 @@
+.football-league-cards-section {
+    margin-block: 10px;
+    padding: 0 10px;
+}
+
+.football-league-slider {
+    width: 100%;
+    position: relative;
+}
+
+.football-league-slide {
+    padding: 0 5px;
+}
+
+.football-league-cards {
+    height: 140px;
+    border-radius: 15px;
+    background-color: var(--theme-primary);
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.football-league-cards img {
+    height: 110px;
+    object-fit: contain;
+}
+
+.football-league-card-league-info {
+    padding-inline: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    cursor: pointer;
+}
+
+.football-league-card-league-info img {
+    min-height: 12px;
+    min-width: 16px;
+    max-width: 16px;
+    max-height: 12px;
+    object-fit: contain;
+}
+
+.football-league-card-league-info p {
+    font-size: var(--fs-xs);
+    color: var(--color-white);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    max-width: 70px;
+    white-space: nowrap;
+}
+
+.football-league-card-league-info svg {
+    height: 13px;
+    width: 13px;
+    color: var(--color-white);
+}
+
+/* ==== Custom Arrow Wrapper for Gradient Border (optional) ==== */
+.custom-arrow-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, #FE8422 100%);
+    padding: 1px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.prev-arrow {
+    left: -15px;
+}
+
+.next-arrow {
+    right: -15px;
+}
+
+/* ==== Inner Actual Button ==== */
+.custom-arrow {
+    width: 100%;
+    height: 100%;
+    border-radius: 50% !important;
+    background-color: var(--theme-primary) !important;
+    color: var(--color-white) !important;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    border: none;
+}
+
+/* Arrow SVG inside buttons */
+.custom-arrow svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-white);
+}
+
+.prev-arrow svg {
+    transform: rotate(90deg);
+}
+
+.next-arrow svg {
+    transform: rotate(-90deg);
+}

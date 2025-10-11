@@ -1,9 +1,11 @@
 const CRICKET_BASE_URL = process.env.NEXT_PUBLIC_CRICKET_BASE_URL;
 const FOOTBALL_BASE_URL = process.env.NEXT_PUBLIC_FOOTBALL_BASE_URL;
+const FOOTBALL_PREMIUM_LEAGUE_BASE_URL = process.env.NEXT_PUBLIC_FOOTBALL_PREMIUM_LEAGUE_BASE_URL
+const FOOTBALL_ENGLAND_FRANCE_LEAGUE_BASE_URL= process.env.NEXT_PUBLIC_FOOTBALL_ENGLAND_FRANCE_LEAGUE_BASE_URL
 
-export async function apiRequest(method, endpoint, data = null, customHeaders = {}, auth = null, sportsType) {
-  let url = sportsType === 'cricket' ? `${CRICKET_BASE_URL}${endpoint}` : `${FOOTBALL_BASE_URL}${endpoint}`;
-
+export async function apiRequest(method, endpoint, data = null, customHeaders = {}, auth = null, URLType) {
+  let url = URLType === 'footballenglandfranceleague' ? `${FOOTBALL_ENGLAND_FRANCE_LEAGUE_BASE_URL}${endpoint}` : URLType === 'footballpremiumleague' ? `${FOOTBALL_PREMIUM_LEAGUE_BASE_URL}${endpoint}` : URLType === 'cricket' ? `${CRICKET_BASE_URL}${endpoint}` : `${FOOTBALL_BASE_URL}${endpoint}`;
+  
   if (data && method === 'GET') {
     const queryString = new URLSearchParams(data).toString();
     url += `?${queryString}`;

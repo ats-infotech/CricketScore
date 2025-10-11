@@ -9,11 +9,11 @@ const CACHE_FILE = path.resolve('./.cache/football/pastMatches.json');
 const today = new Date();
 const lastSevenDates = [];
 
-// Get the last 7 days including today
-for (let i = 6; i >= 0; i--) {
-  const newDate = new Date(today);
-  newDate.setDate(today.getDate() - i);
-  lastSevenDates.push(newDate.toISOString().split('T')[0]);
+// Get the data of today and yesterday
+for (let i = 1; i >= 0; i--) {
+  const date = new Date(today);
+  date.setDate(today.getDate() - i);
+  lastSevenDates.push(date.toISOString().split('T')[0]);
 }
 
 const FIFTEEN_MINUTES = 15 * 60 * 1000;
@@ -45,22 +45,21 @@ export async function GET(req) {
         continue;
       }
 
-      // Calculate next day for API lt. filter
-      const nextDay = new Date(date);
-      nextDay.setDate(nextDay.getDate() + 1);
-      const nextDayFormatted = nextDay.toISOString().split('T')[0];
-
       const response = await apiRequest(
         'GET',
-        `${apiRoutes.FOOTBALL.MATCHES}?start_time=gte.${date}&start_time=lt.${nextDayFormatted}&status_type=eq.finished`,
+        `${apiRoutes.FOOTBALL.FIXTURES}`,
+        {
+          date: date,
+          timezone: 'Asia/Kolkata',
+          status: 'FT'
+        },
+        {
+          'x-rapidapi-key': process.env.NEXT_PUBLIC_FOOTBALL_TEST_DEV_KEY,
+          'x-rapidapi-host': 'v3.football.api-sports.io'
+        },
         '',
-        '',
-        process.env.NEXT_PUBLIC_FOOTBALL_TEST_DEV_KEY,
         'football'
       );
-
-      console.log(response);
-      
 
       freshData[date] = response;
       updatedCache[date] = {

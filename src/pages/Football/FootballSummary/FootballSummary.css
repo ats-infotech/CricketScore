@@ -9,7 +9,34 @@
 }
 
 .football-summary-main-section {
-    padding: 20px 20px 0;
+    margin: 20px 20px 0;
+    height: calc(100vh - 320px);
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+/* For Safari, Chrome, Edge */
+.football-summary-main-section::-webkit-scrollbar {
+    width: 0px !important;
+    height: 8px;
+}
+
+.football-summary-main-section::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.football-summary-main-section::-webkit-scrollbar-thumb {
+    background-color: transparent !important;
+    border-radius: 10px !important;
+    border: 2px solid transparent !important;
+}
+
+/* Optional: Hover effect */
+.football-summary-main-section::-webkit-scrollbar-thumb:hover {
+    background-color: transparent !important;
 }
 
 .football-summary-title p {

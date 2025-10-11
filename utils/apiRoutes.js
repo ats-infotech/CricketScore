@@ -5,11 +5,7 @@ export const apiRoutes = {
         STATISTICS: '/statistics'
     },
     FOOTBALL: {
-        MATCHESBYDATE: '/matches-by-date',
-        MATCHES: '/matches',
-        MATCHESLIVE: '/matches-live',
-        MATCHESINCIDENTS: '/matches-incidents',
-        MATCHSTATISTICS: '/matches-statistics',
-        MATCHLINEUPS: '/matches-lineups'
+        FIXTURES: '/fixtures',
+        FOOTBALL: '/football'
     }
 }
