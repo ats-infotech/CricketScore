@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { getRecentMatches, getUpcomingMatches, getLiveMatches } from '@/redux/internationalMatchesSlices/matchesSlice.js'
 import CustomeTabs from '@/components/common/commonUi/CustomeTabs.jsx'
 import Image from 'next/image'
-import vsLogo from '../../assets/img/Vs1.png';
+import vsLogo from '../../../assets/img/Vs1.png';
 import Loader from '@/components/common/commonUi/Loader'
 import CustomeButton from '@/components/common/commonUi/CustomeButton'
 import { useRouter } from 'next/navigation'
@@ -23,7 +23,7 @@ const ScoresMatchCard = ({ isTwoInnings, image, name, runs, overs, isWinner, act
     return (
         <Box className='scores-card-team-section'>
             <Box className='scores-card-team-logo'>
-                <Image src={image} width={1500} height={1500} alt='logo' />
+                <Image unoptimized src={image} width={500} height={500} alt='logo' />
             </Box>
             <Box className={`scores-team-details ${isWinner ? 'winner' : ''}`}>
                 <Typography variant='body2'>{name}</Typography>
@@ -131,7 +131,7 @@ const InternationalMatchesScores = () => {
     }
 
     const handleShowScoreboard = (matchDetails) => {
-        router.push(`/scorecard/${matchDetails?.match_id}`)
+        router.push(`/internationalmatch/${matchDetails?.match_id}/scorecard`)
     }
 
     const handleAlertClose = () => {
@@ -151,7 +151,6 @@ const InternationalMatchesScores = () => {
                 <Box className='scores-card-section'>
                     {
                         Array.isArray(data) && data.length > 0 && data.map((item, i) => {
-                            console.log(item);
 
                             // --- DATE ---
                             const startDateStr = item.date_start_ist || item.date_start || '';

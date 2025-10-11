@@ -3,7 +3,7 @@ import { Box, Typography, useMediaQuery } from "@mui/material"
 import Image from "next/image"
 import './StrikePlayerSection.css'
 
-const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlayer, type, isPlayerShow = false, side }) => {
+const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlayer, type, isPlayerShow = false, side, isImageWithHttp = false }) => {
     let isShow = (type && type === 'readonly')
     const sm = useMediaQuery('(max-width: 350px)')
     const md = useMediaQuery('(max-width: 380px)')
@@ -30,7 +30,7 @@ const PlayerSelection = ({ playerdata = [], onCheck, handleUpdatePlayer, isPlaye
                                         <Box className='strike_player_photo'>
                                             {
                                                 item?.playerImage ?
-                                                    <Image unoptimized className={type === 'readonly' ? 'active' : isSelect ? 'active' : 'notActive'} src={`/${item?.playerImage}`} alt='profile pic' width={150} height={150} />
+                                                    <Image unoptimized className={type === 'readonly' ? 'active' : isSelect ? 'active' : 'notActive'} src={isImageWithHttp ? item?.playerImage : `/${item?.playerImage}`} alt='profile pic' width={150} height={150} /> 
                                                     :
                                                     <Box className={type === 'readonly' ? 'active' : isSelect ? 'active' : 'notActive'}
                                                         sx={{

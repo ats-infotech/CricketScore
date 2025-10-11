@@ -159,8 +159,8 @@ const CustomTooltip = React.memo(({ active, payload }) => {
 // This section is only for Partnership
 const PartnershipCard = React.memo(({ data, playerdata }) => {
     const { batter1Id, batter1run, batter1ball, batter2Id, batter2run, batter2ball, partnershipRun } = data;
-    const batter1name = playerdata?.data?.find((items) => items.id === batter1Id)?.playerName || 'Striker'
-    const batter2name = playerdata?.data?.find((items) => items.id === batter2Id)?.playerName || 'Non-Striker'
+    const batter1name = data?.batter1name ? data?.batter1name : playerdata?.data?.find((items) => items.id === batter1Id)?.playerName || 'Striker'
+    const batter2name = data?.batter2name ? data?.batter2name : playerdata?.data?.find((items) => items.id === batter2Id)?.playerName || 'Non-Striker'
     const totalRuns = batter1run + batter2run;
     const batter1Percentage = totalRuns === 0 ? 0 : (batter1run / totalRuns) * 100;
     const batter2Percentage = totalRuns === 0 ? 0 : (batter2run / totalRuns) * 100;

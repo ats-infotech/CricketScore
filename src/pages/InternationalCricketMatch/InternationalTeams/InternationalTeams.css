@@ -1,0 +1,10 @@
+.international-matches-teams-sub-section{
+    padding: 20px 20px 0px;
+}
+
+.international-matches-teams-tab {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 15px;
+}

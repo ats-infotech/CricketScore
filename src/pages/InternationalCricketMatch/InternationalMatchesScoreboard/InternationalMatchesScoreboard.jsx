@@ -1,15 +1,11 @@
 'use client'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import './InternationalMatchesScoreboard.css'
-import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { getLiveMatchesScorecard, getPastMatchesScorecard } from '@/redux/internationalMatchesSlices/matchesSlice'
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
-import Banner from '@/components/common/commonUi/Banner/Banner'
 import SwitchSelect from '@/components/common/commonUi/SwitchSelect/SwitchSelect'
 import SvgIcon from '@/assets/icons/SvgIcon'
 import ExtraSection from '@/components/common/commonUi/ExtrasSection/ExtraSection'
-import CommonBack from '@/components/common/commonUi/commonBack'
 
 const batterheader = [
     { label: 'Batter', icon: 'striker' },
@@ -190,10 +186,7 @@ const SecondInningsCommonSection = ({ battingData, bowlingData, extras, showAllB
 }
 
 const InternationalMatchesScoreboard = () => {
-    const dispatch = useDispatch()
-    const params = useParams()
-    const router = useRouter()
-    const { liveMatchScoreboard, liveMatches, recentMatches } = useSelector(state => state.matchData)
+    const { liveMatchScoreboard } = useSelector(state => state.matchData)
     const [teams, setTeams] = useState([])
     const [currentTeam, setCurrentTeam] = useState(0)
     const [showAllBatter, setShowAllBatter] = useState({
@@ -206,7 +199,6 @@ const InternationalMatchesScoreboard = () => {
     })
     let liveScorecard = liveMatchScoreboard?.response?.scorecard?.innings
     let InningsLength = Object?.keys(liveScorecard || {})?.length
-    let isExtraInnings = InningsLength > 2
     const isTeamABattingFirst = liveMatchScoreboard?.response?.scorecard?.teama?.team_id === liveMatchScoreboard?.response?.scorecard?.innings?.[0]?.batting_team_id
     let isTeam1PlayingThirdInnings = liveMatchScoreboard?.response?.scorecard?.teama?.team_id === liveMatchScoreboard?.response?.scorecard?.innings?.[2]?.batting_team_id
     let showFirstInningsTitle = InningsLength <= 2 ? false : InningsLength > 3 ? true
@@ -225,30 +217,6 @@ const InternationalMatchesScoreboard = () => {
         }
     }, [isTeamABattingFirst, liveMatchScoreboard])
 
-    useEffect(() => {
-        const handleApiCall = async () => {
-            const currentMatch = Array.isArray(liveMatches?.response?.items)
-                ? liveMatches.response.items.find(item => item?.match_id === parseInt(params?.matchId))
-                : null;
-
-            const pastMatch = Array.isArray(recentMatches?.response?.items)
-                ? recentMatches.response.items.find(item => item?.match_id === parseInt(params?.matchId))
-                : null;
-
-            if (currentMatch) {
-                await dispatch(getLiveMatchesScorecard(params?.matchId));
-            } else if (pastMatch) {
-                await dispatch(getPastMatchesScorecard(params?.matchId));
-            }
-        };
-
-        handleApiCall();
-    }, [liveMatches, recentMatches, params?.matchId, dispatch]);
-
-    const FirstInningsScores = parseScoreFull(liveScorecard?.[0]?.scores_full);
-    const SecondInningsScores = parseScoreFull(liveScorecard?.[1]?.scores_full);
-    const ThirdInningsScores = parseScoreFull(liveScorecard?.[2]?.scores_full);
-    const FourthInningsScores = parseScoreFull(liveScorecard?.[3]?.scores_full);
 
     useEffect(() => {
         const currentInnings = InningsLength
@@ -287,23 +255,7 @@ const InternationalMatchesScoreboard = () => {
 
     return (
         <Box className='international-matches-scorecard-main-section'>
-            <Box sx={{ position: 'absolute' }}>
-                <CommonBack onClick={() => router.push(`/`)} />
-            </Box>
-            <Banner
-                winnerName={liveMatchScoreboard?.response?.scorecard?.status_note}
-                image1={liveMatchScoreboard?.response?.scorecard?.teama?.logo_url}
-                image2={liveMatchScoreboard?.response?.scorecard?.teamb?.logo_url}
-                team1score={isTeamABattingFirst ? FirstInningsScores : SecondInningsScores}
-                team2score={isTeamABattingFirst ? SecondInningsScores : FirstInningsScores}
-                superover={isExtraInnings}
-                soteam1score={isTeam1PlayingThirdInnings ? ThirdInningsScores : FourthInningsScores}
-                soteam2score={isTeam1PlayingThirdInnings ? FourthInningsScores : ThirdInningsScores}
-                type={'score'}
-                soteam1scorehidden={isTeam1PlayingThirdInnings ? false : !isTeam1PlayingThirdInnings && InningsLength > 3 ? false : true}
-                soteam2scorehidden={isTeam1PlayingThirdInnings && InningsLength === 3 ? true : false}
-            />
-
+            
             <Box className='international-matches-scorecard-sub-section'>
                 <Box className='international-matches-teams-tab'>
                     <SwitchSelect options={teams} defaultSelected={currentTeam} onChange={(val) => handleSwitchTeam(val)} />

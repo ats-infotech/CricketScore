@@ -1,0 +1,6907 @@
+{
+  "93763": {
+    "status": "ok",
+    "response": {
+      "innings": [
+        {
+          "inning_id": 203589,
+          "number": 1,
+          "name": "Malaysia Inning",
+          "runs": 123,
+          "overs": "20",
+          "wickets": 9,
+          "status": 2,
+          "result": 4,
+          "batting_team_id": 9132,
+          "fielding_team_id": 112190,
+          "fows": [
+            {
+              "batsman_id": 52342,
+              "runs": 2,
+              "balls_faced": 7,
+              "how_out": "c M Tanveer b MM Baig",
+              "score_at_dismissal": 18,
+              "overs_at_dismissal": 2.1,
+              "order": 1
+            },
+            {
+              "batsman_id": 112110,
+              "runs": 23,
+              "balls_faced": 11,
+              "how_out": "b MRM Zaman",
+              "score_at_dismissal": 31,
+              "overs_at_dismissal": 3.4,
+              "order": 2
+            },
+            {
+              "batsman_id": 56611,
+              "runs": 4,
+              "balls_faced": 5,
+              "how_out": "c & b MM Baig",
+              "score_at_dismissal": 31,
+              "overs_at_dismissal": 4.1,
+              "order": 3
+            },
+            {
+              "batsman_id": 82818,
+              "runs": 5,
+              "balls_faced": 6,
+              "how_out": "c I Liyanage b MM Baig",
+              "score_at_dismissal": 40,
+              "overs_at_dismissal": 6.2,
+              "order": 4
+            },
+            {
+              "batsman_id": 121542,
+              "runs": 0,
+              "balls_faced": 2,
+              "how_out": "c M Asim Liaqat Ali b MM Baig",
+              "score_at_dismissal": 40,
+              "overs_at_dismissal": 6.4,
+              "order": 5
+            },
+            {
+              "batsman_id": 95997,
+              "runs": 3,
+              "balls_faced": 6,
+              "how_out": "runout (MRM Zaman)",
+              "score_at_dismissal": 51,
+              "overs_at_dismissal": 8.6,
+              "order": 6
+            },
+            {
+              "batsman_id": 61251,
+              "runs": 14,
+              "balls_faced": 21,
+              "how_out": "c & b O Ahmed",
+              "score_at_dismissal": 88,
+              "overs_at_dismissal": 15.4,
+              "order": 7
+            },
+            {
+              "batsman_id": 56157,
+              "runs": 0,
+              "balls_faced": 1,
+              "how_out": "lbw b O Ahmed",
+              "score_at_dismissal": 88,
+              "overs_at_dismissal": 15.5,
+              "order": 8
+            },
+            {
+              "batsman_id": 48270,
+              "runs": 0,
+              "balls_faced": 1,
+              "how_out": "c MM Baig b O Ahmed",
+              "score_at_dismissal": 88,
+              "overs_at_dismissal": 15.6,
+              "order": 9
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 3
+              },
+              {
+                "over": 2,
+                "runs": 15
+              },
+              {
+                "over": 3,
+                "runs": 3
+              },
+              {
+                "over": 4,
+                "runs": 10
+              },
+              {
+                "over": 5,
+                "runs": 7
+              },
+              {
+                "over": 6,
+                "runs": 1
+              },
+              {
+                "over": 7,
+                "runs": 4
+              },
+              {
+                "over": 8,
+                "runs": 2
+              },
+              {
+                "over": 9,
+                "runs": 6
+              },
+              {
+                "over": 10,
+                "runs": 3
+              },
+              {
+                "over": 11,
+                "runs": 9
+              },
+              {
+                "over": 12,
+                "runs": 9
+              },
+              {
+                "over": 13,
+                "runs": 3
+              },
+              {
+                "over": 14,
+                "runs": 3
+              },
+              {
+                "over": 15,
+                "runs": 7
+              },
+              {
+                "over": 16,
+                "runs": 3
+              },
+              {
+                "over": 17,
+                "runs": 11
+              },
+              {
+                "over": 18,
+                "runs": 5
+              },
+              {
+                "over": 19,
+                "runs": 6
+              },
+              {
+                "over": 20,
+                "runs": 13
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 3
+              },
+              {
+                "over": 2,
+                "runs": 18
+              },
+              {
+                "over": 3,
+                "runs": 21
+              },
+              {
+                "over": 4,
+                "runs": 31
+              },
+              {
+                "over": 5,
+                "runs": 38
+              },
+              {
+                "over": 6,
+                "runs": 39
+              },
+              {
+                "over": 7,
+                "runs": 43
+              },
+              {
+                "over": 8,
+                "runs": 45
+              },
+              {
+                "over": 9,
+                "runs": 51
+              },
+              {
+                "over": 10,
+                "runs": 54
+              },
+              {
+                "over": 11,
+                "runs": 63
+              },
+              {
+                "over": 12,
+                "runs": 72
+              },
+              {
+                "over": 13,
+                "runs": 75
+              },
+              {
+                "over": 14,
+                "runs": 78
+              },
+              {
+                "over": 15,
+                "runs": 85
+              },
+              {
+                "over": 16,
+                "runs": 88
+              },
+              {
+                "over": 17,
+                "runs": 99
+              },
+              {
+                "over": 18,
+                "runs": 104
+              },
+              {
+                "over": 19,
+                "runs": 110
+              },
+              {
+                "over": 20,
+                "runs": 123
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 3
+              },
+              {
+                "over": 2,
+                "runrate": 9
+              },
+              {
+                "over": 3,
+                "runrate": 7
+              },
+              {
+                "over": 4,
+                "runrate": 7.75
+              },
+              {
+                "over": 5,
+                "runrate": 7.6
+              },
+              {
+                "over": 6,
+                "runrate": 6.5
+              },
+              {
+                "over": 7,
+                "runrate": 6.14
+              },
+              {
+                "over": 8,
+                "runrate": 5.63
+              },
+              {
+                "over": 9,
+                "runrate": 5.67
+              },
+              {
+                "over": 10,
+                "runrate": 5.4
+              },
+              {
+                "over": 11,
+                "runrate": 5.73
+              },
+              {
+                "over": 12,
+                "runrate": 6
+              },
+              {
+                "over": 13,
+                "runrate": 5.77
+              },
+              {
+                "over": 14,
+                "runrate": 5.57
+              },
+              {
+                "over": 15,
+                "runrate": 5.67
+              },
+              {
+                "over": 16,
+                "runrate": 5.5
+              },
+              {
+                "over": 17,
+                "runrate": 5.82
+              },
+              {
+                "over": 18,
+                "runrate": 5.78
+              },
+              {
+                "over": 19,
+                "runrate": 5.79
+              },
+              {
+                "over": 20,
+                "runrate": 6.15
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 52342,
+                    "balls_faced": 7,
+                    "runs": 2,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 112110,
+                    "balls_faced": 6,
+                    "runs": 16,
+                    "fours": 2,
+                    "sixes": 1
+                  }
+                ],
+                "balls_faced": 13,
+                "runs": 18,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 112110,
+                    "balls_faced": 5,
+                    "runs": 7,
+                    "fours": 0,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 56611,
+                    "balls_faced": 4,
+                    "runs": 4,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 9,
+                "runs": 13,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 56611,
+                    "balls_faced": 1,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 2,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 3,
+                "runs": 0,
+                "order": 3
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 7,
+                    "runs": 3,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 82818,
+                    "balls_faced": 6,
+                    "runs": 5,
+                    "fours": 1,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 13,
+                "runs": 9,
+                "order": 4
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 0,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 121542,
+                    "balls_faced": 2,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 2,
+                "runs": 0,
+                "order": 5
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 8,
+                    "runs": 8,
+                    "fours": 1,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 95997,
+                    "balls_faced": 6,
+                    "runs": 3,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 14,
+                "runs": 11,
+                "order": 6
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 19,
+                    "runs": 22,
+                    "fours": 1,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 61251,
+                    "balls_faced": 21,
+                    "runs": 14,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 40,
+                "runs": 37,
+                "order": 7
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 0,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 56157,
+                    "balls_faced": 1,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 1,
+                "runs": 0,
+                "order": 8
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 0,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 48270,
+                    "balls_faced": 1,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 1,
+                "runs": 0,
+                "order": 9
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 18,
+                    "runs": 29,
+                    "fours": 3,
+                    "sixes": 2
+                  },
+                  {
+                    "batsman_id": 101605,
+                    "balls_faced": 6,
+                    "runs": 5,
+                    "fours": 1,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 24,
+                "runs": 35,
+                "order": 10
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 62
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 37
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 6
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 1
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 9
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 5
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 1
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 6
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 1
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 0
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 1
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "52342",
+                "bowler_id": "62184",
+                "balls": "6",
+                "runs": "1",
+                "run0": "5",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112110",
+                "bowler_id": "62184",
+                "balls": "3",
+                "runs": "2",
+                "run0": "2",
+                "run1": "0",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "52342",
+                "bowler_id": "111333",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112110",
+                "bowler_id": "111333",
+                "balls": "5",
+                "runs": "14",
+                "run0": "2",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "62184",
+                "balls": "4",
+                "runs": "3",
+                "run0": "2",
+                "run1": "1",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "147826",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112110",
+                "bowler_id": "147826",
+                "balls": "3",
+                "runs": "7",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "147826",
+                "balls": "13",
+                "runs": "6",
+                "run0": "7",
+                "run1": "6",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "82818",
+                "bowler_id": "62184",
+                "balls": "4",
+                "runs": "5",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "62184",
+                "balls": "4",
+                "runs": "4",
+                "run0": "1",
+                "run1": "2",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "82818",
+                "bowler_id": "147826",
+                "balls": "2",
+                "runs": "0",
+                "run0": "2",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "121542",
+                "bowler_id": "62184",
+                "balls": "2",
+                "runs": "0",
+                "run0": "2",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95997",
+                "bowler_id": "62184",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95997",
+                "bowler_id": "96066",
+                "balls": "3",
+                "runs": "1",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "96066",
+                "balls": "11",
+                "runs": "7",
+                "run0": "7",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "152300",
+                "balls": "13",
+                "runs": "25",
+                "run0": "5",
+                "run1": "3",
+                "run2": "1",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "2",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95997",
+                "bowler_id": "152300",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "96066",
+                "balls": "8",
+                "runs": "4",
+                "run0": "5",
+                "run1": "2",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "152300",
+                "balls": "3",
+                "runs": "1",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "147826",
+                "balls": "5",
+                "runs": "7",
+                "run0": "1",
+                "run1": "2",
+                "run2": "1",
+                "run3": "1",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "125816",
+                "balls": "7",
+                "runs": "8",
+                "run0": "2",
+                "run1": "4",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "125816",
+                "balls": "5",
+                "runs": "2",
+                "run0": "3",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56157",
+                "bowler_id": "96066",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48270",
+                "bowler_id": "96066",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "111333",
+                "balls": "6",
+                "runs": "12",
+                "run0": "2",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "101605",
+                "bowler_id": "111333",
+                "balls": "6",
+                "runs": "5",
+                "run0": "4",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 5
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 0
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 0
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "inning_id": 203593,
+          "number": 2,
+          "name": "Qatar Inning",
+          "runs": 124,
+          "overs": "17.1",
+          "wickets": 2,
+          "status": 2,
+          "result": 3,
+          "batting_team_id": 112190,
+          "fielding_team_id": 9132,
+          "fows": [
+            {
+              "batsman_id": 43747,
+              "runs": 16,
+              "balls_faced": 28,
+              "how_out": "c Virandeep Singh b Khizar Hayat",
+              "score_at_dismissal": 58,
+              "overs_at_dismissal": 9.4,
+              "order": 1
+            },
+            {
+              "batsman_id": 125952,
+              "runs": 7,
+              "balls_faced": 12,
+              "how_out": "c M Syahadat b Virandeep Singh",
+              "score_at_dismissal": 69,
+              "overs_at_dismissal": 12.2,
+              "order": 2
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 4
+              },
+              {
+                "over": 2,
+                "runs": 3
+              },
+              {
+                "over": 3,
+                "runs": 4
+              },
+              {
+                "over": 4,
+                "runs": 8
+              },
+              {
+                "over": 5,
+                "runs": 2
+              },
+              {
+                "over": 6,
+                "runs": 6
+              },
+              {
+                "over": 7,
+                "runs": 6
+              },
+              {
+                "over": 8,
+                "runs": 6
+              },
+              {
+                "over": 9,
+                "runs": 10
+              },
+              {
+                "over": 10,
+                "runs": 9
+              },
+              {
+                "over": 11,
+                "runs": 7
+              },
+              {
+                "over": 12,
+                "runs": 4
+              },
+              {
+                "over": 13,
+                "runs": 2
+              },
+              {
+                "over": 14,
+                "runs": 9
+              },
+              {
+                "over": 15,
+                "runs": 8
+              },
+              {
+                "over": 16,
+                "runs": 17
+              },
+              {
+                "over": 17,
+                "runs": 13
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 4
+              },
+              {
+                "over": 2,
+                "runs": 7
+              },
+              {
+                "over": 3,
+                "runs": 11
+              },
+              {
+                "over": 4,
+                "runs": 19
+              },
+              {
+                "over": 5,
+                "runs": 21
+              },
+              {
+                "over": 6,
+                "runs": 27
+              },
+              {
+                "over": 7,
+                "runs": 33
+              },
+              {
+                "over": 8,
+                "runs": 39
+              },
+              {
+                "over": 9,
+                "runs": 49
+              },
+              {
+                "over": 10,
+                "runs": 58
+              },
+              {
+                "over": 11,
+                "runs": 65
+              },
+              {
+                "over": 12,
+                "runs": 69
+              },
+              {
+                "over": 13,
+                "runs": 71
+              },
+              {
+                "over": 14,
+                "runs": 80
+              },
+              {
+                "over": 15,
+                "runs": 88
+              },
+              {
+                "over": 16,
+                "runs": 105
+              },
+              {
+                "over": 17,
+                "runs": 118
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 4
+              },
+              {
+                "over": 2,
+                "runrate": 3.5
+              },
+              {
+                "over": 3,
+                "runrate": 3.67
+              },
+              {
+                "over": 4,
+                "runrate": 4.75
+              },
+              {
+                "over": 5,
+                "runrate": 4.2
+              },
+              {
+                "over": 6,
+                "runrate": 4.5
+              },
+              {
+                "over": 7,
+                "runrate": 4.71
+              },
+              {
+                "over": 8,
+                "runrate": 4.88
+              },
+              {
+                "over": 9,
+                "runrate": 5.44
+              },
+              {
+                "over": 10,
+                "runrate": 5.8
+              },
+              {
+                "over": 11,
+                "runrate": 5.91
+              },
+              {
+                "over": 12,
+                "runrate": 5.75
+              },
+              {
+                "over": 13,
+                "runrate": 5.46
+              },
+              {
+                "over": 14,
+                "runrate": 5.71
+              },
+              {
+                "over": 15,
+                "runrate": 5.87
+              },
+              {
+                "over": 16,
+                "runrate": 6.56
+              },
+              {
+                "over": 17,
+                "runrate": 6.94
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 43747,
+                    "balls_faced": 28,
+                    "runs": 16,
+                    "fours": 2,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 152299,
+                    "balls_faced": 30,
+                    "runs": 41,
+                    "fours": 2,
+                    "sixes": 3
+                  }
+                ],
+                "balls_faced": 58,
+                "runs": 58,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 152299,
+                    "balls_faced": 4,
+                    "runs": 4,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 125952,
+                    "balls_faced": 12,
+                    "runs": 7,
+                    "fours": 1,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 16,
+                "runs": 11,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 152299,
+                    "balls_faced": 10,
+                    "runs": 20,
+                    "fours": 0,
+                    "sixes": 2
+                  },
+                  {
+                    "batsman_id": 62184,
+                    "balls_faced": 19,
+                    "runs": 35,
+                    "fours": 2,
+                    "sixes": 3
+                  }
+                ],
+                "balls_faced": 29,
+                "runs": 55,
+                "order": 3
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 47
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 35
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 6
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 0
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 7
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 8
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 0
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 2
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 0
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 0
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 0
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "43747",
+                "bowler_id": "52342",
+                "balls": "6",
+                "runs": "4",
+                "run0": "5",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152299",
+                "bowler_id": "101605",
+                "balls": "9",
+                "runs": "23",
+                "run0": "2",
+                "run1": "3",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "3",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "43747",
+                "bowler_id": "101605",
+                "balls": "6",
+                "runs": "1",
+                "run0": "5",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152299",
+                "bowler_id": "52342",
+                "balls": "6",
+                "runs": "4",
+                "run0": "5",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152299",
+                "bowler_id": "95997",
+                "balls": "10",
+                "runs": "14",
+                "run0": "2",
+                "run1": "6",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "43747",
+                "bowler_id": "95997",
+                "balls": "11",
+                "runs": "6",
+                "run0": "6",
+                "run1": "4",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152299",
+                "bowler_id": "56157",
+                "balls": "13",
+                "runs": "18",
+                "run0": "5",
+                "run1": "4",
+                "run2": "2",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "43747",
+                "bowler_id": "56157",
+                "balls": "5",
+                "runs": "5",
+                "run0": "3",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "125952",
+                "bowler_id": "56157",
+                "balls": "6",
+                "runs": "2",
+                "run0": "4",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152299",
+                "bowler_id": "48266",
+                "balls": "4",
+                "runs": "4",
+                "run0": "0",
+                "run1": "4",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "125952",
+                "bowler_id": "48266",
+                "balls": "6",
+                "runs": "5",
+                "run0": "4",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "62184",
+                "bowler_id": "48266",
+                "balls": "8",
+                "runs": "13",
+                "run0": "3",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152299",
+                "bowler_id": "121542",
+                "balls": "2",
+                "runs": "2",
+                "run0": "0",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "62184",
+                "bowler_id": "121542",
+                "balls": "4",
+                "runs": "7",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "62184",
+                "bowler_id": "95997",
+                "balls": "3",
+                "runs": "5",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "62184",
+                "bowler_id": "101605",
+                "balls": "3",
+                "runs": "4",
+                "run0": "0",
+                "run1": "2",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "62184",
+                "bowler_id": "52342",
+                "balls": "1",
+                "runs": "6",
+                "run0": "0",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 1
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 0
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 0
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 0
+              }
+            ]
+          }
+        }
+      ],
+      "teams": [
+        {
+          "team_id": 9132,
+          "name": "Malaysia",
+          "short_name": "MAL",
+          "country_iso": "my",
+          "type": "country",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2023/05/Malaysia.png"
+        },
+        {
+          "team_id": 112190,
+          "name": "Qatar",
+          "short_name": "QAT",
+          "country_iso": "qa",
+          "type": "country",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2023/05/Quatar.png"
+        }
+      ],
+      "players": [
+        {
+          "player_id": 43747,
+          "name": "Imal Liyanage",
+          "short_name": "I Liyanage",
+          "country_iso": "lk",
+          "logo_url": ""
+        },
+        {
+          "player_id": 48266,
+          "name": "Virandeep Singh",
+          "short_name": "Virandeep Singh",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 48270,
+          "name": "Ainool Hafizs",
+          "short_name": "Ainool Hafizs",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 48278,
+          "name": "Muhammad Wafiq Zarbani",
+          "short_name": "Muhammad Wafiq Zarbani",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 52342,
+          "name": "Syed Aziz",
+          "short_name": "SAS Aziz",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 52345,
+          "name": "Zubaidi Zulkifle",
+          "short_name": "Zubaidi Zulkifle",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 52348,
+          "name": "Pavandeep Singh",
+          "short_name": "Pavandeep Singh",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 56157,
+          "name": "Khizar Hayat",
+          "short_name": "Khizar Hayat",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 56611,
+          "name": "Ahmad Faiz",
+          "short_name": "A Faiz",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 61251,
+          "name": "Sharvin Muniandy",
+          "short_name": "Sharvin Muniandy",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 62184,
+          "name": "Mirza Mohammed Baig",
+          "short_name": "MM Baig",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 82818,
+          "name": "Muhamad Syahadat Ramli",
+          "short_name": "M Syahadat",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 94483,
+          "name": "Muhammad Tanveer",
+          "short_name": "M Tanveer",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95989,
+          "name": "Aslam Khan Malik",
+          "short_name": "A Khan Malik",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95991,
+          "name": "Muhammad Amir Azim",
+          "short_name": "M Azim",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95997,
+          "name": "Vijay Unni",
+          "short_name": "V Unni",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 96062,
+          "name": "Saqlain Arshad",
+          "short_name": "S Arshad",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 96066,
+          "name": "Owais Ahmed",
+          "short_name": "O Ahmed",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 101605,
+          "name": "Arif Ullah",
+          "short_name": "Arif Ullah",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 111333,
+          "name": "Muhammad Ikramullah",
+          "short_name": "M Ikramullah",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 111334,
+          "name": "Muhammad Murad",
+          "short_name": "M Murad",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 112110,
+          "name": "Mohammad Haziq Aiman",
+          "short_name": "M Aiman",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 121458,
+          "name": "Amir Khan Malik",
+          "short_name": "A K Malik",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 121542,
+          "name": "Ahmed Aqeel Wahid",
+          "short_name": "A A Wahid",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 125816,
+          "name": "Daniel Archer",
+          "short_name": "Daniel Archer",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 125945,
+          "name": "Amir Farooq",
+          "short_name": "Amir Farooq",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 125950,
+          "name": "Shahzaib Jamil Ahmed",
+          "short_name": "S Ahmed",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 125952,
+          "name": "Muhammad Asim Liaqat Ali",
+          "short_name": "M Asim Liaqat Ali",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 125973,
+          "name": "Arif Nasir Uddin",
+          "short_name": "Arif Nasir Uddin",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 147826,
+          "name": "Mujeeb ur Rehman Muhammad Zaman",
+          "short_name": "MRM Zaman",
+          "country_iso": "qa",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152299,
+          "name": "Zubair Ali",
+          "short_name": "Zubair Ali",
+          "country_iso": "",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152300,
+          "name": "Shariq Munir",
+          "short_name": "S Munir",
+          "country_iso": "qa",
+          "logo_url": ""
+        }
+      ]
+    },
+    "etag": "fdeb997f98904fdc9a620f8d91a2261b",
+    "modified": "2025-10-10 06:57:02",
+    "datetime": "2025-10-10 06:57:02",
+    "api_version": "5.0.12"
+  },
+  "93766": {
+    "status": "ok",
+    "response": {
+      "innings": [
+        {
+          "inning_id": 203635,
+          "number": 1,
+          "name": " Malaysia Inning",
+          "runs": 161,
+          "overs": "20",
+          "wickets": 5,
+          "status": 2,
+          "result": 4,
+          "batting_team_id": 9132,
+          "fielding_team_id": 15,
+          "fows": [
+            {
+              "batsman_id": 95989,
+              "runs": 6,
+              "balls_faced": 5,
+              "how_out": "b MD R Khan",
+              "score_at_dismissal": 23,
+              "overs_at_dismissal": 2.3,
+              "order": 1
+            },
+            {
+              "batsman_id": 52342,
+              "runs": 4,
+              "balls_faced": 9,
+              "how_out": "c W Muhammad b D Parashar",
+              "score_at_dismissal": 48,
+              "overs_at_dismissal": 5.5,
+              "order": 2
+            },
+            {
+              "batsman_id": 112110,
+              "runs": 41,
+              "balls_faced": 31,
+              "how_out": "b H Ali",
+              "score_at_dismissal": 55,
+              "overs_at_dismissal": 7.6,
+              "order": 3
+            },
+            {
+              "batsman_id": 48266,
+              "runs": 8,
+              "balls_faced": 14,
+              "how_out": "runout (M Irfan / R Chopra)",
+              "score_at_dismissal": 83,
+              "overs_at_dismissal": 12.1,
+              "order": 4
+            },
+            {
+              "batsman_id": 82818,
+              "runs": 0,
+              "balls_faced": 1,
+              "how_out": "c H Ali b M Irfan",
+              "score_at_dismissal": 84,
+              "overs_at_dismissal": 12.3,
+              "order": 5
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 11
+              },
+              {
+                "over": 2,
+                "runs": 11
+              },
+              {
+                "over": 3,
+                "runs": 4
+              },
+              {
+                "over": 4,
+                "runs": 5
+              },
+              {
+                "over": 5,
+                "runs": 14
+              },
+              {
+                "over": 6,
+                "runs": 3
+              },
+              {
+                "over": 7,
+                "runs": 5
+              },
+              {
+                "over": 8,
+                "runs": 2
+              },
+              {
+                "over": 9,
+                "runs": 8
+              },
+              {
+                "over": 10,
+                "runs": 5
+              },
+              {
+                "over": 11,
+                "runs": 5
+              },
+              {
+                "over": 12,
+                "runs": 10
+              },
+              {
+                "over": 13,
+                "runs": 2
+              },
+              {
+                "over": 14,
+                "runs": 5
+              },
+              {
+                "over": 15,
+                "runs": 12
+              },
+              {
+                "over": 16,
+                "runs": 12
+              },
+              {
+                "over": 17,
+                "runs": 7
+              },
+              {
+                "over": 18,
+                "runs": 9
+              },
+              {
+                "over": 19,
+                "runs": 7
+              },
+              {
+                "over": 20,
+                "runs": 24
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 11
+              },
+              {
+                "over": 2,
+                "runs": 22
+              },
+              {
+                "over": 3,
+                "runs": 26
+              },
+              {
+                "over": 4,
+                "runs": 31
+              },
+              {
+                "over": 5,
+                "runs": 45
+              },
+              {
+                "over": 6,
+                "runs": 48
+              },
+              {
+                "over": 7,
+                "runs": 53
+              },
+              {
+                "over": 8,
+                "runs": 55
+              },
+              {
+                "over": 9,
+                "runs": 63
+              },
+              {
+                "over": 10,
+                "runs": 68
+              },
+              {
+                "over": 11,
+                "runs": 73
+              },
+              {
+                "over": 12,
+                "runs": 83
+              },
+              {
+                "over": 13,
+                "runs": 85
+              },
+              {
+                "over": 14,
+                "runs": 90
+              },
+              {
+                "over": 15,
+                "runs": 102
+              },
+              {
+                "over": 16,
+                "runs": 114
+              },
+              {
+                "over": 17,
+                "runs": 121
+              },
+              {
+                "over": 18,
+                "runs": 130
+              },
+              {
+                "over": 19,
+                "runs": 137
+              },
+              {
+                "over": 20,
+                "runs": 161
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 11
+              },
+              {
+                "over": 2,
+                "runrate": 11
+              },
+              {
+                "over": 3,
+                "runrate": 8.67
+              },
+              {
+                "over": 4,
+                "runrate": 7.75
+              },
+              {
+                "over": 5,
+                "runrate": 9
+              },
+              {
+                "over": 6,
+                "runrate": 8
+              },
+              {
+                "over": 7,
+                "runrate": 7.57
+              },
+              {
+                "over": 8,
+                "runrate": 6.88
+              },
+              {
+                "over": 9,
+                "runrate": 7
+              },
+              {
+                "over": 10,
+                "runrate": 6.8
+              },
+              {
+                "over": 11,
+                "runrate": 6.64
+              },
+              {
+                "over": 12,
+                "runrate": 6.92
+              },
+              {
+                "over": 13,
+                "runrate": 6.54
+              },
+              {
+                "over": 14,
+                "runrate": 6.43
+              },
+              {
+                "over": 15,
+                "runrate": 6.8
+              },
+              {
+                "over": 16,
+                "runrate": 7.13
+              },
+              {
+                "over": 17,
+                "runrate": 7.12
+              },
+              {
+                "over": 18,
+                "runrate": 7.22
+              },
+              {
+                "over": 19,
+                "runrate": 7.21
+              },
+              {
+                "over": 20,
+                "runrate": 8.05
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 112110,
+                    "balls_faced": 10,
+                    "runs": 17,
+                    "fours": 2,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 95989,
+                    "balls_faced": 5,
+                    "runs": 6,
+                    "fours": 0,
+                    "sixes": 1
+                  }
+                ],
+                "balls_faced": 15,
+                "runs": 23,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 112110,
+                    "balls_faced": 11,
+                    "runs": 19,
+                    "fours": 3,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 52342,
+                    "balls_faced": 9,
+                    "runs": 4,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 20,
+                "runs": 25,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 112110,
+                    "balls_faced": 10,
+                    "runs": 5,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 56611,
+                    "balls_faced": 3,
+                    "runs": 2,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 13,
+                "runs": 7,
+                "order": 3
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 56611,
+                    "balls_faced": 11,
+                    "runs": 19,
+                    "fours": 0,
+                    "sixes": 2
+                  },
+                  {
+                    "batsman_id": 48266,
+                    "balls_faced": 14,
+                    "runs": 8,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 25,
+                "runs": 28,
+                "order": 4
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 56611,
+                    "balls_faced": 1,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 82818,
+                    "balls_faced": 1,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 2,
+                "runs": 1,
+                "order": 5
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 56611,
+                    "balls_faced": 24,
+                    "runs": 32,
+                    "fours": 2,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 61251,
+                    "balls_faced": 22,
+                    "runs": 41,
+                    "fours": 2,
+                    "sixes": 3
+                  }
+                ],
+                "balls_faced": 46,
+                "runs": 77,
+                "order": 6
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 40
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 58
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 6
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 0
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 9
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 8
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 2
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 2
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 0
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 0
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 1
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "112110",
+                "bowler_id": "96311",
+                "balls": "5",
+                "runs": "11",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95989",
+                "bowler_id": "96311",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112110",
+                "bowler_id": "135295",
+                "balls": "9",
+                "runs": "7",
+                "run0": "6",
+                "run1": "1",
+                "run2": "1",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95989",
+                "bowler_id": "135295",
+                "balls": "3",
+                "runs": "6",
+                "run0": "2",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112110",
+                "bowler_id": "136199",
+                "balls": "8",
+                "runs": "15",
+                "run0": "2",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "3",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95989",
+                "bowler_id": "136199",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "52342",
+                "bowler_id": "136199",
+                "balls": "3",
+                "runs": "2",
+                "run0": "1",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112110",
+                "bowler_id": "113322",
+                "balls": "5",
+                "runs": "5",
+                "run0": "1",
+                "run1": "3",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "52342",
+                "bowler_id": "113322",
+                "balls": "6",
+                "runs": "2",
+                "run0": "4",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "113322",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112110",
+                "bowler_id": "94025",
+                "balls": "4",
+                "runs": "3",
+                "run0": "1",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "94025",
+                "balls": "13",
+                "runs": "26",
+                "run0": "2",
+                "run1": "8",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "3",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "94025",
+                "balls": "5",
+                "runs": "3",
+                "run0": "2",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "135295",
+                "balls": "4",
+                "runs": "3",
+                "run0": "1",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "135295",
+                "balls": "5",
+                "runs": "5",
+                "run0": "1",
+                "run1": "3",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "96311",
+                "balls": "4",
+                "runs": "2",
+                "run0": "2",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "96311",
+                "balls": "8",
+                "runs": "9",
+                "run0": "0",
+                "run1": "7",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48266",
+                "bowler_id": "138296",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "138296",
+                "balls": "7",
+                "runs": "11",
+                "run0": "2",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "82818",
+                "bowler_id": "138296",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "138296",
+                "balls": "3",
+                "runs": "3",
+                "run0": "0",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "135295",
+                "balls": "3",
+                "runs": "1",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "94025",
+                "balls": "2",
+                "runs": "2",
+                "run0": "0",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "96311",
+                "balls": "6",
+                "runs": "7",
+                "run0": "2",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "56611",
+                "bowler_id": "136199",
+                "balls": "5",
+                "runs": "3",
+                "run0": "2",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "61251",
+                "bowler_id": "136199",
+                "balls": "8",
+                "runs": "28",
+                "run0": "0",
+                "run1": "2",
+                "run2": "2",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "3",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 4
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 1
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 1
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "inning_id": 203638,
+          "number": 2,
+          "name": "United Arab Emirates Inning",
+          "runs": 167,
+          "overs": "19.2",
+          "wickets": 4,
+          "status": 2,
+          "result": 3,
+          "batting_team_id": 15,
+          "fielding_team_id": 9132,
+          "fows": [
+            {
+              "batsman_id": 138296,
+              "runs": 11,
+              "balls_faced": 8,
+              "how_out": "c Virandeep Singh b SAS Aziz",
+              "score_at_dismissal": 23,
+              "overs_at_dismissal": 2.5,
+              "order": 1
+            },
+            {
+              "batsman_id": 94179,
+              "runs": 34,
+              "balls_faced": 31,
+              "how_out": "c (sub M Azim) b SAS Aziz",
+              "score_at_dismissal": 117,
+              "overs_at_dismissal": 14.4,
+              "order": 2
+            },
+            {
+              "batsman_id": 101175,
+              "runs": 84,
+              "balls_faced": 53,
+              "how_out": "b Arif Ullah",
+              "score_at_dismissal": 139,
+              "overs_at_dismissal": 16.3,
+              "order": 3
+            },
+            {
+              "batsman_id": 112834,
+              "runs": 3,
+              "balls_faced": 3,
+              "how_out": "c Virandeep Singh b V Unni",
+              "score_at_dismissal": 145,
+              "overs_at_dismissal": 17.5,
+              "order": 4
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 2
+              },
+              {
+                "over": 2,
+                "runs": 12
+              },
+              {
+                "over": 3,
+                "runs": 9
+              },
+              {
+                "over": 4,
+                "runs": 3
+              },
+              {
+                "over": 5,
+                "runs": 8
+              },
+              {
+                "over": 6,
+                "runs": 15
+              },
+              {
+                "over": 7,
+                "runs": 3
+              },
+              {
+                "over": 8,
+                "runs": 5
+              },
+              {
+                "over": 9,
+                "runs": 11
+              },
+              {
+                "over": 10,
+                "runs": 6
+              },
+              {
+                "over": 11,
+                "runs": 11
+              },
+              {
+                "over": 12,
+                "runs": 6
+              },
+              {
+                "over": 13,
+                "runs": 10
+              },
+              {
+                "over": 14,
+                "runs": 13
+              },
+              {
+                "over": 15,
+                "runs": 9
+              },
+              {
+                "over": 16,
+                "runs": 6
+              },
+              {
+                "over": 17,
+                "runs": 14
+              },
+              {
+                "over": 18,
+                "runs": 3
+              },
+              {
+                "over": 19,
+                "runs": 15
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 2
+              },
+              {
+                "over": 2,
+                "runs": 14
+              },
+              {
+                "over": 3,
+                "runs": 23
+              },
+              {
+                "over": 4,
+                "runs": 26
+              },
+              {
+                "over": 5,
+                "runs": 34
+              },
+              {
+                "over": 6,
+                "runs": 49
+              },
+              {
+                "over": 7,
+                "runs": 52
+              },
+              {
+                "over": 8,
+                "runs": 57
+              },
+              {
+                "over": 9,
+                "runs": 68
+              },
+              {
+                "over": 10,
+                "runs": 74
+              },
+              {
+                "over": 11,
+                "runs": 85
+              },
+              {
+                "over": 12,
+                "runs": 91
+              },
+              {
+                "over": 13,
+                "runs": 101
+              },
+              {
+                "over": 14,
+                "runs": 114
+              },
+              {
+                "over": 15,
+                "runs": 123
+              },
+              {
+                "over": 16,
+                "runs": 129
+              },
+              {
+                "over": 17,
+                "runs": 143
+              },
+              {
+                "over": 18,
+                "runs": 146
+              },
+              {
+                "over": 19,
+                "runs": 161
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 2
+              },
+              {
+                "over": 2,
+                "runrate": 7
+              },
+              {
+                "over": 3,
+                "runrate": 7.67
+              },
+              {
+                "over": 4,
+                "runrate": 6.5
+              },
+              {
+                "over": 5,
+                "runrate": 6.8
+              },
+              {
+                "over": 6,
+                "runrate": 8.17
+              },
+              {
+                "over": 7,
+                "runrate": 7.43
+              },
+              {
+                "over": 8,
+                "runrate": 7.13
+              },
+              {
+                "over": 9,
+                "runrate": 7.56
+              },
+              {
+                "over": 10,
+                "runrate": 7.4
+              },
+              {
+                "over": 11,
+                "runrate": 7.73
+              },
+              {
+                "over": 12,
+                "runrate": 7.58
+              },
+              {
+                "over": 13,
+                "runrate": 7.77
+              },
+              {
+                "over": 14,
+                "runrate": 8.14
+              },
+              {
+                "over": 15,
+                "runrate": 8.2
+              },
+              {
+                "over": 16,
+                "runrate": 8.06
+              },
+              {
+                "over": 17,
+                "runrate": 8.41
+              },
+              {
+                "over": 18,
+                "runrate": 8.11
+              },
+              {
+                "over": 19,
+                "runrate": 8.47
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 101175,
+                    "balls_faced": 9,
+                    "runs": 11,
+                    "fours": 2,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 138296,
+                    "balls_faced": 8,
+                    "runs": 11,
+                    "fours": 2,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 17,
+                "runs": 23,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 101175,
+                    "balls_faced": 40,
+                    "runs": 59,
+                    "fours": 5,
+                    "sixes": 3
+                  },
+                  {
+                    "batsman_id": 94179,
+                    "balls_faced": 31,
+                    "runs": 34,
+                    "fours": 2,
+                    "sixes": 1
+                  }
+                ],
+                "balls_faced": 71,
+                "runs": 94,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 101175,
+                    "balls_faced": 4,
+                    "runs": 14,
+                    "fours": 2,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 48702,
+                    "balls_faced": 7,
+                    "runs": 7,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 11,
+                "runs": 22,
+                "order": 3
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48702,
+                    "balls_faced": 5,
+                    "runs": 2,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 112834,
+                    "balls_faced": 3,
+                    "runs": 3,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 8,
+                "runs": 6,
+                "order": 4
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 48702,
+                    "balls_faced": 4,
+                    "runs": 9,
+                    "fours": 0,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 96618,
+                    "balls_faced": 5,
+                    "runs": 12,
+                    "fours": 1,
+                    "sixes": 1
+                  }
+                ],
+                "balls_faced": 9,
+                "runs": 22,
+                "order": 5
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 45
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 37
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 12
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 1
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 14
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 7
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 1
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 3
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 0
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 0
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 0
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "101175",
+                "bowler_id": "52342",
+                "balls": "9",
+                "runs": "14",
+                "run0": "4",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "3",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "138296",
+                "bowler_id": "52342",
+                "balls": "3",
+                "runs": "1",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "138296",
+                "bowler_id": "101605",
+                "balls": "5",
+                "runs": "10",
+                "run0": "2",
+                "run1": "0",
+                "run2": "1",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "101175",
+                "bowler_id": "101605",
+                "balls": "8",
+                "runs": "20",
+                "run0": "1",
+                "run1": "2",
+                "run2": "2",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "94179",
+                "bowler_id": "52342",
+                "balls": "5",
+                "runs": "2",
+                "run0": "4",
+                "run1": "0",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "101175",
+                "bowler_id": "61251",
+                "balls": "5",
+                "runs": "2",
+                "run0": "3",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "94179",
+                "bowler_id": "61251",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "101175",
+                "bowler_id": "95997",
+                "balls": "11",
+                "runs": "16",
+                "run0": "6",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "94179",
+                "bowler_id": "56157",
+                "balls": "7",
+                "runs": "13",
+                "run0": "2",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "101175",
+                "bowler_id": "56157",
+                "balls": "11",
+                "runs": "26",
+                "run0": "3",
+                "run1": "2",
+                "run2": "2",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "2",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "94179",
+                "bowler_id": "95997",
+                "balls": "7",
+                "runs": "6",
+                "run0": "3",
+                "run1": "3",
+                "run2": "0",
+                "run3": "1",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "94179",
+                "bowler_id": "48266",
+                "balls": "9",
+                "runs": "11",
+                "run0": "2",
+                "run1": "5",
+                "run2": "1",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "101175",
+                "bowler_id": "48266",
+                "balls": "9",
+                "runs": "6",
+                "run0": "3",
+                "run1": "6",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "94179",
+                "bowler_id": "101605",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48702",
+                "bowler_id": "52342",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48702",
+                "bowler_id": "48266",
+                "balls": "6",
+                "runs": "6",
+                "run0": "3",
+                "run1": "0",
+                "run2": "3",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112834",
+                "bowler_id": "101605",
+                "balls": "2",
+                "runs": "3",
+                "run0": "0",
+                "run1": "1",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48702",
+                "bowler_id": "101605",
+                "balls": "3",
+                "runs": "4",
+                "run0": "0",
+                "run1": "2",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48702",
+                "bowler_id": "95997",
+                "balls": "4",
+                "runs": "1",
+                "run0": "3",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "112834",
+                "bowler_id": "95997",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "96618",
+                "bowler_id": "95997",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "96618",
+                "bowler_id": "101605",
+                "balls": "4",
+                "runs": "11",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "48702",
+                "bowler_id": "56157",
+                "balls": "2",
+                "runs": "6",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 4
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 0
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 0
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 1
+              }
+            ]
+          }
+        }
+      ],
+      "teams": [
+        {
+          "team_id": 15,
+          "name": "United Arab Emirates",
+          "short_name": "UAE",
+          "country_iso": "ae",
+          "type": "country",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2023/05/United_Arab_Emirates.png"
+        },
+        {
+          "team_id": 9132,
+          "name": "Malaysia",
+          "short_name": "MAL",
+          "country_iso": "my",
+          "type": "country",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2023/05/Malaysia.png"
+        }
+      ],
+      "players": [
+        {
+          "player_id": 48266,
+          "name": "Virandeep Singh",
+          "short_name": "Virandeep Singh",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 48270,
+          "name": "Ainool Hafizs",
+          "short_name": "Ainool Hafizs",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 48278,
+          "name": "Muhammad Wafiq Zarbani",
+          "short_name": "Muhammad Wafiq Zarbani",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 48702,
+          "name": "Harshit Kaushik",
+          "short_name": "H Kaushik",
+          "country_iso": "in",
+          "logo_url": ""
+        },
+        {
+          "player_id": 52342,
+          "name": "Syed Aziz",
+          "short_name": "SAS Aziz",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 52345,
+          "name": "Zubaidi Zulkifle",
+          "short_name": "Zubaidi Zulkifle",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 52348,
+          "name": "Pavandeep Singh",
+          "short_name": "Pavandeep Singh",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 56157,
+          "name": "Khizar Hayat",
+          "short_name": "Khizar Hayat",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 56611,
+          "name": "Ahmad Faiz",
+          "short_name": "A Faiz",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 61251,
+          "name": "Sharvin Muniandy",
+          "short_name": "Sharvin Muniandy",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 82818,
+          "name": "Muhamad Syahadat Ramli",
+          "short_name": "M Syahadat",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 94025,
+          "name": "Simarjeet Singh",
+          "short_name": "S Singh",
+          "country_iso": "in",
+          "logo_url": ""
+        },
+        {
+          "player_id": 94173,
+          "name": "Jonathan Figy",
+          "short_name": "J Figy",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 94179,
+          "name": "Alishan Sharafu",
+          "short_name": "A Sharafu",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95989,
+          "name": "Aslam Khan Malik",
+          "short_name": "A Khan Malik",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95991,
+          "name": "Muhammad Amir Azim",
+          "short_name": "M Azim",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95997,
+          "name": "Vijay Unni",
+          "short_name": "V Unni",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 96311,
+          "name": "Junaid Siddique",
+          "short_name": "J Siddique",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 96618,
+          "name": "Basil Hameed",
+          "short_name": "B Hameed",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 101175,
+          "name": "Waseem Muhammad",
+          "short_name": "W Muhammad",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 101605,
+          "name": "Arif Ullah",
+          "short_name": "Arif Ullah",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 106625,
+          "name": "Aryansh Sharma",
+          "short_name": "A Sharma",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 112110,
+          "name": "Mohammad Haziq Aiman",
+          "short_name": "M Aiman",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 112136,
+          "name": "Muhammad Farooq",
+          "short_name": "Muhammad Farooq",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 112834,
+          "name": "Rahul Chopra",
+          "short_name": "R Chopra",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 113288,
+          "name": "Zahid Ali",
+          "short_name": "Z Ali",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 113322,
+          "name": "Dhruv Parashar",
+          "short_name": "D Parashar",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 121458,
+          "name": "Amir Khan Malik",
+          "short_name": "A K Malik",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 121542,
+          "name": "Ahmed Aqeel Wahid",
+          "short_name": "A A Wahid",
+          "country_iso": "my",
+          "logo_url": ""
+        },
+        {
+          "player_id": 135295,
+          "name": "Haider Ali",
+          "short_name": "H Ali",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 136199,
+          "name": "Muhammad Rohid Khan",
+          "short_name": "MD R Khan",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 138296,
+          "name": "Muhammad Irfan",
+          "short_name": "M Irfan",
+          "country_iso": "ae",
+          "logo_url": ""
+        }
+      ]
+    },
+    "etag": "a563369f9ff873cbc3f0159d53f602af",
+    "modified": "2025-10-10 11:30:23",
+    "datetime": "2025-10-10 11:30:23",
+    "api_version": "5.0.12"
+  },
+  "93993": {
+    "status": "ok",
+    "response": {
+      "innings": [
+        {
+          "inning_id": 203579,
+          "number": 1,
+          "name": "Mississauga Masters Inning",
+          "runs": 113,
+          "overs": "10",
+          "wickets": 8,
+          "status": 2,
+          "result": 4,
+          "batting_team_id": 129127,
+          "fielding_team_id": 129126,
+          "fows": [
+            {
+              "batsman_id": 53281,
+              "runs": 10,
+              "balls_faced": 5,
+              "how_out": "c N Hobson b I Udana",
+              "score_at_dismissal": 11,
+              "overs_at_dismissal": 0.6,
+              "order": 0
+            },
+            {
+              "batsman_id": 474,
+              "runs": 5,
+              "balls_faced": 5,
+              "how_out": "b BJ Currie",
+              "score_at_dismissal": 21,
+              "overs_at_dismissal": 2.1,
+              "order": 0
+            },
+            {
+              "batsman_id": 152308,
+              "runs": 47,
+              "balls_faced": 15,
+              "how_out": "c BJ Currie b A Patel",
+              "score_at_dismissal": 82,
+              "overs_at_dismissal": 5.6,
+              "order": 0
+            },
+            {
+              "batsman_id": 1754,
+              "runs": 23,
+              "balls_faced": 15,
+              "how_out": "c S Movva b I Udana",
+              "score_at_dismissal": 93,
+              "overs_at_dismissal": 7.1,
+              "order": 0
+            },
+            {
+              "batsman_id": 59214,
+              "runs": 0,
+              "balls_faced": 1,
+              "how_out": "c S Al Hasan b I Udana",
+              "score_at_dismissal": 93,
+              "overs_at_dismissal": 7.2,
+              "order": 0
+            },
+            {
+              "batsman_id": 49187,
+              "runs": 6,
+              "balls_faced": 4,
+              "how_out": "c N Hobson b I Udana",
+              "score_at_dismissal": 99,
+              "overs_at_dismissal": 7.6,
+              "order": 0
+            },
+            {
+              "batsman_id": 74426,
+              "runs": 6,
+              "balls_faced": 5,
+              "how_out": "c I Udana b A Tye",
+              "score_at_dismissal": 101,
+              "overs_at_dismissal": 8.2,
+              "order": 0
+            },
+            {
+              "batsman_id": 52193,
+              "runs": 1,
+              "balls_faced": 3,
+              "how_out": "c A Tye b RF Higgins",
+              "score_at_dismissal": 104,
+              "overs_at_dismissal": 9.1,
+              "order": 0
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 11
+              },
+              {
+                "over": 2,
+                "runs": 10
+              },
+              {
+                "over": 3,
+                "runs": 8
+              },
+              {
+                "over": 4,
+                "runs": 21
+              },
+              {
+                "over": 5,
+                "runs": 17
+              },
+              {
+                "over": 6,
+                "runs": 15
+              },
+              {
+                "over": 7,
+                "runs": 11
+              },
+              {
+                "over": 8,
+                "runs": 6
+              },
+              {
+                "over": 9,
+                "runs": 5
+              },
+              {
+                "over": 10,
+                "runs": 9
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 11
+              },
+              {
+                "over": 2,
+                "runs": 21
+              },
+              {
+                "over": 3,
+                "runs": 29
+              },
+              {
+                "over": 4,
+                "runs": 50
+              },
+              {
+                "over": 5,
+                "runs": 67
+              },
+              {
+                "over": 6,
+                "runs": 82
+              },
+              {
+                "over": 7,
+                "runs": 93
+              },
+              {
+                "over": 8,
+                "runs": 99
+              },
+              {
+                "over": 9,
+                "runs": 104
+              },
+              {
+                "over": 10,
+                "runs": 113
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 11
+              },
+              {
+                "over": 2,
+                "runrate": 10.5
+              },
+              {
+                "over": 3,
+                "runrate": 9.67
+              },
+              {
+                "over": 4,
+                "runrate": 12.5
+              },
+              {
+                "over": 5,
+                "runrate": 13.4
+              },
+              {
+                "over": 6,
+                "runrate": 13.67
+              },
+              {
+                "over": 7,
+                "runrate": 13.29
+              },
+              {
+                "over": 8,
+                "runrate": 12.38
+              },
+              {
+                "over": 9,
+                "runrate": 11.56
+              },
+              {
+                "over": 10,
+                "runrate": 11.3
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 474,
+                    "balls_faced": 1,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 53281,
+                    "balls_faced": 5,
+                    "runs": 10,
+                    "fours": 1,
+                    "sixes": 1
+                  }
+                ],
+                "balls_faced": 6,
+                "runs": 11,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 474,
+                    "balls_faced": 4,
+                    "runs": 5,
+                    "fours": 1,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 1754,
+                    "balls_faced": 3,
+                    "runs": 4,
+                    "fours": 1,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 7,
+                "runs": 10,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 1754,
+                    "balls_faced": 8,
+                    "runs": 14,
+                    "fours": 0,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 152308,
+                    "balls_faced": 15,
+                    "runs": 47,
+                    "fours": 3,
+                    "sixes": 5
+                  }
+                ],
+                "balls_faced": 23,
+                "runs": 61,
+                "order": 3
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 1754,
+                    "balls_faced": 4,
+                    "runs": 5,
+                    "fours": 1,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 74426,
+                    "balls_faced": 3,
+                    "runs": 5,
+                    "fours": 1,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 7,
+                "runs": 11,
+                "order": 4
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 74426,
+                    "balls_faced": 0,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 59214,
+                    "balls_faced": 1,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 1,
+                "runs": 0,
+                "order": 5
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 74426,
+                    "balls_faced": 0,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 49187,
+                    "balls_faced": 4,
+                    "runs": 6,
+                    "fours": 0,
+                    "sixes": 1
+                  }
+                ],
+                "balls_faced": 4,
+                "runs": 6,
+                "order": 6
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 74426,
+                    "balls_faced": 2,
+                    "runs": 2,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 52193,
+                    "balls_faced": 0,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 2,
+                "runs": 2,
+                "order": 7
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 52193,
+                    "balls_faced": 3,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 177,
+                    "balls_faced": 3,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 6,
+                "runs": 3,
+                "order": 8
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 177,
+                    "balls_faced": 4,
+                    "runs": 7,
+                    "fours": 0,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 102966,
+                    "balls_faced": 1,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 5,
+                "runs": 9,
+                "order": 9
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 25
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 16
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 3
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 0
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 8
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 9
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 1
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 7
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 0
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 0
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 0
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "474",
+                "bowler_id": "43983",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "53281",
+                "bowler_id": "43983",
+                "balls": "5",
+                "runs": "10",
+                "run0": "3",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "474",
+                "bowler_id": "1963",
+                "balls": "3",
+                "runs": "5",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1754",
+                "bowler_id": "1963",
+                "balls": "3",
+                "runs": "4",
+                "run0": "2",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "474",
+                "bowler_id": "118322",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152308",
+                "bowler_id": "118322",
+                "balls": "7",
+                "runs": "20",
+                "run0": "1",
+                "run1": "2",
+                "run2": "1",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "2",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1754",
+                "bowler_id": "118322",
+                "balls": "4",
+                "runs": "5",
+                "run0": "0",
+                "run1": "3",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1754",
+                "bowler_id": "49930",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152308",
+                "bowler_id": "49930",
+                "balls": "5",
+                "runs": "20",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "2",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1754",
+                "bowler_id": "144146",
+                "balls": "3",
+                "runs": "8",
+                "run0": "0",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152308",
+                "bowler_id": "144146",
+                "balls": "3",
+                "runs": "7",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1754",
+                "bowler_id": "348",
+                "balls": "3",
+                "runs": "5",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "74426",
+                "bowler_id": "348",
+                "balls": "3",
+                "runs": "5",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1754",
+                "bowler_id": "43983",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "59214",
+                "bowler_id": "43983",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "49187",
+                "bowler_id": "43983",
+                "balls": "4",
+                "runs": "6",
+                "run0": "3",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "74426",
+                "bowler_id": "1963",
+                "balls": "2",
+                "runs": "2",
+                "run0": "1",
+                "run1": "0",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "177",
+                "bowler_id": "1963",
+                "balls": "3",
+                "runs": "1",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "52193",
+                "bowler_id": "1963",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "52193",
+                "bowler_id": "49930",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "102966",
+                "bowler_id": "49930",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "177",
+                "bowler_id": "49930",
+                "balls": "4",
+                "runs": "7",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 2
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 1
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 1
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 2
+              }
+            ]
+          }
+        },
+        {
+          "inning_id": 203582,
+          "number": 2,
+          "name": "Montreal Royal Tiger Inning",
+          "runs": 115,
+          "overs": "8.4",
+          "wickets": 3,
+          "status": 2,
+          "result": 3,
+          "batting_team_id": 129126,
+          "fielding_team_id": 129127,
+          "fows": [
+            {
+              "batsman_id": 1383,
+              "runs": 31,
+              "balls_faced": 12,
+              "how_out": "b Z Khan",
+              "score_at_dismissal": 46,
+              "overs_at_dismissal": 3.1,
+              "order": 1
+            },
+            {
+              "batsman_id": 55844,
+              "runs": 1,
+              "balls_faced": 3,
+              "how_out": "c SS Ranjane b Z Khan",
+              "score_at_dismissal": 48,
+              "overs_at_dismissal": 3.5,
+              "order": 2
+            },
+            {
+              "batsman_id": 122236,
+              "runs": 29,
+              "balls_faced": 16,
+              "how_out": "st Hamza Tariq b MI Tahir",
+              "score_at_dismissal": 69,
+              "overs_at_dismissal": 5.6,
+              "order": 3
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 14
+              },
+              {
+                "over": 2,
+                "runs": 12
+              },
+              {
+                "over": 3,
+                "runs": 20
+              },
+              {
+                "over": 4,
+                "runs": 2
+              },
+              {
+                "over": 5,
+                "runs": 12
+              },
+              {
+                "over": 6,
+                "runs": 9
+              },
+              {
+                "over": 7,
+                "runs": 16
+              },
+              {
+                "over": 8,
+                "runs": 16
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 14
+              },
+              {
+                "over": 2,
+                "runs": 26
+              },
+              {
+                "over": 3,
+                "runs": 46
+              },
+              {
+                "over": 4,
+                "runs": 48
+              },
+              {
+                "over": 5,
+                "runs": 60
+              },
+              {
+                "over": 6,
+                "runs": 69
+              },
+              {
+                "over": 7,
+                "runs": 85
+              },
+              {
+                "over": 8,
+                "runs": 101
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 14
+              },
+              {
+                "over": 2,
+                "runrate": 13
+              },
+              {
+                "over": 3,
+                "runrate": 15.33
+              },
+              {
+                "over": 4,
+                "runrate": 12
+              },
+              {
+                "over": 5,
+                "runrate": 12
+              },
+              {
+                "over": 6,
+                "runrate": 11.5
+              },
+              {
+                "over": 7,
+                "runrate": 12.14
+              },
+              {
+                "over": 8,
+                "runrate": 12.63
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 122236,
+                    "balls_faced": 7,
+                    "runs": 13,
+                    "fours": 0,
+                    "sixes": 2
+                  },
+                  {
+                    "batsman_id": 1383,
+                    "balls_faced": 12,
+                    "runs": 31,
+                    "fours": 1,
+                    "sixes": 4
+                  }
+                ],
+                "balls_faced": 19,
+                "runs": 46,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 122236,
+                    "balls_faced": 1,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 55844,
+                    "balls_faced": 3,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 4,
+                "runs": 2,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 122236,
+                    "balls_faced": 8,
+                    "runs": 15,
+                    "fours": 0,
+                    "sixes": 2
+                  },
+                  {
+                    "batsman_id": 128466,
+                    "balls_faced": 5,
+                    "runs": 2,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 13,
+                "runs": 21,
+                "order": 3
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 128466,
+                    "balls_faced": 8,
+                    "runs": 24,
+                    "fours": 2,
+                    "sixes": 2
+                  },
+                  {
+                    "batsman_id": 49930,
+                    "balls_faced": 8,
+                    "runs": 16,
+                    "fours": 1,
+                    "sixes": 1
+                  }
+                ],
+                "balls_faced": 16,
+                "runs": 46,
+                "order": 4
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 19
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 16
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 1
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 1
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 4
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 11
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 1
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 1
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 0
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 1
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 0
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "122236",
+                "bowler_id": "102966",
+                "balls": "6",
+                "runs": "14",
+                "run0": "2",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "2",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1383",
+                "bowler_id": "102966",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1383",
+                "bowler_id": "52193",
+                "balls": "5",
+                "runs": "11",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "122236",
+                "bowler_id": "52193",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "1383",
+                "bowler_id": "177",
+                "balls": "5",
+                "runs": "19",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "3",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "122236",
+                "bowler_id": "177",
+                "balls": "5",
+                "runs": "6",
+                "run0": "4",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "55844",
+                "bowler_id": "102966",
+                "balls": "3",
+                "runs": "1",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "128466",
+                "bowler_id": "102966",
+                "balls": "1",
+                "runs": "0",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "122236",
+                "bowler_id": "90815",
+                "balls": "4",
+                "runs": "9",
+                "run0": "1",
+                "run1": "1",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "128466",
+                "bowler_id": "90815",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "128466",
+                "bowler_id": "177",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "128466",
+                "bowler_id": "152308",
+                "balls": "4",
+                "runs": "12",
+                "run0": "0",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "49930",
+                "bowler_id": "152308",
+                "balls": "2",
+                "runs": "2",
+                "run0": "0",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "49930",
+                "bowler_id": "52193",
+                "balls": "5",
+                "runs": "11",
+                "run0": "2",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "128466",
+                "bowler_id": "52193",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "128466",
+                "bowler_id": "474",
+                "balls": "3",
+                "runs": "11",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "49930",
+                "bowler_id": "474",
+                "balls": "1",
+                "runs": "3",
+                "run0": "0",
+                "run1": "0",
+                "run2": "0",
+                "run3": "1",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 6
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 0
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 5
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 1
+              }
+            ]
+          }
+        }
+      ],
+      "teams": [
+        {
+          "team_id": 129126,
+          "name": "Montreal Royal Tiger",
+          "short_name": "MRT",
+          "country_iso": "ca",
+          "type": "club",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2025/10/Montreal-Royal-Tigers.webp"
+        },
+        {
+          "team_id": 129127,
+          "name": "Mississauga Masters",
+          "short_name": "MGM",
+          "country_iso": "ca",
+          "type": "club",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2025/10/Mississauga-Masters.webp"
+        }
+      ],
+      "players": [
+        {
+          "player_id": 177,
+          "name": "Imran Tahir",
+          "short_name": "MI Tahir",
+          "country_iso": "za",
+          "logo_url": ""
+        },
+        {
+          "player_id": 183,
+          "name": "Sikandar Raza",
+          "short_name": "S Raza",
+          "country_iso": "zw",
+          "logo_url": ""
+        },
+        {
+          "player_id": 348,
+          "name": "Shakib Al Hasan",
+          "short_name": "S Al Hasan",
+          "country_iso": "bd",
+          "logo_url": ""
+        },
+        {
+          "player_id": 474,
+          "name": "Ravi Bopara",
+          "short_name": "R Bopara",
+          "country_iso": "en",
+          "logo_url": ""
+        },
+        {
+          "player_id": 1383,
+          "name": "Tom Moores",
+          "short_name": "T Moores",
+          "country_iso": "en",
+          "logo_url": ""
+        },
+        {
+          "player_id": 1384,
+          "name": "George Garton",
+          "short_name": "G Garton",
+          "country_iso": "en",
+          "logo_url": ""
+        },
+        {
+          "player_id": 1754,
+          "name": "Shoaib Malik",
+          "short_name": "S Malik",
+          "country_iso": "pk",
+          "logo_url": ""
+        },
+        {
+          "player_id": 1963,
+          "name": "Andrew Tye",
+          "short_name": "A Tye",
+          "country_iso": "au",
+          "logo_url": ""
+        },
+        {
+          "player_id": 37430,
+          "name": "Saeed Ajmal",
+          "short_name": "Saeed Ajmal",
+          "country_iso": "pk",
+          "logo_url": ""
+        },
+        {
+          "player_id": 43983,
+          "name": "Isuru Udana",
+          "short_name": "I Udana",
+          "country_iso": "lk",
+          "logo_url": ""
+        },
+        {
+          "player_id": 49187,
+          "name": "Hamza Tariq",
+          "short_name": "Hamza Tariq",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 49930,
+          "name": "Ryan Higgins",
+          "short_name": "RF Higgins",
+          "country_iso": "en",
+          "logo_url": ""
+        },
+        {
+          "player_id": 52193,
+          "name": "Dominic Drakes",
+          "short_name": "DC Drakes",
+          "country_iso": "wi",
+          "logo_url": ""
+        },
+        {
+          "player_id": 53281,
+          "name": "Leus du Plooy",
+          "short_name": "JLdu Plooy",
+          "country_iso": "za",
+          "logo_url": ""
+        },
+        {
+          "player_id": 55844,
+          "name": "Nick Hobson",
+          "short_name": "N Hobson",
+          "country_iso": "au",
+          "logo_url": ""
+        },
+        {
+          "player_id": 59214,
+          "name": "Rayyan Pathan",
+          "short_name": "Rayyan Pathan",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 62053,
+          "name": "Ben Manenti",
+          "short_name": "BAD Manenti",
+          "country_iso": "it",
+          "logo_url": ""
+        },
+        {
+          "player_id": 74426,
+          "name": "Shubham Ranjane",
+          "short_name": "SS Ranjane",
+          "country_iso": "in",
+          "logo_url": ""
+        },
+        {
+          "player_id": 90815,
+          "name": "Ali Khan",
+          "short_name": "Ali Khan",
+          "country_iso": "us",
+          "logo_url": ""
+        },
+        {
+          "player_id": 96311,
+          "name": "Junaid Siddique",
+          "short_name": "J Siddique",
+          "country_iso": "ae",
+          "logo_url": ""
+        },
+        {
+          "player_id": 96417,
+          "name": "Shreyas Movva",
+          "short_name": "S Movva",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 102966,
+          "name": "Zahid Khan",
+          "short_name": "Z Khan",
+          "country_iso": "af",
+          "logo_url": ""
+        },
+        {
+          "player_id": 118322,
+          "name": "Bradley Currie",
+          "short_name": "BJ Currie",
+          "country_iso": "sct",
+          "logo_url": ""
+        },
+        {
+          "player_id": 122236,
+          "name": "Josh Brown",
+          "short_name": "J Brown",
+          "country_iso": "au",
+          "logo_url": ""
+        },
+        {
+          "player_id": 128466,
+          "name": "Dilpreet Bajwa",
+          "short_name": "D Bajwa",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 130098,
+          "name": "Rushil Ugarkar",
+          "short_name": "Rushil Ugarkar",
+          "country_iso": "us",
+          "logo_url": ""
+        },
+        {
+          "player_id": 130119,
+          "name": "Dilraj Deol",
+          "short_name": "D Deol",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 141336,
+          "name": "Padam Joshi",
+          "short_name": "P Joshi",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 144146,
+          "name": "Ansh Pradipkumar Patel",
+          "short_name": "A Patel",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152308,
+          "name": "Saif",
+          "short_name": "Saif",
+          "country_iso": "ca",
+          "logo_url": ""
+        }
+      ]
+    },
+    "etag": "778758aac5a2c6649369f34ec1be2307",
+    "modified": "2025-10-09 06:31:35",
+    "datetime": "2025-10-09 06:31:35",
+    "api_version": "5.0.12"
+  },
+  "94233": {
+    "status": "ok",
+    "response": {
+      "innings": [
+        {
+          "inning_id": 203634,
+          "number": 1,
+          "name": "Vancouver Thunderbirds Women Inning",
+          "runs": 97,
+          "overs": "10",
+          "wickets": 3,
+          "status": 2,
+          "result": 4,
+          "batting_team_id": 129136,
+          "fielding_team_id": 129137,
+          "fows": [
+            {
+              "batsman_id": 147354,
+              "runs": 0,
+              "balls_faced": 3,
+              "how_out": "c S Dhadwal b K Kapadia",
+              "score_at_dismissal": 2,
+              "overs_at_dismissal": 0.4,
+              "order": 0
+            },
+            {
+              "batsman_id": 104410,
+              "runs": 28,
+              "balls_faced": 21,
+              "how_out": "c S Sriharsha b S Dhadwal",
+              "score_at_dismissal": 56,
+              "overs_at_dismissal": 6.4,
+              "order": 0
+            },
+            {
+              "batsman_id": 47709,
+              "runs": 26,
+              "balls_faced": 11,
+              "how_out": "c N Samim b A Kaur",
+              "score_at_dismissal": 95,
+              "overs_at_dismissal": 9.5,
+              "order": 0
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 4
+              },
+              {
+                "over": 2,
+                "runs": 14
+              },
+              {
+                "over": 3,
+                "runs": 10
+              },
+              {
+                "over": 4,
+                "runs": 10
+              },
+              {
+                "over": 5,
+                "runs": 10
+              },
+              {
+                "over": 6,
+                "runs": 5
+              },
+              {
+                "over": 7,
+                "runs": 11
+              },
+              {
+                "over": 8,
+                "runs": 11
+              },
+              {
+                "over": 9,
+                "runs": 9
+              },
+              {
+                "over": 10,
+                "runs": 13
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 4
+              },
+              {
+                "over": 2,
+                "runs": 18
+              },
+              {
+                "over": 3,
+                "runs": 28
+              },
+              {
+                "over": 4,
+                "runs": 38
+              },
+              {
+                "over": 5,
+                "runs": 48
+              },
+              {
+                "over": 6,
+                "runs": 53
+              },
+              {
+                "over": 7,
+                "runs": 64
+              },
+              {
+                "over": 8,
+                "runs": 75
+              },
+              {
+                "over": 9,
+                "runs": 84
+              },
+              {
+                "over": 10,
+                "runs": 97
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 4
+              },
+              {
+                "over": 2,
+                "runrate": 9
+              },
+              {
+                "over": 3,
+                "runrate": 9.33
+              },
+              {
+                "over": 4,
+                "runrate": 9.5
+              },
+              {
+                "over": 5,
+                "runrate": 9.6
+              },
+              {
+                "over": 6,
+                "runrate": 8.83
+              },
+              {
+                "over": 7,
+                "runrate": 9.14
+              },
+              {
+                "over": 8,
+                "runrate": 9.38
+              },
+              {
+                "over": 9,
+                "runrate": 9.33
+              },
+              {
+                "over": 10,
+                "runrate": 9.7
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 95284,
+                    "balls_faced": 1,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 147354,
+                    "balls_faced": 3,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 4,
+                "runs": 2,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 95284,
+                    "balls_faced": 15,
+                    "runs": 22,
+                    "fours": 3,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 104410,
+                    "balls_faced": 21,
+                    "runs": 28,
+                    "fours": 4,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 36,
+                "runs": 54,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 95284,
+                    "balls_faced": 9,
+                    "runs": 7,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 47709,
+                    "balls_faced": 11,
+                    "runs": 26,
+                    "fours": 2,
+                    "sixes": 2
+                  }
+                ],
+                "balls_faced": 20,
+                "runs": 39,
+                "order": 3
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 95284,
+                    "balls_faced": 0,
+                    "runs": 0,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 118699,
+                    "balls_faced": 1,
+                    "runs": 2,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 1,
+                "runs": 2,
+                "order": 4
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 18
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 28
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 2
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 2
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 9
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 2
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 0
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 3
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 0
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 0
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 0
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "95284",
+                "bowler_id": "152324",
+                "balls": "4",
+                "runs": "7",
+                "run0": "0",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "147354",
+                "bowler_id": "152324",
+                "balls": "3",
+                "runs": "0",
+                "run0": "3",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "104410",
+                "bowler_id": "152324",
+                "balls": "5",
+                "runs": "3",
+                "run0": "3",
+                "run1": "1",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "104410",
+                "bowler_id": "62557",
+                "balls": "5",
+                "runs": "13",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "3",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95284",
+                "bowler_id": "62557",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95284",
+                "bowler_id": "43017",
+                "balls": "6",
+                "runs": "8",
+                "run0": "1",
+                "run1": "4",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "104410",
+                "bowler_id": "43017",
+                "balls": "3",
+                "runs": "4",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "1",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "104410",
+                "bowler_id": "117270",
+                "balls": "5",
+                "runs": "6",
+                "run0": "2",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95284",
+                "bowler_id": "117270",
+                "balls": "5",
+                "runs": "7",
+                "run0": "1",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95284",
+                "bowler_id": "152323",
+                "balls": "5",
+                "runs": "4",
+                "run0": "1",
+                "run1": "4",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "104410",
+                "bowler_id": "152323",
+                "balls": "3",
+                "runs": "2",
+                "run0": "1",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "47709",
+                "bowler_id": "117270",
+                "balls": "2",
+                "runs": "8",
+                "run0": "0",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95284",
+                "bowler_id": "62341",
+                "balls": "4",
+                "runs": "3",
+                "run0": "1",
+                "run1": "3",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "47709",
+                "bowler_id": "62341",
+                "balls": "3",
+                "runs": "2",
+                "run0": "1",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "47709",
+                "bowler_id": "43017",
+                "balls": "3",
+                "runs": "7",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "47709",
+                "bowler_id": "152323",
+                "balls": "3",
+                "runs": "9",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "1",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "118699",
+                "bowler_id": "152323",
+                "balls": "1",
+                "runs": "2",
+                "run0": "0",
+                "run1": "0",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 7
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 2
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 0
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 2
+              }
+            ]
+          }
+        },
+        {
+          "inning_id": 203636,
+          "number": 2,
+          "name": "Toronto Sixers Women Inning",
+          "runs": 100,
+          "overs": "8.3",
+          "wickets": 3,
+          "status": 2,
+          "result": 3,
+          "batting_team_id": 129137,
+          "fielding_team_id": 129136,
+          "fows": [
+            {
+              "batsman_id": 44532,
+              "runs": 11,
+              "balls_faced": 13,
+              "how_out": "b AJ Wellington",
+              "score_at_dismissal": 31,
+              "overs_at_dismissal": 4.2,
+              "order": 1
+            },
+            {
+              "batsman_id": 95286,
+              "runs": 1,
+              "balls_faced": 2,
+              "how_out": "runout (S Purandare / I Vaghela)",
+              "score_at_dismissal": 33,
+              "overs_at_dismissal": 4.5,
+              "order": 2
+            },
+            {
+              "batsman_id": 43017,
+              "runs": 70,
+              "balls_faced": 27,
+              "how_out": "b Indomatie Goordial-John",
+              "score_at_dismissal": 88,
+              "overs_at_dismissal": 7.4,
+              "order": 3
+            }
+          ],
+          "statistics": {
+            "manhattan": [
+              {
+                "over": 1,
+                "runs": 4
+              },
+              {
+                "over": 2,
+                "runs": 4
+              },
+              {
+                "over": 3,
+                "runs": 4
+              },
+              {
+                "over": 4,
+                "runs": 15
+              },
+              {
+                "over": 5,
+                "runs": 6
+              },
+              {
+                "over": 6,
+                "runs": 23
+              },
+              {
+                "over": 7,
+                "runs": 20
+              },
+              {
+                "over": 8,
+                "runs": 13
+              }
+            ],
+            "worm": [
+              {
+                "over": 1,
+                "runs": 4
+              },
+              {
+                "over": 2,
+                "runs": 8
+              },
+              {
+                "over": 3,
+                "runs": 12
+              },
+              {
+                "over": 4,
+                "runs": 27
+              },
+              {
+                "over": 5,
+                "runs": 33
+              },
+              {
+                "over": 6,
+                "runs": 56
+              },
+              {
+                "over": 7,
+                "runs": 76
+              },
+              {
+                "over": 8,
+                "runs": 89
+              }
+            ],
+            "runrates": [
+              {
+                "over": 1,
+                "runrate": 4
+              },
+              {
+                "over": 2,
+                "runrate": 4
+              },
+              {
+                "over": 3,
+                "runrate": 4
+              },
+              {
+                "over": 4,
+                "runrate": 6.75
+              },
+              {
+                "over": 5,
+                "runrate": 6.6
+              },
+              {
+                "over": 6,
+                "runrate": 9.33
+              },
+              {
+                "over": 7,
+                "runrate": 10.86
+              },
+              {
+                "over": 8,
+                "runrate": 11.13
+              }
+            ],
+            "partnership": [
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 43017,
+                    "balls_faced": 13,
+                    "runs": 20,
+                    "fours": 0,
+                    "sixes": 2
+                  },
+                  {
+                    "batsman_id": 44532,
+                    "balls_faced": 13,
+                    "runs": 11,
+                    "fours": 1,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 26,
+                "runs": 31,
+                "order": 1
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 43017,
+                    "balls_faced": 1,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  },
+                  {
+                    "batsman_id": 95286,
+                    "balls_faced": 2,
+                    "runs": 1,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 3,
+                "runs": 2,
+                "order": 2
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 43017,
+                    "balls_faced": 13,
+                    "runs": 49,
+                    "fours": 6,
+                    "sixes": 4
+                  },
+                  {
+                    "batsman_id": 117270,
+                    "balls_faced": 4,
+                    "runs": 3,
+                    "fours": 0,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 17,
+                "runs": 55,
+                "order": 3
+              },
+              {
+                "batsmen": [
+                  {
+                    "batsman_id": 117270,
+                    "balls_faced": 1,
+                    "runs": 6,
+                    "fours": 0,
+                    "sixes": 1
+                  },
+                  {
+                    "batsman_id": 152323,
+                    "balls_faced": 4,
+                    "runs": 6,
+                    "fours": 1,
+                    "sixes": 0
+                  }
+                ],
+                "balls_faced": 5,
+                "runs": 12,
+                "order": 4
+              }
+            ],
+            "runtypes": [
+              {
+                "key": "run0",
+                "name": "Dots",
+                "value": 15
+              },
+              {
+                "key": "run1",
+                "name": "Singles",
+                "value": 17
+              },
+              {
+                "key": "run2",
+                "name": "Doubles",
+                "value": 3
+              },
+              {
+                "key": "run3",
+                "name": "Threes",
+                "value": 0
+              },
+              {
+                "key": "run4",
+                "name": "Fours",
+                "value": 8
+              },
+              {
+                "key": "run6",
+                "name": "Sixes",
+                "value": 7
+              }
+            ],
+            "wickets": [
+              {
+                "key": "bowled",
+                "name": "Bowled",
+                "value": 2
+              },
+              {
+                "key": "caught",
+                "name": "Caught",
+                "value": 0
+              },
+              {
+                "key": "lbw",
+                "name": "LBW",
+                "value": 0
+              },
+              {
+                "key": "stumped",
+                "name": "Stumped",
+                "value": 0
+              },
+              {
+                "key": "runout",
+                "name": "Run Out",
+                "value": 1
+              },
+              {
+                "key": "hitwicket",
+                "name": "Hit Wicket",
+                "value": 0
+              },
+              {
+                "key": "retired",
+                "name": "Retired Hurt",
+                "value": 0
+              },
+              {
+                "key": "retiredout",
+                "name": "Retired Out",
+                "value": 0
+              },
+              {
+                "key": "fieldobstruction",
+                "name": "Obstructing The Field",
+                "value": 0
+              }
+            ],
+            "p2p": [
+              {
+                "batsman_id": "43017",
+                "bowler_id": "147354",
+                "balls": "9",
+                "runs": "6",
+                "run0": "5",
+                "run1": "2",
+                "run2": "2",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "44532",
+                "bowler_id": "152234",
+                "balls": "5",
+                "runs": "3",
+                "run0": "3",
+                "run1": "1",
+                "run2": "1",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "43017",
+                "bowler_id": "152234",
+                "balls": "4",
+                "runs": "11",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "44532",
+                "bowler_id": "147354",
+                "balls": "3",
+                "runs": "2",
+                "run0": "1",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "44532",
+                "bowler_id": "131076",
+                "balls": "3",
+                "runs": "2",
+                "run0": "1",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "43017",
+                "bowler_id": "131076",
+                "balls": "8",
+                "runs": "34",
+                "run0": "0",
+                "run1": "2",
+                "run2": "0",
+                "run3": "0",
+                "run4": "2",
+                "run5": "0",
+                "run6": "4",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "44532",
+                "bowler_id": "47709",
+                "balls": "2",
+                "runs": "4",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "95286",
+                "bowler_id": "47709",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "43017",
+                "bowler_id": "47709",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "117270",
+                "bowler_id": "47709",
+                "balls": "2",
+                "runs": "6",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "117270",
+                "bowler_id": "131076",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "117270",
+                "bowler_id": "117026",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "43017",
+                "bowler_id": "117026",
+                "balls": "5",
+                "runs": "18",
+                "run0": "1",
+                "run1": "0",
+                "run2": "0",
+                "run3": "0",
+                "run4": "3",
+                "run5": "0",
+                "run6": "1",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "117270",
+                "bowler_id": "152234",
+                "balls": "1",
+                "runs": "1",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152323",
+                "bowler_id": "152234",
+                "balls": "2",
+                "runs": "1",
+                "run0": "1",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "0",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              },
+              {
+                "batsman_id": "152323",
+                "bowler_id": "47709",
+                "balls": "2",
+                "runs": "5",
+                "run0": "0",
+                "run1": "1",
+                "run2": "0",
+                "run3": "0",
+                "run4": "1",
+                "run5": "0",
+                "run6": "0",
+                "run6p": "0"
+              }
+            ],
+            "extras": [
+              {
+                "key": "runwides",
+                "name": "Wides",
+                "value": 3
+              },
+              {
+                "key": "runnoballs",
+                "name": "No Balls",
+                "value": 0
+              },
+              {
+                "key": "runbyes",
+                "name": "Bye",
+                "value": 0
+              },
+              {
+                "key": "runlegbyes",
+                "name": "Leg Bye",
+                "value": 0
+              }
+            ]
+          }
+        }
+      ],
+      "teams": [
+        {
+          "team_id": 129136,
+          "name": "Vancouver Thunderbirds Women",
+          "short_name": "VTW",
+          "country_iso": "ca",
+          "type": "club",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2025/10/Vancouver-Thunderbirds-Women.webp"
+        },
+        {
+          "team_id": 129137,
+          "name": "Toronto Sixers Women",
+          "short_name": "TSW",
+          "country_iso": "ca",
+          "type": "club",
+          "logo_url": "https://gcdnimages.entitysport.com/assets/uploads/2025/10/Toronto-Sixers-Women.webp"
+        }
+      ],
+      "players": [
+        {
+          "player_id": 43017,
+          "name": "Deandra Dottin",
+          "short_name": "DJS Dottin",
+          "country_iso": "wi",
+          "logo_url": ""
+        },
+        {
+          "player_id": 44532,
+          "name": "Sterre Kalis",
+          "short_name": "SL Kalis",
+          "country_iso": "nl",
+          "logo_url": ""
+        },
+        {
+          "player_id": 47709,
+          "name": "Amanda Wellington",
+          "short_name": "AJ Wellington",
+          "country_iso": "au",
+          "logo_url": ""
+        },
+        {
+          "player_id": 62341,
+          "name": "Xara Jetly",
+          "short_name": "XA Jetly",
+          "country_iso": "nz",
+          "logo_url": ""
+        },
+        {
+          "player_id": 62557,
+          "name": "Terisha Lavia",
+          "short_name": "T Lavia",
+          "country_iso": "wi",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95282,
+          "name": "Sindhu Sriharsha",
+          "short_name": "S Sriharsha",
+          "country_iso": "us",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95284,
+          "name": "Achini Perera",
+          "short_name": "A Perera",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95286,
+          "name": "Habeeba Bader",
+          "short_name": "Habeeba Bader",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 95289,
+          "name": "Kainat Qazi",
+          "short_name": "Kainat Qazi",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 104410,
+          "name": "Ailsa Lister",
+          "short_name": "A Lister",
+          "country_iso": "sct",
+          "logo_url": ""
+        },
+        {
+          "player_id": 112349,
+          "name": "Isani Vaghela",
+          "short_name": "I Vaghela",
+          "country_iso": "us",
+          "logo_url": ""
+        },
+        {
+          "player_id": 117026,
+          "name": "Tiffany Thorpe",
+          "short_name": "T Thorpe",
+          "country_iso": "wi",
+          "logo_url": ""
+        },
+        {
+          "player_id": 117270,
+          "name": "Saachi Dhadwal",
+          "short_name": "S Dhadwal",
+          "country_iso": "int",
+          "logo_url": ""
+        },
+        {
+          "player_id": 118699,
+          "name": "Ritu Singh",
+          "short_name": "Ritu Singh",
+          "country_iso": "us",
+          "logo_url": ""
+        },
+        {
+          "player_id": 131076,
+          "name": "Rabbjyot Rajput",
+          "short_name": "R Rajput",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 147351,
+          "name": "Belinda Williams",
+          "short_name": "B Williams",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 147354,
+          "name": "Vandana Mahajan",
+          "short_name": "V Mahajan",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152234,
+          "name": "Indomatie Goordial-John",
+          "short_name": "Indomatie Goordial-John",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152323,
+          "name": "Amarpal Kaur",
+          "short_name": "A Kaur",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152324,
+          "name": "Krima Kapadia",
+          "short_name": "K Kapadia",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152325,
+          "name": "Najiba Samim",
+          "short_name": "N Samim",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152326,
+          "name": "Roya Samim",
+          "short_name": "R Samim",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152327,
+          "name": "Zeel Patel",
+          "short_name": "Z Patel",
+          "country_iso": "ca",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152328,
+          "name": "Firooza Afghan",
+          "short_name": "F Afghan",
+          "country_iso": "af",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152329,
+          "name": "Friba Hotak",
+          "short_name": "F Hotak",
+          "country_iso": "af",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152330,
+          "name": "Saee Purandare",
+          "short_name": "S Purandare",
+          "country_iso": "in",
+          "logo_url": ""
+        },
+        {
+          "player_id": 152331,
+          "name": "Tooba Sarwari",
+          "short_name": "T Sarwari",
+          "country_iso": "ca",
+          "logo_url": ""
+        }
+      ]
+    },
+    "etag": "140e5061445469ce480b52d5ae5ddaec",
+    "modified": "2025-10-10 10:57:01",
+    "datetime": "2025-10-10 10:57:01",
+    "api_version": "5.0.12"
+  }
+}

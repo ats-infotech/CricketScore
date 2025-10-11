@@ -1,7 +1,8 @@
 export const apiRoutes = {
     CRICKET: {
         MATCHES: '/matches',
-        INFO: '/info'
+        INFO: '/info',
+        STATISTICS: '/statistics'
     },
     FOOTBALL: {
         MATCHESBYDATE: '/matches-by-date',

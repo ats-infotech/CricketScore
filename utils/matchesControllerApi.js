@@ -49,3 +49,23 @@ export const handleGetPastMatchScorecard = async (id) => {
     return handleApiError(error);
   }
 }
+
+// this function gets past matches statistics data
+export const handleGetPastMatchStatistics = async (id) => {
+  try {
+    const response = await fetch(`/api/pastmatch-statistics/${id}`)
+    return await response.json()
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+// this function gets live matches statistics data
+export const handleLivePastMatchStatistics = async (id) => {
+  try {
+    const response = await fetch(`/api/livematch-statistics/${id}`)
+    return await response.json()
+  } catch (error) {
+    return handleApiError(error);
+  }
+};

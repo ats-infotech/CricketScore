@@ -1,5 +1,5 @@
 'use client'
-import InternationalMatchesScores from "@/pages/InternationalMatchesScores/InternationalMatchesScores";
+import InternationalMatchesScores from "@/pages/InternationalCricketMatch/InternationalMatchesScores/InternationalMatchesScores";
 import Tournament from "@/pages/Tournament/Tournament";
 import { matchesState } from "@/redux/slices/matchSlice";
 import { tournamentState } from "@/redux/slices/tournamentSlice";

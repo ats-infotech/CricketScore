@@ -1,4 +1,4 @@
-import InternationalMatchesScores from "@/pages/InternationalMatchesScores/InternationalMatchesScores"
+import InternationalMatchesScores from "@/pages/InternationalCricketMatch/InternationalMatchesScores/InternationalMatchesScores"
 
 const ScoresPage = () => {
     return(

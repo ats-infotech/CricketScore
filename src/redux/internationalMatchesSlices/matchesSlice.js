@@ -1,11 +1,12 @@
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit")
-import { handleGetLiveMatches, handleGetLiveMatchScoreboard, handleGetPastMatchScorecard, handleGetRecentMatches, handleGetUpcomingMatches } from "../../../utils/matchesControllerApi"
+import { handleGetLiveMatches, handleGetLiveMatchScoreboard, handleGetPastMatchScorecard, handleGetPastMatchStatistics, handleGetRecentMatches, handleGetUpcomingMatches, handleLivePastMatchStatistics } from "../../../utils/matchesControllerApi"
 
 const initialState = {
   liveMatches: [],
   upcomingMatches: [],
   recentMatches: [],
   liveMatchScoreboard: [],
+  pastMatchStatistics: [],
   success: false,
   loading: false,
   status: ''
@@ -69,6 +70,32 @@ export const getPastMatchesScorecard = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await handleGetPastMatchScorecard(id)
+      return response
+    } catch (error) {
+      return rejectWithValue(error.message || 'Failed to fetch scorecard')
+    }
+  }
+)
+
+// get past match Statistics
+export const getPastMatchesStatistics = createAsyncThunk(
+  "matches/getPastMatchesStatistics",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await handleGetPastMatchStatistics(id)
+      return response
+    } catch (error) {
+      return rejectWithValue(error.message || 'Failed to fetch scorecard')
+    }
+  }
+)
+
+// get live match Statistics
+export const getLiveMatchesStatistics = createAsyncThunk(
+  "matches/getLiveMatchesStatistics",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await handleLivePastMatchStatistics(id)
       return response
     } catch (error) {
       return rejectWithValue(error.message || 'Failed to fetch scorecard')
@@ -165,6 +192,42 @@ const matchesSlice = createSlice(({
         state.status = 'Successful'
     })
     builder.addCase(getPastMatchesScorecard.rejected, (state) => {
+      state.success = false,
+        state.loading = false,
+        state.status = 'Rejected'
+    })
+
+    //get past match statistics
+    builder.addCase(getPastMatchesStatistics.pending, (state) => {
+      state.success = false,
+        state.loading = true,
+        state.status = 'Processing Data'
+    })
+    builder.addCase(getPastMatchesStatistics.fulfilled, (state, action) => {
+      state.pastMatchStatistics = action?.payload
+      state.success = true,
+        state.loading = false,
+        state.status = 'Successful'
+    })
+    builder.addCase(getPastMatchesStatistics.rejected, (state) => {
+      state.success = false,
+        state.loading = false,
+        state.status = 'Rejected'
+    })
+
+    //get live match statistics
+    builder.addCase(getLiveMatchesStatistics.pending, (state) => {
+      state.success = false,
+        state.loading = true,
+        state.status = 'Processing Data'
+    })
+    builder.addCase(getLiveMatchesStatistics.fulfilled, (state, action) => {
+      state.pastMatchStatistics = action?.payload
+      state.success = true,
+        state.loading = false,
+        state.status = 'Successful'
+    })
+    builder.addCase(getLiveMatchesStatistics.rejected, (state) => {
       state.success = false,
         state.loading = false,
         state.status = 'Rejected'

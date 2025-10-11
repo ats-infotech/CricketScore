@@ -27,7 +27,7 @@
     right: 0;
     width: 100%;
     bottom: -6px;
-    height: 1px;
+    height: 2px;
     transition: all 0.5s ease;
     background: linear-gradient(90deg, rgba(255, 255, 255, 0) 9.39%, #0C1830 50.73%, rgba(255, 255, 255, 0) 98.27%);
 }
